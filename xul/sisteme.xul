@@ -1,0 +1,125 @@
+<?xml version="1.0"?>
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+
+<window
+    id="sisteme-win"
+    title="Lista Preturi Sisteme"
+    persist="screenX screenY width height"
+    orient="horizontal"
+    xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+
+  <script src="js/logging.js"/>
+  <script src="js/httpdata.js"/>
+  <script src="js/formobject.js"/>
+
+  <commandset>
+    <command id="command-save" oncommand="theForm.save(); load_sisteme();" />
+    <command id="command-add" oncommand="theForm.addnew(); document.getElementById('maintab').selectedIndex=1" />
+    <command id="onprint" oncommand="open('http://localhost:9000/reports/OfertaSisteme.pdf', 'OfertaSisteme', '');" />
+    <command id="onAdjustPrices" oncommand="adjustPricesDlg()" />
+  </commandset>
+
+  <tabbox flex="1" id="maintab">
+    <tabs>
+      <tab label="Sisteme" id="sistemetab" selected="true"/>
+      <tab label="Detalii sistem" id="detaliitab"/>
+    </tabs>
+
+    <tabpanels flex="1">
+      <tabpanel id="maintab.listing" orient="vertical" flex="1" >
+	<hbox>
+	  <spacer flex="1"/>
+	  <!--
+	  <button id="adjust-prices" label="Ajustare preturi" command="onAdjustPrices" />
+	  -->
+	  <button label="Adaugare sistem" command="command-add" />
+	</hbox>
+	<tree id="sistemeListing" flex="1" enableColumnDrag="true" 
+	      perisist="ordinal width height hidden" seltype="single"  
+	      onclick="theForm.load_form(sisteme[this.currentIndex]['id']);"
+	      ondblclick="document.getElementById('maintab').selectedIndex=1">
+	  <treecols>
+	    <treecol id="col-code" label="Cod magazie" flex="1"/>
+	    <splitter class="tree-splitter"/>
+	    <treecol id="col-category" label="Categorie" flex="1"/>
+	    <splitter class="tree-splitter"/>
+	    <treecol id="col-name" label="Sistem" flex="1"/>
+	    <splitter class="tree-splitter"/>
+	    <treecol id="col-entryPrice" label="Pret intrare" flex="1"/>
+	    <splitter class="tree-splitter"/>
+	    <treecol id="col-sellPrice" label="Pret magazin" flex="1"/>
+	    <splitter class="tree-splitter"/>
+	    <treecol id="col-partPrice" label="Pret cu usa" flex="1"/>
+	  </treecols>
+	  <treechildren/>
+	</tree>
+      </tabpanel>
+      <tabpanel id="maintab.detalii" orient="vertical" flex="1" style="overflow:auto">
+	<grid>
+	  <columns>
+	    <column/>
+	    <column/>
+	    <column/>
+	    <column/>
+	  </columns>
+	  <rows>
+	    <row>
+	      <label control="categoryId" value="Categorie:"/>
+	      <menulist id="categoryId">
+		<menupopup id="categoryId-popup"/>
+	      </menulist>
+	    </row>
+	    <row>
+	      <label control="code" value="Cod magazie:"/>
+	      <textbox id="code"/>
+	    </row>
+	    <row>
+	      <label control="name" value="Cod (denumire):"/>
+	      <textbox id="name"/>
+	    </row>
+	    <row>
+	      <label control="entryPrice" value="Pret intrare:"/>
+	      <textbox id="entryPrice"/>
+	    </row>
+	    <row>
+	      <label control="sellPrice" value="Pret magazin:"/>
+	      <textbox id="sellPrice"/>
+	      <label control="relativeGainSP" value="Adaos (%):"/>
+	      <textbox id="relativeGainSP"/>
+	    </row>
+	    <row>
+	      <hbox/>
+	      <hbox/>
+	      <label control="absoluteGainSP" value="Adaos (Lei):"/>
+	      <textbox id="absoluteGainSP"/>
+	    </row>
+	    <row>
+	      <label control="partPrice" value="Pret cu usa:"/>
+	      <textbox id="partPrice"/>
+	      <label control="relativeGainPP" value="Adaos (%):"/>
+	      <textbox id="relativeGainPP"/>
+	    </row>
+	    <row>
+	      <hbox/>
+	      <hbox/>
+	      <label control="absoluteGainPP" value="Adaos (Lei):"/>
+	      <textbox id="absoluteGainPP"/>
+	    </row>
+	    <row>
+	      <label control="laborPrice" value="Pret montare:"/>
+	      <textbox id="laborPrice"/>
+	    </row>
+	  </rows>
+	</grid>
+
+	<hbox align="left">
+	  <button label="Salveaza modificari" id="button-save"
+		  command="command-save"/>
+	</hbox>
+
+      </tabpanel>
+    </tabpanels>
+  </tabbox>
+
+  <script src="sisteme.js"/>
+</window>

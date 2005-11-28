@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<class>
+  <package>ro.kds.erp.biz.setum.basic</package>
+  <name>StandardOffer</name>
+  <field>
+    <name>no</name>
+    <type>String</type>
+  </field>
+  <field>
+    <name>docDate</name>
+    <type>java.util.Date</type>
+  </field>
+  <field>
+    <name>dateFrom</name>
+    <type>java.util.Date</type>
+  </field>
+  <field>
+    <name>dateTo</name>
+    <type>java.util.Date</type>
+  </field>
+  <field>
+    <name>discontinued</name>
+    <type>Boolean</type>
+  </field>
+  <field>
+    <name>period</name>
+    <type>Integer</type>
+  </field>
+  <field>
+    <name>name</name>
+    <type>String</type>
+  </field>
+  <field>
+    <name>description</name>
+    <type>String</type>
+  </field>
+  <field>
+    <name>comment</name>
+    <type>String</type>
+  </field>
+
+  <!-- Subform fields -->
+  <field>
+    <name>productId</name>
+    <type>Integer</type>
+  </field>
+  <field>
+    <name>price</name>
+    <type>java.math.BigDecimal</type>
+  </field>
+  <field>
+    <name>relativeGain</name>
+    <type>Double</type>
+  </field>
+  <field>
+    <name>absoluteGain</name>
+    <type>java.math.BigDecimal</type>
+  </field>
+  <field>
+    <name>productCategory</name>
+    <type>String</type>
+  </field>
+  <field>
+    <name>productCode</name>
+    <type>String</type>
+  </field>
+  <field>
+    <name>productName</name>
+    <type>String</type>
+  </field>
+  <field>
+    <name>entryPrice</name>
+    <type>java.math.BigDecimal</type>
+  </field>
+  <field>
+    <name>sellPrice</name>
+    <type>java.math.BigDecimal</type>
+  </field>
+
+
+  <!-- additional methods for the remote interface -->
+  <remote>
+    <method>ResponseBean offersListing() throws RemoteException</method>
+    <method>ResponseBean lineItemsListing() throws RemoteException</method>
+    <method>ResponseBean loadSubForm(Integer loadId) throws RemoteException</method>
+    <method>ResponseBean addNewItem() throws RemoteException</method>
+    <method>ResponseBean removeItem() throws RemoteException</method>
+    <method>ResponseBean saveSubForm() throws RemoteException</method>
+    <method>java.util.Collection lineItemsCollectionMap() throws RemoteException</method>
+  </remote>
+</class>

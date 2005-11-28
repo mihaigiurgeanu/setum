@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="ISO-8859-15"?>
+
+<ejb-jar xmlns="http://java.sun.com/xml/ns/j2ee"
+		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee
+		 http://java.sun.com/xml/ns/j2ee/ejb-jar_2_1.xsd"
+		 version="2.1">
+
+  <description>Contains the bean or beans used to get or set applications preferences</description>
+  <display-name>setumbiz</display-name>
+
+  <enterprise-beans>
+    <session>
+      <description>Allows accessing the application preferences</description>
+      <display-name>PreferensesEJB</display-name>
+      <ejb-name>PreferencesEJB</ejb-name>
+      <home>ro.kds.erp.biz.PreferencesHome</home>
+      <remote>ro.kds.erp.biz.Preferences</remote>
+      <ejb-class>ro.kds.erp.biz.PreferencesBean</ejb-class>
+      <session-type>Stateless</session-type>
+      <transaction-type>Container</transaction-type>
+      <env-entry>
+	<description>The absolute path of the entry in preferences data store where keeping the preferences for this application</description>
+	<env-entry-name>preferencesPath</env-entry-name>
+	<env-entry-type>java.lang.String</env-entry-type>
+	<env-entry-value>/ro/kds/erp/setum</env-entry-value>
+      </env-entry>
+    </session>
+  </enterprise-beans>
+
+  <assembly-descriptor>
+    <container-transaction>
+      <method>
+	<ejb-name>PreferencesEJB</ejb-name>
+	<method-name>*</method-name>
+      </method>
+      <trans-attribute>Supports</trans-attribute>
+    </container-transaction>
+  </assembly-descriptor>
+</ejb-jar>

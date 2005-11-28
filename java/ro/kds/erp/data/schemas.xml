@@ -1,0 +1,4 @@
+<?xml version="1.0"?>
+<locatingRules xmlns="http://thaiopensource.com/ns/locating-rules/1.0">
+  <uri resource="datalayer.xml" uri="../../../../../../../../../../Apps/emacs-21.3/site-lisp/nxml-mode-20041004/schema/ejb-jar_2_1.rnc"/>
+</locatingRules>

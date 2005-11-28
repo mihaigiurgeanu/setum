@@ -1,0 +1,222 @@
+<?xml version="1.0"?>
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+
+<window
+    id="oferta-usistd-win"
+    title="Oferta usi standard"
+    persist="screenX screenY width height"
+    orient="vertical"
+    xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+    style="overflow:auto">
+
+  <script src="js/logging.js"/>
+  <script src="js/httpdata.js"/>
+  <script src="js/formobject.js"/>
+
+  <commandset>
+    <command id="command-save" oncommand="theForm.save();load_offers();" />
+    <command id="command-add" oncommand="theForm.addnew(); document.getElementById('maintab').selectedIndex=1;" />
+    <command id="command-save-subform" 
+	     oncommand="theForm.save_sub('saveSubForm');load_items()" />
+    <command id="command-add-products"
+	     oncommand="addProducts();" />
+
+
+    <command id="onprint" oncommand="open('http://localhost:9000/setum/oferta-usi-standard.pdf', 'Usi standard', '');" />
+  </commandset>
+
+  <tabbox flex="1" id="maintab">
+    <tabs>
+      <tab label="Oferte"/>
+      <tab label="Detalii oferta"/>
+      <tab label="Detalii linie oferta"/>
+    </tabs>
+
+    <tabpanels flex="1">
+      <tabpanel id="maintab.offersListing" orient="vertical">
+	<hbox>
+	  <split flex="1"/>
+	  <button label="Tiparire oferta" command="onprint"/>
+	  <button label="Adaugare" command="command-add"/>
+	</hbox>
+	<tree id="offersListing" flex="1" enableColumnDrag="true"
+	      persist="ordinal width height hidden" seltype="single"
+	      onclick="theForm.load_form(offers[this.currentIndex]['id']);load_items()"
+	      ondblclick="document.getElementById('maintab').selectedIndex=1"
+	      >
+	  <treecols>
+	    <treecol id="offersListing.name" label="Oferta" flex="1"/>
+	    <splitter class="tree-splitter"/>
+	    <treecol id="offersListing.no" label="Numarul" flex="1"/>
+	    <splitter class="tree-splitter"/>
+	    <treecol id="offersListing.docDate" label="din Data" flex="1"/>
+	    <splitter class="tree-splitter"/>
+	    <treecol id="offersListing.dateFrom" label="Prima zi" flex="1"/>
+	    <splitter class="tree-splitter"/>
+	    <treecol id="offersListing.dateTo" label="Ultima zi" flex="1"/>
+	  </treecols>
+	  <treechildren/>
+	</tree>
+      </tabpanel>
+
+      <tabpanel id="maintab.offerDetails" style="overflow:auto;" 
+		orient="vertical">
+	<grid>
+	  <columns>
+	    <column/>
+	    <column/>
+	  </columns>
+	  <rows>
+	    <row>
+	      <label control="no" value="Numar:"/>
+	      <textbox id="no"/>
+	    </row>
+	    <row>
+	      <label control="docDate" value="Data:"/>
+	      <textbox id="docDate"/>
+	    </row>
+	    <row>
+	      <label value="Valabila " />
+	      <grid>
+		<columns>
+		  <column/>
+		  <column/>
+		  <column/>
+		  <column/>
+		</columns>
+		<rows>
+		  <row>
+		    <label control="dateFrom" value="de la:"/>
+		    <textbox id="dateFrom"/>
+		    <label control="dateTo" value="pana la:"/>
+		    <textbox id="dateTo"/>
+		  </row>
+		  <row>
+		    <label control="period" value="nr zile:"/>
+		    <textbox id="period"/>
+		  </row>
+		</rows>
+	      </grid>
+	    </row>
+	    <row>
+	      <label control="name" value="Nume:"/>
+	      <textbox id="name"/>
+	    </row>
+	    <row>
+	      <label control="description" value="Descriere:"/>
+	      <textbox id="description" multiline="true" maxlength="255" 
+		       rows="4"/>
+	    </row>
+	    <row>
+	      <label control="comment" value="Observatii:"/>
+	      <textbox id="comment" multiline="true" maxlength="255" 
+		       rows="4"/>
+	    </row>
+	  </rows>
+	</grid>
+	
+	<hbox>
+	  <split flex="1"/>
+	  <button label="Adauga produse" command="command-add-products" />
+	</hbox>
+
+	<tree id="offerLines" flex="1" enableColumnDrag="true"
+	      persist="ordinal width height hidden" seltype="single"
+	      onclick="theForm.load_subform('loadSubForm', line_items[this.currentIndex]['id'])"
+	      ondblclick="document.getElementById('maintab').selectedIndex=2"
+	      >
+	  <treecols>
+	    <treecol id="col-usa" label="Usa" flex="1"/>
+	    <splitter class="tree-splitter"/>
+	    <treecol id="col-broasca" label="Broasca" flex="1"/>
+	    <splitter class="tree-splitter"/>
+	    <treecol id="col-cilindru" label="Cilindru" flex="1"/>
+	    <splitter class="tree-splitter"/>
+	    <treecol id="col-sild" label="Sild" flex="1"/>
+	    <splitter class="tree-splitter"/>
+	    <treecol id="col-yalla" label="Yalla" flex="1"/>
+	    <splitter class="tree-splitter"/>
+	    <treecol id="col-vizor" label="Vizor" flex="1"/>
+	    <splitter class="tree-splitter"/>
+	    <treecol id="col-price" label="pret" flex="1"/>
+	  </treecols>
+	  <treechildren/>
+	</tree>
+	<hbox>
+	  <split flex="1"/>
+	  <button label="Salvare" command="command-save"/>
+	</hbox>
+      </tabpanel>
+      
+      <tabpanel id="maintab.offerDetails" style="overflow:auto;" 
+		orient="vertical">
+	<hbox>
+	  <grid>
+	    <columns>
+	      <column/>
+	      <column/>
+	    </columns>
+	    <rows>
+	      <row>
+		<label control="price" value="Pret"/>
+		<textbox id="price"/>
+	      </row>
+	      <row>
+		<label control="relativeGain" value="Adaos (%):"/>
+		<textbox id="relativeGain"/>
+	      </row>
+	      <row>
+		<label control="absoluteGain" value="Adaos (Lei):"/>
+		<textbox id="absoluteGain"/>
+	      </row>
+	    </rows>
+	  </grid>
+	  <grid>
+	    <colums>
+	      <column/>
+	      <column/>
+	    </colums>
+	    <rows>
+	      <row>
+		<label control="usa" value="Usa:"/>
+		<textbox id="usa" readonly="true"/>
+	      </row>
+	      <row>
+		<label control="broasca" value="Broasca:"/>
+		<textbox id="broasca" readonly="true"/>
+	      </row>
+	      <row>
+		<label control="cilindru" value="Cilindru:"/>
+		<textbox id="cilindru" readonly="true"/>
+	      </row>
+	      <row>
+		<label control="sild" value="Sild:"/>
+		<textbox id="sild" readonly="true"/>
+	      </row>
+	      <row>
+		<label control="yalla" value="Yalla:"/>
+		<textbox id="yalla" readonly="true"/>
+	      </row>
+	      <row>
+		<label control="vizor" value="Vizor:"/>
+		<textbox id="vizor" readonly="true"/>
+	      </row>
+	      <row>
+		<label control="referencePrice" value="Pret de referinta:"/>
+		<textbox id="referencePrice" readonly="true"/>
+	      </row>
+	    </rows>
+	  </grid>
+	</hbox>
+	<hbox>
+	  <split flex="1"/>
+	  <button label="Salvare" command="command-save-subform"/>
+	</hbox>
+      </tabpanel>
+    </tabpanels>
+
+  </tabbox>
+
+
+  <script src="oferta_usi_std.js"/>
+</window>

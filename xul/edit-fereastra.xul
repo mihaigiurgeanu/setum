@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="iso-8859-2"?>
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+<!--
+edit-fereastra.xul
+
+Editarea datelor unei ferestre.
+
+Argumentele primite la deschiderea dialogului:
+0 - obiect select_handler care trebuie sa contina metoda select(objectId)
+-->
+<dialog
+    id="edit-fereastra-dlg"
+    title="Fereastra"
+    xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+    orient="vertical"
+    buttons="accept,cancel"
+    ondialogaccept="return doOk();"
+    ondialogcancel="return true;"
+    debug="false">
+
+  <script src="js/logging.js"/>
+  <script src="js/httpdata.js"/>
+  <script src="js/formobject.js"/>
+
+  <hbox style="overflow:auto" width="600">
+    <!-- partea stanga -->
+    <vbox>
+      <grid>
+	<columns>
+	  <column/><column/>
+	</columns>
+	<rows>
+	  <row>
+	    <label controls="canat" value="Canat:"/>
+	    <menulist id="canat">
+	      <menupopup id="canat-popup"/>
+	    </menulist>
+	  </row>
+	  <row>
+	    <label controls="lf" value="Lf = "/>
+	    <textbox id="lf"/>
+	  </row>
+	  <row>
+	    <label controls="hf" value="Hf = "/>
+	    <textbox id="hf"/>
+	  </row>
+	  <row>
+	    <label controls="pozitionare1" value="Pozitionare: "/>
+	    <textbox id="pozitionare1"/>
+	  </row>
+	  <row>
+	    <label controls="pozitionare2" value="Pozitionare: "/>
+	    <textbox id="pozitionare2"/>
+	  </row>
+	  <row>
+	    <label controls="pozitionare3" value="Pozitionare: "/>
+	    <textbox id="pozitionare3"/>
+	  </row>
+	  <separator/>
+	  <row>
+	    <radiogroup id="deschidere">
+	      <radio id="deschidere.1" value="1" label="Fereastra fixa"/>
+	      <radio id="deschidere.2" value="2" label="Fereastra mobila"/>
+	    </radiogroup>
+	  </row>
+	  <separator/>
+	  <row>
+	    <label controls="sensDeschidere" value="Sens deschidere:" />
+	    <menulist id="sensDeschidere">
+	      <menupopup id="sensDeschidere-popup"/>
+	    </menulist>
+	  </row>
+	  <row>
+	    <label controls="pozitionareBalamale" value="balamale"/>
+	    <menulist id="pozitionareBalamale">
+	      <menupopup id="pozitionareBalamale-popup"/>
+	    </menulist>
+	  </row>
+	</rows>
+      </grid>
+    </vbox>
+
+    <separator orient="vertical"/>
+
+    <!-- partea dreapta -->
+    <vbox>
+      <grid>
+	<columns>
+	  <column/><column/>
+	</columns>
+	<rows>
+	  <row>
+	    <label controls="componenta" value="Componenta:"/>
+	    <menulist id="componenta">
+	      <menupopup id="componenta-popup"/>
+	    </menulist>
+	  </row>
+	</rows>
+      </grid>
+
+      <separator/>
+      <groupbox>
+	<radiogroup id="tipComponenta">
+	  <grid>
+	    <columns>
+	      <column/><column/>
+	    </columns>
+	    <rows>
+	      <row align="start">
+		<radio id="tipComponenta.1" value="1" label="geam"/>
+		<radiogroup id="tipGeam" orient="vertical">
+		  <grid>
+		    <columns><column/><column/></columns>
+		    <rows>
+		      <row>
+			<radio id="tipGeam.1" value="1" label="simplu"/>
+			<menulist id="geamSimpluId">
+			  <menupopup id="geamSimpluId-popup"/>
+			</menulist>
+		      </row>
+		      <row>
+			<radio id="tipGeam.2" value="2" label="termopan"/>
+			<menulist id="geamTermopanId">
+			  <menupopup id="geamTermopanId-popup"/>
+			</menulist>
+		      </row>
+		    </rows>
+		  </grid>
+		</radiogroup>
+	      </row>
+
+	      <separator/>
+	      
+	      <row align="start">
+		<radio id="tipComponenta.2" value="2" label="grilaj"/>
+		<radiogroup id="tipGrilaj" orient="vertical">
+		  <grid>
+		    <columns><column/><column/></columns>
+		    <rows>
+		      <row>
+			<radio id="tipGrilaj.1" value="1" label="STAS"/>
+			<menulist id="grilajStasId">
+			  <menupopup id="grilajStasId-popup"/>
+			</menulist>
+		      </row>
+		      <row>
+			<radio id="tipGrilaj.2" value="2" label="atipic, Valoare:"/>
+			<textbox id="valoareGrilajAtipic"/>
+		      </row>
+		    </rows>
+		  </grid>
+		</radiogroup>
+	      </row>
+
+	      <separator/>
+	      
+	      <row align="start">
+		<radio id="tipComponenta.3" value="3" label="tabla"/>
+		<hbox>
+		  <menulist id="tipTabla">
+		    <menupopup id="tipTabla-popup"/>
+		  </menulist>
+		  <menulist id="tablaId">
+		    <menupopup id="tablaId-popup"/>
+		  </menulist>
+		</hbox>
+	      </row>
+
+	    </rows>
+	  </grid>
+	</radiogroup>
+      </groupbox>
+    </vbox>
+  </hbox>
+  <script language="javascript"><![CDATA[
+// Global variable theForm that will be used by event handlers
+var theForm = new FormObject();
+
+theForm.do_link = "/edit-fereastra.do";
+theForm.text_fields = new Array("lf", "hf", "pozitionare1", "pozitionare2",
+				"pozitionare3", "valoareGrilajAtipic");
+theForm.combo_fields = new Array("canat", "sensDeschidere", 
+				 "pozitionareBalamale", "componenta",
+				 "geamSimpluId", "geamTermopanId",
+				 "grilajStasId", "tipTabla", "tablaId");
+theForm.radio_fields = new Array("deschidere", "tipComponenta", "tipGeam",
+				 "tipGrilaj");
+
+theForm.setupEventListeners();
+theForm.load_current();
+
+function doOk() {
+    if(theForm.save()) {
+	window.arguments[0].select(theForm.get_loaded_id());
+	return true;
+    }
+    return false;
+}
+  ]]></script>
+</dialog>

@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+
+<window
+    id="modules-list"
+    title="Setum"
+    persist="screenX screenY width height"
+    orient="horizontal"
+    xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+
+  <script language="JavaScript"><![CDATA[
+
+  function show_module() {
+    var tree = document.getElementById("appmodules");
+    var view = tree.view;
+    var pannel = document.getElementById("apppannel");
+
+    pannel.setAttribute("src", view.getCellText(tree.currentIndex, "xulfile"));
+    //window.setAttribute("title", pannel.contentWindow.getAttribute("title"));
+  }
+
+  ]]></script>
+
+
+  <tree id="appmodules" width="180px"
+	datasources="modules.rdf" ref="http://www.kds.ro/erp/modules" 
+	onselect="show_module();">
+    <treecols>
+      <treecol id="modulename" label="Module" primary="true" flex="1"/>
+      <treecol id="xulfile" label="File" hidden="true"/>
+    </treecols>
+    
+    <template>
+      <rule>
+	<treechildren>
+	  <treeitem uri="rdf:*">
+	    <treerow>
+	      <treecell label="rdf:http://www.kds.ro/erp/modules/definition#displayName"/>
+	      <treecell label="rdf:http://www.kds.ro/erp/modules/definition#xulfile"/>
+            </treerow>
+	  </treeitem>
+	</treechildren>
+      </rule>
+    </template>
+  </tree>
+
+  <splitter state="open" collapse="before">
+    <grippy />
+  </splitter>
+
+  <iframe flex="1" id="apppannel" />
+  
+
+</window>

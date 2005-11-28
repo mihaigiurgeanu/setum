@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="iso-8859-2"?>
+
+<class>
+  <package>ro.kds.erp.biz.setum.basic</package>
+  <name>UsaStdNeechipata</name>
+  <field>
+    <name>name</name>
+    <type>String</type>
+  </field>
+  <field>
+    <name>code</name>
+    <type>String</type>
+  </field>
+  <field>
+    <name>description</name>
+    <type>String</type>
+  </field>
+  <field>
+    <name>price</name>
+    <type>java.math.BigDecimal</type>
+  </field>
+
+  <!-- methods to add to the remote interface -->
+  <remote>
+    <method>ResponseBean loadListing() throws RemoteException</method>
+  </remote>
+
+</class>
+

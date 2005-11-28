@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<!DOCTYPE ejb-jar PUBLIC "-//Sun Microsystems, Inc.//DTD Enterprise JavaBeans 2.0//EN"  "http://java.sun.com/dtd/ejb-jar_2_0.dtd" > 
+
+<ejb-jar>
+  <enterprise-beans>
+    <entity> 
+      <ejb-name>AttributeBean</ejb-name>
+      <home>ro.kds.erp.data.AttributeHome</home>
+      <remote>ro.kds.erp.data.Attribute</remote>
+      <local-home>ro.kds.erp.data.AttributeLocalHome</local-home>
+      <local>ro.kds.erp.data.AttributeLocal</local>
+      <ejb-class>ro.kds.erp.data.AttributeBean</ejb-class>
+      <persistence-type>Container</persistence-type>
+      <prim-key-class>ro.kds.erp.data.AttributePK</prim-key-class>
+      <reentrant>False</reentrant>
+    </entity>
+  </enterprise-beans>
+  <assembly-descriptor>
+    <container-transaction>
+      <method>
+	<ejb-name>AttributeBean</ejb-name>
+	<method-intf>Local</method-intf>
+	<method-name>*</method-name>
+      </method>
+      <method>
+	<ejb-name>AttributeBean</ejb-name>
+	<method-intf>Remote</method-intf>
+	<method-name>*</method-name>
+      </method>
+      <trans-attribute>Required</trans-attribute>
+    </container-transaction>
+  </assembly-descriptor>
+</ejb-jar>
+

@@ -1,0 +1,127 @@
+<?xml version="1.0"?>
+
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+            xmlns:modules="http://www.kds.ro/erp/modules/definition#">
+
+  <rdf:Seq rdf:about="http://www.kds.ro/erp/modules">
+    <rdf:li rdf:resource="http://www.kds.ro/erp/modules/setum/products" />
+    <rdf:li rdf:resource="http://www.kds.ro/erp/modules/setum/offer" />
+    <rdf:li rdf:resource="http://www.kds.ro/erp/modules/setum/clienti" />
+  </rdf:Seq>
+
+  <rdf:Seq rdf:about="http://www.kds.ro/erp/modules/setum/products">    
+    <rdf:li rdf:resource="http://www.kds.ro/erp/modules/setum/sisteme" />
+    <rdf:li rdf:resource="http://www.kds.ro/erp/modules/setum/usisimple" />
+    <rdf:li rdf:resource="http://www.kds.ro/erp/modules/setum/usistandard" />
+    <rdf:li rdf:resource="http://www.kds.ro/erp/modules/setum/otherProducts" />
+  </rdf:Seq>
+
+  <rdf:Seq rdf:about="http://www.kds.ro/erp/modules/setum/offer">
+    <rdf:li rdf:resource="http://www.kds.ro/erp/modules/setum/standardoffer" />
+    <rdf:li 
+	rdf:resource="http://www.kds.ro/erp/modules/setum/oferta_usi_std" />
+    <rdf:li 
+	rdf:resource="http://www.kds.ro/erp/modules/setum/arbitrary-offer"/>
+  </rdf:Seq>
+
+  <rdf:Description rdf:about="http://www.kds.ro/erp/modules/setum/products">
+    <modules:displayName>Produse</modules:displayName>
+    <modules:description>Nomenclator produse</modules:description>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="http://www.kds.ro/erp/modules/setum/offer">
+    <modules:displayName>Ofertare</modules:displayName>
+    <modules:description>Gestiune oferte</modules:description>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="http://www.kds.ro/erp/modules/setum/sisteme">
+    <modules:displayName>Sisteme</modules:displayName>
+    <modules:description>Gestionarea ofertei de sisteme de inchidere</modules:description>
+    <modules:xulfile>sisteme.xul</modules:xulfile>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="http://www.kds.ro/erp/modules/setum/otherProducts">
+    <modules:displayName>Alte produse</modules:displayName>
+    <modules:description>Gestiunea preturilor interne folosite pentru productia de alte produse</modules:description>
+    <modules:xulfile>preturi_interne.xul</modules:xulfile>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="http://www.kds.ro/erp/modules/setum/usisimple">
+    <modules:displayName>Usi neechipate</modules:displayName>
+    <modules:description>Gestiunea nomenclatorului de produse</modules:description>
+    <modules:xulfile>usa_std_neechipata.xul</modules:xulfile>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="http://www.kds.ro/erp/modules/setum/usistandard">
+    <modules:displayName>Usi standard</modules:displayName>
+    <modules:description>Gestiunea nomenclatorului de produse</modules:description>
+    <modules:xulfile>usi_std_echipate.xul</modules:xulfile>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="http://www.kds.ro/erp/modules/setum/usimetalice1K">
+    <modules:displayName>Usi metalice 1 canat</modules:displayName>
+    <modules:description>Gestionarea ofertei de usi metalice</modules:description>
+    <modules:xulfile>usimetalice.xul</modules:xulfile>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="http://www.kds.ro/erp/modules/setum/usimetalice2K">
+    <modules:displayName>Usi metalice 2 canate</modules:displayName>
+    <modules:description>Gestionarea ofertei de usi metalice</modules:description>
+    <modules:xulfile>usimetalice2k.xul</modules:xulfile>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="http://www.kds.ro/erp/modules/setum/clienti">
+    <modules:displayName>Clienti</modules:displayName>
+    <modules:description>Adaugare/modificare/vizualizare clienti</modules:description>
+    <modules:xulfile>clienti.xul</modules:xulfile>
+  </rdf:Description>
+
+  <rdf:Description 
+      rdf:about="http://www.kds.ro/erp/modules/setum/standardoffer">
+    <modules:displayName>Oferta feronerie</modules:displayName>
+    <modules:description>Lista produse de feronerie</modules:description>
+    <modules:xulfile>standardoffer.xul</modules:xulfile>
+  </rdf:Description>
+
+  <rdf:Description 
+      rdf:about="http://www.kds.ro/erp/modules/setum/oferta_usi_std">
+    <modules:displayName>Oferta usi standard</modules:displayName>
+    <modules:description>Lista de usi standard</modules:description>
+    <modules:xulfile>oferta_usi_std.xul</modules:xulfile>
+  </rdf:Description>
+
+  <rdf:Description
+      rdf:about="http://www.kds.ro/erp/modules/setum/arbitrary-offer">
+    <modules:displayName>Oferte particularizate</modules:displayName>
+    <modules:description>Oferte create dupa specificatiile clientului</modules:description>
+    <modules:xulfile>arbitrary-offer.xul</modules:xulfile>    
+  </rdf:Description>
+
+  <rdf:Description 
+      rdf:about="http://www.kds.ro/erp/modules/setum/selectSistem">
+    <modules:displayName>Selectare sistem</modules:displayName>
+    <modules:description>Dialog pentru selectarea unui sistem</modules:description>
+    <modules:xulfile>select-sistem.xul</modules:xulfile>
+  </rdf:Description>
+
+  <rdf:Description
+      rdf:about="http://www.kds.ro/erp/modules/setum/selectUsaStd">
+    <modules:displayName>Selectare usa standard</modules:displayName>
+    <modules:description>Dialog pentru selectarea unei usi standard</modules:description>
+    <modules:xulfile>select-usastd.xul</modules:xulfile>
+  </rdf:Description>
+
+  <rdf:Description 
+      rdf:about="http://www.kds.ro/erp/modules/setum/editUsa1K">
+    <modules:displayName>Usa cu un canat</modules:displayName>
+    <modules:description>Modificare/adaugare usa cu un canat</modules:description>
+    <modules:xulfile>edit-usa1k.xul</modules:xulfile>
+  </rdf:Description>
+
+  <rdf:Description
+      rdf:about="http://www.kds.ro/erp/modules/setum/editUsa2K">
+    <modules:displayName>Usa cu doua canate</modules:displayName>
+    <modules:description>Modificare/adaugare usa cu 2 canate</modules:description>
+    <modules:xulfile>edit-usa2k.xul</modules:xulfile>
+  </rdf:Description>
+</rdf:RDF>

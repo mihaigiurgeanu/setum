@@ -1,0 +1,21 @@
+format 21
+
+classcanvas 128064 class_ref 128064 // User
+  xyz 50 179 3005 label_xy 58 219
+usecasecanvas 128576 usecase_ref 128064 // Editing an offer item, 1st scenario
+  xyzwh 265 34 3005 64 32 label_xy 221 66
+usecasecanvas 128704 usecase_ref 128192 // Editing an offer item, 2nd scenario
+  xyzwh 262 135 3005 64 32 label_xy 220 167
+usecasecanvas 128832 usecase_ref 128320 // Create a new offer item, 1st scenario
+  xyzwh 272 219 3005 64 32 label_xy 222 255
+usecasecanvas 128960 usecase_ref 128448 // Create a new offer item, 2nd scenario
+  xyzwh 276 343 3005 64 32 label_xy 216 375
+line 129088 --->
+  from ref 128064 z 3004 to ref 128576
+line 129216 --->
+  from ref 128064 z 3004 to ref 128704
+line 129344 --->
+  from ref 128064 z 3004 to ref 128832
+line 129472 --->
+  from ref 128064 z 3004 to ref 128960
+end

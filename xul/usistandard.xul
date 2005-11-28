@@ -1,0 +1,178 @@
+<?xml version="1.0"?>
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+
+<window
+    id="lista-preturi-usi-standard-win"
+    title="Lista Preturi Usi Standard"
+    persist="screenX screenY width height"
+    orient="horizontal"
+    onload="init()"
+    xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+  
+  <script src="js/httpdata.js"/>
+  <script src="usistandard.js" />
+
+
+  <commandset>
+    <command id="command-saveusmpl" oncommand="save_usmpl();" 
+	     disabled="true" />
+    <command id="command-addusmpl" oncommand="add_usmpl();" />
+    
+    <command id="command-saveustd" oncommand="save_ustd();" 
+	     disabled="true" />
+    <command id="command-addustd" oncommand="add_ustd();" />
+
+    <command id="onReportUFF" oncommand="open('http://localhost:9000/reports/OfertaUFF.pdf', 'OfertaSisteme', '');" />
+    <command id="onReportUF" oncommand="open('http://localhost:9000/reports/OfertaUF.pdf', 'OfertaSisteme', '');" />
+    <command id="onReportGeneric" oncommand="open('http://localhost:9000/reports/OfertaUsiStandard.pdf', 'OfertaSisteme', '');" />
+
+  </commandset>
+
+
+  <tabbox flex="1" id="maintab">
+    <tabs>
+      <tab label="Lista usi"/>
+      <tab label="Echipare usa"/>
+      <tab label="Usa neechipata"/>
+    </tabs>
+    
+    <tabpanels flex="1">
+      
+      <tabpanel id="lista-usi" orient="vertical">
+	<hbox>
+	  <spacer flex="1"/>
+	  <!--
+	  <button id="showReportUFF" label="Oferta UFF" command="onReportUFF" />
+	  <button id="showReportUF" label="Oferta UF" command="onReportUFF" />
+	  -->
+	  <button id="showReportGeneric" label="Tiparire Oferta" command="onReportGeneric" />
+	</hbox>
+
+	<tree id="ofertatree" flex="1" enableColumnDrag="true" perisist="ordinal width height hidden" seltype="single" ondblclick="editUsaStd()" onclick="syncForms();">
+	  <treecols>
+	    <treecol id="col-usa" label="Usa" flex="1"/>
+	    <splitter class="tree-splitter"/>
+	    <treecol id="col-broasca" label="Broasca" flex="1"/>
+	    <splitter class="tree-splitter"/>
+	    <treecol id="col-cilindru" label="Cilindru" flex="1"/>
+	    <splitter class="tree-splitter"/>
+	    <treecol id="col-sild" label="Sild" flex="1"/>
+	    <splitter class="tree-splitter"/>
+	    <treecol id="col-yalla" label="Yalla" flex="1"/>
+	    <splitter class="tree-splitter"/>
+	    <treecol id="col-vizor" label="Vizor" flex="1"/>
+	    <splitter class="tree-splitter"/>
+	    <treecol id="col-pret" label="Pret" flex="1"/>
+	    <splitter class="tree-splitter"/>
+	  </treecols>
+	  <treechildren/>
+	</tree>
+
+	
+      </tabpanel>
+      
+      <tabpanel id="echipare-usa" orient="vertical">
+	<description>
+	  Definirea combinatiilor de usi si sisteme disponibile in oferta.
+	</description>
+	<spacer/>
+	<grid flex="1">
+	  <columns>
+	    <column flex="0"/>
+	    <column flex="1"/>
+	  </columns>
+
+	  <rows>
+	    <row>
+	      <label control="usa-simpla" value="Usa:" />
+	      <menulist id="usa-simpla">
+		<menupopup id="usa-simpla-popup">
+		</menupopup>
+	      </menulist>
+	    </row>
+	    <row>
+	      <label control="broasca" value="Broasca:" />
+	      <menulist id="broasca">
+		<menupopup id="broasca-popup">
+		</menupopup>
+	      </menulist>
+	    </row>
+	    <row>
+	      <label control="cilindru" value="Cilindru:" />
+	      <menulist id="cilindru">
+		<menupopup id="cilindru-popup">
+		</menupopup>
+	      </menulist>
+	    </row>
+	    <row>
+	      <label control="sild" value="Sild:" />
+	      <menulist id="sild">
+		<menupopup id="sild-popup">
+		</menupopup>
+	      </menulist>
+	    </row>
+	    <row>
+	      <label control="yalla" value="Yalla:" />
+	      <menulist id="yalla">
+		<menupopup id="yalla-popup">
+		</menupopup>
+	      </menulist>
+	    </row>
+	    <row>
+	      <label control="vizor" value="Vizor:" />
+	      <menulist id="vizor">
+		<menupopup id="vizor-popup">
+		</menupopup>
+	      </menulist>
+	    </row>
+	  </rows>
+	</grid>
+
+	<hbox align="center">
+	  <button label="Salveaza modificari" id="button-saveustd"
+		  command="command-saveustd"/>
+	  <button label="Adauga" id="button-addustd"
+		  command="command-addustd"/>
+	</hbox>
+
+      </tabpanel>
+
+      <tabpanel id="editare-usa" orient="vertical">
+	<grid flex="1">
+	  <columns>
+	    <column flex="0"/>
+	    <column flex="1"/>
+	  </columns>
+	  
+	  <rows>
+	    <row>
+	      <label control="denumire-produs" value="Denumire Produs:"/>
+	      <textbox id="denumire-produs" maxlength="100"/>
+	    </row>
+	    <row>
+	      <label control="cod-produs" value="Cod Produs:"/>
+	      <textbox id="cod-produs" maxlength="20"/>
+	    </row>
+	    <row>
+	      <label control="varianta-constructiva" value="Varianta Constructiva:"/>
+	      <textbox id="varianta-constructiva" maxlength="100"/>
+	    </row>
+	    <row>
+	      <label control="pret-std-fara-tva" value="Pret Standard fara TVA:"/>
+	      <textbox id="pret-std-fara-tva" maxlength="20"/>
+	    </row>
+	  </rows>
+	</grid>
+
+	<hbox align="center">
+	  <button label="Salveaza modificari" id="button-saveusmpl"
+		  command="command-saveusmpl"/>
+	  <button label="Adauga" id="button-addusmpl"
+		  command="command-addusmpl"/>
+	</hbox>
+	
+      </tabpanel>
+    </tabpanels>
+  </tabbox>	
+
+</window>

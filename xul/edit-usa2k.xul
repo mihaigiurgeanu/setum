@@ -1,0 +1,409 @@
+<?xml version="1.0"?>
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+<!--
+edit-usa2k.xul
+
+Dialog that enables editing a product.
+
+Arguments:
+0  - select_handler object.  For each product selected, doOk will call
+windows.arguments[0].select(productId)
+-->
+
+<dialog
+    id="edit-usa2k-dlg"
+    title="Usa metalica cu 2 canate"
+    xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+    orient="vertical"
+    style="overflow:scroll;"
+    buttons="accept,cancel"
+    ondialogaccept="return doOk();"
+    ondialogcancel="return true;">
+
+  <script src="js/logging.js"/>
+  <script src="js/httpdata.js"/>
+  <script src="js/formobject.js"/>
+
+  <!-- the vbox is here for puting scrollbars to the content of the window -->
+  <hbox height="600" width="750" style="overflow:auto">
+    <grid>
+      <columns>
+	<column/>
+      </columns>
+      <rows>
+	<row>
+	  <groupbox orient="vertical">
+	    <caption label="Definire usa" />
+	    <grid>
+	      <columns>
+
+		<column/>
+		<column/>
+	      </columns>
+	      <rows>
+		<row>
+		  <label control="subclass" value="Subcod:"/>
+		  <menulist id="subclass" >
+		    <menupopup id="subclass-popup">
+		      <menuitem id="subclass.A" label="A - apartament" 
+				value="A" />
+		      <menuitem id="subclass.S" label="S - siguranta" 
+				value="S" />
+		      <menuitem id="subclass.M" label="M - metalica" 
+				value="M" />
+		      <menuitem id="subclass.B" label="B - batanta" 
+				value="B" />
+		    </menupopup>
+		  </menulist>
+		</row>
+		<row>
+		  <label control="version" value="Varianta:"/>
+		  <menulist id="version" >
+		    <menupopup id="version-popup">
+		      <menuitem id="version.UF" value="UF" 
+				label="UF - cu falt"/>
+		      <menuitem id="version.UFF" value="UFF" 
+				label="UFF - fara falt"/>
+		    </menupopup>
+		  </menulist>
+		</row>
+		<row>
+		  <label control="material" value="Material:"/>
+		  <menulist id="material" >
+		    <menupopup id="material-popup">
+		      <menuitem id="material.1" value="1" label="otel"/>
+		      <menuitem id="material.2" value="2" 
+				label="otel zincat termic"/>
+		      <menuitem id="material.3" value="3" label="inox"/>
+		      <menuitem id="material.4" value="4" label="aluminiu"/>
+		      <menuitem id="material.5" value="5" label="alama"/>
+		      <menuitem id="material.6" value="6" label="cupru"/>
+		    </menupopup>
+		  </menulist>
+		</row>
+		<row>
+		  <label value="Dimensiuni gol:"/>
+		  <box>
+		    <grid>
+		      <columns>
+			<column/>
+			<column/>
+		      </columns>
+		      <rows>
+			<row>
+			  <label control="lg" value="Lg ="/>
+			  <textbox id="lg" />
+			</row>
+			<row>
+			  <label control="hg" value="Hg ="/>
+			  <textbox id="hg" />
+			</row>
+			<row>
+			  <label control="lcorrection" value="L corectie ="/>
+			  <textbox id="lcorrection" />
+			</row>
+			<row>
+			  <label control="hcorrection" value="H correction ="/>
+			  <textbox id="hcorrection" />
+			</row>
+			<row>
+			  <label control="lCurrent" value="L curenta ="/>
+			  <textbox id="lCurrent" />
+			</row>
+			<row>
+			  <radiogroup id="kType">
+			    <radio id="kType.1" value="1" 
+				   label="cu canate egale"/>
+			    <radio id="kType.2" value="2" 
+				   label="cu canate inegale"/>
+			  </radiogroup>
+			</row>
+		      </rows>
+		    </grid>
+		  </box>
+		</row>
+		<row>
+		  <label value="Dimensiuni executie:"/>
+		  <box>
+		    <grid>
+		      <columns>
+			<column/>
+			<column/>
+		      </columns>
+		      <rows>
+			<row>
+			  <label control="le" value="Le ="/>
+			  <textbox id="le"  disabled="true" />
+			</row>
+			<row>
+			  <label control="he" value="He ="/>
+			  <textbox id="he" disabled="true"/>
+			</row>
+		      </rows>
+		    </grid>
+		  </box>
+		</row>
+	      </rows>
+	    </grid>
+	  </groupbox>
+	</row>
+	<row>
+	  <groupbox orient="vertical">
+	    <caption label="Tip foaie"/>
+
+	    <separator/>
+	    <label value="Canat principal" style="font-color:red"/>
+
+	    <hbox>
+	      <label>La interior placata cu tabla 2 randuri</label>
+	      <menulist id="intFoil" >
+		<menupopup id="intFoil-popup">
+		  <menuitem id="intFoil.1" value="1" label="Lisa"/>
+		  <menuitem id="intFoil.2" value="2" label="Amprentata"/>
+		</menupopup>
+	      </menulist>
+	    </hbox>
+	    <hbox>
+	      <label value="La exterior"/>
+	      <radiogroup id="ieFoil" >
+		<radio id="ieFoil.1" value="1" label="la fel ca la interior"/>
+		<hbox>
+		  <radio id="ieFoil.2" value="2" label="placata cu tabla 2 randuri"/>
+		  <menulist id="extFoil" >
+		    <menupopup id="extFoil-popup">
+		      <menuitem id="extFoil.1" value="1" label="Lisa"/>
+		      <menuitem id="extFoil.2" value="2" label="Amprentata"/>
+		    </menupopup>
+		  </menulist>
+		</hbox>
+	      </radiogroup>
+	    </hbox>
+
+
+	    <separator/>
+	    <label value="Canat secundar" style="font-color:red"/>
+
+	    <hbox>
+	      <label>La interior placata cu tabla 2 randuri</label>
+	      <menulist id="intFoilSec" >
+		<menupopup id="intFoilSec-popup">
+		  <menuitem id="intFoilSec.1" value="1" label="Lisa"/>
+		  <menuitem id="intFoilSec.2" value="2" label="Amprentata"/>
+		</menupopup>
+	      </menulist>
+	    </hbox>
+	    <hbox>
+	      <label value="La exterior"/>
+	      <radiogroup id="ieFoilSec" >
+		<radio id="ieFoilSec.1" value="1" 
+		       label="la fel ca la interior"/>
+		<hbox>
+		  <radio id="ieFoilSec.2" value="2" 
+			 label="placata cu tabla 2 randuri"/>
+		  <menulist id="extFoilSec" >
+		    <menupopup id="extFoilSec-popup">
+		      <menuitem id="extFoilSec.1" value="1" label="Lisa"/>
+		      <menuitem id="extFoilSec.2" value="2" 
+				label="Amprentata"/>
+		    </menupopup>
+		  </menulist>
+		</hbox>
+	      </radiogroup>
+	    </hbox>
+
+
+	    <hbox>
+	      <label control="isolation" value="Izolatie:"/>
+	      <menulist id="isolation" >
+		<menupopup id="isolation-popup">
+		  <menuitem id="isolation.1" value="1" label="vata minerala"/>
+		  <menuitem id="isolation.2" value="2" 
+			    label="spuma poliuretanica"/>
+		</menupopup>
+	      </menulist>
+	    </hbox>
+	    <hbox>
+	      <label control="openingDir" value="Sens deschidere:"/>
+	      <vbox>
+		<menulist id="openingDir" >
+		  <menupopup id="openingDir-popup">
+		    <menuitem id="openingDir.1" value="1" label="interior"/>
+		    <menuitem id="openingDir.2" value="2" label="exterior"/>
+		  </menupopup>
+		</menulist>
+		<menulist id="openingSide" >
+		  <menupopup id="openingSide-popup">
+		    <menuitem id="openingSide.1" value="1" label="stanga"/>
+		    <menuitem id="openingSide.2" value="2" label="dreapta"/>
+		  </menupopup>
+		</menulist>
+	      </vbox>
+	    </hbox>
+	  </groupbox>
+	</row>
+	<row>
+	  <groupbox orient="vertical">
+	    <caption label="Toc"/>
+	    <radiogroup id="frameType" >
+	      <radio id="frameType.1" value="1" label="Toc STAS"/>
+	      <hbox align="start">
+		<radio id="frameType.2" value="2" label="Toc modificat"/>
+		<vbox>
+		  <grid>
+		    <columns>
+		      <column/>
+		      <column/>
+		    </columns>
+		    <rows>
+		      <row>
+			<label control="lFrame" value="l toc = "/>
+			<textbox id="lFrame" />
+		      </row>
+		      <row>
+			<label control="bFrame" value="b toc = "/>
+			<textbox id="bFrame" />
+		      </row>
+		      <row>
+			<label control="cFrame" value="C toc = "/>
+			<textbox id="cFrame" />
+		      </row>
+		    </rows>
+		  </grid>
+		</vbox>
+	      </hbox>
+	    </radiogroup>
+	    <hbox>
+	      <label value="Pozitionare foaie"/>
+	      <menulist id="foilPosition" >
+		<menupopup id="foilPosition-popup">
+		  <menuitem id="foilPosition.1" value="1" label="interior"/>
+		  <menuitem id="foilPosition.2" value="2" label="exterior"/>
+		  <menuitem id="foilPosition.3" value="3" label="mijloc"/>
+		</menupopup>
+	      </menulist>
+	    </hbox>
+	  </groupbox>
+	</row>
+	<row>
+	  <groupbox orient="vertical">
+	    <caption label="Prag"/>
+	    <radiogroup id="tresholdType" >
+	      <radio id="tresholdType.1" value="1" label="Prag STAS"/>
+	      <hbox align="start">
+		<radio id="tresholdType.2" value="2" label="Prag modificat"/>
+		<vbox>
+		  <grid>
+		    <columns>
+		      <column/>
+		      <column/>
+		    </columns>
+		    <rows>
+		      <row>
+			<label control="lTreshold" value="l prag = "/>
+			<textbox id="lTreshold" />
+		      </row>
+		      <row>
+			<label control="hTreshold" value="h prag = "/>
+			<textbox id="hTreshold" />
+		      </row>
+		      <row>
+			<label control="cTreshold" value="C prag = "/>
+			<textbox id="cTreshold" />
+		      </row>
+		    </rows>
+		  </grid>
+		</vbox>
+	      </hbox>
+	      <hbox align="start">
+		<radio id="tresholdType.3" value="3" label="Fara prag"/>
+		<vbox>
+		  <radiogroup id="tresholdSpace" >
+		    <hbox>
+		      <radio id="tresholdSpace.1" value="1" label="Cu incastrare - h incastrare = "/>
+		      <textbox id="h1Treshold" />
+		    </hbox>
+		    <hbox>
+		      <radio id="tresholdSpace.2" value="2" label="Fara incastrare - h = "/>
+		      <textbox id="h2Treshold" />
+		    </hbox>
+		  </radiogroup>
+		</vbox>
+	      </hbox>
+	    </radiogroup>
+	  </groupbox>
+	</row>
+      </rows>
+    </grid>
+    
+    <vbox>
+      <groupbox>
+	<caption label="Optiuni"/>
+	<grid>
+	  <columns>
+	    <column/><column/><column/>
+	  </columns>
+	  <rows>
+	    <row>
+	      <label controls="fereatra" value="Fereastra:"/>
+	      <textbox id="fereastra" disabled="true"/>
+	      <button label="..." command="edit-fereastra"/>
+	    </row>
+	    <row>
+	      <label controls="grilaVentilatie" value="Grila ventilatie:"/>
+	      <textbox id="grilaVentilatie" disabled="true"/>
+	      <button label="..." command="edit-gv"/>
+	    </row>
+	    <row>
+	      <label controls="gauriAerisire" value="Gauri aerisire:"/>
+	      <textbox id="gauriAerisire" disabled="true"/>
+	      <button label="..." command="edit-ga"/>
+	    </row>
+	  </rows>
+	</grid>
+      </groupbox>
+    </vbox>
+  </hbox>
+
+  <commandset>
+    <command id="edit-fereastra" oncommand="open_service_dlg('fereastraId', '/edit-fereastra.do', 'edit-fereastra.xul')"/>
+    <command id="edit-gv" oncommand="open_service_dlg('grilaVentilatieId', '/edit-gv.do', 'edit-gv.xul')"/>
+    <command id="edit-ga" oncommand="open_service_dlg('gauriAerisireId', '/edit-ga.do', 'edit-ga.xul')"/>
+  </commandset>
+
+
+  <script language="javascript"><![CDATA[
+
+// Global variable theForm that will be used by event handlers
+var theForm = new FormObject();
+
+theForm.text_fields = new Array("lg", "hg", "lcorrection", "hcorrection",
+				"le", "he", "lCurrent",
+				"lFrame", "bFrame", "cFrame", "lTreshold",
+				"cTreshold", "hTreshold", "h1Treshold",
+				"h2Treshold", "fereastra", "grilaVentilatie",
+				"gauriAerisire");
+theForm.combo_fields = new Array("subclass", "version", "material", 
+				 "intFoil", "extFoil", "isolation",
+				 "intFoilSec", "extFoilSec", 
+				 "openingDir", "openingSide", "foilPosition");
+theForm.radio_fields = new Array("ieFoil", "ieFoilSec", 
+				 "frameType", "tresholdType",
+				 "tresholdSpace");
+
+theForm.hidden_fields = new Array("fereastraId", "grilaVentilatieId", 
+				  "gauriAerisireId");
+theForm.do_link = "/usametalica2k.do";
+
+theForm.setupEventListeners();
+theForm.load_current();
+
+function doOk() {
+    if(theForm.save()) {
+	window.arguments[0].select(theForm.get_loaded_id());
+	return true;
+    }
+    return false;
+}
+
+  ]]></script>
+</dialog>

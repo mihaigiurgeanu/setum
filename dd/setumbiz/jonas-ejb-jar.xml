@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="ISO-8859-15"?>
+
+<jonas-ejb-jar xmlns="http://www.objectweb.org/jonas/ns"
+	           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+<!--
+    xsi:schemaLocation="http://www.objectweb.org/jonas/ns
+	http://www.objectweb.org/jonas/ns/jonas-ejb-jar_4_0.xsd" 
+-->
+
+
+  <jonas-session>
+    <ejb-name>UsaMetalica1KEJB</ejb-name>
+    <jndi-name>UsaMetalica1KHome</jndi-name>
+    <jonas-ejb-ref>
+      <ejb-ref-name>ejb/PreferencesEJB</ejb-ref-name>
+      <jndi-name>PreferencesHome</jndi-name>
+    </jonas-ejb-ref>
+  </jonas-session>
+
+  <jonas-session>
+    <ejb-name>UsiMetalice1KEJB</ejb-name>
+    <jndi-name>UsiMetalice1KHome</jndi-name>
+  </jonas-session>
+
+  <jonas-session>
+    <ejb-name>UsaMetalica2KEJB</ejb-name>
+    <jndi-name>UsaMetalica2KHome</jndi-name>
+    <jonas-ejb-ref>
+      <ejb-ref-name>ejb/PreferencesEJB</ejb-ref-name>
+      <jndi-name>PreferencesHome</jndi-name>
+    </jonas-ejb-ref>
+  </jonas-session>
+
+  <jonas-session>
+    <ejb-name>UsiMetalice2KEJB</ejb-name>
+    <jndi-name>UsiMetalice2KHome</jndi-name>
+  </jonas-session>
+
+  <jonas-session>
+    <ejb-name>StandardOfferEJB</ejb-name>
+    <jndi-name>StandardOfferHome</jndi-name>
+    <jonas-ejb-ref>
+      <ejb-ref-name>ejb/PreferencesEJB</ejb-ref-name>
+      <jndi-name>PreferencesHome</jndi-name>
+    </jonas-ejb-ref>
+  </jonas-session>
+
+  <jonas-session>
+    <ejb-name>SistemEJB</ejb-name>
+    <jndi-name>SistemHome</jndi-name>
+    <jonas-ejb-ref>
+      <ejb-ref-name>ejb/PreferencesEJB</ejb-ref-name>
+      <jndi-name>PreferencesHome</jndi-name>
+    </jonas-ejb-ref>
+  </jonas-session>
+
+
+  <jonas-session>
+    <ejb-name>OtherProductsEJB</ejb-name>
+    <jndi-name>OtherProductsHome</jndi-name>
+    <jonas-ejb-ref>
+      <ejb-ref-name>ejb/PreferencesEJB</ejb-ref-name>
+      <jndi-name>PreferencesHome</jndi-name>
+    </jonas-ejb-ref>
+  </jonas-session>
+
+
+  <jonas-session>
+    <ejb-name>UsaStdNeechipataEJB</ejb-name>
+    <jndi-name>UsaStdNeechipataHome</jndi-name>
+    <jonas-ejb-ref>
+      <ejb-ref-name>ejb/PreferencesEJB</ejb-ref-name>
+      <jndi-name>PreferencesHome</jndi-name>
+    </jonas-ejb-ref>
+  </jonas-session>
+
+  <jonas-session>
+    <ejb-name>UsaStandardEJB</ejb-name>
+    <jndi-name>UsaStandardHome</jndi-name>
+    <jonas-ejb-ref>
+      <ejb-ref-name>ejb/PreferencesEJB</ejb-ref-name>
+      <jndi-name>PreferencesHome</jndi-name>
+    </jonas-ejb-ref>
+  </jonas-session>
+
+
+  <jonas-session>
+    <ejb-name>OfertaUsiStandardEJB</ejb-name>
+    <jndi-name>OfertaUsiStandardHome</jndi-name>
+    <jonas-ejb-ref>
+      <ejb-ref-name>ejb/PreferencesEJB</ejb-ref-name>
+      <jndi-name>PreferencesHome</jndi-name>
+    </jonas-ejb-ref>
+  </jonas-session>
+
+  <jonas-session>
+    <ejb-name>ArbitraryOfferEJB</ejb-name>
+    <jndi-name>ArbitraryOfferHome</jndi-name>
+    <jonas-ejb-ref>
+      <ejb-ref-name>ejb/PreferencesEJB</ejb-ref-name>
+      <jndi-name>PreferencesHome</jndi-name>
+    </jonas-ejb-ref>
+  </jonas-session>
+
+  <jonas-session>
+    <ejb-name>FereastraEJB</ejb-name>
+    <jndi-name>FereastraHome</jndi-name>
+    <jonas-ejb-ref>
+      <ejb-ref-name>ejb/PreferencesEJB</ejb-ref-name>
+      <jndi-name>PreferencesHome</jndi-name>
+    </jonas-ejb-ref>
+  </jonas-session>
+
+  <jonas-session>
+    <ejb-name>GrilaVentilatieEJB</ejb-name>
+    <jndi-name>GrilaVentilatieHome</jndi-name>
+    <jonas-ejb-ref>
+      <ejb-ref-name>ejb/PreferencesEJB</ejb-ref-name>
+      <jndi-name>PreferencesHome</jndi-name>
+    </jonas-ejb-ref>
+  </jonas-session>
+
+  <jonas-session>
+    <ejb-name>GauriAerisireEJB</ejb-name>
+    <jndi-name>GauriAerisireHome</jndi-name>
+    <jonas-ejb-ref>
+      <ejb-ref-name>ejb/PreferencesEJB</ejb-ref-name>
+      <jndi-name>PreferencesHome</jndi-name>
+    </jonas-ejb-ref>
+  </jonas-session>
+
+</jonas-ejb-jar>

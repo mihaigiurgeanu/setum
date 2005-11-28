@@ -1,0 +1,173 @@
+format 21
+"setum"
+
+
+  
+  // class settings
+  default_attribute_visibility protected default_relation_visibility protected default_operation_visibility public
+  //class diagram settings
+  draw_all_relations yes hide_attributes no hide_operations no show_full_members_definition no package_name_in_tab no class_drawing_mode natural drawing_language uml show_context_mode no auto_label_position yes
+  //use case diagram settings
+  package_name_in_tab no show_context no auto_label_position yes
+  //sequence diagram settings
+  show_full_operations_definition no write_horizontally yes drawing_language uml
+  //collaboration diagram settings
+  show_full_operations_definition no show_hierarchical_rank no write_horizontally yes drawing_language uml
+  //component diagram settings
+  package_name_in_tab no show_context no auto_label_position yes
+  draw_component_as_icon no show_component_req_prov no show_component_rea no
+  //deployment diagram settings
+  package_name_in_tab no show_context no write_horizontally yes auto_label_position yes
+  draw_component_as_icon no show_component_req_prov no show_component_rea no
+  //state diagram settings
+  package_name_in_tab no show_context no auto_label_position yes write_trans_label_horizontally yes
+  show_activities yes region_horizontally yes drawing_language uml
+  
+  class_color yellow duration_color white continuation_color gray note_color blue fragment_color white usecase_color yellow package_color white component_color green artifact_color green deploymentnode_color gray state_color yellow stateaction_color white 
+  font_size 8
+  diagram_format A4
+
+  mark_for_import
+  
+  ncouples 1
+  key "html dir" value "C:/tmp/"
+  classview 128058 "Class view1"
+    //class diagram settings
+    draw_all_relations default hide_attributes default hide_operations default show_full_members_definition default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default
+    //col diagram settings
+    show_full_operations_definition default show_hierarchical_rank default write_horizontally default drawing_language default
+    //seq diagram settings
+    show_full_operations_definition default write_horizontally default drawing_language default
+    //state diagram settings
+    package_name_in_tab default show_context default auto_label_position default write_trans_label_horizontally default
+    show_activities default region_horizontally default drawing_language default
+    //class settings
+    sequencediagram 128097 "Edit offer item, 1st cenario"
+      show_full_operations_definition default write_horizontally default drawing_language default
+      comment "Editing an offer item by selecting a product from a list of products.
+This scenario is appropriate for the cases where the product's business category is a standard product for the company."
+      size A4
+    end
+
+    sequencediagram 128058 "Edit offer item, 2nd scenario"
+      show_full_operations_definition default write_horizontally default drawing_language default
+      comment "Edit an offer item by editing the corresponding. This kind of editing is good for cases when products do not exist independent of the offer."
+      size A4
+    end
+
+    class 128097 "UIModule"
+      
+      
+      cpp_decl "${comment}${template}class ${name}${inherit} {
+${members}};
+${inlines}
+"
+      java_decl "${comment}${public}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      idl_decl "${comment}${abstract}${custom}valuetype ${name}${inherit} {
+${members}};
+"
+      explicit_switch_type ""
+      
+      comment "Represents the user interface module"
+    end
+
+    class 128481 "User"
+       stereotype "actor"
+      
+      cpp_decl ""
+      java_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+    end
+
+    class 128609 "HTTPService"
+      
+      
+      cpp_decl ""
+      java_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+    end
+  end
+
+  usecaseview 128064 "Use Case View1"
+    //use case diagram settings
+    package_name_in_tab default show_context default auto_label_position default
+    //sequence diagram settings
+    show_full_operations_definition default write_horizontally default drawing_language default
+    //collaboration diagram settings
+    show_full_operations_definition default show_hierarchical_rank default write_horizontally default drawing_language default
+    class 128064 "User"
+       stereotype "actor"
+      
+      cpp_decl ""
+      java_decl "${comment}${public}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      idl_decl ""
+      explicit_switch_type ""
+      
+    end
+
+    usecasediagram 128192 "Edit ofer item"
+      package_name_in_tab default show_context default auto_label_position default
+      size A4
+    end
+
+    usecase 128064 "Editing an offer item, 1st scenario"
+      //use case diagram settings
+      package_name_in_tab default show_context default auto_label_position default
+      //sequence diagram settings
+      show_full_operations_definition default write_horizontally default drawing_language default
+      //collaboration diagram settings
+      show_full_operations_definition default show_hierarchical_rank default write_horizontally default drawing_language default
+      comment "The offer item's business category allows it to be assigned to products from a certain list of standard products. The standard products are
+products that are part from the company's catalog of standard products, as oposed to custom products that are specifically offered to one
+particular client. The standard products do not need any customization. Editing an offer item consists in selecting another product from the list
+of products and changing the offer item's details like price, quantity, discount."
+    end
+
+    usecase 128192 "Editing an offer item, 2nd scenario"
+      //use case diagram settings
+      package_name_in_tab default show_context default auto_label_position default
+      //sequence diagram settings
+      show_full_operations_definition default write_horizontally default drawing_language default
+      //collaboration diagram settings
+      show_full_operations_definition default show_hierarchical_rank default write_horizontally default drawing_language default
+      comment "The 2nd scenario refers to the products that are not standardized products, but they need specific customization (like dimensions, accesories, etc).
+For these products, there will be a custom definition for each offer, so the customized products definitions do not exist, and can not be accessed
+separate from the customized offer. An example of customized product would be a door with custom dimmensions, window, custom materials, etc.
+Changeing an offer item's product means changeing the product's details in the product definition."
+    end
+
+    usecase 128320 "Create a new offer item, 1st scenario"
+      //use case diagram settings
+      package_name_in_tab default show_context default auto_label_position default
+      //sequence diagram settings
+      show_full_operations_definition default write_horizontally default drawing_language default
+      //collaboration diagram settings
+      show_full_operations_definition default show_hierarchical_rank default write_horizontally default drawing_language default
+      comment "The offer item's business category allows it to be assigned to products from a certain list of standard products. The standard products are
+products that are part from the company's catalog of standard products, as oposed to custom products that are specifically offered to one
+particular client. The standard products do not need any customization. Creating a new item consist in selecting a product from a list of products
+and then entering price and quantity."
+    end
+
+    usecase 128448 "Create a new offer item, 2nd scenario"
+      //use case diagram settings
+      package_name_in_tab default show_context default auto_label_position default
+      //sequence diagram settings
+      show_full_operations_definition default write_horizontally default drawing_language default
+      //collaboration diagram settings
+      show_full_operations_definition default show_hierarchical_rank default write_horizontally default drawing_language default
+      comment "The 2nd scenario refers to the products that are not standardized products, but they need specific customization (like dimensions, accesories, etc).
+For these products, there will be a custom definition for each offer, so the customized products definitions do not exist, and can not be accessed
+separate from the customized offer. An example of customized product would be a door with custom dimmensions, window, custom materials, etc.
+Creating a new intem implies the creation of a new product definition."
+    end
+  end
+end

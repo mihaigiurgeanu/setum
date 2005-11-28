@@ -1,0 +1,63 @@
+package ro.kds.erp.reports;
+
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.ServletException;
+import java.io.IOException;
+import ro.kds.erp.biz.setum.basic.StandardOffer;
+import ro.kds.erp.web.StandardOfferServlet;
+import net.sf.jasperreports.engine.JRDataSource;
+import net.sf.jasperreports.engine.data.JRMapCollectionDataSource;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperFillManager;
+import java.util.HashMap;
+import net.sf.jasperreports.engine.JasperExportManager;
+import java.util.Collection;
+import java.io.InputStream;
+import java.io.OutputStream;
+
+
+/**
+ * Outputs the PDF report with company's standard offer.
+ *
+ *
+ * Created: Fri Oct 28 05:55:43 2005
+ *
+ * @author <a href="mailto:Mihai Giurgeanu@CRIMIRA"></a>
+ * @version 1.0
+ */
+public class StandardOfferPDF extends HttpServlet {
+
+    /**
+     * Outputs the PDF report. It first builds a <code>JRDataSource</code>
+     * object and then pass this object to the JasperReports engine to
+     * obtain the PDF content.
+     *
+     * @param httpServletRequest a <code>HttpServletRequest</code> value
+     * @param httpServletResponse a <code>HttpServletResponse</code> value
+     * @exception ServletException if an error occurs
+     * @exception IOException if an error occurs
+     */
+    public final void doGet(final HttpServletRequest httpServletRequest, final HttpServletResponse httpServletResponse) throws ServletException, IOException {
+	try {
+	    StandardOffer offer = (StandardOffer)httpServletRequest
+		.getSession().getAttribute(StandardOfferServlet.SESSION_ATTR);
+	    
+	    Collection reportData = offer.lineItemsCollectionMap();
+	    JRDataSource ds = new JRMapCollectionDataSource(reportData);
+	    InputStream jasperFile = getServletContext().
+		getResourceAsStream("/WEB-INF/reports/OfertaSisteme.jasper");
+	    JasperPrint report = JasperFillManager.fillReport(jasperFile, new HashMap(), ds);
+
+	    OutputStream outputStream = httpServletResponse.getOutputStream();
+	    httpServletResponse.setContentType("application/pdf");
+	    JasperExportManager.exportReportToPdfStream(report, outputStream);
+	    
+	    
+	} catch (Exception e) {
+	    throw new ServletException(e);
+	}
+    }
+
+}

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="iso-8859-2"?>
+
+<class>
+  <package>ro.kds.erp.biz.setum.basic</package>
+  <name>GauriAerisire</name>
+  <field>
+    <name>diametru</name>
+    <type>Double</type>
+  </field>
+  <field>
+    <name>pas</name>
+    <type>Double</type>
+  </field>
+  <field>
+    <name>nrRanduri</name>
+    <type>Integer</type>
+  </field>
+  <field>
+    <name>pozitionare1</name>
+    <type>String</type>
+  </field>
+  <field>
+    <name>pozitionare2</name>
+    <type>String</type>
+  </field>
+  <field>
+    <name>pozitionare3</name>
+    <type>String</type>
+  </field>
+  <field>
+    <name>sellPrice</name>
+    <type>java.math.BigDecimal</type>
+  </field>
+  <field>
+    <name>entryPrice</name>
+    <type>java.math.BigDecimal</type>
+  </field>
+  <field>
+    <name>price1</name>
+    <type>java.math.BigDecimal</type>
+  </field>
+</class>

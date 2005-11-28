@@ -1,0 +1,144 @@
+<?xml version="1.0"?>
+
+<web-app xmlns="http://java.sun.com/xml/ns/j2ee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee web-app_2_4.xsd"
+    version="2.4">
+
+  <display-name>SETUM Web</display-name>
+
+  <description>
+    The collection of reports for this application
+  </description>
+
+  <!--
+  <servlet>
+    <servlet-name>PDFReport</servlet-name>
+    <servlet-class>ro.kds.erp.reports.PDFServlet</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>PDFReport</servlet-name>
+    <url-pattern>*.pdf</url-pattern>
+  </servlet-mapping>
+
+  <resource-ref>
+    <description>Databsource reference</description>
+    <res-ref-name>jdbc/Products</res-ref-name>
+    <res-type>javax.sql.DataSource</res-type>
+    <res-auth>Container</res-auth>
+  </resource-ref>
+  -->
+
+  <servlet>
+    <description>Oferta sisteme (lista preturi de magazin)</description>
+    <display-name>OfertaSisteme</display-name>
+    <servlet-name>OfertaSistemePDF</servlet-name>
+    <servlet-class>ro.kds.erp.reports.OfertaSistemePDF</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>OfertaSistemePDF</servlet-name>
+    <url-pattern>/OfertaSisteme.pdf</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <description>Oferta usi standard (lista preturi de magazin)</description>
+    <display-name>OfertaUsiStandard</display-name>
+    <servlet-name>OfertaUsiStandardPDF</servlet-name>
+    <servlet-class>ro.kds.erp.reports.OfertaUsiStandardPDF</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>OfertaUsiStandardPDF</servlet-name>
+    <url-pattern>/OfertaUsiStandard.pdf</url-pattern>
+  </servlet-mapping>
+
+
+  <servlet>
+    <description>Report based on OfferEJB and StandardOfferEJB</description>
+    <servlet-name>StandardOfferReport</servlet-name>
+    <servlet-class>ro.kds.erp.reports.StandardOfferPDF</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>StandardOfferReport</servlet-name>
+    <url-pattern>/standardoffer.pdf</url-pattern>
+  </servlet-mapping>
+
+
+  <env-entry>
+    <description>Setum's special product category</description>
+    <env-entry-name>setum/category/sistemeId</env-entry-name>
+    <env-entry-type>java.lang.Integer</env-entry-type>
+    <env-entry-value>9999</env-entry-value>
+  </env-entry>
+  <env-entry>
+    <description>Setum's special product category</description>
+    <env-entry-name>setum/category/broascaId</env-entry-name>
+    <env-entry-type>java.lang.Integer</env-entry-type>
+    <env-entry-value>9998</env-entry-value>
+  </env-entry>
+  <env-entry>
+    <description>Setum's special product category</description>
+    <env-entry-name>setum/category/cilindruId</env-entry-name>
+    <env-entry-type>java.lang.Integer</env-entry-type>
+    <env-entry-value>9997</env-entry-value>
+  </env-entry>
+  <env-entry>
+    <description>Setum's special product category</description>
+    <env-entry-name>setum/category/sildId</env-entry-name>
+    <env-entry-type>java.lang.Integer</env-entry-type>
+    <env-entry-value>9996</env-entry-value>
+  </env-entry>
+  <env-entry>
+    <description>Setum's special product category</description>
+    <env-entry-name>setum/category/yallaId</env-entry-name>
+    <env-entry-type>java.lang.Integer</env-entry-type>
+    <env-entry-value>9995</env-entry-value>
+  </env-entry>
+  <env-entry>
+    <description>Setum's special product category</description>
+    <env-entry-name>setum/category/vizorId</env-entry-name>
+    <env-entry-type>java.lang.Integer</env-entry-type>
+    <env-entry-value>9994</env-entry-value>
+  </env-entry>
+  <env-entry>
+    <description>
+      Usa standard este o usa compusa dintr-o usa simpla
+      la care se pot sau nu adauga broasca, cilindru, sild, yalla si vizor
+    </description>
+    <env-entry-name>setum/category/usaStdId</env-entry-name>
+    <env-entry-type>java.lang.Integer</env-entry-type>
+    <env-entry-value>9993</env-entry-value>
+  </env-entry>
+  <env-entry>
+    <description>
+      Usa simpla este o usa cu finisaje fara sisteme, 
+      folosita drept baza pentru oferta de usi standard
+    </description>
+    <env-entry-name>setum/category/usaSimplaId</env-entry-name>
+    <env-entry-type>java.lang.Integer</env-entry-type>
+    <env-entry-value>9992</env-entry-value>
+  </env-entry>
+  
+  <ejb-local-ref>
+    <ejb-ref-name>ejb/ProductLocalHome</ejb-ref-name>
+    <ejb-ref-type>Entity</ejb-ref-type>
+    <local-home>ro.kds.erp.data.ProductLocalHome</local-home>
+    <local>ro.kds.erp.data.ProductLocal</local>
+    <ejb-link>datalayer.jar#ProductEJB</ejb-link>
+  </ejb-local-ref>
+  <ejb-local-ref>
+    <ejb-ref-name>ejb/CategoryLocalHome</ejb-ref-name>
+    <ejb-ref-type>Entity</ejb-ref-type>
+    <local-home>ro.kds.erp.data.CategoryLocalHome</local-home>
+    <local>ro.kds.erp.data.CategoryLocal</local>
+    <ejb-link>datalayer.jar#CategoryEJB</ejb-link>
+  </ejb-local-ref>
+  <ejb-local-ref>
+    <ejb-ref-name>ejb/CompositeProductLocalHome</ejb-ref-name>
+    <ejb-ref-type>Entity</ejb-ref-type>
+    <local-home>ro.kds.erp.data.CompositeProductLocalHome</local-home>
+    <local>ro.kds.erp.data.CompositeProductLocal</local>
+    <ejb-link>datalayer.jar#CompositeProductEJB</ejb-link>
+  </ejb-local-ref>
+
+</web-app>

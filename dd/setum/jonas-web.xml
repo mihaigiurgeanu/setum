@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<jonas-web-app xmlns="http://www.objectweb.org/jonas/ns">
+
+  <jonas-resource>
+    <res-ref-name>jdbc/Products</res-ref-name>
+    <jndi-name>setumdb</jndi-name>
+  </jonas-resource>
+
+  <jonas-resource>
+    <res-ref-name>jdbc/Clients</res-ref-name>
+    <jndi-name>setumdb</jndi-name>
+  </jonas-resource>
+
+  <jonas-ejb-ref>
+    <ejb-ref-name>ejb/UsaMetalica1K</ejb-ref-name>
+    <jndi-name>UsaMetalica1KHome</jndi-name>
+  </jonas-ejb-ref>
+
+  <jonas-ejb-ref>
+    <ejb-ref-name>ejb/UsiMetalice1K</ejb-ref-name>
+    <jndi-name>UsiMetalice1KHome</jndi-name>
+  </jonas-ejb-ref>
+
+  <jonas-ejb-ref>
+    <ejb-ref-name>ejb/UsaMetalica2K</ejb-ref-name>
+    <jndi-name>UsaMetalica2KHome</jndi-name>
+  </jonas-ejb-ref>
+
+  <jonas-ejb-ref>
+    <ejb-ref-name>ejb/UsiMetalice2K</ejb-ref-name>
+    <jndi-name>UsiMetalice2KHome</jndi-name>
+  </jonas-ejb-ref>
+
+  <jonas-ejb-ref>
+    <ejb-ref-name>ejb/StandardOfferHome</ejb-ref-name>
+    <jndi-name>StandardOfferHome</jndi-name>
+  </jonas-ejb-ref>
+
+  <jonas-ejb-ref>
+    <ejb-ref-name>ejb/SistemHome</ejb-ref-name>
+    <jndi-name>SistemHome</jndi-name>
+  </jonas-ejb-ref>
+
+  <jonas-ejb-ref>
+    <ejb-ref-name>ejb/OtherProductsHome</ejb-ref-name>
+    <jndi-name>OtherProductsHome</jndi-name>
+  </jonas-ejb-ref>
+
+  <jonas-ejb-ref>
+    <ejb-ref-name>ejb/UsaStdNeechipataHome</ejb-ref-name>
+    <jndi-name>UsaStdNeechipataHome</jndi-name>
+  </jonas-ejb-ref>
+
+  <jonas-ejb-ref>
+    <ejb-ref-name>ejb/UsaStandardHome</ejb-ref-name>
+    <jndi-name>UsaStandardHome</jndi-name>
+  </jonas-ejb-ref>
+
+  <jonas-ejb-ref>
+    <ejb-ref-name>ejb/OfertaUsiStandardHome</ejb-ref-name>
+    <jndi-name>OfertaUsiStandardHome</jndi-name>
+  </jonas-ejb-ref>
+
+  <jonas-ejb-ref>
+    <ejb-ref-name>ejb/ArbitraryOfferHome</ejb-ref-name>
+    <jndi-name>ArbitraryOfferHome</jndi-name>
+  </jonas-ejb-ref>
+
+  <jonas-ejb-ref>
+    <ejb-ref-name>ejb/FereastraHome</ejb-ref-name>
+    <jndi-name>FereastraHome</jndi-name>
+  </jonas-ejb-ref>
+
+  <jonas-ejb-ref>
+    <ejb-ref-name>ejb/GrilaVentilatieHome</ejb-ref-name>
+    <jndi-name>GrilaVentilatieHome</jndi-name>
+  </jonas-ejb-ref>
+
+  <jonas-ejb-ref>
+    <ejb-ref-name>ejb/GauriAerisireHome</ejb-ref-name>
+    <jndi-name>GauriAerisireHome</jndi-name>
+  </jonas-ejb-ref>
+
+</jonas-web-app>

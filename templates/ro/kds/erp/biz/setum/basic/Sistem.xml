@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<class>
+  <package>ro.kds.erp.biz.setum.basic</package>
+  <name>Sistem</name>
+  <field>
+    <name>name</name>
+    <type>String</type>
+  </field>
+  <field>
+    <name>code</name>
+    <type>String</type>
+  </field>
+  <field>
+    <name>categoryId</name>
+    <type>Integer</type>
+  </field>
+  <field>
+    <name>entryPrice</name>
+    <type>java.math.BigDecimal</type>
+  </field>
+  <field>
+    <name>sellPrice</name>
+    <type>java.math.BigDecimal</type>
+  </field>
+  <field>
+    <!-- Pretul sistemului cand este montat pe usa -->
+    <name>partPrice</name>
+    <type>java.math.BigDecimal</type>
+  </field>
+  <field>
+    <!-- Pretul sistemului cand este montat pe usa -->
+    <name>laborPrice</name>
+    <type>java.math.BigDecimal</type>
+  </field>
+  <field>
+    <!-- Adaosul pentru sellPrice -->
+    <name>relativeGainSP</name>
+    <type>Double</type>
+  </field>
+  <field>
+    <name>absoluteGainSP</name>
+    <type>java.math.BigDecimal</type>
+  </field>
+  <field>
+    <!-- Adaosul procentual pentru pretul de montaj -->
+    <name>relativeGainPP</name>
+    <type>Double</type>
+  </field>
+  <field>
+    <name>absoluteGainPP</name>
+    <type>java.math.BigDecimal</type>
+  </field>
+
+  <remote>
+    <!-- loadListing returneaza lista de sisteme -->
+    <method>ResponseBean loadListing() throws RemoteException</method>
+  </remote>
+</class>

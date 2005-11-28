@@ -1,0 +1,108 @@
+<?xml version="1.0"?>
+<!--
+- build.xml file for JOnAS examples (for Ant Version 1.5)
+- environment variables used :
+-  JONAS_ROOT
+-->
+
+<project name="JOnAS sample examples"
+	 default="install"
+	 basedir=".">
+
+  <!-- build.properties hold the properties that can be customized -->
+  <property file="../build.properties" />
+
+  <!-- some properties are build from environment variables -->
+  <property environment="myenv"/>
+  <property name="jonas.root" value="${myenv.JONAS_ROOT}" />
+
+  <property name="src.dir" value="." />
+  <property name="classes.dir" value="${jonas.root}/examples/classes" />
+  <property name="dist.dir" value="output" />
+  <property name="dist.ejbjars.dir" value="${dist.dir}/ejbjars" />
+  <property name="lib.dir" value="${jonas.root}/lib" />
+  <property name="verbose" value="false"/>
+
+
+  <!-- ejbjar task  -->
+  <taskdef name="ejbjar"
+	   classname="org.objectweb.jonas.ant.EjbJar"
+	   classpath="${jonas.root}/lib/common/ow_jonas_ant.jar" />
+
+
+  <!-- The classpath to be used to compile examples -->
+  <path id="base.classpath">
+    <pathelement location="${classes.dir}" />
+    <fileset dir="${lib.dir}">
+      <include name="client.jar"/>
+    </fileset>
+  </path>
+
+  <target name="mydtd"
+	  description="rebuild ./build.dtd for DOCTYPE">
+    <antstructure output="build.dtd"/>
+  </target>
+
+  <target name="init">
+    <!-- directories building -->
+    <mkdir dir="${classes.dir}" />
+    <mkdir dir="${dist.dir}" />
+    <mkdir dir="${dist.ejbjars.dir}" />
+    <condition property="jonas.base" value="${myenv.JONAS_BASE}">
+      <available file="${myenv.JONAS_BASE}"/>
+    </condition>
+    <condition property="jonas.base" value="${jonas.root}">
+      <available file="${jonas.root}"/>
+    </condition>
+  </target>
+
+  <target name="clean"
+	  description="Removes all the generated files or directories">
+    <!-- Delete the generated directories -->
+    <delete dir="${classes.dir}" />
+    <delete dir="${dist.dir}" />
+  </target>
+
+  <target name="compile"
+	  description="Compile example"
+	  depends="init" >
+    <javac srcdir="${src.dir}"
+	   destdir="${classes.dir}"
+	   debug="${opt.javac.debug}"
+	   optimize="${opt.javac.optimize}">
+      <classpath refid="base.classpath" />
+    </javac>
+  </target>
+
+  <!-- Deploying ejbjars via ejbjar task  -->
+  <target name="jonasejbjar"
+	  description="Build and deploy the ejb-jars"
+	  depends="compile" >
+    <property name="mappernames" value="rdb.postgres"/>
+    <ejbjar naming="directory"
+	    srcdir="${classes.dir}"
+	    descriptordir="${src.dir}"
+	    dependency="full">
+      <jonas destdir="${dist.ejbjars.dir}"
+	     jonasroot="${jonas.root}"
+	     keepgenerated="true"
+	     verbose="${verbose}">
+      </jonas>
+      <include name="**/*.xml"/>
+      <exclude name="**/jonas-*.xml"/>
+      <exclude name="**/build.xml" />
+    </ejbjar>
+  </target>
+
+  <target name="install"
+	  description="Build and install the ejb-jars"
+	  depends="jonasejbjar" >
+    <!-- Copy ejbjars files in JONAS_ROOT -->
+    <copy todir="${jonas.base}/ejbjars">
+      <fileset dir="${dist.ejbjars.dir}">
+	<include name="*.jar" />
+      </fileset>
+    </copy>
+  </target>
+
+</project>

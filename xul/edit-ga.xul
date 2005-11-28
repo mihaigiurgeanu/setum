@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="iso-8859-2"?>
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+<!--
+edit-ga.xul
+
+Editarea datelor despre gaurile de aerisire.
+
+window.arguments[0] trebuie sa fie un obiect care are metoda select(productId).
+La apasarea butonului ok, se va apela window.arguments[0].select(productId).
+-->
+<dialog
+    id="edit-ga-dlg"
+    title="Gauri aerisire"
+    xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+    orient="vertical"
+    buttons="accept,cancel"
+    ondialogaccept="return doOk();"
+    ondialogcancel="return true;"
+    debug="false">
+
+  <script src="js/logging.js"/>
+  <script src="js/httpdata.js"/>
+  <script src="js/formobject.js"/>
+  
+  <grid>
+    <rows>
+      <row>
+	<label controls="diametru" value="Diametru = "/>
+	<textbox id="diametru"/>
+      </row>
+      <row>
+	<label controls="pas" value="Pas = "/>
+	<textbox id="pas"/>
+      </row>
+      <row>
+	<label controls="nrRanduri" value="Nr randuri:" />
+	<textbox id="nrRanduri"/>
+      </row>
+      <row>
+	<label controls="pozitionare1" value="Pozitionare: "/>
+	<textbox id="pozitionare1"/>
+	<textbox id="pozitionare2"/>
+	<textbox id="pozitionare3"/>
+      </row>
+    </rows>
+  </grid>
+
+  <script language="javascript"><![CDATA[
+var theForm = new FormObject();
+theForm.do_link = "/edit-ga.do";
+theForm.text_fields = new Array("diametru", "pas", "nrRanduri",
+				"pozitionare1", 
+				"pozitionare2", "pozitionare3");
+theForm.setupEventListeners();
+theForm.load_current();
+
+function doOk() {
+    if(theForm.save()) {
+	window.arguments[0].select(theForm.get_loaded_id());
+	return true;
+    }
+    return false;
+}
+  ]]></script>
+</dialog>

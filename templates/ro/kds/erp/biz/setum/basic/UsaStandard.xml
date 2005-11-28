@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="iso-8859-2"?>
+<class>
+  <package>ro.kds.erp.biz.setum.basic</package>
+  <name>UsaStandard</name>
+
+  <field>
+    <name>name</name>
+    <type>String</type>
+  </field>
+  <field>
+    <name>code</name>
+    <type>String</type>
+  </field>
+  <field>
+    <name>usaId</name>
+    <type>Integer</type>
+  </field>
+  <field>
+    <name>broascaId</name>
+    <type>String</type>
+  </field>
+  <field>
+    <name>cilindruId</name>
+    <type>String</type>
+  </field>
+  <field>
+    <name>sildId</name>
+    <type>String</type>
+  </field>
+  <field>
+    <name>yallaId</name>
+    <type>String</type>
+  </field>
+  <field>
+    <name>vizorId</name>
+    <type>String</type>
+  </field>
+
+  <remote>
+    <method>ResponseBean loadListing() throws RemoteException</method>
+  </remote>
+
+</class>

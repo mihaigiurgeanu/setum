@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<application-client xmlns="http://java.sun.com/xml/ns/j2ee" version="1.4">
+  
+  <description>Makes iReport application a client of the erp EJBs</description>
+  <display-name>iReport</display-name>
+
+  <ejb-ref>
+    <description>Report builder</description>
+    <ejb-ref-name>ejb/RemoteDataSourceProvider</ejb-ref-name>
+    <ejb-ref-type>Session</ejb-ref-type>
+    <home>ro.kds.iReport.RemoteDataSourceProviderHome</home>
+    <remote>ro.kds.iReport.RemoteDataSourceProvider</remote>
+  </ejb-ref>
+  
+</application-client>

@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="iso-8859-2"?>
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+
+<window
+    id="usa_std_neechipata-win"
+    title="Usi neechipate"
+    persist="screenX screeY width height"
+    orient="horizontal"
+    xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+
+  <script src="js/logging.js"/>
+  <script src="js/httpdata.js"/>
+  <script src="js/formobject.js"/>
+
+  <commandset>
+    <command id="command-save" oncommand="theForm.save(); load_usi();"/>
+    <command id="command-add" oncommand="theForm.addnew(); document.getElementById('maintab').selectedIndex=1;"/>
+  </commandset>
+
+
+  <tabbox flex="1" id="maintab">
+    <tabs>
+      <tab label="Usi" id="maintab.tabs.usi" selected="true"/>
+      <tab label="Detalii usa" id="maintab.tabs.detalii"/>
+    </tabs>
+
+    <tabpanels flex="1">
+
+      <tabpanel id="maintab.panels.usi" orient="vertical">
+
+	<hbox>
+	  <spacer flex="1"/>
+	  <button label="Adaugare usa" command="command-add"/>
+	</hbox>
+
+	<tree id="usiListing" flex="1" enableColumnDrag="true"
+	      persist="ordinal width height hidden" seltype="single"
+	      onclick="theForm.load_form(usi[this.currentIndex]['id']);"
+	      ondblclick="document.getElementById('maintab').selectedIndex=1">
+	  <treecols id="usiListing-colums" >
+	    <treecol id="col-code" label="Cod magazie" flex="1"/>
+	    <splitter class="tree-splitter"/>
+	    <treecol id="col-usa" label="Usa" flex="1"/>
+	    <splitter class="tree-splitter"/>
+	    <treecol id="col-description" label="Varianta" flex="1"/>
+	    <splitter class="tree-splitter"/>
+	    <treecol id="col-price" label="Pret" flex="1"/>
+	  </treecols>
+	  <treechildren/>
+	</tree>
+      </tabpanel>
+
+
+
+      <tabpabel id="maintab.panels.detalii" orient="vertical" flex="1"
+		style="overflow:auto">
+	
+
+	<grid>
+	  <columns>
+	    <column/>
+	    <column flex="1"/>
+	  </columns>
+
+	  <rows>
+	    <row>
+	      <label control="code" value="Cod magazie:"/>
+	      <textbox id="code"/>
+	    </row>
+	    <row>
+	      <label control="name" value="Denumire:" />
+	      <textbox id="name"/>
+	    </row>
+	    <row>
+	      <label control="description" value="Varianta constructiva:"/>
+	      <textbox id="description"/>
+	    </row>
+	    <row>
+	      <label control="price" value="Pret:"/>
+	      <textbox id="price"/>
+	    </row>
+	  </rows>
+	</grid>
+	<hbox>
+	  <button label="Salveaza modificari" id="button-save"
+		  command="command-save"/>
+	  <spacer flex="1"/>
+	</hbox>
+      </tabpabel>
+    </tabpanels>
+  </tabbox>
+
+  <script src="usa_std_neechipata.js"/>
+</window>
