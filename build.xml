@@ -14,22 +14,23 @@
   <property name="dist" value="apps"/>
   <property name="docs" value="docs"/>
   <property name="descriptors" value="dd"/>
+  <property name="jonas.root" value="c:/JOnAS-4.4.3"/>
   <property name="reports" value="reports"/>
   <property name="library" value="lib"/>
   <property name="genic.destination" value="skels"/>
+  <property name="local.lib" value="C:/lib"/>
   <property name="templates" value="templates"/>
   <property name="src.formbean" value="${source}"/>
   <property name="src.home" value="${source}"/>
   <property name="src.remote" value="${source}"/>
   <property name="src.sessionbean" value="${source}"/>
-  <property name="java.lib" value="/usr/share"/>
 
   <!-- ejbjar task  -->
   <taskdef name="ejbjar"
 	   classname="org.objectweb.jonas.ant.EjbJar"
 	   classpath="${jonas.root}/lib/common/ow_jonas_ant.jar" />
   <taskdef name="freemarker" classname="freemarker.ext.ant.FreemarkerXmlTask"
-	   classpath="${java.lib}/freemarker-2.3.4/lib/freemarker.jar"/>
+	   classpath="C:/lib/freemarker-2.3.4/lib/freemarker.jar"/>
   <taskdef name="jrc" 
 	   classname="net.sf.jasperreports.ant.JRAntCompileTask"> 
     <classpath>
@@ -38,6 +39,10 @@
       </fileset>
     </classpath>
   </taskdef>
+
+  <!-- texen task for generating java code with velocity -->
+  <taskdef name="texen" classname="org.apache.velocity.texen.ant.TexenTask"
+	   classpath="${local.lib}/velocity-1.4/velocity-dep-1.4.jar"/>
 
   <path id="compilation.classpath">
     <pathelement location="${build}" />
@@ -176,6 +181,17 @@
 	  overwrite="true" />
   </target>
 
+  <target name="deploy" >
+    <exec executable="${jonas.root}/bin/nt/jonas.bat" dir="${jonas.root}/apps">
+      <arg line="admin -a setum.ear"/>
+    </exec>
+  </target>
+
+  <target name="undeploy" >
+    <exec executable="${jonas.root}/bin/nt/jonas.bat" dir="${jonas.root}/apps">
+      <arg line="admin -r setum.ear"/>
+    </exec>
+  </target>
 
   <!-- Building the ear -->
   <target name="application" depends="init,ejbjars,setum.war,prefsadm"
