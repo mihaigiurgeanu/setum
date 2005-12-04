@@ -1,4 +1,5 @@
 <?xml version="1.0"?>
+<!-- $Id: build.xml,v 1.3 2005/12/04 13:15:05 mihai Exp $ -->
 <project name="setumerp" default="application">
   <description>
     setum.war target builds the web module used for interfacing the UI
@@ -176,6 +177,20 @@
 	  overwrite="true" />
   </target>
 
+  <!-- deploying the ear on a linux machine -->
+  <target name="deploy">
+    <exec executable="${jonas.root}/bin/unix/jonas"
+	  dir="${jonas.root}/apps">
+      <arg line="admin -a setum.ear"/>
+    </exec>
+  </target>
+
+  <target name="undeploy">
+    <exec executable="${jonas.root}/bin/unix/jonas"
+	  dir="${jonas.root}/apps">
+      <arg line="admin -r setum.ear"/>
+    </exec>
+  </target>
 
   <!-- Building the ear -->
   <target name="application" depends="init,ejbjars,setum.war,prefsadm"
