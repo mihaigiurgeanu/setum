@@ -312,13 +312,13 @@ public abstract class UsaStdNeechipataBean
 	computeCalculatedFields(r);
 	return r;
     }
-    public ResponseBean updatePrice(java.math.BigDecimal price) {
+    public ResponseBean updateEntryPrice(java.math.BigDecimal entryPrice) {
         ResponseBean r = new ResponseBean();
-	java.math.BigDecimal oldVal = form.getPrice();
-	form.setPrice(price);
+	java.math.BigDecimal oldVal = form.getEntryPrice();
+	form.setEntryPrice(entryPrice);
 	r.addRecord();
-	r.addField("price", price); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.UsaStdNeechipata.price");
+	r.addField("entryPrice", entryPrice); // for number format
+	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.UsaStdNeechipata.entryPrice");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
@@ -330,7 +330,79 @@ public abstract class UsaStdNeechipataBean
 		getFieldsFromScript(script, r); // add all the changed
 						// fields to the response also
 	   } catch (ScriptErrorException e) {
-	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the price", e);
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the entryPrice", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
+    public ResponseBean updateSellPrice(java.math.BigDecimal sellPrice) {
+        ResponseBean r = new ResponseBean();
+	java.math.BigDecimal oldVal = form.getSellPrice();
+	form.setSellPrice(sellPrice);
+	r.addRecord();
+	r.addField("sellPrice", sellPrice); // for number format
+	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.UsaStdNeechipata.sellPrice");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(OLDVAL_VARNAME, oldVal, java.math.BigDecimal.class);
+		script.setVar(FORM_VARNAME, form, UsaStdNeechipataForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the sellPrice", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
+    public ResponseBean updateRelativeGain(Double relativeGain) {
+        ResponseBean r = new ResponseBean();
+	Double oldVal = form.getRelativeGain();
+	form.setRelativeGain(relativeGain);
+	r.addRecord();
+	r.addField("relativeGain", relativeGain); // for number format
+	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.UsaStdNeechipata.relativeGain");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(OLDVAL_VARNAME, oldVal, Double.class);
+		script.setVar(FORM_VARNAME, form, UsaStdNeechipataForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the relativeGain", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
+    public ResponseBean updateAbsoluteGain(java.math.BigDecimal absoluteGain) {
+        ResponseBean r = new ResponseBean();
+	java.math.BigDecimal oldVal = form.getAbsoluteGain();
+	form.setAbsoluteGain(absoluteGain);
+	r.addRecord();
+	r.addField("absoluteGain", absoluteGain); // for number format
+	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.UsaStdNeechipata.absoluteGain");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(OLDVAL_VARNAME, oldVal, java.math.BigDecimal.class);
+		script.setVar(FORM_VARNAME, form, UsaStdNeechipataForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the absoluteGain", e);
            }
         }
 	computeCalculatedFields(r);
@@ -344,7 +416,10 @@ public abstract class UsaStdNeechipataBean
 	r.addField("name", form.getName());
 	r.addField("code", form.getCode());
 	r.addField("description", form.getDescription());
-	r.addField("price", form.getPrice());
+	r.addField("entryPrice", form.getEntryPrice());
+	r.addField("sellPrice", form.getSellPrice());
+	r.addField("relativeGain", form.getRelativeGain());
+	r.addField("absoluteGain", form.getAbsoluteGain());
 	loadValueLists(r);
     }
 
@@ -368,9 +443,24 @@ public abstract class UsaStdNeechipataBean
 	    logger.log(BasicLevel.WARN, "Can not set the value of field: description from the script", e);
         }
 	try {
-	    s.setVar("price", form.getPrice(), java.math.BigDecimal.class);
+	    s.setVar("entryPrice", form.getEntryPrice(), java.math.BigDecimal.class);
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not set the value of field: price from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: entryPrice from the script", e);
+        }
+	try {
+	    s.setVar("sellPrice", form.getSellPrice(), java.math.BigDecimal.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: sellPrice from the script", e);
+        }
+	try {
+	    s.setVar("relativeGain", form.getRelativeGain(), Double.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: relativeGain from the script", e);
+        }
+	try {
+	    s.setVar("absoluteGain", form.getAbsoluteGain(), java.math.BigDecimal.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: absoluteGain from the script", e);
         }
     }
 
@@ -411,14 +501,44 @@ public abstract class UsaStdNeechipataBean
 	    logger.log(BasicLevel.WARN, "Can not get the value of field: description from the script", e);
         }
 	try {
-	    field = s.getVar("price", java.math.BigDecimal.class);
-	    if(!field.equals(form.getPrice())) {
-	        logger.log(BasicLevel.DEBUG, "Field price modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
-	        form.setPrice((java.math.BigDecimal)field);
-	        r.addField("price", (java.math.BigDecimal)field);
+	    field = s.getVar("entryPrice", java.math.BigDecimal.class);
+	    if(!field.equals(form.getEntryPrice())) {
+	        logger.log(BasicLevel.DEBUG, "Field entryPrice modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setEntryPrice((java.math.BigDecimal)field);
+	        r.addField("entryPrice", (java.math.BigDecimal)field);
 	    }
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not get the value of field: price from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: entryPrice from the script", e);
+        }
+	try {
+	    field = s.getVar("sellPrice", java.math.BigDecimal.class);
+	    if(!field.equals(form.getSellPrice())) {
+	        logger.log(BasicLevel.DEBUG, "Field sellPrice modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setSellPrice((java.math.BigDecimal)field);
+	        r.addField("sellPrice", (java.math.BigDecimal)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: sellPrice from the script", e);
+        }
+	try {
+	    field = s.getVar("relativeGain", Double.class);
+	    if(!field.equals(form.getRelativeGain())) {
+	        logger.log(BasicLevel.DEBUG, "Field relativeGain modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setRelativeGain((Double)field);
+	        r.addField("relativeGain", (Double)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: relativeGain from the script", e);
+        }
+	try {
+	    field = s.getVar("absoluteGain", java.math.BigDecimal.class);
+	    if(!field.equals(form.getAbsoluteGain())) {
+	        logger.log(BasicLevel.DEBUG, "Field absoluteGain modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setAbsoluteGain((java.math.BigDecimal)field);
+	        r.addField("absoluteGain", (java.math.BigDecimal)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: absoluteGain from the script", e);
         }
     }
 

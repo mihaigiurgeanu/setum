@@ -22,7 +22,10 @@ public interface UsaStdNeechipata extends EJBObject {
     public ResponseBean updateName(String newName) throws RemoteException;
     public ResponseBean updateCode(String newCode) throws RemoteException;
     public ResponseBean updateDescription(String newDescription) throws RemoteException;
-    public ResponseBean updatePrice(java.math.BigDecimal newPrice) throws RemoteException;
+    public ResponseBean updateEntryPrice(java.math.BigDecimal newEntryPrice) throws RemoteException;
+    public ResponseBean updateSellPrice(java.math.BigDecimal newSellPrice) throws RemoteException;
+    public ResponseBean updateRelativeGain(Double newRelativeGain) throws RemoteException;
+    public ResponseBean updateAbsoluteGain(java.math.BigDecimal newAbsoluteGain) throws RemoteException;
 
     public ResponseBean loadListing() throws RemoteException;
 }

@@ -1,6 +1,8 @@
 package ro.kds.erp.biz.setum.basic;
 
 import java.io.Serializable;
+import java.util.Map;
+import ro.kds.erp.data.AttributeLocal;
 
 /**
  * A represantation of form data. While user is editing the data associated
@@ -31,12 +33,26 @@ public class GauriAerisireForm implements Serializable {
         return diametru;
     }
 
+    public void readDiametru(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("diametru");
+	if(a != null) {
+	    this.setDiametru(a.getDoubleValue());
+	}
+    }
+
     public void setPas(Double newPas) {
         this.pas = newPas;
     }
 
     public Double getPas() {
         return pas;
+    }
+
+    public void readPas(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("pas");
+	if(a != null) {
+	    this.setPas(a.getDoubleValue());
+	}
     }
 
     public void setNrRanduri(Integer newNrRanduri) {
@@ -47,12 +63,26 @@ public class GauriAerisireForm implements Serializable {
         return nrRanduri;
     }
 
+    public void readNrRanduri(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("nrRanduri");
+	if(a != null) {
+	    this.setNrRanduri(a.getIntValue());
+	}
+    }
+
     public void setPozitionare1(String newPozitionare1) {
         this.pozitionare1 = newPozitionare1;
     }
 
     public String getPozitionare1() {
         return pozitionare1;
+    }
+
+    public void readPozitionare1(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("pozitionare1");
+	if(a != null) {
+	    this.setPozitionare1(a.getStringValue());
+	}
     }
 
     public void setPozitionare2(String newPozitionare2) {
@@ -63,12 +93,26 @@ public class GauriAerisireForm implements Serializable {
         return pozitionare2;
     }
 
+    public void readPozitionare2(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("pozitionare2");
+	if(a != null) {
+	    this.setPozitionare2(a.getStringValue());
+	}
+    }
+
     public void setPozitionare3(String newPozitionare3) {
         this.pozitionare3 = newPozitionare3;
     }
 
     public String getPozitionare3() {
         return pozitionare3;
+    }
+
+    public void readPozitionare3(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("pozitionare3");
+	if(a != null) {
+	    this.setPozitionare3(a.getStringValue());
+	}
     }
 
     public void setSellPrice(java.math.BigDecimal newSellPrice) {
@@ -79,6 +123,13 @@ public class GauriAerisireForm implements Serializable {
         return sellPrice;
     }
 
+    public void readSellPrice(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("sellPrice");
+	if(a != null) {
+	    this.setSellPrice(a.getDecimalValue());
+	}
+    }
+
     public void setEntryPrice(java.math.BigDecimal newEntryPrice) {
         this.entryPrice = newEntryPrice;
     }
@@ -87,12 +138,26 @@ public class GauriAerisireForm implements Serializable {
         return entryPrice;
     }
 
+    public void readEntryPrice(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("entryPrice");
+	if(a != null) {
+	    this.setEntryPrice(a.getDecimalValue());
+	}
+    }
+
     public void setPrice1(java.math.BigDecimal newPrice1) {
         this.price1 = newPrice1;
     }
 
     public java.math.BigDecimal getPrice1() {
         return price1;
+    }
+
+    public void readPrice1(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("price1");
+	if(a != null) {
+	    this.setPrice1(a.getDecimalValue());
+	}
     }
 
 }

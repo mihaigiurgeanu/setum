@@ -240,6 +240,78 @@ public abstract class UsaMetalica1KBean
 	return r;
     }
 
+    public ResponseBean updateCode(String code) {
+        ResponseBean r = new ResponseBean();
+	String oldVal = form.getCode();
+	form.setCode(code);
+	r.addRecord();
+	r.addField("code", code); // for number format
+	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.UsaMetalica1K.code");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
+		script.setVar(FORM_VARNAME, form, UsaMetalica1KForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the code", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
+    public ResponseBean updateName(String name) {
+        ResponseBean r = new ResponseBean();
+	String oldVal = form.getName();
+	form.setName(name);
+	r.addRecord();
+	r.addField("name", name); // for number format
+	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.UsaMetalica1K.name");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
+		script.setVar(FORM_VARNAME, form, UsaMetalica1KForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the name", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
+    public ResponseBean updateDescription(String description) {
+        ResponseBean r = new ResponseBean();
+	String oldVal = form.getDescription();
+	form.setDescription(description);
+	r.addRecord();
+	r.addField("description", description); // for number format
+	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.UsaMetalica1K.description");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
+		script.setVar(FORM_VARNAME, form, UsaMetalica1KForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the description", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
     public ResponseBean updateSubclass(String subclass) {
         ResponseBean r = new ResponseBean();
 	String oldVal = form.getSubclass();
@@ -936,11 +1008,62 @@ public abstract class UsaMetalica1KBean
 	computeCalculatedFields(r);
 	return r;
     }
+    public ResponseBean updateEntryPrice(java.math.BigDecimal entryPrice) {
+        ResponseBean r = new ResponseBean();
+	java.math.BigDecimal oldVal = form.getEntryPrice();
+	form.setEntryPrice(entryPrice);
+	r.addRecord();
+	r.addField("entryPrice", entryPrice); // for number format
+	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.UsaMetalica1K.entryPrice");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(OLDVAL_VARNAME, oldVal, java.math.BigDecimal.class);
+		script.setVar(FORM_VARNAME, form, UsaMetalica1KForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the entryPrice", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
+    public ResponseBean updateSellPrice(java.math.BigDecimal sellPrice) {
+        ResponseBean r = new ResponseBean();
+	java.math.BigDecimal oldVal = form.getSellPrice();
+	form.setSellPrice(sellPrice);
+	r.addRecord();
+	r.addField("sellPrice", sellPrice); // for number format
+	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.UsaMetalica1K.sellPrice");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(OLDVAL_VARNAME, oldVal, java.math.BigDecimal.class);
+		script.setVar(FORM_VARNAME, form, UsaMetalica1KForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the sellPrice", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
 
     /**
      * Get the fields stored internaly and adds them to the response.
      */
     protected void copyFieldsToResponse(ResponseBean r) {
+	r.addField("code", form.getCode());
+	r.addField("name", form.getName());
+	r.addField("description", form.getDescription());
 	r.addField("subclass", form.getSubclass());
 	r.addField("version", form.getVersion());
 	r.addField("material", form.getMaterial());
@@ -970,6 +1093,8 @@ public abstract class UsaMetalica1KBean
 	r.addField("h2Treshold", form.getH2Treshold());
 	r.addField("fereastraId", form.getFereastraId());
 	r.addField("fereastra", form.getFereastra());
+	r.addField("entryPrice", form.getEntryPrice());
+	r.addField("sellPrice", form.getSellPrice());
 	loadValueLists(r);
     }
 
@@ -977,6 +1102,21 @@ public abstract class UsaMetalica1KBean
      * Add all the fields of the form as variables for the script
      */
     protected void addFieldsToScript(Script s) {
+	try {
+	    s.setVar("code", form.getCode(), String.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: code from the script", e);
+        }
+	try {
+	    s.setVar("name", form.getName(), String.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: name from the script", e);
+        }
+	try {
+	    s.setVar("description", form.getDescription(), String.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: description from the script", e);
+        }
 	try {
 	    s.setVar("subclass", form.getSubclass(), String.class);
 	} catch (ScriptErrorException e) {
@@ -1122,6 +1262,16 @@ public abstract class UsaMetalica1KBean
 	} catch (ScriptErrorException e) {
 	    logger.log(BasicLevel.WARN, "Can not set the value of field: fereastra from the script", e);
         }
+	try {
+	    s.setVar("entryPrice", form.getEntryPrice(), java.math.BigDecimal.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: entryPrice from the script", e);
+        }
+	try {
+	    s.setVar("sellPrice", form.getSellPrice(), java.math.BigDecimal.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: sellPrice from the script", e);
+        }
     }
 
     /**
@@ -1130,6 +1280,36 @@ public abstract class UsaMetalica1KBean
      */
     protected void getFieldsFromScript(Script s, ResponseBean r) {
 	Object field;
+	try {
+	    field = s.getVar("code", String.class);
+	    if(!field.equals(form.getCode())) {
+	        logger.log(BasicLevel.DEBUG, "Field code modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setCode((String)field);
+	        r.addField("code", (String)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: code from the script", e);
+        }
+	try {
+	    field = s.getVar("name", String.class);
+	    if(!field.equals(form.getName())) {
+	        logger.log(BasicLevel.DEBUG, "Field name modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setName((String)field);
+	        r.addField("name", (String)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: name from the script", e);
+        }
+	try {
+	    field = s.getVar("description", String.class);
+	    if(!field.equals(form.getDescription())) {
+	        logger.log(BasicLevel.DEBUG, "Field description modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setDescription((String)field);
+	        r.addField("description", (String)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: description from the script", e);
+        }
 	try {
 	    field = s.getVar("subclass", String.class);
 	    if(!field.equals(form.getSubclass())) {
@@ -1419,6 +1599,26 @@ public abstract class UsaMetalica1KBean
 	    }
 	} catch (ScriptErrorException e) {
 	    logger.log(BasicLevel.WARN, "Can not get the value of field: fereastra from the script", e);
+        }
+	try {
+	    field = s.getVar("entryPrice", java.math.BigDecimal.class);
+	    if(!field.equals(form.getEntryPrice())) {
+	        logger.log(BasicLevel.DEBUG, "Field entryPrice modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setEntryPrice((java.math.BigDecimal)field);
+	        r.addField("entryPrice", (java.math.BigDecimal)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: entryPrice from the script", e);
+        }
+	try {
+	    field = s.getVar("sellPrice", java.math.BigDecimal.class);
+	    if(!field.equals(form.getSellPrice())) {
+	        logger.log(BasicLevel.DEBUG, "Field sellPrice modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setSellPrice((java.math.BigDecimal)field);
+	        r.addField("sellPrice", (java.math.BigDecimal)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: sellPrice from the script", e);
         }
     }
 

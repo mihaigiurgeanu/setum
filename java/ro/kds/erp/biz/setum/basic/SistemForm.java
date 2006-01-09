@@ -1,6 +1,8 @@
 package ro.kds.erp.biz.setum.basic;
 
 import java.io.Serializable;
+import java.util.Map;
+import ro.kds.erp.data.AttributeLocal;
 
 /**
  * A represantation of form data. While user is editing the data associated
@@ -33,12 +35,26 @@ public class SistemForm implements Serializable {
         return name;
     }
 
+    public void readName(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("name");
+	if(a != null) {
+	    this.setName(a.getStringValue());
+	}
+    }
+
     public void setCode(String newCode) {
         this.code = newCode;
     }
 
     public String getCode() {
         return code;
+    }
+
+    public void readCode(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("code");
+	if(a != null) {
+	    this.setCode(a.getStringValue());
+	}
     }
 
     public void setCategoryId(Integer newCategoryId) {
@@ -49,12 +65,26 @@ public class SistemForm implements Serializable {
         return categoryId;
     }
 
+    public void readCategoryId(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("categoryId");
+	if(a != null) {
+	    this.setCategoryId(a.getIntValue());
+	}
+    }
+
     public void setEntryPrice(java.math.BigDecimal newEntryPrice) {
         this.entryPrice = newEntryPrice;
     }
 
     public java.math.BigDecimal getEntryPrice() {
         return entryPrice;
+    }
+
+    public void readEntryPrice(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("entryPrice");
+	if(a != null) {
+	    this.setEntryPrice(a.getDecimalValue());
+	}
     }
 
     public void setSellPrice(java.math.BigDecimal newSellPrice) {
@@ -65,12 +95,26 @@ public class SistemForm implements Serializable {
         return sellPrice;
     }
 
+    public void readSellPrice(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("sellPrice");
+	if(a != null) {
+	    this.setSellPrice(a.getDecimalValue());
+	}
+    }
+
     public void setPartPrice(java.math.BigDecimal newPartPrice) {
         this.partPrice = newPartPrice;
     }
 
     public java.math.BigDecimal getPartPrice() {
         return partPrice;
+    }
+
+    public void readPartPrice(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("partPrice");
+	if(a != null) {
+	    this.setPartPrice(a.getDecimalValue());
+	}
     }
 
     public void setLaborPrice(java.math.BigDecimal newLaborPrice) {
@@ -81,12 +125,26 @@ public class SistemForm implements Serializable {
         return laborPrice;
     }
 
+    public void readLaborPrice(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("laborPrice");
+	if(a != null) {
+	    this.setLaborPrice(a.getDecimalValue());
+	}
+    }
+
     public void setRelativeGainSP(Double newRelativeGainSP) {
         this.relativeGainSP = newRelativeGainSP;
     }
 
     public Double getRelativeGainSP() {
         return relativeGainSP;
+    }
+
+    public void readRelativeGainSP(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("relativeGainSP");
+	if(a != null) {
+	    this.setRelativeGainSP(a.getDoubleValue());
+	}
     }
 
     public void setAbsoluteGainSP(java.math.BigDecimal newAbsoluteGainSP) {
@@ -97,6 +155,13 @@ public class SistemForm implements Serializable {
         return absoluteGainSP;
     }
 
+    public void readAbsoluteGainSP(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("absoluteGainSP");
+	if(a != null) {
+	    this.setAbsoluteGainSP(a.getDecimalValue());
+	}
+    }
+
     public void setRelativeGainPP(Double newRelativeGainPP) {
         this.relativeGainPP = newRelativeGainPP;
     }
@@ -105,12 +170,26 @@ public class SistemForm implements Serializable {
         return relativeGainPP;
     }
 
+    public void readRelativeGainPP(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("relativeGainPP");
+	if(a != null) {
+	    this.setRelativeGainPP(a.getDoubleValue());
+	}
+    }
+
     public void setAbsoluteGainPP(java.math.BigDecimal newAbsoluteGainPP) {
         this.absoluteGainPP = newAbsoluteGainPP;
     }
 
     public java.math.BigDecimal getAbsoluteGainPP() {
         return absoluteGainPP;
+    }
+
+    public void readAbsoluteGainPP(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("absoluteGainPP");
+	if(a != null) {
+	    this.setAbsoluteGainPP(a.getDecimalValue());
+	}
     }
 
 }

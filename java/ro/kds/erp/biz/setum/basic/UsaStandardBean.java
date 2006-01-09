@@ -312,9 +312,9 @@ public abstract class UsaStandardBean
 	computeCalculatedFields(r);
 	return r;
     }
-    public ResponseBean updateBroascaId(String broascaId) {
+    public ResponseBean updateBroascaId(Integer broascaId) {
         ResponseBean r = new ResponseBean();
-	String oldVal = form.getBroascaId();
+	Integer oldVal = form.getBroascaId();
 	form.setBroascaId(broascaId);
 	r.addRecord();
 	r.addField("broascaId", broascaId); // for number format
@@ -322,7 +322,7 @@ public abstract class UsaStandardBean
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
-		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
+		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
 		script.setVar(FORM_VARNAME, form, UsaStandardForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
 		addFieldsToScript(script);
@@ -336,9 +336,9 @@ public abstract class UsaStandardBean
 	computeCalculatedFields(r);
 	return r;
     }
-    public ResponseBean updateCilindruId(String cilindruId) {
+    public ResponseBean updateCilindruId(Integer cilindruId) {
         ResponseBean r = new ResponseBean();
-	String oldVal = form.getCilindruId();
+	Integer oldVal = form.getCilindruId();
 	form.setCilindruId(cilindruId);
 	r.addRecord();
 	r.addField("cilindruId", cilindruId); // for number format
@@ -346,7 +346,7 @@ public abstract class UsaStandardBean
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
-		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
+		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
 		script.setVar(FORM_VARNAME, form, UsaStandardForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
 		addFieldsToScript(script);
@@ -360,9 +360,9 @@ public abstract class UsaStandardBean
 	computeCalculatedFields(r);
 	return r;
     }
-    public ResponseBean updateSildId(String sildId) {
+    public ResponseBean updateSildId(Integer sildId) {
         ResponseBean r = new ResponseBean();
-	String oldVal = form.getSildId();
+	Integer oldVal = form.getSildId();
 	form.setSildId(sildId);
 	r.addRecord();
 	r.addField("sildId", sildId); // for number format
@@ -370,7 +370,7 @@ public abstract class UsaStandardBean
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
-		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
+		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
 		script.setVar(FORM_VARNAME, form, UsaStandardForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
 		addFieldsToScript(script);
@@ -384,9 +384,9 @@ public abstract class UsaStandardBean
 	computeCalculatedFields(r);
 	return r;
     }
-    public ResponseBean updateYallaId(String yallaId) {
+    public ResponseBean updateYallaId(Integer yallaId) {
         ResponseBean r = new ResponseBean();
-	String oldVal = form.getYallaId();
+	Integer oldVal = form.getYallaId();
 	form.setYallaId(yallaId);
 	r.addRecord();
 	r.addField("yallaId", yallaId); // for number format
@@ -394,7 +394,7 @@ public abstract class UsaStandardBean
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
-		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
+		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
 		script.setVar(FORM_VARNAME, form, UsaStandardForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
 		addFieldsToScript(script);
@@ -408,9 +408,9 @@ public abstract class UsaStandardBean
 	computeCalculatedFields(r);
 	return r;
     }
-    public ResponseBean updateVizorId(String vizorId) {
+    public ResponseBean updateVizorId(Integer vizorId) {
         ResponseBean r = new ResponseBean();
-	String oldVal = form.getVizorId();
+	Integer oldVal = form.getVizorId();
 	form.setVizorId(vizorId);
 	r.addRecord();
 	r.addField("vizorId", vizorId); // for number format
@@ -418,7 +418,7 @@ public abstract class UsaStandardBean
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
-		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
+		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
 		script.setVar(FORM_VARNAME, form, UsaStandardForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
 		addFieldsToScript(script);
@@ -468,27 +468,27 @@ public abstract class UsaStandardBean
 	    logger.log(BasicLevel.WARN, "Can not set the value of field: usaId from the script", e);
         }
 	try {
-	    s.setVar("broascaId", form.getBroascaId(), String.class);
+	    s.setVar("broascaId", form.getBroascaId(), Integer.class);
 	} catch (ScriptErrorException e) {
 	    logger.log(BasicLevel.WARN, "Can not set the value of field: broascaId from the script", e);
         }
 	try {
-	    s.setVar("cilindruId", form.getCilindruId(), String.class);
+	    s.setVar("cilindruId", form.getCilindruId(), Integer.class);
 	} catch (ScriptErrorException e) {
 	    logger.log(BasicLevel.WARN, "Can not set the value of field: cilindruId from the script", e);
         }
 	try {
-	    s.setVar("sildId", form.getSildId(), String.class);
+	    s.setVar("sildId", form.getSildId(), Integer.class);
 	} catch (ScriptErrorException e) {
 	    logger.log(BasicLevel.WARN, "Can not set the value of field: sildId from the script", e);
         }
 	try {
-	    s.setVar("yallaId", form.getYallaId(), String.class);
+	    s.setVar("yallaId", form.getYallaId(), Integer.class);
 	} catch (ScriptErrorException e) {
 	    logger.log(BasicLevel.WARN, "Can not set the value of field: yallaId from the script", e);
         }
 	try {
-	    s.setVar("vizorId", form.getVizorId(), String.class);
+	    s.setVar("vizorId", form.getVizorId(), Integer.class);
 	} catch (ScriptErrorException e) {
 	    logger.log(BasicLevel.WARN, "Can not set the value of field: vizorId from the script", e);
         }
@@ -531,51 +531,51 @@ public abstract class UsaStandardBean
 	    logger.log(BasicLevel.WARN, "Can not get the value of field: usaId from the script", e);
         }
 	try {
-	    field = s.getVar("broascaId", String.class);
+	    field = s.getVar("broascaId", Integer.class);
 	    if(!field.equals(form.getBroascaId())) {
 	        logger.log(BasicLevel.DEBUG, "Field broascaId modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
-	        form.setBroascaId((String)field);
-	        r.addField("broascaId", (String)field);
+	        form.setBroascaId((Integer)field);
+	        r.addField("broascaId", (Integer)field);
 	    }
 	} catch (ScriptErrorException e) {
 	    logger.log(BasicLevel.WARN, "Can not get the value of field: broascaId from the script", e);
         }
 	try {
-	    field = s.getVar("cilindruId", String.class);
+	    field = s.getVar("cilindruId", Integer.class);
 	    if(!field.equals(form.getCilindruId())) {
 	        logger.log(BasicLevel.DEBUG, "Field cilindruId modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
-	        form.setCilindruId((String)field);
-	        r.addField("cilindruId", (String)field);
+	        form.setCilindruId((Integer)field);
+	        r.addField("cilindruId", (Integer)field);
 	    }
 	} catch (ScriptErrorException e) {
 	    logger.log(BasicLevel.WARN, "Can not get the value of field: cilindruId from the script", e);
         }
 	try {
-	    field = s.getVar("sildId", String.class);
+	    field = s.getVar("sildId", Integer.class);
 	    if(!field.equals(form.getSildId())) {
 	        logger.log(BasicLevel.DEBUG, "Field sildId modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
-	        form.setSildId((String)field);
-	        r.addField("sildId", (String)field);
+	        form.setSildId((Integer)field);
+	        r.addField("sildId", (Integer)field);
 	    }
 	} catch (ScriptErrorException e) {
 	    logger.log(BasicLevel.WARN, "Can not get the value of field: sildId from the script", e);
         }
 	try {
-	    field = s.getVar("yallaId", String.class);
+	    field = s.getVar("yallaId", Integer.class);
 	    if(!field.equals(form.getYallaId())) {
 	        logger.log(BasicLevel.DEBUG, "Field yallaId modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
-	        form.setYallaId((String)field);
-	        r.addField("yallaId", (String)field);
+	        form.setYallaId((Integer)field);
+	        r.addField("yallaId", (Integer)field);
 	    }
 	} catch (ScriptErrorException e) {
 	    logger.log(BasicLevel.WARN, "Can not get the value of field: yallaId from the script", e);
         }
 	try {
-	    field = s.getVar("vizorId", String.class);
+	    field = s.getVar("vizorId", Integer.class);
 	    if(!field.equals(form.getVizorId())) {
 	        logger.log(BasicLevel.DEBUG, "Field vizorId modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
-	        form.setVizorId((String)field);
-	        r.addField("vizorId", (String)field);
+	        form.setVizorId((Integer)field);
+	        r.addField("vizorId", (Integer)field);
 	    }
 	} catch (ScriptErrorException e) {
 	    logger.log(BasicLevel.WARN, "Can not get the value of field: vizorId from the script", e);

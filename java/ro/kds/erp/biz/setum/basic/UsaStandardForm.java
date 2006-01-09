@@ -1,6 +1,8 @@
 package ro.kds.erp.biz.setum.basic;
 
 import java.io.Serializable;
+import java.util.Map;
+import ro.kds.erp.data.AttributeLocal;
 
 /**
  * A represantation of form data. While user is editing the data associated
@@ -16,11 +18,11 @@ public class UsaStandardForm implements Serializable {
     String name;
     String code;
     Integer usaId;
-    String broascaId;
-    String cilindruId;
-    String sildId;
-    String yallaId;
-    String vizorId;
+    Integer broascaId;
+    Integer cilindruId;
+    Integer sildId;
+    Integer yallaId;
+    Integer vizorId;
 
     public void setName(String newName) {
         this.name = newName;
@@ -28,6 +30,13 @@ public class UsaStandardForm implements Serializable {
 
     public String getName() {
         return name;
+    }
+
+    public void readName(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("name");
+	if(a != null) {
+	    this.setName(a.getStringValue());
+	}
     }
 
     public void setCode(String newCode) {
@@ -38,6 +47,13 @@ public class UsaStandardForm implements Serializable {
         return code;
     }
 
+    public void readCode(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("code");
+	if(a != null) {
+	    this.setCode(a.getStringValue());
+	}
+    }
+
     public void setUsaId(Integer newUsaId) {
         this.usaId = newUsaId;
     }
@@ -46,44 +62,86 @@ public class UsaStandardForm implements Serializable {
         return usaId;
     }
 
-    public void setBroascaId(String newBroascaId) {
+    public void readUsaId(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("usaId");
+	if(a != null) {
+	    this.setUsaId(a.getIntValue());
+	}
+    }
+
+    public void setBroascaId(Integer newBroascaId) {
         this.broascaId = newBroascaId;
     }
 
-    public String getBroascaId() {
+    public Integer getBroascaId() {
         return broascaId;
     }
 
-    public void setCilindruId(String newCilindruId) {
+    public void readBroascaId(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("broascaId");
+	if(a != null) {
+	    this.setBroascaId(a.getIntValue());
+	}
+    }
+
+    public void setCilindruId(Integer newCilindruId) {
         this.cilindruId = newCilindruId;
     }
 
-    public String getCilindruId() {
+    public Integer getCilindruId() {
         return cilindruId;
     }
 
-    public void setSildId(String newSildId) {
+    public void readCilindruId(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("cilindruId");
+	if(a != null) {
+	    this.setCilindruId(a.getIntValue());
+	}
+    }
+
+    public void setSildId(Integer newSildId) {
         this.sildId = newSildId;
     }
 
-    public String getSildId() {
+    public Integer getSildId() {
         return sildId;
     }
 
-    public void setYallaId(String newYallaId) {
+    public void readSildId(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("sildId");
+	if(a != null) {
+	    this.setSildId(a.getIntValue());
+	}
+    }
+
+    public void setYallaId(Integer newYallaId) {
         this.yallaId = newYallaId;
     }
 
-    public String getYallaId() {
+    public Integer getYallaId() {
         return yallaId;
     }
 
-    public void setVizorId(String newVizorId) {
+    public void readYallaId(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("yallaId");
+	if(a != null) {
+	    this.setYallaId(a.getIntValue());
+	}
+    }
+
+    public void setVizorId(Integer newVizorId) {
         this.vizorId = newVizorId;
     }
 
-    public String getVizorId() {
+    public Integer getVizorId() {
         return vizorId;
+    }
+
+    public void readVizorId(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("vizorId");
+	if(a != null) {
+	    this.setVizorId(a.getIntValue());
+	}
     }
 
 }

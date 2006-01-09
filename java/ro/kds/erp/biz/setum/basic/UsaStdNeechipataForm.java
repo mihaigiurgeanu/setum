@@ -1,6 +1,8 @@
 package ro.kds.erp.biz.setum.basic;
 
 import java.io.Serializable;
+import java.util.Map;
+import ro.kds.erp.data.AttributeLocal;
 
 /**
  * A represantation of form data. While user is editing the data associated
@@ -16,7 +18,10 @@ public class UsaStdNeechipataForm implements Serializable {
     String name;
     String code;
     String description;
-    java.math.BigDecimal price;
+    java.math.BigDecimal entryPrice;
+    java.math.BigDecimal sellPrice;
+    Double relativeGain;
+    java.math.BigDecimal absoluteGain;
 
     public void setName(String newName) {
         this.name = newName;
@@ -24,6 +29,13 @@ public class UsaStdNeechipataForm implements Serializable {
 
     public String getName() {
         return name;
+    }
+
+    public void readName(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("name");
+	if(a != null) {
+	    this.setName(a.getStringValue());
+	}
     }
 
     public void setCode(String newCode) {
@@ -34,6 +46,13 @@ public class UsaStdNeechipataForm implements Serializable {
         return code;
     }
 
+    public void readCode(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("code");
+	if(a != null) {
+	    this.setCode(a.getStringValue());
+	}
+    }
+
     public void setDescription(String newDescription) {
         this.description = newDescription;
     }
@@ -42,12 +61,71 @@ public class UsaStdNeechipataForm implements Serializable {
         return description;
     }
 
-    public void setPrice(java.math.BigDecimal newPrice) {
-        this.price = newPrice;
+    public void readDescription(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("description");
+	if(a != null) {
+	    this.setDescription(a.getStringValue());
+	}
     }
 
-    public java.math.BigDecimal getPrice() {
-        return price;
+    public void setEntryPrice(java.math.BigDecimal newEntryPrice) {
+        this.entryPrice = newEntryPrice;
+    }
+
+    public java.math.BigDecimal getEntryPrice() {
+        return entryPrice;
+    }
+
+    public void readEntryPrice(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("entryPrice");
+	if(a != null) {
+	    this.setEntryPrice(a.getDecimalValue());
+	}
+    }
+
+    public void setSellPrice(java.math.BigDecimal newSellPrice) {
+        this.sellPrice = newSellPrice;
+    }
+
+    public java.math.BigDecimal getSellPrice() {
+        return sellPrice;
+    }
+
+    public void readSellPrice(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("sellPrice");
+	if(a != null) {
+	    this.setSellPrice(a.getDecimalValue());
+	}
+    }
+
+    public void setRelativeGain(Double newRelativeGain) {
+        this.relativeGain = newRelativeGain;
+    }
+
+    public Double getRelativeGain() {
+        return relativeGain;
+    }
+
+    public void readRelativeGain(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("relativeGain");
+	if(a != null) {
+	    this.setRelativeGain(a.getDoubleValue());
+	}
+    }
+
+    public void setAbsoluteGain(java.math.BigDecimal newAbsoluteGain) {
+        this.absoluteGain = newAbsoluteGain;
+    }
+
+    public java.math.BigDecimal getAbsoluteGain() {
+        return absoluteGain;
+    }
+
+    public void readAbsoluteGain(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("absoluteGain");
+	if(a != null) {
+	    this.setAbsoluteGain(a.getDecimalValue());
+	}
     }
 
 }

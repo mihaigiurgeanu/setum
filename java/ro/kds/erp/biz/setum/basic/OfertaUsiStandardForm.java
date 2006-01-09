@@ -1,6 +1,8 @@
 package ro.kds.erp.biz.setum.basic;
 
 import java.io.Serializable;
+import java.util.Map;
+import ro.kds.erp.data.AttributeLocal;
 
 /**
  * A represantation of form data. While user is editing the data associated
@@ -31,7 +33,8 @@ public class OfertaUsiStandardForm implements Serializable {
     String sild;
     String yalla;
     String vizor;
-    java.math.BigDecimal referencePrice;
+    java.math.BigDecimal entryPrice;
+    java.math.BigDecimal sellPrice;
 
     public void setNo(String newNo) {
         this.no = newNo;
@@ -39,6 +42,13 @@ public class OfertaUsiStandardForm implements Serializable {
 
     public String getNo() {
         return no;
+    }
+
+    public void readNo(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("no");
+	if(a != null) {
+	    this.setNo(a.getStringValue());
+	}
     }
 
     public void setDocDate(java.util.Date newDocDate) {
@@ -49,6 +59,7 @@ public class OfertaUsiStandardForm implements Serializable {
         return docDate;
     }
 
+
     public void setDateFrom(java.util.Date newDateFrom) {
         this.dateFrom = newDateFrom;
     }
@@ -56,6 +67,7 @@ public class OfertaUsiStandardForm implements Serializable {
     public java.util.Date getDateFrom() {
         return dateFrom;
     }
+
 
     public void setDateTo(java.util.Date newDateTo) {
         this.dateTo = newDateTo;
@@ -65,6 +77,7 @@ public class OfertaUsiStandardForm implements Serializable {
         return dateTo;
     }
 
+
     public void setDiscontinued(Boolean newDiscontinued) {
         this.discontinued = newDiscontinued;
     }
@@ -73,12 +86,20 @@ public class OfertaUsiStandardForm implements Serializable {
         return discontinued;
     }
 
+
     public void setPeriod(Integer newPeriod) {
         this.period = newPeriod;
     }
 
     public Integer getPeriod() {
         return period;
+    }
+
+    public void readPeriod(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("period");
+	if(a != null) {
+	    this.setPeriod(a.getIntValue());
+	}
     }
 
     public void setName(String newName) {
@@ -89,12 +110,26 @@ public class OfertaUsiStandardForm implements Serializable {
         return name;
     }
 
+    public void readName(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("name");
+	if(a != null) {
+	    this.setName(a.getStringValue());
+	}
+    }
+
     public void setDescription(String newDescription) {
         this.description = newDescription;
     }
 
     public String getDescription() {
         return description;
+    }
+
+    public void readDescription(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("description");
+	if(a != null) {
+	    this.setDescription(a.getStringValue());
+	}
     }
 
     public void setComment(String newComment) {
@@ -105,12 +140,26 @@ public class OfertaUsiStandardForm implements Serializable {
         return comment;
     }
 
+    public void readComment(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("comment");
+	if(a != null) {
+	    this.setComment(a.getStringValue());
+	}
+    }
+
     public void setPrice(java.math.BigDecimal newPrice) {
         this.price = newPrice;
     }
 
     public java.math.BigDecimal getPrice() {
         return price;
+    }
+
+    public void readPrice(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("price");
+	if(a != null) {
+	    this.setPrice(a.getDecimalValue());
+	}
     }
 
     public void setRelativeGain(Double newRelativeGain) {
@@ -121,12 +170,26 @@ public class OfertaUsiStandardForm implements Serializable {
         return relativeGain;
     }
 
+    public void readRelativeGain(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("relativeGain");
+	if(a != null) {
+	    this.setRelativeGain(a.getDoubleValue());
+	}
+    }
+
     public void setAbsoluteGain(java.math.BigDecimal newAbsoluteGain) {
         this.absoluteGain = newAbsoluteGain;
     }
 
     public java.math.BigDecimal getAbsoluteGain() {
         return absoluteGain;
+    }
+
+    public void readAbsoluteGain(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("absoluteGain");
+	if(a != null) {
+	    this.setAbsoluteGain(a.getDecimalValue());
+	}
     }
 
     public void setUsa(String newUsa) {
@@ -137,12 +200,26 @@ public class OfertaUsiStandardForm implements Serializable {
         return usa;
     }
 
+    public void readUsa(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("usa");
+	if(a != null) {
+	    this.setUsa(a.getStringValue());
+	}
+    }
+
     public void setBroasca(String newBroasca) {
         this.broasca = newBroasca;
     }
 
     public String getBroasca() {
         return broasca;
+    }
+
+    public void readBroasca(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("broasca");
+	if(a != null) {
+	    this.setBroasca(a.getStringValue());
+	}
     }
 
     public void setCilindru(String newCilindru) {
@@ -153,12 +230,26 @@ public class OfertaUsiStandardForm implements Serializable {
         return cilindru;
     }
 
+    public void readCilindru(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("cilindru");
+	if(a != null) {
+	    this.setCilindru(a.getStringValue());
+	}
+    }
+
     public void setSild(String newSild) {
         this.sild = newSild;
     }
 
     public String getSild() {
         return sild;
+    }
+
+    public void readSild(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("sild");
+	if(a != null) {
+	    this.setSild(a.getStringValue());
+	}
     }
 
     public void setYalla(String newYalla) {
@@ -169,6 +260,13 @@ public class OfertaUsiStandardForm implements Serializable {
         return yalla;
     }
 
+    public void readYalla(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("yalla");
+	if(a != null) {
+	    this.setYalla(a.getStringValue());
+	}
+    }
+
     public void setVizor(String newVizor) {
         this.vizor = newVizor;
     }
@@ -177,12 +275,41 @@ public class OfertaUsiStandardForm implements Serializable {
         return vizor;
     }
 
-    public void setReferencePrice(java.math.BigDecimal newReferencePrice) {
-        this.referencePrice = newReferencePrice;
+    public void readVizor(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("vizor");
+	if(a != null) {
+	    this.setVizor(a.getStringValue());
+	}
     }
 
-    public java.math.BigDecimal getReferencePrice() {
-        return referencePrice;
+    public void setEntryPrice(java.math.BigDecimal newEntryPrice) {
+        this.entryPrice = newEntryPrice;
+    }
+
+    public java.math.BigDecimal getEntryPrice() {
+        return entryPrice;
+    }
+
+    public void readEntryPrice(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("entryPrice");
+	if(a != null) {
+	    this.setEntryPrice(a.getDecimalValue());
+	}
+    }
+
+    public void setSellPrice(java.math.BigDecimal newSellPrice) {
+        this.sellPrice = newSellPrice;
+    }
+
+    public java.math.BigDecimal getSellPrice() {
+        return sellPrice;
+    }
+
+    public void readSellPrice(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("sellPrice");
+	if(a != null) {
+	    this.setSellPrice(a.getDecimalValue());
+	}
     }
 
 }

@@ -35,7 +35,8 @@ public interface ArbitraryOffer extends EJBObject {
     public ResponseBean updateProductCategory(String newProductCategory) throws RemoteException;
     public ResponseBean updateProductCode(String newProductCode) throws RemoteException;
     public ResponseBean updateProductName(String newProductName) throws RemoteException;
-    public ResponseBean updateReferencePrice(java.math.BigDecimal newReferencePrice) throws RemoteException;
+    public ResponseBean updateEntryPrice(java.math.BigDecimal newEntryPrice) throws RemoteException;
+    public ResponseBean updateSellPrice(java.math.BigDecimal newSellPrice) throws RemoteException;
     public ResponseBean updateBusinessCategory(String newBusinessCategory) throws RemoteException;
 
     public ResponseBean loadListing() throws RemoteException;

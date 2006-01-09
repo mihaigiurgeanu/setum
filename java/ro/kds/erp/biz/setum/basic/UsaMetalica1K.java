@@ -19,6 +19,9 @@ public interface UsaMetalica1K extends EJBObject {
     public ResponseBean getCurrentFormData() throws RemoteException;
     public ResponseBean getLoadedPrimaryKey() throws RemoteException;
 
+    public ResponseBean updateCode(String newCode) throws RemoteException;
+    public ResponseBean updateName(String newName) throws RemoteException;
+    public ResponseBean updateDescription(String newDescription) throws RemoteException;
     public ResponseBean updateSubclass(String newSubclass) throws RemoteException;
     public ResponseBean updateVersion(String newVersion) throws RemoteException;
     public ResponseBean updateMaterial(Integer newMaterial) throws RemoteException;
@@ -48,5 +51,7 @@ public interface UsaMetalica1K extends EJBObject {
     public ResponseBean updateH2Treshold(Double newH2Treshold) throws RemoteException;
     public ResponseBean updateFereastraId(Integer newFereastraId) throws RemoteException;
     public ResponseBean updateFereastra(String newFereastra) throws RemoteException;
+    public ResponseBean updateEntryPrice(java.math.BigDecimal newEntryPrice) throws RemoteException;
+    public ResponseBean updateSellPrice(java.math.BigDecimal newSellPrice) throws RemoteException;
 
 }

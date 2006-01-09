@@ -37,7 +37,8 @@ public interface OfertaUsiStandard extends EJBObject {
     public ResponseBean updateSild(String newSild) throws RemoteException;
     public ResponseBean updateYalla(String newYalla) throws RemoteException;
     public ResponseBean updateVizor(String newVizor) throws RemoteException;
-    public ResponseBean updateReferencePrice(java.math.BigDecimal newReferencePrice) throws RemoteException;
+    public ResponseBean updateEntryPrice(java.math.BigDecimal newEntryPrice) throws RemoteException;
+    public ResponseBean updateSellPrice(java.math.BigDecimal newSellPrice) throws RemoteException;
 
     public ResponseBean loadListing() throws RemoteException;
     public ResponseBean lineItemsListing() throws RemoteException;

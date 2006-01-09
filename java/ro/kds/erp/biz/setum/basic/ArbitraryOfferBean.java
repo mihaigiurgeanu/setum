@@ -624,13 +624,13 @@ public abstract class ArbitraryOfferBean
 	computeCalculatedFields(r);
 	return r;
     }
-    public ResponseBean updateReferencePrice(java.math.BigDecimal referencePrice) {
+    public ResponseBean updateEntryPrice(java.math.BigDecimal entryPrice) {
         ResponseBean r = new ResponseBean();
-	java.math.BigDecimal oldVal = form.getReferencePrice();
-	form.setReferencePrice(referencePrice);
+	java.math.BigDecimal oldVal = form.getEntryPrice();
+	form.setEntryPrice(entryPrice);
 	r.addRecord();
-	r.addField("referencePrice", referencePrice); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.ArbitraryOffer.referencePrice");
+	r.addField("entryPrice", entryPrice); // for number format
+	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.ArbitraryOffer.entryPrice");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
@@ -642,7 +642,31 @@ public abstract class ArbitraryOfferBean
 		getFieldsFromScript(script, r); // add all the changed
 						// fields to the response also
 	   } catch (ScriptErrorException e) {
-	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the referencePrice", e);
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the entryPrice", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
+    public ResponseBean updateSellPrice(java.math.BigDecimal sellPrice) {
+        ResponseBean r = new ResponseBean();
+	java.math.BigDecimal oldVal = form.getSellPrice();
+	form.setSellPrice(sellPrice);
+	r.addRecord();
+	r.addField("sellPrice", sellPrice); // for number format
+	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.ArbitraryOffer.sellPrice");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(OLDVAL_VARNAME, oldVal, java.math.BigDecimal.class);
+		script.setVar(FORM_VARNAME, form, ArbitraryOfferForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the sellPrice", e);
            }
         }
 	computeCalculatedFields(r);
@@ -693,7 +717,8 @@ public abstract class ArbitraryOfferBean
 	r.addField("productCategory", form.getProductCategory());
 	r.addField("productCode", form.getProductCode());
 	r.addField("productName", form.getProductName());
-	r.addField("referencePrice", form.getReferencePrice());
+	r.addField("entryPrice", form.getEntryPrice());
+	r.addField("sellPrice", form.getSellPrice());
 	r.addField("businessCategory", form.getBusinessCategory());
 	loadValueLists(r);
     }
@@ -783,9 +808,14 @@ public abstract class ArbitraryOfferBean
 	    logger.log(BasicLevel.WARN, "Can not set the value of field: productName from the script", e);
         }
 	try {
-	    s.setVar("referencePrice", form.getReferencePrice(), java.math.BigDecimal.class);
+	    s.setVar("entryPrice", form.getEntryPrice(), java.math.BigDecimal.class);
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not set the value of field: referencePrice from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: entryPrice from the script", e);
+        }
+	try {
+	    s.setVar("sellPrice", form.getSellPrice(), java.math.BigDecimal.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: sellPrice from the script", e);
         }
 	try {
 	    s.setVar("businessCategory", form.getBusinessCategory(), String.class);
@@ -961,14 +991,24 @@ public abstract class ArbitraryOfferBean
 	    logger.log(BasicLevel.WARN, "Can not get the value of field: productName from the script", e);
         }
 	try {
-	    field = s.getVar("referencePrice", java.math.BigDecimal.class);
-	    if(!field.equals(form.getReferencePrice())) {
-	        logger.log(BasicLevel.DEBUG, "Field referencePrice modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
-	        form.setReferencePrice((java.math.BigDecimal)field);
-	        r.addField("referencePrice", (java.math.BigDecimal)field);
+	    field = s.getVar("entryPrice", java.math.BigDecimal.class);
+	    if(!field.equals(form.getEntryPrice())) {
+	        logger.log(BasicLevel.DEBUG, "Field entryPrice modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setEntryPrice((java.math.BigDecimal)field);
+	        r.addField("entryPrice", (java.math.BigDecimal)field);
 	    }
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not get the value of field: referencePrice from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: entryPrice from the script", e);
+        }
+	try {
+	    field = s.getVar("sellPrice", java.math.BigDecimal.class);
+	    if(!field.equals(form.getSellPrice())) {
+	        logger.log(BasicLevel.DEBUG, "Field sellPrice modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setSellPrice((java.math.BigDecimal)field);
+	        r.addField("sellPrice", (java.math.BigDecimal)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: sellPrice from the script", e);
         }
 	try {
 	    field = s.getVar("businessCategory", String.class);

@@ -22,11 +22,12 @@ public interface UsaStandard extends EJBObject {
     public ResponseBean updateName(String newName) throws RemoteException;
     public ResponseBean updateCode(String newCode) throws RemoteException;
     public ResponseBean updateUsaId(Integer newUsaId) throws RemoteException;
-    public ResponseBean updateBroascaId(String newBroascaId) throws RemoteException;
-    public ResponseBean updateCilindruId(String newCilindruId) throws RemoteException;
-    public ResponseBean updateSildId(String newSildId) throws RemoteException;
-    public ResponseBean updateYallaId(String newYallaId) throws RemoteException;
-    public ResponseBean updateVizorId(String newVizorId) throws RemoteException;
+    public ResponseBean updateBroascaId(Integer newBroascaId) throws RemoteException;
+    public ResponseBean updateCilindruId(Integer newCilindruId) throws RemoteException;
+    public ResponseBean updateSildId(Integer newSildId) throws RemoteException;
+    public ResponseBean updateYallaId(Integer newYallaId) throws RemoteException;
+    public ResponseBean updateVizorId(Integer newVizorId) throws RemoteException;
 
     public ResponseBean loadListing() throws RemoteException;
+    public void recalculatePrices() throws RemoteException;
 }

@@ -648,54 +648,6 @@ public abstract class FereastraBean
 	computeCalculatedFields(r);
 	return r;
     }
-    public ResponseBean updateTipTabla(Integer tipTabla) {
-        ResponseBean r = new ResponseBean();
-	Integer oldVal = form.getTipTabla();
-	form.setTipTabla(tipTabla);
-	r.addRecord();
-	r.addField("tipTabla", tipTabla); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.Fereastra.tipTabla");
-	if(script.loaded()) {
-	   try {
-		script.setVar(LOGIC_VARNAME, this);
-		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
-		script.setVar(FORM_VARNAME, form, FereastraForm.class);
-		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
-		addFieldsToScript(script);
-		script.run();
-		getFieldsFromScript(script, r); // add all the changed
-						// fields to the response also
-	   } catch (ScriptErrorException e) {
-	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the tipTabla", e);
-           }
-        }
-	computeCalculatedFields(r);
-	return r;
-    }
-    public ResponseBean updateTablaId(Integer tablaId) {
-        ResponseBean r = new ResponseBean();
-	Integer oldVal = form.getTablaId();
-	form.setTablaId(tablaId);
-	r.addRecord();
-	r.addField("tablaId", tablaId); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.Fereastra.tablaId");
-	if(script.loaded()) {
-	   try {
-		script.setVar(LOGIC_VARNAME, this);
-		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
-		script.setVar(FORM_VARNAME, form, FereastraForm.class);
-		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
-		addFieldsToScript(script);
-		script.run();
-		getFieldsFromScript(script, r); // add all the changed
-						// fields to the response also
-	   } catch (ScriptErrorException e) {
-	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the tablaId", e);
-           }
-        }
-	computeCalculatedFields(r);
-	return r;
-    }
     public ResponseBean updateSellPrice(java.math.BigDecimal sellPrice) {
         ResponseBean r = new ResponseBean();
 	java.math.BigDecimal oldVal = form.getSellPrice();
@@ -790,8 +742,6 @@ public abstract class FereastraBean
 	r.addField("tipGrilaj", form.getTipGrilaj());
 	r.addField("grilajStasId", form.getGrilajStasId());
 	r.addField("valoareGrilajAtipic", form.getValoareGrilajAtipic());
-	r.addField("tipTabla", form.getTipTabla());
-	r.addField("tablaId", form.getTablaId());
 	r.addField("sellPrice", form.getSellPrice());
 	r.addField("entryPrice", form.getEntryPrice());
 	r.addField("price1", form.getPrice1());
@@ -886,16 +836,6 @@ public abstract class FereastraBean
 	    s.setVar("valoareGrilajAtipic", form.getValoareGrilajAtipic(), java.math.BigDecimal.class);
 	} catch (ScriptErrorException e) {
 	    logger.log(BasicLevel.WARN, "Can not set the value of field: valoareGrilajAtipic from the script", e);
-        }
-	try {
-	    s.setVar("tipTabla", form.getTipTabla(), Integer.class);
-	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not set the value of field: tipTabla from the script", e);
-        }
-	try {
-	    s.setVar("tablaId", form.getTablaId(), Integer.class);
-	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not set the value of field: tablaId from the script", e);
         }
 	try {
 	    s.setVar("sellPrice", form.getSellPrice(), java.math.BigDecimal.class);
@@ -1089,26 +1029,6 @@ public abstract class FereastraBean
 	    }
 	} catch (ScriptErrorException e) {
 	    logger.log(BasicLevel.WARN, "Can not get the value of field: valoareGrilajAtipic from the script", e);
-        }
-	try {
-	    field = s.getVar("tipTabla", Integer.class);
-	    if(!field.equals(form.getTipTabla())) {
-	        logger.log(BasicLevel.DEBUG, "Field tipTabla modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
-	        form.setTipTabla((Integer)field);
-	        r.addField("tipTabla", (Integer)field);
-	    }
-	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not get the value of field: tipTabla from the script", e);
-        }
-	try {
-	    field = s.getVar("tablaId", Integer.class);
-	    if(!field.equals(form.getTablaId())) {
-	        logger.log(BasicLevel.DEBUG, "Field tablaId modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
-	        form.setTablaId((Integer)field);
-	        r.addField("tablaId", (Integer)field);
-	    }
-	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not get the value of field: tablaId from the script", e);
         }
 	try {
 	    field = s.getVar("sellPrice", java.math.BigDecimal.class);

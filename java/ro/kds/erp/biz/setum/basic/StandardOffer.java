@@ -39,10 +39,13 @@ public interface StandardOffer extends EJBObject {
     public ResponseBean updateSellPrice(java.math.BigDecimal newSellPrice) throws RemoteException;
 
     public ResponseBean offersListing() throws RemoteException;
+    public ResponseBean loadListing() throws RemoteException;
     public ResponseBean lineItemsListing() throws RemoteException;
     public ResponseBean loadSubForm(Integer loadId) throws RemoteException;
     public ResponseBean addNewItem() throws RemoteException;
     public ResponseBean removeItem() throws RemoteException;
     public ResponseBean saveSubForm() throws RemoteException;
     public java.util.Collection lineItemsCollectionMap() throws RemoteException;
+    public ResponseBean makeCurrent() throws RemoteException;
+    public ResponseBean discontinue() throws RemoteException;
 }

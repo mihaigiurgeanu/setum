@@ -36,8 +36,6 @@ public interface Fereastra extends EJBObject {
     public ResponseBean updateTipGrilaj(Integer newTipGrilaj) throws RemoteException;
     public ResponseBean updateGrilajStasId(Integer newGrilajStasId) throws RemoteException;
     public ResponseBean updateValoareGrilajAtipic(java.math.BigDecimal newValoareGrilajAtipic) throws RemoteException;
-    public ResponseBean updateTipTabla(Integer newTipTabla) throws RemoteException;
-    public ResponseBean updateTablaId(Integer newTablaId) throws RemoteException;
     public ResponseBean updateSellPrice(java.math.BigDecimal newSellPrice) throws RemoteException;
     public ResponseBean updateEntryPrice(java.math.BigDecimal newEntryPrice) throws RemoteException;
     public ResponseBean updatePrice1(java.math.BigDecimal newPrice1) throws RemoteException;
