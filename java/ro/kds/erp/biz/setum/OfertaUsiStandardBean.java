@@ -29,6 +29,8 @@ import java.util.HashMap;
 import ro.kds.erp.data.CategoryLocal;
 import java.util.ArrayList;
 import java.util.Map;
+import ro.kds.erp.biz.SequenceHome;
+import ro.kds.erp.biz.Sequence;
 
 /**
  * Business logic pentru form-ul de vizualizare/modificare oferte
@@ -75,7 +77,21 @@ public class OfertaUsiStandardBean
 	    availability = 30;
 	}
 
-	form.setNo("");
+	Integer offerNo;
+	try {
+	    InitialContext ic = new InitialContext();
+	    Context env = (Context) ic.lookup("java:comp/env");
+	    
+	    SequenceHome sh = (SequenceHome)PortableRemoteObject.narrow
+		(env.lookup("ejb/SequenceHome"), SequenceHome.class);
+	    Sequence s = sh.create();
+	    offerNo = s.getNext("ro.setumsa.sequnces.offers");
+	} catch (Exception e) {
+	    offerNo = null;
+	    logger.log(BasicLevel.WARN, "Can not get a number for offer", e);
+	}
+
+	form.setNo(String.valueOf(offerNo));
 	form.setDocDate(new Date());
 
 	form.setDateFrom(new Date());
@@ -102,7 +118,8 @@ public class OfertaUsiStandardBean
 	form.setSild("");
 	form.setYalla("");
 	form.setVizor("");
-	form.setReferencePrice(new BigDecimal(0));
+	form.setEntryPrice(new BigDecimal(0));
+	form.setSellPrice(new BigDecimal(0));
     }
 
 
@@ -318,7 +335,8 @@ public class OfertaUsiStandardBean
 	    if(p != null) {
 		CompositeProductLocal cp = p.getCompositeProduct();
 		Collection parts = cp.getComponents();
-		BigDecimal referencePrice = new BigDecimal(0);
+		BigDecimal entryPrice = new BigDecimal(0);
+		BigDecimal sellPrice = new BigDecimal(0);
 		for(Iterator i = parts.iterator(); i.hasNext();) {
 		    ProductLocal part = (ProductLocal)i.next();
 		    Integer catid = part.getCategory().getId();
@@ -339,9 +357,11 @@ public class OfertaUsiStandardBean
 				   " has an unknown component type " 
 				   + part.getCategory().getName());
 		    }
-		    referencePrice = referencePrice.add(part.getSellPrice());
+		    sellPrice = sellPrice.add(part.getSellPrice());
+		    entryPrice = entryPrice.add(part.getEntryPrice());
 		}
-		form.setReferencePrice(referencePrice);
+		form.setEntryPrice(entryPrice);
+		form.setSellPrice(sellPrice);
 	    }
 	    else {
 		logger.log(BasicLevel.WARN, "No product associated with this offer " + id);
@@ -351,7 +371,8 @@ public class OfertaUsiStandardBean
 		form.setSild("");
 		form.setYalla("");
 		form.setVizor("");
-		form.setReferencePrice(new BigDecimal(0));
+		form.setEntryPrice(new BigDecimal(0));
+		form.setSellPrice(new BigDecimal(0));
 	    }
 
 	    form.setPrice(offerItem.getPrice());
