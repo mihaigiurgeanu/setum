@@ -17,6 +17,7 @@ import java.math.BigDecimal;
 import javax.naming.Context;
 import java.util.Map;
 import java.util.ArrayList;
+import ro.kds.erp.data.CategoryLocal;
 
 /**
  * Describe class GrilaVentilatieBizBean here.
@@ -45,10 +46,11 @@ public class GrilaVentilatieBizBean extends GrilaVentilatieBean {
 		narrow(env.lookup("ejb/ProductHome"), ProductLocalHome.class);
 	    ProductLocal p;
 
+	    CategoryLocalHome ch = 
+		(CategoryLocalHome)PortableRemoteObject.narrow
+		(env.lookup("ejb/CategoryHome"), CategoryLocalHome.class);
+
 	    if(id == null) {
-		CategoryLocalHome ch = 
-		    (CategoryLocalHome)PortableRemoteObject.narrow
-		    (env.lookup("ejb/CategoryHome"), CategoryLocalHome.class);
 		Integer categoryId = (Integer)env.lookup("categoryId");
 		p = ph.create();
 		id = p.getId();
@@ -60,9 +62,22 @@ public class GrilaVentilatieBizBean extends GrilaVentilatieBean {
 	    }
 
 	    p.setDescription("Grila ventilatie " + form.getLgv() + "x" + form.getHgv());
-	    p.setSellPrice(form.getSellPrice());
-	    p.setEntryPrice(form.getEntryPrice());
-	    p.setPrice1(form.getPrice1());
+
+
+	    // The category found by ID value hold in the env property
+	    // priceCategoryId is used to configure the price by square
+	    // meter for this kind of product. So, this category shoul
+	    // contain one and only one product.
+	    Integer priceCatId = (Integer)env.lookup("priceCategoryId");
+	    CategoryLocal priceCategory = ch.findByPrimaryKey(priceCatId);
+	    ProductLocal priceProduct = (ProductLocal)
+		priceCategory.getProducts().iterator().next();
+
+	    BigDecimal surface = new BigDecimal(form.getLgv().doubleValue() *
+						form.getHgv().doubleValue());
+	    p.setSellPrice(priceProduct.getSellPrice().multiply(surface));
+	    p.setEntryPrice(priceProduct.getEntryPrice().multiply(surface));
+	    p.setPrice1(priceProduct.getPrice1().multiply(surface));
 
 	    AttributeLocalHome ah = (AttributeLocalHome)PortableRemoteObject.
 		narrow(env.lookup("ejb/AttributeHome"), 
@@ -85,12 +100,14 @@ public class GrilaVentilatieBizBean extends GrilaVentilatieBean {
 			 "Datele nu au fost salvate");
 	    logger.log(BasicLevel.ERROR, "Error saving product with id " + id,
 		       e);
+	    ejbContext.setRollbackOnly();
 	} catch (Exception e) {
 	    r = new ResponseBean();
 	    r.setCode(3);
 	    r.setMessage("Eroare! Datele nu au fost salvate");
 	    logger.log(BasicLevel.ERROR, "Error saving product with id " + id,
 		       e);
+	    ejbContext.setRollbackOnly();
 	}
 	return r;
     }
