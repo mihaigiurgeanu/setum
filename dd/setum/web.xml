@@ -382,8 +382,38 @@
     <servlet-name>StandardOffer</servlet-name>
     <servlet-class>ro.kds.erp.web.StandardOfferServlet</servlet-class>
   </servlet>
+  <servlet>
+    <description>Formul pentru oferta standard. Realizat prin mecanismul generic CallDispatcherServlet.</description>
+    <servlet-name>StandardOfferDispatcher</servlet-name>
+    <servlet-class>ro.kds.erp.web.CallDispatcherServlet</servlet-class>
+
+    <init-param>
+      <description>The name of the session attribute holding the session bean.</description>
+      <param-name>sessionName</param-name>
+      <param-value>forms.setum.StandardOffer</param-value>
+    </init-param>
+
+    <init-param>
+      <description>The jndi name to refer to the session bean EJB</description>
+      <param-name>sessionBean</param-name>
+      <param-value>ejb/StandardOfferHome</param-value>
+    </init-param>
+
+    <init-param>
+      <description>The calss name of the remote interface</description>
+      <param-name>sessionClass</param-name>
+      <param-value>ro.kds.erp.biz.setum.basic.StandardOffer</param-value>
+    </init-param>
+
+    <init-param>
+      <description>The class name of the home interface</description>
+      <param-name>sessionHome</param-name>
+      <param-value>ro.kds.erp.biz.setum.basic.StandardOfferHome</param-value>
+    </init-param>
+  </servlet>
+
   <servlet-mapping>
-    <servlet-name>StandardOffer</servlet-name>
+    <servlet-name>StandardOfferDispatcher</servlet-name>
     <url-pattern>/standardoffer.do</url-pattern>
   </servlet-mapping>
 
