@@ -292,12 +292,14 @@ public class CallDispatcherServlet extends HttpServlet {
 		r = new ResponseBean();
 		r.setCode(2);
 		r.setMessage("Nu pot incarca lista");
+		removeSessionBean(request);
 		logger.log(BasicLevel.ERROR,
 			   "Error executing listing operation", e);
 	    } catch (Exception e) {
 		r = new ResponseBean();
 		r.setCode(1);
 		r.setMessage("Nu pot incarca lista");
+		removeSessionBean(request);
 		logger.log(BasicLevel.ERROR,
 			   "Error executing listing operation", e);
 	    }
