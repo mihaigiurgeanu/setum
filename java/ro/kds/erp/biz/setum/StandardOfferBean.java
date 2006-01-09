@@ -35,6 +35,12 @@ import ro.kds.erp.biz.ResponseBean;
 import java.util.TreeMap;
 import java.util.HashMap;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+
+import ro.kds.erp.biz.SequenceHome;
+import ro.kds.erp.biz.Sequence;
+import javax.jms.JMSException;
 
 /**
  * Customization of generated class 
@@ -80,7 +86,21 @@ public class StandardOfferBean extends ro.kds.erp.biz.setum.basic.StandardOfferB
 	    availability = 30;
 	}
 
-	form.setNo("");
+	Integer offerNo;
+	try {
+	    InitialContext ic = new InitialContext();
+	    Context env = (Context) ic.lookup("java:comp/env");
+	    
+	    SequenceHome sh = (SequenceHome)PortableRemoteObject.narrow
+		(env.lookup("ejb/SequenceHome"), SequenceHome.class);
+	    Sequence s = sh.create();
+	    offerNo = s.getNext("ro.setumsa.sequnces.offers");
+	} catch (Exception e) {
+	    offerNo = null;
+	    logger.log(BasicLevel.WARN, "Can not get a number for offer", e);
+	}
+
+	form.setNo(String.valueOf(offerNo));
 	form.setDocDate(new Date());
 
 	form.setDateFrom(new Date());
@@ -209,6 +229,16 @@ public class StandardOfferBean extends ro.kds.erp.biz.setum.basic.StandardOfferB
 		(env.lookup("ejb/OfferHome"), OfferLocalHome.class);
 
 	    Collection offers = oh.findByCategory(STANDARD_OFFERS_CATEGORY);
+	    ArrayList sortedOffers = new ArrayList(offers);
+	    Collections.sort(sortedOffers, new Comparator() {
+		    public int compare(Object o1, Object o2) {
+			OfferLocal offer1 = (OfferLocal) o1;
+			OfferLocal offer2 = (OfferLocal) o2;
+			return - offer1.getDateFrom().
+			    compareTo(offer2.getDateFrom());
+		    }
+		});
+
 	    ResponseBean r = new ResponseBean();
 	    for(Iterator i = offers.iterator(); i.hasNext(); ) {
 		OfferLocal offer = (OfferLocal) i.next();
@@ -219,6 +249,7 @@ public class StandardOfferBean extends ro.kds.erp.biz.setum.basic.StandardOfferB
 		r.addField("offersListing.docDate", offer.getDocument().getDate());
 		r.addField("offersListing.dateFrom", offer.getDateFrom());
 		r.addField("offersListing.dateTo", offer.getDateTo());
+		r.addField("offersListing.status", offer.getDocument().getIsDraft().booleanValue()?"draft":(offer.getDiscontinued().booleanValue()?"anulata":"lansata"));
 	    }
 	    return r;
 	} catch (Exception e) {
@@ -566,5 +597,86 @@ public class StandardOfferBean extends ro.kds.erp.biz.setum.basic.StandardOfferB
 	form.setProductName("-");
 	form.setEntryPrice(new BigDecimal(0));
 	form.setSellPrice(new BigDecimal(0));
+    }
+
+    /**
+     * Making an offer the current offer will have the effect that all the 
+     * products contained in this offer will have a default salePrice given
+     * by this offer. The products that are not in the current offer are
+     * not affected. To discontinue older products, just discontinue the
+     * old offers that are containing these products.
+     */
+    public ResponseBean makeCurrent() {
+	OfferLocal offer = getCurrentOffer(); // get the offer object
+	if(offer == null) {
+	    ResponseBean r = new ResponseBean();
+	    r.setCode(4);
+	    r.setMessage("Selectati o oferta mai intai");
+	    return r;
+	}
+
+	offer.setDiscontinued(new Boolean(false));
+	offer.getDocument().setIsDraft(new Boolean(false));
+
+	Collection items = offer.getItems();
+	for(Iterator i = items.iterator(); i.hasNext();) {
+	    OfferItemLocal item = (OfferItemLocal)i.next();
+	    item.getProduct().setSellPrice(item.getPrice());
+	}
+
+	try {
+	    PricesUpdater.updatePrices(); // composite products prices
+	} catch (Exception e) {
+	    logger.log(BasicLevel.ERROR, "Failed notifying the message bean about price updates. Rolling back this transaction.");
+	    ResponseBean r = new ResponseBean();
+	    r.setCode(1);
+	    r.setMessage("Eroare aplicatie. Preturile nu au putut fi actualizate. Oferta aceasta NU a fost facuta curenta.");
+	    ejbContext.setRollbackOnly();
+	}
+		
+	return new ResponseBean();
+    }
+
+    /**
+     * When an offer is discontinued it will discontinue all products
+     * in this offer by setting there sellPrice to 0.
+     */
+    public ResponseBean discontinue() {
+	OfferLocal offer = getCurrentOffer();
+	if(offer == null) {
+	    ResponseBean r = new ResponseBean();
+	    r.setCode(4);
+	    r.setMessage("Selectati o oferta mai intai");
+	    return r;
+	}
+
+	offer.setDiscontinued(new Boolean(true));
+	offer.getDocument().setIsDraft(new Boolean(false));
+
+	Collection items = offer.getItems();
+	for(Iterator i = items.iterator(); i.hasNext();) {
+	    OfferItemLocal item = (OfferItemLocal)i.next();
+	    item.getProduct().setSellPrice(new BigDecimal(0));
+	}
+	
+	try {
+	    PricesUpdater.updatePrices(); // composite products prices
+	} catch (Exception e) {
+	    logger.log(BasicLevel.ERROR, "Failed notifying the message bean about price updates. Rolling back this transaction.");
+	    ResponseBean r = new ResponseBean();
+	    r.setCode(1);
+	    r.setMessage("Eroare aplicatie. Preturile nu au putut fi actualizate. Oferta aceasta NU a fost retrasa.");
+	    ejbContext.setRollbackOnly();
+	}
+
+	return new ResponseBean();
+    }
+
+    /**
+     * Call the offersListing method. Makes the bean usable by
+     * CallDispatcherServlet
+     */
+    public ResponseBean loadListing() {
+	return offersListing();
     }
 }
