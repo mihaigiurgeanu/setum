@@ -18,8 +18,14 @@ import javax.naming.Context;
 import java.util.Collection;
 import java.util.Iterator;
 import javax.ejb.FinderException;
+import ro.kds.erp.biz.SequenceHome;
+import ro.kds.erp.biz.Sequence;
 
 /**
+ * DEPRECATED: use only UsaMetalica2KBeanImplementation. Both EJBs,
+ * UsaMetalica1KEJB and UsaMetalica2KEJB, are using the same implementation
+ * class.
+ *
  * Implements the loadFields and saveFormData methods of the UsaMetalica1KBean
  * class generated from templates.
  *
@@ -70,7 +76,11 @@ public class UsaMetalica1KBeanImplementation extends UsaMetalica1KBean {
 		p = ph.findByPrimaryKey(id);
 	    }
 	    
-	    p.setName(form.getVersion() + "-" + form.getSubclass());
+	    p.setName(form.getName());
+	    p.setCode(form.getCode());
+	    p.setDescription(form.getDescription());
+	    p.setEntryPrice(form.getEntryPrice());
+	    p.setSellPrice(form.getSellPrice());
 	    Collection attribs = p.getAttributes();
 	    attribs.clear();
 	    attribs.add(ah.create("subclass", form.getSubclass()));
@@ -132,6 +142,11 @@ public class UsaMetalica1KBeanImplementation extends UsaMetalica1KBean {
 		.narrow(env.lookup("ejb/ProductLocalHome"), 
 			ProductLocalHome.class);
 	    ProductLocal p = ph.findByPrimaryKey(id);
+	    form.setCode(p.getCode());
+	    form.setName(p.getName());
+	    form.setDescription(p.getDescription());
+	    form.setSellPrice(p.getSellPrice());
+	    form.setEntryPrice(p.getEntryPrice());
 	    Collection attribs = p.getAttributes();
 	    for(Iterator i=attribs.iterator(); i.hasNext(); ) {
 		AttributeLocal a = (AttributeLocal) i.next();
@@ -209,8 +224,23 @@ public class UsaMetalica1KBeanImplementation extends UsaMetalica1KBean {
     public final void createNewFormBean() {
 	super.createNewFormBean();
 	
+	// automatically generate a code
+	String newCode;
+	try {
+	    InitialContext ic = new InitialContext();
+	    Context env = (Context)ic.lookup("java:comp/env");
+	    SequenceHome sh = (SequenceHome)PortableRemoteObject.narrow
+		(env.lookup("ejb/SequenceHome"), SequenceHome.class);
+	    Sequence s = sh.create();
+	    newCode = s.getNext("ro.setumsa.sequences.products").toString();
+	} catch (Exception e) {
+	    newCode = "";
+	}
 
 	// set default values
+	form.setCode(newCode);
+	form.setName("Usa metalica 1 canat " + newCode);
+	form.setDescription("");
 	form.setSubclass("A");
 	form.setVersion("UF");
 	form.setMaterial(new Integer(1));
@@ -241,6 +271,8 @@ public class UsaMetalica1KBeanImplementation extends UsaMetalica1KBean {
 	fereastra = null;
 	form.setFereastraId(new Integer(0));
 	form.setFereastra("Nu are fereastra");
+	form.setEntryPrice(new BigDecimal(0));
+	form.setSellPrice(new BigDecimal(0));
     }
 
     /**
