@@ -1,7 +1,7 @@
 # Valorile campurilor calculate
 
 if {$price == 0} {
-    set price [expr $entryPrice * 110/100]
+    set price [expr $sellPrice]
 }
 
 set period [expr ($dateTo - $dateFrom)/(3600 * 24)]
