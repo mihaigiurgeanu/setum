@@ -23,6 +23,8 @@
 
 
     <command id="onprint" oncommand="open('http://localhost:9000/setum/oferta-usi-standard.pdf', 'Usi standard', '');" />
+
+    <command id="remove-line" oncommand="theForm.remove_item(crtItem()['id']);load_items();" />
   </commandset>
 
   <tabbox flex="1" id="maintab">
@@ -117,6 +119,7 @@
 	
 	<hbox>
 	  <split flex="1"/>
+	  <button label="Strerge linie" command="remove-line" />
 	  <button label="Adauga produse" command="command-add-products" />
 	</hbox>
 
@@ -202,8 +205,12 @@
 		<textbox id="vizor" readonly="true"/>
 	      </row>
 	      <row>
-		<label control="referencePrice" value="Pret de referinta:"/>
-		<textbox id="referencePrice" readonly="true"/>
+		<label control="entryPrice" value="Pret de intrare:"/>
+		<textbox id="entryPrice" readonly="true"/>
+	      </row>
+	      <row>
+		<label control="sellPrice" value="Pret de magazin:"/>
+		<textbox id="sellPrice" readonly="true"/>
 	      </row>
 	    </rows>
 	  </grid>

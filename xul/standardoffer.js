@@ -37,3 +37,24 @@ theForm.do_link = "/standardoffer.do";
 
 theForm.setupEventListeners();
 load_offers();
+
+
+// launch offer
+function launch_offer() {
+    var req = new HTTPDataRequest(theForm.do_link);
+    req.add("command", "makeCurrent");
+    theForm.post_request(req);
+    load_offers();
+}
+
+// discontinue offer
+function discontinue_offer() {
+    var req = new HTTPDataRequest(theForm.do_link);
+    req.add("command", "discontinue");
+    theForm.post_request(req);
+    load_offers();
+}
+
+function crtItem() {
+    return line_items[document.getElementById('offerLines').currentIndex];
+}

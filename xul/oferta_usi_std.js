@@ -29,7 +29,7 @@ theForm.text_fields = new Array("no", "docDate", "dateFrom", "dateTo",
 				"period", "name", "description", "comment",
 				"price", "relativeGain", "absoluteGain",
 				"usa", "broasca", "cilindru", "sild",
-				"yalla", "vizor", "referencePrice");
+				"yalla", "vizor", "sellPrice", "entryPrice");
 
 theForm.combo_fields = new Array();
 theForm.radio_fields = new Array();
@@ -55,4 +55,8 @@ function addProduct(id) {
   req.add("param0", id);
   theForm.post_request(req);
 
+}
+
+function crtItem() {
+    return line_items[document.getElementById('offerLines').currentIndex];
 }

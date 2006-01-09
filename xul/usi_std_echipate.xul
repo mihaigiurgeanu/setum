@@ -69,14 +69,6 @@
 
 	  <rows>
 	    <row>
-	      <label control="code" value="Cod:"/>
-	      <textbox id="code"/>
-	    </row>
-	    <row>
-	      <label control="name" value="Cod magazin:"/>
-	      <textbox id="name"/>
-	    </row>
-	    <row>
 	      <label control="usaId" value="Usa:" />
 	      <menulist id="usaId">
 		<menupopup id="usaId-popup"/>
@@ -116,6 +108,14 @@
 		<menupopup id="vizorId-popup">
 		</menupopup>
 	      </menulist>
+	    </row>
+	    <row>
+	      <label control="code" value="Cod:"/>
+	      <textbox id="code"/>
+	    </row>
+	    <row>
+	      <label control="name" value="Cod magazin:"/>
+	      <textbox id="name"/>
 	    </row>
 	  </rows>
 	</grid>

@@ -2,7 +2,8 @@
 
 // Global variable theForm, for managing the form data fields
 var theForm = new FormObject();
-theForm.text_fields = new Array("code", "name", "description", "price");
+theForm.text_fields = new Array("code", "name", "description", "entryPrice",
+				"sellPrice", "relativeGain", "absoluteGain");
 theForm.combo_fields = new Array();
 theForm.radio_fields = new Array();
 

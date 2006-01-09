@@ -29,7 +29,7 @@ theForm.text_fields = new Array("no", "docDate", "dateFrom", "dateTo",
 				"period", "name", "description", "comment",
 				"price", "relativeGain", "absoluteGain",
 				"productCategory", "productCode",
-				"productName", "referencePrice");
+				"productName", "sellPrice", "entryPrice");
 
 theForm.combo_fields = new Array();
 theForm.radio_fields = new Array();

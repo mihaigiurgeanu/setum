@@ -361,6 +361,164 @@ windows.arguments[0].select(productId)
 	  </rows>
 	</grid>
       </groupbox>
+
+      <!-- Sisteme -->
+      <groupbox>
+	<caption label="Sisteme"/>
+	<grid>
+	  <rows>
+	    <row>
+	      <label controls="montareSistem" value="Montare sisteme inchidere:"/>
+	      <radiogroup id="montareSistem">
+		<radio id="montareSistem.1" value="1" label="Da"/>
+		<hbox>
+		  <radio id="montareSistem.2" value="2" label="Nu"/>
+		  <menulist id="decupareSistemId">
+		    <menupopup id="decupareSistemId-popup"/>
+		  </menulist>
+		</hbox>
+	      </radiogroup>
+	    </row>
+	    <row>
+	      <label controls="sistemSetumSauBeneficiar" value="Provenienta sistem"/>
+	      <radiogroup id="sistemSetumSauBeneficiar">
+		<radio id="sistemSetumSauBeneficiar.1" 
+		       label="Setum" value="1"/>
+		<radio id="sistemSetumSauBeneficiar.2"
+		       label="Beneficiar" value="2"/>
+	      </radiogroup>
+	    </row>
+	    <row>
+	      <label controls="broascaId" value="Broasca:"/>
+	      <menulist id="broascaId">
+		<menupopup id="broascaId-popup"/>
+	      </menulist>
+	      <label controls="broascaBuc" value="Buc:"/>
+	      <textbox id="broascaBuc" length="4"/>
+	    </row>
+	    <row>
+	      <label controls="cilindruId" value="Cilindru:"/>
+	      <menulist id="cilindruId">
+		<menupopup id="cilindruId-popup"/>
+	      </menulist>
+	      <label controls="cilindruBuc" value="Buc:"/>
+	      <textbox id="cilindruBuc"/>
+	    </row>
+	    <row>
+	      <label controls="copiatCheieId" value="Copiat chei:"/>
+	      <menulist id="copiatCheieId">
+		<menupopup id="copiatCheie-popup"/>
+	      </menulist>
+	      <label controls="copiatCheieBuc" value="Buc:"/>
+	      <textbox id="copiatCheieBuc"/>
+	    </row>
+	    <row>
+	      <hbox/>
+	      <label flex="1" style="align: center;" value="Cod"/>
+	      <label flex="1" style="align: center;" value="Tip"/>
+	      <label flex="1" style="align: center;" value="Culoare"/>
+	      <label flex="1" style="align: center;" value="Buc"/>
+	    </row>
+	    <row>
+	      <label controls="sildId" value="Silduri:"/>
+	      <menulist id="sildId">
+		<menupopup id="sildId-popup"/>
+	      </menulist>
+	      <textbox id="sildTip"/>
+	      <textbox id="sildCuloare"/>
+	      <textbox id="sildBuc"/>
+	    </row>
+	    <row>
+	      <label controls="rozetaId" value="Rozete:"/>
+	      <menulist id="rozetaId">
+		<menupopup id="rozetaId-popup"/>
+	      </menulist>
+	      <textbox id="rozetaTip"/>
+	      <textbox id="rozetaCuloare"/>
+	      <textbox id="rozetaBuc"/>
+	    </row>
+	    <row>
+	      <label controls="manerId" value="Maner:"/>
+	      <menulist id="manerId">
+		<menupopup id="manerId-popup"/>
+	      </menulist>
+	      <textbox id="manerTip"/>
+	      <textbox id="manerCuloare"/>
+	      <textbox id="manerBuc"/>
+	    </row>
+	    <row>
+	      <label controls="yalla1Id" value="Yalla:"/>
+	      <menulist id="yalla1Id">
+		<menupopup id="yalla1Id-popup"/>
+	      </menulist>
+	      <label controls="yalla1Buc" value="Buc:"/>
+	      <textbox id="yalla1Buc"/>
+	    </row>
+	    <row>
+	      <label controls="yalla2Id" value="Yalla:"/>
+	      <menulist id="yalla2Id">
+		<menupopup id="yalla2Id-popup"/>
+	      </menulist>
+	      <label controls="yalla2Buc" value="Buc:"/>
+	      <textbox id="yalla2Buc"/>
+	    </row>
+	    <row>
+	      <label controls="baraAntipanicaId" value="Bara antipanica:"/>
+	      <menulist id="baraAntipanicaId">
+		<menupopup id="baraAntipanicaId-popup"/>
+	      </menulist>
+	      <label controls="baraAntipanicaBuc" value="Buc:"/>
+	      <textbox id="baraAntipanicaBuc"/>
+	    </row>
+	    <row>
+	      <label controls="manerSemicilindruId" 
+		     value="Maner/Semicilindru exterior:"/>
+	      <menulist id="manerSemicilindruId">
+		<menupopup id="manerSemicilindruId-popup"/>
+	      </menulist>
+	      <label controls="manerSemicilindruBuc" value="Buc:"/>
+	      <textbox id="manerSemicilindruBuc"/>
+	    </row>
+	    <row>
+	      <label controls="selectorOrdineId" 
+		     value="Selector ordine:"/>
+	      <menulist id="selectorOrdineId">
+		<menupopup id="selectorOrdineId-popup"/>
+	      </menulist>
+	      <label controls="selectorOrdineBuc" value="Buc:"/>
+	      <textbox id="selectorOrdineBuc"/>
+	    </row>
+	    <row>
+	      <label controls="amortizorId" value="Amortizor:"/>
+	      <menulist id="amortizorId">
+		<menupopup id="amortizorId-popup"/>
+	      </menulist>
+	      <label controls="amortizorBuc" value="Buc:"/>
+	      <textbox id="amortizorBuc"/>
+	    </row>
+	    <row>
+	      <label controls="alteSisteme1Id" value="Alte sisteme:"/>
+	      <menulist id="alteSisteme1Id">
+		<menupopup id="alteSisteme1Id-popup"/>
+	      </menulist>
+	      <label controls="alteSisteme1Buc" value="Buc:"/>
+	      <textbox id="alteSisteme1Buc"/>
+	    </row>
+	    <row>
+	      <hbox/>
+	      <menulist id="alteSisteme2Id">
+		<menupopup id="alteSisteme2Id-popup"/>
+	      </menulist>
+	      <label controls="alteSisteme2Buc" value="Buc:"/>
+	      <textbox id="alteSisteme2Buc"/>
+	    </row>
+	  </rows>
+	</grid>
+	<hbox flex="1">
+	  <label controls="sistemeComment" value="Obs:"/>
+	  <textbox id="sistemeComment" multiline="true" rows="4" flex="1"/>
+	</hbox>
+      </groupbox>
     </vbox>
   </hbox>
 
@@ -381,14 +539,30 @@ theForm.text_fields = new Array("lg", "hg", "lcorrection", "hcorrection",
 				"lFrame", "bFrame", "cFrame", "lTreshold",
 				"cTreshold", "hTreshold", "h1Treshold",
 				"h2Treshold", "fereastra", "grilaVentilatie",
-				"gauriAerisire");
+				"gauriAerisire",
+				"broascaBuc", "cilindruBuc", "copiatCheieBuc",
+				"sildTip", "sildCuloare", "sildBuc",
+				"rozetaTip", "rozetaCuloare", "rozetaBuc",
+				"manerTip", "manerCuloare", "manerBuc",
+				"yalla1Buc", "yalla2Buc",
+				"baraAntipanicaBuc",
+				"manerSemicilindruBuc", "amortizorBuc",
+				"alteSisteme1Buc", "alteSisteme2Buc",
+				"sistemeComment");
 theForm.combo_fields = new Array("subclass", "version", "material", 
 				 "intFoil", "extFoil", "isolation",
 				 "intFoilSec", "extFoilSec", 
-				 "openingDir", "openingSide", "foilPosition");
+				 "openingDir", "openingSide", "foilPosition",
+				 "decupareSistemId", "broascaId", "cilindruId",
+				 "copiatCheieId", "sildId", "rozetaId",
+				 "manerId", "yalla1Id", "yalla2Id",
+				 "baraAntipanicaId", "manerSemicilindruId",
+				 "selectorOrdineId", "amortizorId", 
+				 "alteSisteme1Id", "alteSisteme2Id");
 theForm.radio_fields = new Array("ieFoil", "ieFoilSec", 
 				 "frameType", "tresholdType",
-				 "tresholdSpace");
+				 "tresholdSpace", "montareSistem", 
+				 "sistemSetumSauBeneficiar");
 
 theForm.hidden_fields = new Array("fereastraId", "grilaVentilatieId", 
 				  "gauriAerisireId");

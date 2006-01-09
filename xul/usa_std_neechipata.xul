@@ -60,6 +60,8 @@
 	  <columns>
 	    <column/>
 	    <column flex="1"/>
+	    <column/>
+	    <column flex="1"/>
 	  </columns>
 
 	  <rows>
@@ -76,8 +78,20 @@
 	      <textbox id="description"/>
 	    </row>
 	    <row>
-	      <label control="price" value="Pret:"/>
-	      <textbox id="price"/>
+	      <label control="price" value="Pret intrare:"/>
+	      <textbox id="entryPrice"/>
+	    </row>
+	    <row>
+	      <label control="sellPrice" value="Pret:"/>
+	      <textbox id="sellPrice"/>
+	      <label control="relativeGain" value="Adaos(%):"/>
+	      <textbox id="relativeGain"/>
+	    </row>
+	    <row>
+	      <box/>
+	      <box/>
+	      <label control="absoluteGain" value="Adaos(Lei):"/>
+	      <textbox id="absoluteGain"/>
 	    </row>
 	  </rows>
 	</grid>

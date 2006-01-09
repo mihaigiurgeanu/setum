@@ -203,8 +203,12 @@ Data-entry form for general purpose offers.
 		<textbox id="productName" readonly="true"/>
 	      </row>
 	      <row>
-		<label control="referencePrice" value="Pret de referinţă:"/>
-		<textbox id="referencePrice" readonly="true"/>
+		<label control="entryPrice" value="Pret de intrare:"/>
+		<textbox id="entryPrice" readonly="true"/>
+	      </row>
+	      <row>
+		<label control="sellPrice" value="Pret de magazin:"/>
+		<textbox id="sellPrice" readonly="true"/>
 	      </row>
 	    </rows>
 	  </grid>
