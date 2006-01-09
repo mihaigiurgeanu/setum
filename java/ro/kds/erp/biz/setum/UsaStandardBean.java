@@ -19,6 +19,8 @@ import java.util.Iterator;
 import java.util.Map;
 import javax.ejb.FinderException;
 import java.math.BigDecimal;
+import ro.kds.erp.scripting.Script;
+import java.rmi.RemoteException;
 
 /**
  * Gestiunea usilor standard. Usile standard sunt produse compuse obtinute
@@ -26,7 +28,7 @@ import java.math.BigDecimal;
  * yalla, vizor.
  *
  *
- * Created: Wed Nov 02 13:03:31 2005
+ * $Id: UsaStandardBean.java,v 1.2 2006/01/09 10:15:49 mihai Exp $
  *
  * @author <a href="mailto:Mihai Giurgeanu@CRIMIRA"></a>
  * @version 1.0
@@ -45,11 +47,11 @@ public class UsaStandardBean
 	form.setCode("");
 	
 	form.setUsaId(new Integer(0));
-	form.setBroascaId("");
-	form.setCilindruId("");
-	form.setSildId("");
-	form.setYallaId("");
-	form.setVizorId("");
+	form.setBroascaId(new Integer(0));
+	form.setCilindruId(new Integer(0));
+	form.setSildId(new Integer(0));
+	form.setYallaId(new Integer(0));
+	form.setVizorId(new Integer(0));
     }
 
     /**
@@ -85,15 +87,15 @@ public class UsaStandardBean
 		if(p.getCategory().getId().equals(USA_SIMPLA_ID)) {
 		    form.setUsaId(p.getId());
 		} else if (p.getCategory().getId().equals(BROASCA_ID)) {
-		    form.setBroascaId(p.getId().toString());
+		    form.setBroascaId(p.getId());
 		} else if (p.getCategory().getId().equals(CILINDRU_ID)) {
-		    form.setCilindruId(p.getId().toString());
+		    form.setCilindruId(p.getId());
 		} else if (p.getCategory().getId().equals(SILD_ID)) {
-		    form.setSildId(p.getId().toString());
+		    form.setSildId(p.getId());
 		} else if (p.getCategory().getId().equals(YALLA_ID)) {
-		    form.setYallaId(p.getId().toString());
+		    form.setYallaId(p.getId());
 		} else if (p.getCategory().getId().equals(VIZOR_ID)) {
-		    form.setVizorId(p.getId().toString());
+		    form.setVizorId(p.getId());
 		} else {
 		    logger.log(BasicLevel.WARN, "Product in category: " 
 			       + p.getCategory().getName() +
@@ -169,36 +171,36 @@ public class UsaStandardBean
 	    entryPrice = entryPrice.add(usa.getEntryPrice());
 	    price1 = price1.add(usa.getPrice1());
 
-	    if(! form.getBroascaId().equals("")) {
-		ProductLocal part = ph.findByPrimaryKey(new Integer(form.getBroascaId())); 
+	    if(! form.getBroascaId().equals(new Integer(0))) {
+		ProductLocal part = ph.findByPrimaryKey(form.getBroascaId()); 
 		parts.add(part);
 		sellPrice = sellPrice.add(part.getSellPrice());
 		entryPrice = entryPrice.add(part.getEntryPrice());
 		price1 = price1.add(part.getPrice1());
 	    }
-	    if(! form.getCilindruId().equals("")) {
-		ProductLocal part = ph.findByPrimaryKey(new Integer(form.getCilindruId()));
+	    if(! form.getCilindruId().equals(new Integer(0))) {
+		ProductLocal part = ph.findByPrimaryKey(form.getCilindruId());
 		parts.add(part);
 		sellPrice = sellPrice.add(part.getSellPrice());
 		entryPrice = entryPrice.add(part.getEntryPrice());
 		price1 = price1.add(part.getPrice1());
 	    }
-	    if(! form.getSildId().equals("")) {
-		ProductLocal part = ph.findByPrimaryKey(new Integer(form.getSildId())); 
+	    if(! form.getSildId().equals(new Integer(0))) {
+		ProductLocal part = ph.findByPrimaryKey(form.getSildId()); 
 		parts.add(part);
 		sellPrice = sellPrice.add(part.getSellPrice());
 		entryPrice = entryPrice.add(part.getEntryPrice());
 		price1 = price1.add(part.getPrice1());
 	    }
-	    if(! form.getYallaId().equals("")) {
-		ProductLocal part = ph.findByPrimaryKey(new Integer(form.getYallaId()));
+	    if(! form.getYallaId().equals(new Integer(0))) {
+		ProductLocal part = ph.findByPrimaryKey(form.getYallaId());
 		parts.add(part);
 		sellPrice = sellPrice.add(part.getSellPrice());
 		entryPrice = entryPrice.add(part.getEntryPrice());
 		price1 = price1.add(part.getPrice1());
 	    }
-	    if(! form.getVizorId().equals("")) {
-		ProductLocal part = ph.findByPrimaryKey(new Integer(form.getVizorId()));
+	    if(! form.getVizorId().equals(new Integer(0))) {
+		ProductLocal part = ph.findByPrimaryKey(form.getVizorId());
 		parts.add(part);
 		sellPrice = sellPrice.add(part.getSellPrice());
 		entryPrice = entryPrice.add(part.getEntryPrice());
@@ -281,6 +283,40 @@ public class UsaStandardBean
 	return r;
     }
 
+
+    /**
+     * Recalculate the price for products in this category.
+     */
+    public void recalculatePrices() {
+
+	// Get the list of all products in this category, loads them
+	// one by one and save them back after price calculation.
+
+	try {
+	    InitialContext ic = new InitialContext();
+	    Context env = (Context)ic.lookup("java:comp/env");
+	    CategoryLocalHome ch =
+		(CategoryLocalHome)PortableRemoteObject.narrow
+		(env.lookup("ejb/CategoryHome"), CategoryLocalHome.class);
+	    CategoryLocal c = ch.findByPrimaryKey(USA_STD_ID);
+	    
+	    Collection products = c.getProducts();
+
+	    for(Iterator i = products.iterator(); i.hasNext(); ) {
+		ProductLocal p = (ProductLocal)i.next();
+		logger.log(BasicLevel.DEBUG, "Recalculating for product id: "
+			   + p.getId());
+		this.loadFormData(p.getId());
+		this.saveFormData(); // makes the price calculation also
+	    }
+	} catch (NamingException e) {
+	    logger.log(BasicLevel.ERROR, e.getMessage(), e);
+	} catch (Exception e) {
+	    logger.log(BasicLevel.ERROR, e.getMessage(), e);
+	}
+
+    }
+
     /**
      * CategoryId
      */
@@ -354,7 +390,7 @@ public class UsaStandardBean
      */
     private Map makeProductsValueList(Integer catId) {
 	TreeMap vl = new TreeMap();
-	vl.put("-", "");
+	vl.put("-", "0");
 
 	try {
 	    InitialContext ic = new InitialContext();
@@ -387,6 +423,94 @@ public class UsaStandardBean
 	r.addValueList("sildId", makeProductsValueList(SILD_ID));
 	r.addValueList("yallaId", makeProductsValueList(YALLA_ID));
 	r.addValueList("vizorId", makeProductsValueList(VIZOR_ID));
+    }
+
+
+    /**
+     * Provide to the script the codes and the names of the selected
+     * componewnts. The script is responsible to derive the code and the
+     * name of the new product.
+     */
+    protected void addFieldsToScript(Script s) {
+
+	super.addFieldsToScript(s);
+	try {
+	    InitialContext ic = new InitialContext();
+	    Context env = (Context)ic.lookup("java:comp/env");
+	    ProductLocalHome ph = (ProductLocalHome)PortableRemoteObject.narrow
+		(env.lookup("ejb/ProductHome"), ProductLocalHome.class);
+
+	    try {
+		ProductLocal p = ph.findByPrimaryKey(form.getUsaId());
+		s.setVar("usaName", p.getName());
+		s.setVar("usaCode", p.getCode());
+	    } catch (FinderException e) {
+		logger.log(BasicLevel.DEBUG,
+			   "product does not exists; id " + form.getUsaId());
+	    } catch (Exception e) {
+		logger.log(BasicLevel.WARN,
+			   "Can not add usaName and/or usaCode to the script",
+			   e);
+	    }
+	    try {
+		ProductLocal p = ph.findByPrimaryKey(form.getBroascaId());
+		s.setVar("broascaName", p.getName());
+		s.setVar("broascaCode", p.getCode());
+	    } catch (FinderException e) {
+		logger.log(BasicLevel.DEBUG,
+			   "product does not exists; id " + form.getBroascaId());
+	    } catch (Exception e) {
+		logger.log(BasicLevel.WARN,
+			   "Can not add broascaName and/or broascaCode to the script", e);
+	    }
+	    try {
+		ProductLocal p = ph.findByPrimaryKey(form.getSildId());
+		s.setVar("sildName", p.getName());
+		s.setVar("sildCode", p.getCode());
+	    } catch (FinderException e) {
+		logger.log(BasicLevel.DEBUG,
+			   "product does not exists; id " + form.getSildId());
+	    } catch (Exception e) {
+		logger.log(BasicLevel.WARN,
+			   "Can not add sildName and/or sildCode to the script",
+			   e);
+	    }
+	    try {
+		ProductLocal p = ph.findByPrimaryKey(form.getYallaId());
+		s.setVar("yallaName", p.getName());
+		s.setVar("yallaCode", p.getCode());
+	    } catch (FinderException e) {
+		logger.log(BasicLevel.DEBUG,
+			   "product does not exists; id " + form.getYallaId());
+	    } catch (Exception e) {
+		logger.log(BasicLevel.WARN,
+			   "Can not add yallaName and/or yallaCod to the script",e);
+	    }
+	    try {
+		ProductLocal p = ph.findByPrimaryKey(form.getCilindruId());
+		s.setVar("cilindruName", p.getName());
+		s.setVar("cilindruCode", p.getCode());
+	    } catch (FinderException e) {
+		logger.log(BasicLevel.DEBUG,
+			   "product does not exists; id " + form.getCilindruId());
+	    } catch (Exception e) {
+		logger.log(BasicLevel.WARN,
+			   "Can not add cilindruName and/or cilindruCod to the script", e);
+	    }
+	    try {
+		ProductLocal p = ph.findByPrimaryKey(form.getVizorId());
+		s.setVar("vizorName", p.getName());
+		s.setVar("vizorCode", p.getCode());
+	    } catch (FinderException e) {
+		logger.log(BasicLevel.DEBUG,
+			   "product does not exists; id " + form.getVizorId());
+	    } catch (Exception e) {
+		logger.log(BasicLevel.WARN,
+			   "Can not add vizorName and/or vizorCode to the script", e);
+	    }
+	} catch (NamingException e) {
+	    logger.log(BasicLevel.WARN, e);
+	}
     }
 }
 
