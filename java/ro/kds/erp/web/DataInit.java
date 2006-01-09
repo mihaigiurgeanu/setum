@@ -74,12 +74,18 @@ public class DataInit extends HttpServlet {
 	    others.add(ch.create(new Integer(9985), "Grilaj"));
 	    others.add(ch.create(new Integer(9984), "Tabla"));
 
-
 	    ch.create(new Integer(9983), "Grila ventilatie");
 	    ch.create(new Integer(9982), "Gauri aerisire");
 	    ch.create(new Integer(9981), "Supralumina");
 	    ch.create(new Integer(9980), "Panou lateral");
 	    ch.create(new Integer(9979), "Ghiseu");
+
+	    others.add(ch.create(new Integer(9978), "Pret grila ventilatie"));
+
+	    sisteme.add(ch.create(new Integer(9977), "Maner"));
+	    sisteme.add(ch.create(new Integer(9976), "Bara antipanica"));
+	    sisteme.add(ch.create(new Integer(9975), "Selector ordine"));
+	    sisteme.add(ch.create(new Integer(9974), "Decupare sistem"));
 
 	    // the objects with ids over 10000 are user objects;
 	    // create here some for convenience
@@ -90,6 +96,7 @@ public class DataInit extends HttpServlet {
 	    sisteme.add(ch.create(new Integer(10004), "Rozeta"));
 	    sisteme.add(ch.create(new Integer(10005), "Protectie"));
 	    sisteme.add(ch.create(new Integer(10006), "Copiat cheie"));
+
 
 	} catch (Exception e) {
 	    logger.log(BasicLevel.ERROR, "Exception initializing beans");
