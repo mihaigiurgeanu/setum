@@ -68,9 +68,6 @@ public class FereastraBizBean extends FereastraBean {
 	    }
 
 	    p.setDescription("Fereastra " + form.getLf() + "x" + form.getHf());
-	    p.setSellPrice(form.getSellPrice());
-	    p.setEntryPrice(form.getEntryPrice());
-	    p.setPrice1(form.getPrice1());
 
 	    AttributeLocalHome ah = (AttributeLocalHome)PortableRemoteObject.
 		narrow(env.lookup("ejb/AttributeHome"), 
@@ -81,6 +78,52 @@ public class FereastraBizBean extends FereastraBean {
 	    attributes.add(ah.create("canat", form.getCanat()));
 	    attributes.add(ah.create("lf", form.getLf()));
 	    attributes.add(ah.create("hf", form.getHf()));
+
+	    p.setSellPrice(new BigDecimal(0));
+	    p.setEntryPrice(new BigDecimal(0));
+	    p.setPrice1(new BigDecimal(0));
+	    if(form.getComponenta().intValue() == 1) {
+		// componenta setum
+		switch(form.getTipComponenta().intValue()) {
+		case 1: // geam
+		    double surf = (form.getLf().doubleValue()/1000) * 
+			(form.getHf().doubleValue()/1000);
+		    switch (form.getTipGeam().intValue()) {
+		    case 1:
+			ProductLocal geamS = ph
+			    .findByPrimaryKey(form.getGeamSimpluId());
+			p.setSellPrice(geamS.getSellPrice()
+				       .multiply(new BigDecimal(surf)));
+			p.setEntryPrice(geamS.getEntryPrice()
+					.multiply(new BigDecimal(surf)));
+			break;
+		    case 2:
+			ProductLocal geamT = ph.
+			    findByPrimaryKey(form.getGeamTermopanId());
+			p.setSellPrice(geamT.getSellPrice()
+				       .multiply(new BigDecimal(surf)));
+			p.setEntryPrice(geamT.getEntryPrice()
+					.multiply(new BigDecimal(surf)));
+			break;
+		    }
+		    break;
+		case 2: // grilaj
+		    switch (form.getTipGrilaj().intValue()) {
+		    case 1:
+			ProductLocal grilaj = ph.
+			    findByPrimaryKey(form.getGrilajStasId());
+			p.setSellPrice(grilaj.getSellPrice());
+			p.setEntryPrice(grilaj.getEntryPrice());
+			break;
+		    case 2:
+			p.setSellPrice(form.getValoareGrilajAtipic());
+			p.setEntryPrice(form.getValoareGrilajAtipic());
+			break;
+		    }
+		    break;
+		}
+	    }
+	    
 	    attributes.add(ah.create("pozitionare1", form.getPozitionare1()));
 	    attributes.add(ah.create("pozitionare2", form.getPozitionare2()));
 	    attributes.add(ah.create("pozitionare3", form.getPozitionare3()));
@@ -108,11 +151,11 @@ public class FereastraBizBean extends FereastraBean {
 
 	    attributes.add(ah.create("valoareGrilajAtipic", 
 				     form.getValoareGrilajAtipic()));
-	    attributes.add(ah.create("tipTabla", form.getTipTabla()));
-	    try {
-		attributes.add(ah.create("tabla", 
-					 ph.findByPrimaryKey(form.getTablaId())));
-	    } catch (FinderException ignore) {}
+// 	    attributes.add(ah.create("tipTabla", form.getTipTabla()));
+// 	    try {
+// 		attributes.add(ah.create("tabla", 
+// 					 ph.findByPrimaryKey(form.getTablaId())));
+// 	    } catch (FinderException ignore) {}
 	    
 	    p.setAttributes(attributes);
 	    
@@ -125,12 +168,14 @@ public class FereastraBizBean extends FereastraBean {
 			 "Datele nu pot fi salvate.");
 	    logger.log(BasicLevel.ERROR, "Error saving object id "  + this.id, 
 		       e);
+	    ejbContext.setRollbackOnly();
 	} catch (Exception e) {
 	    r = new ResponseBean();
 	    r.setCode(3);
 	    r.setMessage("Eroare la salvarea datelor");
 	    logger.log(BasicLevel.ERROR, "Error saving object id "  + this.id, 
 		       e);
+	    ejbContext.setRollbackOnly();
 	}
 
 	return r;
@@ -211,11 +256,11 @@ public class FereastraBizBean extends FereastraBean {
 	       != null)
 		form.setValoareGrilajAtipic(a.getDecimalValue());
 
-	    if((a = (AttributeLocal)attributes.get("tipTabla")) != null)
-		form.setTipTabla(a.getIntValue());
+// 	    if((a = (AttributeLocal)attributes.get("tipTabla")) != null)
+// 		form.setTipTabla(a.getIntValue());
 
-	    if((a = (AttributeLocal)attributes.get("tabla")) != null)
-		form.setTablaId(a.getProduct().getId());
+// 	    if((a = (AttributeLocal)attributes.get("tabla")) != null)
+// 		form.setTablaId(a.getProduct().getId());
 
 	    r = new ResponseBean();
 
@@ -266,8 +311,8 @@ public class FereastraBizBean extends FereastraBean {
 	form.setTipGrilaj(new Integer(1));
 	form.setGrilajStasId(new Integer(1));
 	form.setValoareGrilajAtipic(new BigDecimal(0));
-	form.setTipTabla(new Integer(1));
-	form.setTablaId(new Integer(1));
+// 	form.setTipTabla(new Integer(1));
+// 	form.setTablaId(new Integer(1));
     }
 
     /**
@@ -380,33 +425,33 @@ public class FereastraBizBean extends FereastraBean {
 	}
 	r.addValueList("grilajStasId", vl);
 	
-	// tipTabla
-	vl = new LinkedHashMap();
-	vl.put("1 rand", new Integer(1));
-	vl.put("2 randuri", new Integer(2));
-	vl.put("Blat usa", new Integer(3));
-	r.addValueList("tipTabla", vl);
+// 	// tipTabla
+// 	vl = new LinkedHashMap();
+// 	vl.put("1 rand", new Integer(1));
+// 	vl.put("2 randuri", new Integer(2));
+// 	vl.put("Blat usa", new Integer(3));
+// 	r.addValueList("tipTabla", vl);
 	
-	// tablaId
-	vl = new LinkedHashMap();
-	try {
-	    InitialContext ic = new InitialContext();
-	    Context env = (Context) ic.lookup("java:comp/env");
-	    Integer categoryId = (Integer)env.lookup("tablaCategoryId");
-	    CategoryLocalHome ch = 
-		(CategoryLocalHome)PortableRemoteObject.narrow
-		(env.lookup("ejb/CategoryHome"), CategoryLocalHome.class);
-	    CategoryLocal categ = ch.findByPrimaryKey(categoryId);
-	    Collection products = categ.getProducts();
-	    for(Iterator i = products.iterator(); i.hasNext(); ) {
-		ProductLocal p = (ProductLocal)i.next();
-		vl.put(p.getName(), p.getId());
-	    }
-	} catch (Exception e) {
-	    logger.log(BasicLevel.ERROR, 
-		       "Can not build vl for geamTermopanId", e);
-	}
-	r.addValueList("tablaId", vl);
+// 	// tablaId
+// 	vl = new LinkedHashMap();
+// 	try {
+// 	    InitialContext ic = new InitialContext();
+// 	    Context env = (Context) ic.lookup("java:comp/env");
+// 	    Integer categoryId = (Integer)env.lookup("tablaCategoryId");
+// 	    CategoryLocalHome ch = 
+// 		(CategoryLocalHome)PortableRemoteObject.narrow
+// 		(env.lookup("ejb/CategoryHome"), CategoryLocalHome.class);
+// 	    CategoryLocal categ = ch.findByPrimaryKey(categoryId);
+// 	    Collection products = categ.getProducts();
+// 	    for(Iterator i = products.iterator(); i.hasNext(); ) {
+// 		ProductLocal p = (ProductLocal)i.next();
+// 		vl.put(p.getName(), p.getId());
+// 	    }
+// 	} catch (Exception e) {
+// 	    logger.log(BasicLevel.ERROR, 
+// 		       "Can not build vl for geamTermopanId", e);
+// 	}
+// 	r.addValueList("tablaId", vl);
 	
     }
 
