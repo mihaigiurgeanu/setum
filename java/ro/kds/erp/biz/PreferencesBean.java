@@ -20,7 +20,7 @@ import javax.rmi.PortableRemoteObject;
  * @version 1.0
  */
 public class PreferencesBean implements SessionBean {
-    
+
     private java.util.prefs.Preferences prefsNode;
 
     // Implementation of javax.ejb.SessionBean
@@ -91,7 +91,9 @@ public class PreferencesBean implements SessionBean {
      * property can not be accessed.
      */
     public String get(String key, String def) throws RemoteException {
-	return prefsNode.get(key, def);
+	synchronized(PreferencesBean.class) {
+	    return prefsNode.get(key, def);
+	}
     }
 
     /**
@@ -103,7 +105,9 @@ public class PreferencesBean implements SessionBean {
      * property can not be accessed.
      */
     public Double getDouble(String key, Double def) throws RemoteException {
-	return new Double(prefsNode.getDouble(key, def.doubleValue()));
+	synchronized(PreferencesBean.class) {
+	    return new Double(prefsNode.getDouble(key, def.doubleValue()));
+	}
     }
 
     /**
@@ -115,7 +119,9 @@ public class PreferencesBean implements SessionBean {
      * property can not be accessed.
      */
     public Integer getInteger(String key, Integer def) throws RemoteException {
-	return new Integer(prefsNode.getInt(key, def.intValue()));
+	synchronized(PreferencesBean.class) {
+	    return new Integer(prefsNode.getInt(key, def.intValue()));
+	}
     }
 
 
@@ -134,7 +140,9 @@ public class PreferencesBean implements SessionBean {
     public void put(String key, String value) throws NullPointerException,
 						     IllegalArgumentException,
 						     IllegalStateException {
-	prefsNode.put(key, value);
+	synchronized(PreferencesBean.class) {
+	    prefsNode.put(key, value);
+	}
     }
 
     /**
@@ -153,7 +161,9 @@ public class PreferencesBean implements SessionBean {
 						     IllegalArgumentException,
 						     IllegalStateException
     {
-	prefsNode.putDouble(key, value.doubleValue());
+	synchronized(PreferencesBean.class) {
+	    prefsNode.putDouble(key, value.doubleValue());
+	}
     }
 
     /**
@@ -172,7 +182,9 @@ public class PreferencesBean implements SessionBean {
 						      IllegalArgumentException,
 						      IllegalStateException
     {
-	prefsNode.putInt(key, value.intValue());
+	synchronized(PreferencesBean.class) {
+	    prefsNode.putInt(key, value.intValue());
+	}
     }
 
     /**
