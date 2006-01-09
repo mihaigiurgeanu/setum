@@ -2,6 +2,8 @@
 package ${.node.class.package};
 
 import java.io.Serializable;
+import java.util.Map;
+import ro.kds.erp.data.AttributeLocal;
 
 /**
  * A represantation of form data. While user is editing the data associated
@@ -26,6 +28,36 @@ public class ${.node.class.name}Form implements Serializable {
     public ${field.type} get${field.name?cap_first}() {
         return ${field.name};
     }
+
+    [#if field.type = 'Integer']
+    public void read${field.name?cap_first}(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("${field.name}");
+	if(a != null) {
+	    this.set${field.name?cap_first}(a.getIntValue());
+	}
+    }
+    [#elseif field.type = 'String']
+    public void read${field.name?cap_first}(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("${field.name}");
+	if(a != null) {
+	    this.set${field.name?cap_first}(a.getStringValue());
+	}
+    }
+    [#elseif field.type = 'Double']
+    public void read${field.name?cap_first}(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("${field.name}");
+	if(a != null) {
+	    this.set${field.name?cap_first}(a.getDoubleValue());
+	}
+    }
+    [#elseif field.type = 'java.math.BigDecimal']
+    public void read${field.name?cap_first}(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("${field.name}");
+	if(a != null) {
+	    this.set${field.name?cap_first}(a.getDecimalValue());
+	}
+    }
+    [/#if]
 
     [/#list]
 }
