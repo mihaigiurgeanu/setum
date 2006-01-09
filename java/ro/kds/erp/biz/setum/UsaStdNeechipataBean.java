@@ -37,7 +37,8 @@ public class UsaStdNeechipataBean
 	form.setName("");
 	form.setCode("");
 	form.setDescription("");
-	form.setPrice(new BigDecimal(0));
+	form.setSellPrice(new BigDecimal(0));
+	form.setEntryPrice(new BigDecimal(0));
     }
 
     /**
@@ -58,7 +59,8 @@ public class UsaStdNeechipataBean
 	    form.setName(p.getName());
 	    form.setCode(p.getCode());
 	    form.setDescription(p.getDescription());
-	    form.setPrice(p.getSellPrice());
+	    form.setSellPrice(p.getSellPrice());
+	    form.setEntryPrice(p.getEntryPrice());
 
 	    r = new ResponseBean();
 
@@ -107,9 +109,19 @@ public class UsaStdNeechipataBean
 	    p.setName(form.getName());
 	    p.setCode(form.getCode());
 	    p.setDescription(form.getDescription());
-	    p.setSellPrice(form.getPrice());
-	    p.setEntryPrice(form.getPrice());
-	    p.setPrice1(form.getPrice());
+	    p.setEntryPrice(form.getEntryPrice());
+	    p.setPrice1(form.getSellPrice());
+	    if(! p.getSellPrice().equals(form.getSellPrice())) {
+		p.setSellPrice(form.getSellPrice());
+
+
+		try {
+		    PricesUpdater.updatePrices(); // composite products prices
+		} catch (Exception e) {
+		    logger.log(BasicLevel.ERROR, "Failed notifying the message bean about price updates.");
+		}
+		
+	    }
 
 	    r = new ResponseBean();
 	} catch (NamingException e) {
@@ -170,4 +182,5 @@ public class UsaStdNeechipataBean
 
 	return r;
     }
+
 }
