@@ -26,6 +26,9 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.Date;
 import ro.kds.erp.biz.Preferences;
+import ro.kds.erp.biz.SequenceHome;
+import ro.kds.erp.biz.Sequence;
+import ro.kds.erp.biz.ResponseBean;
 
 /**
  * Specific implemetation of business rules for ArbitraryOfferEJB.
@@ -69,7 +72,21 @@ public class ArbitraryOfferBizBean extends ArbitraryOfferBean {
 	    availability = 30;
 	}
 
-	form.setNo("");
+	Integer offerNo;
+	try {
+	    InitialContext ic = new InitialContext();
+	    Context env = (Context) ic.lookup("java:comp/env");
+	    
+	    SequenceHome sh = (SequenceHome)PortableRemoteObject.narrow
+		(env.lookup("ejb/SequenceHome"), SequenceHome.class);
+	    Sequence s = sh.create();
+	    offerNo = s.getNext("ro.setumsa.sequnces.offers");
+	} catch (Exception e) {
+	    offerNo = null;
+	    logger.log(BasicLevel.WARN, "Can not get a number for offer", e);
+	}
+
+	form.setNo(String.valueOf(offerNo));
 	form.setDocDate(new Date());
 
 	form.setDateFrom(new Date());
@@ -94,7 +111,8 @@ public class ArbitraryOfferBizBean extends ArbitraryOfferBean {
 	form.setProductCategory("");
 	form.setProductCode("");
 	form.setProductName("");
-	form.setReferencePrice(new BigDecimal(0));
+	form.setEntryPrice(new BigDecimal(0));
+	form.setSellPrice(new BigDecimal(0));
 
 	form.setBusinessCategory("");
     }
@@ -131,6 +149,7 @@ public class ArbitraryOfferBizBean extends ArbitraryOfferBean {
 	    form.setName(offer.getName());
 	    form.setDescription(offer.getDescription());
 	    form.setComment(offer.getComment());
+
 	} catch (NamingException e) {
 	    logger.log(BasicLevel.ERROR, "Can not get the jndi name for ejb/OfferHome", e);
 	    r.setCode(3);
@@ -184,7 +203,7 @@ public class ArbitraryOfferBizBean extends ArbitraryOfferBean {
 	} catch (CreateException e) {
 	    logger.log(BasicLevel.ERROR, "Can not create the new offer object", e);
 	    r.setCode(3);
-	    r.setMessage("Eroare in baza de date la creerea unei noi inregistrari. Datele nu au fost salvate!");
+	    r.setMessage("Eroare in baza de date la crearea unei noi inregistrari. Datele nu au fost salvate!");
 	} catch (FinderException e) {
 	    logger.log(BasicLevel.ERROR, "No such object for offer id = " + id, e);
 	    r.setCode(3);
@@ -297,14 +316,16 @@ public class ArbitraryOfferBizBean extends ArbitraryOfferBean {
 		form.setProductCode(p.getCode());
 		form.setProductName(p.getName());
 
-		form.setReferencePrice(p.getSellPrice());
+		form.setSellPrice(p.getSellPrice());
+		form.setEntryPrice(p.getEntryPrice());
 	    }
 	    else {
 		form.setProductId(new Integer(0));
 		form.setProductCategory("");
 		form.setProductCode("");
 		form.setProductName("");
-		form.setReferencePrice(new BigDecimal(0));
+		form.setSellPrice(new BigDecimal(0));
+		form.setEntryPrice(new BigDecimal(0));
 	    }
 
 	    form.setPrice(offerItem.getPrice());
@@ -330,6 +351,56 @@ public class ArbitraryOfferBizBean extends ArbitraryOfferBean {
 	return r;
     }
 
+    /**
+     * Update the fields related with the product when the product id
+     * is modifief.
+     */
+    public ResponseBean updateProductId(Integer productId) {
+	ResponseBean r;
+	try {
+	    InitialContext ic = new InitialContext();
+	    Context env = (Context)ic.lookup("java:comp/env");
+	    ProductLocalHome ph = (ProductLocalHome)PortableRemoteObject.narrow
+		(env.lookup("ejb/ProductHome"), ProductLocalHome.class);
+	    ProductLocal p = ph.findByPrimaryKey(productId);
+	    
+	    form.setProductCategory(p.getCategory().getName());
+	    form.setProductCode(p.getCode());
+	    form.setProductName(p.getName());
+	    form.setSellPrice(p.getSellPrice());
+	    form.setEntryPrice(p.getEntryPrice());
+	    form.setPrice(p.getSellPrice());
+
+	    r = super.updateProductId(productId);
+	    if(r.getCode() == 0) {
+		logger.log(BasicLevel.DEBUG, "Add to the response bean " +
+			   "returned by std. updateProductId the values " +
+			   "for the new product.");
+		r.addField("productCategory", form.getProductCategory());
+		r.addField("productCode", form.getProductCode());
+		r.addField("productName", form.getProductName());
+		r.addField("entryPrice", form.getEntryPrice());
+		r.addField("sellPrice", form.getSellPrice());
+		r.addField("price", form.getPrice());
+	    }
+	} catch (FinderException e) {
+	    logger.log(BasicLevel.ERROR, "Product not found for id " + 
+		       productId, e);
+	    r = new ResponseBean();
+	    r.setCode(3);
+	    r.setMessage("Produsul ales nu exista in baza de date");
+	} catch (Exception e) {
+	    logger.log(BasicLevel.ERROR, "Could not retrieve the product's " +
+		       "details for productId" + productId, e);
+	    r = new ResponseBean();
+	    r.setCode(1);
+	    r.setMessage("Eroare aplicatie! " +
+			 "Nu se poate adauga produsul selectat.");
+	}
+	
+	return r;
+    }
+    
 
     /**
      * Adding a new item on an offer.
@@ -458,46 +529,6 @@ public class ArbitraryOfferBizBean extends ArbitraryOfferBean {
 	}
 
     }
-
-
-    /**
-     * Add details about product to the response, by setting
-     * the values of fields productCategory, productCode, productName,
-     * entryPrice and sellPrice.
-     *
-     */
-    public ResponseBean computeCalculatedFields(ResponseBean responseBean) {
-	try {
-	    InitialContext ic = new InitialContext();
-	    Context env = (Context)ic.lookup("java:comp/env");
-	    ProductLocalHome ph = (ProductLocalHome)PortableRemoteObject.narrow
-		(env.lookup("ejb/ProductHome"), ProductLocalHome.class);
-	    ProductLocal p = ph.findByPrimaryKey(form.getProductId());
-	    
-	    form.setProductCategory(p.getCategory().getName());
-	    form.setProductCode(p.getCode());
-	    form.setProductName(p.getName());
-	} catch (FinderException e) {
-	    // The product might not of been chosen on the form,
-	    // so it is quite normal to get a FinderException.
-	    logger.log(BasicLevel.DEBUG, "Product not found for id " + 
-		       form.getProductId());
-	    initItemCalculatedFields();
-
-	} catch (Exception e) {
-	    logger.log(BasicLevel.ERROR, "Could not retrieve the product's details", e);
-	    initItemCalculatedFields();
-	    
-	}
-	
-	ResponseBean r = super.computeCalculatedFields(responseBean);
-
-	r.addField("productCategory", form.getProductCategory());
-	r.addField("productCode", form.getProductCode());
-	r.addField("productName", form.getProductName());
-	r.addField("referencePrice", form.getReferencePrice());
-	return r;
-    }
     
     /**
      * Initialize the calculated fields of the subform
@@ -506,7 +537,8 @@ public class ArbitraryOfferBizBean extends ArbitraryOfferBean {
 	form.setProductCategory("-");
 	form.setProductCode("-");
 	form.setProductName("-");
-	form.setReferencePrice(new BigDecimal(0));
+	form.setEntryPrice(new BigDecimal(0));
+	form.setSellPrice(new BigDecimal(0));
     }
 
 }
