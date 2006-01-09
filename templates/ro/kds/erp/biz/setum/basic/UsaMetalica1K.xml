@@ -4,6 +4,18 @@
   <package>ro.kds.erp.biz.setum.basic</package>
   <name>UsaMetalica1K</name>
   <field>
+    <name>code</name>
+    <type>String</type>
+  </field>
+  <field>
+    <name>name</name>
+    <type>String</type>
+  </field>
+  <field>
+    <name>description</name>
+    <type>String</type>
+  </field>
+  <field>
     <name>subclass</name>
     <type>String</type>
   </field>
@@ -118,5 +130,13 @@
   <field>
     <name>fereastra</name>
     <type>String</type>
+  </field>
+  <field>
+    <name>entryPrice</name>
+    <type>java.math.BigDecimal</type>
+  </field>
+  <field>
+    <name>sellPrice</name>
+    <type>java.math.BigDecimal</type>
   </field>
 </class>

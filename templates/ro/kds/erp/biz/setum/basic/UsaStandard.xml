@@ -17,27 +17,28 @@
   </field>
   <field>
     <name>broascaId</name>
-    <type>String</type>
+    <type>Integer</type>
   </field>
   <field>
     <name>cilindruId</name>
-    <type>String</type>
+    <type>Integer</type>
   </field>
   <field>
     <name>sildId</name>
-    <type>String</type>
+    <type>Integer</type>
   </field>
   <field>
     <name>yallaId</name>
-    <type>String</type>
+    <type>Integer</type>
   </field>
   <field>
     <name>vizorId</name>
-    <type>String</type>
+    <type>Integer</type>
   </field>
 
   <remote>
     <method>ResponseBean loadListing() throws RemoteException</method>
+    <method>void recalculatePrices() throws RemoteException</method>
   </remote>
 
 </class>

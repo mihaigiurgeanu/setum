@@ -71,6 +71,7 @@
     <name>valoareGrilajAtipic</name>
     <type>java.math.BigDecimal</type>
   </field>
+  <!--
   <field>
     <name>tipTabla</name>
     <type>Integer</type>
@@ -79,7 +80,7 @@
     <name>tablaId</name>
     <type>Integer</type>
   </field>
-
+  -->
   <field>
     <name>sellPrice</name>
     <type>java.math.BigDecimal</type>

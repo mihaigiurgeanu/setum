@@ -70,7 +70,11 @@
     <type>String</type>
   </field>
   <field>
-    <name>referencePrice</name>
+    <name>entryPrice</name>
+    <type>java.math.BigDecimal</type>
+  </field>
+  <field>
+    <name>sellPrice</name>
     <type>java.math.BigDecimal</type>
   </field>
   <field>

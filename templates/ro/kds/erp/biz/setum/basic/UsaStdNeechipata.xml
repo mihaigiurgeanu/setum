@@ -16,7 +16,19 @@
     <type>String</type>
   </field>
   <field>
-    <name>price</name>
+    <name>entryPrice</name>
+    <type>java.math.BigDecimal</type>
+  </field>
+  <field>
+    <name>sellPrice</name>
+    <type>java.math.BigDecimal</type>
+  </field>
+  <field>
+    <name>relativeGain</name>
+    <type>Double</type>
+  </field>
+  <field>
+    <name>absoluteGain</name>
     <type>java.math.BigDecimal</type>
   </field>
 
