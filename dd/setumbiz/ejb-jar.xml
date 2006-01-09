@@ -28,12 +28,91 @@
 	<env-entry-type>java.lang.Integer</env-entry-type>
 	<env-entry-value>9991</env-entry-value>
       </env-entry>
+      <env-entry>
+	<description>The category id for a value list</description>
+	<env-entry-name>broascaId</env-entry-name>
+	<env-entry-type>java.lang.Integer</env-entry-type>
+	<env-entry-value>9998</env-entry-value>
+      </env-entry>
+      <env-entry>
+	<description>The category id for a value list</description>
+	<env-entry-name>cilindruId</env-entry-name>
+	<env-entry-type>java.lang.Integer</env-entry-type>
+	<env-entry-value>9997</env-entry-value>
+      </env-entry>
+      <env-entry>
+	<description>The category id for a value list</description>
+	<env-entry-name>copiatCheieId</env-entry-name>
+	<env-entry-type>java.lang.Integer</env-entry-type>
+	<env-entry-value>10006</env-entry-value>
+      </env-entry>
+      <env-entry>
+	<description>The category id for a value list</description>
+	<env-entry-name>sildId</env-entry-name>
+	<env-entry-type>java.lang.Integer</env-entry-type>
+	<env-entry-value>9996</env-entry-value>
+      </env-entry>
+      <env-entry>
+	<description>The category id for a value list</description>
+	<env-entry-name>rozetaId</env-entry-name>
+	<env-entry-type>java.lang.Integer</env-entry-type>
+	<env-entry-value>10004</env-entry-value>
+      </env-entry>
+      <env-entry>
+	<description>The category id for a value list</description>
+	<env-entry-name>manerId</env-entry-name>
+	<env-entry-type>java.lang.Integer</env-entry-type>
+	<env-entry-value>9977</env-entry-value>
+      </env-entry>
+      <env-entry>
+	<description>The category id for a value list</description>
+	<env-entry-name>yallaId</env-entry-name>
+	<env-entry-type>java.lang.Integer</env-entry-type>
+	<env-entry-value>9995</env-entry-value>
+      </env-entry>
+      <env-entry>
+	<description>The category id for a value list</description>
+	<env-entry-name>baraAntipanicaId</env-entry-name>
+	<env-entry-type>java.lang.Integer</env-entry-type>
+	<env-entry-value>9976</env-entry-value>
+      </env-entry>
+      <env-entry>
+	<description>The category id for a value list</description>
+	<env-entry-name>selectorOrdineId</env-entry-name>
+	<env-entry-type>java.lang.Integer</env-entry-type>
+	<env-entry-value>9975</env-entry-value>
+      </env-entry>
+      <env-entry>
+	<description>The category id for a value list</description>
+	<env-entry-name>amortizor</env-entry-name>
+	<env-entry-type>java.lang.Integer</env-entry-type>
+	<env-entry-value>10001</env-entry-value>
+      </env-entry>
+      <env-entry>
+	<description>The category id for a value list</description>
+	<env-entry-name>decupareSistemId</env-entry-name>
+	<env-entry-type>java.lang.Integer</env-entry-type>
+	<env-entry-value>9974</env-entry-value>
+      </env-entry>
+      <env-entry>
+	<description>The category id for a value list</description>
+	<env-entry-name>sistemeId</env-entry-name>
+	<env-entry-type>java.lang.Integer</env-entry-type>
+	<env-entry-value>9999</env-entry-value>
+      </env-entry>
       <ejb-ref>
 	<description>Preferences bean</description>
 	<ejb-ref-name>ejb/PreferencesEJB</ejb-ref-name>
 	<ejb-ref-type>Session</ejb-ref-type>
 	<home>ro.kds.erp.biz.PreferencesHome</home>
 	<remote>ro.kds.erp.biz.Preferences</remote>
+      </ejb-ref>
+      <ejb-ref>
+	<description>Sequence generator (for offer no)</description>
+	<ejb-ref-name>ejb/SequenceHome</ejb-ref-name>
+	<ejb-ref-type>Session</ejb-ref-type>
+	<home>ro.kds.erp.biz.SequenceHome</home>
+	<remote>ro.kds.erp.biz.Sequence</remote>
       </ejb-ref>
       <ejb-local-ref>
 	<ejb-ref-name>ejb/ProductLocalHome</ejb-ref-name>
@@ -51,6 +130,13 @@
       </ejb-local-ref>
       <ejb-local-ref>
 	<ejb-ref-name>ejb/CategoryLocalHome</ejb-ref-name>
+	<ejb-ref-type>Entity</ejb-ref-type>
+	<local-home>ro.kds.erp.data.CategoryLocalHome</local-home>
+	<local>ro.kds.erp.data.CategoryLocal</local>
+	<ejb-link>datalayer.jar#CategoryEJB</ejb-link>
+      </ejb-local-ref>
+      <ejb-local-ref>
+	<ejb-ref-name>ejb/CategoryHome</ejb-ref-name>
 	<ejb-ref-type>Entity</ejb-ref-type>
 	<local-home>ro.kds.erp.data.CategoryLocalHome</local-home>
 	<local>ro.kds.erp.data.CategoryLocal</local>
@@ -127,12 +213,91 @@
 	<env-entry-type>java.lang.Integer</env-entry-type>
 	<env-entry-value>9990</env-entry-value>
       </env-entry>
+      <env-entry>
+	<description>The category id for a value list</description>
+	<env-entry-name>broascaId</env-entry-name>
+	<env-entry-type>java.lang.Integer</env-entry-type>
+	<env-entry-value>9998</env-entry-value>
+      </env-entry>
+      <env-entry>
+	<description>The category id for a value list</description>
+	<env-entry-name>cilindruId</env-entry-name>
+	<env-entry-type>java.lang.Integer</env-entry-type>
+	<env-entry-value>9997</env-entry-value>
+      </env-entry>
+      <env-entry>
+	<description>The category id for a value list</description>
+	<env-entry-name>copiatCheieId</env-entry-name>
+	<env-entry-type>java.lang.Integer</env-entry-type>
+	<env-entry-value>10006</env-entry-value>
+      </env-entry>
+      <env-entry>
+	<description>The category id for a value list</description>
+	<env-entry-name>sildId</env-entry-name>
+	<env-entry-type>java.lang.Integer</env-entry-type>
+	<env-entry-value>9996</env-entry-value>
+      </env-entry>
+      <env-entry>
+	<description>The category id for a value list</description>
+	<env-entry-name>rozetaId</env-entry-name>
+	<env-entry-type>java.lang.Integer</env-entry-type>
+	<env-entry-value>10004</env-entry-value>
+      </env-entry>
+      <env-entry>
+	<description>The category id for a value list</description>
+	<env-entry-name>manerId</env-entry-name>
+	<env-entry-type>java.lang.Integer</env-entry-type>
+	<env-entry-value>9977</env-entry-value>
+      </env-entry>
+      <env-entry>
+	<description>The category id for a value list</description>
+	<env-entry-name>yallaId</env-entry-name>
+	<env-entry-type>java.lang.Integer</env-entry-type>
+	<env-entry-value>9995</env-entry-value>
+      </env-entry>
+      <env-entry>
+	<description>The category id for a value list</description>
+	<env-entry-name>baraAntipanicaId</env-entry-name>
+	<env-entry-type>java.lang.Integer</env-entry-type>
+	<env-entry-value>9976</env-entry-value>
+      </env-entry>
+      <env-entry>
+	<description>The category id for a value list</description>
+	<env-entry-name>selectorOrdineId</env-entry-name>
+	<env-entry-type>java.lang.Integer</env-entry-type>
+	<env-entry-value>9975</env-entry-value>
+      </env-entry>
+      <env-entry>
+	<description>The category id for a value list</description>
+	<env-entry-name>amortizor</env-entry-name>
+	<env-entry-type>java.lang.Integer</env-entry-type>
+	<env-entry-value>10001</env-entry-value>
+      </env-entry>
+      <env-entry>
+	<description>The category id for a value list</description>
+	<env-entry-name>decupareSistemId</env-entry-name>
+	<env-entry-type>java.lang.Integer</env-entry-type>
+	<env-entry-value>9974</env-entry-value>
+      </env-entry>
+      <env-entry>
+	<description>The category id for a value list</description>
+	<env-entry-name>sistemeId</env-entry-name>
+	<env-entry-type>java.lang.Integer</env-entry-type>
+	<env-entry-value>9999</env-entry-value>
+      </env-entry>
       <ejb-ref>
 	<description>Preferences bean</description>
 	<ejb-ref-name>ejb/PreferencesEJB</ejb-ref-name>
 	<ejb-ref-type>Session</ejb-ref-type>
 	<home>ro.kds.erp.biz.PreferencesHome</home>
 	<remote>ro.kds.erp.biz.Preferences</remote>
+      </ejb-ref>
+      <ejb-ref>
+	<description>Sequence generator (for offer no)</description>
+	<ejb-ref-name>ejb/SequenceHome</ejb-ref-name>
+	<ejb-ref-type>Session</ejb-ref-type>
+	<home>ro.kds.erp.biz.SequenceHome</home>
+	<remote>ro.kds.erp.biz.Sequence</remote>
       </ejb-ref>
       <ejb-local-ref>
 	<ejb-ref-name>ejb/ProductLocalHome</ejb-ref-name>
@@ -150,6 +315,13 @@
       </ejb-local-ref>
       <ejb-local-ref>
 	<ejb-ref-name>ejb/CategoryLocalHome</ejb-ref-name>
+	<ejb-ref-type>Entity</ejb-ref-type>
+	<local-home>ro.kds.erp.data.CategoryLocalHome</local-home>
+	<local>ro.kds.erp.data.CategoryLocal</local>
+	<ejb-link>datalayer.jar#CategoryEJB</ejb-link>
+      </ejb-local-ref>
+      <ejb-local-ref>
+	<ejb-ref-name>ejb/CategoryHome</ejb-ref-name>
 	<ejb-ref-type>Entity</ejb-ref-type>
 	<local-home>ro.kds.erp.data.CategoryLocalHome</local-home>
 	<local>ro.kds.erp.data.CategoryLocal</local>
@@ -232,6 +404,13 @@
 	<home>ro.kds.erp.biz.PreferencesHome</home>
 	<remote>ro.kds.erp.biz.Preferences</remote>
       </ejb-ref>
+      <ejb-ref>
+	<description>Sequence generator (for offer no)</description>
+	<ejb-ref-name>ejb/SequenceHome</ejb-ref-name>
+	<ejb-ref-type>Session</ejb-ref-type>
+	<home>ro.kds.erp.biz.SequenceHome</home>
+	<remote>ro.kds.erp.biz.Sequence</remote>
+      </ejb-ref>
       <ejb-local-ref>
 	<ejb-ref-name>ejb/DocumentHome</ejb-ref-name>
 	<ejb-ref-type>Entity</ejb-ref-type>
@@ -269,6 +448,18 @@
 	<local>ro.kds.erp.data.CategoryLocal</local>
 	<ejb-link>datalayer.jar#CategoryEJB</ejb-link>
       </ejb-local-ref>
+      <resource-ref>
+	<description>JMS connection factory</description>
+	<res-ref-name>jms/CF</res-ref-name>
+	<res-type>javax.jms.ConnectionFactory</res-type>
+	<res-auth>Container</res-auth>
+      </resource-ref>
+      <message-destination-ref>
+	<description>Used to notify application of price updates</description>
+	<message-destination-ref-name>jms/priceUpdate</message-destination-ref-name>
+	<message-destination-type>javax.jms.Topic</message-destination-type>
+	<message-destination-usage>Produces</message-destination-usage>
+      </message-destination-ref>
     </session>
 
     <session>
@@ -307,6 +498,18 @@
 	<local>ro.kds.erp.data.ProductLocal</local>
 	<ejb-link>datalayer.jar#ProductEJB</ejb-link>
       </ejb-local-ref>
+      <resource-ref>
+	<description>JMS connection factory</description>
+	<res-ref-name>jms/CF</res-ref-name>
+	<res-type>javax.jms.ConnectionFactory</res-type>
+	<res-auth>Container</res-auth>
+      </resource-ref>
+      <message-destination-ref>
+	<description>Used to notify application of price updates</description>
+	<message-destination-ref-name>jms/priceUpdate</message-destination-ref-name>
+	<message-destination-type>javax.jms.Topic</message-destination-type>
+	<message-destination-usage>Produces</message-destination-usage>
+      </message-destination-ref>
     </session>
 
 
@@ -348,6 +551,18 @@
 	<local>ro.kds.erp.data.ProductLocal</local>
 	<ejb-link>datalayer.jar#ProductEJB</ejb-link>
       </ejb-local-ref>
+      <resource-ref>
+	<description>JMS connection factory</description>
+	<res-ref-name>jms/CF</res-ref-name>
+	<res-type>javax.jms.ConnectionFactory</res-type>
+	<res-auth>Container</res-auth>
+      </resource-ref>
+      <message-destination-ref>
+	<description>Used to notify application of price updates</description>
+	<message-destination-ref-name>jms/priceUpdate</message-destination-ref-name>
+	<message-destination-type>javax.jms.Topic</message-destination-type>
+	<message-destination-usage>Produces</message-destination-usage>
+      </message-destination-ref>
     </session>
 
 
@@ -388,6 +603,18 @@
 	<local>ro.kds.erp.data.ProductLocal</local>
 	<ejb-link>datalayer.jar#ProductEJB</ejb-link>
       </ejb-local-ref>
+      <resource-ref>
+	<description>JMS connection factory</description>
+	<res-ref-name>jms/CF</res-ref-name>
+	<res-type>javax.jms.ConnectionFactory</res-type>
+	<res-auth>Container</res-auth>
+      </resource-ref>
+      <message-destination-ref>
+	<description>Used to notify application of price updates</description>
+	<message-destination-ref-name>jms/priceUpdate</message-destination-ref-name>
+	<message-destination-type>javax.jms.Topic</message-destination-type>
+	<message-destination-usage>Produces</message-destination-usage>
+      </message-destination-ref>
     </session>
 
 
@@ -555,6 +782,13 @@
 	<home>ro.kds.erp.biz.PreferencesHome</home>
 	<remote>ro.kds.erp.biz.Preferences</remote>
       </ejb-ref>
+      <ejb-ref>
+	<description>Sequence generator (for offer no)</description>
+	<ejb-ref-name>ejb/SequenceHome</ejb-ref-name>
+	<ejb-ref-type>Session</ejb-ref-type>
+	<home>ro.kds.erp.biz.SequenceHome</home>
+	<remote>ro.kds.erp.biz.Sequence</remote>
+      </ejb-ref>
       <ejb-local-ref>
 	<ejb-ref-name>ejb/CategoryHome</ejb-ref-name>
 	<ejb-ref-type>Entity</ejb-ref-type>
@@ -607,6 +841,13 @@
 	<ejb-ref-type>Session</ejb-ref-type>
 	<home>ro.kds.erp.biz.PreferencesHome</home>
 	<remote>ro.kds.erp.biz.Preferences</remote>
+      </ejb-ref>
+      <ejb-ref>
+	<description>Sequence generator (for offer no)</description>
+	<ejb-ref-name>ejb/SequenceHome</ejb-ref-name>
+	<ejb-ref-type>Session</ejb-ref-type>
+	<home>ro.kds.erp.biz.SequenceHome</home>
+	<remote>ro.kds.erp.biz.Sequence</remote>
       </ejb-ref>
       <ejb-local-ref>
 	<ejb-ref-name>ejb/CategoryHome</ejb-ref-name>
@@ -727,6 +968,12 @@
 	<env-entry-name>categoryId</env-entry-name>
 	<env-entry-type>java.lang.Integer</env-entry-type>
 	<env-entry-value>9983</env-entry-value>
+      </env-entry>
+      <env-entry>
+	<description>The category holding the price for this product. This category should only contain one product. It's price is given per square meter.</description>
+	<env-entry-name>priceCategoryId</env-entry-name>
+	<env-entry-type>java.lang.Integer</env-entry-type>
+	<env-entry-value>9978</env-entry-value>
       </env-entry>
       <ejb-ref>
 	<ejb-ref-name>ejb/PreferencesEJB</ejb-ref-name>

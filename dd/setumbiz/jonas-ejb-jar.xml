@@ -16,6 +16,10 @@
       <ejb-ref-name>ejb/PreferencesEJB</ejb-ref-name>
       <jndi-name>PreferencesHome</jndi-name>
     </jonas-ejb-ref>
+    <jonas-ejb-ref>
+      <ejb-ref-name>ejb/SequenceHome</ejb-ref-name>
+      <jndi-name>SequenceHome</jndi-name>
+    </jonas-ejb-ref>
   </jonas-session>
 
   <jonas-session>
@@ -29,6 +33,10 @@
     <jonas-ejb-ref>
       <ejb-ref-name>ejb/PreferencesEJB</ejb-ref-name>
       <jndi-name>PreferencesHome</jndi-name>
+    </jonas-ejb-ref>
+    <jonas-ejb-ref>
+      <ejb-ref-name>ejb/SequenceHome</ejb-ref-name>
+      <jndi-name>SequenceHome</jndi-name>
     </jonas-ejb-ref>
   </jonas-session>
 
@@ -44,6 +52,18 @@
       <ejb-ref-name>ejb/PreferencesEJB</ejb-ref-name>
       <jndi-name>PreferencesHome</jndi-name>
     </jonas-ejb-ref>
+    <jonas-ejb-ref>
+      <ejb-ref-name>ejb/SequenceHome</ejb-ref-name>
+      <jndi-name>SequenceHome</jndi-name>
+    </jonas-ejb-ref>
+    <jonas-resource>
+      <res-ref-name>jms/CF</res-ref-name>
+      <jndi-name>CF</jndi-name>
+    </jonas-resource>
+    <jonas-message-destination-ref>
+      <message-destination-ref-name>jms/priceUpdate</message-destination-ref-name>
+      <jndi-name>Setum.UpdatePricesTopic</jndi-name>
+    </jonas-message-destination-ref>
   </jonas-session>
 
   <jonas-session>
@@ -53,6 +73,14 @@
       <ejb-ref-name>ejb/PreferencesEJB</ejb-ref-name>
       <jndi-name>PreferencesHome</jndi-name>
     </jonas-ejb-ref>
+    <jonas-resource>
+      <res-ref-name>jms/CF</res-ref-name>
+      <jndi-name>CF</jndi-name>
+    </jonas-resource>
+    <jonas-message-destination-ref>
+      <message-destination-ref-name>jms/priceUpdate</message-destination-ref-name>
+      <jndi-name>Setum.UpdatePricesTopic</jndi-name>
+    </jonas-message-destination-ref>
   </jonas-session>
 
 
@@ -63,6 +91,14 @@
       <ejb-ref-name>ejb/PreferencesEJB</ejb-ref-name>
       <jndi-name>PreferencesHome</jndi-name>
     </jonas-ejb-ref>
+    <jonas-resource>
+      <res-ref-name>jms/CF</res-ref-name>
+      <jndi-name>CF</jndi-name>
+    </jonas-resource>
+    <jonas-message-destination-ref>
+      <message-destination-ref-name>jms/priceUpdate</message-destination-ref-name>
+      <jndi-name>Setum.UpdatePricesTopic</jndi-name>
+    </jonas-message-destination-ref>
   </jonas-session>
 
 
@@ -73,6 +109,14 @@
       <ejb-ref-name>ejb/PreferencesEJB</ejb-ref-name>
       <jndi-name>PreferencesHome</jndi-name>
     </jonas-ejb-ref>
+    <jonas-resource>
+      <res-ref-name>jms/CF</res-ref-name>
+      <jndi-name>CF</jndi-name>
+    </jonas-resource>
+    <jonas-message-destination-ref>
+      <message-destination-ref-name>jms/priceUpdate</message-destination-ref-name>
+      <jndi-name>Setum.UpdatePricesTopic</jndi-name>
+    </jonas-message-destination-ref>
   </jonas-session>
 
   <jonas-session>
@@ -92,6 +136,10 @@
       <ejb-ref-name>ejb/PreferencesEJB</ejb-ref-name>
       <jndi-name>PreferencesHome</jndi-name>
     </jonas-ejb-ref>
+    <jonas-ejb-ref>
+      <ejb-ref-name>ejb/SequenceHome</ejb-ref-name>
+      <jndi-name>SequenceHome</jndi-name>
+    </jonas-ejb-ref>
   </jonas-session>
 
   <jonas-session>
@@ -100,6 +148,10 @@
     <jonas-ejb-ref>
       <ejb-ref-name>ejb/PreferencesEJB</ejb-ref-name>
       <jndi-name>PreferencesHome</jndi-name>
+    </jonas-ejb-ref>
+    <jonas-ejb-ref>
+      <ejb-ref-name>ejb/SequenceHome</ejb-ref-name>
+      <jndi-name>SequenceHome</jndi-name>
     </jonas-ejb-ref>
   </jonas-session>
 
