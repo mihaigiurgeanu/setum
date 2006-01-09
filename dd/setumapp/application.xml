@@ -28,4 +28,12 @@
     <ejb>setumprefs.jar</ejb>
   </module>
 
+  <module>
+    <ejb>sequence.jar</ejb>
+  </module>
+
+  <module>
+    <ejb>updatePrices.jar</ejb>
+  </module>
+
 </application>
