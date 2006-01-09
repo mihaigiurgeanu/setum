@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<jonas-ejb-jar xmlns="http://www.objectweb.org/jonas/ns">
+  
+  <jonas-message-driven>
+    <ejb-name>PricesUpdaterEJB</ejb-name>
+    <jonas-message-driven-destination>
+      <jndi-name>Setum.UpdatePricesTopic</jndi-name>
+    </jonas-message-driven-destination>
+    <jonas-ejb-ref>
+      <ejb-ref-name>ejb/UsaStandardHome</ejb-ref-name>
+      <jndi-name>UsaStandardHome</jndi-name>
+    </jonas-ejb-ref>
+  </jonas-message-driven>
+  
+</jonas-ejb-jar>
