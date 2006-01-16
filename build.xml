@@ -1,4 +1,6 @@
 <?xml version="1.0"?>
+<!-- $Id: build.xml,v 1.1.1.1.2.2 2006/01/16 10:02:23 mihai Exp $ -->
+
 <project name="setumerp" default="application">
   <description>
     setum.war target builds the web module used for interfacing the UI
@@ -39,10 +41,6 @@
       </fileset>
     </classpath>
   </taskdef>
-
-  <!-- texen task for generating java code with velocity -->
-  <taskdef name="texen" classname="org.apache.velocity.texen.ant.TexenTask"
-	   classpath="${local.lib}/velocity-1.4/velocity-dep-1.4.jar"/>
 
   <path id="compilation.classpath">
     <pathelement location="${build}" />
@@ -201,7 +199,12 @@
       <fileset dir="${dist}" includes="setum.war" />
       <fileset dir="${dist}" includes="setumbiz.jar" />
       <fileset dir="${dist}" includes="setumprefs.jar" />
-      <fileset dir="${library}" includes="jacl.jar tcljava.jar" />
+      <fileset dir="${dist}" includes="sequence.jar" />
+      <fileset dir="${dist}" includes="updatePrices.jar"/>
+      <fileset dir="${library}">
+	<include name="jacl.jar"/>
+	<include name="tcljava.jar"/>
+      </fileset>
     </ear>
 
     <ear earfile="${dist}/prefsadm.ear" appxml="${descriptors}/prefsadm/application.xml">
