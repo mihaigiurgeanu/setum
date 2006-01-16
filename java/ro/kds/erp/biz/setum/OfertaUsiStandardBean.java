@@ -656,7 +656,7 @@ public class OfertaUsiStandardBean
 		    HashMap row1 = (HashMap) o1;
 		    HashMap row2 = (HashMap) o2;
 		    int comp;
-		    if((comp = ((String)row1.get("name")).compareTo((String)row2.get("name"))) == 0) {
+		    if((comp = ((String)row1.get("usa_code")).compareTo((String)row2.get("usa_code"))) == 0) {
 			if((comp = ((String)row1.get("broasca_name")).compareTo((String)row2.get("broasca_name"))) == 0) {
 			    if((comp = ((String)row1.get("cilindru_name")).compareTo((String)row2.get("cilindru_name"))) == 0) {
 				if((comp = ((String)row1.get("sild_name")).compareTo((String)row2.get("sild_name"))) == 0) {

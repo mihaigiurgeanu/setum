@@ -53,7 +53,7 @@
 	<field name="yalla_name" class="java.lang.String"/>
 	<field name="vizor_name" class="java.lang.String"/>
 	<field name="sellPrice" class="java.math.BigDecimal"/>
-	<variable name="nrcrt" class="java.lang.Integer" resetType="Report" calculation="Nothing">
+	<variable name="nrcrt" class="java.lang.Integer" resetType="Group" resetGroup="Usa" calculation="Nothing">
 		<variableExpression><![CDATA[new java.lang.Integer($V{nrcrt}.intValue()+1)]]></variableExpression>
 		<initialValueExpression><![CDATA[new Integer(0)]]></initialValueExpression>
 	</variable>
@@ -235,7 +235,7 @@
 					<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" lineSpacing="Single">
 						<font reportFont="header"/>
 					</textElement>
-				<textFieldExpression   class="java.lang.String"><![CDATA[$F{usa_code} + " - " + $F{usa_name} + " - " + $F{usa_description} + " - " + $F{usa_description}]]></textFieldExpression>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{usa_code} + " - " + $F{usa_name} + " - " + $F{usa_description}]]></textFieldExpression>
 				</textField>
 			</band>
 			</groupHeader>

@@ -25,6 +25,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.io.PrintWriter;
 import java.util.Map.Entry;
 import java.util.Iterator;
+import org.apache.commons.beanutils.locale.converters.DateLocaleConverter;
 
 /**
  * Gets the calls from the UI interface and dispatch them to the
@@ -133,6 +134,11 @@ public class CallDispatcherServlet extends HttpServlet {
 
 	    homeInterface = Class.forName(getServletConfig().
 					  getInitParameter("sessionHome"));
+
+	    // Converter initialization
+	    ConvertUtils.register(new ro.kds.erp.utils.DateConverter(),
+				  java.util.Date.class);
+	    
 	} catch (Exception e) {
 	    logger.log(BasicLevel.ERROR, "Servlet can not be initialized", e);
 	    throw new ServletException(e);
@@ -218,9 +224,11 @@ public class CallDispatcherServlet extends HttpServlet {
 
 			logger.log(BasicLevel.DEBUG,
 				   "Invoking " + methodName + 
-				   " with one parameter: " + value);
-			r = (ResponseBean)m.invoke(bean,
-								params);
+				   " with one parameter: " + value
+				   + "(" + params[0] + " - "
+				   + params[0].getClass().getName()
+				   + ")");
+			r = (ResponseBean)m.invoke(bean, params);
 		    }
 		} catch (Exception e) {
 		    r = new ResponseBean();
