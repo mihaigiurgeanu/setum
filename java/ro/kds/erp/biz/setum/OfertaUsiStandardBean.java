@@ -31,6 +31,9 @@ import java.util.ArrayList;
 import java.util.Map;
 import ro.kds.erp.biz.SequenceHome;
 import ro.kds.erp.biz.Sequence;
+import java.util.Collections;
+
+import java.util.Comparator;
 
 /**
  * Business logic pentru form-ul de vizualizare/modificare oferte
@@ -574,7 +577,7 @@ public class OfertaUsiStandardBean
      * beeing a <code>Map</code> representation of current offer's items.
      */
     public Collection lineItemsCollectionMap() {
-	Collection reportData;
+	ArrayList reportData;
 	
 	try {
 	    InitialContext ic = new InitialContext();
@@ -648,6 +651,29 @@ public class OfertaUsiStandardBean
 		       "Can not build the report data. Exception caught.", e);
 	    reportData = new ArrayList();
 	}
+	Collections.sort(reportData, new Comparator() {
+		public int compare(Object o1, Object o2) {
+		    HashMap row1 = (HashMap) o1;
+		    HashMap row2 = (HashMap) o2;
+		    int comp;
+		    if((comp = ((String)row1.get("name")).compareTo((String)row2.get("name"))) == 0) {
+			if((comp = ((String)row1.get("broasca_name")).compareTo((String)row2.get("broasca_name"))) == 0) {
+			    if((comp = ((String)row1.get("cilindru_name")).compareTo((String)row2.get("cilindru_name"))) == 0) {
+				if((comp = ((String)row1.get("sild_name")).compareTo((String)row2.get("sild_name"))) == 0) {
+				    if((comp = ((String)row1.get("yalla_name")).compareTo((String)row2.get("yalla_name"))) == 0) {
+					if((comp = ((String)row1.get("vizor_name")).compareTo((String)row2.get("vizor_name"))) == 0) {
+					    // the two are equal
+					}
+				    }
+				}
+			    }
+			}
+		    }
+
+		    return comp;
+		    
+		}
+	    });
 	return reportData;
     }
 

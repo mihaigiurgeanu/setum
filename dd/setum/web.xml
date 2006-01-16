@@ -438,6 +438,11 @@
     <description>Report based on OfferEJB and StandardOfferEJB</description>
     <servlet-name>StandardOfferReport</servlet-name>
     <servlet-class>ro.kds.erp.reports.StandardOfferPDF</servlet-class>
+    <init-param>
+      <description>The name of the session attribute holding the offer session bean.</description>
+      <param-name>sessionName</param-name>
+      <param-value>forms.setum.StandardOffer</param-value>
+    </init-param>
   </servlet>
   <servlet-mapping>
     <servlet-name>StandardOfferReport</servlet-name>

@@ -16,6 +16,7 @@ import net.sf.jasperreports.engine.JasperExportManager;
 import java.util.Collection;
 import java.io.InputStream;
 import java.io.OutputStream;
+import javax.servlet.ServletException;
 
 
 /**
@@ -30,6 +31,22 @@ import java.io.OutputStream;
 public class StandardOfferPDF extends HttpServlet {
 
     /**
+     * Contains the name of the http session attribute that holds the 
+     * current StandardOfferEJB session bean.
+     * It is read from the init parameter "sessionName".
+     */
+    protected String SESSION_ATTR;
+
+    /**
+     * Read init parameters.
+     *
+     * @exception ServletException if an error occurs
+     */
+    public final void init() throws ServletException {
+	SESSION_ATTR = getServletConfig().getInitParameter("sessionName");
+    }
+
+    /**
      * Outputs the PDF report. It first builds a <code>JRDataSource</code>
      * object and then pass this object to the JasperReports engine to
      * obtain the PDF content.
@@ -42,7 +59,7 @@ public class StandardOfferPDF extends HttpServlet {
     public final void doGet(final HttpServletRequest httpServletRequest, final HttpServletResponse httpServletResponse) throws ServletException, IOException {
 	try {
 	    StandardOffer offer = (StandardOffer)httpServletRequest
-		.getSession().getAttribute(StandardOfferServlet.SESSION_ATTR);
+		.getSession().getAttribute(SESSION_ATTR);
 	    
 	    Collection reportData = offer.lineItemsCollectionMap();
 	    JRDataSource ds = new JRMapCollectionDataSource(reportData);
