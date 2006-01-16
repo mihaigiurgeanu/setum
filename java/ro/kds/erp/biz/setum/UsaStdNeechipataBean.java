@@ -87,6 +87,7 @@ public class UsaStdNeechipataBean
      */
     public ResponseBean saveFormData() {
 	ResponseBean r;
+	logger.log(BasicLevel.DEBUG, "saveFormData entered");
 	try {
 	    InitialContext ic = new InitialContext();
 	    Context env = (Context) ic.lookup("java:comp/env");
@@ -95,23 +96,29 @@ public class UsaStdNeechipataBean
 
 	    ProductLocal p;
 	    if(id == null) {
+		logger.log(BasicLevel.DEBUG, "This is a new product (id==null). Creating a new product");
 		p = ph.create();
 		CategoryLocalHome ch = (CategoryLocalHome)
 		    PortableRemoteObject.narrow
 		    (env.lookup("ejb/CategoryHome"), CategoryLocalHome.class);
 
+		logger.log(BasicLevel.DEBUG, "Setting the category for the new product");
 		Integer catId = (Integer)env.lookup("categoryId");
 		p.setCategory(ch.findByPrimaryKey(catId));
+		id = p.getId();
 	    } else {
 		p = ph.findByPrimaryKey(id);
 	    }
 
+	    logger.log(BasicLevel.DEBUG, "The id of the product to save is: " +
+		       id);
 	    p.setName(form.getName());
 	    p.setCode(form.getCode());
 	    p.setDescription(form.getDescription());
 	    p.setEntryPrice(form.getEntryPrice());
 	    p.setPrice1(form.getSellPrice());
-	    if(! p.getSellPrice().equals(form.getSellPrice())) {
+	    if(p.getSellPrice() == null ||
+	       ! p.getSellPrice().equals(form.getSellPrice())) {
 		p.setSellPrice(form.getSellPrice());
 
 
@@ -134,6 +141,7 @@ public class UsaStdNeechipataBean
 	    r.setCode(3);
 	    r.setMessage("Eroare la salvarea campurilor in baza de date");
 	    logger.log(BasicLevel.ERROR, e.getMessage(), e);
+	    ejbContext.setRollbackOnly();
 	}
 	
 	return r;
