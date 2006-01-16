@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<!-- $Id: build.xml,v 1.1.1.1.2.2 2006/01/16 10:02:23 mihai Exp $ -->
+<!-- $Id: build.xml,v 1.1.1.1.2.3 2006/01/16 15:44:13 mihai Exp $ -->
 
 <project name="setumerp" default="application">
   <description>
@@ -69,6 +69,7 @@
       <classes dir="${build}">
 	<include name="ro/kds/erp/web/**/*.class" />
 	<include name="ro/kds/erp/reports/**/*.class" />
+	<include name="ro/kds/erp/utils/*.class" />
       </classes>
       
       <webinf file="${descriptors}/setum/jonas-web.xml" />
