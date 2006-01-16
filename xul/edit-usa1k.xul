@@ -24,14 +24,18 @@ windows.arguments[0].select(productId)
   <script src="js/httpdata.js"/>
   <script src="js/formobject.js"/>
 
-  <!-- the vbox is here for puting scrollbars to the content of the window -->
-  <hbox height="600" width="750" style="overflow:auto">
-    <grid>
-      <columns>
-	<column/>
-      </columns>
-      <rows>
-	<row>
+  <tabbox>
+    <tabs>
+      <tab label="Definire usa"/>
+      <tab label="Optiuni"/>
+      <tab label="Sisteme"/>
+      <tab label="Finisaje"/>
+    </tabs>
+    <tabpanels>
+      <tabpanel orient="horizontal" 
+		style="overflow:auto">
+
+	<vbox>
 	  <groupbox orient="vertical">
 	    <caption label="Definire usa" />
 	    <grid>
@@ -134,8 +138,7 @@ windows.arguments[0].select(productId)
 	      </rows>
 	    </grid>
 	  </groupbox>
-	</row>
-	<row>
+
 	  <groupbox orient="vertical">
 	    <caption label="Tip foaie"/>
 	    <hbox>
@@ -190,8 +193,10 @@ windows.arguments[0].select(productId)
 	      </vbox>
 	    </hbox>
 	  </groupbox>
-	</row>
-	<row>
+
+	</vbox>
+	<vbox>
+
 	  <groupbox orient="vertical">
 	    <caption label="Toc"/>
 	    <radiogroup id="frameType" >
@@ -233,8 +238,7 @@ windows.arguments[0].select(productId)
 	      </menulist>
 	    </hbox>
 	  </groupbox>
-	</row>
-	<row>
+
 	  <groupbox orient="vertical">
 	    <caption label="Prag"/>
 	    <radiogroup id="tresholdType" >
@@ -268,12 +272,16 @@ windows.arguments[0].select(productId)
 		<radio id="tresholdType.3" value="3" label="Fara prag"/>
 		<vbox>
 		  <radiogroup id="tresholdSpace" >
+		    <radio id="tresholdSpace.1" value="1" 
+			   label="Cu incastrare"/>
 		    <hbox>
-		      <radio id="tresholdSpace.1" value="1" label="Cu incastrare - h incastrare = "/>
+		      <label control="h1Treshold" value="h incastrare = "/>
 		      <textbox id="h1Treshold" />
 		    </hbox>
+		    <radio id="tresholdSpace.2" value="2" 
+			   label="Fara incastrare"/>
 		    <hbox>
-		      <radio id="tresholdSpace.2" value="2" label="Fara incastrare - h = "/>
+		      <label control="h2Treshold" value="h = "/>
 		      <textbox id="h2Treshold" />
 		    </hbox>
 		  </radiogroup>
@@ -281,12 +289,11 @@ windows.arguments[0].select(productId)
 	      </hbox>
 	    </radiogroup>
 	  </groupbox>
-	</row>
-      </rows>
-    </grid>
-    <vbox>
-      <groupbox>
-	<caption label="Optiuni"/>
+	</vbox>
+      </tabpanel>
+    
+      <!-- Optiuni -->
+      <tabpanel orient="vertical">
 	<grid>
 	  <columns>
 	    <column/><column/><column/>
@@ -309,11 +316,14 @@ windows.arguments[0].select(productId)
 	    </row>
 	  </rows>
 	</grid>
-      </groupbox>
+      </tabpanel>
       
       <!-- Sisteme -->
-      <groupbox>
-	<caption label="Sisteme"/>
+      <tabpanel orient="horizontal" 
+		style="overflow:auto">
+
+	<!-- daca nu pun vbox aici, scrollbarurile nu apar -->
+	<vbox>
 	<grid>
 	  <rows>
 	    <row>
@@ -467,9 +477,11 @@ windows.arguments[0].select(productId)
 	  <label controls="sistemeComment" value="Obs:"/>
 	  <textbox id="sistemeComment" multiline="true" rows="4" flex="1"/>
 	</hbox>
-      </groupbox>
-    </vbox>
-  </hbox>
+	</vbox>
+      </tabpanel>
+
+    </tabpanels>
+  </tabbox>
 
   <commandset>
     <command id="edit-fereastra" oncommand="open_service_dlg('fereastraId', '/edit-fereastra.do', 'edit-fereastra.xul')"/>
