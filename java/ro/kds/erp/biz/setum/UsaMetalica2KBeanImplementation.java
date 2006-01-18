@@ -30,7 +30,7 @@ import java.util.Map;
  * Created: Fri Nov 18 15:34:24 2005
  *
  * @author <a href="mailto:Mihai Giurgeanu@CRIMIRA"></a>
- * @version $Id: UsaMetalica2KBeanImplementation.java,v 1.3 2006/01/18 04:13:42 mihai Exp $
+ * @version $Id: UsaMetalica2KBeanImplementation.java,v 1.4 2006/01/18 19:42:58 mihai Exp $
  */
 public class UsaMetalica2KBeanImplementation 
     extends ro.kds.erp.biz.setum.basic.UsaMetalica2KBean {
@@ -202,88 +202,36 @@ public class UsaMetalica2KBeanImplementation
 	    form.setDescription(p.getDescription());
 	    form.setEntryPrice(p.getEntryPrice());
 	    form.setSellPrice(p.getSellPrice());
-	    Collection attribs = p.getAttributes();
-	    for(Iterator i=attribs.iterator(); i.hasNext(); ) {
-		AttributeLocal a = (AttributeLocal) i.next();
-		if(a.getName().compareTo("subclass") == 0) {
-		    form.setSubclass(a.getStringValue());
-		} else if(a.getName().compareTo("version") == 0) {
-		    form.setVersion(a.getStringValue());
-		} else if(a.getName().compareTo("material") == 0) {
-		    form.setMaterial(a.getIntValue());
-		} else if(a.getName().compareTo("lg") == 0) {
-		    form.setLg(a.getDoubleValue());
-		} else if(a.getName().compareTo("hg") == 0) {
-		    form.setHg(a.getDoubleValue());
-		} else if(a.getName().compareTo("lcorrection") == 0) {
-		    form.setLcorrection(a.getDoubleValue());
-		} else if(a.getName().compareTo("hcorrection") == 0) {
-		    form.setHcorrection(a.getDoubleValue());
-		} else if(a.getName().equals("lCurrent")) {
-		    form.setLCurrent(a.getDoubleValue());
-		} else if(a.getName().equals("kType")) {
-		    form.setKType(a.getIntValue());
-		} else if(a.getName().compareTo("intFoil") == 0) {
-		    form.setIntFoil(a.getIntValue());
-		} else if(a.getName().compareTo("ieFoil") == 0) {
-		    form.setIeFoil(a.getIntValue());
-		} else if(a.getName().compareTo("extFoil") == 0) {
-		    form.setExtFoil(a.getIntValue());
-		} else if(a.getName().compareTo("intFoilSec") == 0) {
-		    form.setIntFoilSec(a.getIntValue());
-		} else if(a.getName().compareTo("ieFoilSec") == 0) {
-		    form.setIeFoilSec(a.getIntValue());
-		} else if(a.getName().compareTo("extFoilSec") == 0) {
-		    form.setExtFoilSec(a.getIntValue());
-		} else if(a.getName().compareTo("isolation") == 0) {
-		    form.setIsolation(a.getIntValue());
-		} else if(a.getName().compareTo("openingDir") == 0) {
-		    form.setOpeningDir(a.getIntValue());
-		} else if(a.getName().compareTo("openingSide") == 0) {
-		    form.setOpeningSide(a.getIntValue());
-		} else if(a.getName().compareTo("frameType") == 0) {
-		    form.setFrameType(a.getIntValue());
-		} else if(a.getName().compareTo("lFrame") == 0) {
-		    form.setLFrame(a.getDoubleValue());
-		} else if(a.getName().compareTo("bFrame") == 0) {
-		    form.setBFrame(a.getDoubleValue());
-		} else if(a.getName().compareTo("cFrame") == 0) {
-		    form.setCFrame(a.getDoubleValue());
-		} else if(a.getName().compareTo("foilPosition") == 0) {
-		    form.setFoilPosition(a.getIntValue());
-		} else if(a.getName().compareTo("tresholdType") == 0) {
-		    form.setTresholdType(a.getIntValue());
-		} else if(a.getName().compareTo("lTreshold") == 0) {
-		    form.setLTreshold(a.getDoubleValue());
-		} else if(a.getName().compareTo("hTreshold") == 0) {
-		    form.setHTreshold(a.getDoubleValue());
-		} else if(a.getName().compareTo("cTreshold") == 0) {
-		    form.setCTreshold(a.getDoubleValue());
-		} else if(a.getName().compareTo("tresholdSpace") == 0) {
-		    form.setTresholdSpace(a.getIntValue());
-		} else if(a.getName().compareTo("h1Treshold") == 0) {
-		    form.setH1Treshold(a.getDoubleValue());
-		} else if(a.getName().compareTo("h2Treshold") == 0) {
-		    form.setH2Treshold(a.getDoubleValue());
-		} else if(a.getName().equals("fereastra")) {
-		    fereastra = a.getProduct();
-		    form.setFereastraId(fereastra.getId());
-		    form.setFereastra(fereastra.getDescription());
-		} else if(a.getName().equals("grilaVentilatie")) {
-		    grilaVentilatie = a.getProduct();
-		    form.setGrilaVentilatieId(grilaVentilatie.getId());
-		    form.setGrilaVentilatie(grilaVentilatie.getDescription());
-		} else if(a.getName().equals("gauriAerisire")) {
-		    gauriAerisire = a.getProduct();
-		    form.setGauriAerisireId(gauriAerisire.getId());
-		    form.setGauriAerisire(gauriAerisire.getDescription());
-		}
-	    }
 
-	    // Extracting the newer attributes by using the attributes map.
-	    // It easier to program. Maybe the attributes above should be
-	    // extracted also with the attributes map, for uniformity.
+	    // Attributes
 	    Map amap = p.getAttributesMap();
+	    form.readSubclass(amap);
+	    form.readVersion(amap);
+	    form.readMaterial(amap);
+	    form.readLg(amap);
+	    form.readHg(amap);
+	    form.readLcorrection(amap);
+	    form.readHcorrection(amap);
+	    form.readLCurrent(amap);
+	    form.readKType(amap);
+	    form.readIntFoil(amap);
+	    form.readIeFoil(amap);
+	    form.readExtFoil(amap);
+	    form.readIsolation(amap);
+	    form.readOpeningDir(amap);
+	    form.readOpeningSide(amap);
+	    form.readFrameType(amap);
+	    form.readLFrame(amap);
+	    form.readBFrame(amap);
+	    form.readCFrame(amap);
+	    form.readFoilPosition(amap);
+	    form.readTresholdType(amap);
+	    form.readLTreshold(amap);
+	    form.readHTreshold(amap);
+	    form.readCTreshold(amap);
+	    form.readTresholdSpace(amap);
+	    form.readH1Treshold(amap);
+	    form.readH2Treshold(amap);
 
 	    form.readMontareSistem(amap);
 	    form.readDecupareSistemId(amap);
