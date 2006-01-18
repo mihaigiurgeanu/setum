@@ -293,7 +293,29 @@ public class CallDispatcherServlet extends HttpServlet {
 		    bean = newSessionBean(request);
 		}
 		Method loadListing = (Method)methods.get("loadListing");
-		r = (ResponseBean)loadListing.invoke(bean, null);
+
+
+		Class paramTypes[] = loadListing.getParameterTypes();
+		logger.log(BasicLevel.DEBUG, "Method loadListing" + 
+			   " requires " + paramTypes.length + " parameters.");
+		Object params[] = new Object[paramTypes.length];
+		for(int i=0; i<paramTypes.length; i++) {
+		    // i expect the parameters with the names
+		    // param1, param2, ... .
+		    String param = request.getParameter("param" + i);
+		    if(param == null) {
+			params[i] = null;
+			logger.log(BasicLevel.WARN, "param" + i + " does not exist. Setting it to null when calling method " + command);
+		    } else {
+			params[i] = ConvertUtils.convert(param, paramTypes[i]);
+			logger.log(BasicLevel.DEBUG, "param" + i + 
+				   " has value <<" + param +
+				   ">>  when calling method " + command);
+		    }
+		}
+
+
+		r = (ResponseBean)loadListing.invoke(bean, params);
 
 	    } catch (RemoteException e) {
 		removeSessionBean(request);

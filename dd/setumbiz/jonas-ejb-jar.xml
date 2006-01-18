@@ -182,4 +182,13 @@
     </jonas-ejb-ref>
   </jonas-session>
 
+  <jonas-session>
+    <ejb-name>ClientsEJB</ejb-name>
+    <jndi-name>ClientsHome</jndi-name>
+    <jonas-ejb-ref>
+      <ejb-ref-name>ejb/PreferencesEJB</ejb-ref-name>
+      <jndi-name>PreferencesHome</jndi-name>
+    </jonas-ejb-ref>
+  </jonas-session>
+
 </jonas-ejb-jar>

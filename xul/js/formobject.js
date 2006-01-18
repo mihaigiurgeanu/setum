@@ -21,6 +21,7 @@ function FormObject() {
     this.save_sub = save_sub;
     this.post_save_request = post_save_request;
     this.load_listing = load_listing;
+    this.load_param_listing = load_param_listing;
     this.load_sub_listing = load_sub_listing;
     this.update_fields = update_fields;
     this.remove_item = remove_item;
@@ -315,6 +316,21 @@ function post_save_request(req) {
 function load_listing() {
     var req = new HTTPDataRequest(this.do_link);
     req.add("command", "listing");
+    var response = req.execute();
+    if(response) {
+	if(response.message) {
+	    alert(response.message + "\n\n" + "Cod: " + response.code);
+	}
+	if(response.code == 0)
+	    return response.records;
+    }
+    return new Array();
+}
+
+function load_param_listing(param) {
+    var req = new HTTPDataRequest(this.do_link);
+    req.add("command", "listing");
+    req.add("param0", param)
     var response = req.execute();
     if(response) {
 	if(response.message) {

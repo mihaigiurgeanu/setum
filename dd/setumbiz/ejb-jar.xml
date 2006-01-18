@@ -1051,6 +1051,39 @@
     </session>
 
 
+
+    <!-- ClientsEJB -->
+    <session>
+      <description>Manage the business logic of storing and retrieving client and contacts.</description>
+      <ejb-name>ClientsEJB</ejb-name>
+      <home>ro.kds.erp.biz.setum.basic.ClientsHome</home>
+      <remote>ro.kds.erp.biz.setum.basic.Clients</remote>
+      <ejb-class>ro.kds.erp.biz.setum.ClientsBeanImplementation</ejb-class>
+      <session-type>Stateful</session-type>
+      <transaction-type>Container</transaction-type>
+      <ejb-ref>
+	<description>Required by the scripting engine.</description>
+	<ejb-ref-name>ejb/PreferencesEJB</ejb-ref-name>
+	<ejb-ref-type>Session</ejb-ref-type>
+	<home>ro.kds.erp.biz.PreferencesHome</home>
+	<remote>ro.kds.erp.biz.Preferences</remote>
+      </ejb-ref>
+      <ejb-local-ref>
+	<ejb-ref-name>ejb/ClientHome</ejb-ref-name>
+	<ejb-ref-type>Entity</ejb-ref-type>
+	<local-home>ro.kds.erp.data.ClientLocalHome</local-home>
+	<local>ro.kds.erp.data.ClientLocal</local>
+	<ejb-link>datalayer.jar#ClientEJB</ejb-link>
+      </ejb-local-ref>
+      <ejb-local-ref>
+	<ejb-ref-name>ejb/ContactHome</ejb-ref-name>
+	<ejb-ref-type>Entity</ejb-ref-type>
+	<local-home>ro.kds.erp.data.ContactLocalHome</local-home>
+	<local>ro.kds.erp.data.ContactLocal</local>
+	<ejb-link>datalayer.jar#ContactEJB</ejb-link>
+      </ejb-local-ref>
+    </session>
+
   </enterprise-beans>
 
 
@@ -1159,6 +1192,14 @@
     <container-transaction>
       <method>
 	<ejb-name>GauriAerisireEJB</ejb-name>
+	<method-name>*</method-name>
+      </method>
+      <trans-attribute>Required</trans-attribute>
+    </container-transaction>
+
+    <container-transaction>
+      <method>
+	<ejb-name>ClientsEJB</ejb-name>
 	<method-name>*</method-name>
       </method>
       <trans-attribute>Required</trans-attribute>

@@ -70,11 +70,29 @@
     <modules:xulfile>usimetalice2k.xul</modules:xulfile>
   </rdf:Description>
 
+  <rdf:Seq rdf:about="http://www.kds.ro/erp/modules/setum/clienti">
+    <rdf:li rdf:resource="http://www.kds.ro/erp/modules/setum/clienti/companii" />
+    <rdf:li rdf:resource="http://www.kds.ro/erp/modules/setum/clienti/persoaneFizice" />
+  </rdf:Seq>
+
   <rdf:Description rdf:about="http://www.kds.ro/erp/modules/setum/clienti">
     <modules:displayName>Clienti</modules:displayName>
     <modules:description>Adaugare/modificare/vizualizare clienti</modules:description>
-    <modules:xulfile>clienti.xul</modules:xulfile>
   </rdf:Description>
+
+  <rdf:Description rdf:about="http://www.kds.ro/erp/modules/setum/clienti/companii">
+    <modules:displayName>Companii</modules:displayName>
+    <modules:description>Adaugare/modificare/vizualizare clienti</modules:description>
+    <modules:xulfile>companies.xul</modules:xulfile>
+  </rdf:Description>
+
+
+  <rdf:Description rdf:about="http://www.kds.ro/erp/modules/setum/clienti/persoaneFizice">
+    <modules:displayName>Persoane fizice</modules:displayName>
+    <modules:description>Adaugare/modificare/vizualizare clienti</modules:description>
+    <modules:xulfile>persons.xul</modules:xulfile>
+  </rdf:Description>
+
 
   <rdf:Description 
       rdf:about="http://www.kds.ro/erp/modules/setum/standardoffer">

@@ -786,6 +786,42 @@
 
 
 
+  <servlet>
+    <description>Call dispatcher for form "Clients"</description>
+    <servlet-name>ClientsServlet</servlet-name>
+    <servlet-class>ro.kds.erp.web.CallDispatcherServlet</servlet-class>
+
+    <init-param>
+      <description>The name of the session attribute holding the session bean.</description>
+      <param-name>sessionName</param-name>
+      <param-value>forms.setum.Clients</param-value>
+    </init-param>
+
+    <init-param>
+      <description>The jndi name to refer to the session bean EJB</description>
+      <param-name>sessionBean</param-name>
+      <param-value>ejb/ClientsHome</param-value>
+    </init-param>
+
+    <init-param>
+      <description>The calss name of the remote interface</description>
+      <param-name>sessionClass</param-name>
+      <param-value>ro.kds.erp.biz.setum.basic.Clients</param-value>
+    </init-param>
+
+    <init-param>
+      <description>The class name of the home interface</description>
+      <param-name>sessionHome</param-name>
+      <param-value>ro.kds.erp.biz.setum.basic.ClientsHome</param-value>
+    </init-param>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ClientsServlet</servlet-name>
+    <url-pattern>/clients.do</url-pattern>
+  </servlet-mapping>
+
+
+
   <resource-ref>
     <description>Products datasource reference</description>
     <res-ref-name>jdbc/Products</res-ref-name>
@@ -968,5 +1004,11 @@
     <ejb-ref-type>Session</ejb-ref-type>
     <home>ro.kds.erp.biz.setum.basic.GrilaVentilatieHome</home>
     <remote>ro.kds.erp.biz.setum.basic.GrilaVentilatie</remote>
+  </ejb-ref>
+  <ejb-ref>
+    <ejb-ref-name>ejb/ClientsHome</ejb-ref-name>
+    <ejb-ref-type>Session</ejb-ref-type>
+    <home>ro.kds.erp.biz.setum.basic.ClientsHome</home>
+    <remote>ro.kds.erp.biz.setum.basic.Clients</remote>
   </ejb-ref>
 </web-app>

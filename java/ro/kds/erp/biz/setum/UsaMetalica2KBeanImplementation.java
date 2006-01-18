@@ -30,7 +30,7 @@ import java.util.Map;
  * Created: Fri Nov 18 15:34:24 2005
  *
  * @author <a href="mailto:Mihai Giurgeanu@CRIMIRA"></a>
- * @version 1.0
+ * @version $Id: UsaMetalica2KBeanImplementation.java,v 1.3 2006/01/18 04:13:42 mihai Exp $
  */
 public class UsaMetalica2KBeanImplementation 
     extends ro.kds.erp.biz.setum.basic.UsaMetalica2KBean {

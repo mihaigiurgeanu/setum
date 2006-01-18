@@ -68,6 +68,25 @@
     </jdbc-mapping>
     <cleanup>create</cleanup>
   </jonas-entity>
+  <jonas-entity>
+    <ejb-name>ClientEJB</ejb-name>
+    <jndi-local-name>ClientLocalHome</jndi-local-name>
+    <jdbc-mapping>
+      <jndi-name>erpsetumdb</jndi-name>
+      <automatic-pk>true</automatic-pk>
+    </jdbc-mapping>
+    <cleanup>create</cleanup>
+  </jonas-entity>
+  <jonas-entity>
+    <ejb-name>ContactEJB</ejb-name>
+    <jndi-local-name>ContactLocalHome</jndi-local-name>
+    <jdbc-mapping>
+      <jndi-name>erpsetumdb</jndi-name>
+      <automatic-pk>true</automatic-pk>
+    </jdbc-mapping>
+    <cleanup>create</cleanup>
+  </jonas-entity>
+
 
   <jonas-ejb-relation>
     <ejb-relation-name>ProductAttribute</ejb-relation-name>

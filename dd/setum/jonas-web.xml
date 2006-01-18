@@ -82,4 +82,9 @@
     <jndi-name>GauriAerisireHome</jndi-name>
   </jonas-ejb-ref>
 
+  <jonas-ejb-ref>
+    <ejb-ref-name>ejb/ClientsHome</ejb-ref-name>
+    <jndi-name>ClientsHome</jndi-name>
+  </jonas-ejb-ref>
+
 </jonas-web-app>
