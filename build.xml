@@ -1,10 +1,9 @@
 <?xml version="1.0"?>
-<!-- $Id: build.xml,v 1.1.1.1.2.3 2006/01/16 15:44:13 mihai Exp $ -->
+<!-- $Id: build.xml,v 1.1.1.1.2.4 2006/01/18 04:34:27 mihai Exp $ -->
 
 <project name="setumerp" default="application">
   <description>
-    setum.war target builds the web module used for interfacing the UI
-    with the business logic.
+    Targets for building and deploying the setumapp application.
   </description>
 
   <!-- some properties are build from environment variables -->
@@ -230,7 +229,8 @@
     <jrc srcdir="${reports}" includes="**/*.xml" />
   </target>
 
-  <target name="generateFormClasses" depends="init">
+  <target name="generateFormClasses" depends="init"
+	  description="Generation of java classes from xml templates">
     <freemarker basedir="${templates}" destdir="${src.formbean}"
 		templatedir="${templates}"
 		includes="**/*.xml" template="FormBean.ftl"
