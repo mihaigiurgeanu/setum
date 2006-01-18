@@ -27,7 +27,7 @@ import javax.ejb.RemoveException;
  * Created: Tue Jan 17 10:40:18 2006
  *
  * @author <a href="mailto:mihai@cris.kds.ro">Mihai Giurgeanu</a>
- * @version $Id: ClientsBeanImplementation.java,v 1.1 2006/01/18 04:25:30 mihai Exp $
+ * @version $Id: ClientsBeanImplementation.java,v 1.2 2006/01/18 09:57:57 mihai Exp $
  */
 public class ClientsBeanImplementation extends ClientsBean {
 
@@ -215,7 +215,7 @@ public class ClientsBeanImplementation extends ClientsBean {
 	    
 	    r = new ResponseBean();
 	    for(Iterator i = contacts.iterator(); i.hasNext();) {
-		ContactLocal c = (ContactLocal)i;
+		ContactLocal c = (ContactLocal)i.next();
 		r.addRecord();
 		r.addField("contacts.id", c.getId());
 		r.addField("contacts.firstName", c.getFirstName());

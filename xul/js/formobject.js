@@ -9,6 +9,7 @@ function FormObject() {
     this.values = new Array();
     this.do_link = "";
 
+    this.set_value = set_value;
     this.setupEventListeners = setupEventListeners; 
     this.update_form = update_form;
     this.post_request = post_request;
@@ -106,6 +107,17 @@ function text_changed(event) {
     req.add("value", control.value);
 
     theForm.post_request(req);
+}
+
+function set_value(fieldName, fieldValue) {
+    log("Send set field value: " + fieldName + ". New value: " + fieldValue);
+    log(" ... to " + this.do_link);
+    var req = new HTTPDataRequest(this.do_link);
+    req.add("command", "change");
+    req.add("field", fieldName);
+    req.add("value", fieldValue);
+
+    this.post_request(req);
 }
 
 function post_request(req, prefix) {

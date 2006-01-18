@@ -1,74 +1,70 @@
 <?xml version="1.0"?>
 <?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
 
+<!-- $Id: companies.xul,v 1.2 2006/01/18 09:57:57 mihai Exp $ -->
+
 <window
-    id="clienti-win"
+    id="companies-persons-win"
     persist="screenX screenY width height"
     orient="horizontal"
-    title="Clienti"
-    onload="init();"
+    title="Companii"
     xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
   >
 
+  <script src="js/logging.js"/>
   <script src="js/httpdata.js"/>
-  <script src="lista-clienti.js"/>
+  <script src="js/formobject.js"/>
 
   <commandset>
-    <command id="command-saveclient" oncommand="saveClient();" 
-	     disabled="true" />
+    <command id="command-saveclient" oncommand="saveClient();" />
     <command id="command-addclient" oncommand="addClient();" />
     
-    <command id="command-savecontact" oncommand="saveContact();" 
-	     disabled="true" />
+    <command id="command-savecontact" oncommand="saveContact();" />
     <command id="command-addcontact" oncommand="addContact();" />
 
   </commandset>
 
 
-  <tabbox flex="1" id="clienti-tabbox" align="stretch">
+  <tabbox flex="1" id="maintab" align="stretch">
     <tabs>
       <tab label="Lista Clienti" selected="true"/>
       <tab label="Detalii Client"/>
     </tabs>
     
     <tabpanels flex="1">
-      <tabpanel id="lista-clienti" orient="vertical">
-	<tree id="lista-clienti-tree" flex="1" enableColumnDrag="true" persist="ordinal width height hidden" seltype="single"  ondblclick="initformdata();" onclick="copyvalues();setTreeContentForPersoaneContact();">
+      <tabpanel id="maintab.listing" orient="vertical">
+	<hbox align="right">
+	  <button label="Adauga" id="button-addclient"
+		  command="command-addclient"/>
+	</hbox>
+	<tree id="clients-listing-tree" flex="1" 
+	      enableColumnDrag="true" 
+	      persist="ordinal width height hidden" 
+	      seltype="single"  
+	      ondblclick="selectTabClientDetails()" 
+	      onclick="loadClient(this.currentIndex)">
 	  <treecols>
-	    <treecol id="tc-tip-pers" label="Tip" flex="1" 
+	    <treecol id="listing.companyName" label="Nume Companie" flex="1"
 		     persist="ordinal width height hidden"/>
 	    <splitter class="tree-splitter"/>
-	    <treecol id="tc-nume-companie" label="Nume Companie" flex="1"
+	    <treecol id="listing.companyCode" label="Cod fiscal" flex="1"
 		     persist="ordinal width height hidden"/>
 	    <splitter class="tree-splitter"/>
-	    <treecol id="tc-nume" label="Nume" flex="1"
+	    <!--
+	    <treecol id="listing.lastName" label="Nume" flex="1"
 		     persist="ordinal width height hidden"/>
 	    <splitter class="tree-splitter"/>
-	    <treecol id="tc-prenume" label="Prenume" flex="1"
+	    <treecol id="listing.firstName" label="Prenume" flex="1"
 		     persist="ordinal width height hidden"/>
 	    <splitter class="tree-splitter"/>
-	    <treecol id="tc-adresa" label="Adresa" flex="1"
+	    -->
+	    <treecol id="listing.city" label="Oras" flex="1"
 		     persist="ordinal width height hidden"/>
 	    <splitter class="tree-splitter"/>
-	    <treecol id="tc-cod-postal" label="Cod Postal" flex="1"
+	    <treecol id="listing.countryCode" label="Tara" flex="1"
 		     persist="ordinal width height hidden"/>
 	    <splitter class="tree-splitter"/>
-	    <treecol id="tc-oras" label="Oras" flex="1"
-		     persist="ordinal width height hidden"/>
-	    <splitter class="tree-splitter"/>
-	    <treecol id="tc-tara" label="Tara" flex="1"
-		     persist="ordinal width height hidden"/>
-	    <splitter class="tree-splitter"/>
-	    <treecol id="tc-cod-fiscal" label="Cod Fiscal" flex="1"
-		     persist="ordinal width height hidden"/>
-	    <splitter class="tree-splitter"/>
-	    <treecol id="tc-telefon" label="Telefon" flex="1"
-		     persist="ordinal width height hidden"/>
-	    <splitter class="tree-splitter"/>
-	    <treecol id="tc-cont-iban" label="Cont IBAN"
-		     persist="ordinal width height hidden"/>
-	    <splitter class="tree-splitter"/>
-	    <treecol id="tc-banca" label="Banca"
+	    <treecol id="listing.phone" label="Telefon" flex="1"
 		     persist="ordinal width height hidden"/>
 	  </treecols>
 
@@ -76,14 +72,7 @@
 	</tree>
 
       </tabpanel>
-      <tabpanel id="detalii-client" orient="vertical">
-	<radiogroup id="tip-persoana">
-	  <radio id="pers-fiz" value="0" label="Persoana Fizica" selected="true"/>
-	  <radio id="pers-jur" value="1" label="Persoana Juridica"/>
-	</radiogroup>
-
-	<spacer flex="1"/>
-
+      <tabpanel id="maintab.details" orient="vertical">
 	<hbox>
 	  <grid>
 	    <columns>
@@ -92,28 +81,30 @@
 	    </columns>
 	    <rows>
 	      <row>
-		<label control="nume-companie" value="Nume Companie:"/>
-		<textbox id="nume-companie"/>
+		<label control="companyName" value="Nume Companie:"/>
+		<textbox id="companyName"/>
 	      </row>
 	      <row>
-		<label control="nume" value="Nume:"/>
-		<textbox id="nume"/>
+		<label control="companyCode" value="Cod Fiscal:"/>
+		<textbox id="companyCode"/>
+	      </row>
+	      <!--
+	      <row>
+		<label control="lastName" value="Nume:"/>
+		<textbox id="lastName"/>
 	      </row>
 	      <row>
-		<label control="prenume" value="Prenume:"/>
-		<textbox id="prenume"/>
+		<label control="firstName" value="Prenume:"/>
+		<textbox id="firstName"/>
+	      </row>
+	      -->
+	      <row>
+		<label control="iban" value="Cont IBAN:"/>
+		<textbox id="iban"/>
 	      </row>
 	      <row>
-		<label control="cod-fiscal" value="Cod Fiscal:"/>
-		<textbox id="cod-fiscal"/>
-	      </row>
-	      <row>
-		<label control="cont-iban" value="Cont IBAN:"/>
-		<textbox id="cont-iban"/>
-	      </row>
-	      <row>
-		<label control="banca" value="Banca:"/>
-		<textbox id="banca"/>
+		<label control="bank" value="Banca:"/>
+		<textbox id="bank"/>
 	      </row>
 	    </rows>
 	  </grid>
@@ -128,27 +119,26 @@
 	    
 	    <rows>
 	      <row>
-		<label control="adresa" value="Adresa:"/>
-		<textbox id="adresa" rows="4" multiline="true"/>
+		<label control="address" value="Adresa:"/>
+		<textbox id="address" rows="4" multiline="true"/>
 	      </row>
 	      <row>
-		<label control="cod-postal" value="Cod Postal:"/>
-		<textbox id="cod-postal"/>
+		<label control="postalCode" value="Cod Postal:"/>
+		<textbox id="postalCode"/>
 	      </row>
 	      <row>
-		<label control="oras" value="Oras:"/>
-		<textbox id="oras"/>
+		<label control="city" value="Oras:"/>
+		<textbox id="city"/>
 	      </row>
 	      <row>
-		<label control="tara" value="Tara:"/>
-		<menulist id="tara">
-		  <menupopup id="tara-popup">
-		  </menupopup>
+		<label control="countyCode" value="Tara:"/>
+		<menulist id="countryCode">
+		  <menupopup id="countryCode-popup" />
 		</menulist>
 	      </row>
 	      <row>
-		<label control="telefon" value="Numar de Telefon:"/>
-		<textbox id="telefon"/>
+		<label control="phone" value="Numar de Telefon:"/>
+		<textbox id="phone"/>
 	      </row>
 	    </rows>
 	  </grid>
@@ -156,8 +146,8 @@
 	
 	<spacer flex="1"/>
 	
-	<label control="observatii" value="Observatii:"/>
-	<textbox flex="1" id="observatii" rows="4" multiline="true"/>
+	<label control="comment" value="Observatii:"/>
+	<textbox flex="1" id="comment" rows="4" multiline="true"/>
 	
 	
 	<spacer flex="1" style=" max-height: 40px; min-height: 10px;"/>
@@ -165,56 +155,59 @@
 	<hbox align="center">
 	  <button label="Salveaza modificari" id="button-saveclient"
 		  command="command-saveclient"/>
-	  <button label="Adauga" id="button-addclient"
-		  command="command-addclient"/>
 	</hbox>
 
 	
 	<vbox flex="1">
-	  <tabbox flex="1" id="perscont-tabbox" align="stretch">
+	  <tabbox flex="1" id="contactstab" align="stretch">
 	    <tabs>
 	      <tab label="Persoane Contact" selected="true"/>
 	      <tab label="Detalii"/>
 	    </tabs>
 	    
 	    <tabpanels flex="1">
-	      <tabpanel id="lista-persoane-contact" orient="vertical">
-		<tree id="persoane-contact-tree" flex="1" enableColumnDrag="true" persist="ordinal width height hidden" seltype="single"   ondblclick="initformdataPC();" onclick="copyvaluesPC();">
+	      <tabpanel id="contactstab.listing" orient="vertical">
+		<hbox align="right">
+		  <button label="Adauga" id="button-addcontact"
+			  command="command-addcontact"/>
+		</hbox>
+		<tree id="contacts-listing-tree" 
+		      flex="1" 
+		      enableColumnDrag="true" 
+		      persist="ordinal width height hidden" 
+		      seltype="single"   
+		      ondblclick="selectTabContactDetails()" 
+		      onclick="loadContact(this.currentIndex)">
 		  <treecols>
-		    <treecol id="tc-pc-nume" label="Nume" flex="1"
+		    <treecol id="contacts.lastName" label="Nume" flex="1"
 			     persist="ordinal width height hidden"/>
 		    <splitter class="tree-splitter"/>
-		    <treecol id="tc-pc-prenume" label="Prenume" flex="1"
+		    <treecol id="contacts.firstName" label="Prenume" flex="1"
 			     persist="ordinal width height hidden"/>
 		    <splitter class="tree-splitter"/>
-		    <treecol id="tc-pc-departament" label="Departament" 
+		    <treecol id="contacts.department" label="Departament" 
 			     flex="1"
 			     persist="ordinal width height hidden"/>
 		    <splitter class="tree-splitter"/>
-		    <treecol id="tc-pc-telefon" label="Telefon" flex="1"
+		    <treecol id="contacts.phone" label="Telefon" flex="1"
 			     persist="ordinal width height hidden"/>
 		    <splitter class="tree-splitter"/>
-		    <treecol id="tc-pc-mobil" label="Mobil" flex="1"
+		    <treecol id="contacts.mobile" label="Mobil" flex="1"
 			     persist="ordinal width height hidden"/>
 		    <splitter class="tree-splitter"/>
-		    <treecol id="tc-pc-fax" label="Fax" flex="1"
+		    <treecol id="contacts.fax" label="Fax" flex="1"
 			     persist="ordinal width height hidden"/>
 		    <splitter class="tree-splitter"/>
-		    <treecol id="tc-pc-email" label="Email" flex="1"
+		    <treecol id="contacts.email" label="Email" flex="1"
 			     persist="ordinal width height hidden"/>
 		    <splitter class="tree-splitter"/>
-		    <treecol id="tc-pc-functie" label="Functie" flex="1"
-			     persist="ordinal width height hidden"/>
-		    <splitter class="tree-splitter"/>
-		    <treecol id="tc-pc-observatii" label="Observatii" flex="1"
-			     persist="ordinal width height hidden"/>
 		  </treecols>
 		  
 		  <treechildren/>
 		</tree>
 	      </tabpanel>
 	      
-	      <tabpanel id="detalii-persoana-contact" 
+	      <tabpanel id="contactstab.details" 
 			orient="vertical">
 		
 		<hbox>					
@@ -225,20 +218,21 @@
 		    </columns>
 		    <rows>
 		      <row>
-			<label control="pc-nume" value="Nume:"/>
-			<textbox id="pc-nume"/>
+			<label control="contactLastName" value="Nume:"/>
+			<textbox id="contactLastName"/>
 		      </row>
 		      <row>
-			<label control="pc-prenume" value="Prenume:"/>
-			<textbox id="pc-prenume"/>
+			<label control="contactFirstName" value="Prenume:"/>
+			<textbox id="contactFirstName"/>
 		      </row>
 		      <row>
-			<label control="pc-departament" value="Departament:"/>
-			<textbox id="pc-departament"/>
+			<label control="contactDepartment" 
+			       value="Departament:"/>
+			<textbox id="contactDepartment"/>
 		      </row>
 		      <row>
-			<label control="pc-functie" value="Functie:"/>
-			<textbox id="pc-functie"/>
+			<label control="contactTitle" value="Titlu:"/>
+			<textbox id="contactTitle"/>
 		      </row>
 		    </rows>
 		  </grid>
@@ -253,27 +247,27 @@
 		    
 		    <rows>
 		      <row>
-			<label control="pc-telefon" value="Telefon:"/>
-			<textbox id="pc-telefon"/>
+			<label control="contactPhone" value="Telefon:"/>
+			<textbox id="contactPhone"/>
 		      </row>
 		      <row>
-			<label control="pc-mobil" value="Mobil:"/>
-			<textbox id="pc-mobil"/>
+			<label control="contactMobile" value="Mobil:"/>
+			<textbox id="contactMobile"/>
 		      </row>
 		      <row>
-			<label control="pc-fax" value="Fax:"/>
-			<textbox id="pc-fax"/>
+			<label control="contactFax" value="Fax:"/>
+			<textbox id="contactFax"/>
 		      </row>
 		      <row>
-			<label control="pc-email" value="Email:"/>
-			<textbox id="pc-email"/>
+			<label control="contactEmail" value="Email:"/>
+			<textbox id="contactEmail"/>
 		      </row>
 		    </rows>
 		  </grid>
 		</hbox>
 
-		<label control="pc-observatii" value="Observatii:"/>
-		<textbox id="pc-observatii" rows="4" 
+		<label control="contactComment" value="Observatii:"/>
+		<textbox id="contactComment" rows="4" 
 			 multiline="true" flex="1"/>
 		
 
@@ -282,8 +276,6 @@
 		<hbox align="center">
 		  <button label="Salveaza modificari" id="button-savecontact"
 			  command="command-savecontact"/>
-		  <button label="Adauga" id="button-addcontact"
-			  command="command-addcontact"/>
 		</hbox>
 	      </tabpanel>
 	    </tabpanels>
@@ -293,5 +285,98 @@
     </tabpanels>
   </tabbox>
 
+
+  <script language="javascript">
+
+// The main tree
+var clients;
+function load_clients() {
+  clients = theForm.load_param_listing(1); // only companies
+  document.getElementById('clients-listing-tree').view = make_treeview
+    (clients,
+     function(row,column) {
+       return clients[row][column];
+     });
+}
+
+// contacts
+var contacts;
+function load_contacts() {
+  contacts = theForm.load_sub_listing("contactsListing");
+  document.getElementById('contacts-listing-tree').view = make_treeview
+    (contacts,
+     function(row,column) {
+       return contacts[row][column];
+     });
+}
+
+function saveClient() {
+  theForm.save();
+  load_clients();  
+  selectTabClientsListing();
+}
+
+function addClient() {
+  theForm.addnew();
+  theForm.set_value("isCompany", 1);
+  selectTabClientDetails();
+}
+
+function saveContact() {
+  theForm.save_sub("saveSubForm");
+  load_contacts();
+  selectTabContactDetails();
+}
+
+function addContact() {
+  theForm.addnew_sub('addNewContact');
+  selectTabContactDetails();
+}
+
+function loadClient(pos) {
+  theForm.load_form(clients[pos]['listing.id']);
+  load_contacts();
+}
+
+function loadContact(pos) {
+  theForm.load_subform('loadSubForm', contacts[pos]['contacts.id']);
+}
+
+function selectTabClientsListing() {
+  document.getElementById('maintab').selectedIndex=0;
+}
+
+function selectTabClientDetails() {
+  document.getElementById('maintab').selectedIndex=1;
+}
+
+function selectTabContactsListing() {
+  document.getElementById('contactstab').selectedIndex = 0;
+}
+
+function selectTabContactDetails() {
+  document.getElementById('contactstab').selectedIndex = 1;
+}
+
+// Global variable theForm that will be used by event handlers
+var theForm = new FormObject();
+theForm.text_fields = new Array(/*"firstName", "lastName", */
+                                "companyName", "companyCode",
+                                "address", "postalCode", "city", 
+				"iban", "bank", "comment",
+				"contactFirstName", "contactLastName",
+				"contactDepartment", "contactPhone",
+				"contactMobile", "contactFax",
+				"contactEmail", "contactTitle",
+				"contactComment");
+theForm.combo_fields = new Array("countryCode");
+theForm.radio_fields = new Array();
+theForm.do_link = "/clients.do";
+
+theForm.setupEventListeners();
+load_clients();
+
+
+  </script>
 </window>
 

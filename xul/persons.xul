@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
 
-<!-- $Id -->
+<!-- $Id: persons.xul,v 1.2 2006/01/18 09:57:57 mihai Exp $ -->
 
 <window
     id="clients-persons-win"
@@ -177,7 +177,7 @@
 		      persist="ordinal width height hidden" 
 		      seltype="single"   
 		      ondblclick="selectTabContactDetails()" 
-		      onclick="">
+		      onclick="loadContact(this.currentIndex)">
 		  <treecols>
 		    <treecol id="contacts.lastName" label="Nume" flex="1"
 			     persist="ordinal width height hidden"/>
@@ -334,14 +334,15 @@ function addContact() {
 
 function loadClient(pos) {
   theForm.load_form(clients[pos]['listing.id']);
+  load_contacts();
 }
 
 function loadContact(pos) {
-  theForm.load_subform('loadSubForm', clients[pos]['contacts.id']);
+  theForm.load_subform('loadSubForm', contacts[pos]['contacts.id']);
 }
 
 function selectTabClientsListing() {
-  document.getElementById('maintab.details').selectedIndex=0;
+  document.getElementById('maintab').selectedIndex=0;
 }
 
 function selectTabClientDetails() {
