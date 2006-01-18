@@ -29,13 +29,37 @@
             <taskproperty id="tpd8" name="coordinator" type="default" valuetype="text" />
             <taskproperty id="tpd9" name="predecessors" type="default" valuetype="text" />
         </taskproperties>
-        <task id="0" name="Rescriere modul clienti" color="#8cb6ce" meeting="false" start="2006-01-16" duration="1" complete="0" priority="1" expand="true">
+        <task id="0" name="Rescriere modul clienti" color="#8cb6ce" meeting="false" start="2006-01-16" duration="1" complete="100" priority="1" expand="true">
         </task>
         <task id="1" name="Adaugare finisaje la usi metalice" color="#8cb6ce" meeting="false" start="2006-01-16" duration="1" complete="0" priority="1" expand="true">
         </task>
         <task id="2" name="Raport oferte customizate" color="#8cb6ce" meeting="false" start="2006-01-16" duration="1" complete="0" priority="1" expand="true">
         </task>
         <task id="3" name="Realizare comanda pe baza ofertei" color="#8cb6ce" meeting="false" start="2006-01-16" duration="1" complete="0" priority="1" expand="true">
+        </task>
+        <task id="4" name="Usa metalica in loc de usa cu un canat si doua canate" color="#8cb6ce" meeting="false" start="2006-01-16" duration="1" complete="0" priority="1" expand="true">
+            <notes>
+                Pe oferta, la adaugare produs nou, sa fie o singura optiune pentru usi metalice cu numele &#34;Usa metalica&#34; in loc de 2 optiuni &#34;Usa cu un canat&#34; si &#34;Usa cu doua canate&#34;
+            </notes>
+        </task>
+        <task id="5" name="Eroare la adaugare optiuni pe usa noua" color="#8cb6ce" meeting="false" start="2006-01-16" duration="1" complete="0" priority="1" expand="true">
+            <notes>
+                La adaugarea optiunilor pe usa noua, apare eroare (usa trebuie salvata intai)
+            </notes>
+        </task>
+        <task id="6" name="Afisare optionala perioada valabilitate oferte" color="#8cb6ce" meeting="false" start="2006-01-16" duration="1" complete="0" priority="1" expand="true">
+            <notes>
+                Daca perioada este de 0 zile, sa nu se mai afiseze perioada de valabilitate pe oferta
+            </notes>
+        </task>
+        <task id="7" name="IBAN sa aiba 4 campuri de 4 caractere" color="#8cb6ce" meeting="false" start="2006-01-16" duration="1" complete="0" priority="1" expand="true">
+        </task>
+        <task id="8" name="Adaugare selector data pe form" color="#8cb6ce" meeting="false" start="2006-01-16" duration="1" complete="0" priority="1" expand="true">
+        </task>
+        <task id="9" name="Sisteme beneficiar" color="#8cb6ce" meeting="false" start="2006-01-16" duration="1" complete="0" priority="1" expand="true">
+            <notes>
+                Sistemele beneficiar sunt diferite de sistemele SETUM. Aici se scriu doar texte cu numele sistemelor, ele nu se aleg din baza de date SETUM
+            </notes>
         </task>
     </tasks>
 
