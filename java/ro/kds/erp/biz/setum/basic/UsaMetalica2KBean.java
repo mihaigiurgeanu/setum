@@ -1080,150 +1080,6 @@ public abstract class UsaMetalica2KBean
 	computeCalculatedFields(r);
 	return r;
     }
-    public ResponseBean updateFereastraId(Integer fereastraId) {
-        ResponseBean r = new ResponseBean();
-	Integer oldVal = form.getFereastraId();
-	form.setFereastraId(fereastraId);
-	r.addRecord();
-	r.addField("fereastraId", fereastraId); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.UsaMetalica2K.fereastraId");
-	if(script.loaded()) {
-	   try {
-		script.setVar(LOGIC_VARNAME, this);
-		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
-		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
-		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
-		addFieldsToScript(script);
-		script.run();
-		getFieldsFromScript(script, r); // add all the changed
-						// fields to the response also
-	   } catch (ScriptErrorException e) {
-	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the fereastraId", e);
-           }
-        }
-	computeCalculatedFields(r);
-	return r;
-    }
-    public ResponseBean updateFereastra(String fereastra) {
-        ResponseBean r = new ResponseBean();
-	String oldVal = form.getFereastra();
-	form.setFereastra(fereastra);
-	r.addRecord();
-	r.addField("fereastra", fereastra); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.UsaMetalica2K.fereastra");
-	if(script.loaded()) {
-	   try {
-		script.setVar(LOGIC_VARNAME, this);
-		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
-		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
-		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
-		addFieldsToScript(script);
-		script.run();
-		getFieldsFromScript(script, r); // add all the changed
-						// fields to the response also
-	   } catch (ScriptErrorException e) {
-	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the fereastra", e);
-           }
-        }
-	computeCalculatedFields(r);
-	return r;
-    }
-    public ResponseBean updateGrilaVentilatieId(Integer grilaVentilatieId) {
-        ResponseBean r = new ResponseBean();
-	Integer oldVal = form.getGrilaVentilatieId();
-	form.setGrilaVentilatieId(grilaVentilatieId);
-	r.addRecord();
-	r.addField("grilaVentilatieId", grilaVentilatieId); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.UsaMetalica2K.grilaVentilatieId");
-	if(script.loaded()) {
-	   try {
-		script.setVar(LOGIC_VARNAME, this);
-		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
-		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
-		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
-		addFieldsToScript(script);
-		script.run();
-		getFieldsFromScript(script, r); // add all the changed
-						// fields to the response also
-	   } catch (ScriptErrorException e) {
-	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the grilaVentilatieId", e);
-           }
-        }
-	computeCalculatedFields(r);
-	return r;
-    }
-    public ResponseBean updateGrilaVentilatie(String grilaVentilatie) {
-        ResponseBean r = new ResponseBean();
-	String oldVal = form.getGrilaVentilatie();
-	form.setGrilaVentilatie(grilaVentilatie);
-	r.addRecord();
-	r.addField("grilaVentilatie", grilaVentilatie); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.UsaMetalica2K.grilaVentilatie");
-	if(script.loaded()) {
-	   try {
-		script.setVar(LOGIC_VARNAME, this);
-		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
-		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
-		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
-		addFieldsToScript(script);
-		script.run();
-		getFieldsFromScript(script, r); // add all the changed
-						// fields to the response also
-	   } catch (ScriptErrorException e) {
-	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the grilaVentilatie", e);
-           }
-        }
-	computeCalculatedFields(r);
-	return r;
-    }
-    public ResponseBean updateGauriAerisireId(Integer gauriAerisireId) {
-        ResponseBean r = new ResponseBean();
-	Integer oldVal = form.getGauriAerisireId();
-	form.setGauriAerisireId(gauriAerisireId);
-	r.addRecord();
-	r.addField("gauriAerisireId", gauriAerisireId); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.UsaMetalica2K.gauriAerisireId");
-	if(script.loaded()) {
-	   try {
-		script.setVar(LOGIC_VARNAME, this);
-		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
-		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
-		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
-		addFieldsToScript(script);
-		script.run();
-		getFieldsFromScript(script, r); // add all the changed
-						// fields to the response also
-	   } catch (ScriptErrorException e) {
-	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the gauriAerisireId", e);
-           }
-        }
-	computeCalculatedFields(r);
-	return r;
-    }
-    public ResponseBean updateGauriAerisire(String gauriAerisire) {
-        ResponseBean r = new ResponseBean();
-	String oldVal = form.getGauriAerisire();
-	form.setGauriAerisire(gauriAerisire);
-	r.addRecord();
-	r.addField("gauriAerisire", gauriAerisire); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.UsaMetalica2K.gauriAerisire");
-	if(script.loaded()) {
-	   try {
-		script.setVar(LOGIC_VARNAME, this);
-		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
-		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
-		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
-		addFieldsToScript(script);
-		script.run();
-		getFieldsFromScript(script, r); // add all the changed
-						// fields to the response also
-	   } catch (ScriptErrorException e) {
-	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the gauriAerisire", e);
-           }
-        }
-	computeCalculatedFields(r);
-	return r;
-    }
     public ResponseBean updateEntryPrice(java.math.BigDecimal entryPrice) {
         ResponseBean r = new ResponseBean();
 	java.math.BigDecimal oldVal = form.getEntryPrice();
@@ -2224,12 +2080,6 @@ public abstract class UsaMetalica2KBean
 	r.addField("tresholdSpace", form.getTresholdSpace());
 	r.addField("h1Treshold", form.getH1Treshold());
 	r.addField("h2Treshold", form.getH2Treshold());
-	r.addField("fereastraId", form.getFereastraId());
-	r.addField("fereastra", form.getFereastra());
-	r.addField("grilaVentilatieId", form.getGrilaVentilatieId());
-	r.addField("grilaVentilatie", form.getGrilaVentilatie());
-	r.addField("gauriAerisireId", form.getGauriAerisireId());
-	r.addField("gauriAerisire", form.getGauriAerisire());
 	r.addField("entryPrice", form.getEntryPrice());
 	r.addField("sellPrice", form.getSellPrice());
 	r.addField("montareSistem", form.getMontareSistem());
@@ -2451,36 +2301,6 @@ public abstract class UsaMetalica2KBean
 	    s.setVar("h2Treshold", form.getH2Treshold(), Double.class);
 	} catch (ScriptErrorException e) {
 	    logger.log(BasicLevel.WARN, "Can not set the value of field: h2Treshold from the script", e);
-        }
-	try {
-	    s.setVar("fereastraId", form.getFereastraId(), Integer.class);
-	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not set the value of field: fereastraId from the script", e);
-        }
-	try {
-	    s.setVar("fereastra", form.getFereastra(), String.class);
-	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not set the value of field: fereastra from the script", e);
-        }
-	try {
-	    s.setVar("grilaVentilatieId", form.getGrilaVentilatieId(), Integer.class);
-	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not set the value of field: grilaVentilatieId from the script", e);
-        }
-	try {
-	    s.setVar("grilaVentilatie", form.getGrilaVentilatie(), String.class);
-	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not set the value of field: grilaVentilatie from the script", e);
-        }
-	try {
-	    s.setVar("gauriAerisireId", form.getGauriAerisireId(), Integer.class);
-	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not set the value of field: gauriAerisireId from the script", e);
-        }
-	try {
-	    s.setVar("gauriAerisire", form.getGauriAerisire(), String.class);
-	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not set the value of field: gauriAerisire from the script", e);
         }
 	try {
 	    s.setVar("entryPrice", form.getEntryPrice(), java.math.BigDecimal.class);
@@ -3039,66 +2859,6 @@ public abstract class UsaMetalica2KBean
 	    }
 	} catch (ScriptErrorException e) {
 	    logger.log(BasicLevel.WARN, "Can not get the value of field: h2Treshold from the script", e);
-        }
-	try {
-	    field = s.getVar("fereastraId", Integer.class);
-	    if(!field.equals(form.getFereastraId())) {
-	        logger.log(BasicLevel.DEBUG, "Field fereastraId modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
-	        form.setFereastraId((Integer)field);
-	        r.addField("fereastraId", (Integer)field);
-	    }
-	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not get the value of field: fereastraId from the script", e);
-        }
-	try {
-	    field = s.getVar("fereastra", String.class);
-	    if(!field.equals(form.getFereastra())) {
-	        logger.log(BasicLevel.DEBUG, "Field fereastra modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
-	        form.setFereastra((String)field);
-	        r.addField("fereastra", (String)field);
-	    }
-	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not get the value of field: fereastra from the script", e);
-        }
-	try {
-	    field = s.getVar("grilaVentilatieId", Integer.class);
-	    if(!field.equals(form.getGrilaVentilatieId())) {
-	        logger.log(BasicLevel.DEBUG, "Field grilaVentilatieId modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
-	        form.setGrilaVentilatieId((Integer)field);
-	        r.addField("grilaVentilatieId", (Integer)field);
-	    }
-	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not get the value of field: grilaVentilatieId from the script", e);
-        }
-	try {
-	    field = s.getVar("grilaVentilatie", String.class);
-	    if(!field.equals(form.getGrilaVentilatie())) {
-	        logger.log(BasicLevel.DEBUG, "Field grilaVentilatie modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
-	        form.setGrilaVentilatie((String)field);
-	        r.addField("grilaVentilatie", (String)field);
-	    }
-	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not get the value of field: grilaVentilatie from the script", e);
-        }
-	try {
-	    field = s.getVar("gauriAerisireId", Integer.class);
-	    if(!field.equals(form.getGauriAerisireId())) {
-	        logger.log(BasicLevel.DEBUG, "Field gauriAerisireId modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
-	        form.setGauriAerisireId((Integer)field);
-	        r.addField("gauriAerisireId", (Integer)field);
-	    }
-	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not get the value of field: gauriAerisireId from the script", e);
-        }
-	try {
-	    field = s.getVar("gauriAerisire", String.class);
-	    if(!field.equals(form.getGauriAerisire())) {
-	        logger.log(BasicLevel.DEBUG, "Field gauriAerisire modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
-	        form.setGauriAerisire((String)field);
-	        r.addField("gauriAerisire", (String)field);
-	    }
-	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not get the value of field: gauriAerisire from the script", e);
         }
 	try {
 	    field = s.getVar("entryPrice", java.math.BigDecimal.class);

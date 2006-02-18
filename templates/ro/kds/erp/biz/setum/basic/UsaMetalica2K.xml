@@ -144,30 +144,6 @@
     <type>Double</type>
   </field>
   <field>
-    <name>fereastraId</name>
-    <type>Integer</type>
-  </field>
-  <field>
-    <name>fereastra</name>
-    <type>String</type>
-  </field>
-  <field>
-    <name>grilaVentilatieId</name>
-    <type>Integer</type>
-  </field>
-  <field>
-    <name>grilaVentilatie</name>
-    <type>String</type>
-  </field>
-  <field>
-    <name>gauriAerisireId</name>
-    <type>Integer</type>
-  </field>
-  <field>
-    <name>gauriAerisire</name>
-    <type>String</type>
-  </field>
-  <field>
     <name>entryPrice</name>
     <type>java.math.BigDecimal</type>
   </field>

@@ -50,12 +50,6 @@ public class UsaMetalica2KForm implements Serializable {
     Integer tresholdSpace;
     Double h1Treshold;
     Double h2Treshold;
-    Integer fereastraId;
-    String fereastra;
-    Integer grilaVentilatieId;
-    String grilaVentilatie;
-    Integer gauriAerisireId;
-    String gauriAerisire;
     java.math.BigDecimal entryPrice;
     java.math.BigDecimal sellPrice;
     Integer montareSistem;
@@ -619,96 +613,6 @@ public class UsaMetalica2KForm implements Serializable {
 	AttributeLocal a = (AttributeLocal)attributes.get("h2Treshold");
 	if(a != null) {
 	    this.setH2Treshold(a.getDoubleValue());
-	}
-    }
-
-    public void setFereastraId(Integer newFereastraId) {
-        this.fereastraId = newFereastraId;
-    }
-
-    public Integer getFereastraId() {
-        return fereastraId;
-    }
-
-    public void readFereastraId(Map attributes) {
-	AttributeLocal a = (AttributeLocal)attributes.get("fereastraId");
-	if(a != null) {
-	    this.setFereastraId(a.getIntValue());
-	}
-    }
-
-    public void setFereastra(String newFereastra) {
-        this.fereastra = newFereastra;
-    }
-
-    public String getFereastra() {
-        return fereastra;
-    }
-
-    public void readFereastra(Map attributes) {
-	AttributeLocal a = (AttributeLocal)attributes.get("fereastra");
-	if(a != null) {
-	    this.setFereastra(a.getStringValue());
-	}
-    }
-
-    public void setGrilaVentilatieId(Integer newGrilaVentilatieId) {
-        this.grilaVentilatieId = newGrilaVentilatieId;
-    }
-
-    public Integer getGrilaVentilatieId() {
-        return grilaVentilatieId;
-    }
-
-    public void readGrilaVentilatieId(Map attributes) {
-	AttributeLocal a = (AttributeLocal)attributes.get("grilaVentilatieId");
-	if(a != null) {
-	    this.setGrilaVentilatieId(a.getIntValue());
-	}
-    }
-
-    public void setGrilaVentilatie(String newGrilaVentilatie) {
-        this.grilaVentilatie = newGrilaVentilatie;
-    }
-
-    public String getGrilaVentilatie() {
-        return grilaVentilatie;
-    }
-
-    public void readGrilaVentilatie(Map attributes) {
-	AttributeLocal a = (AttributeLocal)attributes.get("grilaVentilatie");
-	if(a != null) {
-	    this.setGrilaVentilatie(a.getStringValue());
-	}
-    }
-
-    public void setGauriAerisireId(Integer newGauriAerisireId) {
-        this.gauriAerisireId = newGauriAerisireId;
-    }
-
-    public Integer getGauriAerisireId() {
-        return gauriAerisireId;
-    }
-
-    public void readGauriAerisireId(Map attributes) {
-	AttributeLocal a = (AttributeLocal)attributes.get("gauriAerisireId");
-	if(a != null) {
-	    this.setGauriAerisireId(a.getIntValue());
-	}
-    }
-
-    public void setGauriAerisire(String newGauriAerisire) {
-        this.gauriAerisire = newGauriAerisire;
-    }
-
-    public String getGauriAerisire() {
-        return gauriAerisire;
-    }
-
-    public void readGauriAerisire(Map attributes) {
-	AttributeLocal a = (AttributeLocal)attributes.get("gauriAerisire");
-	if(a != null) {
-	    this.setGauriAerisire(a.getStringValue());
 	}
     }
 

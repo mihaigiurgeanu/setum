@@ -54,12 +54,6 @@ public interface UsaMetalica2K extends EJBObject {
     public ResponseBean updateTresholdSpace(Integer newTresholdSpace) throws RemoteException;
     public ResponseBean updateH1Treshold(Double newH1Treshold) throws RemoteException;
     public ResponseBean updateH2Treshold(Double newH2Treshold) throws RemoteException;
-    public ResponseBean updateFereastraId(Integer newFereastraId) throws RemoteException;
-    public ResponseBean updateFereastra(String newFereastra) throws RemoteException;
-    public ResponseBean updateGrilaVentilatieId(Integer newGrilaVentilatieId) throws RemoteException;
-    public ResponseBean updateGrilaVentilatie(String newGrilaVentilatie) throws RemoteException;
-    public ResponseBean updateGauriAerisireId(Integer newGauriAerisireId) throws RemoteException;
-    public ResponseBean updateGauriAerisire(String newGauriAerisire) throws RemoteException;
     public ResponseBean updateEntryPrice(java.math.BigDecimal newEntryPrice) throws RemoteException;
     public ResponseBean updateSellPrice(java.math.BigDecimal newSellPrice) throws RemoteException;
     public ResponseBean updateMontareSistem(Integer newMontareSistem) throws RemoteException;

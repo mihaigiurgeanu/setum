@@ -19,6 +19,7 @@ import ro.kds.erp.biz.SequenceHome;
 import ro.kds.erp.biz.Sequence;
 import java.math.BigDecimal;
 import java.util.Map;
+import ro.kds.erp.data.CompositeProductLocalHome;
 
 /**
  * Business logic implementation of the genrated UsaMetalica2K EJB
@@ -30,14 +31,10 @@ import java.util.Map;
  * Created: Fri Nov 18 15:34:24 2005
  *
  * @author <a href="mailto:Mihai Giurgeanu@CRIMIRA"></a>
- * @version $Id: UsaMetalica2KBeanImplementation.java,v 1.4 2006/01/18 19:42:58 mihai Exp $
+ * @version $Id: UsaMetalica2KBeanImplementation.java,v 1.5 2006/02/18 10:46:28 mihai Exp $
  */
 public class UsaMetalica2KBeanImplementation 
     extends ro.kds.erp.biz.setum.basic.UsaMetalica2KBean {
-
-    protected ProductLocal fereastra;
-    protected ProductLocal grilaVentilatie;
-    protected ProductLocal gauriAerisire;
 
     /**
      * Save data to the database.
@@ -153,16 +150,6 @@ public class UsaMetalica2KBeanImplementation
 	    attribs.add(ah.create("alteSisteme2Id", form.getAlteSisteme2Id()));
 	    attribs.add(ah.create("alteSisteme2Buc", form.getAlteSisteme2Buc()));
 	    attribs.add(ah.create("sistemeComment", form.getSistemeComment()));
-
-	    if(fereastra != null) {
-		attribs.add(ah.create("fereastra", fereastra));		
-	    }
-	    if(grilaVentilatie != null) {
-		attribs.add(ah.create("grilaVentilatie", grilaVentilatie));
-	    }
-	    if(gauriAerisire != null) {
-		attribs.add(ah.create("gauriAerisire", gauriAerisire));
-	    }
 
 	    r = validate();
 	} catch (Exception e) {
@@ -339,15 +326,6 @@ public class UsaMetalica2KBeanImplementation
 	form.setTresholdSpace(new Integer(1));
 	form.setH1Treshold(new Double(0));
 	form.setH2Treshold(new Double(0));
-	fereastra = null;
-	form.setFereastraId(new Integer(0));
-	form.setFereastra("Fara fereastra");
-	grilaVentilatie = null;
-	form.setGrilaVentilatieId(new Integer(0));
-	form.setGrilaVentilatie("Fara grila ventilatie");
-	gauriAerisire = null;
-	form.setGauriAerisireId(new Integer(0));
-	form.setGauriAerisire("Fara gauri aerisire");
 	form.setSellPrice(new BigDecimal(0));
 	form.setEntryPrice(new BigDecimal(0));
 	form.setMontareSistem(new Integer(1));
@@ -387,108 +365,6 @@ public class UsaMetalica2KBeanImplementation
 	form.setSistemeComment("");
     }
 
-    /**
-     * Overwrite default method. Load the corresponding object from the 
-     * persistence layer.
-     */
-    public ResponseBean updateFereastraId(Integer fereastraId) {
-	ResponseBean r;
-	try {
-	    if(fereastra == null || 
-	       !(fereastra.getId().equals(fereastraId))) {
-		InitialContext ic = new InitialContext();
-		Context env = (Context) ic.lookup("java:comp/env");
-		ProductLocalHome ph = 
-		    (ProductLocalHome)PortableRemoteObject.narrow
-		    (env.lookup("ejb/ProductLocalHome"), ProductLocalHome.class);
-		fereastra = ph.findByPrimaryKey(fereastraId);
-	    }
-
-	    form.setFereastraId(fereastraId);
-	    form.setFereastra(fereastra.getDescription());
-	    
-	    r = new ResponseBean();
-	    r.addRecord();
-	    r.addField("fereastraId", fereastraId);
-	    r.addField("fereastra", fereastra.getDescription());
-	} catch (Exception e) {
-	    r = new ResponseBean();
-	    r.setCode(1);
-	    r.setMessage("Datele despre fereastra nu au putut fi incarcate");
-	    logger.log(BasicLevel.ERROR, "Error updating fereastraId " +
-		       fereastraId, e);
-	}
-	return r;
-    }
-
-    /**
-     * Overwrite default method. Load the corresponding object from the 
-     * persistence layer.
-     */
-    public ResponseBean updateGrilaVentilatieId(Integer grilaVentilatieId) {
-	ResponseBean r;
-	try {
-	    if(grilaVentilatie == null || 
-	       !(grilaVentilatie.getId().equals(grilaVentilatieId))) {
-		InitialContext ic = new InitialContext();
-		Context env = (Context) ic.lookup("java:comp/env");
-		ProductLocalHome ph = 
-		    (ProductLocalHome)PortableRemoteObject.narrow
-		    (env.lookup("ejb/ProductLocalHome"), ProductLocalHome.class);
-		grilaVentilatie = ph.findByPrimaryKey(grilaVentilatieId);
-	    }
-
-	    form.setGrilaVentilatieId(grilaVentilatieId);
-	    form.setGrilaVentilatie(grilaVentilatie.getDescription());
-	    
-	    r = new ResponseBean();
-	    r.addRecord();
-	    r.addField("grilaVentilatieId", grilaVentilatieId);
-	    r.addField("grilaVentilatie", grilaVentilatie.getDescription());
-	} catch (Exception e) {
-	    r = new ResponseBean();
-	    r.setCode(1);
-	    r.setMessage("Datele despre grila de ventilatie nu au putut fi incarcate");
-	    logger.log(BasicLevel.ERROR, "Error updating grilaVentilatieId " +
-		       grilaVentilatieId, e);
-	}
-	return r;
-    }
-
-
-    /**
-     * Overwrite default method. Load the corresponding object from the 
-     * persistence layer.
-     */
-    public ResponseBean updateGauriAerisireId(Integer gaId) {
-	ResponseBean r;
-	try {
-	    if(gauriAerisire == null || 
-	       !(gauriAerisire.getId().equals(gaId))) {
-		InitialContext ic = new InitialContext();
-		Context env = (Context) ic.lookup("java:comp/env");
-		ProductLocalHome ph = 
-		    (ProductLocalHome)PortableRemoteObject.narrow
-		    (env.lookup("ejb/ProductLocalHome"), ProductLocalHome.class);
-		gauriAerisire = ph.findByPrimaryKey(gaId);
-	    }
-
-	    form.setGauriAerisireId(gaId);
-	    form.setGauriAerisire(gauriAerisire.getDescription());
-	    
-	    r = new ResponseBean();
-	    r.addRecord();
-	    r.addField("gauriAerisireId", gaId);
-	    r.addField("gauriAerisire", gauriAerisire.getDescription());
-	} catch (Exception e) {
-	    r = new ResponseBean();
-	    r.setCode(1);
-	    r.setMessage("Datele despre gaurile de aerisire nu au putut fi incarcate");
-	    logger.log(BasicLevel.ERROR, "Error updating gauriAerisireId " +
-		       gaId, e);
-	}
-	return r;
-    }
 
     /**
      * Add the value lists to the response. This method overrides the default
@@ -531,6 +407,40 @@ public class UsaMetalica2KBeanImplementation
 	}
     }
 
+
+    /**
+     * Retrieves the listing of options. The options are different
+     * kind of products that can be added to a door.
+     */
+    public ResponseBean getOptionsListing() {
+	ResponseBean r;
+	try {
+	    InitialContext ic = new InitialContext();
+	    Context env = (Context) ic.lookup("java:comp/env");
+	    ProductLocalHome ph = (ProductLocalHome)PortableRemoteObject.narrow
+		(env.lookup("ejb/ProductHome"), ProductLocalHome.class);
+	    
+	    ProductLocal usa = ph.findByPrimaryKey(id);
+	    r = new ResponseBean();
+	    for(Iterator i = 
+		    usa.getCompositeProduct().getComponents().iterator();
+		i.hasNext(); ) {
+		ProductLocal p = (ProductLocal)i.next();
+		r.addRecord();
+		r.addField("options.id", p.getId());
+		r.addField("options.code", p.getCode());
+		r.addField("options.name", p.getName());
+		r.addField("options.description", p.getDescription());
+		r.addField("options.entryPrice", p.getEntryPrice());
+		r.addField("options.sellPrice", p.getSellPrice());
+		r.addField("options.categoryId", p.getCategory().getId());
+		r.addField("options.categoryName", p.getCategory().getName());
+	    }
+	} catch (Exception e) {
+	}
+	return null;
+    }
+
     /**
      * Price calculation.
      */
@@ -539,11 +449,6 @@ public class UsaMetalica2KBeanImplementation
 	    * (form.getHe().doubleValue()/1000);
 	double price = se * 200;
 	double entryPrice = se * 125;
-
-	if(fereastra != null) {
-	    price += fereastra.getSellPrice().doubleValue();
-	    entryPrice += fereastra.getEntryPrice().doubleValue();
-	}
 
 	form.setEntryPrice(new BigDecimal(entryPrice));
 	form.setSellPrice(new BigDecimal(price));
