@@ -8,18 +8,20 @@
     orient="horizontal"
     xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
 
-  <script language="JavaScript"><![CDATA[
-
-  function show_module() {
-    var tree = document.getElementById("appmodules");
-    var view = tree.view;
-    var pannel = document.getElementById("apppannel");
-
-    pannel.setAttribute("src", view.getCellText(tree.currentIndex, "xulfile"));
-    //window.setAttribute("title", pannel.contentWindow.getAttribute("title"));
-  }
-
-  ]]></script>
+  <script language="JavaScript">
+    <![CDATA[
+	       
+	     function show_module() {
+		 var tree = document.getElementById("appmodules");
+		 var view = tree.view;
+		 var pannel = document.getElementById("apppannel");
+		 
+		 pannel.setAttribute("src", view.getCellText(tree.currentIndex, "xulfile"));
+		 
+	     }
+	     
+    ]]>
+  </script>
 
 
   <tree id="appmodules" width="180px"
