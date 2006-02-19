@@ -1,0 +1,14 @@
+Setting up development environment for xul:
+
+The following should be added to prefs.js:
+
+// Log errors in chrome file to the Javascript Console
+user_pref( "javascript.options.showInConsole", true ) ; 
+// Disable XUL cache, so chrome changes do not require a restart
+user_pref( "nglayout.debug.disable_xul_cache", true ) ; 
+// dump() function outputs to console if application started with -console flag
+user_pref( "browser.dom.window.dump.enabled", true ) ; 
+// Enable strict javascript warnings, to produce clean extensions
+user_pref( "javascript.options.strict", true ) ; 
+
+
