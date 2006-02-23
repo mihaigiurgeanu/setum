@@ -3,12 +3,14 @@
 <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
             xmlns:modules="http://www.kds.ro/erp/modules/definition#">
 
+  <!-- Top menus -->
   <rdf:Seq rdf:about="http://www.kds.ro/erp/modules">
     <rdf:li rdf:resource="http://www.kds.ro/erp/modules/setum/products" />
     <rdf:li rdf:resource="http://www.kds.ro/erp/modules/setum/offer" />
     <rdf:li rdf:resource="http://www.kds.ro/erp/modules/setum/clienti" />
   </rdf:Seq>
 
+  <!-- Modules in products category -->
   <rdf:Seq rdf:about="http://www.kds.ro/erp/modules/setum/products">    
     <rdf:li rdf:resource="http://www.kds.ro/erp/modules/setum/sisteme" />
     <rdf:li rdf:resource="http://www.kds.ro/erp/modules/setum/usisimple" />
@@ -16,6 +18,8 @@
     <rdf:li rdf:resource="http://www.kds.ro/erp/modules/setum/otherProducts" />
   </rdf:Seq>
 
+
+  <!-- Menus in offer category -->
   <rdf:Seq rdf:about="http://www.kds.ro/erp/modules/setum/offer">
     <rdf:li rdf:resource="http://www.kds.ro/erp/modules/setum/standardoffer" />
     <rdf:li 
@@ -24,6 +28,8 @@
 	rdf:resource="http://www.kds.ro/erp/modules/setum/arbitrary-offer"/>
   </rdf:Seq>
 
+
+  <!-- Products toplevel menu -->
   <rdf:Description rdf:about="http://www.kds.ro/erp/modules/setum/products">
     <modules:displayName>Produse</modules:displayName>
     <modules:description>Nomenclator produse</modules:description>
