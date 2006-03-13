@@ -265,38 +265,43 @@ public class StandardOfferBean extends ro.kds.erp.biz.setum.basic.StandardOfferB
     public ResponseBean lineItemsListing() {
 	ResponseBean r;
 
-	try {
-	    InitialContext ic = new InitialContext();
-	    Context env = (Context)ic.lookup("java:comp/env");
-	    
-	    OfferLocalHome oh = (OfferLocalHome)PortableRemoteObject.
-		narrow(env.lookup("ejb/OfferHome"), OfferLocalHome.class);
-
-	    OfferLocal offer = oh.findByPrimaryKey(id);
-
-	    Collection offerItems = offer.getItems();
+	if (id == null) {
+	    // this is a new offer
 	    r = new ResponseBean();
-	    for(Iterator i = offerItems.iterator(); i.hasNext();) {
-		OfferItemLocal item = (OfferItemLocal)i.next();
-		r.addRecord();
-		r.addField("id", item.getId());
-		ProductLocal p = item.getProduct();
-		if(p != null) {
-		    r.addField("offerLines.category", 
-			       p.getCategory().getName());
-		    r.addField("offerLines.name", p.getName());
+	} else {
+	    try {
+		InitialContext ic = new InitialContext();
+		Context env = (Context)ic.lookup("java:comp/env");
+	    
+		OfferLocalHome oh = (OfferLocalHome)PortableRemoteObject.
+		    narrow(env.lookup("ejb/OfferHome"), OfferLocalHome.class);
+
+		OfferLocal offer = oh.findByPrimaryKey(id);
+
+		Collection offerItems = offer.getItems();
+		r = new ResponseBean();
+		for(Iterator i = offerItems.iterator(); i.hasNext();) {
+		    OfferItemLocal item = (OfferItemLocal)i.next();
+		    r.addRecord();
+		    r.addField("id", item.getId());
+		    ProductLocal p = item.getProduct();
+		    if(p != null) {
+			r.addField("offerLines.category", 
+				   p.getCategory().getName());
+			r.addField("offerLines.name", p.getName());
+		    }
+
+		    r.addField("offerLines.price", item.getPrice());
+		
 		}
 
-		r.addField("offerLines.price", item.getPrice());
-		
+	    } catch (Exception e) {
+		logger.log(BasicLevel.WARN, "Current offer can not be selected", 
+			   e);
+		r = new ResponseBean();
+		r.setCode(4);
+		r.setMessage("Nu se poate incarca lista de oferte. Ati selectat o oferta?");
 	    }
-
-	} catch (Exception e) {
-	    logger.log(BasicLevel.WARN, "Current offer can not be selected", 
-		       e);
-	    r = new ResponseBean();
-	    r.setCode(4);
-	    r.setMessage("Nu se poate incarca lista de oferte. Ati selectat o oferta?");
 	}
 	return r;
     }

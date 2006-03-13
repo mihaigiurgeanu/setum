@@ -15,9 +15,9 @@
 
   <commandset>
     <command id="command-save" oncommand="theForm.save();load_offers();" />
-    <command id="command-add" oncommand="theForm.addnew(); document.getElementById('maintab').selectedIndex=1;" />
+    <command id="command-add" oncommand="theForm.addnew();load_items();document.getElementById('maintab').selectedIndex=1" />
     <command id="command-save-subform" 
-	     oncommand="theForm.save_sub('saveSubForm');load_items()" />
+	     oncommand="theForm.save_sub('saveSubForm');load_items();document.getElementById('maintab').selectedIndex=1" />
     <command id="command-add-item"
 	     oncommand="theForm.addnew_sub('addNewItem'); document.getElementById('maintab').selectedIndex=2;" />
 
