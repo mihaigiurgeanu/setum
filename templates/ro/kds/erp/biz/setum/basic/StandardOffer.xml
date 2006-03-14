@@ -86,6 +86,7 @@
     <method>ResponseBean lineItemsListing() throws RemoteException</method>
     <method>ResponseBean loadSubForm(Integer loadId) throws RemoteException</method>
     <method>ResponseBean addNewItem() throws RemoteException</method>
+    <method>ResponseBean addProduct(Integer productId) throws RemoteException</method>
     <method>ResponseBean removeItem() throws RemoteException</method>
     <method>ResponseBean saveSubForm() throws RemoteException</method>
     <method>java.util.Collection lineItemsCollectionMap() throws RemoteException</method>
