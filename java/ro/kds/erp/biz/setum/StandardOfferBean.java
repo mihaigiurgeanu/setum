@@ -424,9 +424,17 @@ public class StandardOfferBean extends ro.kds.erp.biz.setum.basic.StandardOfferB
 	copyFieldsToResponse(r);
 	
 	// add the list values used for this form
-	r.addValueList("productId", getProductsVL());
+	//r.addValueList("productId", getProductsVL());
 
 	return r;
+    }
+
+    public ResponseBean addProduct(Integer productId) {
+	form.setProductId(productId);
+	computeCalculatedFields(null);
+	form.setPrice(form.getSellPrice());
+	offerItem = null;
+	return saveSubForm();
     }
 
     public ResponseBean removeItem() {

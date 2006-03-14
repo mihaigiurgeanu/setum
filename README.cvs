@@ -1,3 +1,9 @@
 # Add here different tags to be able to quikly retrieve old versions from repository
 #Date:Tag:Comment
 2006-02-18::Almost the last version released
+2006-02-26:
+	Will use FMPP for processing templates: there will be only one XML data file that will contain data for all classes and the templates will generate files for each class.
+	The templates will be enriched with generating code for suforms.
+2006-03-14:
+	For now I will stick with the old style, because for the new style (with FMPP and one XML file in wich to describe all classes needs more thinking). The main objectives now: finalizing the arbitrary offer and building the order.
+
