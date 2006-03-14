@@ -46,12 +46,6 @@
     <modules:xulfile>sisteme.xul</modules:xulfile>
   </rdf:Description>
 
-  <rdf:Description rdf:about="http://www.kds.ro/erp/modules/setum/otherProducts">
-    <modules:displayName>Alte produse</modules:displayName>
-    <modules:description>Gestiunea preturilor interne folosite pentru productia de alte produse</modules:description>
-    <modules:xulfile>preturi_interne.xul</modules:xulfile>
-  </rdf:Description>
-
   <rdf:Description rdf:about="http://www.kds.ro/erp/modules/setum/usisimple">
     <modules:displayName>Usi neechipate</modules:displayName>
     <modules:description>Gestiunea nomenclatorului de produse</modules:description>
@@ -64,6 +58,13 @@
     <modules:xulfile>usi_std_echipate.xul</modules:xulfile>
   </rdf:Description>
 
+  <rdf:Description rdf:about="http://www.kds.ro/erp/modules/setum/otherProducts">
+    <modules:displayName>Alte produse</modules:displayName>
+    <modules:description>Gestiunea preturilor interne folosite pentru productia de alte produse</modules:description>
+    <modules:xulfile>preturi_interne.xul</modules:xulfile>
+  </rdf:Description>
+
+<!--
   <rdf:Description rdf:about="http://www.kds.ro/erp/modules/setum/usimetalice1K">
     <modules:displayName>Usi metalice 1 canat</modules:displayName>
     <modules:description>Gestionarea ofertei de usi metalice</modules:description>
@@ -75,6 +76,7 @@
     <modules:description>Gestionarea ofertei de usi metalice</modules:description>
     <modules:xulfile>usimetalice2k.xul</modules:xulfile>
   </rdf:Description>
+-->
 
   <rdf:Seq rdf:about="http://www.kds.ro/erp/modules/setum/clienti">
     <rdf:li rdf:resource="http://www.kds.ro/erp/modules/setum/clienti/companii" />

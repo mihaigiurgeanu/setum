@@ -19,7 +19,7 @@
     <command id="command-save-subform" 
 	     oncommand="theForm.save_sub('saveSubForm');load_items();document.getElementById('maintab').selectedIndex=1" />
     <command id="command-add-item"
-	     oncommand="theForm.addnew_sub('addNewItem'); document.getElementById('maintab').selectedIndex=2;" />
+	     oncommand="addItems()" />
 
     <command id="remove-line" oncommand="theForm.remove_item(crtItem()['id']);load_items();" />
 
@@ -160,11 +160,17 @@
 	    </columns>
 	    <rows>
 	      <row>
+		<label control="productName" value="Produs:"/>
+		<textbox id="productName" readonly="true"/>
+	      </row>
+	      <!--
+	      <row>
 		<label control="productId" value="Produs"/>
 		<menulist id="productId" oncommand="combo_changed(this)">
 		  <menupopup id="productId-popup"/>
 		</menulist>
 	      </row>
+	      -->
 	      <row>
 		<label control="price" value="Pret"/>
 		<textbox id="price"/>
@@ -192,10 +198,6 @@
 	      <row>
 		<label control="productCode" value="Cod:"/>
 		<textbox id="productCode" readonly="true"/>
-	      </row>
-	      <row>
-		<label control="productName" value="Nume produs:"/>
-		<textbox id="productName" readonly="true"/>
 	      </row>
 	      <row>
 		<label control="entryPrice" value="Pret intrare:"/>

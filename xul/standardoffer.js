@@ -31,7 +31,7 @@ theForm.text_fields = new Array("no", "docDate", "dateFrom", "dateTo",
 				"productCategory", "productCode",
 				"productName", "entryPrice", "sellPrice");
 
-theForm.combo_fields = new Array("productId");
+theForm.combo_fields = new Array();
 theForm.radio_fields = new Array();
 theForm.do_link = "/standardoffer.do";
 
@@ -57,4 +57,24 @@ function discontinue_offer() {
 
 function crtItem() {
     return line_items[document.getElementById('offerLines').currentIndex];
+}
+
+// Open a dialog to select the items to add to the offer
+function addItems() {
+    //theForm.addnew_sub('addNewItem'); 
+    //document.getElementById('maintab').selectedIndex=2;
+
+    var select_handler = {
+	theForm: theForm,
+	select: function(id) {
+	    var req = this.theForm.get_request();
+	    req.add("command", "addProduct");
+	    req.add("param0", id);
+	    this.theForm.post_request(req);
+	    load_items();
+	}
+    };
+
+    window.openDialog("select-sistem.xul", "selectsistem", "chrome,resizable", select_handler);
+
 }

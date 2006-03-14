@@ -57,13 +57,6 @@
 	
 
 	<grid>
-	  <columns>
-	    <column/>
-	    <column flex="1"/>
-	    <column/>
-	    <column flex="1"/>
-	  </columns>
-
 	  <rows>
 	    <row>
 	      <label control="code" value="Cod magazie:"/>
@@ -84,14 +77,21 @@
 	    <row>
 	      <label control="sellPrice" value="Pret:"/>
 	      <textbox id="sellPrice"/>
-	      <label control="relativeGain" value="Adaos(%):"/>
-	      <textbox id="relativeGain"/>
 	    </row>
 	    <row>
-	      <box/>
-	      <box/>
-	      <label control="absoluteGain" value="Adaos(Lei):"/>
-	      <textbox id="absoluteGain"/>
+	      <hbox/>
+	      <grid>
+		<rows>
+		  <row>
+		    <label control="relativeGain" value="Adaos(%):"/>
+		    <textbox id="relativeGain"/>
+		  </row>
+		  <row>
+		    <label control="absoluteGain" value="Adaos(Lei):"/>
+		    <textbox id="absoluteGain"/>
+		  </row>
+		</rows>
+	      </grid>
 	    </row>
 	  </rows>
 	</grid>

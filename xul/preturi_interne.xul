@@ -54,12 +54,6 @@
       </tabpanel>
       <tabpanel id="maintab.detalii" orient="vertical" flex="1" style="overflow:auto">
 	<grid>
-	  <columns>
-	    <column/>
-	    <column/>
-	    <column/>
-	    <column/>
-	  </columns>
 	  <rows>
 	    <row>
 	      <label control="categoryId" value="Categorie:"/>
@@ -82,26 +76,40 @@
 	    <row>
 	      <label control="sellPrice" value="Pret magazin:"/>
 	      <textbox id="sellPrice"/>
-	      <label control="relativeGainSP" value="Adaos (%):"/>
-	      <textbox id="relativeGainSP"/>
 	    </row>
 	    <row>
 	      <hbox/>
-	      <hbox/>
-	      <label control="absoluteGainSP" value="Adaos (Lei):"/>
-	      <textbox id="absoluteGainSP"/>
+	      <grid>
+		<rows>
+		  <row>
+		    <label control="relativeGainSP" value="Adaos (%):"/>
+		    <textbox id="relativeGainSP"/>
+		  </row>
+		  <row>
+		    <label control="absoluteGainSP" value="Adaos (Lei):"/>
+		    <textbox id="absoluteGainSP"/>
+		  </row>
+		</rows>
+	      </grid>
 	    </row>
 	    <row>
 	      <label control="partPrice" value="Pret cu usa:"/>
 	      <textbox id="partPrice"/>
-	      <label control="relativeGainPP" value="Adaos (%):"/>
-	      <textbox id="relativeGainPP"/>
 	    </row>
 	    <row>
 	      <hbox/>
-	      <hbox/>
-	      <label control="absoluteGainPP" value="Adaos (Lei):"/>
-	      <textbox id="absoluteGainPP"/>
+	      <grid>
+		<rows>
+		  <row>
+		    <label control="relativeGainPP" value="Adaos (%):"/>
+		    <textbox id="relativeGainPP"/>
+		  </row>
+		  <row>
+		    <label control="absoluteGainPP" value="Adaos (Lei):"/>
+		    <textbox id="absoluteGainPP"/>
+		  </row>
+		</rows>
+	      </grid>
 	    </row>
 	    <row>
 	      <label control="laborPrice" value="Pret montare:"/>

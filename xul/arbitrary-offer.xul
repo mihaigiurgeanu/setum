@@ -36,7 +36,7 @@ Data-entry form for general purpose offers.
       <template>
 	<menuitem uri="rdf:*" 
 		  label="rdf:http://www.kds.ro/erp/businessCategory#title" 
-		  oncommand="make_category(this.id).addnew_dlg(load_items);" />
+		  oncommand="theForm.save(); make_category(this.id).addnew_dlg(load_items);" />
       </template>
     </popup>
 

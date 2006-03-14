@@ -16,6 +16,7 @@ function FormObject() {
     this.load_form = load_form;
     this.load_current = load_current;
     this.load_subform = load_subform;
+    this.get_request = get_request;
     this.addnew = addnew;
     this.addnew_sub = addnew_sub;
     this.save = save;
@@ -233,6 +234,10 @@ function update_valuelists(vlc) {
 function remove_children(node) {
     while(node.hasChildNodes())
 	node.removeChild(node.firstChild);
+}
+
+function get_request() {
+    return new HTTPDataRequest(this.do_link);
 }
 
 function addnew() {
