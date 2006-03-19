@@ -42,15 +42,28 @@ public class ResponseBean implements Serializable {
     LinkedHashMap valueLists;
 
     /**
-     * Creates a new <code>ResponseBean</code> instance.
-     *
+     * Field intialization
      */
-    public ResponseBean() {
+    private void initialize() {
 	fields = null;
 	records = new LinkedList();
 	setCode(0);
 	setMessage(null);
 	valueLists = new LinkedHashMap();
+    }
+
+    /**
+     * Creates a new <code>ResponseBean</code> instance.
+     *
+     */
+    public ResponseBean() {
+	initialize();
+    }
+
+    public ResponseBean(int code, String msg) {
+	initialize();
+	setCode(code);
+	setMessage(msg);
     }
 
     /** 
@@ -283,4 +296,26 @@ public class ResponseBean implements Serializable {
     public final void setMessage(final String newMessage) {
 	this.message = newMessage;
     }
+
+
+    public static final ResponseBean SUCCESS = new ResponseBean();
+    public static final ResponseBean ERR_CONFIG_NAMING = 
+	new ResponseBean(1, "Eroare de sistem");
+    public static final ResponseBean ERR_REMOTE = 
+	new ResponseBean(2, "Eroare comunicare cu serverul de aplicatie");
+    public static final ResponseBean ERR_CREATE = 
+	new ResponseBean(3, "Eroare la insert in baza de date");
+    public static final ResponseBean ERR_NOTCURRENT = 
+	new ResponseBean(4, "Nu este nici o selectie curenta!" +
+			 " Alegeti ceva din lista!");
+    public static final ResponseBean ERR_UNEXPECTED = 
+	new ResponseBean(5, "O eroare neasteptata a aparut la executia pe server");
+    public static final ResponseBean ERR_CONFIG_NOTFOUND = 
+	new ResponseBean(6, "Eroare de sistem");
+    public static final ResponseBean ERR_NOTFOUND = 
+	new ResponseBean(7, "Informatia nu exista in baza de date");
+    public static final ResponseBean ERR_NOTIMPLEMENTED =
+	new ResponseBean(8, "Operatia nu este implementata");
+    public static final ResponseBean ERR_REMOVE = 
+	new ResponseBean(9, "Eroare la executarea operatiei de stergere");
 }

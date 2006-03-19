@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="iso-8859-2"?>
+
+<!-- 
+
+Business logic responsible to edit a list of categories, 
+the corresponding list of products and the corresponding 
+list of attributes.
+
+-->
+
+<class>
+  <package>ro.kds.erp.biz.basic</package>
+  <name>GenericProducts</name>
+  <field>
+    <name>categoryId</name>
+    <type>Integer</type>
+  </field>
+  <field>
+    <name>categoryName</name>
+    <type>String</type>
+  </field>
+  
+  <field>
+    <name>productId</name>
+    <type>Integer</type>
+  </field>
+  <field>
+    <name>productName</name>
+    <type>String</type>
+  </field>
+  <field>
+    <name>productDescription</name>
+    <type>String</type>
+  </field>
+  <field>
+    <name>productCode</name>
+    <type>String</type>
+  </field>
+  <field>
+    <name>productEntryPrice</name>
+    <type>java.math.BigDecimal</type>
+  </field>
+  <field>
+    <name>productSellPrice</name>
+    <type>java.math.BigDecimal</type>
+  </field>
+  <field>
+    <name>productPrice1</name>
+    <type>java.math.BigDecimal</type>
+  </field>
+  <field>
+    <name>productPrice2</name>
+    <type>java.math.BigDecimal</type>
+  </field>
+  <field>
+    <name>productPrice3</name>
+    <type>java.math.BigDecimal</type>
+  </field>
+  <field>
+    <name>productPrice4</name>
+    <type>java.math.BigDecimal</type>
+  </field>
+  <field>
+    <name>productPrice5</name>
+    <type>java.math.BigDecimal</type>
+  </field>
+
+  <field>
+    <name>attrId</name>
+    <type>Integer</type>
+  </field>
+  <field>
+    <name>attrName</name>
+    <type>String</type>
+  </field>
+  <field>
+    <name>attrString</name>
+    <type>String</type>
+  </field>
+  <field>
+    <name>attrInt</name>
+    <type>Integer</type>
+  </field>
+  <field>
+    <name>attrDecimal</name>
+    <type>java.math.BigDecimal</type>
+  </field>
+  <field>
+    <name>attrDouble</name>
+    <type>Double</type>
+  </field>
+
+  <!-- subform definitions -->
+  <subforms>
+    <subform name="product"/>
+    <subform name="attribute"/>
+  </subforms>
+
+  <!-- Business methods (update methods are included automatically) -->
+  <remote>
+    <method>ResponseBean loadCategories() throws RemoteException</method>
+    <method>ResponseBean loadProducts() throws RemoteException</method>
+    <method>ResponseBean loadAttributes() throws RemoteException</method>
+    <method>ResponseBean removeCategory() throws RemoteException</method>
+    <method>ResponseBean removeProduct() throws RemoteException</method>
+    <method>ResponseBean removeAttribute() throws RemoteException</method>
+  </remote>
+
+</class>

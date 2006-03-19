@@ -1,44 +1,40 @@
 package ro.kds.erp.web;
 
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
 import org.objectweb.util.monolog.api.BasicLevel;
 import java.util.HashMap;
+import org.apache.commons.beanutils.ConvertUtils;
+import ro.kds.erp.utils.DateConverter;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import javax.ejb.EJBObject;
 import ro.kds.erp.biz.ResponseBean;
-import org.objectweb.util.monolog.api.Logger;
-import java.lang.reflect.Method;
-import org.objectweb.jonas.common.Log;
-import java.util.Map;
-import org.apache.commons.beanutils.ConvertUtils;
+import java.io.PrintWriter;
 import javax.naming.NamingException;
 import javax.ejb.CreateException;
 import java.rmi.RemoteException;
+import java.lang.reflect.InvocationTargetException;
+import javax.naming.InitialContext;
 import javax.ejb.EJBHome;
 import javax.rmi.PortableRemoteObject;
-import javax.naming.InitialContext;
-import javax.naming.Context;
-import java.lang.reflect.InvocationTargetException;
-import java.io.PrintWriter;
 import java.util.Map.Entry;
+import javax.naming.Context;
+import org.objectweb.util.monolog.api.Logger;
+import java.lang.reflect.Method;
+import org.objectweb.jonas.common.Log;
 import java.util.Iterator;
-import org.apache.commons.beanutils.locale.converters.DateLocaleConverter;
+import java.util.Map;
+import java.util.Date;
+import javax.servlet.http.HttpServlet;
 
 /**
- * Gets the calls from the UI interface and dispatch them to the
- * business logic layer. The business layer is representing by a session
- * bean stored in the current HTTP session of the request. The session bean
- * is localized through the jndi. It's jndi name is retrieved from the
- * servlet's init parameter named "sessionBean".
- *
- * The dispatching is made uppon the <code>command</code>
- * http parameter:
+ * This is a trimed down version of the <code>CallDispatcher</code> that will
+ * be used for a less verbose api of client server communications. The only
+ * commands recognized by this dispatcher are:
  *
  * <dl>
- * <dt>change
+ * <dt>change</dt>
  * <dd>The <code>field</code> http parameter of the request contains the
  * name of the field that would be updated and the <code>value</code>
  * parameter contains the <code>String</code> representation of the new value
@@ -46,40 +42,25 @@ import org.apache.commons.beanutils.locale.converters.DateLocaleConverter;
  * session bean for a method called 
  * <code>updateField</code>, and invokes the method by converting the
  * <code>value</code> parameter to the type of the method's parameter.
+ * </dd>
  *
- * <dt>load
- * <dd>The <code>id</code> parameter will contain the value of the primary
- * key that should be loaded. The servlet gets the current session bean or
- * creates a new one and invokes the <code>loadFormData(Integer id)</code>
- * on it.
- *
- * <dt>save
- * <dd>The current session bean's method <code>saveFormData()</code> is
- * invoked.
- *
- * <dt>new
- * <dd>The current session bean is retrieved from the HTTP session and if it 
- * does not exists a new one is created. The <code>newFormData()</code>
- * method is invoked on this bean.
- *
- * <dt>listing
- * <dd>The current session bean's <code>loadListing()</code> is invoked.
- * 
- * <dt>other commands
+ * <dt>Reflection commands</dt>
  * <dd>The current session bean is retrieved. It is searched for a method
  * called as the <code>command</code> parameter. For each of its parameters
  * the values are looked in the current request and converted to the 
  * parameter types found in the method. The method is then invoked with these
  * parameters.
+ * </dd>
  *
  * </dl>
  *
- * Created: Sun Oct 30 16:35:02 2005
+ *
+ * Created: Tue Mar 14 17:09:40 2006
  *
  * @author <a href="mailto:Mihai Giurgeanu@CRIMIRA"></a>
- * @version 1.0
+ * @version $Id: SimpleCallDispatcherServlet.java,v 1.1 2006/03/19 20:19:23 mihai Exp $
  */
-public class CallDispatcherServlet extends HttpServlet {
+public class SimpleCallDispatcherServlet extends HttpServlet {
 
 
     private Logger logger = null;
@@ -112,7 +93,7 @@ public class CallDispatcherServlet extends HttpServlet {
      * @exception ServletException if an error occurs
      */
     public final void init() throws ServletException {
-	logger = Log.getLogger("ro.kds.erp.web.CallDispatcherServlet");
+	logger = Log.getLogger("ro.kds.erp.web.SimpleCallDispatcherServlet");
         logger.log(BasicLevel.DEBUG, "");
 
 	try {
@@ -142,6 +123,8 @@ public class CallDispatcherServlet extends HttpServlet {
 	}
     }
 
+
+
     /**
      * Servlet's entry point.
      *
@@ -156,8 +139,6 @@ public class CallDispatcherServlet extends HttpServlet {
 
 	logger.log(BasicLevel.DEBUG, "Component's path: " + 
 		   request.getRequestURI());
-	logger.log(BasicLevel.DEBUG, "Query string: " + 
-		   request.getQueryString());
 	
 	EJBObject bean = (EJBObject)request.getSession()
 	    .getAttribute(SESSION_ATTR);
@@ -237,116 +218,6 @@ public class CallDispatcherServlet extends HttpServlet {
 		}
 	    }
 	    
-	} else if (command.equals("load")) {
-	    String idParam = request.getParameter("id");
-	    logger.log(BasicLevel.DEBUG, "Operation load for id " + idParam);
-	    try {
-		Object params[] = new Object[1];
-		params[0] = new Integer(Integer.parseInt(idParam));
-		Method loadFormData = (Method)methods.get("loadFormData");
-
-		if(bean == null) {
-		    bean = newSessionBean(request);
-		}
-		r = (ResponseBean)loadFormData.invoke(bean, params);
-	    } catch (RemoteException e) {
-		removeSessionBean(request);
-		r = new ResponseBean();
-		r.setCode(2);
-		r.setMessage("Eroare la comunicarea cu server-ul de business logic");
-		logger.log(BasicLevel.ERROR,
-			   "Error executing load operation", e);
-	    } catch (Exception e) {
-		r = new ResponseBean();
-		r.setCode(1);
-		r.setMessage("Eroare la incarcarea formului");
-		logger.log(BasicLevel.ERROR, "Can not load form for id " +
-			   idParam, e);
-	    }
-	} else if (command.equals("new")) {
-	    logger.log(BasicLevel.DEBUG, "Executing operation new");
-	    try {
-		if(bean == null) {
-		    bean = newSessionBean(request);
-		}
-		Method newFormData = (Method)methods.get("newFormData");
-		r = (ResponseBean)newFormData.invoke(bean, null);
-	    } catch (RemoteException e) {
-		removeSessionBean(request);
-		r = new ResponseBean();
-		r.setCode(2);
-		r.setMessage("Eroare la comunicarea cu server-ul de business logic");
-		logger.log(BasicLevel.ERROR,
-			   "Error executing new operation", e);
-	    } catch (Exception e) {
-		r = new ResponseBean();
-		r.setCode(1);
-		r.setMessage("Eroare la crearea unui nou obiect");
-		logger.log(BasicLevel.ERROR, "Error executing new", e);
-	    }
-	} else if (command.equals("listing")) {
-	    try {
-		if(bean == null) {
-		    bean = newSessionBean(request);
-		}
-		Method loadListing = (Method)methods.get("loadListing");
-
-
-		Class paramTypes[] = loadListing.getParameterTypes();
-		logger.log(BasicLevel.DEBUG, "Method loadListing" + 
-			   " requires " + paramTypes.length + " parameters.");
-		Object params[] = new Object[paramTypes.length];
-		for(int i=0; i<paramTypes.length; i++) {
-		    // i expect the parameters with the names
-		    // param1, param2, ... .
-		    String param = request.getParameter("param" + i);
-		    if(param == null) {
-			params[i] = null;
-			logger.log(BasicLevel.WARN, "param" + i + " does not exist. Setting it to null when calling method " + command);
-		    } else {
-			params[i] = ConvertUtils.convert(param, paramTypes[i]);
-			logger.log(BasicLevel.DEBUG, "param" + i + 
-				   " has value <<" + param +
-				   ">>  when calling method " + command);
-		    }
-		}
-
-
-		r = (ResponseBean)loadListing.invoke(bean, params);
-
-	    } catch (RemoteException e) {
-		removeSessionBean(request);
-		r = new ResponseBean();
-		r.setCode(2);
-		r.setMessage("Nu pot incarca lista");
-		removeSessionBean(request);
-		logger.log(BasicLevel.ERROR,
-			   "Error executing listing operation", e);
-	    } catch (Exception e) {
-		r = new ResponseBean();
-		r.setCode(1);
-		r.setMessage("Nu pot incarca lista");
-		removeSessionBean(request);
-		logger.log(BasicLevel.ERROR,
-			   "Error executing listing operation", e);
-	    }
-	} else if (command.equals("save")) {
-	    if(bean == null) {
-		r = new ResponseBean();
-		r.setCode(4);
-		r.setMessage("Trebuie sa selectati mai intai o inregistrare!");
-		logger.log(BasicLevel.INFO, "Save operation called but no itemwas selected");
-	    } else {
-		try {
-		    Method saveFormData = (Method)methods.get("saveFormData");
-		    r = (ResponseBean)saveFormData.invoke(bean, null);
-		} catch (Exception e) {
-		    r = new ResponseBean();
-		    r.setCode(1);
-		    r.setMessage("Eroare la salvare!");
-		    logger.log(BasicLevel.ERROR, "Error executing save", e);
-		}
-	    }	    
 	} else {
 	    // other commands
 	    Method m = (Method)methods.get(command);
@@ -436,5 +307,6 @@ public class CallDispatcherServlet extends HttpServlet {
 	}
 	request.getSession().removeAttribute(SESSION_ATTR);
     }
+
 
 }

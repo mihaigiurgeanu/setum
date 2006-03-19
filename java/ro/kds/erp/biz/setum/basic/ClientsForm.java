@@ -38,6 +38,99 @@ public class ClientsForm implements Serializable {
     String contactTitle;
     String contactComment;
 
+    public ClientsForm() {
+
+
+       this.isCompany = new Integer(0);
+
+
+
+       this.firstName = "";
+
+
+
+       this.lastName = "";
+
+
+
+       this.companyName = "";
+
+
+
+       this.address = "";
+
+
+
+       this.postalCode = "";
+
+
+
+       this.city = "";
+
+
+
+       this.countryCode = "";
+
+
+
+       this.companyCode = "";
+
+
+
+       this.phone = "";
+
+
+
+       this.iban = "";
+
+
+
+       this.bank = "";
+
+
+
+       this.comment = "";
+
+
+
+       this.contactFirstName = "";
+
+
+
+       this.contactLastName = "";
+
+
+
+       this.contactDepartment = "";
+
+
+
+       this.contactPhone = "";
+
+
+
+       this.contactMobile = "";
+
+
+
+       this.contactFax = "";
+
+
+
+       this.contactEmail = "";
+
+
+
+       this.contactTitle = "";
+
+
+
+       this.contactComment = "";
+
+
+
+    }
+
     public void setIsCompany(Integer newIsCompany) {
         this.isCompany = newIsCompany;
     }

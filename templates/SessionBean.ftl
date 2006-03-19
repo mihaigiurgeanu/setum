@@ -29,7 +29,9 @@ public abstract class ${.node.class.name}Bean
     protected SessionContext ejbContext;
 
     protected Integer id;
-
+    [#list .node.class.subforms.subform as subform]
+    protected Integer ${subform.@name}Id;
+    [/#list]
     final static String FORM_VARNAME = "form";
     final static String RESPONSE_VARNAME = "response";
     final static String LOGIC_VARNAME = "logic";
@@ -84,6 +86,9 @@ public abstract class ${.node.class.name}Bean
 	ResponseBean r = new ResponseBean();
 	r.addRecord();
 	id = null; // a new product will be added
+        [#list .node.class.subforms.subform as subform]
+        ${subform.@name}Id = null;
+        [/#list]
 	
 	// set values of the calculated fields
 	computeCalculatedFields(null);
@@ -92,11 +97,6 @@ public abstract class ${.node.class.name}Bean
 	copyFieldsToResponse(r);
 	return r;
     }
-
-    /**
-     * Updating or inserting the form into the database.
-     */
-    public abstract ResponseBean saveFormData();
 
     /**
      * Load the form from the database.
@@ -112,6 +112,72 @@ public abstract class ${.node.class.name}Bean
 	copyFieldsToResponse(r);
 	return r;
      }
+
+    /**
+     * Locates the data by the primary key and loads the fields into the
+     * form. The <code>form</code> instance variable already contains
+     * a new initialized form data. The <code>id</code> local variable contains
+     * the primary key for the record that should be located and loaded into
+     * the form bean.
+     */
+     public abstract ResponseBean loadFields() throws FinderException;
+
+    /**
+     * Create a new ${.node.class.name}Form and initialize the 
+     * <code>this.form</code> instance variable. Overwrite this method
+     * if you want to provide other code for initializing the form bean.
+     */
+    protected void createNewFormBean() {
+	form = new ${.node.class.name}Form();
+    }
+
+    /**
+     * Save the current record into the database.
+     */
+    public abstract ResponseBean saveFormData();
+
+    [#list .node.class.subforms.subform as subform]
+    public ResponseBean new${subform.@name?cap_first}Data() {
+        init${subform.@name?cap_first}Fields();
+        ResponseBean r = new ResponseBean();
+        ${subform.@name}Id = null;
+        computeCalculatedFields(null);
+
+        copyFieldsToResponse(r);
+        return r;
+    }
+
+    protected abstract void init${subform.@name?cap_first}Fields();
+
+    /**
+     * Load the data in the subform ${subform.@name}
+     */
+    public ResponseBean load${subform.@name?cap_first}Data(Integer loadId) throws FinderException {
+
+	logger.log(BasicLevel.DEBUG, "Loading subform ${subform.@name?cap_first} for id = " + loadId);
+	init${subform.@name?cap_first}Fields();
+	${subform.@name}Id = loadId;
+
+	ResponseBean r = load${subform.@name?cap_first}Fields();
+	computeCalculatedFields(null);
+	r.addRecord();
+	copyFieldsToResponse(r);
+	return r;
+    }
+
+    /**
+     * Loads the fields corresponding to the subform ${subform.@name}
+     * from the database.
+     */
+    protected abstract ResponseBean load${subform.@name?cap_first}Fields() throws FinderException;
+
+    /**
+     * Save the current subform record into the database.
+     */
+    public abstract ResponseBean save${subform.@name?cap_first}Data();
+
+    [/#list]
+
 
     /**
      * Retrieves the currently loaded data, without changing the current
@@ -139,24 +205,6 @@ public abstract class ${.node.class.name}Bean
 	r.addField("id", id);
 	return r;
      }
-
-    /**
-     * Locates the data by the primary key and loads the fields into the
-     * form. The <code>form</code> instance variable already contains
-     * a new initialized form data. The <code>id</code> local variable contains
-     * the primary key for the record that should be located and loaded into
-     * the form bean.
-     */
-     public abstract ResponseBean loadFields() throws FinderException;
-
-    /**
-     * Create a new ${.node.class.name}Form and initialize the 
-     * <code>this.form</code> instance variable. Overwrite this method
-     * if you want to provide other code for initializing the form bean.
-     */
-    protected void createNewFormBean() {
-	form = new ${.node.class.name}Form();
-    }
 
     /**
      * Evaluates the script for computing the values of the calculated

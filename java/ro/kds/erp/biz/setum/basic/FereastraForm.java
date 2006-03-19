@@ -36,6 +36,91 @@ public class FereastraForm implements Serializable {
     java.math.BigDecimal entryPrice;
     java.math.BigDecimal price1;
 
+    public FereastraForm() {
+
+
+       this.canat = new Integer(0);
+
+
+
+       this.lf = new Double(0);
+   
+
+
+       this.hf = new Double(0);
+   
+
+
+       this.pozitionare1 = "";
+
+
+
+       this.pozitionare2 = "";
+
+
+
+       this.pozitionare3 = "";
+
+
+
+       this.deschidere = new Integer(0);
+
+
+
+       this.sensDeschidere = new Integer(0);
+
+
+
+       this.pozitionareBalamale = new Integer(0);
+
+
+
+       this.componenta = new Integer(0);
+
+
+
+       this.tipComponenta = new Integer(0);
+
+
+
+       this.tipGeam = new Integer(0);
+
+
+
+       this.geamSimpluId = new Integer(0);
+
+
+
+       this.geamTermopanId = new Integer(0);
+
+
+
+       this.tipGrilaj = new Integer(0);
+
+
+
+       this.grilajStasId = new Integer(0);
+
+
+
+       this.valoareGrilajAtipic = new java.math.BigDecimal(0);
+
+
+
+       this.sellPrice = new java.math.BigDecimal(0);
+
+
+
+       this.entryPrice = new java.math.BigDecimal(0);
+
+
+
+       this.price1 = new java.math.BigDecimal(0);
+
+
+
+    }
+
     public void setCanat(Integer newCanat) {
         this.canat = newCanat;
     }

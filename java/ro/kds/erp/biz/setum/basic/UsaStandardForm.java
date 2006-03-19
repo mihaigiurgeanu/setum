@@ -24,6 +24,43 @@ public class UsaStandardForm implements Serializable {
     Integer yallaId;
     Integer vizorId;
 
+    public UsaStandardForm() {
+
+
+       this.name = "";
+
+
+
+       this.code = "";
+
+
+
+       this.usaId = new Integer(0);
+
+
+
+       this.broascaId = new Integer(0);
+
+
+
+       this.cilindruId = new Integer(0);
+
+
+
+       this.sildId = new Integer(0);
+
+
+
+       this.yallaId = new Integer(0);
+
+
+
+       this.vizorId = new Integer(0);
+
+
+
+    }
+
     public void setName(String newName) {
         this.name = newName;
     }

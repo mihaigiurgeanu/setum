@@ -50,6 +50,147 @@ public class UsaMetalica1KForm implements Serializable {
     java.math.BigDecimal entryPrice;
     java.math.BigDecimal sellPrice;
 
+    public UsaMetalica1KForm() {
+
+
+       this.code = "";
+
+
+
+       this.name = "";
+
+
+
+       this.description = "";
+
+
+
+       this.subclass = "";
+
+
+
+       this.version = "";
+
+
+
+       this.material = new Integer(0);
+
+
+
+       this.lg = new Double(0);
+   
+
+
+       this.hg = new Double(0);
+   
+
+
+       this.le = new Double(0);
+   
+
+
+       this.he = new Double(0);
+   
+
+
+       this.lcorrection = new Double(0);
+   
+
+
+       this.hcorrection = new Double(0);
+   
+
+
+       this.intFoil = new Integer(0);
+
+
+
+       this.ieFoil = new Integer(0);
+
+
+
+       this.extFoil = new Integer(0);
+
+
+
+       this.isolation = new Integer(0);
+
+
+
+       this.openingDir = new Integer(0);
+
+
+
+       this.openingSide = new Integer(0);
+
+
+
+       this.frameType = new Integer(0);
+
+
+
+       this.lFrame = new Double(0);
+   
+
+
+       this.bFrame = new Double(0);
+   
+
+
+       this.cFrame = new Double(0);
+   
+
+
+       this.foilPosition = new Integer(0);
+
+
+
+       this.tresholdType = new Integer(0);
+
+
+
+       this.lTreshold = new Double(0);
+   
+
+
+       this.hTreshold = new Double(0);
+   
+
+
+       this.cTreshold = new Double(0);
+   
+
+
+       this.tresholdSpace = new Integer(0);
+
+
+
+       this.h1Treshold = new Double(0);
+   
+
+
+       this.h2Treshold = new Double(0);
+   
+
+
+       this.fereastraId = new Integer(0);
+
+
+
+       this.fereastra = "";
+
+
+
+       this.entryPrice = new java.math.BigDecimal(0);
+
+
+
+       this.sellPrice = new java.math.BigDecimal(0);
+
+
+
+    }
+
     public void setCode(String newCode) {
         this.code = newCode;
     }

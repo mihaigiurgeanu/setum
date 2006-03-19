@@ -16,6 +16,8 @@ public interface GrilaVentilatie extends EJBObject {
     public ResponseBean newFormData() throws RemoteException;
     public ResponseBean saveFormData() throws RemoteException;
     public ResponseBean loadFormData(Integer id) throws RemoteException, FinderException;
+
+
     public ResponseBean getCurrentFormData() throws RemoteException;
     public ResponseBean getLoadedPrimaryKey() throws RemoteException;
 

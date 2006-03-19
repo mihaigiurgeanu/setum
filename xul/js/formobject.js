@@ -9,25 +9,65 @@ function FormObject() {
     this.values = new Array();
     this.do_link = "";
 
-    this.set_value = set_value;
+    // main methods
     this.setupEventListeners = setupEventListeners; 
     this.update_form = update_form;
     this.post_request = post_request;
-    this.load_form = load_form;
+    this.post_save_request = post_save_request;
+
+    // convenience methods
+    this.set_value = set_value;
     this.load_current = load_current;
-    this.load_subform = load_subform;
     this.get_request = get_request;
-    this.addnew = addnew;
-    this.addnew_sub = addnew_sub;
+    this.get_loaded_id = get_loaded_id;
+
+    // internal methods
+    this.update_fields = update_fields;
+
+
+    // DEPRECATED
+    // use instead:
+    //  var req = theForm.getRequest();
+    //  req.add("command", "removeObject");
+    //  theForm.post_request(req);
+    this.remove_item = remove_item;
+
+    // DEPRECATED
+    // use instead:
+    //  var req = theForm.getRequest();
+    //  req.add("command", "saveFormData");
+    //  theForm.post_save_request(req);
     this.save = save;
     this.save_sub = save_sub;
-    this.post_save_request = post_save_request;
+
+    // DEPRECATED
+    // use instead:
+    //  var req = theForm.getRequest();
+    //  req.add("command", "newFormData");
+    //  theForm.post_request(req);
+    this.addnew = addnew;
+    this.addnew_sub = addnew_sub;
+
+    // DEPRECATED
+    // use instead:
+    //  var req = theForm.getRequest();
+    //  req.add("command", "loadFormData");
+    //  req.add("param0", paramValue);
+    //  theForm.post_request(req);
+    this.load_form = load_form;
+    this.load_subform = load_subform;
+
+    // DEPRECATED
+    // use instead:
+    //  var req = theForm.get_request();
+    //  req.add("command", "loadObjects");
+    //  req.add("param0", paramValue);
+    //  var records = load_records(req);
     this.load_listing = load_listing;
     this.load_param_listing = load_param_listing;
     this.load_sub_listing = load_sub_listing;
-    this.update_fields = update_fields;
-    this.remove_item = remove_item;
-    this.get_loaded_id = get_loaded_id;
+
+
 
     this.text_event_listener = { handleEvent: text_changed };
     this.combo_event_listener = { handleEvent: combo_changed };
@@ -40,21 +80,39 @@ function setupEventListeners() {
     var i;
 
     for(i=0; i<this.text_fields.length; i++) {
-	log("Set up event listener for: " + this.text_fields[i]);
-	document.getElementById(this.text_fields[i])
-	    .addEventListener("change", this.text_event_listener, true);
+	//log("Set up event listener for: " + this.text_fields[i]);
+	if(document.getElementById(this.text_fields[i])) {
+	    document.getElementById(this.text_fields[i])
+		.addEventListener("change", this.text_event_listener, true);
+	} else {
+	    log("setupEventListeners Warning: Text Field " 
+		+ this.text_fields[i] 
+		+ " does not exists in this document");
+	}
     }
   
     for(i=0; i<this.combo_fields.length; i++) {
-	log("Set up event listener for: " + this.combo_fields[i]);
-	document.getElementById(this.combo_fields[i])
-	    .addEventListener("command", this.combo_event_listener, true);
+	//log("Set up event listener for: " + this.combo_fields[i]);
+	if(document.getElementById(this.combo_fields[i])) {
+	    document.getElementById(this.combo_fields[i])
+		.addEventListener("command", this.combo_event_listener, true);
+	} else {
+	    log("setupEventListeners Warning: Combo Field " 
+		+ this.combo_fields[i] 
+		+ " does not exists in this document");
+	}
     }
 
     for(i=0; i<this.radio_fields.length; i++) {
-	log("Set up event listener for: " + this.radio_fields[i]);
-	document.getElementById(this.radio_fields[i])
-	    .addEventListener("RadioStateChange", this.radio_event_listener, true);
+	//log("Set up event listener for: " + this.radio_fields[i]);
+	if(document.getElementById(this.radio_fields[i])) {
+	    document.getElementById(this.radio_fields[i])
+		.addEventListener("RadioStateChange", this.radio_event_listener, true);
+	} else {
+	    log("setupEventListeners Warning: Radio Field " 
+		+ this.radio_fields[i] 
+		+ " does not exists in this document");
+	}
     }
 }
 
@@ -240,57 +298,12 @@ function get_request() {
     return new HTTPDataRequest(this.do_link);
 }
 
-function addnew() {
-    var req = new HTTPDataRequest(this.do_link);
-    req.add("command", "new");
-    this.post_request(req);
-}
-
-function addnew_sub(newcmd) {
-    var req = new HTTPDataRequest(this.do_link);
-    req.add("command", newcmd);
-    this.post_request(req);
-}
-
-function load_form(id) {
-    var req = new HTTPDataRequest(this.do_link);
-    req.add("command", "load");
-    req.add("id", id);
-    this.post_request(req);
-}
-
 function load_current() {
     var req = new HTTPDataRequest(this.do_link);
     req.add("command", "getCurrentFormData");
     this.post_request(req);
 }
 
-function remove_item(id) {
-    var req = new HTTPDataRequest(this.do_link);
-    req.add("command", "removeItem");
-    req.add("param0", id);
-    this.post_request(req);
-}
-
-function load_subform(loadcommand, id) {
-    var req = new HTTPDataRequest(this.do_link);
-    req.add("command", loadcommand);
-    req.add("id", id);
-    req.add("param0", id);
-    this.post_request(req);
-}
-
-function save() {
-    var req = new HTTPDataRequest(this.do_link);
-    req.add("command", "save");
-    return this.post_save_request(req);  
-}
-
-function save_sub(save_cmd) {
-    var req = new HTTPDataRequest(this.do_link);
-    req.add("command", save_cmd);
-    return this.post_save_request(req);  
-}
 
 
 function post_save_request(req) {
@@ -330,38 +343,9 @@ function post_save_request(req) {
     return false;
 }
 
-function load_listing() {
-    var req = new HTTPDataRequest(this.do_link);
-    req.add("command", "listing");
-    var response = req.execute();
-    if(response) {
-	if(response.message) {
-	    alert(response.message + "\n\n" + "Cod: " + response.code);
-	}
-	if(response.code == 0)
-	    return response.records;
-    }
-    return new Array();
-}
-
-function load_param_listing(param) {
-    var req = new HTTPDataRequest(this.do_link);
-    req.add("command", "listing");
-    req.add("param0", param)
-    var response = req.execute();
-    if(response) {
-	if(response.message) {
-	    alert(response.message + "\n\n" + "Cod: " + response.code);
-	}
-	if(response.code == 0)
-	    return response.records;
-    }
-    return new Array();
-}
-
-function load_sub_listing(listing_cmd) {
-    var req = new HTTPDataRequest(this.do_link);
-    req.add("command", listing_cmd);
+// post the request and return an array of records.
+// used for loading listings.
+function load_records(req) {
     var response = req.execute();
     if(response) {
 	if(response.message) {
@@ -386,25 +370,6 @@ function get_loaded_id() {
     return undefined;
 }
 
-
-function make_treeview(objects, getCellText) {
-
-    var treeView = {
-	rowCount : objects.length,
-	getCellText : getCellText,
-	setTree: function(treebox){ this.treebox = treebox; },
-	isContainer: function(row){ return false; },
-	isSeparator: function(row){ return false; },
-	isSorted: function(row){ return false; },
-	getLevel: function(row){ return 0; },
-	getImageSrc: function(row,col){ return null; },
-	getRowProperties: function(row,props){},
-	getCellProperties: function(row,col,props){},
-	getColumnProperties: function(colid,col,props){}
-    };
-
-    return treeView;
-}
 
 /**
  * Opens a dialog to edit one of the objects refered by the current form.
@@ -441,3 +406,126 @@ function open_service_dlg(idField, service, xulfile) {
 	alert("Cod eroare: " + response.code);
     }
 }
+
+// DEPRECATED
+// use instead:
+//  var req = theForm.getRequest();
+//  req.add("command", "newFormData");
+//  theForm.post_request(req);
+function addnew() {
+    var req = new HTTPDataRequest(this.do_link);
+    req.add("command", "new");
+    this.post_request(req);
+}
+
+// DEPRECATED
+// use instead:
+//  var req = theForm.getRequest();
+//  req.add("command", "newFormData");
+//  theForm.post_request(req);
+function addnew_sub(newcmd) {
+    var req = new HTTPDataRequest(this.do_link);
+    req.add("command", newcmd);
+    this.post_request(req);
+}
+
+
+// DEPRECATED
+// use instead:
+//  var req = theForm.getRequest();
+//  req.add("command", "removeObject");
+//  theForm.post_request(req);
+function remove_item(id) {
+    var req = new HTTPDataRequest(this.do_link);
+    req.add("command", "removeItem");
+    req.add("param0", id);
+    this.post_request(req);
+}
+
+// DEPRECATED
+// use instead:
+//  var req = theForm.getRequest();
+//  req.add("command", "loadFormData");
+//  req.add("param0", paramValue);
+//  theForm.post_request(req);
+function load_form(id) {
+    var req = new HTTPDataRequest(this.do_link);
+    req.add("command", "load");
+    req.add("id", id);
+    this.post_request(req);
+}
+
+// DEPRECATED
+// use instead:
+//  var req = theForm.getRequest();
+//  req.add("command", "loadObjectData");
+//  req.add("param0", paramValue);
+//  theForm.post_request(req);
+function load_subform(loadcommand, id) {
+    var req = new HTTPDataRequest(this.do_link);
+    req.add("command", loadcommand);
+    req.add("id", id);
+    req.add("param0", id);
+    this.post_request(req);
+}
+
+// DEPRECATED
+// use instead:
+//  var req = theForm.getRequest();
+//  req.add("command", "saveFormData");
+//  theForm.post_save_request(req);
+function save() {
+    var req = new HTTPDataRequest(this.do_link);
+    req.add("command", "save");
+    return this.post_save_request(req);  
+}
+
+// DEPRECATED
+// use instead:
+//  var req = theForm.getRequest();
+//  req.add("command", "saveFormData");
+//  theForm.post_save_request(req);
+function save_sub(save_cmd) {
+    var req = new HTTPDataRequest(this.do_link);
+    req.add("command", save_cmd);
+    return this.post_save_request(req);  
+}
+
+// DEPRECATED
+// use instead:
+//  var req = theForm.get_request();
+//  req.add("command", "loadObjects");
+//  req.add("param0", paramValue);
+//  var records = load_records(req);
+function load_listing() {
+    var req = new HTTPDataRequest(this.do_link);
+    req.add("command", "listing");
+    return load_records(req);
+}
+
+
+// DEPRECATED
+// use instead:
+//  var req = theForm.get_request();
+//  req.add("command", "loadObjects");
+//  req.add("param0", paramValue);
+//  var records = load_records(req);
+function load_param_listing(param) {
+    var req = new HTTPDataRequest(this.do_link);
+    req.add("command", "listing");
+    req.add("param0", param);
+    return load_records(req);
+}
+
+// DEPRECATED
+// use instead:
+//  var req = theForm.get_request();
+//  req.add("command", "loadObjects");
+//  req.add("param0", paramValue);
+//  var records = load_records(req);
+function load_sub_listing(listing_cmd) {
+    var req = new HTTPDataRequest(this.do_link);
+    req.add("command", listing_cmd);
+    return load_records(req);
+}
+

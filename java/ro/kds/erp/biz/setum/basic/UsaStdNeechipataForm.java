@@ -23,6 +23,39 @@ public class UsaStdNeechipataForm implements Serializable {
     Double relativeGain;
     java.math.BigDecimal absoluteGain;
 
+    public UsaStdNeechipataForm() {
+
+
+       this.name = "";
+
+
+
+       this.code = "";
+
+
+
+       this.description = "";
+
+
+
+       this.entryPrice = new java.math.BigDecimal(0);
+
+
+
+       this.sellPrice = new java.math.BigDecimal(0);
+
+
+
+       this.relativeGain = new Double(0);
+   
+
+
+       this.absoluteGain = new java.math.BigDecimal(0);
+
+
+
+    }
+
     public void setName(String newName) {
         this.name = newName;
     }

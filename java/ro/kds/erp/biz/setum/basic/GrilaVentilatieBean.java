@@ -28,7 +28,6 @@ public abstract class GrilaVentilatieBean
     protected SessionContext ejbContext;
 
     protected Integer id;
-
     final static String FORM_VARNAME = "form";
     final static String RESPONSE_VARNAME = "response";
     final static String LOGIC_VARNAME = "logic";
@@ -93,11 +92,6 @@ public abstract class GrilaVentilatieBean
     }
 
     /**
-     * Updating or inserting the form into the database.
-     */
-    public abstract ResponseBean saveFormData();
-
-    /**
      * Load the form from the database.
      */
      public ResponseBean loadFormData(Integer loadId) throws FinderException {
@@ -111,6 +105,31 @@ public abstract class GrilaVentilatieBean
 	copyFieldsToResponse(r);
 	return r;
      }
+
+    /**
+     * Locates the data by the primary key and loads the fields into the
+     * form. The <code>form</code> instance variable already contains
+     * a new initialized form data. The <code>id</code> local variable contains
+     * the primary key for the record that should be located and loaded into
+     * the form bean.
+     */
+     public abstract ResponseBean loadFields() throws FinderException;
+
+    /**
+     * Create a new GrilaVentilatieForm and initialize the 
+     * <code>this.form</code> instance variable. Overwrite this method
+     * if you want to provide other code for initializing the form bean.
+     */
+    protected void createNewFormBean() {
+	form = new GrilaVentilatieForm();
+    }
+
+    /**
+     * Save the current record into the database.
+     */
+    public abstract ResponseBean saveFormData();
+
+
 
     /**
      * Retrieves the currently loaded data, without changing the current
@@ -138,24 +157,6 @@ public abstract class GrilaVentilatieBean
 	r.addField("id", id);
 	return r;
      }
-
-    /**
-     * Locates the data by the primary key and loads the fields into the
-     * form. The <code>form</code> instance variable already contains
-     * a new initialized form data. The <code>id</code> local variable contains
-     * the primary key for the record that should be located and loaded into
-     * the form bean.
-     */
-     public abstract ResponseBean loadFields() throws FinderException;
-
-    /**
-     * Create a new GrilaVentilatieForm and initialize the 
-     * <code>this.form</code> instance variable. Overwrite this method
-     * if you want to provide other code for initializing the form bean.
-     */
-    protected void createNewFormBean() {
-	form = new GrilaVentilatieForm();
-    }
 
     /**
      * Evaluates the script for computing the values of the calculated

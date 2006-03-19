@@ -6,4 +6,12 @@
 	The templates will be enriched with generating code for suforms.
 2006-03-14:
 	For now I will stick with the old style, because for the new style (with FMPP and one XML file in wich to describe all classes needs more thinking). The main objectives now: finalizing the arbitrary offer and building the order.
-
+2006-03-19:
+	Organized code a litle:
+	* support for subforms in xml templates
+	* use of more standard methods in javascript formobject
+	* the fields declared in javascript as text, combo or radio but not present in the actual xul file will not cause formobject script to fail; now it will just log an warning
+        * the methods for dealing with treeview construction and other are put in separate file: treeutils.js
+	* added SimpleCallDispatcherServlet, a trimmed down version of the CallDispatcherServlet. It will only work with not deprecated methods of the formobject. If your code makes use of the deprecated formobject methods, then you must use CallDispatcherServlet
+	These modifications are still compatible with the old code.
+	Added a new module for editing value lists (BusinessLogic is implemented by the GenericProductsEJB). This module conforms to the new code organization style.

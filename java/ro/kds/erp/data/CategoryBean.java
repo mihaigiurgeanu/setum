@@ -12,6 +12,7 @@ import org.objectweb.jonas.common.Log;
 import javax.ejb.CreateException;
 
 import org.objectweb.util.monolog.api.Logger;
+import javax.ejb.FinderException;
 
 /**
  * Describe class CategoryBean here.
@@ -55,6 +56,26 @@ public abstract class CategoryBean implements EntityBean {
 
     public abstract Collection getProducts();
     public abstract void setProducts(Collection products);
+
+    // ------------------------------------------------------------------
+    // Business methods
+    //
+    // ------------------------------------------------------------------
+    public Integer getProductsCount() {
+	try {
+	    return new Integer(ejbSelectProductsCount());
+	} catch (FinderException e) {
+	    logger.log(BasicLevel.WARN, e);
+	    return new Integer(0);
+	}
+    }
+
+
+    // ------------------------------------------------------------------
+    // Select methods
+    //
+    // ------------------------------------------------------------------
+    public abstract int ejbSelectProductsCount() throws FinderException;
 
     // ------------------------------------------------------------------
     // Standard call back methods

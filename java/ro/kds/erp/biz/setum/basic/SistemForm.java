@@ -27,6 +27,55 @@ public class SistemForm implements Serializable {
     Double relativeGainPP;
     java.math.BigDecimal absoluteGainPP;
 
+    public SistemForm() {
+
+
+       this.name = "";
+
+
+
+       this.code = "";
+
+
+
+       this.categoryId = new Integer(0);
+
+
+
+       this.entryPrice = new java.math.BigDecimal(0);
+
+
+
+       this.sellPrice = new java.math.BigDecimal(0);
+
+
+
+       this.partPrice = new java.math.BigDecimal(0);
+
+
+
+       this.laborPrice = new java.math.BigDecimal(0);
+
+
+
+       this.relativeGainSP = new Double(0);
+   
+
+
+       this.absoluteGainSP = new java.math.BigDecimal(0);
+
+
+
+       this.relativeGainPP = new Double(0);
+   
+
+
+       this.absoluteGainPP = new java.math.BigDecimal(0);
+
+
+
+    }
+
     public void setName(String newName) {
         this.name = newName;
     }

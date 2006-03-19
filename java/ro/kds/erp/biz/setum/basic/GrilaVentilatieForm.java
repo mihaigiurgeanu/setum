@@ -24,6 +24,43 @@ public class GrilaVentilatieForm implements Serializable {
     java.math.BigDecimal entryPrice;
     java.math.BigDecimal price1;
 
+    public GrilaVentilatieForm() {
+
+
+       this.lgv = new Double(0);
+   
+
+
+       this.hgv = new Double(0);
+   
+
+
+       this.pozitionare1 = "";
+
+
+
+       this.pozitionare2 = "";
+
+
+
+       this.pozitionare3 = "";
+
+
+
+       this.sellPrice = new java.math.BigDecimal(0);
+
+
+
+       this.entryPrice = new java.math.BigDecimal(0);
+
+
+
+       this.price1 = new java.math.BigDecimal(0);
+
+
+
+    }
+
     public void setLgv(Double newLgv) {
         this.lgv = newLgv;
     }

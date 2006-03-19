@@ -36,6 +36,95 @@ public class OfertaUsiStandardForm implements Serializable {
     java.math.BigDecimal entryPrice;
     java.math.BigDecimal sellPrice;
 
+    public OfertaUsiStandardForm() {
+
+
+       this.no = "";
+
+
+
+
+       // No rule to initialize this.docDate
+
+
+
+
+       // No rule to initialize this.dateFrom
+
+
+
+
+       // No rule to initialize this.dateTo
+
+
+
+
+       // No rule to initialize this.discontinued
+
+
+
+       this.period = new Integer(0);
+
+
+
+       this.name = "";
+
+
+
+       this.description = "";
+
+
+
+       this.comment = "";
+
+
+
+       this.price = new java.math.BigDecimal(0);
+
+
+
+       this.relativeGain = new Double(0);
+   
+
+
+       this.absoluteGain = new java.math.BigDecimal(0);
+
+
+
+       this.usa = "";
+
+
+
+       this.broasca = "";
+
+
+
+       this.cilindru = "";
+
+
+
+       this.sild = "";
+
+
+
+       this.yalla = "";
+
+
+
+       this.vizor = "";
+
+
+
+       this.entryPrice = new java.math.BigDecimal(0);
+
+
+
+       this.sellPrice = new java.math.BigDecimal(0);
+
+
+
+    }
+
     public void setNo(String newNo) {
         this.no = newNo;
     }

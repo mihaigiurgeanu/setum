@@ -21,6 +21,7 @@ windows.arguments[0].select(productId)
     ondialogcancel="return true;">
 
   <script src="js/logging.js"/>
+  <script src="js/treeutils.js"/>
   <script src="js/httpdata.js"/>
   <script src="js/formobject.js"/>
 

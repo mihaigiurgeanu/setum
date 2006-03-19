@@ -137,6 +137,15 @@
 	<field-name>name</field-name>
       </cmp-field>
       <primkey-field>id</primkey-field>
+      <query>
+	<description>Counts the products in this category</description>
+	<query-method>
+	  <method-name>ejbSelectProductsCount</method-name>
+	  <method-params>
+	  </method-params>	  
+	</query-method>
+	<ejb-ql>SELECT COUNT(p) FROM Category c, IN(c.products) p</ejb-ql>
+      </query>
     </entity>
 
     <entity>

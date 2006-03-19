@@ -22,6 +22,8 @@ public interface CategoryLocal extends EJBLocalObject {
     public Collection getProducts();
     public void setProducts(Collection products);
 
+    public Integer getProductsCount();
+
     public Collection getSubCategories();
     public void setSubCategories(Collection categories);
 }

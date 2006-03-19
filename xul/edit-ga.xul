@@ -19,6 +19,7 @@ La apasarea butonului ok, se va apela window.arguments[0].select(productId).
     debug="false">
 
   <script src="js/logging.js"/>
+  <script src="js/treeutils.js"/>
   <script src="js/httpdata.js"/>
   <script src="js/formobject.js"/>
   

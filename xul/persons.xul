@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
 
-<!-- $Id: persons.xul,v 1.2 2006/01/18 09:57:57 mihai Exp $ -->
+<!-- $Id: persons.xul,v 1.3 2006/03/19 20:19:23 mihai Exp $ -->
 
 <window
     id="clients-persons-win"
@@ -12,6 +12,7 @@
   >
 
   <script src="js/logging.js"/>
+  <script src="js/treeutils.js"/>
   <script src="js/httpdata.js"/>
   <script src="js/formobject.js"/>
 

@@ -17,6 +17,13 @@ public interface ${.node.class.name} extends EJBObject {
     public ResponseBean newFormData() throws RemoteException;
     public ResponseBean saveFormData() throws RemoteException;
     public ResponseBean loadFormData(Integer id) throws RemoteException, FinderException;
+
+    [#list .node.class.subforms.subform as subform]
+    public ResponseBean new${subform.@name?cap_first}Data() throws RemoteException;
+    public ResponseBean save${subform.@name?cap_first}Data() throws RemoteException;
+    public ResponseBean load${subform.@name?cap_first}Data(Integer id) throws RemoteException, FinderException;
+    [/#list]
+
     public ResponseBean getCurrentFormData() throws RemoteException;
     public ResponseBean getLoadedPrimaryKey() throws RemoteException;
 

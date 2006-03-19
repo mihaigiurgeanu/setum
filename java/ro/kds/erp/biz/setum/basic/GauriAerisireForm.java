@@ -25,6 +25,47 @@ public class GauriAerisireForm implements Serializable {
     java.math.BigDecimal entryPrice;
     java.math.BigDecimal price1;
 
+    public GauriAerisireForm() {
+
+
+       this.diametru = new Double(0);
+   
+
+
+       this.pas = new Double(0);
+   
+
+
+       this.nrRanduri = new Integer(0);
+
+
+
+       this.pozitionare1 = "";
+
+
+
+       this.pozitionare2 = "";
+
+
+
+       this.pozitionare3 = "";
+
+
+
+       this.sellPrice = new java.math.BigDecimal(0);
+
+
+
+       this.entryPrice = new java.math.BigDecimal(0);
+
+
+
+       this.price1 = new java.math.BigDecimal(0);
+
+
+
+    }
+
     public void setDiametru(Double newDiametru) {
         this.diametru = newDiametru;
     }

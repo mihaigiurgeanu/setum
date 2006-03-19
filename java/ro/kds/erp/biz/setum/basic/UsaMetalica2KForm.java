@@ -91,6 +91,311 @@ public class UsaMetalica2KForm implements Serializable {
     Integer alteSisteme2Buc;
     String sistemeComment;
 
+    public UsaMetalica2KForm() {
+
+
+       this.code = "";
+
+
+
+       this.name = "";
+
+
+
+       this.description = "";
+
+
+
+       this.subclass = "";
+
+
+
+       this.version = "";
+
+
+
+       this.material = new Integer(0);
+
+
+
+       this.lg = new Double(0);
+   
+
+
+       this.hg = new Double(0);
+   
+
+
+       this.le = new Double(0);
+   
+
+
+       this.he = new Double(0);
+   
+
+
+       this.lcorrection = new Double(0);
+   
+
+
+       this.hcorrection = new Double(0);
+   
+
+
+       this.lCurrent = new Double(0);
+   
+
+
+       this.kType = new Integer(0);
+
+
+
+       this.intFoil = new Integer(0);
+
+
+
+       this.ieFoil = new Integer(0);
+
+
+
+       this.extFoil = new Integer(0);
+
+
+
+       this.intFoilSec = new Integer(0);
+
+
+
+       this.ieFoilSec = new Integer(0);
+
+
+
+       this.extFoilSec = new Integer(0);
+
+
+
+       this.isolation = new Integer(0);
+
+
+
+       this.openingDir = new Integer(0);
+
+
+
+       this.openingSide = new Integer(0);
+
+
+
+       this.frameType = new Integer(0);
+
+
+
+       this.lFrame = new Double(0);
+   
+
+
+       this.bFrame = new Double(0);
+   
+
+
+       this.cFrame = new Double(0);
+   
+
+
+       this.foilPosition = new Integer(0);
+
+
+
+       this.tresholdType = new Integer(0);
+
+
+
+       this.lTreshold = new Double(0);
+   
+
+
+       this.hTreshold = new Double(0);
+   
+
+
+       this.cTreshold = new Double(0);
+   
+
+
+       this.tresholdSpace = new Integer(0);
+
+
+
+       this.h1Treshold = new Double(0);
+   
+
+
+       this.h2Treshold = new Double(0);
+   
+
+
+       this.entryPrice = new java.math.BigDecimal(0);
+
+
+
+       this.sellPrice = new java.math.BigDecimal(0);
+
+
+
+       this.montareSistem = new Integer(0);
+
+
+
+       this.decupareSistemId = new Integer(0);
+
+
+
+       this.sistemSetumSauBeneficiar = new Integer(0);
+
+
+
+       this.broascaId = new Integer(0);
+
+
+
+       this.broascaBuc = new Integer(0);
+
+
+
+       this.cilindruId = new Integer(0);
+
+
+
+       this.cilindruBuc = new Integer(0);
+
+
+
+       this.copiatCheieId = new Integer(0);
+
+
+
+       this.copiatCheieBuc = new Integer(0);
+
+
+
+       this.sildId = new Integer(0);
+
+
+
+       this.sildTip = "";
+
+
+
+       this.sildCuloare = "";
+
+
+
+       this.sildBuc = new Integer(0);
+
+
+
+       this.rozetaId = new Integer(0);
+
+
+
+       this.rozetaTip = "";
+
+
+
+       this.rozetaCuloare = "";
+
+
+
+       this.rozetaBuc = new Integer(0);
+
+
+
+       this.manerId = new Integer(0);
+
+
+
+       this.manerTip = "";
+
+
+
+       this.manerCuloare = "";
+
+
+
+       this.manerBuc = new Integer(0);
+
+
+
+       this.yalla1Id = new Integer(0);
+
+
+
+       this.yalla1Buc = new Integer(0);
+
+
+
+       this.yalla2Id = new Integer(0);
+
+
+
+       this.yalla2Buc = new Integer(0);
+
+
+
+       this.baraAntipanicaId = new Integer(0);
+
+
+
+       this.baraAntipanicaBuc = new Integer(0);
+
+
+
+       this.manerSemicilindruId = new Integer(0);
+
+
+
+       this.manerSemicilindruBuc = new Integer(0);
+
+
+
+       this.selectorOrdineId = new Integer(0);
+
+
+
+       this.selectorOrdineBuc = new Integer(0);
+
+
+
+       this.amortizorId = new Integer(0);
+
+
+
+       this.amortizorBuc = new Integer(0);
+
+
+
+       this.alteSisteme1Id = new Integer(0);
+
+
+
+       this.alteSisteme1Buc = new Integer(0);
+
+
+
+       this.alteSisteme2Id = new Integer(0);
+
+
+
+       this.alteSisteme2Buc = new Integer(0);
+
+
+
+       this.sistemeComment = "";
+
+
+
+    }
+
     public void setCode(String newCode) {
         this.code = newCode;
     }

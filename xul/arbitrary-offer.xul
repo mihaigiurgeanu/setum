@@ -17,6 +17,7 @@ Data-entry form for general purpose offers.
     style="overflow:auto">
 
   <script src="js/logging.js"/>
+  <script src="js/treeutils.js"/>
   <script src="js/httpdata.js"/>
   <script src="js/formobject.js"/>
   <script src="js/businessCategory.js"/>

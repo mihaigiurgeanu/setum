@@ -20,6 +20,32 @@ public class ${.node.class.name}Form implements Serializable {
     ${field.type} ${field.name};
     [/#list]
 
+    public ${.node.class.name}Form() {
+
+       [#list .node.class.field as field]
+
+       [#if field.type = 'Integer']
+       this.${field.name} = new Integer(0);
+
+       [#elseif field.type = 'String']
+       this.${field.name} = "";
+
+       [#elseif field.type = 'Double']
+       this.${field.name} = new Double(0);
+   
+       [#elseif field.type = 'java.math.BigDecimal']
+       this.${field.name} = new java.math.BigDecimal(0);
+
+       [#else]
+
+       // No rule to initialize this.${field.name}
+
+       [/#if]
+
+       [/#list]
+
+    }
+
     [#list .node.class.field as field]
     public void set${field.name?cap_first}(${field.type} new${field.name?cap_first}) {
         this.${field.name} = new${field.name?cap_first};

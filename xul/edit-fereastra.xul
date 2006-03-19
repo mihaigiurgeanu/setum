@@ -19,6 +19,7 @@ Argumentele primite la deschiderea dialogului:
     debug="false">
 
   <script src="js/logging.js"/>
+  <script src="js/treeutils.js"/>
   <script src="js/httpdata.js"/>
   <script src="js/formobject.js"/>
 
