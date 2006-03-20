@@ -1,16 +1,7 @@
 
-// load the view from the objects array
-// objects array must be a reference to a global variable
-function refresh_listing(objects, tree) {
-    tree.view = make_treeview
-	(
-	 objects,
-	 function(row,column) {
-	     return offers[row][column];
-	 }
-	 );
-}
-
+// objects is the array of objects to be displayed in the tree
+// getCellText is a function of 2 paramams -- row and col -- 
+// returning the data for the given row and column
 function make_treeview(objects, getCellText) {
 
     var treeView = {

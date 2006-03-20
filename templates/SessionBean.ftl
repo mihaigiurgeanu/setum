@@ -143,6 +143,7 @@ public abstract class ${.node.class.name}Bean
         ${subform.@name}Id = null;
         computeCalculatedFields(null);
 
+        r.addRecord();
         copyFieldsToResponse(r);
         return r;
     }

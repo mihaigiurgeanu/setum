@@ -52,6 +52,8 @@ function httpRequestExecute() {
 	//httpRequest.open("GET", targetURL+'?'+txt, false, null, null);  
 
 	//POST REQUEST EXAMPLE
+	log("POST request to " + targetURL);
+	log("POST request " + txt);
 	httpRequest.open("POST", targetURL, false, null, null);  
 	httpRequest.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
 	httpRequest.send(txt);
@@ -79,7 +81,8 @@ function httpRequestExecute() {
     default:
 	return false;
     }
-  
+
+    return false;
 }
 
 function HTTPDataResponse(xmldoc, prefix) {

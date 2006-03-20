@@ -139,6 +139,7 @@ public abstract class GenericProductsBean
         productId = null;
         computeCalculatedFields(null);
 
+        r.addRecord();
         copyFieldsToResponse(r);
         return r;
     }
@@ -178,6 +179,7 @@ public abstract class GenericProductsBean
         attributeId = null;
         computeCalculatedFields(null);
 
+        r.addRecord();
         copyFieldsToResponse(r);
         return r;
     }

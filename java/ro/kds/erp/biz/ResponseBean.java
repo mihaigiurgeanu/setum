@@ -11,6 +11,9 @@ import java.util.Date;
 import java.util.LinkedHashMap;
 import java.text.DateFormat;
 import java.text.NumberFormat;
+import org.objectweb.util.monolog.api.BasicLevel;
+import org.objectweb.util.monolog.api.Logger;
+import org.objectweb.jonas.common.Log;
 
 /**
  * The <code>ResponseBean</code> is a data transporter between the
@@ -27,6 +30,8 @@ import java.text.NumberFormat;
  * @version 1.0
  */
 public class ResponseBean implements Serializable {
+
+    static protected Logger logger = null;
 
     /**
      * Describe code here.
@@ -45,6 +50,11 @@ public class ResponseBean implements Serializable {
      * Field intialization
      */
     private void initialize() {
+        if (logger == null) {
+            logger = Log.getLogger("ro.kds.erp.biz.basic.GenericProducts");
+        }
+        logger.log(BasicLevel.DEBUG, "");
+
 	fields = null;
 	records = new LinkedList();
 	setCode(0);
@@ -91,6 +101,8 @@ public class ResponseBean implements Serializable {
      * @throws NullPointerException if <code>addRecord</code> was never called.
      */
     public void addField(String name, String value) {
+	logger.log(BasicLevel.DEBUG, "add field to response: <<" + 
+		   name + ">> -> <<" + value + ">>"); 
 	fields.put(name,value);
     }
 
@@ -104,6 +116,8 @@ public class ResponseBean implements Serializable {
      * the UI engine should display).
      */
     public void addField(String name, int value) {
+	logger.log(BasicLevel.DEBUG, "add field to response: <<" + 
+		   name + ">> -> <<" + value + ">>"); 
 	fields.put(name, String.valueOf(value));
     }
 
@@ -117,6 +131,8 @@ public class ResponseBean implements Serializable {
      * the UI engine should display).
      */
     public void addField(String name, double value) {
+	logger.log(BasicLevel.DEBUG, "add field to response: <<" + 
+		   name + ">> -> <<" + value + ">>"); 
 	fields.put(name, String.valueOf(value));
     }
 
@@ -130,6 +146,8 @@ public class ResponseBean implements Serializable {
      * the UI engine should display).
      */
     public void addField(String name, Double value) {
+	logger.log(BasicLevel.DEBUG, "add field to response: <<" + 
+		   name + ">> -> <<" + value + ">>"); 
 	if(value != null)
 	    fields.put(name, NumberFormat.getInstance().format(value));
 	else 
@@ -146,6 +164,8 @@ public class ResponseBean implements Serializable {
      * the UI engine should display).
      */
     public void addField(String name, Integer value) {
+	logger.log(BasicLevel.DEBUG, "add field to response: <<" + 
+		   name + ">> -> <<" + value + ">>"); 
 	if(value != null)
 	    fields.put(name, value.toString());
 	else 
@@ -162,6 +182,8 @@ public class ResponseBean implements Serializable {
      * the UI engine should display).
      */
     public void addField(String name, BigDecimal value) {
+	logger.log(BasicLevel.DEBUG, "add field to response: <<" + 
+		   name + ">> -> <<" + value + ">>"); 
 	if(value != null) {
 	    fields.put(name, NumberFormat.getInstance().format(value));
 	}
@@ -179,6 +201,8 @@ public class ResponseBean implements Serializable {
      * the UI engine should display).
      */
     public void addField(String name, Date value) {
+	logger.log(BasicLevel.DEBUG, "add field to response: <<" + 
+		   name + ">> -> <<" + value + ">>"); 
 	if(value != null) {
 	    fields.put(name, DateFormat.getDateInstance().format(value));
 	}
@@ -196,6 +220,8 @@ public class ResponseBean implements Serializable {
      * the UI engine should display).
      */
     public void addField(String name, Boolean value) {
+	logger.log(BasicLevel.DEBUG, "add field to response: <<" + 
+		   name + ">> -> <<" + value + ">>"); 
 	if(value != null)
 	    fields.put(name, value.toString());
 	else 

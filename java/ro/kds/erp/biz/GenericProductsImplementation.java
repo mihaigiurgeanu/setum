@@ -27,7 +27,7 @@ import javax.ejb.RemoveException;
  * Created: Tue Mar 14 18:58:14 2006
  *
  * @author <a href="mailto:Mihai Giurgeanu@CRIMIRA"></a>
- * @version $Id: GenericProductsImplementation.java,v 1.1 2006/03/19 20:19:23 mihai Exp $
+ * @version $Id: GenericProductsImplementation.java,v 1.2 2006/03/20 00:29:10 mihai Exp $
  */
 public class GenericProductsImplementation extends GenericProductsBean {
 
@@ -99,7 +99,7 @@ public class GenericProductsImplementation extends GenericProductsBean {
 	try {
 	    CategoryLocal c = getCurrentCategory();
 	    if(c == null) {
-		r = ResponseBean.ERR_NOTCURRENT;
+		r = ResponseBean.SUCCESS; // it is a new category, it has no products
 	    } else {
 		Collection products = c.getProducts();
 		r = new ResponseBean();
@@ -141,7 +141,7 @@ public class GenericProductsImplementation extends GenericProductsBean {
 	try {
 	    ProductLocal p = getCurrentProduct();
 	    if(p == null) {
-		r = ResponseBean.ERR_NOTCURRENT;
+		r = ResponseBean.SUCCESS; // it is a new product, it has no attributes
 	    } else {
 		Collection attribs = p.getAttributes();
 		r = new ResponseBean();
@@ -308,16 +308,7 @@ public class GenericProductsImplementation extends GenericProductsBean {
 	try {
 	    CategoryLocal c = getCurrentCategory();
 	    if(c == null) {
-		Integer cId = form.getCategoryId();
-		if(cId.intValue() == 0) {
-		    cId = getNextCategoryId();
-		    logger.log(BasicLevel.DEBUG, "Create new category: " +
-			       cId + " " + form.getCategoryName());
-		    form.setCategoryId(cId);
-		    id = cId; // the currently selected category
-		}
-		CategoryLocalHome ch = getCategoryHome();
-		c = ch.create(cId, form.getCategoryName());
+		c = makeNewCategory();
 	    } else {
 		c.setName(form.getCategoryName());
 	    }
@@ -345,6 +336,27 @@ public class GenericProductsImplementation extends GenericProductsBean {
 	return r;
     }
 
+    protected CategoryLocal makeNewCategory() 
+	throws FinderException, CreateException, 
+	       NamingException, RemoteException {
+	
+	Integer cId = form.getCategoryId();
+	if(cId.intValue() == 0) {
+	    cId = getNextCategoryId();
+	    logger.log(BasicLevel.DEBUG, "Create new category: " +
+		       cId + " " + form.getCategoryName());
+	}
+	CategoryLocalHome ch = getCategoryHome();
+	CategoryLocal c = ch.create(cId, form.getCategoryName());
+	CategoryLocal root = getRootCategory();
+	root.getSubCategories().add(c);
+
+	form.setCategoryId(cId);
+	id = cId; // the currently selected category
+
+	return c;
+    }
+
     /**
      * Saves the data of the product subform into the persistent layer.
      * The method is directly exposed through the remote interface,
@@ -360,10 +372,7 @@ public class GenericProductsImplementation extends GenericProductsBean {
 	try {
 	    ProductLocal p = getCurrentProduct();
 	    if(p == null) {
-		ProductLocalHome ph = getProductHome();
-		p = ph.create();
-		productId = p.getId(); // set the currently selected product
-		form.setProductId(productId);
+		p = makeNewProduct();
 	    }
 	    p.setName(form.getProductName());
 	    p.setCode(form.getProductCode());
@@ -375,6 +384,7 @@ public class GenericProductsImplementation extends GenericProductsBean {
 	    p.setPrice3(form.getProductPrice3());
 	    p.setPrice4(form.getProductPrice4());
 	    p.setPrice5(form.getProductPrice5());
+
 	    r = new ResponseBean();
 	    r.addRecord();
 	    r.addField("productId", p.getId());
@@ -391,9 +401,29 @@ public class GenericProductsImplementation extends GenericProductsBean {
 	    // can not create the new product
 	    r = ResponseBean.ERR_CREATE;
 	    logger.log(BasicLevel.ERROR, e);
+	} catch (RemoteException e) {
+	    r = ResponseBean.ERR_REMOTE;
+	    logger.log(BasicLevel.ERROR, e);
 	}
 
 	return r;
+    }
+
+    protected ProductLocal makeNewProduct() 
+	throws NamingException, CreateException, 
+	       FinderException, RemoteException {
+
+	ProductLocalHome ph = getProductHome();
+	ProductLocal p = ph.create();
+	productId = p.getId(); // set the currently selected product
+	form.setProductId(productId);
+
+
+	CategoryLocal c = getCurrentCategory();
+	if(c == null) c = makeNewCategory();
+	c.getProducts().add(p);
+
+	return p;
     }
 
     public ResponseBean saveAttributeData() {
@@ -405,6 +435,10 @@ public class GenericProductsImplementation extends GenericProductsBean {
 		AttributeLocalHome ah = getAttributeHome();
 		a = ah.create();
 		attributeId = a.getId(); // the new attribute is the current one
+		ProductLocal p = getCurrentProduct();
+		if(p == null) p = makeNewProduct();
+		p.getAttributes().add(a);
+
 	    }
 	    a.setName(form.getAttrName());
 	    a.setStringValue(form.getAttrString());
@@ -424,6 +458,9 @@ public class GenericProductsImplementation extends GenericProductsBean {
 	    logger.log(BasicLevel.ERROR, e);
 	} catch (NamingException e) {
 	    r = ResponseBean.ERR_CONFIG_NAMING;
+	    logger.log(BasicLevel.ERROR, e);
+	} catch (RemoteException e) {
+	    r = ResponseBean.ERR_REMOTE;
 	    logger.log(BasicLevel.ERROR, e);
 	}
 
@@ -502,11 +539,14 @@ public class GenericProductsImplementation extends GenericProductsBean {
      * @throws FinderException if the current <code>id</code> can not be found
      */
     protected CategoryLocal getCurrentCategory() throws FinderException {
+
+	logger.log(BasicLevel.DEBUG, "Loading category for id " + id);
 	if(id == null) return null;
 
 
 	CategoryLocal c;
 	try {
+	    logger.log(BasicLevel.DEBUG, "Reading the category from database");
 	    CategoryLocalHome home = getCategoryHome();
 	    c = home.findByPrimaryKey(id);
 	} catch (FinderException e) {
@@ -519,7 +559,7 @@ public class GenericProductsImplementation extends GenericProductsBean {
 	    logger.log(BasicLevel.INFO, e);
 	    c = null;
 	}
-	return null;
+	return c;
     }
 
     /**
@@ -645,7 +685,7 @@ public class GenericProductsImplementation extends GenericProductsBean {
 	SequenceHome sh = (SequenceHome)PortableRemoteObject.narrow
 	    (env.lookup("ejb/SequenceHome"), SequenceHome.class);
 	Sequence s = sh.create();
-	return s.getNext("ro.setumsa.sequnces.categories");
+	return s.getNext("ro.setumsa.sequences.categories");
     }
 
     // Bean life cycle methods
