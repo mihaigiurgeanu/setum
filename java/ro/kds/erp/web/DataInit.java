@@ -87,6 +87,11 @@ public class DataInit extends HttpServlet {
 	    sisteme.add(ch.create(new Integer(9975), "Selector ordine"));
 	    sisteme.add(ch.create(new Integer(9974), "Decupare sistem"));
 
+
+
+	    CategoryLocal valueListsCategory = ch.create(new Integer(9973), "Liste de valori");
+
+
 	    // the objects with ids over 10000 are user objects;
 	    // create here some for convenience
 	    sisteme.add(ch.create(new Integer(10000), "Cheie"));
