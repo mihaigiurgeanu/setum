@@ -10,14 +10,15 @@
     style="overflow:auto">
 
   <script src="js/logging.js"/>
+  <script src="js/treeutils.js"/>
   <script src="js/httpdata.js"/>
   <script src="js/formobject.js"/>
   
 
   <commandset>
-    <command id="command-new_category"		oncommand="add_category()"/>
-    <command id="command-new_product"		oncommand="add_product()"/>
-    <command id="command-new_attribute"		oncommand="add_attribute()"/>
+    <command id="command-add_category"		oncommand="add_category()"/>
+    <command id="command-add_product"		oncommand="add_product()"/>
+    <command id="command-add_attribute"		oncommand="add_attribute()"/>
 
     <command id="command-remove_category"	oncommand="remove_category()"/>
     <command id="command-remove_product"	oncommand="remove_product()"/>
@@ -41,12 +42,10 @@
       
       <tabpanel id="maintab.listing" orient="vertical"
 		style="border:thin outset white">
-	<toolbox>
-	  <toolbar id="mainlisting.actions">
-	    <toolbarbutton label="Adauga lista" command="command-add_category"/>
-	    <toolbarbutton label="Sterge lista" command="command-remove_category"/>
-	  </toolbar>
-	</toolbox>
+	<hbox id="mainlisting.actions">
+	  <button label="Adauga lista" command="command-add_category"/>
+	  <button label="Sterge lista" command="command-remove_category"/>
+	</hbox>
 	<spacer height="8px"/>
 
 	<tree id="categoriesListing"
@@ -77,13 +76,11 @@
       <tabpanel id="maintab.category" orient="vertical"
 		style="border:thin outset white">
 
-	<toolbox>
-	  <toolbar id="category.actions">
-	    <toolbarbutton label="Adauga valoare" command="command-add_product"/>
-	    <toolbarbutton label="Sterge valoare" command="command-remove_product"/>
-	    <toolbarbutton label="Salveaza" command="command-save_category"/>
-	  </toolbar>
-	</toolbox>
+	<hbox id="category.actions">
+	  <button label="Adauga valoare" command="command-add_product"/>
+	  <button label="Sterge valoare" command="command-remove_product"/>
+	  <button label="Salveaza" command="command-save_category"/>
+	</hbox>
 	<spacer height="8px"/>
 	
 	<grid>
@@ -148,13 +145,11 @@
       <tabpanel id="maintab.product" orient="vertical"
 		style="border:thin outset white">
 
-	<toolbox>
-	  <toolbar id="product.actions">
-	    <toolbarbutton label="Adauga atribut" command="command-add_attribute"/>
-	    <toolbarbutton label="Sterge atribut" command="command-remove_attribute"/>
-	    <toolbarbutton label="Salveaza" command="command-save_product"/>
-	  </toolbar>
-	</toolbox>
+	<hbox id="product.actions">
+	  <button label="Adauga atribut" command="command-add_attribute"/>
+	  <button label="Sterge atribut" command="command-remove_attribute"/>
+	  <button label="Salveaza" command="command-save_product"/>
+	</hbox>
 	<spacer height="8px"/>
 
 	<grid>
@@ -240,6 +235,7 @@
 		     label="Valoare reala"
 		     persist="ordinal width hidden"/>
 	  </treecols>
+	  <treechildren/>
 	</tree>
       </tabpanel> <!-- maintab.product -->
 
@@ -249,11 +245,9 @@
 
       <tabpanel id="maintab.attribute" orient="vertical"
 		style="border:thin outset white">
-	<toolbox>
-	  <toolbar id="attribute.actions">
-	    <toolbarbutton label="Salveaza" command="command-attribute_save"/>
-	  </toolbar>
-	</toolbox>
+	<hbox id="attribute.actions">
+	  <button label="Salveaza" command="command-save_attribute"/>
+	</hbox>
 	<spacer height="8px"/>
 
 	<grid>
@@ -290,7 +284,5 @@
 
   </tabbox>
 
-  <!--
   <script src="value_lists.js"/>
-  -->
 </window>

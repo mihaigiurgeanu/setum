@@ -10,7 +10,8 @@ function load_categories() {
     var req = theForm.get_request();
     req.add("command", "loadCategories");
     categories = load_records(req);
-    refresh_listing(categories, categoriesListing);
+    categoriesListing.view = make_treeview
+	(categories, function(row,col) { return categories[row][col]; });
 }
 
 // products listing
@@ -20,7 +21,8 @@ function load_products() {
     var req = theForm.get_request();
     req.add("command", "loadProducts");
     products = load_records(req);
-    refresh_listing(products, productsListing);
+    productsListing.view = make_treeview
+    (products, function(row,col) { return products[row][col]; });
 }
 
 // attributes listing
@@ -30,16 +32,18 @@ function load_attributes() {
     var req = theForm.get_request();
     req.add("command", "loadAttributes");
     attributes = load_records(req);
-    refresh_listing(attributes, attributesListing);
+    attributesListing.view = make_treeview
+	(attributes, function(row,col) { return attributes[row][col]; });
 }
 
 // a selection was made in the category listing
 function on_select_category() {
     var selid = categories[categoriesListing.currentIndex]["categories.id"];
     var req = theForm.get_request();
-    req.add("command", "loadCategoryData");
+    req.add("command", "loadFormData");
     req.add("param0", selid);
-    theForm.post_request(req);    
+    theForm.post_request(req);
+    load_products();
 }
 
 // a selection was made in the products listing
@@ -49,11 +53,12 @@ function on_select_product() {
     req.add("command", "loadProductData");
     req.add("param0", selid);
     theForm.post_request(req);
+    load_attributes();
 }
 
 // a selection was made in the attributes listing
 function on_select_attribute() {
-    var selid = attributes[attributesListing.currentIndex]["attributes.id"];
+    var selid = attributes[attributesListing.currentIndex]["attr.id"];
     var req = theForm.get_request();
     req.add("command", "loadAttributeData");
     req.add("param0", selid);
@@ -135,7 +140,7 @@ theForm.text_fields = new Array(
 				"categoryId", 
 				"categoryName", 
 
-				"productId"
+				"productId",
 				"productName",
 				"productCode",
 				"productDescription",
