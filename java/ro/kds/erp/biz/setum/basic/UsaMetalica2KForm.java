@@ -21,6 +21,7 @@ public class UsaMetalica2KForm implements Serializable {
     String subclass;
     String version;
     Integer material;
+    Integer k;
     Double lg;
     Double hg;
     Double le;
@@ -115,6 +116,10 @@ public class UsaMetalica2KForm implements Serializable {
 
 
        this.material = new Integer(0);
+
+
+
+       this.k = new Integer(0);
 
 
 
@@ -483,6 +488,21 @@ public class UsaMetalica2KForm implements Serializable {
 	AttributeLocal a = (AttributeLocal)attributes.get("material");
 	if(a != null) {
 	    this.setMaterial(a.getIntValue());
+	}
+    }
+
+    public void setK(Integer newK) {
+        this.k = newK;
+    }
+
+    public Integer getK() {
+        return k;
+    }
+
+    public void readK(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("k");
+	if(a != null) {
+	    this.setK(a.getIntValue());
 	}
     }
 

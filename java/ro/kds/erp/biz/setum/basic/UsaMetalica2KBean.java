@@ -385,6 +385,30 @@ public abstract class UsaMetalica2KBean
 	computeCalculatedFields(r);
 	return r;
     }
+    public ResponseBean updateK(Integer k) {
+        ResponseBean r = new ResponseBean();
+	Integer oldVal = form.getK();
+	form.setK(k);
+	r.addRecord();
+	r.addField("k", k); // for number format
+	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.UsaMetalica2K.k");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
+		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the k", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
     public ResponseBean updateLg(Double lg) {
         ResponseBean r = new ResponseBean();
 	Double oldVal = form.getLg();
@@ -2052,6 +2076,7 @@ public abstract class UsaMetalica2KBean
 	r.addField("subclass", form.getSubclass());
 	r.addField("version", form.getVersion());
 	r.addField("material", form.getMaterial());
+	r.addField("k", form.getK());
 	r.addField("lg", form.getLg());
 	r.addField("hg", form.getHg());
 	r.addField("le", form.getLe());
@@ -2157,6 +2182,11 @@ public abstract class UsaMetalica2KBean
 	    s.setVar("material", form.getMaterial(), Integer.class);
 	} catch (ScriptErrorException e) {
 	    logger.log(BasicLevel.WARN, "Can not set the value of field: material from the script", e);
+        }
+	try {
+	    s.setVar("k", form.getK(), Integer.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: k from the script", e);
         }
 	try {
 	    s.setVar("lg", form.getLg(), Double.class);
@@ -2570,6 +2600,16 @@ public abstract class UsaMetalica2KBean
 	    }
 	} catch (ScriptErrorException e) {
 	    logger.log(BasicLevel.WARN, "Can not get the value of field: material from the script", e);
+        }
+	try {
+	    field = s.getVar("k", Integer.class);
+	    if(!field.equals(form.getK())) {
+	        logger.log(BasicLevel.DEBUG, "Field k modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setK((Integer)field);
+	        r.addField("k", (Integer)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: k from the script", e);
         }
 	try {
 	    field = s.getVar("lg", Double.class);

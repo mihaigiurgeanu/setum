@@ -28,6 +28,10 @@
     <type>Integer</type>
   </field>
   <field>
+    <name>k</name>
+    <type>Integer</type>
+  </field>
+  <field>
     <name>lg</name>
     <type>Double</type>
   </field>

@@ -22,16 +22,15 @@ import java.util.Map;
 import ro.kds.erp.data.CompositeProductLocalHome;
 
 /**
- * Business logic implementation of the genrated UsaMetalica2K EJB
- * and UsaMetalica1K EJB. It obsoletes the old, separate, implementation of 
- * UsaMetalica1K EJB. The 2 kinds of products have an almost identical 
- * structure, so it makes no sense to have 2 separate implementations.
- *
+ * Business logic for definition of UsaMetalica product. It obsoletes old implementation
+ * for UsaMetalica2K and UsaMetalica1K. The form field <code>k</code> that may have values
+ * <code>1</code> or <code>2</code> separates between the 2 types of UsaMetalica. This will
+ * allow the design of only one form to handle both types.
  *
  * Created: Fri Nov 18 15:34:24 2005
  *
  * @author <a href="mailto:Mihai Giurgeanu@CRIMIRA"></a>
- * @version $Id: UsaMetalica2KBeanImplementation.java,v 1.5 2006/02/18 10:46:28 mihai Exp $
+ * @version $Id: UsaMetalica2KBeanImplementation.java,v 1.6 2006/03/21 00:40:38 mihai Exp $
  */
 public class UsaMetalica2KBeanImplementation 
     extends ro.kds.erp.biz.setum.basic.UsaMetalica2KBean {
@@ -84,6 +83,7 @@ public class UsaMetalica2KBeanImplementation
 	    attribs.add(ah.create("subclass", form.getSubclass()));
 	    attribs.add(ah.create("version", form.getVersion()));
 	    attribs.add(ah.create("material", form.getMaterial()));
+	    attribs.add(ah.create("k", form.getK()));
 	    attribs.add(ah.create("lg", form.getLg()));
 	    attribs.add(ah.create("hg", form.getHg()));
 	    attribs.add(ah.create("lcorrection", form.getLcorrection()));
@@ -195,6 +195,7 @@ public class UsaMetalica2KBeanImplementation
 	    form.readSubclass(amap);
 	    form.readVersion(amap);
 	    form.readMaterial(amap);
+	    form.readK(amap);
 	    form.readLg(amap);
 	    form.readHg(amap);
 	    form.readLcorrection(amap);
@@ -292,11 +293,12 @@ public class UsaMetalica2KBeanImplementation
 
 	// set default values
 	form.setCode(newCode);
-	form.setName("Usa metalica 2 canate " + newCode);
+	form.setName("Usa metalica " + newCode);
 	form.setDescription("");
 	form.setSubclass("A");
 	form.setVersion("UF");
 	form.setMaterial(new Integer(1));
+	form.setK(new Integer(1));
 	form.setLg(new Double(0));
 	form.setHg(new Double(0));
 	form.setLe(new Double(0));
