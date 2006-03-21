@@ -5,11 +5,12 @@ var maintab = document.getElementById("maintab");
 
 // The main tree
 var offers;
-var offersListing = document.getElementById('offersLines');
+var offersListing = document.getElementById('offersListing');
 function load_offers() {
-    var req = theForm.getRequest();
+    var req = theForm.get_request();
     req.add("command", "loadListing");
     offers = load_records(req);
+
     offersListing.view = make_treeview
 	(offers,
 	 function(row,column) {
@@ -19,9 +20,9 @@ function load_offers() {
 
 // The list of offer items
 var line_items;
-var lineItemsListing = documeng.getElementById('lineItemsListing');
+var lineItemsListing = document.getElementById('offerLines');
 function load_items() {
-    var req = theForm.getRequest();
+    var req = theForm.get_request();
     req.add("command", "lineItemsListing");
     line_items = load_records(req);
     lineItemsListing.view = make_treeview
@@ -34,7 +35,7 @@ function load_items() {
 
 function make_category(categoryURI) {
     log("Making business category for uri: " + categoryURI);
-    category = new BusinessCategory(categoryURI);
+    var category = new BusinessCategory(categoryURI);
     category.theForm = theForm;
     category.fieldsPrefix = "product";
     category.idFieldName = "productId"; // the name of the primary key field
@@ -43,7 +44,7 @@ function make_category(categoryURI) {
 }
 
 function crtItem() {
-    return line_items[offersListing.currentIndex];
+    return line_items[lineItemsListing.currentIndex];
 }
 
 function on_select_offer() {
@@ -97,12 +98,14 @@ function save_item() {
 
 
 function edit_product() {
+    log("edit_product: " + crtItem()['productId']);
+    log("edit_product: " + crtItem()['businessCategory']);
     make_category(crtItem()['businessCategory']).edit_dlg(crtItem()['productId']);
 }
 
 function popup_new_item(id) {
     theForm.save(); 
-    make_category(this.id).addnew_dlg(load_items);
+    make_category(id).addnew_dlg(load_items);
 }
 
 // Global variable theForm that will be used by event handlers

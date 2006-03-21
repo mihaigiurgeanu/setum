@@ -1,5 +1,7 @@
 <?xml version="1.0"?>
 <?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+<?xml-stylesheet href="chrome://setum/xul/setum.css type="text/css"?>
+
 <!--
 edit-usa2k.xul
 
@@ -25,6 +27,12 @@ windows.arguments[0].select(productId)
   <script src="js/httpdata.js"/>
   <script src="js/formobject.js"/>
 
+  <!--
+  <broadcasterset>
+    <broadcaster id="usa2Kstatus" disabled="true"/>
+  </broadcasterset>
+  -->
+
   <tabbox>
     <tabs>
       <tab label="Definire usa"/>
@@ -38,12 +46,18 @@ windows.arguments[0].select(productId)
 	  <groupbox orient="vertical">
 	    <caption label="Definire usa" />
 	    <grid>
-	      <columns>
-
-		<column/>
-		<column/>
-	      </columns>
 	      <rows>
+		<!--
+		<row>
+		  <label controls="" value="Nr canate:"/>
+		  <hbox>
+		    <radiogroup id="k">
+		      <radio id="k.1" value="1" label="1 canat"/>
+		      <radio id="k.2" value="2" label="2 canate"/>
+		    </radiogroup>
+		  </hbox>
+		</row>
+		-->
 		<row>
 		  <label control="subclass" value="Subcod:"/>
 		  <menulist id="subclass" >
@@ -114,7 +128,7 @@ windows.arguments[0].select(productId)
 			  <textbox id="lCurrent" />
 			</row>
 			<row>
-			  <radiogroup id="kType">
+			  <radiogroup id="kType" >
 			    <radio id="kType.1" value="1" 
 				   label="cu canate egale"/>
 			    <radio id="kType.2" value="2" 
@@ -201,7 +215,7 @@ windows.arguments[0].select(productId)
 		       label="la fel ca la interior"/>
 		<hbox>
 		  <radio id="ieFoilSec.2" value="2" 
-			 label="placata cu tabla 2 randuri"/>
+			 label="placata cu tabla 2 randuri" />
 		  <menulist id="extFoilSec" >
 		    <menupopup id="extFoilSec-popup">
 		      <menuitem id="extFoilSec.1" value="1" label="Lisa"/>
@@ -610,6 +624,7 @@ windows.arguments[0].select(productId)
 
   <script language="javascript"><![CDATA[
 
+
 // Global variable theForm that will be used by event handlers
 var theForm = new FormObject();
 
@@ -642,12 +657,27 @@ theForm.radio_fields = new Array("ieFoil", "ieFoilSec",
 				 "tresholdSpace", "montareSistem", 
 				 "sistemSetumSauBeneficiar");
 
-theForm.hidden_fields = new Array("fereastraId", "grilaVentilatieId", 
-				  "gauriAerisireId");
+
+theForm.hidden_fields = new Array();
 theForm.do_link = "/usametalica2k.do";
 
-theForm.setupEventListeners();
-theForm.load_current();
+// theForm.afterpost = function afterpost() {
+//     var k = document.getElementById("k");
+//     var usa2Kstatus = document.getElementById("usa2Kstatus");
+//     if(control.selectedItem) {
+// 	switch(control.selectedItem.value) {
+// 	case 1:
+// 	    usa2Kstatus.disabled = true;
+// 	    break;
+// 	case 2:
+// 	    usa2Kstatus.disabled = false;
+// 	}
+//     }	    
+// }
+
+
+//theForm.setupEventListeners();
+//theForm.load_current();
 
 function doOk() {
     if(theForm.save()) {
@@ -656,6 +686,7 @@ function doOk() {
     }
     return false;
 }
+
 
   ]]></script>
 </dialog>

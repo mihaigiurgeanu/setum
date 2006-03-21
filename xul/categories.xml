@@ -45,6 +45,7 @@ function to call when the called module ends.
     <category:module rdf:resource="http://www.kds.ro/erp/modules/setum/selectUsaStd"/>
   </rdf:Description>
 
+  <!-- UsaMetalica1K and UsaMetalica2K have become one single type of product
   <rdf:Description
       rdf:about="http://www.kds.ro/erp/businessCategory/setum/usa1k">
     <category:title>Usa cu un canat</category:title>
@@ -53,10 +54,11 @@ function to call when the called module ends.
     <category:onnew>new</category:onnew>
     <category:load>load</category:load>
   </rdf:Description>
+  -->
 
   <rdf:Description
       rdf:about="http://www.kds.ro/erp/businessCategory/setum/usa2k">
-    <category:title>Usa cu 2 canate</category:title>
+    <category:title>Usa metalica</category:title>
     <category:service>/usametalica2k.do</category:service>
     <category:module rdf:resource="http://www.kds.ro/erp/modules/setum/editUsa2K"/>
     <category:onnew>new</category:onnew>
@@ -67,7 +69,6 @@ function to call when the called module ends.
   <rdf:Seq rdf:about="http://www.kds.ro/erp/modules/setum/arbitrary-offer/categories">
     <rdf:li rdf:resource="http://www.kds.ro/erp/businessCategory/setum/sistem"/>
     <rdf:li rdf:resource="http://www.kds.ro/erp/businessCategory/setum/usastd"/>
-    <rdf:li rdf:resource="http://www.kds.ro/erp/businessCategory/setum/usa1k"/>
     <rdf:li rdf:resource="http://www.kds.ro/erp/businessCategory/setum/usa2k"/>
   </rdf:Seq>
 
