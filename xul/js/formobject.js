@@ -19,7 +19,7 @@ function FormObject() {
     // finishes; the default method does nothing
     // put your own method to do some action (like enabling or
     // disableing controls) after new data is received from server
-    this.afterpost = function () {};
+    this.afterpost = function () {log ("default afterpost() called"); };
 
     // convenience methods
     this.set_value = set_value;
@@ -189,10 +189,10 @@ function post_request(req, prefix) {
     var response = req.execute();
     if(response) {
 	this.update_fields(response);
+	this.afterpost();
 	return (response.code == 0);
     }
     log("No response received");
-    this.afterpost();
     return false;
 }
 
@@ -341,13 +341,17 @@ function post_save_request(req) {
 		}
 	    }
 	    alert(err);
+	    this.afterpost();
 	    return false;
 	} else {
+	    if(response.records[0]) {
+		this.update_form(response.records[0]);
+	    }
+	    this.afterpost();
 	    return true;
 	}
     }
     log("No response for save operation");
-    this.afterpost();
     return false;
 }
 

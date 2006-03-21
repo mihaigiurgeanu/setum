@@ -27,11 +27,9 @@ windows.arguments[0].select(productId)
   <script src="js/httpdata.js"/>
   <script src="js/formobject.js"/>
 
-  <!--
   <broadcasterset>
     <broadcaster id="usa2Kstatus" disabled="true"/>
   </broadcasterset>
-  -->
 
   <tabbox>
     <tabs>
@@ -41,13 +39,12 @@ windows.arguments[0].select(productId)
       <tab label="Finisaje"/>
     </tabs>
     <tabpanels>
-      <tabpanel orient="horizontal" style="overflow:auto">
-	<vbox>
+      <tabpanel orient="vertical" style="overflow:auto">
+	<hbox>
 	  <groupbox orient="vertical">
 	    <caption label="Definire usa" />
 	    <grid>
 	      <rows>
-		<!--
 		<row>
 		  <label controls="" value="Nr canate:"/>
 		  <hbox>
@@ -57,7 +54,6 @@ windows.arguments[0].select(productId)
 		    </radiogroup>
 		  </hbox>
 		</row>
-		-->
 		<row>
 		  <label control="subclass" value="Subcod:"/>
 		  <menulist id="subclass" >
@@ -124,15 +120,17 @@ windows.arguments[0].select(productId)
 			  <textbox id="hcorrection" />
 			</row>
 			<row>
-			  <label control="lCurrent" value="L curenta ="/>
-			  <textbox id="lCurrent" />
+			  <label control="lCurrent" value="L curenta =" observes="usa2Kstatus"/>
+			  <textbox id="lCurrent" observes="usa2Kstatus" />
 			</row>
 			<row>
-			  <radiogroup id="kType" >
+			  <radiogroup id="kType"  observes="usa2Kstatus">
 			    <radio id="kType.1" value="1" 
-				   label="cu canate egale"/>
+				   label="cu canate egale"
+				   observes="usa2Kstatus" />
 			    <radio id="kType.2" value="2" 
-				   label="cu canate inegale"/>
+				   label="cu canate inegale"
+				   observes="usa2Kstatus"/>
 			  </radiogroup>
 			</row>
 		      </rows>
@@ -168,7 +166,7 @@ windows.arguments[0].select(productId)
 	    <caption label="Tip foaie"/>
 
 	    <separator/>
-	    <label value="Canat principal" style="font-color:red"/>
+	    <label value="Canat principal"/>
 
 	    <hbox>
 	      <label>La interior placata cu tabla 2 randuri</label>
@@ -197,26 +195,28 @@ windows.arguments[0].select(productId)
 
 
 	    <separator/>
-	    <label value="Canat secundar" style="font-color:red"/>
+	    <label value="Canat secundar" observes="usa2Kstatus"/>
 
 	    <hbox>
-	      <label>La interior placata cu tabla 2 randuri</label>
-	      <menulist id="intFoilSec" >
-		<menupopup id="intFoilSec-popup">
+	      <label observes="usa2Kstatus">La interior placata cu tabla 2 randuri</label>
+	      <menulist id="intFoilSec" observes="usa2Kstatus" >
+		<menupopup id="intFoilSec-popup" observes="usa2Kstatus">
 		  <menuitem id="intFoilSec.1" value="1" label="Lisa"/>
 		  <menuitem id="intFoilSec.2" value="2" label="Amprentata"/>
 		</menupopup>
 	      </menulist>
 	    </hbox>
 	    <hbox>
-	      <label value="La exterior"/>
-	      <radiogroup id="ieFoilSec" >
+	      <label value="La exterior" observes="usa2Kstatus"/>
+	      <radiogroup id="ieFoilSec" observes="usa2Kstatus" >
 		<radio id="ieFoilSec.1" value="1" 
-		       label="la fel ca la interior"/>
+		       label="la fel ca la interior"
+		       observes="usa2Kstatus"/>
 		<hbox>
 		  <radio id="ieFoilSec.2" value="2" 
-			 label="placata cu tabla 2 randuri" />
-		  <menulist id="extFoilSec" >
+			 label="placata cu tabla 2 randuri"
+			 observes="usa2Kstatus"/>
+		  <menulist id="extFoilSec" observes="usa2Kstatus" >
 		    <menupopup id="extFoilSec-popup">
 		      <menuitem id="extFoilSec.1" value="1" label="Lisa"/>
 		      <menuitem id="extFoilSec.2" value="2" 
@@ -256,8 +256,8 @@ windows.arguments[0].select(productId)
 	      </vbox>
 	    </hbox>
 	  </groupbox>
-	</vbox>
-	<vbox>
+	</hbox>
+	<hbox>
 	  <groupbox orient="vertical">
 	    <caption label="Toc"/>
 	    <radiogroup id="frameType" >
@@ -350,7 +350,7 @@ windows.arguments[0].select(productId)
 	      </hbox>
 	    </radiogroup>
 	  </groupbox>
-	</vbox>
+	</hbox>
       </tabpanel>
 
       <!-- Optiuni -->
@@ -622,71 +622,6 @@ windows.arguments[0].select(productId)
   </commandset>
 
 
-  <script language="javascript"><![CDATA[
+  <script language="javascript" src="edit-usa2k.js"/>
 
-
-// Global variable theForm that will be used by event handlers
-var theForm = new FormObject();
-
-theForm.text_fields = new Array("lg", "hg", "lcorrection", "hcorrection",
-				"le", "he", "lCurrent",
-				"lFrame", "bFrame", "cFrame", "lTreshold",
-				"cTreshold", "hTreshold", "h1Treshold",
-				"h2Treshold",
-				"broascaBuc", "cilindruBuc", "copiatCheieBuc",
-				"sildTip", "sildCuloare", "sildBuc",
-				"rozetaTip", "rozetaCuloare", "rozetaBuc",
-				"manerTip", "manerCuloare", "manerBuc",
-				"yalla1Buc", "yalla2Buc",
-				"baraAntipanicaBuc",
-				"manerSemicilindruBuc", "amortizorBuc",
-				"alteSisteme1Buc", "alteSisteme2Buc",
-				"sistemeComment");
-theForm.combo_fields = new Array("subclass", "version", "material", 
-				 "intFoil", "extFoil", "isolation",
-				 "intFoilSec", "extFoilSec", 
-				 "openingDir", "openingSide", "foilPosition",
-				 "decupareSistemId", "broascaId", "cilindruId",
-				 "copiatCheieId", "sildId", "rozetaId",
-				 "manerId", "yalla1Id", "yalla2Id",
-				 "baraAntipanicaId", "manerSemicilindruId",
-				 "selectorOrdineId", "amortizorId", 
-				 "alteSisteme1Id", "alteSisteme2Id");
-theForm.radio_fields = new Array("ieFoil", "ieFoilSec", 
-				 "frameType", "tresholdType",
-				 "tresholdSpace", "montareSistem", 
-				 "sistemSetumSauBeneficiar");
-
-
-theForm.hidden_fields = new Array();
-theForm.do_link = "/usametalica2k.do";
-
-// theForm.afterpost = function afterpost() {
-//     var k = document.getElementById("k");
-//     var usa2Kstatus = document.getElementById("usa2Kstatus");
-//     if(control.selectedItem) {
-// 	switch(control.selectedItem.value) {
-// 	case 1:
-// 	    usa2Kstatus.disabled = true;
-// 	    break;
-// 	case 2:
-// 	    usa2Kstatus.disabled = false;
-// 	}
-//     }	    
-// }
-
-
-//theForm.setupEventListeners();
-//theForm.load_current();
-
-function doOk() {
-    if(theForm.save()) {
-	window.arguments[0].select(theForm.get_loaded_id());
-	return true;
-    }
-    return false;
-}
-
-
-  ]]></script>
 </dialog>
