@@ -15,6 +15,12 @@ function FormObject() {
     this.post_request = post_request;
     this.post_save_request = post_save_request;
 
+    // afterpost method will be called after a post request
+    // finishes; the default method does nothing
+    // put your own method to do some action (like enabling or
+    // disableing controls) after new data is received from server
+    this.afterpost = function () {};
+
     // convenience methods
     this.set_value = set_value;
     this.load_current = load_current;
@@ -186,6 +192,7 @@ function post_request(req, prefix) {
 	return (response.code == 0);
     }
     log("No response received");
+    this.afterpost();
     return false;
 }
 
@@ -340,6 +347,7 @@ function post_save_request(req) {
 	}
     }
     log("No response for save operation");
+    this.afterpost();
     return false;
 }
 
