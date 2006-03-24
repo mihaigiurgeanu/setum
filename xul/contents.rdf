@@ -4,7 +4,7 @@
          xmlns:chrome="http://www.mozilla.org/rdf/chrome#">
 
   <RDF:Seq about="urn:mozilla:package:root">
-    <RDF:li resource="urn:mozilla:package:setum"/>
+    <RDF:li RDF:resource="urn:mozilla:package:setum"/>
   </RDF:Seq>
 
   <RDF:Description about="urn:mozilla:package:setum"

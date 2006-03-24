@@ -171,21 +171,29 @@ function ValueListItem(value, label) {
 }
 
 function post_data(request) {
+    var waitCursor = window.getAttribute("wait-cursor");
 
+    window.setAttribute("wait-cursor", true);
+
+    var result;
     var response = request.execute();
     if(response) {
 	if(response.code == 0)
-	    return true;
+	    result = true;
 	else {
 	    alert("Error posting data to the database. " +
 		  "Response code is: " + response.code +
 		  "\nMessage:\n" + response.message);
-	    return false;
+	    result = false;
 	}
+    } else {
+	alert("Error posting data to the database. " +
+	      "No response received from server.");
+	result = false;
     }
-    alert("Error posting data to the database. " +
-	  "No response received from server.");
-    return false;
+
+    window.setAttribute("wait-cursor", waitCursor);
+    return result;
 }
 
 //Utility Pair class

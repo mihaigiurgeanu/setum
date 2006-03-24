@@ -186,14 +186,20 @@ function set_value(fieldName, fieldValue) {
 }
 
 function post_request(req, prefix) {
+
     var response = req.execute();
+    var result;
+
     if(response) {
 	this.update_fields(response);
 	this.afterpost();
-	return (response.code == 0);
+	result = (response.code == 0);
+    } else {
+	log("No response received");
+	result = false;
     }
-    log("No response received");
-    return false;
+
+    return result;
 }
 
 function update_fields(response) {

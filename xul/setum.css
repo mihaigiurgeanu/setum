@@ -1,9 +1,7 @@
-# setum.css
+@namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
 
-button { border: thin solid black; }
-textbox { border: thin solid black; }
 
-.flat { border: thin solid black; }
+.flat { outline-style: solid; color: red; }
 
 .mytoolbar { border: thin outset white; }
 

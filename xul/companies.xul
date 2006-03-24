@@ -1,7 +1,8 @@
 <?xml version="1.0"?>
 <?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+<?xml-stylesheet href="setum.css" type="text/css"?>
 
-<!-- $Id: companies.xul,v 1.4 2006/03/19 20:19:23 mihai Exp $ -->
+<!-- $Id: companies.xul,v 1.5 2006/03/24 18:21:56 mihai Exp $ -->
 
 <window
     id="companies-persons-win"
@@ -33,10 +34,14 @@
     
     <tabpanels flex="1">
       <tabpanel id="maintab.listing" orient="vertical">
-	<hbox align="right">
-	  <button label="Adauga" id="button-addclient"
-		  command="command-addclient"/>
+	<hbox class="mytoolbar">
+	  <button label="Adauga" id="button-addclient" command="command-addclient"/>
 	</hbox>
+	<hbox class="title">
+	  <label>Lista clienti companii</label>
+	</hbox>
+	<spacer class="header"/>
+
 	<tree id="clients-listing-tree" flex="1" 
 	      enableColumnDrag="true" 
 	      persist="ordinal width height hidden" 
@@ -73,12 +78,16 @@
 
       </tabpanel>
       <tabpanel id="maintab.details" orient="vertical">
+	<hbox class="mytoolbar">
+	  <button label="Salveaza modificari" id="button-saveclient" command="command-saveclient"/>
+	</hbox>
+	<hbox class="title">
+	  <label>Detalii companie</label>
+	</hbox>
+	<spacer class="header"/>
+
 	<hbox>
 	  <grid>
-	    <columns>
-	      <column/>
-	      <column/>
-	    </columns>
 	    <rows>
 	      <row>
 		<label control="companyName" value="Nume Companie:"/>
@@ -112,10 +121,6 @@
 	  <spacer flex="1" style=" max-width: 40px;"/>
 	  
 	  <grid>
-	    <columns>
-	      <column/>
-	      <column/>
-	    </columns>
 	    
 	    <rows>
 	      <row>
@@ -152,10 +157,6 @@
 	
 	<spacer flex="1" style=" max-height: 40px; min-height: 10px;"/>
 
-	<hbox align="center">
-	  <button label="Salveaza modificari" id="button-saveclient"
-		  command="command-saveclient"/>
-	</hbox>
 
 	
 	<vbox flex="1">
@@ -167,10 +168,14 @@
 	    
 	    <tabpanels flex="1">
 	      <tabpanel id="contactstab.listing" orient="vertical">
-		<hbox align="right">
-		  <button label="Adauga" id="button-addcontact"
-			  command="command-addcontact"/>
+		<hbox class="mytoolbar">
+		  <button label="Adauga" id="button-addcontact" command="command-addcontact"/>
 		</hbox>
+		<hbox class="title">
+		  <label>Persoane de contact</label>
+		</hbox>
+		<spacer class="header"/>
+
 		<tree id="contacts-listing-tree" 
 		      flex="1" 
 		      enableColumnDrag="true" 
@@ -209,7 +214,15 @@
 	      
 	      <tabpanel id="contactstab.details" 
 			orient="vertical">
-		
+
+		<hbox class="mytoolbar">
+		  <button label="Salveaza modificari" id="button-savecontact" command="command-savecontact"/>
+		</hbox>
+		<hbox class="title">
+		  <label>Detalii persoana de contact</label>
+		</hbox>
+		<spacer class="header"/>
+
 		<hbox>					
 		  <grid>
 		    <columns>
@@ -273,10 +286,6 @@
 
 		<spacer flex="1"/>
 
-		<hbox align="center">
-		  <button label="Salveaza modificari" id="button-savecontact"
-			  command="command-savecontact"/>
-		</hbox>
 	      </tabpanel>
 	    </tabpanels>
 	  </tabbox>

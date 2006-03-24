@@ -125,16 +125,18 @@
     <modules:xulfile>select-usastd.xul</modules:xulfile>
   </rdf:Description>
 
+  <!--
   <rdf:Description 
       rdf:about="http://www.kds.ro/erp/modules/setum/editUsa1K">
     <modules:displayName>Usa cu un canat</modules:displayName>
     <modules:description>Modificare/adaugare usa cu un canat</modules:description>
     <modules:xulfile>edit-usa1k.xul</modules:xulfile>
   </rdf:Description>
+  -->
 
   <rdf:Description
       rdf:about="http://www.kds.ro/erp/modules/setum/editUsa2K">
-    <modules:displayName>Usa cu doua canate</modules:displayName>
+    <modules:displayName>Usa metalica</modules:displayName>
     <modules:description>Modificare/adaugare usa cu 2 canate</modules:description>
     <modules:xulfile>edit-usa2k.xul</modules:xulfile>
   </rdf:Description>
