@@ -27,7 +27,7 @@ import javax.ejb.RemoveException;
  * Created: Tue Mar 14 18:58:14 2006
  *
  * @author <a href="mailto:Mihai Giurgeanu@CRIMIRA"></a>
- * @version $Id: GenericProductsImplementation.java,v 1.2 2006/03/20 00:29:10 mihai Exp $
+ * @version $Id: GenericProductsImplementation.java,v 1.3 2006/03/24 20:31:24 mihai Exp $
  */
 public class GenericProductsImplementation extends GenericProductsBean {
 
@@ -88,6 +88,7 @@ public class GenericProductsImplementation extends GenericProductsBean {
      * For each record, there are the following fields:
      * <ul>
      * <li>products.id</li>
+     * <li>products.code</li>
      * <li>products.name</li>
      * <li>products.entryPrice</li>
      * <li>products.sellPrice</li>
@@ -107,6 +108,7 @@ public class GenericProductsImplementation extends GenericProductsBean {
 		    ProductLocal p = (ProductLocal)i.next();
 		    r.addRecord();
 		    r.addField("products.id", p.getId());
+		    r.addField("products.code", p.getCode());
 		    r.addField("products.name", p.getName());
 		    r.addField("products.entryPrice", p.getEntryPrice());
 		    r.addField("products.sellPrice", p.getSellPrice());
@@ -215,6 +217,7 @@ public class GenericProductsImplementation extends GenericProductsBean {
 	if(p != null) {
 	    form.setProductId(p.getId());
 	    form.setProductName(p.getName());
+	    form.setProductCode(p.getCode());
 	    form.setProductDescription(p.getDescription());
 	    form.setProductEntryPrice(p.getEntryPrice());
 	    form.setProductSellPrice(p.getSellPrice());
@@ -271,6 +274,7 @@ public class GenericProductsImplementation extends GenericProductsBean {
     protected void initProductFields() {
 	form.setProductId(new Integer(0));
 	form.setProductName("");
+	form.setProductCode("");
 	form.setProductDescription("");
 	form.setProductEntryPrice(new BigDecimal(0));
 	form.setProductSellPrice(new BigDecimal(0));
