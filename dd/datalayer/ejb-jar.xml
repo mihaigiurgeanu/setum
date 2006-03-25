@@ -142,9 +142,10 @@
 	<query-method>
 	  <method-name>ejbSelectProductsCount</method-name>
 	  <method-params>
+	    <method-param>java.lang.Integer</method-param>
 	  </method-params>	  
 	</query-method>
-	<ejb-ql>SELECT COUNT(p) FROM Category c, IN(c.products) p</ejb-ql>
+	<ejb-ql>SELECT COUNT(p) FROM Category c, IN(c.products) p WHERE c.id = ?1</ejb-ql>
       </query>
     </entity>
 

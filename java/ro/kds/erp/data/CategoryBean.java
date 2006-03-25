@@ -63,7 +63,7 @@ public abstract class CategoryBean implements EntityBean {
     // ------------------------------------------------------------------
     public Integer getProductsCount() {
 	try {
-	    return new Integer(ejbSelectProductsCount());
+	    return new Integer(ejbSelectProductsCount(getId()));
 	} catch (FinderException e) {
 	    logger.log(BasicLevel.WARN, e);
 	    return new Integer(0);
@@ -75,7 +75,7 @@ public abstract class CategoryBean implements EntityBean {
     // Select methods
     //
     // ------------------------------------------------------------------
-    public abstract int ejbSelectProductsCount() throws FinderException;
+    public abstract int ejbSelectProductsCount(Integer productId) throws FinderException;
 
     // ------------------------------------------------------------------
     // Standard call back methods
