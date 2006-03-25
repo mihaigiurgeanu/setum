@@ -233,6 +233,12 @@
       </env-entry>
       <env-entry>
 	<description>The category id for a value list</description>
+	<env-entry-name>manerSemicilindruId</env-entry-name>
+	<env-entry-type>java.lang.Integer</env-entry-type>
+	<env-entry-value>10007</env-entry-value>
+      </env-entry>
+      <env-entry>
+	<description>The category id for a value list</description>
 	<env-entry-name>sildId</env-entry-name>
 	<env-entry-type>java.lang.Integer</env-entry-type>
 	<env-entry-value>9996</env-entry-value>

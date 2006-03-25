@@ -30,7 +30,7 @@ import ro.kds.erp.data.CompositeProductLocalHome;
  * Created: Fri Nov 18 15:34:24 2005
  *
  * @author <a href="mailto:Mihai Giurgeanu@CRIMIRA"></a>
- * @version $Id: UsaMetalica2KBeanImplementation.java,v 1.7 2006/03/25 20:46:11 mihai Exp $
+ * @version $Id: UsaMetalica2KBeanImplementation.java,v 1.8 2006/03/25 21:25:31 mihai Exp $
  */
 public class UsaMetalica2KBeanImplementation 
     extends ro.kds.erp.biz.setum.basic.UsaMetalica2KBean {
@@ -416,6 +416,8 @@ public class UsaMetalica2KBeanImplementation
 		       ValueLists.makeVLForCategoryRef("amortizorId"));
 	r.addValueList("decupareSistemId",
 		       ValueLists.makeVLForCategoryRef("decupareSistemId"));
+	r.addValueList("manerSemicilindruId",
+		       ValueLists.makeVLForCategoryRef("manerSemicilindruId"));
 
 	try {
 	    InitialContext ic = new InitialContext();
