@@ -269,7 +269,7 @@
       </env-entry>
       <env-entry>
 	<description>The category id for a value list</description>
-	<env-entry-name>amortizor</env-entry-name>
+	<env-entry-name>amortizorId</env-entry-name>
 	<env-entry-type>java.lang.Integer</env-entry-type>
 	<env-entry-value>10001</env-entry-value>
       </env-entry>
@@ -1081,6 +1081,14 @@
 	<local-home>ro.kds.erp.data.ContactLocalHome</local-home>
 	<local>ro.kds.erp.data.ContactLocal</local>
 	<ejb-link>datalayer.jar#ContactEJB</ejb-link>
+      </ejb-local-ref>
+      <ejb-local-ref>
+	<description>Used to locate country value list</description>
+	<ejb-ref-name>ejb/CategoryHome</ejb-ref-name>
+	<ejb-ref-type>Entity</ejb-ref-type>
+	<local-home>ro.kds.erp.data.CategoryLocalHome</local-home>
+	<local>ro.kds.erp.data.CategoryLocal</local>
+	<ejb-link>datalayer.jar#CategoryEJB</ejb-link>
       </ejb-local-ref>
     </session>
 
