@@ -17,32 +17,86 @@ var rdfService = Components.classes["@mozilla.org/rdf/rdf-service;1"].getService
 var categories_ds = rdfService.GetDataSource(categories_uri);
 var modules_ds = rdfService.GetDataSource(modules_uri);
 
-function BusinessCategory(category, theForm, fieldsPrefix, idFieldName) {
+
+
+// Creates a new BusinessCategory object.
+// Params:
+// category	- is the rdf category id
+// theForm	- is the object that handles the form that wants
+//		- to call on methods on this business category
+function BusinessCategory(category, theForm) {
 
   this.category = rdfService.GetResource(category);
+
+  // Predicates:
   this.title_predicate = rdfService.GetResource("http://www.kds.ro/erp/businessCategory#title");
+
+  // Points to the service url to which requests will be submited for loading or adding a new object
   this.service_predicate = rdfService.GetResource("http://www.kds.ro/erp/businessCategory#service");
+
+  // Points to the module resource found in the modules.rdf; this is the dialog window to be
+  // opened for editing (and adding) a new object
   this.module_predicate = rdfService.GetResource("http://www.kds.ro/erp/businessCategory#module");
+
+  // Points to the command name to be sent to the service for adding a new object
   this.onnew_predicate = rdfService.GetResource("http://www.kds.ro/erp/businessCategory#onnew");
+
+  // Points to the command name to be sent to the service to load a specific object in
+  // this category
   this.onload_predicate = rdfService.GetResource("http://www.kds.ro/erp/businessCategory#load");
+
+  // The predicate used in modules.rdf to point to the xulfile containing the definition
+  // of the object to be opened and edited
   this.xulfile_predicate = rdfService.GetResource("http://www.kds.ro/erp/modules/definition#xulfile");
 
 
   this.theForm = theForm;
-  this.prefix = fieldsPrefix;
-  this.idFieldName = idFieldName;
 
-  this.load = function(id) {
+
+  // Sends a load request to the service containing the business
+  // logic of the object in this business category
+  this.load = function load_related_object(id) {
     var req = new HTTPDataRequest(get_literal(categories_ds, 
 					      this.category, 
 					      this.service_predicate));
-    req.add("command", "load");
-    req.add("id", id);
-    this.theForm.post_request(req, this.prefix);
+    var load_command = get_literal(categories_ds,
+				   this.category,
+				   this.onload_predicate)
+    req.add("command", get_literal(categories_ds, 
+				   this.category, 
+				   this.service_predicate));
+    req.add("id", id);		// old style for id param (deprecated)
+    req.add("param0", id);	// new style for calling load method
+
+    this.theForm.post_request(req);
 
   };
 
-  this.addnew_dlg = function open_addnew_dialog(update_procedure) {
+
+  // Opens a new dialog window for creating a new object in this business category.
+  // It first sends a "new" command to the service for this category without any
+  // params. Then opens the dialog associated with this business category.
+  //
+  // After closing the dialog with OK button, the dialog calls the 
+  // select_handler.select(id) method with the id of the created object.
+  //
+  // The name of the "new" command is taken from the description of the
+  // business category (in the rdf file) with the predicate onnew_predicate.
+  //
+  // A sample select handler:
+  // select_handler = {
+  //	theForm: theForm,
+  //	category: "http://bla/bla/bla",
+  //	select: function add_new(id) {
+  //		var req = this.theForm.get_request();
+  //		req.add("command", "addItem");
+  //		req.add("param0", id);
+  //		req.add("param1", this.category.Value);
+  //		this.theForm.post_request(req);
+  //		load_items(); // the method that refreshes the tree listing
+  //	}
+  // } 
+  this.addnew_dlg = function open_addnew_dialog(select_handler) {
     if(categories_ds.hasArcOut(this.category, this.onnew_predicate)) {
       var req = new HTTPDataRequest(get_literal(categories_ds,
 						this.category,
@@ -57,20 +111,6 @@ function BusinessCategory(category, theForm, fieldsPrefix, idFieldName) {
 				  this.category,
 				  this.module_predicate);
 
-    var select_handler = {
-      theForm: this.theForm,
-      idFieldName: this.idFieldName,
-      update_procedure: update_procedure,
-      category: this.category,
-      select: function(id) {
-	var req = new HTTPDataRequest(this.theForm.do_link);	
-	req.add("command", "addItem");
-	req.add("param0", id);
-	req.add("param1", this.category.Value);
-	req.execute();
-	if(this.update_procedure) { this.update_procedure(); }
-      }
-    }
     window.openDialog(get_literal(modules_ds, 
 				  module_res, this.xulfile_predicate),
 		      get_literal(modules_ds, 
@@ -78,7 +118,30 @@ function BusinessCategory(category, theForm, fieldsPrefix, idFieldName) {
 		      "chrome, resizable, scrollbars", select_handler);
   };
 
-  this.edit_dlg = function open_edit_dialog(objectId, update_procedure) {
+
+
+  // Opens a new dialog window for editing the data of the current object in 
+  // this business category.
+  // It first sends a "load" command to the service for this category with one
+  // param indicating the id of the object to be edited. Then opens the dialog 
+  // associated with this business category.
+  // After closing the dialog with OK button, the dialog calls the
+  // select_handler.select(id) method. You should provide the select_handler object.
+  //
+  // The select_handler can be something like this:
+  // select_handler = {
+  //	theForm: theForm,
+  //	select: function update_command(id) {
+  //		var req = this.theForm.get_request();
+  //		req.add("command", "change");
+  //		req.add("field", <field name>);
+  //		req.add("value", id);
+  //		this.theForm.post_request(req);
+  //	}
+  // }
+  //
+  // Calling change command will refresh the calling form data.
+  this.edit_dlg = function open_edit_dialog(objectId, select_handler) {
 
     if(categories_ds.hasArcOut(this.category, this.onload_predicate)) {
       var req = new HTTPDataRequest(get_literal(categories_ds,
@@ -99,20 +162,6 @@ function BusinessCategory(category, theForm, fieldsPrefix, idFieldName) {
 				 this.category, 
 				 this.module_predicate);
     
-    var select_handler = {
-      theForm: this.theForm,
-      idFieldName: this.idFieldName,
-      update_procedure: update_procedure,
-      category: this.category,
-      select: function(id) {
-	var req = new HTTPDataRequest(this.theForm.do_link);
-	req.add("command", "change");
-	req.add("field", this.idFieldName);
-	req.add("value", id);
-	this.theForm.post_request(req);
-	if(this.update_procedure) { this.update_procedure(); }
-      }
-    };
     window.openDialog(get_literal(modules_ds, 
 				  module_res, this.xulfile_predicate),
 		      get_literal(modules_ds, 

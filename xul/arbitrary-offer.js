@@ -35,11 +35,7 @@ function load_items() {
 
 function make_category(categoryURI) {
     log("Making business category for uri: " + categoryURI);
-    var category = new BusinessCategory(categoryURI);
-    category.theForm = theForm;
-    category.fieldsPrefix = "product";
-    category.idFieldName = "productId"; // the name of the primary key field
-    
+    var category = new BusinessCategory(categoryURI, theForm);    
     return category;
 }
 
@@ -100,13 +96,42 @@ function save_item() {
 function edit_product() {
     log("edit_product: " + crtItem()['productId']);
     log("edit_product: " + crtItem()['businessCategory']);
-    make_category(crtItem()['businessCategory']).edit_dlg(crtItem()['productId']);
+
+    var select_handler = {
+	theForm: theForm,
+	select: function update_product(productId) {
+	    var req = this.theForm.get_request();
+	    req.add("command", "change");
+	    req.add("field", "productId");
+	    req.add("value", productId);
+	    this.theForm.post_request(req);
+	}
+    };
+
+    make_category(crtItem()['businessCategory'])
+	.edit_dlg(crtItem()['productId'], select_handler);
 }
 
-function popup_new_item(id) {
-    theForm.save(); 
-    make_category(id).addnew_dlg(load_items);
+
+// reload item data for the given product
+function popup_new_item(categoryURI) {
+    theForm.save();
+    var select_handler = {
+	theForm: theForm,
+	category: categoryURI,
+	select: function add_item(productId) {
+	    var req = this.theForm.get_request();
+	    req.add("command", "addItem");
+	    req.add("param0", productId);
+	    req.add("param1", this.category);
+	    this.theForm.post_request(req);
+	    load_items();
+	}
+    };
+
+    make_category(categoryURI).addnew_dlg(select_handler);
 }
+
 
 // Global variable theForm that will be used by event handlers
 var theForm = new FormObject();

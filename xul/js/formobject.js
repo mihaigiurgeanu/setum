@@ -185,7 +185,7 @@ function set_value(fieldName, fieldValue) {
     this.post_request(req);
 }
 
-function post_request(req, prefix) {
+function post_request(req) {
 
     var response = req.execute();
     var result;

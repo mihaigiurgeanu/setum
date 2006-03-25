@@ -34,34 +34,25 @@ function to call when the called module ends.
             xmlns:category="http://www.kds.ro/erp/businessCategory#">
 
 
-  <rdf:Seq rdf:about="http://www.kds.ro/erp/modules/setum/arbitrary-offer/categories">
-    <rdf:li rdf:resource="http://www.kds.ro/erp/businessCategory/setum/sistem"/>
-    <rdf:li rdf:resource="http://www.kds.ro/erp/businessCategory/setum/usastd"/>
-    <rdf:li rdf:resource="http://www.kds.ro/erp/businessCategory/setum/usa2k"/>
-  </rdf:Seq>
-
   <rdf:Description rdf:about="http://www.kds.ro/erp/businessCategory/setum/sistem">
     <category:title>Sistem</category:title>
     <category:service>/sisteme.do</category:service>
     <category:module rdf:resource="http://www.kds.ro/erp/modules/setum/selectSistem"/>
+    <!--
+	This will be used to select an existing object, so it won't contain a
+	onnew predicate.
+    -->
   </rdf:Description>
 
   <rdf:Description rdf:about="http://www.kds.ro/erp/businessCategory/setum/usastd">
     <category:title>Usa standard</category:title>
     <category:service>/usistandard.do</category:service>
     <category:module rdf:resource="http://www.kds.ro/erp/modules/setum/selectUsaStd"/>
+    <!--
+	This will be used to select an existing object, so it won't contain a
+	onnew predicate.
+    -->
   </rdf:Description>
-
-  <!-- UsaMetalica1K and UsaMetalica2K have become one single type of product
-  <rdf:Description
-      rdf:about="http://www.kds.ro/erp/businessCategory/setum/usa1k">
-    <category:title>Usa cu un canat</category:title>
-    <category:service>/usametalica1k.do</category:service>
-    <category:module rdf:resource="http://www.kds.ro/erp/modules/setum/editUsa1K"/>
-    <category:onnew>new</category:onnew>
-    <category:load>load</category:load>
-  </rdf:Description>
-  -->
 
   <rdf:Description
       rdf:about="http://www.kds.ro/erp/businessCategory/setum/usa2k">
@@ -71,6 +62,19 @@ function to call when the called module ends.
     <category:onnew>new</category:onnew>
     <category:load>load</category:load>
   </rdf:Description>
+
+
+  <!-- 
+       The list of business categories used by the arbitrary-offer form.
+       This list is used by the template on the form to let the user choose between
+       differrent kinds of products to add to the offer.
+  -->
+  <rdf:Seq rdf:about="http://www.kds.ro/erp/modules/setum/arbitrary-offer/categories">
+    <rdf:li rdf:resource="http://www.kds.ro/erp/businessCategory/setum/sistem"/>
+    <rdf:li rdf:resource="http://www.kds.ro/erp/businessCategory/setum/usastd"/>
+    <rdf:li rdf:resource="http://www.kds.ro/erp/businessCategory/setum/usa2k"/>
+  </rdf:Seq>
+
 
 
 </rdf:RDF>
