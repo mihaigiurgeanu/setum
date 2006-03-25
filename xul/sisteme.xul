@@ -15,7 +15,7 @@
   <script src="js/formobject.js"/>
 
   <commandset>
-    <command id="command-save" oncommand="theForm.save(); load_sisteme();" />
+    <command id="command-save" oncommand="theForm.save(); load_sisteme();document.getElementById('maintab').selectedIndex=0" />
     <command id="command-add" oncommand="theForm.addnew(); document.getElementById('maintab').selectedIndex=1" />
     <command id="onprint" oncommand="open('http://localhost:9000/reports/OfertaSisteme.pdf', 'OfertaSisteme', '');" />
     <command id="onAdjustPrices" oncommand="adjustPricesDlg()" />
