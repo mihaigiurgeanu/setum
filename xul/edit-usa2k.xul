@@ -16,6 +16,7 @@ windows.arguments[0].select(productId)
     id="edit-usa2k-dlg"
     title="Usa metalica cu 2 canate"
     xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+    persist="screenX screenY width height"
     orient="vertical"
     style="overflow:scroll;"
     buttons="accept,cancel"
