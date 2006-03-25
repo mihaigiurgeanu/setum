@@ -1,6 +1,6 @@
 /* httpdata.js - manages the http requests for data */
 
-const SERVER_URL = "http://localhost:9000/setum";
+const SERVER_URL = "http://setumserver:9000/setum";
 
 //Create a HTTPDataRequest Object
 function HTTPDataRequest(target, prefix) {

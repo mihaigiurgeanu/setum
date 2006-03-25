@@ -33,6 +33,13 @@ function to call when the called module ends.
 <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
             xmlns:category="http://www.kds.ro/erp/businessCategory#">
 
+
+  <rdf:Seq rdf:about="http://www.kds.ro/erp/modules/setum/arbitrary-offer/categories">
+    <rdf:li rdf:resource="http://www.kds.ro/erp/businessCategory/setum/sistem"/>
+    <rdf:li rdf:resource="http://www.kds.ro/erp/businessCategory/setum/usastd"/>
+    <rdf:li rdf:resource="http://www.kds.ro/erp/businessCategory/setum/usa2k"/>
+  </rdf:Seq>
+
   <rdf:Description rdf:about="http://www.kds.ro/erp/businessCategory/setum/sistem">
     <category:title>Sistem</category:title>
     <category:service>/sisteme.do</category:service>
@@ -65,11 +72,5 @@ function to call when the called module ends.
     <category:load>load</category:load>
   </rdf:Description>
 
-
-  <rdf:Seq rdf:about="http://www.kds.ro/erp/modules/setum/arbitrary-offer/categories">
-    <rdf:li rdf:resource="http://www.kds.ro/erp/businessCategory/setum/sistem"/>
-    <rdf:li rdf:resource="http://www.kds.ro/erp/businessCategory/setum/usastd"/>
-    <rdf:li rdf:resource="http://www.kds.ro/erp/businessCategory/setum/usa2k"/>
-  </rdf:Seq>
 
 </rdf:RDF>

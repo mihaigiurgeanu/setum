@@ -117,7 +117,7 @@ function BusinessCategory(category, theForm, fieldsPrefix, idFieldName) {
 				  module_res, this.xulfile_predicate),
 		      get_literal(modules_ds, 
 				  module_res, this.xulfile_predicate),
-		      "chrome", select_handler);
+		      "chrome, resizable, scrollbars", select_handler);
   };
 }
 

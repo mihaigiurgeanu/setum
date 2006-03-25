@@ -17,6 +17,7 @@ windows.arguments[0].select(productId)
     title="Usa metalica cu 2 canate"
     xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
     persist="screenX screenY width height"
+    maxheight="700" maxwidth="900"
     orient="vertical"
     style="overflow:scroll;"
     buttons="accept,cancel"
@@ -32,7 +33,13 @@ windows.arguments[0].select(productId)
     <broadcaster id="usa2Kstatus" disabled="true"/>
   </broadcasterset>
 
-  <tabbox>
+  <commandset>
+    <command id="edit-fereastra" oncommand="open_service_dlg('fereastraId', '/edit-fereastra.do', 'edit-fereastra.xul')"/>
+    <command id="edit-gv" oncommand="open_service_dlg('grilaVentilatieId', '/edit-gv.do', 'edit-gv.xul')"/>
+    <command id="edit-ga" oncommand="open_service_dlg('gauriAerisireId', '/edit-ga.do', 'edit-ga.xul')"/>
+  </commandset>
+
+  <tabbox maxheight="650" maxwidth="740">
     <tabs>
       <tab label="Definire usa"/>
       <tab label="Optiuni"/>
@@ -616,13 +623,5 @@ windows.arguments[0].select(productId)
     </tabpanels>
   </tabbox>
 
-  <commandset>
-    <command id="edit-fereastra" oncommand="open_service_dlg('fereastraId', '/edit-fereastra.do', 'edit-fereastra.xul')"/>
-    <command id="edit-gv" oncommand="open_service_dlg('grilaVentilatieId', '/edit-gv.do', 'edit-gv.xul')"/>
-    <command id="edit-ga" oncommand="open_service_dlg('gauriAerisireId', '/edit-ga.do', 'edit-ga.xul')"/>
-  </commandset>
-
-
   <script language="javascript" src="edit-usa2k.js"/>
-
 </dialog>
