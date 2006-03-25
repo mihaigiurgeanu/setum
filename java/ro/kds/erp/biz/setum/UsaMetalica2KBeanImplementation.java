@@ -30,7 +30,7 @@ import ro.kds.erp.data.CompositeProductLocalHome;
  * Created: Fri Nov 18 15:34:24 2005
  *
  * @author <a href="mailto:Mihai Giurgeanu@CRIMIRA"></a>
- * @version $Id: UsaMetalica2KBeanImplementation.java,v 1.6 2006/03/21 00:40:38 mihai Exp $
+ * @version $Id: UsaMetalica2KBeanImplementation.java,v 1.7 2006/03/25 20:46:11 mihai Exp $
  */
 public class UsaMetalica2KBeanImplementation 
     extends ro.kds.erp.biz.setum.basic.UsaMetalica2KBean {
@@ -205,6 +205,9 @@ public class UsaMetalica2KBeanImplementation
 	    form.readIntFoil(amap);
 	    form.readIeFoil(amap);
 	    form.readExtFoil(amap);
+	    form.readIeFoilSec(amap);
+	    form.readIntFoilSec(amap);
+	    form.readExtFoilSec(amap);
 	    form.readIsolation(amap);
 	    form.readOpeningDir(amap);
 	    form.readOpeningSide(amap);
@@ -374,6 +377,22 @@ public class UsaMetalica2KBeanImplementation
      * that return data to be loaded in the form.
      */
     public void loadValueLists(ResponseBean r) {
+
+
+	r.addValueList("subclass", ValueLists.makeStdValueList(11001));
+	r.addValueList("version", ValueLists.makeStdValueList(11002));
+	r.addValueList("material", ValueLists.makeStdValueList(11003));
+	r.addValueList("intFoil", ValueLists.makeStdValueList(11006));
+	r.addValueList("extFoil", ValueLists.makeStdValueList(11006));
+	r.addValueList("intFoilSec", ValueLists.makeStdValueList(11006));
+	r.addValueList("extFoilSec", ValueLists.makeStdValueList(11006));
+	r.addValueList("isolation", ValueLists.makeStdValueList(11010));
+	r.addValueList("openingDir", ValueLists.makeStdValueList(11004));
+	r.addValueList("openingSide", ValueLists.makeStdValueList(11005));
+	r.addValueList("foilPosition", ValueLists.makeStdValueList(11008));
+
+
+
 	r.addValueList("broascaId", 
 		       ValueLists.makeVLForCategoryRef("broascaId"));
 	r.addValueList("cilindruId", 
