@@ -19,6 +19,12 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.TreeMap;
+import java.util.Collections;
+import java.util.List;
+
+import java.util.Comparator;
+
+import java.util.ArrayList;
 
 /**
  * Bussines logic for recording and managing products of type "sisteme".
@@ -158,10 +164,34 @@ public class SistemBean extends ro.kds.erp.biz.setum.basic.SistemBean {
 	    r = new ResponseBean();
 
 	    CategoryLocal rootCategory = ch.findByPrimaryKey(rootCategoryId);
-	    Collection categs = rootCategory.getSubCategories();
+	    List categs = new ArrayList(rootCategory.getSubCategories());
+	    Collections.sort(categs,
+			     new Comparator() {
+				 public int compare(Object o1, Object o2) {
+				     return ((CategoryLocal)o1).getName()
+					 .compareToIgnoreCase(((CategoryLocal)o2).getName());
+				 }
+
+				 public boolean equals(Object obj) {
+				     return this.equals(obj);
+				 }
+			     });
+				 
 	    for(Iterator i = categs.iterator(); i.hasNext(); ) {
 		CategoryLocal cat = (CategoryLocal)i.next();
-		Collection products = cat.getProducts();
+		List products = new ArrayList(cat.getProducts());
+
+		Collections.sort(products,
+				 new Comparator() {
+				     public int compare(Object o1, Object o2) {
+					 return ((ProductLocal)o1).getName()
+					     .compareToIgnoreCase(((ProductLocal)o2).getName());
+				     }
+				     public boolean equals(Object obj) {
+					 return this.equals(obj);
+				     }
+				 });
+
 		for(Iterator j = products.iterator(); j.hasNext();) {
 		    ProductLocal p = (ProductLocal)j.next();
 		    
