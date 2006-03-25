@@ -34,9 +34,13 @@ windows.arguments[0].select(productId)
   </broadcasterset>
 
   <commandset>
-    <command id="edit-fereastra" oncommand="open_service_dlg('fereastraId', '/edit-fereastra.do', 'edit-fereastra.xul')"/>
-    <command id="edit-gv" oncommand="open_service_dlg('grilaVentilatieId', '/edit-gv.do', 'edit-gv.xul')"/>
-    <command id="edit-ga" oncommand="open_service_dlg('gauriAerisireId', '/edit-ga.do', 'edit-ga.xul')"/>
+    <!-- Se vor folosi categoriile de business
+	<command id="edit-fereastra" oncommand="open_service_dlg('fereastraId', '/edit-fereastra.do', 'edit-fereastra.xul')"/>
+	<command id="edit-gv" oncommand="open_service_dlg('grilaVentilatieId', '/edit-gv.do', 'edit-gv.xul')"/>
+	<command id="edit-ga" oncommand="open_service_dlg('gauriAerisireId', '/edit-ga.do', 'edit-ga.xul')"/>
+    -->
+
+
   </commandset>
 
   <tabbox maxheight="650" maxwidth="740">
@@ -65,41 +69,19 @@ windows.arguments[0].select(productId)
 		<row>
 		  <label control="subclass" value="Subcod:"/>
 		  <menulist id="subclass" >
-		    <menupopup id="subclass-popup">
-		      <menuitem id="subclass.A" label="A - apartament" 
-				value="A" />
-		      <menuitem id="subclass.S" label="S - siguranta" 
-				value="S" />
-		      <menuitem id="subclass.M" label="M - metalica" 
-				value="M" />
-		      <menuitem id="subclass.B" label="B - batanta" 
-				value="B" />
-		    </menupopup>
+		    <menupopup id="subclass-popup"/>
 		  </menulist>
 		</row>
 		<row>
 		  <label control="version" value="Varianta:"/>
 		  <menulist id="version" >
-		    <menupopup id="version-popup">
-		      <menuitem id="version.UF" value="UF" 
-				label="UF - cu falt"/>
-		      <menuitem id="version.UFF" value="UFF" 
-				label="UFF - fara falt"/>
-		    </menupopup>
+		    <menupopup id="version-popup"/>
 		  </menulist>
 		</row>
 		<row>
 		  <label control="material" value="Material:"/>
 		  <menulist id="material" >
-		    <menupopup id="material-popup">
-		      <menuitem id="material.1" value="1" label="otel"/>
-		      <menuitem id="material.2" value="2" 
-				label="otel zincat termic"/>
-		      <menuitem id="material.3" value="3" label="inox"/>
-		      <menuitem id="material.4" value="4" label="aluminiu"/>
-		      <menuitem id="material.5" value="5" label="alama"/>
-		      <menuitem id="material.6" value="6" label="cupru"/>
-		    </menupopup>
+		    <menupopup id="material-popup" />
 		  </menulist>
 		</row>
 		<row>
@@ -173,16 +155,13 @@ windows.arguments[0].select(productId)
 	  <groupbox orient="vertical">
 	    <caption label="Tip foaie"/>
 
-	    <separator/>
-	    <label value="Canat principal"/>
+	    <separator class="newgroup" />
+	    <label value="Canat principal" class="newgroup"/>
 
 	    <hbox>
 	      <label>La interior placata cu tabla 2 randuri</label>
 	      <menulist id="intFoil" >
-		<menupopup id="intFoil-popup">
-		  <menuitem id="intFoil.1" value="1" label="Lisa"/>
-		  <menuitem id="intFoil.2" value="2" label="Amprentata"/>
-		</menupopup>
+		<menupopup id="intFoil-popup"/>
 	      </menulist>
 	    </hbox>
 	    <hbox>
@@ -192,26 +171,20 @@ windows.arguments[0].select(productId)
 		<hbox>
 		  <radio id="ieFoil.2" value="2" label="placata cu tabla 2 randuri"/>
 		  <menulist id="extFoil" >
-		    <menupopup id="extFoil-popup">
-		      <menuitem id="extFoil.1" value="1" label="Lisa"/>
-		      <menuitem id="extFoil.2" value="2" label="Amprentata"/>
-		    </menupopup>
+		    <menupopup id="extFoil-popup"/>
 		  </menulist>
 		</hbox>
 	      </radiogroup>
 	    </hbox>
 
 
-	    <separator/>
-	    <label value="Canat secundar" observes="usa2Kstatus"/>
+	    <separator class="newgroup" />
+	    <label value="Canat secundar" observes="usa2Kstatus" class="newgroup"/>
 
 	    <hbox>
 	      <label observes="usa2Kstatus">La interior placata cu tabla 2 randuri</label>
 	      <menulist id="intFoilSec" observes="usa2Kstatus" >
-		<menupopup id="intFoilSec-popup" observes="usa2Kstatus">
-		  <menuitem id="intFoilSec.1" value="1" label="Lisa"/>
-		  <menuitem id="intFoilSec.2" value="2" label="Amprentata"/>
-		</menupopup>
+		<menupopup id="intFoilSec-popup" observes="usa2Kstatus"/>
 	      </menulist>
 	    </hbox>
 	    <hbox>
@@ -225,41 +198,27 @@ windows.arguments[0].select(productId)
 			 label="placata cu tabla 2 randuri"
 			 observes="usa2Kstatus"/>
 		  <menulist id="extFoilSec" observes="usa2Kstatus" >
-		    <menupopup id="extFoilSec-popup">
-		      <menuitem id="extFoilSec.1" value="1" label="Lisa"/>
-		      <menuitem id="extFoilSec.2" value="2" 
-				label="Amprentata"/>
-		    </menupopup>
+		    <menupopup id="extFoilSec-popup"/>
 		  </menulist>
 		</hbox>
 	      </radiogroup>
 	    </hbox>
 
-
+	    <separator class="newgroup"/>
 	    <hbox>
 	      <label control="isolation" value="Izolatie:"/>
 	      <menulist id="isolation" >
-		<menupopup id="isolation-popup">
-		  <menuitem id="isolation.1" value="1" label="vata minerala"/>
-		  <menuitem id="isolation.2" value="2" 
-			    label="spuma poliuretanica"/>
-		</menupopup>
+		<menupopup id="isolation-popup"/>
 	      </menulist>
 	    </hbox>
 	    <hbox>
 	      <label control="openingDir" value="Sens deschidere:"/>
 	      <vbox>
 		<menulist id="openingDir" >
-		  <menupopup id="openingDir-popup">
-		    <menuitem id="openingDir.1" value="1" label="interior"/>
-		    <menuitem id="openingDir.2" value="2" label="exterior"/>
-		  </menupopup>
+		  <menupopup id="openingDir-popup"/>
 		</menulist>
 		<menulist id="openingSide" >
-		  <menupopup id="openingSide-popup">
-		    <menuitem id="openingSide.1" value="1" label="stanga"/>
-		    <menuitem id="openingSide.2" value="2" label="dreapta"/>
-		  </menupopup>
+		  <menupopup id="openingSide-popup"/>
 		</menulist>
 	      </vbox>
 	    </hbox>
@@ -299,11 +258,7 @@ windows.arguments[0].select(productId)
 	    <hbox>
 	      <label value="Pozitionare foaie"/>
 	      <menulist id="foilPosition" >
-		<menupopup id="foilPosition-popup">
-		  <menuitem id="foilPosition.1" value="1" label="interior"/>
-		  <menuitem id="foilPosition.2" value="2" label="exterior"/>
-		  <menuitem id="foilPosition.3" value="3" label="mijloc"/>
-		</menupopup>
+		<menupopup id="foilPosition-popup"/>
 	      </menulist>
 	    </hbox>
 	  </groupbox>
