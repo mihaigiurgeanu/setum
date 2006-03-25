@@ -19,6 +19,10 @@ import java.math.BigDecimal;
 import java.rmi.RemoteException;
 import javax.ejb.CreateException;
 import javax.ejb.RemoveException;
+import java.util.Collections;
+import java.util.List;
+import java.util.Comparator;
+import java.util.ArrayList;
 
 /**
  * Describe class GenericProductsImplementation here.
@@ -27,7 +31,7 @@ import javax.ejb.RemoveException;
  * Created: Tue Mar 14 18:58:14 2006
  *
  * @author <a href="mailto:Mihai Giurgeanu@CRIMIRA"></a>
- * @version $Id: GenericProductsImplementation.java,v 1.3 2006/03/24 20:31:24 mihai Exp $
+ * @version $Id: GenericProductsImplementation.java,v 1.4 2006/03/25 22:05:20 mihai Exp $
  */
 public class GenericProductsImplementation extends GenericProductsBean {
 
@@ -57,7 +61,21 @@ public class GenericProductsImplementation extends GenericProductsBean {
 
 	try {
 	    CategoryLocal rootCategory = getRootCategory();
-	    Collection categories = rootCategory.getSubCategories();
+	    List categories = new ArrayList(rootCategory.getSubCategories());
+
+	    Collections.sort(categories,
+			     new Comparator() {
+				 public int compare(Object o1, Object o2) {
+				     return ((CategoryLocal)o1).getId()
+					 .compareTo(((CategoryLocal)o2).getId());
+				 }
+				 
+				 public boolean equals(Object o) {
+				     return this.equals(o);
+				 }
+			     });
+	    
+
 	    r = new ResponseBean();
 	    for(Iterator i = categories.iterator(); i.hasNext(); ) {
 		CategoryLocal c = (CategoryLocal)i.next();
@@ -102,7 +120,19 @@ public class GenericProductsImplementation extends GenericProductsBean {
 	    if(c == null) {
 		r = ResponseBean.SUCCESS; // it is a new category, it has no products
 	    } else {
-		Collection products = c.getProducts();
+		List products = new ArrayList(c.getProducts());
+		Collections.sort(products,
+				 new Comparator() {
+				     public int compare(Object o1, Object o2) {
+					 return ((ProductLocal)o1).getCode()
+					     .compareToIgnoreCase(((ProductLocal)o2).getCode());
+				     }
+
+				     public boolean equals(Object o) {
+					 return this.equals(o);
+				     }
+				 });
+
 		r = new ResponseBean();
 		for(Iterator i = products.iterator(); i.hasNext(); ) {
 		    ProductLocal p = (ProductLocal)i.next();
