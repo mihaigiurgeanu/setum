@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<!-- $Id: build.xml,v 1.6 2006/01/18 04:13:13 mihai Exp $ -->
+<!-- $Id: build.xml,v 1.7 2006/03/26 09:06:07 mihai Exp $ -->
 <project name="setumerp" default="application">
   <description>
     Targets for building and deploying the setumerp application.
@@ -234,19 +234,19 @@
 	  description="Generation of java classes from xml templates">
     <freemarker basedir="${templates}" destdir="${src.formbean}"
 		templatedir="${templates}"
-		includes="**/*.xml" template="FormBean.ftl"
+		includes="**/*.xml" excludes="**/schemas.xml" template="FormBean.ftl"
 		extension="Form.java" />
     <freemarker basedir="${templates}" destdir="${src.remote}"
 		templatedir="${templates}"
-		includes="**/*.xml" template="RemoteInterface.ftl"
+		includes="**/*.xml" excludes="**/schemas.xml" template="RemoteInterface.ftl"
 		extension=".java" />
     <freemarker basedir="${templates}" destdir="${src.home}"
 		templatedir="${templates}"
-		includes="**/*.xml" template="HomeInterface.ftl"
+		includes="**/*.xml" excludes="**/schemas.xml" template="HomeInterface.ftl"
 		extension="Home.java" />
     <freemarker basedir="${templates}" destdir="${src.sessionbean}"
 		templatedir="${templates}"
-		includes="**/*.xml" template="SessionBean.ftl"
+		includes="**/*.xml" excludes="**/schemas.xml" template="SessionBean.ftl"
 		extension="Bean.java" />
   </target>
 
