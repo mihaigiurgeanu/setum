@@ -255,30 +255,34 @@ public class ArbitraryOfferBizBean extends ArbitraryOfferBean {
 	ResponseBean r;
 
 	try {
-	    InitialContext ic = new InitialContext();
-	    Context env = (Context)ic.lookup("java:comp/env");
-	    
-	    OfferLocalHome oh = (OfferLocalHome)PortableRemoteObject.
-		narrow(env.lookup("ejb/OfferHome"), OfferLocalHome.class);
-
-	    OfferLocal offer = oh.findByPrimaryKey(id);
-
-	    Collection offerItems = offer.getItems();
-	    r = new ResponseBean();
-	    for(Iterator i = offerItems.iterator(); i.hasNext();) {
-		OfferItemLocal item = (OfferItemLocal)i.next();
-		r.addRecord();
-		r.addField("id", item.getId());
-		ProductLocal p = item.getProduct();
-		if(p != null) {
-		    r.addField("offerLines.category", 
-			       p.getCategory().getName());
-		    r.addField("offerLines.name", p.getName());
-		    r.addField("productId", p.getId());
+	    if(id != null) {
+		InitialContext ic = new InitialContext();
+		Context env = (Context)ic.lookup("java:comp/env");
+		
+		OfferLocalHome oh = (OfferLocalHome)PortableRemoteObject.
+		    narrow(env.lookup("ejb/OfferHome"), OfferLocalHome.class);
+		
+		OfferLocal offer = oh.findByPrimaryKey(id);
+		
+		Collection offerItems = offer.getItems();
+		r = new ResponseBean();
+		for(Iterator i = offerItems.iterator(); i.hasNext();) {
+		    OfferItemLocal item = (OfferItemLocal)i.next();
+		    r.addRecord();
+		    r.addField("id", item.getId());
+		    ProductLocal p = item.getProduct();
+		    if(p != null) {
+			r.addField("offerLines.category", 
+				   p.getCategory().getName());
+			r.addField("offerLines.name", p.getName());
+			r.addField("productId", p.getId());
+		    }
+		    
+		    r.addField("offerLines.price", item.getPrice());
+		    r.addField("businessCategory", item.getBusinessCategory());
 		}
-
-		r.addField("offerLines.price", item.getPrice());
-		r.addField("businessCategory", item.getBusinessCategory());
+	    } else {
+		r = ResponseBean.SUCCESS;
 	    }
 
 	} catch (Exception e) {

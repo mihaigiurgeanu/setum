@@ -92,7 +92,7 @@ public class FereastraBizBean extends FereastraBean {
 				     form.getPozitionareBalamale()));
 	    attributes.add(ah.create("componenta", form.getComponenta()));
 	    attributes.add(ah.create("tipComponenta", form.getTipComponenta()));
-	    attributes.add(ah.create("tipGean", form.getTipGeam()));
+	    attributes.add(ah.create("tipGeam", form.getTipGeam()));
 
 
 	    try {
@@ -247,6 +247,10 @@ public class FereastraBizBean extends FereastraBean {
     public void createNewFormBean() {
 	super.createNewFormBean();
 
+	form.setDeschidere(new Integer(1));
+	form.setTipComponenta(new Integer(1));
+	form.setTipGeam(new Integer(1));
+	form.setTipGrilaj(new Integer(1));
     }
 
     /**
@@ -263,7 +267,7 @@ public class FereastraBizBean extends FereastraBean {
 	r.addValueList("pozitionareBalamale", ValueLists.makeStdValueList(11065));
 	r.addValueList("componenta", ValueLists.makeStdValueList(11070));
 	r.addValueList("tipGrilaj", ValueLists.makeStdValueList(11075));
-	r.addValueList("tipTabla", ValueLists.makeStdValueList(11080));
+// 	r.addValueList("tipTabla", ValueLists.makeStdValueList(11080));
 
 	// geamSimpluId
 	vl = new LinkedHashMap();
