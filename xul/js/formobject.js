@@ -256,7 +256,7 @@ function update_form(record) {
 
 function update_combo(field, record) {
     log(" Checking new value for field " + field + ": " + record[field]); 
-    if(record[field] != undefined) {
+    if(record[field] != undefined && document.getElementById(field)) {
 	document.getElementById(field).selectedItem = 
 	    document.getElementById(field + "." + record[field]);    
     }
@@ -264,7 +264,7 @@ function update_combo(field, record) {
 
 function update_radio(field, record) {
     log(" Checking new value for field " + field + ": " + record[field]); 
-    if(record[field] != undefined) {
+    if(record[field] != undefined && document.getElementById(field)) {
 	document.getElementById(field).selectedItem = 
 	    document.getElementById(field + "." + record[field]);    
     }
@@ -272,7 +272,7 @@ function update_radio(field, record) {
 
 function update_text(field, record) {
     log(" Checking new value for field " + field + ": " + record[field]); 
-    if(record[field] != undefined) {
+    if(record[field] != undefined && document.getElementById(field)) {
 	document.getElementById(field).value = record[field]; 
     }
 }
