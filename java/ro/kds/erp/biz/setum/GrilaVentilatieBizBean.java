@@ -90,21 +90,17 @@ public class GrilaVentilatieBizBean extends GrilaVentilatieBean {
 	    attributes.add(ah.create("pozitionare1", form.getPozitionare1()));
 	    attributes.add(ah.create("pozitionare2", form.getPozitionare2()));
 	    attributes.add(ah.create("pozitionare3", form.getPozitionare3()));
+	    attributes.add(ah.create("businessCategory", form.getBusinessCategory()));
 
 	    p.setAttributes(attributes);
 	    r = validate();
 	} catch (NamingException e) {
-	    r = new ResponseBean();
-	    r.setCode(1);
-	    r.setMessage("Eroare de configurare a serverului. " +
-			 "Datele nu au fost salvate");
+	    r = ResponseBean.ERR_CONFIG_NAMING;
 	    logger.log(BasicLevel.ERROR, "Error saving product with id " + id,
 		       e);
 	    ejbContext.setRollbackOnly();
 	} catch (Exception e) {
-	    r = new ResponseBean();
-	    r.setCode(3);
-	    r.setMessage("Eroare! Datele nu au fost salvate");
+	    r = ResponseBean.ERR_UNEXPECTED;
 	    logger.log(BasicLevel.ERROR, "Error saving product with id " + id,
 		       e);
 	    ejbContext.setRollbackOnly();
@@ -149,6 +145,9 @@ public class GrilaVentilatieBizBean extends GrilaVentilatieBean {
 	    if((a = (AttributeLocal)as.get("pozitionare3")) != null)
 		form.setPozitionare3(a.getStringValue());
 
+	    if((a = (AttributeLocal)as.get("businessCategory")) != null)
+		form.setBusinessCategory(a.getStringValue());
+
 	    r = new ResponseBean();
 	} catch (NamingException e) {
 	    r = new ResponseBean();
@@ -169,15 +168,6 @@ public class GrilaVentilatieBizBean extends GrilaVentilatieBean {
     public void createNewFormBean() {
 	super.createNewFormBean();
 
-	form.setLgv(new Double(0));
-	form.setHgv(new Double(0));
-	form.setPozitionare1("");
-	form.setPozitionare2("");
-	form.setPozitionare3("");
-
-	form.setSellPrice(new BigDecimal(0));
-	form.setEntryPrice(new BigDecimal(0));
-	form.setPrice1(new BigDecimal(0));
     }
 
 }

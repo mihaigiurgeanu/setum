@@ -78,4 +78,41 @@ function to call when the called module ends.
     <rdf:li rdf:resource="http://www.kds.ro/erp/businessCategory/setum/usa2k"/>
   </rdf:Seq>
 
+
+
+  <rdf:Description rdf:about="http://www.kds.ro/erp/businessCategory/setum/optiuni/fereastra">
+    <category:title>Fereastra</category:title>
+    <category:service>/edit-fereastra.do</category:service>
+    <category:module rdf:resource="http://www.kds.ro/erp/modules/setum/edit-fereastra"/>
+    <category:onnew>newFormData</category:onnew>
+    <category:load>loadFormData</category:load>
+  </rdf:Description>
+
+
+  <rdf:Description rdf:about="http://www.kds.ro/erp/businessCategory/setum/optiuni/gv">
+    <category:title>Grila ventilatie</category:title>
+    <category:service>/edit-gv.do</category:service>
+    <category:module rdf:resource="http://www.kds.ro/erp/modules/setum/edit-gv"/>
+    <category:onnew>newFormData</category:onnew>
+    <category:load>loadFormData</category:load>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="http://www.kds.ro/erp/businessCategory/setum/optiuni/ga">
+    <category:title>Gauri aerisire</category:title>
+    <category:service>/edit-ga.do</category:service>
+    <category:module rdf:resource="http://www.kds.ro/erp/modules/setum/edit-ga"/>
+    <category:onnew>newFormData</category:onnew>
+    <category:load>loadFormData</category:load>
+  </rdf:Description>
+
+
+  <!-- 
+       Optiuni usa metalica
+  -->
+  <rdf:Seq rdf:about="http://www.kds.ro/erp/modules/setum/usa2k/categories">
+    <rdf:li rdf:resource="http://www.kds.ro/erp/businessCategory/setum/optiuni/fereastra"/>
+    <rdf:li rdf:resource="http://www.kds.ro/erp/businessCategory/setum/optiuni/gv"/>
+    <rdf:li rdf:resource="http://www.kds.ro/erp/businessCategory/setum/optiuni/ga"/>
+  </rdf:Seq>
+
 </rdf:RDF>

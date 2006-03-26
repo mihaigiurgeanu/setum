@@ -39,4 +39,8 @@
     <name>price1</name>
     <type>java.math.BigDecimal</type>
   </field>
+  <field>
+    <name>businessCategory</name>
+    <type>String</type>
+  </field>
 </class>

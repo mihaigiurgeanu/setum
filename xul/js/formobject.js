@@ -327,7 +327,7 @@ function post_save_request(req) {
     // containing the message field and the fieldId field.
 
     log("Send save request");
-    response = req.execute();
+    var response = req.execute();
     if(response) {
 	if(response.code != 0) {
 	    err = response.message  + "\n\n";

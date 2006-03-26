@@ -466,4 +466,11 @@
     <name>intFinisajPanouLateralId</name>
     <type>Integer</type>
   </field>
+
+
+  <remote>
+    <method>ResponseBean addOption(Integer optionId, String businessCategory) throws RemoteException</method>
+    <method>ResponseBean getOptionsListing() throws RemoteException</method>
+    <method>ResponseBean removeOption (Integer optionId) throws RemoteException</method>
+  </remote>
 </class>

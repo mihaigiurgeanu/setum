@@ -172,4 +172,21 @@
     <modules:xulfile>value_lists.xul</modules:xulfile>
   </rdf:Description>
 
+
+
+
+  <!-- edit-fereastra -->
+  <rdf:Description rdf:about="http://www.kds.ro/erp/modules/setum/edit-fereastra">
+    <modules:xulfile>edit-fereastra.xul</modules:xulfile>
+  </rdf:Description>
+ 
+  <!-- edit-gv -->
+  <rdf:Description rdf:about="http://www.kds.ro/erp/modules/setum/edit-gv">
+    <modules:xulfile>edit-gv.xul</modules:xulfile>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="http://www.kds.ro/erp/modules/setum/edit-ga">
+    <modules:xulfile>edit-ga.xul</modules:xulfile>
+  </rdf:Description>
+
 </rdf:RDF>

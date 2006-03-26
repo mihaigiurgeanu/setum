@@ -30,5 +30,6 @@ public interface GauriAerisire extends EJBObject {
     public ResponseBean updateSellPrice(java.math.BigDecimal newSellPrice) throws RemoteException;
     public ResponseBean updateEntryPrice(java.math.BigDecimal newEntryPrice) throws RemoteException;
     public ResponseBean updatePrice1(java.math.BigDecimal newPrice1) throws RemoteException;
+    public ResponseBean updateBusinessCategory(String newBusinessCategory) throws RemoteException;
 
 }

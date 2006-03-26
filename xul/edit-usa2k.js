@@ -90,8 +90,64 @@ theForm.afterpost = function afterpost() {
 }
 
 
-theForm.setupEventListeners();
-theForm.load_current();
+// Options
+
+
+
+// the categories listing
+var options;
+var optionsListing = document.getElementById("optionsListing");
+function load_options() {
+    var req = theForm.get_request();
+    req.add("command", "getOptionsListing");
+    options = load_records(req);
+    optionsListing.view = make_treeview
+	(options, function(row,col) { return options[row][col]; });
+}
+
+
+// add a new option
+function popup_new_item(categoryURI) {
+    theForm.save();
+    var select_handler = {
+	theForm: theForm,
+	category: categoryURI,
+	select: function add_item(productId) {
+	    var req = this.theForm.get_request();
+	    req.add("command", "addOption");
+	    req.add("param0", productId);
+	    req.add("param1", this.category);
+	    this.theForm.post_request(req);
+	    load_options();
+	}
+    };
+
+    new BusinessCategory(categoryURI).addnew_dlg(select_handler);
+}
+
+// edit the selected option
+function edit_option() {
+
+    var select_handler = {
+	theForm: theForm,
+	select: function update_option(productId) {
+	    load_options();
+	}
+    };
+
+    new BusinessCategory(options[optionsListing.currentIndex]['options.businessCategory'])
+	.edit_dlg(options[optionsListing.currentIndex]['options.id'], select_handler);
+}
+
+// delete the selected option
+function delete_option() {
+    var req = theForm.get_request();
+    req.add("command", "removeOption");
+    req.add("param0", options[optionsListing.currentIndex]['options.id']);
+    theForm.post_request(req);
+    load_options();
+}
+
 
 function doOk() {
     if(theForm.save()) {
@@ -100,3 +156,11 @@ function doOk() {
     }
     return false;
 }
+
+
+theForm.setupEventListeners();
+theForm.load_current();
+load_options();
+
+
+

@@ -79,51 +79,10 @@ public class FereastraBizBean extends FereastraBean {
 	    attributes.add(ah.create("lf", form.getLf()));
 	    attributes.add(ah.create("hf", form.getHf()));
 
-	    p.setSellPrice(new BigDecimal(0));
-	    p.setEntryPrice(new BigDecimal(0));
-	    p.setPrice1(new BigDecimal(0));
-	    if(form.getComponenta().intValue() == 1) {
-		// componenta setum
-		switch(form.getTipComponenta().intValue()) {
-		case 1: // geam
-		    double surf = (form.getLf().doubleValue()/1000) * 
-			(form.getHf().doubleValue()/1000);
-		    switch (form.getTipGeam().intValue()) {
-		    case 1:
-			ProductLocal geamS = ph
-			    .findByPrimaryKey(form.getGeamSimpluId());
-			p.setSellPrice(geamS.getSellPrice()
-				       .multiply(new BigDecimal(surf)));
-			p.setEntryPrice(geamS.getEntryPrice()
-					.multiply(new BigDecimal(surf)));
-			break;
-		    case 2:
-			ProductLocal geamT = ph.
-			    findByPrimaryKey(form.getGeamTermopanId());
-			p.setSellPrice(geamT.getSellPrice()
-				       .multiply(new BigDecimal(surf)));
-			p.setEntryPrice(geamT.getEntryPrice()
-					.multiply(new BigDecimal(surf)));
-			break;
-		    }
-		    break;
-		case 2: // grilaj
-		    switch (form.getTipGrilaj().intValue()) {
-		    case 1:
-			ProductLocal grilaj = ph.
-			    findByPrimaryKey(form.getGrilajStasId());
-			p.setSellPrice(grilaj.getSellPrice());
-			p.setEntryPrice(grilaj.getEntryPrice());
-			break;
-		    case 2:
-			p.setSellPrice(form.getValoareGrilajAtipic());
-			p.setEntryPrice(form.getValoareGrilajAtipic());
-			break;
-		    }
-		    break;
-		}
-	    }
-	    
+	    p.setSellPrice(form.getSellPrice());
+	    p.setEntryPrice(form.getEntryPrice());
+	    p.setPrice1(form.getPrice1());
+
 	    attributes.add(ah.create("pozitionare1", form.getPozitionare1()));
 	    attributes.add(ah.create("pozitionare2", form.getPozitionare2()));
 	    attributes.add(ah.create("pozitionare3", form.getPozitionare3()));
@@ -134,6 +93,8 @@ public class FereastraBizBean extends FereastraBean {
 	    attributes.add(ah.create("componenta", form.getComponenta()));
 	    attributes.add(ah.create("tipComponenta", form.getTipComponenta()));
 	    attributes.add(ah.create("tipGean", form.getTipGeam()));
+
+
 	    try {
 		attributes.add(ah.create("geamSimplu", 
 					 ph.findByPrimaryKey(form.getGeamSimpluId())));
@@ -156,23 +117,22 @@ public class FereastraBizBean extends FereastraBean {
 // 		attributes.add(ah.create("tabla", 
 // 					 ph.findByPrimaryKey(form.getTablaId())));
 // 	    } catch (FinderException ignore) {}
+
+
 	    
+	    attributes.add(ah.create("businessCategory", form.getBusinessCategory()));
+
 	    p.setAttributes(attributes);
 	    
 
 	    r = validate();
 	} catch (NamingException e) {
-	    r = new ResponseBean();
-	    r.setCode(1);
-	    r.setMessage("Eroare configurare a serverului de aplicatie." +
-			 "Datele nu pot fi salvate.");
+	    r = ResponseBean.ERR_CONFIG_NAMING;
 	    logger.log(BasicLevel.ERROR, "Error saving object id "  + this.id, 
 		       e);
 	    ejbContext.setRollbackOnly();
 	} catch (Exception e) {
-	    r = new ResponseBean();
-	    r.setCode(3);
-	    r.setMessage("Eroare la salvarea datelor");
+	    r = ResponseBean.ERR_UNEXPECTED;
 	    logger.log(BasicLevel.ERROR, "Error saving object id "  + this.id, 
 		       e);
 	    ejbContext.setRollbackOnly();
@@ -199,7 +159,7 @@ public class FereastraBizBean extends FereastraBean {
 		(env.lookup("ejb/ProductHome"), ProductLocalHome.class);
 	    ProductLocal p = ph.findByPrimaryKey(this.id);
 	    form.setSellPrice(p.getSellPrice());
-	    form.setSellPrice(p.getSellPrice());
+	    form.setEntryPrice(p.getEntryPrice());
 	    form.setPrice1(p.getPrice1());
 	    
 	    Map attributes = p.getAttributesMap();
@@ -252,8 +212,7 @@ public class FereastraBizBean extends FereastraBean {
 	    if((a = (AttributeLocal)attributes.get("grilajStas")) != null)
 		form.setGrilajStasId(a.getProduct().getId());
 
-	    if((a = (AttributeLocal)attributes.get("valoareGrilajAtipic"))
-	       != null)
+	    if((a = (AttributeLocal)attributes.get("valoareGrilajAtipic")) != null)
 		form.setValoareGrilajAtipic(a.getDecimalValue());
 
 // 	    if((a = (AttributeLocal)attributes.get("tipTabla")) != null)
@@ -262,22 +221,20 @@ public class FereastraBizBean extends FereastraBean {
 // 	    if((a = (AttributeLocal)attributes.get("tabla")) != null)
 // 		form.setTablaId(a.getProduct().getId());
 
+	    if((a = (AttributeLocal)attributes.get("businessCategory")) != null)
+		form.setBusinessCategory(a.getStringValue());
+
 	    r = new ResponseBean();
 
 	} catch (NamingException e) {
 	    logger.log(BasicLevel.ERROR, "Error loading the product " + id, e);
-	    r = new ResponseBean();
-	    r.setCode(1);
-	    r.setMessage("Eroare de configurare a serverului. " + 
-			 "Datele despre fereastra nu au putut fi incarcate");
+	    r = ResponseBean.ERR_CONFIG_NAMING;
 	} catch (FinderException e) {
 	    logger.log(BasicLevel.ERROR, "Error loading the product " + id, e);
 	    throw(e);
 	} catch (Exception e) {
 	    logger.log(BasicLevel.ERROR, "Error loading the product " + id, e);
-	    r = new ResponseBean();
-	    r.setCode(3);
-	    r.setMessage("Datele despre fereastra nu au putut fi incarcate");
+	    r = ResponseBean.ERR_UNEXPECTED;
 	}
 
 	return r;
@@ -290,29 +247,6 @@ public class FereastraBizBean extends FereastraBean {
     public void createNewFormBean() {
 	super.createNewFormBean();
 
-	form.setSellPrice(new BigDecimal(0));
-	form.setEntryPrice(new BigDecimal(0));
-	form.setPrice1(new BigDecimal(0));
-
-	form.setCanat(new Integer(1));
-	form.setLf(new Double(0));
-	form.setHf(new Double(0));
-	form.setPozitionare1("");
-	form.setPozitionare2("");
-	form.setPozitionare3("");
-	form.setDeschidere(new Integer(1));
-	form.setSensDeschidere(new Integer(1));
-	form.setPozitionareBalamale(new Integer(1));
-	form.setComponenta(new Integer(1));
-	form.setTipComponenta(new Integer(1));
-	form.setTipGeam(new Integer(1));
-	form.setGeamSimpluId(new Integer(0));
-	form.setGeamTermopanId(new Integer(0));
-	form.setTipGrilaj(new Integer(1));
-	form.setGrilajStasId(new Integer(1));
-	form.setValoareGrilajAtipic(new BigDecimal(0));
-// 	form.setTipTabla(new Integer(1));
-// 	form.setTablaId(new Integer(1));
     }
 
     /**
@@ -324,37 +258,12 @@ public class FereastraBizBean extends FereastraBean {
     public void loadValueLists(ResponseBean r) {
 	Map vl;
 	
-	// canat
-	vl = new LinkedHashMap();
-	vl.put("Canat principal", new Integer(1));
-	vl.put("Canat secundar", new Integer(2));
-	r.addValueList("canat", vl);
-
-	// deschidere
-// 	vl = new LinkedHashMap();
-// 	vl.put("Fereastra fixa", 1);
-// 	vl.put("Fereastra mobila", 2);
-// 	r.addValueList("deschidere", vl);
-
-	// sensDeschidere
-	vl = new LinkedHashMap();
-	vl.put("interior", new Integer(1));
-	vl.put("exterior", new Integer(2));
-	r.addValueList("sensDeschidere", vl);
-	
-	// pozitionareBalamale
-	vl = new LinkedHashMap();
-	vl.put("stanga", new Integer(1));
-	vl.put("dreapta", new Integer(2));
-	vl.put("sus", new Integer(3));
-	vl.put("jos", new Integer(4));
-	r.addValueList("pozitionareBalamale", vl);
-
-	// componenta
-	vl = new LinkedHashMap();
-	vl.put("Setum", new Integer(1));
-	vl.put("Beneficiar", new Integer(2));
-	r.addValueList("componenta", vl);
+	r.addValueList("canat", ValueLists.makeStdValueList(11050));
+	r.addValueList("sensDeschidere", ValueLists.makeStdValueList(11060));
+	r.addValueList("pozitionareBalamale", ValueLists.makeStdValueList(11065));
+	r.addValueList("componenta", ValueLists.makeStdValueList(11070));
+	r.addValueList("tipGrilaj", ValueLists.makeStdValueList(11075));
+	r.addValueList("tipTabla", ValueLists.makeStdValueList(11080));
 
 	// geamSimpluId
 	vl = new LinkedHashMap();
@@ -398,11 +307,6 @@ public class FereastraBizBean extends FereastraBean {
 	}
 	r.addValueList("geamTermopanId", vl);
 
-	// tipGrilaj
-	vl = new LinkedHashMap();
-	vl.put("STAS", new Integer(1));
-	vl.put("atipic", new Integer(2));
-	r.addValueList("tipGrilaj", vl);
 
 	// grilajStasId
 	vl = new LinkedHashMap();
@@ -425,12 +329,6 @@ public class FereastraBizBean extends FereastraBean {
 	}
 	r.addValueList("grilajStasId", vl);
 	
-// 	// tipTabla
-// 	vl = new LinkedHashMap();
-// 	vl.put("1 rand", new Integer(1));
-// 	vl.put("2 randuri", new Integer(2));
-// 	vl.put("Blat usa", new Integer(3));
-// 	r.addValueList("tipTabla", vl);
 	
 // 	// tablaId
 // 	vl = new LinkedHashMap();

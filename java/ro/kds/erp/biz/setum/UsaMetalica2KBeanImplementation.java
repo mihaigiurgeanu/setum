@@ -20,6 +20,9 @@ import ro.kds.erp.biz.Sequence;
 import java.math.BigDecimal;
 import java.util.Map;
 import ro.kds.erp.data.CompositeProductLocalHome;
+import ro.kds.erp.data.CompositeProductLocal;
+import javax.ejb.CreateException;
+import javax.ejb.RemoveException;
 
 /**
  * Business logic for definition of UsaMetalica product. It obsoletes old implementation
@@ -30,7 +33,7 @@ import ro.kds.erp.data.CompositeProductLocalHome;
  * Created: Fri Nov 18 15:34:24 2005
  *
  * @author <a href="mailto:Mihai Giurgeanu@CRIMIRA"></a>
- * @version $Id: UsaMetalica2KBeanImplementation.java,v 1.9 2006/03/26 12:12:39 mihai Exp $
+ * @version $Id: UsaMetalica2KBeanImplementation.java,v 1.10 2006/03/26 18:12:02 mihai Exp $
  */
 public class UsaMetalica2KBeanImplementation 
     extends ro.kds.erp.biz.setum.basic.UsaMetalica2KBean {
@@ -520,30 +523,152 @@ public class UsaMetalica2KBeanImplementation
     public ResponseBean getOptionsListing() {
 	ResponseBean r;
 	try {
+	    
+	    r = new ResponseBean();
+
+	    if(id != null) {
+		InitialContext ic = new InitialContext();
+		Context env = (Context) ic.lookup("java:comp/env");
+		ProductLocalHome ph = (ProductLocalHome)PortableRemoteObject.narrow
+		    (env.lookup("ejb/ProductHome"), ProductLocalHome.class);
+		
+		ProductLocal usa = ph.findByPrimaryKey(id);
+		CompositeProductLocal cp = usa.getCompositeProduct();
+		if(cp == null) {
+		    logger.log(BasicLevel.DEBUG, "No composite product found ....");
+		} else {
+		    for(Iterator i = cp.getComponents().iterator();
+			i.hasNext(); ) {
+			ProductLocal p = (ProductLocal)i.next();
+			r.addRecord();
+			r.addField("options.id", p.getId());
+			r.addField("options.code", p.getCode());
+			r.addField("options.name", p.getName());
+			r.addField("options.description", p.getDescription());
+			r.addField("options.entryPrice", p.getEntryPrice());
+			r.addField("options.sellPrice", p.getSellPrice());
+			r.addField("options.categoryId", p.getCategory().getId());
+			r.addField("options.categoryName", p.getCategory().getName());
+			// Attributes
+			Map amap = p.getAttributesMap();
+			AttributeLocal a = (AttributeLocal)amap.get("businessCategory");
+			if(a != null)
+			    r.addField("options.businessCategory", a.getStringValue());
+			else
+			    r.addField("options.businessCategory", "");
+		    }
+		}
+	    }
+		
+	} catch (FinderException e) {
+	    r = ResponseBean.ERR_NOTFOUND;
+	    logger.log(BasicLevel.ERROR, "Can not load the listing options " +
+		       e.getMessage());
+	    logger.log(BasicLevel.DEBUG, e);
+	} catch (NamingException e) {
+	    r = ResponseBean.ERR_CONFIG_NAMING;
+	    logger.log(BasicLevel.ERROR, "Can not load the listing options " +
+		       e.getMessage());
+	    logger.log(BasicLevel.DEBUG, e);
+	} catch (Exception e) {
+	    logger.log(BasicLevel.ERROR, "Can not load the listing options " +
+		       e.getMessage());
+	    logger.log(BasicLevel.DEBUG, e);
+	    r = ResponseBean.ERR_UNEXPECTED;	    
+	}
+	return r;
+    }
+
+    /**
+     * Add a new option.
+     */
+    public ResponseBean addOption(Integer optionId, String businessCategory) {
+	ResponseBean r;
+	try {
+
 	    InitialContext ic = new InitialContext();
 	    Context env = (Context) ic.lookup("java:comp/env");
 	    ProductLocalHome ph = (ProductLocalHome)PortableRemoteObject.narrow
 		(env.lookup("ejb/ProductHome"), ProductLocalHome.class);
 	    
 	    ProductLocal usa = ph.findByPrimaryKey(id);
-	    r = new ResponseBean();
-	    for(Iterator i = 
-		    usa.getCompositeProduct().getComponents().iterator();
-		i.hasNext(); ) {
-		ProductLocal p = (ProductLocal)i.next();
-		r.addRecord();
-		r.addField("options.id", p.getId());
-		r.addField("options.code", p.getCode());
-		r.addField("options.name", p.getName());
-		r.addField("options.description", p.getDescription());
-		r.addField("options.entryPrice", p.getEntryPrice());
-		r.addField("options.sellPrice", p.getSellPrice());
-		r.addField("options.categoryId", p.getCategory().getId());
-		r.addField("options.categoryName", p.getCategory().getName());
+
+	    CompositeProductLocal cp = usa.getCompositeProduct();
+
+	    if (cp == null) {
+		CompositeProductLocalHome cph = (CompositeProductLocalHome)PortableRemoteObject
+		    .narrow(env.lookup("ejb/CompositeProductLocalHome"), CompositeProductLocalHome.class);
+		cp = cph.create(usa.getId());
+		usa.setCompositeProduct(cp);
 	    }
+
+	    cp.getComponents().add(ph.findByPrimaryKey(optionId));
+
+	    r = ResponseBean.SUCCESS;
+	} catch (CreateException e) {
+	    r = ResponseBean.ERR_CREATE;
+	    logger.log(BasicLevel.ERROR, "Can not create related composite product: " 
+		       + e.getMessage());
+	    logger.log(BasicLevel.DEBUG, e);
+	} catch (FinderException e) {
+	    r = ResponseBean.ERR_NOTFOUND;
+	    logger.log(BasicLevel.ERROR, "Can not add the option " +
+		       e.getMessage());
+	    logger.log(BasicLevel.DEBUG, e);
+	} catch (NamingException e) {
+	    r = ResponseBean.ERR_CONFIG_NAMING;
+	    logger.log(BasicLevel.ERROR, "Can not add the option " +
+		       e.getMessage());
+	    logger.log(BasicLevel.DEBUG, e);
 	} catch (Exception e) {
+	    logger.log(BasicLevel.ERROR, "Can not add the option " +
+		       e.getMessage());
+	    logger.log(BasicLevel.DEBUG, e);
+	    r = ResponseBean.ERR_UNEXPECTED;	    
 	}
-	return null;
+	return r;
+    }
+
+    /**
+     * Removes the given option
+     */
+    public ResponseBean removeOption (Integer optionId) {
+	ResponseBean r;
+
+	try {
+	    
+	    InitialContext ic = new InitialContext();
+	    Context env = (Context) ic.lookup("java:comp/env");
+	    ProductLocalHome ph = (ProductLocalHome)PortableRemoteObject.narrow
+		(env.lookup("ejb/ProductHome"), ProductLocalHome.class);
+	    
+	    ProductLocal option = ph.findByPrimaryKey(optionId);
+	    option.remove();
+
+	    r = ResponseBean.SUCCESS;
+
+	} catch (RemoveException e) {
+	    r = ResponseBean.ERR_REMOVE;
+	    logger.log(BasicLevel.ERROR, "Can not remove option " + optionId);
+	    logger.log(BasicLevel.INFO, e);
+	} catch (FinderException e) {
+	    r = ResponseBean.ERR_NOTFOUND;
+	    logger.log(BasicLevel.ERROR, "Can not add the option " +
+		       e.getMessage());
+	    logger.log(BasicLevel.DEBUG, e);
+	} catch (NamingException e) {
+	    r = ResponseBean.ERR_CONFIG_NAMING;
+	    logger.log(BasicLevel.ERROR, "Can not add the option " +
+		       e.getMessage());
+	    logger.log(BasicLevel.DEBUG, e);
+	} catch (Exception e) {
+	    logger.log(BasicLevel.ERROR, "Can not add the option " +
+		       e.getMessage());
+	    logger.log(BasicLevel.DEBUG, e);
+	    r = ResponseBean.ERR_UNEXPECTED;	    
+	}
+
+	return r;
     }
 
     /**

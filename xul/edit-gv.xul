@@ -42,13 +42,26 @@ La apasarea butonului ok, se va apela window.arguments[0].select(productId).
     </rows>
   </grid>
 
-  <script language="javascript"><![CDATA[
+
+
+  <script language="javascript">
+    <![CDATA[
+
+
+
 var theForm = new FormObject();
 theForm.do_link = "/edit-gv.do";
 theForm.text_fields = new Array("lgv", "hgv", "pozitionare1", 
 				"pozitionare2", "pozitionare3");
 theForm.setupEventListeners();
 theForm.load_current();
+
+var req = theForm.get_request();
+req.add("command", "change");
+req.add("field", "businessCategory");
+req.add("value", "http://www.kds.ro/erp/businessCategory/setum/optiuni/gv");
+theForm.post_request(req);   
+
 
 function doOk() {
     if(theForm.save()) {
@@ -57,5 +70,9 @@ function doOk() {
     }
     return false;
 }
-  ]]></script>
+
+
+    ]]></script>
+
 </dialog>
+

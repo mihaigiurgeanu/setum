@@ -46,21 +46,41 @@ La apasarea butonului ok, se va apela window.arguments[0].select(productId).
     </rows>
   </grid>
 
-  <script language="javascript"><![CDATA[
-var theForm = new FormObject();
-theForm.do_link = "/edit-ga.do";
-theForm.text_fields = new Array("diametru", "pas", "nrRanduri",
-				"pozitionare1", 
-				"pozitionare2", "pozitionare3");
-theForm.setupEventListeners();
-theForm.load_current();
 
-function doOk() {
-    if(theForm.save()) {
-	window.arguments[0].select(theForm.get_loaded_id());
-	return true;
-    }
-    return false;
-}
-  ]]></script>
+
+
+  <script language="javascript">
+    <![CDATA[
+
+
+	     var theForm = new FormObject();
+	     theForm.do_link = "/edit-ga.do";
+	     theForm.text_fields = new Array("diametru", "pas", "nrRanduri",
+					     "pozitionare1", 
+					     "pozitionare2", "pozitionare3");
+	     theForm.setupEventListeners();
+	     theForm.load_current();
+	     
+	     
+	     var req = theForm.get_request();
+	     req.add("command", "change");
+	     req.add("field", "businessCategory");
+	     req.add("value", "http://www.kds.ro/erp/businessCategory/setum/optiuni/ga");
+	     theForm.post_request(req);
+
+
+
+	     function doOk() {
+		 if(theForm.save()) {
+		     window.arguments[0].select(theForm.get_loaded_id());
+		     return true;
+		 }
+		 return false;
+	     }
+	     
+	     
+
+    ]]></script>
+    
 </dialog>
+
