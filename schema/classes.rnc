@@ -1,0 +1,24 @@
+element businessObjects {
+   element class {
+      attribute id { text },
+      element package { text },
+      element name { text },
+
+      (
+         element field {
+            element name { text },
+            element type { text }
+         }* &
+         # compose represents a one to many relationship with another class
+         element compose {
+            attribute classid { text },
+            element name { text }
+         }*
+      ),
+
+      # Add more definitions to the remote interface
+      element remote {
+         element method { text }+
+      } ?
+   } *
+}

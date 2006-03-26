@@ -1,0 +1,22 @@
+element class {
+   element package { text },
+   element name { text },
+   
+   (
+      element field {
+         element name { text },
+         element type { text }
+      }*
+   ),
+
+   element subforms {
+      element subform {
+         attribute name { text }
+      }*
+   } ?,
+
+   # Add more definitions to the remote interface
+   element remote {
+      element method { text }+
+   } ?
+}
