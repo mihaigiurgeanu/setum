@@ -1,24 +1,17 @@
 @namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
-
-
-.flat { outline-style: solid; color: red; }
-
 .mytoolbar { border: thin outset white; }
-
 .title { 
 	background-color: rgb(80,105,130);
 	font-size: large;
 	color: white;
- }
-
+}
 spacer.header {
 	height: 8px
 }
 spacer.newgroup {
 	height: 8px
 }
-
-.newgroup {
+label.newgroup {
 	font-weight: bold;
 }
 

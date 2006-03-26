@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
-<?xml-stylesheet href="chrome://setum/xul/setum.css type="text/css"?>
+<?xml-stylesheet href="setum.css" type="text/css"?>
 
 <!--
 edit-usa2k.xul
@@ -13,13 +13,11 @@ windows.arguments[0].select(productId)
 -->
 
 <dialog
-    id="edit-usa2k-dlg"
+    id="edit-usa2k-form"
     title="Usa metalica cu 2 canate"
     xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
     persist="screenX screenY width height"
-    maxheight="700" maxwidth="900"
     orient="vertical"
-    style="overflow:scroll;"
     buttons="accept,cancel"
     ondialogaccept="return doOk();"
     ondialogcancel="return true;">
@@ -43,7 +41,7 @@ windows.arguments[0].select(productId)
 
   </commandset>
 
-  <tabbox maxheight="650" maxwidth="740">
+  <tabbox>
     <tabs>
       <tab label="Definire usa"/>
       <tab label="Optiuni"/>
@@ -51,7 +49,7 @@ windows.arguments[0].select(productId)
       <tab label="Finisaje"/>
     </tabs>
     <tabpanels>
-      <tabpanel orient="vertical" style="overflow:auto">
+      <tabpanel orient="vertical" style="overflow:auto" maxheight="650">
 	<hbox>
 	  <groupbox orient="vertical">
 	    <caption label="Definire usa" />
@@ -318,7 +316,6 @@ windows.arguments[0].select(productId)
 
       <!-- Optiuni -->
       <tabpanel>
-
 	<tree id="options-listing-tree" 
 	      flex="1" 
 	      enableColumnDrag="true" 
@@ -343,37 +340,11 @@ windows.arguments[0].select(productId)
 	  
 	  <treechildren/>
 	</tree>
-
 	
-	<!-- The form with options will be replaced by a list of optional components -->
-	<!--
-	<grid>
-	  <columns>
-	    <column/><column/><column/>
-	  </columns>
-	  <rows>
-	    <row>
-	      <label controls="fereatra" value="Fereastra:"/>
-	      <textbox id="fereastra" disabled="true"/>
-	      <button label="..." command="edit-fereastra"/>
-	    </row>
-	    <row>
-	      <label controls="grilaVentilatie" value="Grila ventilatie:"/>
-	      <textbox id="grilaVentilatie" disabled="true"/>
-	      <button label="..." command="edit-gv"/>
-	    </row>
-	    <row>
-	      <label controls="gauriAerisire" value="Gauri aerisire:"/>
-	      <textbox id="gauriAerisire" disabled="true"/>
-	      <button label="..." command="edit-ga"/>
-	    </row>
-	  </rows>
-	</grid>
-	-->
       </tabpanel>
 
       <!-- Sisteme -->
-      <tabpanel style="overflow:auto">
+      <tabpanel style="overflow:auto" maxheight="650">
 	<vbox>
 	  <radiogroup id="montareSistem">
 	    <hbox>
@@ -553,7 +524,26 @@ windows.arguments[0].select(productId)
 			 label="Sisteme Beneficiar" value="2"/>
 
 
-
+		  <groupbox>
+		    <grid>
+		      <rows>
+			<row>
+			  <box/>
+			  <label value="Descriere"/>
+			  <label value="Bucati"/>
+			  <label value="Tip"/>
+			</row>
+			<row>
+			  <label control="benefBroasca" value="Broasca:"/>
+			  <textbox id="benefBroasca"/>
+			  <textbox id="benefBroascaBuc"/>
+			  <menulist id="benefBroascaTip">
+			    <menupopup id="benefBroascaTip-popup"/>
+			  </menulist>
+			</row>
+		      </rows>
+		    </grid>
+		  </groupbox>
 
 		</radiogroup>
 
@@ -561,12 +551,12 @@ windows.arguments[0].select(productId)
 
 
 	    </hbox>
-
+	    
 	  </radiogroup>
 	  
 	  <hbox flex="1">
 	    <label controls="sistemeComment" value="Obs:"/>
-	    <textbox id="sistemeComment" multiline="true" rows="4" flex="1"/>
+	    <textbox id="sistemeComment" multiline="true" rows="4" flex="1" minheight="80px"/>
 	  </hbox>
 	</vbox>
       </tabpanel>
