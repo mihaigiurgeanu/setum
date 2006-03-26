@@ -423,7 +423,7 @@ windows.arguments[0].select(productId)
 			<row>
 			  <label controls="copiatCheieId" value="Copiat chei:"/>
 			  <menulist id="copiatCheieId">
-			    <menupopup id="copiatCheie-popup"/>
+			    <menupopup id="copiatCheieId-popup"/>
 			  </menulist>
 			  <textbox id="copiatCheieBuc"/>
 			</row>
