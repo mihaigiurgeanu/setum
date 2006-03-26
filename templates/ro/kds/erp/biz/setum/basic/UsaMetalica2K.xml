@@ -303,8 +303,151 @@
     <name>alteSisteme2Buc</name>
     <type>Integer</type>
   </field>
+  
+  <!--
+      Sisteme beneficiar
+  -->
+  <field>
+    <name>benefBroasca</name>
+    <type>String</type>
+  </field>
+  <field>
+    <name>benefBroascaBuc</name>
+    <type>Integer</type>
+  </field>
+  <field>
+    <name>benefCilindru</name>
+    <type>String</type>
+  </field>
+  <field>
+    <name>benefCilindruBuc</name>
+    <type>Integer</type>
+  </field>
+  <field>
+    <name>benefCilindruTip</name>
+    <type>Integer</type>
+  </field>
+  <field>
+    <name>benefYalla</name>
+    <type>String</type>
+  </field>
+  <field>
+    <name>benefYallaBuc</name>
+    <type>Integer</type>
+  </field>
+  <field>
+    <name>benefYallaTip</name>
+    <type>Integer</type>
+  </field>
+  <field>
+    <name>benefBaraAntipanica</name>
+    <type>String</type>
+  </field>
+  <field>
+    <name>benefBaraAntipanicaBuc</name>
+    <type>Integer</type>
+  </field>
+  <field>
+    <name>benefBaraAntipanicaTip</name>
+    <type>Integer</type>
+  </field>
+  <field>
+    <name>benefManer</name>
+    <type>String</type>
+  </field>
+  <field>
+    <name>benefManerBuc</name>
+    <type>Integer</type>
+  </field>
+  <field>
+    <name>benefSelectorOrdine</name>
+    <type>String</type>
+  </field>
+  <field>
+    <name>benefSelectorOrdineBuc</name>
+    <type>Integer</type>
+  </field>
+  <field>
+    <name>benefAmortizor</name>
+    <type>String</type>
+  </field>
+  <field>
+    <name>benefAmortizorBuc</name>
+    <type>Integer</type>
+  </field>
+  <field>
+    <name>benefAlteSisteme1</name>
+    <type>String</type>
+  </field>
+  <field>
+    <name>benefAlteSisteme1Buc</name>
+    <type>Integer</type>
+  </field>
+  <field>
+    <name>benefAlteSisteme2</name>
+    <type>String</type>
+  </field>
+  <field>
+    <name>benefAlteSisteme2Buc</name>
+    <type>Integer</type>
+  </field>
+
+
   <field>
     <name>sistemeComment</name>
     <type>String</type>
+  </field>
+
+
+  <!--
+      Finisaje
+  -->
+  <field>
+    <name>intFinisajBlat</name>
+    <type>String</type>
+  </field>
+  <field>
+    <name>intFinisajBlatId</name>
+    <type>Integer</type>
+  </field>
+  <field>
+    <name>intFinisajToc</name>
+    <type>String</type>
+  </field>
+  <field>
+    <name>intFinisajTocId</name>
+    <type>Integer</type>
+  </field>
+  <field>
+    <name>intFinisajGrilaj</name>
+    <type>Integer</type>
+  </field>
+  <field>
+    <name>intFinisajGrilajId</name>
+    <type>Integer</type>
+  </field>
+  <field>
+    <name>intFinisajFereastra</name>
+    <type>String</type>
+  </field>
+  <field>
+    <name>intFinisajFereastraId</name>
+    <type>Integer</type>
+  </field>
+  <field>
+    <name>intFinisajSupralumina</name>
+    <type>String</type>
+  </field>
+  <field>
+    <name>intFinisajSupraluminaId</name>
+    <type>Integer</type>
+  </field>
+  <field>
+    <name>intFinisajPanouLateral</name>
+    <type>String</type>
+  </field>
+  <field>
+    <name>intFinisajPanouLateralId</name>
+    <type>Integer</type>
   </field>
 </class>

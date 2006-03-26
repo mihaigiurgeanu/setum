@@ -90,7 +90,40 @@ public class UsaMetalica2KForm implements Serializable {
     Integer alteSisteme1Buc;
     Integer alteSisteme2Id;
     Integer alteSisteme2Buc;
+    String benefBroasca;
+    Integer benefBroascaBuc;
+    String benefCilindru;
+    Integer benefCilindruBuc;
+    Integer benefCilindruTip;
+    String benefYalla;
+    Integer benefYallaBuc;
+    Integer benefYallaTip;
+    String benefBaraAntipanica;
+    Integer benefBaraAntipanicaBuc;
+    Integer benefBaraAntipanicaTip;
+    String benefManer;
+    Integer benefManerBuc;
+    String benefSelectorOrdine;
+    Integer benefSelectorOrdineBuc;
+    String benefAmortizor;
+    Integer benefAmortizorBuc;
+    String benefAlteSisteme1;
+    Integer benefAlteSisteme1Buc;
+    String benefAlteSisteme2;
+    Integer benefAlteSisteme2Buc;
     String sistemeComment;
+    String intFinisajBlat;
+    Integer intFinisajBlatId;
+    String intFinisajToc;
+    Integer intFinisajTocId;
+    Integer intFinisajGrilaj;
+    Integer intFinisajGrilajId;
+    String intFinisajFereastra;
+    Integer intFinisajFereastraId;
+    String intFinisajSupralumina;
+    Integer intFinisajSupraluminaId;
+    String intFinisajPanouLateral;
+    Integer intFinisajPanouLateralId;
 
     public UsaMetalica2KForm() {
 
@@ -395,7 +428,139 @@ public class UsaMetalica2KForm implements Serializable {
 
 
 
+       this.benefBroasca = "";
+
+
+
+       this.benefBroascaBuc = new Integer(0);
+
+
+
+       this.benefCilindru = "";
+
+
+
+       this.benefCilindruBuc = new Integer(0);
+
+
+
+       this.benefCilindruTip = new Integer(0);
+
+
+
+       this.benefYalla = "";
+
+
+
+       this.benefYallaBuc = new Integer(0);
+
+
+
+       this.benefYallaTip = new Integer(0);
+
+
+
+       this.benefBaraAntipanica = "";
+
+
+
+       this.benefBaraAntipanicaBuc = new Integer(0);
+
+
+
+       this.benefBaraAntipanicaTip = new Integer(0);
+
+
+
+       this.benefManer = "";
+
+
+
+       this.benefManerBuc = new Integer(0);
+
+
+
+       this.benefSelectorOrdine = "";
+
+
+
+       this.benefSelectorOrdineBuc = new Integer(0);
+
+
+
+       this.benefAmortizor = "";
+
+
+
+       this.benefAmortizorBuc = new Integer(0);
+
+
+
+       this.benefAlteSisteme1 = "";
+
+
+
+       this.benefAlteSisteme1Buc = new Integer(0);
+
+
+
+       this.benefAlteSisteme2 = "";
+
+
+
+       this.benefAlteSisteme2Buc = new Integer(0);
+
+
+
        this.sistemeComment = "";
+
+
+
+       this.intFinisajBlat = "";
+
+
+
+       this.intFinisajBlatId = new Integer(0);
+
+
+
+       this.intFinisajToc = "";
+
+
+
+       this.intFinisajTocId = new Integer(0);
+
+
+
+       this.intFinisajGrilaj = new Integer(0);
+
+
+
+       this.intFinisajGrilajId = new Integer(0);
+
+
+
+       this.intFinisajFereastra = "";
+
+
+
+       this.intFinisajFereastraId = new Integer(0);
+
+
+
+       this.intFinisajSupralumina = "";
+
+
+
+       this.intFinisajSupraluminaId = new Integer(0);
+
+
+
+       this.intFinisajPanouLateral = "";
+
+
+
+       this.intFinisajPanouLateralId = new Integer(0);
 
 
 
@@ -1526,6 +1691,321 @@ public class UsaMetalica2KForm implements Serializable {
 	}
     }
 
+    public void setBenefBroasca(String newBenefBroasca) {
+        this.benefBroasca = newBenefBroasca;
+    }
+
+    public String getBenefBroasca() {
+        return benefBroasca;
+    }
+
+    public void readBenefBroasca(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("benefBroasca");
+	if(a != null) {
+	    this.setBenefBroasca(a.getStringValue());
+	}
+    }
+
+    public void setBenefBroascaBuc(Integer newBenefBroascaBuc) {
+        this.benefBroascaBuc = newBenefBroascaBuc;
+    }
+
+    public Integer getBenefBroascaBuc() {
+        return benefBroascaBuc;
+    }
+
+    public void readBenefBroascaBuc(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("benefBroascaBuc");
+	if(a != null) {
+	    this.setBenefBroascaBuc(a.getIntValue());
+	}
+    }
+
+    public void setBenefCilindru(String newBenefCilindru) {
+        this.benefCilindru = newBenefCilindru;
+    }
+
+    public String getBenefCilindru() {
+        return benefCilindru;
+    }
+
+    public void readBenefCilindru(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("benefCilindru");
+	if(a != null) {
+	    this.setBenefCilindru(a.getStringValue());
+	}
+    }
+
+    public void setBenefCilindruBuc(Integer newBenefCilindruBuc) {
+        this.benefCilindruBuc = newBenefCilindruBuc;
+    }
+
+    public Integer getBenefCilindruBuc() {
+        return benefCilindruBuc;
+    }
+
+    public void readBenefCilindruBuc(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("benefCilindruBuc");
+	if(a != null) {
+	    this.setBenefCilindruBuc(a.getIntValue());
+	}
+    }
+
+    public void setBenefCilindruTip(Integer newBenefCilindruTip) {
+        this.benefCilindruTip = newBenefCilindruTip;
+    }
+
+    public Integer getBenefCilindruTip() {
+        return benefCilindruTip;
+    }
+
+    public void readBenefCilindruTip(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("benefCilindruTip");
+	if(a != null) {
+	    this.setBenefCilindruTip(a.getIntValue());
+	}
+    }
+
+    public void setBenefYalla(String newBenefYalla) {
+        this.benefYalla = newBenefYalla;
+    }
+
+    public String getBenefYalla() {
+        return benefYalla;
+    }
+
+    public void readBenefYalla(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("benefYalla");
+	if(a != null) {
+	    this.setBenefYalla(a.getStringValue());
+	}
+    }
+
+    public void setBenefYallaBuc(Integer newBenefYallaBuc) {
+        this.benefYallaBuc = newBenefYallaBuc;
+    }
+
+    public Integer getBenefYallaBuc() {
+        return benefYallaBuc;
+    }
+
+    public void readBenefYallaBuc(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("benefYallaBuc");
+	if(a != null) {
+	    this.setBenefYallaBuc(a.getIntValue());
+	}
+    }
+
+    public void setBenefYallaTip(Integer newBenefYallaTip) {
+        this.benefYallaTip = newBenefYallaTip;
+    }
+
+    public Integer getBenefYallaTip() {
+        return benefYallaTip;
+    }
+
+    public void readBenefYallaTip(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("benefYallaTip");
+	if(a != null) {
+	    this.setBenefYallaTip(a.getIntValue());
+	}
+    }
+
+    public void setBenefBaraAntipanica(String newBenefBaraAntipanica) {
+        this.benefBaraAntipanica = newBenefBaraAntipanica;
+    }
+
+    public String getBenefBaraAntipanica() {
+        return benefBaraAntipanica;
+    }
+
+    public void readBenefBaraAntipanica(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("benefBaraAntipanica");
+	if(a != null) {
+	    this.setBenefBaraAntipanica(a.getStringValue());
+	}
+    }
+
+    public void setBenefBaraAntipanicaBuc(Integer newBenefBaraAntipanicaBuc) {
+        this.benefBaraAntipanicaBuc = newBenefBaraAntipanicaBuc;
+    }
+
+    public Integer getBenefBaraAntipanicaBuc() {
+        return benefBaraAntipanicaBuc;
+    }
+
+    public void readBenefBaraAntipanicaBuc(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("benefBaraAntipanicaBuc");
+	if(a != null) {
+	    this.setBenefBaraAntipanicaBuc(a.getIntValue());
+	}
+    }
+
+    public void setBenefBaraAntipanicaTip(Integer newBenefBaraAntipanicaTip) {
+        this.benefBaraAntipanicaTip = newBenefBaraAntipanicaTip;
+    }
+
+    public Integer getBenefBaraAntipanicaTip() {
+        return benefBaraAntipanicaTip;
+    }
+
+    public void readBenefBaraAntipanicaTip(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("benefBaraAntipanicaTip");
+	if(a != null) {
+	    this.setBenefBaraAntipanicaTip(a.getIntValue());
+	}
+    }
+
+    public void setBenefManer(String newBenefManer) {
+        this.benefManer = newBenefManer;
+    }
+
+    public String getBenefManer() {
+        return benefManer;
+    }
+
+    public void readBenefManer(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("benefManer");
+	if(a != null) {
+	    this.setBenefManer(a.getStringValue());
+	}
+    }
+
+    public void setBenefManerBuc(Integer newBenefManerBuc) {
+        this.benefManerBuc = newBenefManerBuc;
+    }
+
+    public Integer getBenefManerBuc() {
+        return benefManerBuc;
+    }
+
+    public void readBenefManerBuc(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("benefManerBuc");
+	if(a != null) {
+	    this.setBenefManerBuc(a.getIntValue());
+	}
+    }
+
+    public void setBenefSelectorOrdine(String newBenefSelectorOrdine) {
+        this.benefSelectorOrdine = newBenefSelectorOrdine;
+    }
+
+    public String getBenefSelectorOrdine() {
+        return benefSelectorOrdine;
+    }
+
+    public void readBenefSelectorOrdine(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("benefSelectorOrdine");
+	if(a != null) {
+	    this.setBenefSelectorOrdine(a.getStringValue());
+	}
+    }
+
+    public void setBenefSelectorOrdineBuc(Integer newBenefSelectorOrdineBuc) {
+        this.benefSelectorOrdineBuc = newBenefSelectorOrdineBuc;
+    }
+
+    public Integer getBenefSelectorOrdineBuc() {
+        return benefSelectorOrdineBuc;
+    }
+
+    public void readBenefSelectorOrdineBuc(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("benefSelectorOrdineBuc");
+	if(a != null) {
+	    this.setBenefSelectorOrdineBuc(a.getIntValue());
+	}
+    }
+
+    public void setBenefAmortizor(String newBenefAmortizor) {
+        this.benefAmortizor = newBenefAmortizor;
+    }
+
+    public String getBenefAmortizor() {
+        return benefAmortizor;
+    }
+
+    public void readBenefAmortizor(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("benefAmortizor");
+	if(a != null) {
+	    this.setBenefAmortizor(a.getStringValue());
+	}
+    }
+
+    public void setBenefAmortizorBuc(Integer newBenefAmortizorBuc) {
+        this.benefAmortizorBuc = newBenefAmortizorBuc;
+    }
+
+    public Integer getBenefAmortizorBuc() {
+        return benefAmortizorBuc;
+    }
+
+    public void readBenefAmortizorBuc(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("benefAmortizorBuc");
+	if(a != null) {
+	    this.setBenefAmortizorBuc(a.getIntValue());
+	}
+    }
+
+    public void setBenefAlteSisteme1(String newBenefAlteSisteme1) {
+        this.benefAlteSisteme1 = newBenefAlteSisteme1;
+    }
+
+    public String getBenefAlteSisteme1() {
+        return benefAlteSisteme1;
+    }
+
+    public void readBenefAlteSisteme1(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("benefAlteSisteme1");
+	if(a != null) {
+	    this.setBenefAlteSisteme1(a.getStringValue());
+	}
+    }
+
+    public void setBenefAlteSisteme1Buc(Integer newBenefAlteSisteme1Buc) {
+        this.benefAlteSisteme1Buc = newBenefAlteSisteme1Buc;
+    }
+
+    public Integer getBenefAlteSisteme1Buc() {
+        return benefAlteSisteme1Buc;
+    }
+
+    public void readBenefAlteSisteme1Buc(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("benefAlteSisteme1Buc");
+	if(a != null) {
+	    this.setBenefAlteSisteme1Buc(a.getIntValue());
+	}
+    }
+
+    public void setBenefAlteSisteme2(String newBenefAlteSisteme2) {
+        this.benefAlteSisteme2 = newBenefAlteSisteme2;
+    }
+
+    public String getBenefAlteSisteme2() {
+        return benefAlteSisteme2;
+    }
+
+    public void readBenefAlteSisteme2(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("benefAlteSisteme2");
+	if(a != null) {
+	    this.setBenefAlteSisteme2(a.getStringValue());
+	}
+    }
+
+    public void setBenefAlteSisteme2Buc(Integer newBenefAlteSisteme2Buc) {
+        this.benefAlteSisteme2Buc = newBenefAlteSisteme2Buc;
+    }
+
+    public Integer getBenefAlteSisteme2Buc() {
+        return benefAlteSisteme2Buc;
+    }
+
+    public void readBenefAlteSisteme2Buc(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("benefAlteSisteme2Buc");
+	if(a != null) {
+	    this.setBenefAlteSisteme2Buc(a.getIntValue());
+	}
+    }
+
     public void setSistemeComment(String newSistemeComment) {
         this.sistemeComment = newSistemeComment;
     }
@@ -1538,6 +2018,186 @@ public class UsaMetalica2KForm implements Serializable {
 	AttributeLocal a = (AttributeLocal)attributes.get("sistemeComment");
 	if(a != null) {
 	    this.setSistemeComment(a.getStringValue());
+	}
+    }
+
+    public void setIntFinisajBlat(String newIntFinisajBlat) {
+        this.intFinisajBlat = newIntFinisajBlat;
+    }
+
+    public String getIntFinisajBlat() {
+        return intFinisajBlat;
+    }
+
+    public void readIntFinisajBlat(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("intFinisajBlat");
+	if(a != null) {
+	    this.setIntFinisajBlat(a.getStringValue());
+	}
+    }
+
+    public void setIntFinisajBlatId(Integer newIntFinisajBlatId) {
+        this.intFinisajBlatId = newIntFinisajBlatId;
+    }
+
+    public Integer getIntFinisajBlatId() {
+        return intFinisajBlatId;
+    }
+
+    public void readIntFinisajBlatId(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("intFinisajBlatId");
+	if(a != null) {
+	    this.setIntFinisajBlatId(a.getIntValue());
+	}
+    }
+
+    public void setIntFinisajToc(String newIntFinisajToc) {
+        this.intFinisajToc = newIntFinisajToc;
+    }
+
+    public String getIntFinisajToc() {
+        return intFinisajToc;
+    }
+
+    public void readIntFinisajToc(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("intFinisajToc");
+	if(a != null) {
+	    this.setIntFinisajToc(a.getStringValue());
+	}
+    }
+
+    public void setIntFinisajTocId(Integer newIntFinisajTocId) {
+        this.intFinisajTocId = newIntFinisajTocId;
+    }
+
+    public Integer getIntFinisajTocId() {
+        return intFinisajTocId;
+    }
+
+    public void readIntFinisajTocId(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("intFinisajTocId");
+	if(a != null) {
+	    this.setIntFinisajTocId(a.getIntValue());
+	}
+    }
+
+    public void setIntFinisajGrilaj(Integer newIntFinisajGrilaj) {
+        this.intFinisajGrilaj = newIntFinisajGrilaj;
+    }
+
+    public Integer getIntFinisajGrilaj() {
+        return intFinisajGrilaj;
+    }
+
+    public void readIntFinisajGrilaj(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("intFinisajGrilaj");
+	if(a != null) {
+	    this.setIntFinisajGrilaj(a.getIntValue());
+	}
+    }
+
+    public void setIntFinisajGrilajId(Integer newIntFinisajGrilajId) {
+        this.intFinisajGrilajId = newIntFinisajGrilajId;
+    }
+
+    public Integer getIntFinisajGrilajId() {
+        return intFinisajGrilajId;
+    }
+
+    public void readIntFinisajGrilajId(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("intFinisajGrilajId");
+	if(a != null) {
+	    this.setIntFinisajGrilajId(a.getIntValue());
+	}
+    }
+
+    public void setIntFinisajFereastra(String newIntFinisajFereastra) {
+        this.intFinisajFereastra = newIntFinisajFereastra;
+    }
+
+    public String getIntFinisajFereastra() {
+        return intFinisajFereastra;
+    }
+
+    public void readIntFinisajFereastra(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("intFinisajFereastra");
+	if(a != null) {
+	    this.setIntFinisajFereastra(a.getStringValue());
+	}
+    }
+
+    public void setIntFinisajFereastraId(Integer newIntFinisajFereastraId) {
+        this.intFinisajFereastraId = newIntFinisajFereastraId;
+    }
+
+    public Integer getIntFinisajFereastraId() {
+        return intFinisajFereastraId;
+    }
+
+    public void readIntFinisajFereastraId(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("intFinisajFereastraId");
+	if(a != null) {
+	    this.setIntFinisajFereastraId(a.getIntValue());
+	}
+    }
+
+    public void setIntFinisajSupralumina(String newIntFinisajSupralumina) {
+        this.intFinisajSupralumina = newIntFinisajSupralumina;
+    }
+
+    public String getIntFinisajSupralumina() {
+        return intFinisajSupralumina;
+    }
+
+    public void readIntFinisajSupralumina(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("intFinisajSupralumina");
+	if(a != null) {
+	    this.setIntFinisajSupralumina(a.getStringValue());
+	}
+    }
+
+    public void setIntFinisajSupraluminaId(Integer newIntFinisajSupraluminaId) {
+        this.intFinisajSupraluminaId = newIntFinisajSupraluminaId;
+    }
+
+    public Integer getIntFinisajSupraluminaId() {
+        return intFinisajSupraluminaId;
+    }
+
+    public void readIntFinisajSupraluminaId(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("intFinisajSupraluminaId");
+	if(a != null) {
+	    this.setIntFinisajSupraluminaId(a.getIntValue());
+	}
+    }
+
+    public void setIntFinisajPanouLateral(String newIntFinisajPanouLateral) {
+        this.intFinisajPanouLateral = newIntFinisajPanouLateral;
+    }
+
+    public String getIntFinisajPanouLateral() {
+        return intFinisajPanouLateral;
+    }
+
+    public void readIntFinisajPanouLateral(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("intFinisajPanouLateral");
+	if(a != null) {
+	    this.setIntFinisajPanouLateral(a.getStringValue());
+	}
+    }
+
+    public void setIntFinisajPanouLateralId(Integer newIntFinisajPanouLateralId) {
+        this.intFinisajPanouLateralId = newIntFinisajPanouLateralId;
+    }
+
+    public Integer getIntFinisajPanouLateralId() {
+        return intFinisajPanouLateralId;
+    }
+
+    public void readIntFinisajPanouLateralId(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("intFinisajPanouLateralId");
+	if(a != null) {
+	    this.setIntFinisajPanouLateralId(a.getIntValue());
 	}
     }
 
