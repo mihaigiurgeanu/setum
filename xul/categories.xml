@@ -34,6 +34,11 @@ function to call when the called module ends.
             xmlns:category="http://www.kds.ro/erp/businessCategory#">
 
 
+
+  <!--
+      Products
+  -->
+
   <rdf:Description rdf:about="http://www.kds.ro/erp/businessCategory/setum/sistem">
     <category:title>Sistem</category:title>
     <category:service>/sisteme.do</category:service>
@@ -65,16 +70,12 @@ function to call when the called module ends.
 
 
   <!-- 
-       The list of business categories used by the arbitrary-offer form.
-       This list is used by the template on the form to let the user choose between
-       differrent kinds of products to add to the offer.
+       Products business categories list
   -->
   <rdf:Seq rdf:about="http://www.kds.ro/erp/modules/setum/arbitrary-offer/categories">
     <rdf:li rdf:resource="http://www.kds.ro/erp/businessCategory/setum/sistem"/>
     <rdf:li rdf:resource="http://www.kds.ro/erp/businessCategory/setum/usastd"/>
     <rdf:li rdf:resource="http://www.kds.ro/erp/businessCategory/setum/usa2k"/>
   </rdf:Seq>
-
-
 
 </rdf:RDF>

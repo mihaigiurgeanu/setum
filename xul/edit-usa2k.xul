@@ -56,7 +56,7 @@ windows.arguments[0].select(productId)
 	    <grid>
 	      <rows>
 		<row>
-		  <label controls="" value="Nr canate:"/>
+		  <label control="" value="Nr canate:"/>
 		  <hbox>
 		    <radiogroup id="k">
 		      <radio id="k.1" value="1" label="1 canat"/>
@@ -378,21 +378,21 @@ windows.arguments[0].select(productId)
 			  <label value="Buc"/>
 			</row>
 			<row>
-			  <label controls="broascaId" value="Broasca:"/>
+			  <label control="broascaId" value="Broasca:"/>
 			  <menulist id="broascaId">
 			    <menupopup id="broascaId-popup"/>
 			  </menulist>
 			  <textbox id="broascaBuc" length="4"/>
 			</row>
 			<row>
-			  <label controls="cilindruId" value="Cilindru:"/>
+			  <label control="cilindruId" value="Cilindru:"/>
 			  <menulist id="cilindruId">
 			    <menupopup id="cilindruId-popup"/>
 			  </menulist>
 			  <textbox id="cilindruBuc"/>
 			</row>
 			<row>
-			  <label controls="copiatCheieId" value="Copiat chei:"/>
+			  <label control="copiatCheieId" value="Copiat chei:"/>
 			  <menulist id="copiatCheieId">
 			    <menupopup id="copiatCheieId-popup"/>
 			  </menulist>
@@ -414,7 +414,7 @@ windows.arguments[0].select(productId)
 			  <label flex="1" style="align: center;" value="Buc"/>
 			</row>
 			<row>
-			  <label controls="sildId" value="Silduri:"/>
+			  <label control="sildId" value="Silduri:"/>
 			  <menulist id="sildId">
 			    <menupopup id="sildId-popup"/>
 			  </menulist>
@@ -423,7 +423,7 @@ windows.arguments[0].select(productId)
 			  <textbox id="sildBuc"/>
 			</row>
 			<row>
-			  <label controls="rozetaId" value="Rozete:"/>
+			  <label control="rozetaId" value="Rozete:"/>
 			  <menulist id="rozetaId">
 			    <menupopup id="rozetaId-popup"/>
 			  </menulist>
@@ -432,7 +432,7 @@ windows.arguments[0].select(productId)
 			  <textbox id="rozetaBuc"/>
 			</row>
 			<row>
-			  <label controls="manerId" value="Maner:"/>
+			  <label control="manerId" value="Maner:"/>
 			  <menulist id="manerId">
 			    <menupopup id="manerId-popup"/>
 			  </menulist>
@@ -455,28 +455,28 @@ windows.arguments[0].select(productId)
 			</row>
 
 			<row>
-			  <label controls="yalla1Id" value="YALLA:"/>
+			  <label control="yalla1Id" value="YALLA:"/>
 			  <menulist id="yalla1Id">
 			    <menupopup id="yalla1Id-popup"/>
 			  </menulist>
 			  <textbox id="yalla1Buc"/>
 			</row>
 			<row>
-			  <label controls="yalla2Id" value="YALLA:"/>
+			  <label control="yalla2Id" value="YALLA:"/>
 			  <menulist id="yalla2Id">
 			    <menupopup id="yalla2Id-popup"/>
 			  </menulist>
 			  <textbox id="yalla2Buc"/>
 			</row>
 			<row>
-			  <label controls="baraAntipanicaId" value="Bara antipanica:"/>
+			  <label control="baraAntipanicaId" value="Bara antipanica:"/>
 			  <menulist id="baraAntipanicaId">
 			    <menupopup id="baraAntipanicaId-popup"/>
 			  </menulist>
 			  <textbox id="baraAntipanicaBuc"/>
 			</row>
 			<row>
-			  <label controls="manerSemicilindruId" 
+			  <label control="manerSemicilindruId" 
 				 value="Maner/Semicilindru exterior:"/>
 			  <menulist id="manerSemicilindruId">
 			    <menupopup id="manerSemicilindruId-popup"/>
@@ -484,7 +484,7 @@ windows.arguments[0].select(productId)
 			  <textbox id="manerSemicilindruBuc"/>
 			</row>
 			<row>
-			  <label controls="selectorOrdineId" 
+			  <label control="selectorOrdineId" 
 				 value="Selector ordine:"/>
 			  <menulist id="selectorOrdineId">
 			    <menupopup id="selectorOrdineId-popup"/>
@@ -493,7 +493,7 @@ windows.arguments[0].select(productId)
 			</row>
 
 			<row>
-			  <label controls="amortizorId" value="Amortizor:"/>
+			  <label control="amortizorId" value="Amortizor:"/>
 			  <menulist id="amortizorId">
 			    <menupopup id="amortizorId-popup"/>
 			  </menulist>
@@ -501,7 +501,7 @@ windows.arguments[0].select(productId)
 			</row>
 
 			<row>
-			  <label controls="alteSisteme1Id" value="Alte sisteme:"/>
+			  <label control="alteSisteme1Id" value="Alte sisteme:"/>
 			  <menulist id="alteSisteme1Id">
 			    <menupopup id="alteSisteme1Id-popup"/>
 			  </menulist>
@@ -541,6 +541,63 @@ windows.arguments[0].select(productId)
 			    <menupopup id="benefBroascaTip-popup"/>
 			  </menulist>
 			</row>
+			<row>
+			  <label control="benefCilindru" value="Cilindru:"/>
+			  <textbox id="benefCilindru"/>
+			  <textbox id="benefCilindruBuc"/>
+			  <menulist id="benefCilindruTip">
+			    <menupopup id="benefCilindruTip-popup"/>
+			  </menulist>
+			</row>
+			<row>
+			  <label control="benefSild" value="Sild:"/>
+			  <textbox id="benefSild"/>
+			  <textbox id="benefSildBuc"/>
+			  <menulist id="benefSildTip">
+			    <menupopup id="benefSildTip-popup"/>
+			  </menulist>
+			</row>
+			<row>
+			  <label control="benefYalla" value="YALLA:"/>
+			  <textbox id="benefYalla"/>
+			  <textbox id="benefYallaBuc"/>
+			  <menulist id="benefYallaTip">
+			    <menupopup id="benefYallaTip-popup"/>
+			  </menulist>
+			</row>
+			<row>
+			  <label control="benefBaraAntipanica" value="Bara antipanica:"/>
+			  <textbox id="benefBaraAntipanica"/>
+			  <textbox id="benefBaraAntipanicaBuc"/>
+			  <menulist id="benefBaraAntpanicaTip">
+			    <menupopup id="benefBaraAntipanicaTip-popup"/>
+			  </menulist>
+			</row>
+			<row>
+			  <label control="benefManer" value="Maner/Semicilindru exterior:"/>
+			  <textbox id="benefManer"/>
+			  <textbox id="benefManerBuc"/>
+			</row>
+			<row>
+			  <label control="benefSelectorOrdine" value="Selector ordine:"/>
+			  <textbox id="benefSelectorOrdine"/>
+			  <textbox id="benefSelectorOrdineBuc"/>
+			</row>
+			<row>
+			  <label control="benefAmortizor" value="Amortizor:"/>
+			  <textbox id="benefAmortizor"/>
+			  <textbox id="benefAmortizorBuc"/>
+			</row>
+			<row>
+			  <label control="benefAlteSisteme1" value="Alte sisteme"/>
+			  <textbox id="benefAlteSisteme1"/>
+			  <textbox id="benefAlteSisteme1Buc"/>
+			</row>
+			<row>
+			  <box/>
+			  <textbox id="benefAlteSisteme2"/>
+			  <textbox id="benefAlteSistme2Buc"/>
+			</row>
 		      </rows>
 		    </grid>
 		  </groupbox>
@@ -555,7 +612,7 @@ windows.arguments[0].select(productId)
 	  </radiogroup>
 	  
 	  <hbox flex="1">
-	    <label controls="sistemeComment" value="Obs:"/>
+	    <label control="sistemeComment" value="Obs:"/>
 	    <textbox id="sistemeComment" multiline="true" rows="4" flex="1" minheight="80px"/>
 	  </hbox>
 	</vbox>

@@ -5,8 +5,13 @@
     id="modules-list"
     title="Setum"
     persist="screenX screenY width height"
-    orient="horizontal"
+    orient="vertical"
     xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+
+
+  <commandset>
+    <command id="open-jsconsole" oncommand="open_jsconsole()"/>
+  </commandset>
 
   <script language="JavaScript">
     <![CDATA[
@@ -19,38 +24,53 @@
 		 pannel.setAttribute("src", view.getCellText(tree.currentIndex, "xulfile"));
 		 
 	     }
+
+	     // opens js console in separate window
+	     function open_jsconsole() {
+		 window.open("javascript:");
+	     }
 	     
     ]]>
   </script>
 
+  <toolbox>
+    <menubar id="main-menu">
+      <menu id="tools-menu" label="Tools">
+	<menupopup id="tools-popup">
+	  <menuitem label="JavaScript Console" command="open-jsconsole"/>
+	</menupopup>
+      </menu>
+    </menubar>
+  </toolbox>
 
-  <tree id="appmodules" width="180px"
-	datasources="modules.rdf" ref="http://www.kds.ro/erp/modules" 
-	onselect="show_module();">
-    <treecols>
-      <treecol id="modulename" label="Module" primary="true" flex="1"/>
-      <treecol id="xulfile" label="File" hidden="true"/>
-    </treecols>
-    
-    <template>
-      <rule>
-	<treechildren>
-	  <treeitem uri="rdf:*">
-	    <treerow>
-	      <treecell label="rdf:http://www.kds.ro/erp/modules/definition#displayName"/>
-	      <treecell label="rdf:http://www.kds.ro/erp/modules/definition#xulfile"/>
-            </treerow>
-	  </treeitem>
-	</treechildren>
-      </rule>
-    </template>
-  </tree>
+  <hbox flex="1">
+    <tree id="appmodules" width="180px"
+	  datasources="modules.rdf" ref="http://www.kds.ro/erp/modules" 
+	  onselect="show_module();">
+      <treecols>
+	<treecol id="modulename" label="Module" primary="true" flex="1"/>
+	<treecol id="xulfile" label="File" hidden="true"/>
+      </treecols>
+      
+      <template>
+	<rule>
+	  <treechildren>
+	    <treeitem uri="rdf:*">
+	      <treerow>
+		<treecell label="rdf:http://www.kds.ro/erp/modules/definition#displayName"/>
+		<treecell label="rdf:http://www.kds.ro/erp/modules/definition#xulfile"/>
+	      </treerow>
+	    </treeitem>
+	  </treechildren>
+	</rule>
+      </template>
+    </tree>
 
-  <splitter state="open" collapse="before">
-    <grippy />
-  </splitter>
+    <splitter state="open" collapse="before">
+      <grippy />
+    </splitter>
 
-  <iframe flex="1" id="apppannel" />
+    <iframe flex="1" id="apppannel" />
   
-
+  </hbox>
 </window>
