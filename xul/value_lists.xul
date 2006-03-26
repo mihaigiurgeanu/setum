@@ -1,5 +1,6 @@
 <?xml version="1.0"?>
 <?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+<?xml-stylesheet href="setum.css" type="text/css"?>
 
 <window
     id="value_lists-win"
@@ -42,11 +43,14 @@
       
       <tabpanel id="maintab.listing" orient="vertical"
 		style="border:thin outset white">
-	<hbox id="mainlisting.actions">
+	<hbox id="mainlisting.actions" class="mytoolbar">
 	  <button label="Adauga lista" command="command-add_category"/>
 	  <button label="Sterge lista" command="command-remove_category"/>
 	</hbox>
-	<spacer height="8px"/>
+	<hbox class="title">
+	  <label>Liste de valori</label>
+	</hbox>
+	<spacer height="header"/>
 
 	<tree id="categoriesListing"
 	      flex="1"
@@ -76,12 +80,15 @@
       <tabpanel id="maintab.category" orient="vertical"
 		style="border:thin outset white">
 
-	<hbox id="category.actions">
+	<hbox id="category.actions" class="mytoolbar">
 	  <button label="Adauga valoare" command="command-add_product"/>
 	  <button label="Sterge valoare" command="command-remove_product"/>
 	  <button label="Salveaza" command="command-save_category"/>
 	</hbox>
-	<spacer height="8px"/>
+	<hbox class="title">
+	  <label>Detalii lista de valori</label>
+	</hbox>
+	<spacer class="header"/>
 	
 	<grid>
 	  <columns>
@@ -145,12 +152,15 @@
       <tabpanel id="maintab.product" orient="vertical"
 		style="border:thin outset white">
 
-	<hbox id="product.actions">
+	<hbox id="product.actions"  class="mytoolbar">
 	  <button label="Adauga atribut" command="command-add_attribute"/>
 	  <button label="Sterge atribut" command="command-remove_attribute"/>
 	  <button label="Salveaza" command="command-save_product"/>
 	</hbox>
-	<spacer height="8px"/>
+	<hbox class="title">
+	  <label>Detalii valoare</label>
+	</hbox>
+	<spacer class="header"/>
 
 	<grid>
 	  <rows>
@@ -245,10 +255,13 @@
 
       <tabpanel id="maintab.attribute" orient="vertical"
 		style="border:thin outset white">
-	<hbox id="attribute.actions">
+	<hbox id="attribute.actions" class="mytoolbar">
 	  <button label="Salveaza" command="command-save_attribute"/>
 	</hbox>
-	<spacer height="8px"/>
+	<hbox class="title">
+	  <label>Detalii atribut</label>
+	</hbox>
+	<spacer class="header"/>
 
 	<grid>
 	  <rows>
