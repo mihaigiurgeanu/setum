@@ -2089,6 +2089,30 @@ public abstract class UsaMetalica2KBean
 	computeCalculatedFields(r);
 	return r;
     }
+    public ResponseBean updateBenefBroascaTip(Integer benefBroascaTip) {
+        ResponseBean r = new ResponseBean();
+	Integer oldVal = form.getBenefBroascaTip();
+	form.setBenefBroascaTip(benefBroascaTip);
+	r.addRecord();
+	r.addField("benefBroascaTip", benefBroascaTip); // for number format
+	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.UsaMetalica2K.benefBroascaTip");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
+		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the benefBroascaTip", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
     public ResponseBean updateBenefCilindru(String benefCilindru) {
         ResponseBean r = new ResponseBean();
 	String oldVal = form.getBenefCilindru();
@@ -2156,6 +2180,78 @@ public abstract class UsaMetalica2KBean
 						// fields to the response also
 	   } catch (ScriptErrorException e) {
 	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the benefCilindruTip", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
+    public ResponseBean updateBenefSild(String benefSild) {
+        ResponseBean r = new ResponseBean();
+	String oldVal = form.getBenefSild();
+	form.setBenefSild(benefSild);
+	r.addRecord();
+	r.addField("benefSild", benefSild); // for number format
+	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.UsaMetalica2K.benefSild");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
+		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the benefSild", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
+    public ResponseBean updateBenefSildBuc(Integer benefSildBuc) {
+        ResponseBean r = new ResponseBean();
+	Integer oldVal = form.getBenefSildBuc();
+	form.setBenefSildBuc(benefSildBuc);
+	r.addRecord();
+	r.addField("benefSildBuc", benefSildBuc); // for number format
+	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.UsaMetalica2K.benefSildBuc");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
+		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the benefSildBuc", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
+    public ResponseBean updateBenefSildTip(Integer benefSildTip) {
+        ResponseBean r = new ResponseBean();
+	Integer oldVal = form.getBenefSildTip();
+	form.setBenefSildTip(benefSildTip);
+	r.addRecord();
+	r.addField("benefSildTip", benefSildTip); // for number format
+	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.UsaMetalica2K.benefSildTip");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
+		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the benefSildTip", e);
            }
         }
 	computeCalculatedFields(r);
@@ -2939,9 +3035,13 @@ public abstract class UsaMetalica2KBean
 	r.addField("alteSisteme2Buc", form.getAlteSisteme2Buc());
 	r.addField("benefBroasca", form.getBenefBroasca());
 	r.addField("benefBroascaBuc", form.getBenefBroascaBuc());
+	r.addField("benefBroascaTip", form.getBenefBroascaTip());
 	r.addField("benefCilindru", form.getBenefCilindru());
 	r.addField("benefCilindruBuc", form.getBenefCilindruBuc());
 	r.addField("benefCilindruTip", form.getBenefCilindruTip());
+	r.addField("benefSild", form.getBenefSild());
+	r.addField("benefSildBuc", form.getBenefSildBuc());
+	r.addField("benefSildTip", form.getBenefSildTip());
 	r.addField("benefYalla", form.getBenefYalla());
 	r.addField("benefYallaBuc", form.getBenefYallaBuc());
 	r.addField("benefYallaTip", form.getBenefYallaTip());
@@ -3364,6 +3464,11 @@ public abstract class UsaMetalica2KBean
 	    logger.log(BasicLevel.WARN, "Can not set the value of field: benefBroascaBuc from the script", e);
         }
 	try {
+	    s.setVar("benefBroascaTip", form.getBenefBroascaTip(), Integer.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: benefBroascaTip from the script", e);
+        }
+	try {
 	    s.setVar("benefCilindru", form.getBenefCilindru(), String.class);
 	} catch (ScriptErrorException e) {
 	    logger.log(BasicLevel.WARN, "Can not set the value of field: benefCilindru from the script", e);
@@ -3377,6 +3482,21 @@ public abstract class UsaMetalica2KBean
 	    s.setVar("benefCilindruTip", form.getBenefCilindruTip(), Integer.class);
 	} catch (ScriptErrorException e) {
 	    logger.log(BasicLevel.WARN, "Can not set the value of field: benefCilindruTip from the script", e);
+        }
+	try {
+	    s.setVar("benefSild", form.getBenefSild(), String.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: benefSild from the script", e);
+        }
+	try {
+	    s.setVar("benefSildBuc", form.getBenefSildBuc(), Integer.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: benefSildBuc from the script", e);
+        }
+	try {
+	    s.setVar("benefSildTip", form.getBenefSildTip(), Integer.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: benefSildTip from the script", e);
         }
 	try {
 	    s.setVar("benefYalla", form.getBenefYalla(), String.class);
@@ -4302,6 +4422,16 @@ public abstract class UsaMetalica2KBean
 	    logger.log(BasicLevel.WARN, "Can not get the value of field: benefBroascaBuc from the script", e);
         }
 	try {
+	    field = s.getVar("benefBroascaTip", Integer.class);
+	    if(!field.equals(form.getBenefBroascaTip())) {
+	        logger.log(BasicLevel.DEBUG, "Field benefBroascaTip modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setBenefBroascaTip((Integer)field);
+	        r.addField("benefBroascaTip", (Integer)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: benefBroascaTip from the script", e);
+        }
+	try {
 	    field = s.getVar("benefCilindru", String.class);
 	    if(!field.equals(form.getBenefCilindru())) {
 	        logger.log(BasicLevel.DEBUG, "Field benefCilindru modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
@@ -4330,6 +4460,36 @@ public abstract class UsaMetalica2KBean
 	    }
 	} catch (ScriptErrorException e) {
 	    logger.log(BasicLevel.WARN, "Can not get the value of field: benefCilindruTip from the script", e);
+        }
+	try {
+	    field = s.getVar("benefSild", String.class);
+	    if(!field.equals(form.getBenefSild())) {
+	        logger.log(BasicLevel.DEBUG, "Field benefSild modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setBenefSild((String)field);
+	        r.addField("benefSild", (String)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: benefSild from the script", e);
+        }
+	try {
+	    field = s.getVar("benefSildBuc", Integer.class);
+	    if(!field.equals(form.getBenefSildBuc())) {
+	        logger.log(BasicLevel.DEBUG, "Field benefSildBuc modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setBenefSildBuc((Integer)field);
+	        r.addField("benefSildBuc", (Integer)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: benefSildBuc from the script", e);
+        }
+	try {
+	    field = s.getVar("benefSildTip", Integer.class);
+	    if(!field.equals(form.getBenefSildTip())) {
+	        logger.log(BasicLevel.DEBUG, "Field benefSildTip modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setBenefSildTip((Integer)field);
+	        r.addField("benefSildTip", (Integer)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: benefSildTip from the script", e);
         }
 	try {
 	    field = s.getVar("benefYalla", String.class);

@@ -316,6 +316,10 @@
     <type>Integer</type>
   </field>
   <field>
+    <name>benefBroascaTip</name>
+    <type>Integer</type>
+  </field>
+  <field>
     <name>benefCilindru</name>
     <type>String</type>
   </field>
@@ -325,6 +329,18 @@
   </field>
   <field>
     <name>benefCilindruTip</name>
+    <type>Integer</type>
+  </field>
+  <field>
+    <name>benefSild</name>
+    <type>String</type>
+  </field>
+  <field>
+    <name>benefSildBuc</name>
+    <type>Integer</type>
+  </field>
+  <field>
+    <name>benefSildTip</name>
     <type>Integer</type>
   </field>
   <field>

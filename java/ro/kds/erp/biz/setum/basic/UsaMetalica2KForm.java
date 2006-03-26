@@ -92,9 +92,13 @@ public class UsaMetalica2KForm implements Serializable {
     Integer alteSisteme2Buc;
     String benefBroasca;
     Integer benefBroascaBuc;
+    Integer benefBroascaTip;
     String benefCilindru;
     Integer benefCilindruBuc;
     Integer benefCilindruTip;
+    String benefSild;
+    Integer benefSildBuc;
+    Integer benefSildTip;
     String benefYalla;
     Integer benefYallaBuc;
     Integer benefYallaTip;
@@ -436,6 +440,10 @@ public class UsaMetalica2KForm implements Serializable {
 
 
 
+       this.benefBroascaTip = new Integer(0);
+
+
+
        this.benefCilindru = "";
 
 
@@ -445,6 +453,18 @@ public class UsaMetalica2KForm implements Serializable {
 
 
        this.benefCilindruTip = new Integer(0);
+
+
+
+       this.benefSild = "";
+
+
+
+       this.benefSildBuc = new Integer(0);
+
+
+
+       this.benefSildTip = new Integer(0);
 
 
 
@@ -1721,6 +1741,21 @@ public class UsaMetalica2KForm implements Serializable {
 	}
     }
 
+    public void setBenefBroascaTip(Integer newBenefBroascaTip) {
+        this.benefBroascaTip = newBenefBroascaTip;
+    }
+
+    public Integer getBenefBroascaTip() {
+        return benefBroascaTip;
+    }
+
+    public void readBenefBroascaTip(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("benefBroascaTip");
+	if(a != null) {
+	    this.setBenefBroascaTip(a.getIntValue());
+	}
+    }
+
     public void setBenefCilindru(String newBenefCilindru) {
         this.benefCilindru = newBenefCilindru;
     }
@@ -1763,6 +1798,51 @@ public class UsaMetalica2KForm implements Serializable {
 	AttributeLocal a = (AttributeLocal)attributes.get("benefCilindruTip");
 	if(a != null) {
 	    this.setBenefCilindruTip(a.getIntValue());
+	}
+    }
+
+    public void setBenefSild(String newBenefSild) {
+        this.benefSild = newBenefSild;
+    }
+
+    public String getBenefSild() {
+        return benefSild;
+    }
+
+    public void readBenefSild(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("benefSild");
+	if(a != null) {
+	    this.setBenefSild(a.getStringValue());
+	}
+    }
+
+    public void setBenefSildBuc(Integer newBenefSildBuc) {
+        this.benefSildBuc = newBenefSildBuc;
+    }
+
+    public Integer getBenefSildBuc() {
+        return benefSildBuc;
+    }
+
+    public void readBenefSildBuc(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("benefSildBuc");
+	if(a != null) {
+	    this.setBenefSildBuc(a.getIntValue());
+	}
+    }
+
+    public void setBenefSildTip(Integer newBenefSildTip) {
+        this.benefSildTip = newBenefSildTip;
+    }
+
+    public Integer getBenefSildTip() {
+        return benefSildTip;
+    }
+
+    public void readBenefSildTip(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("benefSildTip");
+	if(a != null) {
+	    this.setBenefSildTip(a.getIntValue());
 	}
     }
 

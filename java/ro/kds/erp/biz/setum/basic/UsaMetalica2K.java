@@ -98,9 +98,13 @@ public interface UsaMetalica2K extends EJBObject {
     public ResponseBean updateAlteSisteme2Buc(Integer newAlteSisteme2Buc) throws RemoteException;
     public ResponseBean updateBenefBroasca(String newBenefBroasca) throws RemoteException;
     public ResponseBean updateBenefBroascaBuc(Integer newBenefBroascaBuc) throws RemoteException;
+    public ResponseBean updateBenefBroascaTip(Integer newBenefBroascaTip) throws RemoteException;
     public ResponseBean updateBenefCilindru(String newBenefCilindru) throws RemoteException;
     public ResponseBean updateBenefCilindruBuc(Integer newBenefCilindruBuc) throws RemoteException;
     public ResponseBean updateBenefCilindruTip(Integer newBenefCilindruTip) throws RemoteException;
+    public ResponseBean updateBenefSild(String newBenefSild) throws RemoteException;
+    public ResponseBean updateBenefSildBuc(Integer newBenefSildBuc) throws RemoteException;
+    public ResponseBean updateBenefSildTip(Integer newBenefSildTip) throws RemoteException;
     public ResponseBean updateBenefYalla(String newBenefYalla) throws RemoteException;
     public ResponseBean updateBenefYallaBuc(Integer newBenefYallaBuc) throws RemoteException;
     public ResponseBean updateBenefYallaTip(Integer newBenefYallaTip) throws RemoteException;

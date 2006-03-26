@@ -569,7 +569,7 @@ windows.arguments[0].select(productId)
 			  <label control="benefBaraAntipanica" value="Bara antipanica:"/>
 			  <textbox id="benefBaraAntipanica"/>
 			  <textbox id="benefBaraAntipanicaBuc"/>
-			  <menulist id="benefBaraAntpanicaTip">
+			  <menulist id="benefBaraAntipanicaTip">
 			    <menupopup id="benefBaraAntipanicaTip-popup"/>
 			  </menulist>
 			</row>
@@ -596,7 +596,7 @@ windows.arguments[0].select(productId)
 			<row>
 			  <box/>
 			  <textbox id="benefAlteSisteme2"/>
-			  <textbox id="benefAlteSistme2Buc"/>
+			  <textbox id="benefAlteSisteme2Buc"/>
 			</row>
 		      </rows>
 		    </grid>

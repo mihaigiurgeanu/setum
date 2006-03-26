@@ -30,7 +30,7 @@ import ro.kds.erp.data.CompositeProductLocalHome;
  * Created: Fri Nov 18 15:34:24 2005
  *
  * @author <a href="mailto:Mihai Giurgeanu@CRIMIRA"></a>
- * @version $Id: UsaMetalica2KBeanImplementation.java,v 1.8 2006/03/25 21:25:31 mihai Exp $
+ * @version $Id: UsaMetalica2KBeanImplementation.java,v 1.9 2006/03/26 12:12:39 mihai Exp $
  */
 public class UsaMetalica2KBeanImplementation 
     extends ro.kds.erp.biz.setum.basic.UsaMetalica2KBean {
@@ -112,7 +112,7 @@ public class UsaMetalica2KBeanImplementation
 	    attribs.add(ah.create("h1Treshold", form.getH1Treshold()));
 	    attribs.add(ah.create("h2Treshold", form.getH2Treshold()));
 	    attribs.add(ah.create("montareSistem", form.getMontareSistem()));
-	    attribs.add(ah.create("decupareSistmeId", form.getDecupareSistemId()));
+	    attribs.add(ah.create("decupareSistemId", form.getDecupareSistemId()));
 	    attribs.add(ah.create("sistemeSetumSauBeneficiar", 
 				  form.getSistemSetumSauBeneficiar()));
 	    attribs.add(ah.create("broascaId", form.getBroascaId()));
@@ -150,6 +150,44 @@ public class UsaMetalica2KBeanImplementation
 	    attribs.add(ah.create("alteSisteme2Id", form.getAlteSisteme2Id()));
 	    attribs.add(ah.create("alteSisteme2Buc", form.getAlteSisteme2Buc()));
 	    attribs.add(ah.create("sistemeComment", form.getSistemeComment()));
+
+	    attribs.add(ah.create("benefBroasca", form.getBenefBroasca()));
+	    attribs.add(ah.create("benefBroascaBuc", form.getBenefBroascaBuc()));
+	    attribs.add(ah.create("benefBroascaTip", form.getBenefBroascaTip()));
+	    attribs.add(ah.create("benefCilindru", form.getBenefCilindru()));
+	    attribs.add(ah.create("benefCilindruBuc", form.getBenefCilindruBuc()));
+	    attribs.add(ah.create("benefCilindruTip", form.getBenefCilindruTip()));
+	    attribs.add(ah.create("benefSild", form.getBenefSild()));
+	    attribs.add(ah.create("benefSildBuc", form.getBenefSildBuc()));
+	    attribs.add(ah.create("benefSildTip", form.getBenefSildTip()));
+	    attribs.add(ah.create("benefYalla", form.getBenefYalla()));
+	    attribs.add(ah.create("benefYallaBuc", form.getBenefYallaBuc()));
+	    attribs.add(ah.create("benefYallaTip", form.getBenefYallaTip()));
+	    attribs.add(ah.create("benefBaraAntipanica", form.getBenefBaraAntipanica()));
+	    attribs.add(ah.create("benefBaraAntipanicaTip", form.getBenefBaraAntipanicaTip()));
+	    attribs.add(ah.create("benefBaraAntipanicaBuc", form.getBenefBaraAntipanicaBuc()));
+	    attribs.add(ah.create("benefManer", form.getBenefManer()));
+	    attribs.add(ah.create("benefManerBuc", form.getBenefManerBuc()));
+	    attribs.add(ah.create("benefSelectorOrdine", form.getBenefSelectorOrdine()));
+	    attribs.add(ah.create("benefSelectorOrdineBuc", form.getBenefSelectorOrdineBuc()));
+	    attribs.add(ah.create("benefAmortizor", form.getBenefAmortizor()));
+	    attribs.add(ah.create("benefAmortizorBuc", form.getBenefAmortizorBuc()));
+	    attribs.add(ah.create("benefAlteSisteme1", form.getBenefAlteSisteme1()));
+	    attribs.add(ah.create("benefAlteSisteme1Buc", form.getBenefAlteSisteme1Buc()));
+	    attribs.add(ah.create("benefAlteSisteme2", form.getBenefAlteSisteme2()));
+	    attribs.add(ah.create("benefAlteSisteme2Buc", form.getBenefAlteSisteme2Buc()));
+
+	    attribs.add(ah.create("intFinisajBlat", form.getIntFinisajBlat()));
+	    attribs.add(ah.create("intFinisajBlatId", form.getIntFinisajBlatId()));
+	    attribs.add(ah.create("intFinisajToc", form.getIntFinisajToc()));
+	    attribs.add(ah.create("intFinisajTocId", form.getIntFinisajTocId()));
+	    attribs.add(ah.create("intFinisajGrilaj", form.getIntFinisajGrilaj()));
+	    attribs.add(ah.create("intFinisajGrilajId", form.getIntFinisajGrilajId()));
+	    attribs.add(ah.create("intFinisajFereastra", form.getIntFinisajFereastra()));
+	    attribs.add(ah.create("intFinisajFereastraId", form.getIntFinisajFereastraId()));
+	    attribs.add(ah.create("intFinisajSupralumina", form.getIntFinisajSupralumina()));
+	    attribs.add(ah.create("intFinisajSupraluminaId", form.getIntFinisajSupraluminaId()));
+	    attribs.add(ah.create("intFinisajPanouLateral", form.getIntFinisajPanouLateralId()));
 
 	    r = validate();
 	} catch (Exception e) {
@@ -263,6 +301,46 @@ public class UsaMetalica2KBeanImplementation
 	    form.readAlteSisteme2Buc(amap);
 	    form.readSistemeComment(amap);
 
+	    form.readBenefBroasca(amap);
+	    form.readBenefBroascaBuc(amap);
+	    form.readBenefBroascaTip(amap);
+	    form.readBenefCilindru(amap);
+	    form.readBenefCilindruBuc(amap);
+	    form.readBenefCilindruTip(amap);
+	    form.readBenefSild(amap);
+	    form.readBenefSildBuc(amap);
+	    form.readBenefSildTip(amap);
+	    form.readBenefYalla(amap);
+	    form.readBenefYallaBuc(amap);
+	    form.readBenefYallaTip(amap);
+	    form.readBenefBaraAntipanica(amap);
+	    form.readBenefBaraAntipanicaTip(amap);
+	    form.readBenefBaraAntipanicaBuc(amap);
+	    form.readBenefManer(amap);
+	    form.readBenefManerBuc(amap);
+	    form.readBenefSelectorOrdine(amap);
+	    form.readBenefSelectorOrdineBuc(amap);
+	    form.readBenefAmortizor(amap);
+	    form.readBenefAmortizorBuc(amap);
+	    form.readBenefAlteSisteme1(amap);
+	    form.readBenefAlteSisteme1Buc(amap);
+	    form.readBenefAlteSisteme2(amap);
+	    form.readBenefAlteSisteme2Buc(amap);
+
+	    form.readIntFinisajBlat(amap);
+	    form.readIntFinisajBlatId(amap);
+	    form.readIntFinisajToc(amap);
+	    form.readIntFinisajTocId(amap);
+	    form.readIntFinisajGrilaj(amap);
+	    form.readIntFinisajGrilajId(amap);
+	    form.readIntFinisajFereastra(amap);
+	    form.readIntFinisajFereastraId(amap);
+	    form.readIntFinisajSupralumina(amap);
+	    form.readIntFinisajSupraluminaId(amap);
+	    form.readIntFinisajPanouLateral(amap);
+	    form.readIntFinisajPanouLateralId(amap);
+
+
 	} catch (NamingException e) {
 	    logger.log(BasicLevel.ERROR, e);
 	    r = new ResponseBean();
@@ -295,79 +373,79 @@ public class UsaMetalica2KBeanImplementation
 	}
 
 	// set default values
-	form.setCode(newCode);
-	form.setName("Usa metalica " + newCode);
-	form.setDescription("");
-	form.setSubclass("A");
-	form.setVersion("UF");
-	form.setMaterial(new Integer(1));
-	form.setK(new Integer(1));
-	form.setLg(new Double(0));
-	form.setHg(new Double(0));
-	form.setLe(new Double(0));
-	form.setHe(new Double(0));
-	form.setLcorrection(new Double(0));
-	form.setHcorrection(new Double(0));
-	form.setLCurrent(new Double(0));
-	form.setKType(new Integer(0));
-	form.setIeFoil(new Integer(1));
-	form.setIntFoil(new Integer(1));
-	form.setExtFoil(new Integer(1));
-	form.setIeFoilSec(new Integer(1));
-	form.setIntFoilSec(new Integer(1));
-	form.setExtFoilSec(new Integer(1));
-	form.setIsolation(new Integer(1));
-	form.setOpeningDir(new Integer(1));
-	form.setOpeningSide(new Integer(1));
-	form.setFrameType(new Integer(1));
-	form.setLFrame(new Double(0));
-	form.setBFrame(new Double(0));
-	form.setCFrame(new Double(0));
-	form.setFoilPosition(new Integer(1));
-	form.setTresholdType(new Integer(1));
-	form.setLTreshold(new Double(0));
-	form.setHTreshold(new Double(0));
-	form.setCTreshold(new Double(0));
-	form.setTresholdSpace(new Integer(1));
-	form.setH1Treshold(new Double(0));
-	form.setH2Treshold(new Double(0));
-	form.setSellPrice(new BigDecimal(0));
-	form.setEntryPrice(new BigDecimal(0));
-	form.setMontareSistem(new Integer(1));
-	form.setDecupareSistemId(new Integer(0));
-	form.setSistemSetumSauBeneficiar(new Integer(1));
-	form.setBroascaId(new Integer(0));
-	form.setBroascaBuc(new Integer(0));
-	form.setCilindruId(new Integer(0));
-	form.setCilindruBuc(new Integer(0));
-	form.setCopiatCheieId(new Integer(0));
-	form.setCopiatCheieBuc(new Integer(0));
-	form.setSildId(new Integer(0));
-	form.setSildTip("");
-	form.setSildCuloare("");
-	form.setSildBuc(new Integer(0));
-	form.setRozetaId(new Integer(0));
-	form.setRozetaTip("");
-	form.setRozetaCuloare("");
-	form.setRozetaBuc(new Integer(0));
-	form.setManerId(new Integer(0));
-	form.setManerTip("");
-	form.setManerCuloare("");
-	form.setManerBuc(new Integer(0));
-	form.setYalla1Id(new Integer(0));
-	form.setYalla1Buc(new Integer(0));
-	form.setYalla2Buc(new Integer(0));
-	form.setYalla2Id(new Integer(0));
-	form.setBaraAntipanicaId(new Integer(0));
-	form.setBaraAntipanicaBuc(new Integer(0));
-	form.setManerSemicilindruId(new Integer(0));
-	form.setManerSemicilindruBuc(new Integer(0));
-	form.setAmortizorId(new Integer(0));
-	form.setAmortizorBuc(new Integer(0));
-	form.setAlteSisteme1Id(new Integer(0));
-	form.setAlteSisteme2Buc(new Integer(0));
-	form.setAlteSisteme2Id(new Integer(0));
-	form.setSistemeComment("");
+ 	form.setCode(newCode);
+ 	form.setName("Usa metalica " + newCode);
+// 	form.setDescription("");
+ 	form.setSubclass("A");
+ 	form.setVersion("UF");
+ 	form.setMaterial(new Integer(1));
+ 	form.setK(new Integer(1));
+// 	form.setLg(new Double(0));
+// 	form.setHg(new Double(0));
+// 	form.setLe(new Double(0));
+// 	form.setHe(new Double(0));
+// 	form.setLcorrection(new Double(0));
+// 	form.setHcorrection(new Double(0));
+// 	form.setLCurrent(new Double(0));
+// 	form.setKType(new Integer(0));
+ 	form.setIeFoil(new Integer(1));
+ 	form.setIntFoil(new Integer(1));
+ 	form.setExtFoil(new Integer(1));
+ 	form.setIeFoilSec(new Integer(1));
+ 	form.setIntFoilSec(new Integer(1));
+ 	form.setExtFoilSec(new Integer(1));
+ 	form.setIsolation(new Integer(1));
+ 	form.setOpeningDir(new Integer(1));
+ 	form.setOpeningSide(new Integer(1));
+ 	form.setFrameType(new Integer(1));
+// 	form.setLFrame(new Double(0));
+// 	form.setBFrame(new Double(0));
+// 	form.setCFrame(new Double(0));
+ 	form.setFoilPosition(new Integer(1));
+ 	form.setTresholdType(new Integer(1));
+// 	form.setLTreshold(new Double(0));
+// 	form.setHTreshold(new Double(0));
+// 	form.setCTreshold(new Double(0));
+ 	form.setTresholdSpace(new Integer(1));
+// 	form.setH1Treshold(new Double(0));
+// 	form.setH2Treshold(new Double(0));
+// 	form.setSellPrice(new BigDecimal(0));
+// 	form.setEntryPrice(new BigDecimal(0));
+// 	form.setMontareSistem(new Integer(1));
+// 	form.setDecupareSistemId(new Integer(0));
+ 	form.setSistemSetumSauBeneficiar(new Integer(1));
+// 	form.setBroascaId(new Integer(0));
+// 	form.setBroascaBuc(new Integer(0));
+// 	form.setCilindruId(new Integer(0));
+// 	form.setCilindruBuc(new Integer(0));
+// 	form.setCopiatCheieId(new Integer(0));
+// 	form.setCopiatCheieBuc(new Integer(0));
+// 	form.setSildId(new Integer(0));
+// 	form.setSildTip("");
+// 	form.setSildCuloare("");
+// 	form.setSildBuc(new Integer(0));
+// 	form.setRozetaId(new Integer(0));
+// 	form.setRozetaTip("");
+// 	form.setRozetaCuloare("");
+// 	form.setRozetaBuc(new Integer(0));
+// 	form.setManerId(new Integer(0));
+// 	form.setManerTip("");
+// 	form.setManerCuloare("");
+// 	form.setManerBuc(new Integer(0));
+// 	form.setYalla1Id(new Integer(0));
+// 	form.setYalla1Buc(new Integer(0));
+// 	form.setYalla2Buc(new Integer(0));
+// 	form.setYalla2Id(new Integer(0));
+// 	form.setBaraAntipanicaId(new Integer(0));
+// 	form.setBaraAntipanicaBuc(new Integer(0));
+// 	form.setManerSemicilindruId(new Integer(0));
+// 	form.setManerSemicilindruBuc(new Integer(0));
+// 	form.setAmortizorId(new Integer(0));
+// 	form.setAmortizorBuc(new Integer(0));
+// 	form.setAlteSisteme1Id(new Integer(0));
+// 	form.setAlteSisteme2Buc(new Integer(0));
+// 	form.setAlteSisteme2Id(new Integer(0));
+// 	form.setSistemeComment("");
     }
 
 
@@ -391,7 +469,11 @@ public class UsaMetalica2KBeanImplementation
 	r.addValueList("openingSide", ValueLists.makeStdValueList(11005));
 	r.addValueList("foilPosition", ValueLists.makeStdValueList(11008));
 
-
+	r.addValueList("benefBroascaTip", ValueLists.makeStdValueList(11020));
+	r.addValueList("benefCilindruTip", ValueLists.makeStdValueList(11021));
+	r.addValueList("benefSildTip", ValueLists.makeStdValueList(11023));
+	r.addValueList("benefYallaTip", ValueLists.makeStdValueList(11022));
+	r.addValueList("benefBaraAntipanicaTip", ValueLists.makeStdValueList(11024));
 
 	r.addValueList("broascaId", 
 		       ValueLists.makeVLForCategoryRef("broascaId"));
