@@ -15,3 +15,11 @@
 	* added SimpleCallDispatcherServlet, a trimmed down version of the CallDispatcherServlet. It will only work with not deprecated methods of the formobject. If your code makes use of the deprecated formobject methods, then you must use CallDispatcherServlet
 	These modifications are still compatible with the old code.
 	Added a new module for editing value lists (BusinessLogic is implemented by the GenericProductsEJB). This module conforms to the new code organization style.
+2006-03-27: livrat-2006_03_27
+	New value lists module
+	Improved user interface
+	Only one usa metalica for both 1K and 2K
+	Options for usa metalica
+	Sisteme beneficiar for usa metalica
+	DataInit improved
+
