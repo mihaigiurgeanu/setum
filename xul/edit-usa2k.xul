@@ -65,7 +65,9 @@ windows.arguments[0].select(productId)
       <tab label="Definire usa"/>
       <tab label="Optiuni"/>
       <tab label="Sisteme"/>
+      <!--
       <tab label="Finisaje"/>
+      -->
     </tabs>
     <tabpanels>
       <tabpanel orient="vertical" style="overflow:auto" maxheight="650">
@@ -674,9 +676,11 @@ windows.arguments[0].select(productId)
       </tabpanel>
 
       <!-- Finisaje -->
+      <!--
       <tabpanel>
 	
       </tabpanel>
+      -->
     </tabpanels>
   </tabbox>
 
