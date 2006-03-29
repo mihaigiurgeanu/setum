@@ -1,4 +1,4 @@
-package ro.kds.erp.biz.setum;
+package ro.kds.erp.biz;
 
 import ro.kds.erp.data.CategoryLocalHome;
 import ro.kds.erp.data.ProductLocalHome;
