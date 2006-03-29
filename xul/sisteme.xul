@@ -19,6 +19,7 @@
     <command id="command-add" oncommand="theForm.addnew(); document.getElementById('maintab').selectedIndex=1" />
     <command id="onprint" oncommand="open('http://localhost:9000/reports/OfertaSisteme.pdf', 'OfertaSisteme', '');" />
     <command id="onAdjustPrices" oncommand="adjustPricesDlg()" />
+    <command id="onAddCategory" oncommand="add_new_category()" />
   </commandset>
 
   <tabbox flex="1" id="maintab">

@@ -11,7 +11,7 @@
 
   <description>Business logic of the application</description>
   <display-name>setumbiz</display-name>
-
+  
   <enterprise-beans>
     <session>
       <description>Manage the editing of a special kind of Product</description>

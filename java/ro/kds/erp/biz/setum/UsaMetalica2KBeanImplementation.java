@@ -23,6 +23,14 @@ import ro.kds.erp.data.CompositeProductLocalHome;
 import ro.kds.erp.data.CompositeProductLocal;
 import javax.ejb.CreateException;
 import javax.ejb.RemoveException;
+import javax.ejb.MessageDrivenBean;
+import javax.ejb.MessageDrivenContext;
+import javax.ejb.EJBException;
+import javax.jms.Message;
+import org.objectweb.jonas.common.Log;
+import javax.jms.MessageListener;
+import ro.kds.erp.scripting.Script;
+import ro.kds.erp.scripting.ScriptErrorException;
 
 /**
  * Business logic for definition of UsaMetalica product. It obsoletes old implementation
@@ -33,7 +41,7 @@ import javax.ejb.RemoveException;
  * Created: Fri Nov 18 15:34:24 2005
  *
  * @author <a href="mailto:Mihai Giurgeanu@CRIMIRA"></a>
- * @version $Id: UsaMetalica2KBeanImplementation.java,v 1.10 2006/03/26 18:12:02 mihai Exp $
+ * @version $Id: UsaMetalica2KBeanImplementation.java,v 1.11 2006/03/29 18:45:18 mihai Exp $
  */
 public class UsaMetalica2KBeanImplementation 
     extends ro.kds.erp.biz.setum.basic.UsaMetalica2KBean {
@@ -671,22 +679,215 @@ public class UsaMetalica2KBeanImplementation
 	return r;
     }
 
-    /**
-     * Price calculation.
-     */
-    protected void computePrice() {
-	double se = (form.getLe().doubleValue()/1000)
-	    * (form.getHe().doubleValue()/1000);
-	double price = se * 200;
-	double entryPrice = se * 125;
-
-	form.setEntryPrice(new BigDecimal(entryPrice));
-	form.setSellPrice(new BigDecimal(price));
+    public ResponseBean computeCalculatedFields(ResponseBean r) {
+	return super.computeCalculatedFields(r);
     }
 
-    public ResponseBean computeCalculatedFields(ResponseBean r) {
-	computePrice();
-	return super.computeCalculatedFields(r);
+    /**
+     * Add to the script suplimentary product references for allowing the script
+     * to calculate the price.
+     *
+     * @param script a <code>Script</code> value
+     */
+    protected void addFieldsToScript(final Script script) {
+	super.addFieldsToScript();
+
+	try {
+
+	    CategoryLocalHome ch = Products.getCategoryHome();
+	    ProductLocalHome ph = Products.getProductHome();
+	    AttributeLocalHome ah = Attributes.getAttributeHome();
+
+	    // subclass
+	    try {
+		Category c = ch.findByPrimaryKey(new Integer(11001));
+		ProductLocal p = c.findProductByCode(form.getSubclass());		
+		s.setVar("subclassObj", p, ProductLocal.class);
+	    } catch (ScriptErrorException e) {
+	    }
+	    // version
+	    try {
+		Category c = ch.findByPrimaryKey(new Integer(11002));
+		ProductLocal p = c.findProductByCode(form.getVersion());		
+		s.setVar("versionObj", p, ProductLocal.class);
+	    } catch (ScriptErrorException e) {
+	    }
+	    // material
+	    try {
+		Category c = ch.findByPrimaryKey(new Integer(11003));
+		ProductLocal p = c.findProductByCode(form.getMaterial());		
+		s.setVar("materialObj", p, ProductLocal.class);
+	    } catch (ScriptErrorException e) {
+	    }
+	    // intFoil
+	    try {
+		Category c = ch.findByPrimaryKey(new Integer(11006));
+		ProductLocal p = c.findProductByCode(form.getIntFoil());		
+		s.setVar("intFoilObj", p, ProductLocal.class);
+	    } catch (ScriptErrorException e) {
+	    }
+	    // extFoil
+	    try {
+		Category c = ch.findByPrimaryKey(new Integer(11006));
+		ProductLocal p = c.findProductByCode(form.getExtFoil());		
+		s.setVar("extFoilObj", p, ProductLocal.class);
+	    } catch (ScriptErrorException e) {
+	    }
+	    // intFoilSec
+	    try {
+		Category c = ch.findByPrimaryKey(new Integer(11006));
+		ProductLocal p = c.findProductByCode(form.getIntFoilSec());		
+		s.setVar("intFoilSecObj", p, ProductLocal.class);
+	    } catch (ScriptErrorException e) {
+	    }
+	    // intFoilSec
+	    try {
+		Category c = ch.findByPrimaryKey(new Integer(11006));
+		ProductLocal p = c.findProductByCode(form.getExtFoilSec());		
+		s.setVar("extFoilSecObj", p, ProductLocal.class);
+	    } catch (ScriptErrorException e) {
+	    }
+	    // isolation
+	    try {
+		Category c = ch.findByPrimaryKey(new Integer(11010));
+		ProductLocal p = c.findProductByCode(form.getIsolation());		
+		s.setVar("isolation", p, ProductLocal.class);
+	    } catch (ScriptErrorException e) {
+	    }
+	    // openingDir
+	    try {
+		Category c = ch.findByPrimaryKey(new Integer(11004));
+		ProductLocal p = c.findProductByCode(form.getOpeningDir());		
+		s.setVar("openingDirObj", p, ProductLocal.class);
+	    } catch (ScriptErrorException e) {
+	    }
+	    // openingSide
+	    try {
+		Category c = ch.findByPrimaryKey(new Integer(11005));
+		ProductLocal p = c.findProductByCode(form.getOpeningSide());		
+		s.setVar("openingSideObj", p, ProductLocal.class);
+	    } catch (ScriptErrorException e) {
+	    }
+	    // foilPosition
+	    try {
+		Category c = ch.findByPrimaryKey(new Integer(11008));
+		ProductLocal p = c.findProductByCode(form.getFoilPosition());		
+		s.setVar("foilPositionObj", p, ProductLocal.class);
+	    } catch (ScriptErrorException e) {
+	    }
+	    // benefBroascaTip
+	    try {
+		Category c = ch.findByPrimaryKey(new Integer(11020));
+		ProductLocal p = c.findProductByCode(form.getBenefBroascaTip());		
+		s.setVar("benefBroascaTipObj", p, ProductLocal.class);
+	    } catch (ScriptErrorException e) {
+	    }
+	    // benefCilindruTip
+	    try {
+		Category c = ch.findByPrimaryKey(new Integer(11021));
+		ProductLocal p = c.findProductByCode(form.getBenefCilindruTip());		
+		s.setVar("benefCilindruTipObj", p, ProductLocal.class);
+	    } catch (ScriptErrorException e) {
+	    }
+	    // benefSildTip
+	    try {
+		Category c = ch.findByPrimaryKey(new Integer(11023));
+		ProductLocal p = c.findProductByCode(form.getBenefSildTip());		
+		s.setVar("benefSildTipObj", p, ProductLocal.class);
+	    } catch (ScriptErrorException e) {
+	    }
+	    // benefYallaTip
+	    try {
+		Category c = ch.findByPrimaryKey(new Integer(11022));
+		ProductLocal p = c.findProductByCode(form.getBenefYallaTip());		
+		s.setVar("benefYallaTipObj", p, ProductLocal.class);
+	    } catch (ScriptErrorException e) {
+	    }
+	    // benefBaraAntipanicaTip
+	    try {
+		Category c = ch.findByPrimaryKey(new Integer(11022));
+		ProductLocal p = c.findProductByCode(form.getBenefBaraAntipanicaTip());		
+		s.setVar("benefBaraAntipanicaTipObj", p, ProductLocal.class);
+	    } catch (ScriptErrorException e) {
+	    }
+
+	    // broascaId
+	    try {
+		ProductLocal p = ph.findByPrimaryKey(form.getBroascaId());
+		s.setVar("broasca", p, ProductLocal.class);
+	    }
+	    // cilindruId
+	    try {
+		ProductLocal p = ph.findByPrimaryKey(form.getCilindruId());
+		s.setVar("cilindru", p, ProductLocal.class);
+	    }
+	    // copiatCheieId
+	    try {
+		ProductLocal p = ph.findByPrimaryKey(form.getCopiatCheieId());
+		s.setVar("copiatCheie", p, ProductLocal.class);
+	    }
+	    // sildId
+	    try {
+		ProductLocal p = ph.findByPrimaryKey(form.getSildId());
+		s.setVar("sild", p, ProductLocal.class);
+	    }
+	    // rozetaId
+	    try {
+		ProductLocal p = ph.findByPrimaryKey(form.getRozetaId());
+		s.setVar("rozeta", p, ProductLocal.class);
+	    }
+	    // manerId
+	    try {
+		ProductLocal p = ph.findByPrimaryKey(form.getManerId());
+		s.setVar("maner", p, ProductLocal.class);
+	    }
+	    // yalla1Id
+	    try {
+		ProductLocal p = ph.findByPrimaryKey(form.getYalla1Id());
+		s.setVar("yalla1", p, ProductLocal.class);
+	    }
+	    // yalla2Id
+	    try {
+		ProductLocal p = ph.findByPrimaryKey(form.getYalla2Id());
+		s.setVar("yalla2", p, ProductLocal.class);
+	    }
+	    // baraAntipanicaId
+	    try {
+		ProductLocal p = ph.findByPrimaryKey(form.getBaraAntipanicaId());
+		s.setVar("baraAntipanica", p, ProductLocal.class);
+	    }
+	    // selectorOrdineId
+	    try {
+		ProductLocal p = ph.findByPrimaryKey(form.getSelectorOrdineId());
+		s.setVar("selectorOrdine", p, ProductLocal.class);
+	    }
+	    // amortizorId
+	    try {
+		ProductLocal p = ph.findByPrimaryKey(form.getAmortizorId());
+		s.setVar("amortizor", p, ProductLocal.class);
+	    }
+	    // decupareSistemId
+	    try {
+		ProductLocal p = ph.findByPrimaryKey(form.getDecupareSistemId());
+		s.setVar("decupareSistem", p, ProductLocal.class);
+	    }
+	    // manerSemiclindruId
+	    try {
+		ProductLocal p = ph.findByPrimaryKey(form.getManerSemicilindruId());
+		s.setVar("manerSemicilindru", p, ProductLocal.class);
+	    }
+	    // alteSisteme1Id
+	    try {
+		ProductLocal p = ph.findByPrimaryKey(form.getAlteSisteme1Id());
+		s.setVar("alteSisteme1", p, ProductLocal.class);
+	    }
+	    // alteSisteme2Id
+	    try {
+		ProductLocal p = ph.findByPrimaryKey(form.getAlteSisteme2Id());
+		s.setVar("alteSisteme2", p, ProductLocal.class);
+	    }
+	} catch (NamingException e) {
+	}
     }
 
 }
