@@ -779,109 +779,137 @@ public abstract class FereastraBean
      */
     protected void addFieldsToScript(Script s) {
 	try {
+            s.setVar("logger", logger, Logger.class);
+        } catch (ScriptErrorException e) {
+            logger.log(BasicLevel.ERROR, "Can not set the logger variable in the script" +
+                       e.getMessage());
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
 	    s.setVar("canat", form.getCanat(), Integer.class);
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not set the value of field: canat from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: canat from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    s.setVar("lf", form.getLf(), Double.class);
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not set the value of field: lf from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: lf from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    s.setVar("hf", form.getHf(), Double.class);
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not set the value of field: hf from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: hf from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    s.setVar("pozitionare1", form.getPozitionare1(), String.class);
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not set the value of field: pozitionare1 from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: pozitionare1 from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    s.setVar("pozitionare2", form.getPozitionare2(), String.class);
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not set the value of field: pozitionare2 from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: pozitionare2 from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    s.setVar("pozitionare3", form.getPozitionare3(), String.class);
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not set the value of field: pozitionare3 from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: pozitionare3 from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    s.setVar("deschidere", form.getDeschidere(), Integer.class);
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not set the value of field: deschidere from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: deschidere from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    s.setVar("sensDeschidere", form.getSensDeschidere(), Integer.class);
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not set the value of field: sensDeschidere from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: sensDeschidere from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    s.setVar("pozitionareBalamale", form.getPozitionareBalamale(), Integer.class);
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not set the value of field: pozitionareBalamale from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: pozitionareBalamale from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    s.setVar("componenta", form.getComponenta(), Integer.class);
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not set the value of field: componenta from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: componenta from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    s.setVar("tipComponenta", form.getTipComponenta(), Integer.class);
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not set the value of field: tipComponenta from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: tipComponenta from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    s.setVar("tipGeam", form.getTipGeam(), Integer.class);
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not set the value of field: tipGeam from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: tipGeam from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    s.setVar("geamSimpluId", form.getGeamSimpluId(), Integer.class);
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not set the value of field: geamSimpluId from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: geamSimpluId from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    s.setVar("geamTermopanId", form.getGeamTermopanId(), Integer.class);
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not set the value of field: geamTermopanId from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: geamTermopanId from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    s.setVar("tipGrilaj", form.getTipGrilaj(), Integer.class);
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not set the value of field: tipGrilaj from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: tipGrilaj from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    s.setVar("grilajStasId", form.getGrilajStasId(), Integer.class);
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not set the value of field: grilajStasId from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: grilajStasId from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    s.setVar("valoareGrilajAtipic", form.getValoareGrilajAtipic(), java.math.BigDecimal.class);
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not set the value of field: valoareGrilajAtipic from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: valoareGrilajAtipic from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    s.setVar("sellPrice", form.getSellPrice(), java.math.BigDecimal.class);
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not set the value of field: sellPrice from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: sellPrice from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    s.setVar("entryPrice", form.getEntryPrice(), java.math.BigDecimal.class);
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not set the value of field: entryPrice from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: entryPrice from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    s.setVar("price1", form.getPrice1(), java.math.BigDecimal.class);
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not set the value of field: price1 from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: price1 from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    s.setVar("businessCategory", form.getBusinessCategory(), String.class);
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not set the value of field: businessCategory from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: businessCategory from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
     }
 
@@ -899,7 +927,8 @@ public abstract class FereastraBean
 	        r.addField("canat", (Integer)field);
 	    }
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not get the value of field: canat from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: canat from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    field = s.getVar("lf", Double.class);
@@ -909,7 +938,8 @@ public abstract class FereastraBean
 	        r.addField("lf", (Double)field);
 	    }
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not get the value of field: lf from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: lf from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    field = s.getVar("hf", Double.class);
@@ -919,7 +949,8 @@ public abstract class FereastraBean
 	        r.addField("hf", (Double)field);
 	    }
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not get the value of field: hf from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: hf from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    field = s.getVar("pozitionare1", String.class);
@@ -929,7 +960,8 @@ public abstract class FereastraBean
 	        r.addField("pozitionare1", (String)field);
 	    }
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not get the value of field: pozitionare1 from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: pozitionare1 from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    field = s.getVar("pozitionare2", String.class);
@@ -939,7 +971,8 @@ public abstract class FereastraBean
 	        r.addField("pozitionare2", (String)field);
 	    }
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not get the value of field: pozitionare2 from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: pozitionare2 from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    field = s.getVar("pozitionare3", String.class);
@@ -949,7 +982,8 @@ public abstract class FereastraBean
 	        r.addField("pozitionare3", (String)field);
 	    }
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not get the value of field: pozitionare3 from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: pozitionare3 from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    field = s.getVar("deschidere", Integer.class);
@@ -959,7 +993,8 @@ public abstract class FereastraBean
 	        r.addField("deschidere", (Integer)field);
 	    }
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not get the value of field: deschidere from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: deschidere from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    field = s.getVar("sensDeschidere", Integer.class);
@@ -969,7 +1004,8 @@ public abstract class FereastraBean
 	        r.addField("sensDeschidere", (Integer)field);
 	    }
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not get the value of field: sensDeschidere from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: sensDeschidere from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    field = s.getVar("pozitionareBalamale", Integer.class);
@@ -979,7 +1015,8 @@ public abstract class FereastraBean
 	        r.addField("pozitionareBalamale", (Integer)field);
 	    }
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not get the value of field: pozitionareBalamale from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: pozitionareBalamale from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    field = s.getVar("componenta", Integer.class);
@@ -989,7 +1026,8 @@ public abstract class FereastraBean
 	        r.addField("componenta", (Integer)field);
 	    }
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not get the value of field: componenta from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: componenta from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    field = s.getVar("tipComponenta", Integer.class);
@@ -999,7 +1037,8 @@ public abstract class FereastraBean
 	        r.addField("tipComponenta", (Integer)field);
 	    }
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not get the value of field: tipComponenta from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: tipComponenta from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    field = s.getVar("tipGeam", Integer.class);
@@ -1009,7 +1048,8 @@ public abstract class FereastraBean
 	        r.addField("tipGeam", (Integer)field);
 	    }
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not get the value of field: tipGeam from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: tipGeam from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    field = s.getVar("geamSimpluId", Integer.class);
@@ -1019,7 +1059,8 @@ public abstract class FereastraBean
 	        r.addField("geamSimpluId", (Integer)field);
 	    }
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not get the value of field: geamSimpluId from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: geamSimpluId from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    field = s.getVar("geamTermopanId", Integer.class);
@@ -1029,7 +1070,8 @@ public abstract class FereastraBean
 	        r.addField("geamTermopanId", (Integer)field);
 	    }
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not get the value of field: geamTermopanId from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: geamTermopanId from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    field = s.getVar("tipGrilaj", Integer.class);
@@ -1039,7 +1081,8 @@ public abstract class FereastraBean
 	        r.addField("tipGrilaj", (Integer)field);
 	    }
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not get the value of field: tipGrilaj from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: tipGrilaj from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    field = s.getVar("grilajStasId", Integer.class);
@@ -1049,7 +1092,8 @@ public abstract class FereastraBean
 	        r.addField("grilajStasId", (Integer)field);
 	    }
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not get the value of field: grilajStasId from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: grilajStasId from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    field = s.getVar("valoareGrilajAtipic", java.math.BigDecimal.class);
@@ -1059,7 +1103,8 @@ public abstract class FereastraBean
 	        r.addField("valoareGrilajAtipic", (java.math.BigDecimal)field);
 	    }
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not get the value of field: valoareGrilajAtipic from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: valoareGrilajAtipic from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    field = s.getVar("sellPrice", java.math.BigDecimal.class);
@@ -1069,7 +1114,8 @@ public abstract class FereastraBean
 	        r.addField("sellPrice", (java.math.BigDecimal)field);
 	    }
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not get the value of field: sellPrice from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: sellPrice from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    field = s.getVar("entryPrice", java.math.BigDecimal.class);
@@ -1079,7 +1125,8 @@ public abstract class FereastraBean
 	        r.addField("entryPrice", (java.math.BigDecimal)field);
 	    }
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not get the value of field: entryPrice from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: entryPrice from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    field = s.getVar("price1", java.math.BigDecimal.class);
@@ -1089,7 +1136,8 @@ public abstract class FereastraBean
 	        r.addField("price1", (java.math.BigDecimal)field);
 	    }
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not get the value of field: price1 from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: price1 from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    field = s.getVar("businessCategory", String.class);
@@ -1099,7 +1147,8 @@ public abstract class FereastraBean
 	        r.addField("businessCategory", (String)field);
 	    }
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not get the value of field: businessCategory from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: businessCategory from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
     }
 

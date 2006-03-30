@@ -454,44 +454,59 @@ public abstract class UsaStandardBean
      */
     protected void addFieldsToScript(Script s) {
 	try {
+            s.setVar("logger", logger, Logger.class);
+        } catch (ScriptErrorException e) {
+            logger.log(BasicLevel.ERROR, "Can not set the logger variable in the script" +
+                       e.getMessage());
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
 	    s.setVar("name", form.getName(), String.class);
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not set the value of field: name from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: name from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    s.setVar("code", form.getCode(), String.class);
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not set the value of field: code from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: code from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    s.setVar("usaId", form.getUsaId(), Integer.class);
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not set the value of field: usaId from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: usaId from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    s.setVar("broascaId", form.getBroascaId(), Integer.class);
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not set the value of field: broascaId from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: broascaId from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    s.setVar("cilindruId", form.getCilindruId(), Integer.class);
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not set the value of field: cilindruId from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: cilindruId from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    s.setVar("sildId", form.getSildId(), Integer.class);
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not set the value of field: sildId from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: sildId from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    s.setVar("yallaId", form.getYallaId(), Integer.class);
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not set the value of field: yallaId from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: yallaId from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    s.setVar("vizorId", form.getVizorId(), Integer.class);
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not set the value of field: vizorId from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: vizorId from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
     }
 
@@ -509,7 +524,8 @@ public abstract class UsaStandardBean
 	        r.addField("name", (String)field);
 	    }
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not get the value of field: name from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: name from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    field = s.getVar("code", String.class);
@@ -519,7 +535,8 @@ public abstract class UsaStandardBean
 	        r.addField("code", (String)field);
 	    }
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not get the value of field: code from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: code from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    field = s.getVar("usaId", Integer.class);
@@ -529,7 +546,8 @@ public abstract class UsaStandardBean
 	        r.addField("usaId", (Integer)field);
 	    }
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not get the value of field: usaId from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: usaId from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    field = s.getVar("broascaId", Integer.class);
@@ -539,7 +557,8 @@ public abstract class UsaStandardBean
 	        r.addField("broascaId", (Integer)field);
 	    }
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not get the value of field: broascaId from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: broascaId from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    field = s.getVar("cilindruId", Integer.class);
@@ -549,7 +568,8 @@ public abstract class UsaStandardBean
 	        r.addField("cilindruId", (Integer)field);
 	    }
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not get the value of field: cilindruId from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: cilindruId from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    field = s.getVar("sildId", Integer.class);
@@ -559,7 +579,8 @@ public abstract class UsaStandardBean
 	        r.addField("sildId", (Integer)field);
 	    }
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not get the value of field: sildId from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: sildId from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    field = s.getVar("yallaId", Integer.class);
@@ -569,7 +590,8 @@ public abstract class UsaStandardBean
 	        r.addField("yallaId", (Integer)field);
 	    }
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not get the value of field: yallaId from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: yallaId from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    field = s.getVar("vizorId", Integer.class);
@@ -579,7 +601,8 @@ public abstract class UsaStandardBean
 	        r.addField("vizorId", (Integer)field);
 	    }
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not get the value of field: vizorId from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: vizorId from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
     }
 

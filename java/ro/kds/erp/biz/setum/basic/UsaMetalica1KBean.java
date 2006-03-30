@@ -1104,174 +1104,215 @@ public abstract class UsaMetalica1KBean
      */
     protected void addFieldsToScript(Script s) {
 	try {
+            s.setVar("logger", logger, Logger.class);
+        } catch (ScriptErrorException e) {
+            logger.log(BasicLevel.ERROR, "Can not set the logger variable in the script" +
+                       e.getMessage());
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
 	    s.setVar("code", form.getCode(), String.class);
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not set the value of field: code from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: code from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    s.setVar("name", form.getName(), String.class);
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not set the value of field: name from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: name from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    s.setVar("description", form.getDescription(), String.class);
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not set the value of field: description from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: description from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    s.setVar("subclass", form.getSubclass(), String.class);
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not set the value of field: subclass from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: subclass from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    s.setVar("version", form.getVersion(), String.class);
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not set the value of field: version from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: version from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    s.setVar("material", form.getMaterial(), Integer.class);
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not set the value of field: material from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: material from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    s.setVar("lg", form.getLg(), Double.class);
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not set the value of field: lg from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: lg from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    s.setVar("hg", form.getHg(), Double.class);
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not set the value of field: hg from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: hg from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    s.setVar("le", form.getLe(), Double.class);
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not set the value of field: le from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: le from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    s.setVar("he", form.getHe(), Double.class);
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not set the value of field: he from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: he from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    s.setVar("lcorrection", form.getLcorrection(), Double.class);
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not set the value of field: lcorrection from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: lcorrection from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    s.setVar("hcorrection", form.getHcorrection(), Double.class);
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not set the value of field: hcorrection from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: hcorrection from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    s.setVar("intFoil", form.getIntFoil(), Integer.class);
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not set the value of field: intFoil from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: intFoil from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    s.setVar("ieFoil", form.getIeFoil(), Integer.class);
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not set the value of field: ieFoil from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: ieFoil from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    s.setVar("extFoil", form.getExtFoil(), Integer.class);
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not set the value of field: extFoil from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: extFoil from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    s.setVar("isolation", form.getIsolation(), Integer.class);
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not set the value of field: isolation from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: isolation from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    s.setVar("openingDir", form.getOpeningDir(), Integer.class);
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not set the value of field: openingDir from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: openingDir from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    s.setVar("openingSide", form.getOpeningSide(), Integer.class);
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not set the value of field: openingSide from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: openingSide from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    s.setVar("frameType", form.getFrameType(), Integer.class);
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not set the value of field: frameType from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: frameType from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    s.setVar("lFrame", form.getLFrame(), Double.class);
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not set the value of field: lFrame from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: lFrame from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    s.setVar("bFrame", form.getBFrame(), Double.class);
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not set the value of field: bFrame from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: bFrame from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    s.setVar("cFrame", form.getCFrame(), Double.class);
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not set the value of field: cFrame from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: cFrame from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    s.setVar("foilPosition", form.getFoilPosition(), Integer.class);
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not set the value of field: foilPosition from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: foilPosition from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    s.setVar("tresholdType", form.getTresholdType(), Integer.class);
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not set the value of field: tresholdType from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: tresholdType from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    s.setVar("lTreshold", form.getLTreshold(), Double.class);
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not set the value of field: lTreshold from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: lTreshold from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    s.setVar("hTreshold", form.getHTreshold(), Double.class);
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not set the value of field: hTreshold from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: hTreshold from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    s.setVar("cTreshold", form.getCTreshold(), Double.class);
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not set the value of field: cTreshold from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: cTreshold from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    s.setVar("tresholdSpace", form.getTresholdSpace(), Integer.class);
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not set the value of field: tresholdSpace from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: tresholdSpace from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    s.setVar("h1Treshold", form.getH1Treshold(), Double.class);
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not set the value of field: h1Treshold from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: h1Treshold from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    s.setVar("h2Treshold", form.getH2Treshold(), Double.class);
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not set the value of field: h2Treshold from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: h2Treshold from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    s.setVar("fereastraId", form.getFereastraId(), Integer.class);
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not set the value of field: fereastraId from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: fereastraId from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    s.setVar("fereastra", form.getFereastra(), String.class);
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not set the value of field: fereastra from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: fereastra from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    s.setVar("entryPrice", form.getEntryPrice(), java.math.BigDecimal.class);
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not set the value of field: entryPrice from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: entryPrice from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    s.setVar("sellPrice", form.getSellPrice(), java.math.BigDecimal.class);
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not set the value of field: sellPrice from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: sellPrice from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
     }
 
@@ -1289,7 +1330,8 @@ public abstract class UsaMetalica1KBean
 	        r.addField("code", (String)field);
 	    }
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not get the value of field: code from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: code from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    field = s.getVar("name", String.class);
@@ -1299,7 +1341,8 @@ public abstract class UsaMetalica1KBean
 	        r.addField("name", (String)field);
 	    }
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not get the value of field: name from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: name from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    field = s.getVar("description", String.class);
@@ -1309,7 +1352,8 @@ public abstract class UsaMetalica1KBean
 	        r.addField("description", (String)field);
 	    }
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not get the value of field: description from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: description from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    field = s.getVar("subclass", String.class);
@@ -1319,7 +1363,8 @@ public abstract class UsaMetalica1KBean
 	        r.addField("subclass", (String)field);
 	    }
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not get the value of field: subclass from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: subclass from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    field = s.getVar("version", String.class);
@@ -1329,7 +1374,8 @@ public abstract class UsaMetalica1KBean
 	        r.addField("version", (String)field);
 	    }
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not get the value of field: version from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: version from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    field = s.getVar("material", Integer.class);
@@ -1339,7 +1385,8 @@ public abstract class UsaMetalica1KBean
 	        r.addField("material", (Integer)field);
 	    }
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not get the value of field: material from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: material from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    field = s.getVar("lg", Double.class);
@@ -1349,7 +1396,8 @@ public abstract class UsaMetalica1KBean
 	        r.addField("lg", (Double)field);
 	    }
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not get the value of field: lg from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: lg from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    field = s.getVar("hg", Double.class);
@@ -1359,7 +1407,8 @@ public abstract class UsaMetalica1KBean
 	        r.addField("hg", (Double)field);
 	    }
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not get the value of field: hg from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: hg from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    field = s.getVar("le", Double.class);
@@ -1369,7 +1418,8 @@ public abstract class UsaMetalica1KBean
 	        r.addField("le", (Double)field);
 	    }
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not get the value of field: le from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: le from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    field = s.getVar("he", Double.class);
@@ -1379,7 +1429,8 @@ public abstract class UsaMetalica1KBean
 	        r.addField("he", (Double)field);
 	    }
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not get the value of field: he from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: he from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    field = s.getVar("lcorrection", Double.class);
@@ -1389,7 +1440,8 @@ public abstract class UsaMetalica1KBean
 	        r.addField("lcorrection", (Double)field);
 	    }
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not get the value of field: lcorrection from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: lcorrection from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    field = s.getVar("hcorrection", Double.class);
@@ -1399,7 +1451,8 @@ public abstract class UsaMetalica1KBean
 	        r.addField("hcorrection", (Double)field);
 	    }
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not get the value of field: hcorrection from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: hcorrection from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    field = s.getVar("intFoil", Integer.class);
@@ -1409,7 +1462,8 @@ public abstract class UsaMetalica1KBean
 	        r.addField("intFoil", (Integer)field);
 	    }
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not get the value of field: intFoil from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: intFoil from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    field = s.getVar("ieFoil", Integer.class);
@@ -1419,7 +1473,8 @@ public abstract class UsaMetalica1KBean
 	        r.addField("ieFoil", (Integer)field);
 	    }
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not get the value of field: ieFoil from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: ieFoil from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    field = s.getVar("extFoil", Integer.class);
@@ -1429,7 +1484,8 @@ public abstract class UsaMetalica1KBean
 	        r.addField("extFoil", (Integer)field);
 	    }
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not get the value of field: extFoil from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: extFoil from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    field = s.getVar("isolation", Integer.class);
@@ -1439,7 +1495,8 @@ public abstract class UsaMetalica1KBean
 	        r.addField("isolation", (Integer)field);
 	    }
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not get the value of field: isolation from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: isolation from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    field = s.getVar("openingDir", Integer.class);
@@ -1449,7 +1506,8 @@ public abstract class UsaMetalica1KBean
 	        r.addField("openingDir", (Integer)field);
 	    }
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not get the value of field: openingDir from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: openingDir from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    field = s.getVar("openingSide", Integer.class);
@@ -1459,7 +1517,8 @@ public abstract class UsaMetalica1KBean
 	        r.addField("openingSide", (Integer)field);
 	    }
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not get the value of field: openingSide from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: openingSide from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    field = s.getVar("frameType", Integer.class);
@@ -1469,7 +1528,8 @@ public abstract class UsaMetalica1KBean
 	        r.addField("frameType", (Integer)field);
 	    }
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not get the value of field: frameType from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: frameType from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    field = s.getVar("lFrame", Double.class);
@@ -1479,7 +1539,8 @@ public abstract class UsaMetalica1KBean
 	        r.addField("lFrame", (Double)field);
 	    }
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not get the value of field: lFrame from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: lFrame from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    field = s.getVar("bFrame", Double.class);
@@ -1489,7 +1550,8 @@ public abstract class UsaMetalica1KBean
 	        r.addField("bFrame", (Double)field);
 	    }
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not get the value of field: bFrame from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: bFrame from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    field = s.getVar("cFrame", Double.class);
@@ -1499,7 +1561,8 @@ public abstract class UsaMetalica1KBean
 	        r.addField("cFrame", (Double)field);
 	    }
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not get the value of field: cFrame from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: cFrame from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    field = s.getVar("foilPosition", Integer.class);
@@ -1509,7 +1572,8 @@ public abstract class UsaMetalica1KBean
 	        r.addField("foilPosition", (Integer)field);
 	    }
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not get the value of field: foilPosition from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: foilPosition from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    field = s.getVar("tresholdType", Integer.class);
@@ -1519,7 +1583,8 @@ public abstract class UsaMetalica1KBean
 	        r.addField("tresholdType", (Integer)field);
 	    }
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not get the value of field: tresholdType from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: tresholdType from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    field = s.getVar("lTreshold", Double.class);
@@ -1529,7 +1594,8 @@ public abstract class UsaMetalica1KBean
 	        r.addField("lTreshold", (Double)field);
 	    }
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not get the value of field: lTreshold from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: lTreshold from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    field = s.getVar("hTreshold", Double.class);
@@ -1539,7 +1605,8 @@ public abstract class UsaMetalica1KBean
 	        r.addField("hTreshold", (Double)field);
 	    }
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not get the value of field: hTreshold from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: hTreshold from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    field = s.getVar("cTreshold", Double.class);
@@ -1549,7 +1616,8 @@ public abstract class UsaMetalica1KBean
 	        r.addField("cTreshold", (Double)field);
 	    }
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not get the value of field: cTreshold from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: cTreshold from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    field = s.getVar("tresholdSpace", Integer.class);
@@ -1559,7 +1627,8 @@ public abstract class UsaMetalica1KBean
 	        r.addField("tresholdSpace", (Integer)field);
 	    }
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not get the value of field: tresholdSpace from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: tresholdSpace from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    field = s.getVar("h1Treshold", Double.class);
@@ -1569,7 +1638,8 @@ public abstract class UsaMetalica1KBean
 	        r.addField("h1Treshold", (Double)field);
 	    }
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not get the value of field: h1Treshold from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: h1Treshold from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    field = s.getVar("h2Treshold", Double.class);
@@ -1579,7 +1649,8 @@ public abstract class UsaMetalica1KBean
 	        r.addField("h2Treshold", (Double)field);
 	    }
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not get the value of field: h2Treshold from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: h2Treshold from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    field = s.getVar("fereastraId", Integer.class);
@@ -1589,7 +1660,8 @@ public abstract class UsaMetalica1KBean
 	        r.addField("fereastraId", (Integer)field);
 	    }
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not get the value of field: fereastraId from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: fereastraId from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    field = s.getVar("fereastra", String.class);
@@ -1599,7 +1671,8 @@ public abstract class UsaMetalica1KBean
 	        r.addField("fereastra", (String)field);
 	    }
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not get the value of field: fereastra from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: fereastra from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    field = s.getVar("entryPrice", java.math.BigDecimal.class);
@@ -1609,7 +1682,8 @@ public abstract class UsaMetalica1KBean
 	        r.addField("entryPrice", (java.math.BigDecimal)field);
 	    }
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not get the value of field: entryPrice from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: entryPrice from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    field = s.getVar("sellPrice", java.math.BigDecimal.class);
@@ -1619,7 +1693,8 @@ public abstract class UsaMetalica1KBean
 	        r.addField("sellPrice", (java.math.BigDecimal)field);
 	    }
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not get the value of field: sellPrice from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: sellPrice from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
     }
 

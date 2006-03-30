@@ -31,6 +31,7 @@ import org.objectweb.jonas.common.Log;
 import javax.jms.MessageListener;
 import ro.kds.erp.scripting.Script;
 import ro.kds.erp.scripting.ScriptErrorException;
+import ro.kds.erp.biz.Products;
 
 /**
  * Business logic for definition of UsaMetalica product. It obsoletes old implementation
@@ -41,7 +42,7 @@ import ro.kds.erp.scripting.ScriptErrorException;
  * Created: Fri Nov 18 15:34:24 2005
  *
  * @author <a href="mailto:Mihai Giurgeanu@CRIMIRA"></a>
- * @version $Id: UsaMetalica2KBeanImplementation.java,v 1.11 2006/03/29 18:45:18 mihai Exp $
+ * @version $Id: UsaMetalica2KBeanImplementation.java,v 1.12 2006/03/30 00:16:57 mihai Exp $
  */
 public class UsaMetalica2KBeanImplementation 
     extends ro.kds.erp.biz.setum.basic.UsaMetalica2KBean {
@@ -689,204 +690,378 @@ public class UsaMetalica2KBeanImplementation
      *
      * @param script a <code>Script</code> value
      */
-    protected void addFieldsToScript(final Script script) {
-	super.addFieldsToScript();
+    protected void addFieldsToScript(Script s) {
+	super.addFieldsToScript(s);
 
 	try {
 
 	    CategoryLocalHome ch = Products.getCategoryHome();
 	    ProductLocalHome ph = Products.getProductHome();
-	    AttributeLocalHome ah = Attributes.getAttributeHome();
+	    AttributeLocalHome ah = Products.getAttributeHome();
 
 	    // subclass
 	    try {
-		Category c = ch.findByPrimaryKey(new Integer(11001));
-		ProductLocal p = c.findProductByCode(form.getSubclass());		
+		logger.log(BasicLevel.DEBUG, "setting the subclassObj");
+		CategoryLocal c = ch.findByPrimaryKey(new Integer(11001));
+		ProductLocal p = c.getProductByCode(form.getSubclass());		
 		s.setVar("subclassObj", p, ProductLocal.class);
 	    } catch (ScriptErrorException e) {
+		logger.log(BasicLevel.ERROR, "ScriptErrorException " + e.getMessage());
+		logger.log(BasicLevel.DEBUG, e);
+	    } catch (FinderException e) {
+		logger.log(BasicLevel.ERROR, "Category 11001 not found");
+		logger.log(BasicLevel.DEBUG, e);
 	    }
 	    // version
 	    try {
-		Category c = ch.findByPrimaryKey(new Integer(11002));
-		ProductLocal p = c.findProductByCode(form.getVersion());		
+		logger.log(BasicLevel.DEBUG, "setting the versionObj");
+		CategoryLocal c = ch.findByPrimaryKey(new Integer(11002));
+		ProductLocal p = c.getProductByCode(form.getVersion());		
 		s.setVar("versionObj", p, ProductLocal.class);
 	    } catch (ScriptErrorException e) {
+		logger.log(BasicLevel.ERROR, "ScriptErrorException " + e.getMessage());
+		logger.log(BasicLevel.DEBUG, e);
+	    } catch (FinderException e) {
+		logger.log(BasicLevel.ERROR, "Category 11002 not found");
+		logger.log(BasicLevel.DEBUG, e);
 	    }
 	    // material
 	    try {
-		Category c = ch.findByPrimaryKey(new Integer(11003));
-		ProductLocal p = c.findProductByCode(form.getMaterial());		
+		logger.log(BasicLevel.DEBUG, "setting the materialObj");
+		CategoryLocal c = ch.findByPrimaryKey(new Integer(11003));
+		ProductLocal p = c.getProductByCode(form.getMaterial());		
 		s.setVar("materialObj", p, ProductLocal.class);
 	    } catch (ScriptErrorException e) {
+		logger.log(BasicLevel.ERROR, "ScriptErrorException " + e.getMessage());
+		logger.log(BasicLevel.DEBUG, e);
+	    } catch (FinderException e) {
+		logger.log(BasicLevel.ERROR, "Category 11003 not found");
+		logger.log(BasicLevel.DEBUG, e);
 	    }
 	    // intFoil
 	    try {
-		Category c = ch.findByPrimaryKey(new Integer(11006));
-		ProductLocal p = c.findProductByCode(form.getIntFoil());		
+		CategoryLocal c = ch.findByPrimaryKey(new Integer(11006));
+		ProductLocal p = c.getProductByCode(form.getIntFoil());		
 		s.setVar("intFoilObj", p, ProductLocal.class);
 	    } catch (ScriptErrorException e) {
+		logger.log(BasicLevel.ERROR, "ScriptErrorException " + e.getMessage());
+		logger.log(BasicLevel.DEBUG, e);
+	    } catch (FinderException e) {
+		logger.log(BasicLevel.ERROR, "Category 11006 not found");
+		logger.log(BasicLevel.DEBUG, e);
 	    }
 	    // extFoil
 	    try {
-		Category c = ch.findByPrimaryKey(new Integer(11006));
-		ProductLocal p = c.findProductByCode(form.getExtFoil());		
+		CategoryLocal c = ch.findByPrimaryKey(new Integer(11006));
+		ProductLocal p = c.getProductByCode(form.getExtFoil());		
 		s.setVar("extFoilObj", p, ProductLocal.class);
 	    } catch (ScriptErrorException e) {
+		logger.log(BasicLevel.ERROR, "ScriptErrorException " + e.getMessage());
+		logger.log(BasicLevel.DEBUG, e);
+	    } catch (FinderException e) {
+		logger.log(BasicLevel.ERROR, "Category 11006 not found");
+		logger.log(BasicLevel.DEBUG, e);
 	    }
 	    // intFoilSec
 	    try {
-		Category c = ch.findByPrimaryKey(new Integer(11006));
-		ProductLocal p = c.findProductByCode(form.getIntFoilSec());		
+		CategoryLocal c = ch.findByPrimaryKey(new Integer(11006));
+		ProductLocal p = c.getProductByCode(form.getIntFoilSec());		
 		s.setVar("intFoilSecObj", p, ProductLocal.class);
 	    } catch (ScriptErrorException e) {
+		logger.log(BasicLevel.ERROR, "ScriptErrorException " + e.getMessage());
+		logger.log(BasicLevel.DEBUG, e);
+	    } catch (FinderException e) {
+		logger.log(BasicLevel.ERROR, "Category 11006 not found");
+		logger.log(BasicLevel.DEBUG, e);
 	    }
 	    // intFoilSec
 	    try {
-		Category c = ch.findByPrimaryKey(new Integer(11006));
-		ProductLocal p = c.findProductByCode(form.getExtFoilSec());		
+		CategoryLocal c = ch.findByPrimaryKey(new Integer(11006));
+		ProductLocal p = c.getProductByCode(form.getExtFoilSec());		
 		s.setVar("extFoilSecObj", p, ProductLocal.class);
 	    } catch (ScriptErrorException e) {
+		logger.log(BasicLevel.ERROR, "ScriptErrorException " + e.getMessage());
+		logger.log(BasicLevel.DEBUG, e);
+	    } catch (FinderException e) {
+		logger.log(BasicLevel.ERROR, "Category 11006 not found");
+		logger.log(BasicLevel.DEBUG, e);
 	    }
 	    // isolation
 	    try {
-		Category c = ch.findByPrimaryKey(new Integer(11010));
-		ProductLocal p = c.findProductByCode(form.getIsolation());		
-		s.setVar("isolation", p, ProductLocal.class);
+		CategoryLocal c = ch.findByPrimaryKey(new Integer(11010));
+		ProductLocal p = c.getProductByCode(form.getIsolation());		
+		s.setVar("isolationObj", p, ProductLocal.class);
 	    } catch (ScriptErrorException e) {
+		logger.log(BasicLevel.ERROR, "ScriptErrorException " + e.getMessage());
+		logger.log(BasicLevel.DEBUG, e);
+	    } catch (FinderException e) {
+		logger.log(BasicLevel.ERROR, "Category 11010 not found");
+		logger.log(BasicLevel.DEBUG, e);
 	    }
 	    // openingDir
 	    try {
-		Category c = ch.findByPrimaryKey(new Integer(11004));
-		ProductLocal p = c.findProductByCode(form.getOpeningDir());		
+		CategoryLocal c = ch.findByPrimaryKey(new Integer(11004));
+		ProductLocal p = c.getProductByCode(form.getOpeningDir());		
 		s.setVar("openingDirObj", p, ProductLocal.class);
 	    } catch (ScriptErrorException e) {
+		logger.log(BasicLevel.ERROR, "ScriptErrorException " + e.getMessage());
+		logger.log(BasicLevel.DEBUG, e);
+	    } catch (FinderException e) {
+		logger.log(BasicLevel.ERROR, "Category 11004 not found");
+		logger.log(BasicLevel.DEBUG, e);
 	    }
 	    // openingSide
 	    try {
-		Category c = ch.findByPrimaryKey(new Integer(11005));
-		ProductLocal p = c.findProductByCode(form.getOpeningSide());		
+		CategoryLocal c = ch.findByPrimaryKey(new Integer(11005));
+		ProductLocal p = c.getProductByCode(form.getOpeningSide());		
 		s.setVar("openingSideObj", p, ProductLocal.class);
 	    } catch (ScriptErrorException e) {
+		logger.log(BasicLevel.ERROR, "ScriptErrorException " + e.getMessage());
+		logger.log(BasicLevel.DEBUG, e);
+	    } catch (FinderException e) {
+		logger.log(BasicLevel.ERROR, "Category 11005 not found");
+		logger.log(BasicLevel.DEBUG, e);
 	    }
 	    // foilPosition
 	    try {
-		Category c = ch.findByPrimaryKey(new Integer(11008));
-		ProductLocal p = c.findProductByCode(form.getFoilPosition());		
+		CategoryLocal c = ch.findByPrimaryKey(new Integer(11008));
+		ProductLocal p = c.getProductByCode(form.getFoilPosition());		
 		s.setVar("foilPositionObj", p, ProductLocal.class);
 	    } catch (ScriptErrorException e) {
+		logger.log(BasicLevel.ERROR, "ScriptErrorException " + e.getMessage());
+		logger.log(BasicLevel.DEBUG, e);
+	    } catch (FinderException e) {
+		logger.log(BasicLevel.ERROR, "Category 11008 not found");
+		logger.log(BasicLevel.DEBUG, e);
 	    }
 	    // benefBroascaTip
 	    try {
-		Category c = ch.findByPrimaryKey(new Integer(11020));
-		ProductLocal p = c.findProductByCode(form.getBenefBroascaTip());		
+		CategoryLocal c = ch.findByPrimaryKey(new Integer(11020));
+		ProductLocal p = c.getProductByCode(form.getBenefBroascaTip());		
 		s.setVar("benefBroascaTipObj", p, ProductLocal.class);
 	    } catch (ScriptErrorException e) {
+		logger.log(BasicLevel.ERROR, "ScriptErrorException " + e.getMessage());
+		logger.log(BasicLevel.DEBUG, e);
+	    } catch (FinderException e) {
+		logger.log(BasicLevel.ERROR, "Category 11020 not found");
+		logger.log(BasicLevel.DEBUG, e);
 	    }
 	    // benefCilindruTip
 	    try {
-		Category c = ch.findByPrimaryKey(new Integer(11021));
-		ProductLocal p = c.findProductByCode(form.getBenefCilindruTip());		
+		CategoryLocal c = ch.findByPrimaryKey(new Integer(11021));
+		ProductLocal p = c.getProductByCode(form.getBenefCilindruTip());		
 		s.setVar("benefCilindruTipObj", p, ProductLocal.class);
 	    } catch (ScriptErrorException e) {
+		logger.log(BasicLevel.ERROR, "ScriptErrorException " + e.getMessage());
+		logger.log(BasicLevel.DEBUG, e);
+	    } catch (FinderException e) {
+		logger.log(BasicLevel.ERROR, "Category 11021 not found");
+		logger.log(BasicLevel.DEBUG, e);
 	    }
 	    // benefSildTip
 	    try {
-		Category c = ch.findByPrimaryKey(new Integer(11023));
-		ProductLocal p = c.findProductByCode(form.getBenefSildTip());		
+		CategoryLocal c = ch.findByPrimaryKey(new Integer(11023));
+		ProductLocal p = c.getProductByCode(form.getBenefSildTip());		
 		s.setVar("benefSildTipObj", p, ProductLocal.class);
 	    } catch (ScriptErrorException e) {
+		logger.log(BasicLevel.ERROR, "ScriptErrorException " + e.getMessage());
+		logger.log(BasicLevel.DEBUG, e);
+	    } catch (FinderException e) {
+		logger.log(BasicLevel.ERROR, "Category 11023 not found");
+		logger.log(BasicLevel.DEBUG, e);
 	    }
 	    // benefYallaTip
 	    try {
-		Category c = ch.findByPrimaryKey(new Integer(11022));
-		ProductLocal p = c.findProductByCode(form.getBenefYallaTip());		
+		CategoryLocal c = ch.findByPrimaryKey(new Integer(11022));
+		ProductLocal p = c.getProductByCode(form.getBenefYallaTip());		
 		s.setVar("benefYallaTipObj", p, ProductLocal.class);
 	    } catch (ScriptErrorException e) {
+		logger.log(BasicLevel.ERROR, "ScriptErrorException " + e.getMessage());
+		logger.log(BasicLevel.DEBUG, e);
+	    } catch (FinderException e) {
+		logger.log(BasicLevel.ERROR, "Category 11022 not found");
+		logger.log(BasicLevel.DEBUG, e);
 	    }
 	    // benefBaraAntipanicaTip
 	    try {
-		Category c = ch.findByPrimaryKey(new Integer(11022));
-		ProductLocal p = c.findProductByCode(form.getBenefBaraAntipanicaTip());		
+		CategoryLocal c = ch.findByPrimaryKey(new Integer(11024));
+		ProductLocal p = c.getProductByCode(form.getBenefBaraAntipanicaTip());		
 		s.setVar("benefBaraAntipanicaTipObj", p, ProductLocal.class);
 	    } catch (ScriptErrorException e) {
+		logger.log(BasicLevel.ERROR, "ScriptErrorException " + e.getMessage());
+		logger.log(BasicLevel.DEBUG, e);
+	    } catch (FinderException e) {
+		logger.log(BasicLevel.ERROR, "Category 11024 not found");
+		logger.log(BasicLevel.DEBUG, e);
 	    }
 
 	    // broascaId
 	    try {
 		ProductLocal p = ph.findByPrimaryKey(form.getBroascaId());
 		s.setVar("broasca", p, ProductLocal.class);
+	    } catch (ScriptErrorException e) {
+		logger.log(BasicLevel.ERROR, "ScriptErrorException " + e.getMessage());
+		logger.log(BasicLevel.DEBUG, e);
+	    } catch (FinderException e) {
+		logger.log(BasicLevel.ERROR, "Product not found");
+		logger.log(BasicLevel.DEBUG, e);
 	    }
 	    // cilindruId
 	    try {
 		ProductLocal p = ph.findByPrimaryKey(form.getCilindruId());
 		s.setVar("cilindru", p, ProductLocal.class);
+	    } catch (ScriptErrorException e) {
+		logger.log(BasicLevel.ERROR, "ScriptErrorException " + e.getMessage());
+		logger.log(BasicLevel.DEBUG, e);
+	    } catch (FinderException e) {
+		logger.log(BasicLevel.ERROR, "Product not found");
+		logger.log(BasicLevel.DEBUG, e);
 	    }
 	    // copiatCheieId
 	    try {
 		ProductLocal p = ph.findByPrimaryKey(form.getCopiatCheieId());
 		s.setVar("copiatCheie", p, ProductLocal.class);
+	    } catch (ScriptErrorException e) {
+		logger.log(BasicLevel.ERROR, "ScriptErrorException " + e.getMessage());
+		logger.log(BasicLevel.DEBUG, e);
+	    } catch (FinderException e) {
+		logger.log(BasicLevel.ERROR, "Product not found");
+		logger.log(BasicLevel.DEBUG, e);
 	    }
 	    // sildId
 	    try {
 		ProductLocal p = ph.findByPrimaryKey(form.getSildId());
 		s.setVar("sild", p, ProductLocal.class);
+	    } catch (ScriptErrorException e) {
+		logger.log(BasicLevel.ERROR, "ScriptErrorException " + e.getMessage());
+		logger.log(BasicLevel.DEBUG, e);
+	    } catch (FinderException e) {
+		logger.log(BasicLevel.ERROR, "Product not found");
+		logger.log(BasicLevel.DEBUG, e);
 	    }
 	    // rozetaId
 	    try {
 		ProductLocal p = ph.findByPrimaryKey(form.getRozetaId());
 		s.setVar("rozeta", p, ProductLocal.class);
+	    } catch (ScriptErrorException e) {
+		logger.log(BasicLevel.ERROR, "ScriptErrorException " + e.getMessage());
+		logger.log(BasicLevel.DEBUG, e);
+	    } catch (FinderException e) {
+		logger.log(BasicLevel.ERROR, "Product not found");
+		logger.log(BasicLevel.DEBUG, e);
 	    }
 	    // manerId
 	    try {
 		ProductLocal p = ph.findByPrimaryKey(form.getManerId());
 		s.setVar("maner", p, ProductLocal.class);
+	    } catch (ScriptErrorException e) {
+		logger.log(BasicLevel.ERROR, "ScriptErrorException " + e.getMessage());
+		logger.log(BasicLevel.DEBUG, e);
+	    } catch (FinderException e) {
+		logger.log(BasicLevel.ERROR, "Product not found");
+		logger.log(BasicLevel.DEBUG, e);
 	    }
 	    // yalla1Id
 	    try {
 		ProductLocal p = ph.findByPrimaryKey(form.getYalla1Id());
 		s.setVar("yalla1", p, ProductLocal.class);
+	    } catch (ScriptErrorException e) {
+		logger.log(BasicLevel.ERROR, "ScriptErrorException " + e.getMessage());
+		logger.log(BasicLevel.DEBUG, e);
+	    } catch (FinderException e) {
+		logger.log(BasicLevel.ERROR, "Product not found");
+		logger.log(BasicLevel.DEBUG, e);
 	    }
 	    // yalla2Id
 	    try {
 		ProductLocal p = ph.findByPrimaryKey(form.getYalla2Id());
 		s.setVar("yalla2", p, ProductLocal.class);
+	    } catch (ScriptErrorException e) {
+		logger.log(BasicLevel.ERROR, "ScriptErrorException " + e.getMessage());
+		logger.log(BasicLevel.DEBUG, e);
+	    } catch (FinderException e) {
+		logger.log(BasicLevel.ERROR, "Product not found");
+		logger.log(BasicLevel.DEBUG, e);
 	    }
 	    // baraAntipanicaId
 	    try {
 		ProductLocal p = ph.findByPrimaryKey(form.getBaraAntipanicaId());
 		s.setVar("baraAntipanica", p, ProductLocal.class);
+	    } catch (ScriptErrorException e) {
+		logger.log(BasicLevel.ERROR, "ScriptErrorException " + e.getMessage());
+		logger.log(BasicLevel.DEBUG, e);
+	    } catch (FinderException e) {
+		logger.log(BasicLevel.ERROR, "Product not found");
+		logger.log(BasicLevel.DEBUG, e);
 	    }
 	    // selectorOrdineId
 	    try {
 		ProductLocal p = ph.findByPrimaryKey(form.getSelectorOrdineId());
 		s.setVar("selectorOrdine", p, ProductLocal.class);
+	    } catch (ScriptErrorException e) {
+		logger.log(BasicLevel.ERROR, "ScriptErrorException " + e.getMessage());
+		logger.log(BasicLevel.DEBUG, e);
+	    } catch (FinderException e) {
+		logger.log(BasicLevel.ERROR, "Product not found");
+		logger.log(BasicLevel.DEBUG, e);
 	    }
 	    // amortizorId
 	    try {
 		ProductLocal p = ph.findByPrimaryKey(form.getAmortizorId());
 		s.setVar("amortizor", p, ProductLocal.class);
+	    } catch (ScriptErrorException e) {
+		logger.log(BasicLevel.ERROR, "ScriptErrorException " + e.getMessage());
+		logger.log(BasicLevel.DEBUG, e);
+	    } catch (FinderException e) {
+		logger.log(BasicLevel.ERROR, "Product not found");
+		logger.log(BasicLevel.DEBUG, e);
 	    }
 	    // decupareSistemId
 	    try {
 		ProductLocal p = ph.findByPrimaryKey(form.getDecupareSistemId());
 		s.setVar("decupareSistem", p, ProductLocal.class);
+	    } catch (ScriptErrorException e) {
+		logger.log(BasicLevel.ERROR, "ScriptErrorException " + e.getMessage());
+		logger.log(BasicLevel.DEBUG, e);
+	    } catch (FinderException e) {
+		logger.log(BasicLevel.ERROR, "Product not found");
+		logger.log(BasicLevel.DEBUG, e);
 	    }
 	    // manerSemiclindruId
 	    try {
 		ProductLocal p = ph.findByPrimaryKey(form.getManerSemicilindruId());
 		s.setVar("manerSemicilindru", p, ProductLocal.class);
+	    } catch (ScriptErrorException e) {
+		logger.log(BasicLevel.ERROR, "ScriptErrorException " + e.getMessage());
+		logger.log(BasicLevel.DEBUG, e);
+	    } catch (FinderException e) {
+		logger.log(BasicLevel.ERROR, "Product not found");
+		logger.log(BasicLevel.DEBUG, e);
 	    }
 	    // alteSisteme1Id
 	    try {
 		ProductLocal p = ph.findByPrimaryKey(form.getAlteSisteme1Id());
 		s.setVar("alteSisteme1", p, ProductLocal.class);
+	    } catch (ScriptErrorException e) {
+		logger.log(BasicLevel.ERROR, "ScriptErrorException " + e.getMessage());
+		logger.log(BasicLevel.DEBUG, e);
+	    } catch (FinderException e) {
+		logger.log(BasicLevel.ERROR, "Product not found");
+		logger.log(BasicLevel.DEBUG, e);
 	    }
 	    // alteSisteme2Id
 	    try {
 		ProductLocal p = ph.findByPrimaryKey(form.getAlteSisteme2Id());
 		s.setVar("alteSisteme2", p, ProductLocal.class);
+	    } catch (ScriptErrorException e) {
+		logger.log(BasicLevel.ERROR, "ScriptErrorException " + e.getMessage());
+		logger.log(BasicLevel.DEBUG, e);
+	    } catch (FinderException e) {
+		logger.log(BasicLevel.ERROR, "Product not found");
+		logger.log(BasicLevel.DEBUG, e);
 	    }
 	} catch (NamingException e) {
+	    logger.log(BasicLevel.ERROR, e);
 	}
     }
 

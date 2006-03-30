@@ -64,4 +64,5 @@ public interface ProductLocal extends EJBLocalObject {
      * and builds a map of attributes name-attribute.
      */
     public Map getAttributesMap();
+
 }

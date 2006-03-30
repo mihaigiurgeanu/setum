@@ -71,11 +71,51 @@ public abstract class CategoryBean implements EntityBean {
     }
 
 
+    /**
+     * Retrieves the child product that has the given code. If there are
+     * more children with the same code, only one will be returned. It is
+     * not defined which of the child products with the given code will be
+     * returned, so it is a logical error to have more child products with
+     * the same code. This is not enforced in any way, and there will be
+     * no exception thrown if there are more children products with the
+     * same code.
+     *
+     * @returns a <code>ProductLocal</code> object that is in this category and
+     * has the specified code.
+     * @throws FinderException if no products could be found.
+     */
+    public ProductLocal getProductByCode(String code) throws FinderException {
+	logger.log(BasicLevel.DEBUG, "Looking for product with code " + code 
+		   + " in category " + getId() + "/" + getName());
+	Collection products = ejbSelectProductsByCode(getId(), code);
+	if(products.size() == 0) {
+	    throw new FinderException("Product with code " + code +
+				      " is not contained in the category " +
+				      this.getId() + "/" + this.getName());
+	}
+	return (ProductLocal)products.iterator().next();
+    }
+
+    /**
+     * Calls the <code>getProductByCode(String code)</code> converting
+     * the given <code>Integer code</code> to <code>String</code>.
+     *
+     * @param code is the code that will be converted to <code>String</code>
+     * @returns the <code>ProductLocal</code> object that has the code equal
+     * to <code>String</code> represantation of <code>code</code> parameter.
+     * @throws FinderException if no product is found.
+     */
+    public ProductLocal getProductByCode(Integer code) throws FinderException {
+	return getProductByCode(code.toString());
+    }
+
+
     // ------------------------------------------------------------------
     // Select methods
     //
     // ------------------------------------------------------------------
     public abstract int ejbSelectProductsCount(Integer productId) throws FinderException;
+    public abstract Collection ejbSelectProductsByCode(Integer categoryId, String code) throws FinderException;
 
     // ------------------------------------------------------------------
     // Standard call back methods

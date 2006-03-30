@@ -331,11 +331,19 @@ public abstract class ${.node.class.name}Bean
      * Add all the fields of the form as variables for the script
      */
     protected void addFieldsToScript(Script s) {
+	try {
+            s.setVar("logger", logger, Logger.class);
+        } catch (ScriptErrorException e) {
+            logger.log(BasicLevel.ERROR, "Can not set the logger variable in the script" +
+                       e.getMessage());
+            logger.log(BasicLevel.DEBUG, e);
+        }
 	[#list .node.class.field as field]
 	try {
 	    s.setVar("${field.name}", form.get${field.name?cap_first}(), ${field.type}.class);
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not set the value of field: ${field.name} from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: ${field.name} from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	[/#list]
     }
@@ -355,7 +363,8 @@ public abstract class ${.node.class.name}Bean
 	        r.addField("${field.name}", (${field.type})field);
 	    }
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not get the value of field: ${field.name} from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: ${field.name} from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	[/#list]
     }

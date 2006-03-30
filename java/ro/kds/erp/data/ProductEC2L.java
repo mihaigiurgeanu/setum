@@ -13,6 +13,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+import javax.ejb.FinderException;
 
 /**
  *
@@ -112,6 +113,12 @@ public  abstract class ProductEC2L implements javax.ejb.EntityBean {
 
 	return attribsMap;
     }
+
+
+    // ------------------------------------------------------------------
+    // Select methods
+    // ------------------------------------------------------------------
+    
 
 
     // ------------------------------------------------------------------

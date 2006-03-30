@@ -813,99 +813,125 @@ public abstract class GenericProductsBean
      */
     protected void addFieldsToScript(Script s) {
 	try {
+            s.setVar("logger", logger, Logger.class);
+        } catch (ScriptErrorException e) {
+            logger.log(BasicLevel.ERROR, "Can not set the logger variable in the script" +
+                       e.getMessage());
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
 	    s.setVar("categoryId", form.getCategoryId(), Integer.class);
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not set the value of field: categoryId from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: categoryId from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    s.setVar("categoryName", form.getCategoryName(), String.class);
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not set the value of field: categoryName from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: categoryName from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    s.setVar("productId", form.getProductId(), Integer.class);
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not set the value of field: productId from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: productId from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    s.setVar("productName", form.getProductName(), String.class);
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not set the value of field: productName from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: productName from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    s.setVar("productDescription", form.getProductDescription(), String.class);
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not set the value of field: productDescription from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: productDescription from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    s.setVar("productCode", form.getProductCode(), String.class);
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not set the value of field: productCode from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: productCode from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    s.setVar("productEntryPrice", form.getProductEntryPrice(), java.math.BigDecimal.class);
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not set the value of field: productEntryPrice from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: productEntryPrice from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    s.setVar("productSellPrice", form.getProductSellPrice(), java.math.BigDecimal.class);
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not set the value of field: productSellPrice from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: productSellPrice from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    s.setVar("productPrice1", form.getProductPrice1(), java.math.BigDecimal.class);
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not set the value of field: productPrice1 from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: productPrice1 from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    s.setVar("productPrice2", form.getProductPrice2(), java.math.BigDecimal.class);
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not set the value of field: productPrice2 from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: productPrice2 from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    s.setVar("productPrice3", form.getProductPrice3(), java.math.BigDecimal.class);
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not set the value of field: productPrice3 from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: productPrice3 from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    s.setVar("productPrice4", form.getProductPrice4(), java.math.BigDecimal.class);
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not set the value of field: productPrice4 from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: productPrice4 from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    s.setVar("productPrice5", form.getProductPrice5(), java.math.BigDecimal.class);
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not set the value of field: productPrice5 from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: productPrice5 from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    s.setVar("attrId", form.getAttrId(), Integer.class);
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not set the value of field: attrId from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: attrId from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    s.setVar("attrName", form.getAttrName(), String.class);
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not set the value of field: attrName from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: attrName from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    s.setVar("attrString", form.getAttrString(), String.class);
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not set the value of field: attrString from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: attrString from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    s.setVar("attrInt", form.getAttrInt(), Integer.class);
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not set the value of field: attrInt from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: attrInt from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    s.setVar("attrDecimal", form.getAttrDecimal(), java.math.BigDecimal.class);
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not set the value of field: attrDecimal from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: attrDecimal from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    s.setVar("attrDouble", form.getAttrDouble(), Double.class);
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not set the value of field: attrDouble from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: attrDouble from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
     }
 
@@ -923,7 +949,8 @@ public abstract class GenericProductsBean
 	        r.addField("categoryId", (Integer)field);
 	    }
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not get the value of field: categoryId from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: categoryId from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    field = s.getVar("categoryName", String.class);
@@ -933,7 +960,8 @@ public abstract class GenericProductsBean
 	        r.addField("categoryName", (String)field);
 	    }
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not get the value of field: categoryName from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: categoryName from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    field = s.getVar("productId", Integer.class);
@@ -943,7 +971,8 @@ public abstract class GenericProductsBean
 	        r.addField("productId", (Integer)field);
 	    }
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not get the value of field: productId from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: productId from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    field = s.getVar("productName", String.class);
@@ -953,7 +982,8 @@ public abstract class GenericProductsBean
 	        r.addField("productName", (String)field);
 	    }
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not get the value of field: productName from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: productName from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    field = s.getVar("productDescription", String.class);
@@ -963,7 +993,8 @@ public abstract class GenericProductsBean
 	        r.addField("productDescription", (String)field);
 	    }
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not get the value of field: productDescription from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: productDescription from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    field = s.getVar("productCode", String.class);
@@ -973,7 +1004,8 @@ public abstract class GenericProductsBean
 	        r.addField("productCode", (String)field);
 	    }
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not get the value of field: productCode from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: productCode from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    field = s.getVar("productEntryPrice", java.math.BigDecimal.class);
@@ -983,7 +1015,8 @@ public abstract class GenericProductsBean
 	        r.addField("productEntryPrice", (java.math.BigDecimal)field);
 	    }
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not get the value of field: productEntryPrice from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: productEntryPrice from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    field = s.getVar("productSellPrice", java.math.BigDecimal.class);
@@ -993,7 +1026,8 @@ public abstract class GenericProductsBean
 	        r.addField("productSellPrice", (java.math.BigDecimal)field);
 	    }
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not get the value of field: productSellPrice from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: productSellPrice from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    field = s.getVar("productPrice1", java.math.BigDecimal.class);
@@ -1003,7 +1037,8 @@ public abstract class GenericProductsBean
 	        r.addField("productPrice1", (java.math.BigDecimal)field);
 	    }
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not get the value of field: productPrice1 from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: productPrice1 from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    field = s.getVar("productPrice2", java.math.BigDecimal.class);
@@ -1013,7 +1048,8 @@ public abstract class GenericProductsBean
 	        r.addField("productPrice2", (java.math.BigDecimal)field);
 	    }
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not get the value of field: productPrice2 from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: productPrice2 from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    field = s.getVar("productPrice3", java.math.BigDecimal.class);
@@ -1023,7 +1059,8 @@ public abstract class GenericProductsBean
 	        r.addField("productPrice3", (java.math.BigDecimal)field);
 	    }
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not get the value of field: productPrice3 from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: productPrice3 from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    field = s.getVar("productPrice4", java.math.BigDecimal.class);
@@ -1033,7 +1070,8 @@ public abstract class GenericProductsBean
 	        r.addField("productPrice4", (java.math.BigDecimal)field);
 	    }
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not get the value of field: productPrice4 from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: productPrice4 from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    field = s.getVar("productPrice5", java.math.BigDecimal.class);
@@ -1043,7 +1081,8 @@ public abstract class GenericProductsBean
 	        r.addField("productPrice5", (java.math.BigDecimal)field);
 	    }
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not get the value of field: productPrice5 from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: productPrice5 from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    field = s.getVar("attrId", Integer.class);
@@ -1053,7 +1092,8 @@ public abstract class GenericProductsBean
 	        r.addField("attrId", (Integer)field);
 	    }
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not get the value of field: attrId from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: attrId from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    field = s.getVar("attrName", String.class);
@@ -1063,7 +1103,8 @@ public abstract class GenericProductsBean
 	        r.addField("attrName", (String)field);
 	    }
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not get the value of field: attrName from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: attrName from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    field = s.getVar("attrString", String.class);
@@ -1073,7 +1114,8 @@ public abstract class GenericProductsBean
 	        r.addField("attrString", (String)field);
 	    }
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not get the value of field: attrString from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: attrString from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    field = s.getVar("attrInt", Integer.class);
@@ -1083,7 +1125,8 @@ public abstract class GenericProductsBean
 	        r.addField("attrInt", (Integer)field);
 	    }
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not get the value of field: attrInt from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: attrInt from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    field = s.getVar("attrDecimal", java.math.BigDecimal.class);
@@ -1093,7 +1136,8 @@ public abstract class GenericProductsBean
 	        r.addField("attrDecimal", (java.math.BigDecimal)field);
 	    }
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not get the value of field: attrDecimal from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: attrDecimal from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    field = s.getVar("attrDouble", Double.class);
@@ -1103,7 +1147,8 @@ public abstract class GenericProductsBean
 	        r.addField("attrDouble", (Double)field);
 	    }
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not get the value of field: attrDouble from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: attrDouble from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
     }
 

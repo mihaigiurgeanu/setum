@@ -147,6 +147,21 @@
 	</query-method>
 	<ejb-ql>SELECT COUNT(p) FROM Category c, IN(c.products) p WHERE c.id = ?1</ejb-ql>
       </query>
+      <query>
+	<description>Gets all the products in this category with a specified code</description>
+	<query-method>
+	  <method-name>ejbSelectProductsByCode</method-name>
+	  <method-params>
+	    <method-param>java.lang.Integer</method-param>
+	    <method-param>java.lang.String</method-param>
+	  </method-params>
+	</query-method>
+	<ejb-ql>
+	  SELECT OBJECT(p) 
+	  FROM Category c, IN(c.products) p
+	  WHERE c.id = ?1 AND p.code = ?2
+	</ejb-ql>
+      </query>
     </entity>
 
     <entity>

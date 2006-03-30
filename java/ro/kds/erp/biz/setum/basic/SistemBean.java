@@ -529,59 +529,77 @@ public abstract class SistemBean
      */
     protected void addFieldsToScript(Script s) {
 	try {
+            s.setVar("logger", logger, Logger.class);
+        } catch (ScriptErrorException e) {
+            logger.log(BasicLevel.ERROR, "Can not set the logger variable in the script" +
+                       e.getMessage());
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
 	    s.setVar("name", form.getName(), String.class);
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not set the value of field: name from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: name from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    s.setVar("code", form.getCode(), String.class);
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not set the value of field: code from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: code from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    s.setVar("categoryId", form.getCategoryId(), Integer.class);
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not set the value of field: categoryId from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: categoryId from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    s.setVar("entryPrice", form.getEntryPrice(), java.math.BigDecimal.class);
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not set the value of field: entryPrice from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: entryPrice from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    s.setVar("sellPrice", form.getSellPrice(), java.math.BigDecimal.class);
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not set the value of field: sellPrice from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: sellPrice from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    s.setVar("partPrice", form.getPartPrice(), java.math.BigDecimal.class);
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not set the value of field: partPrice from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: partPrice from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    s.setVar("laborPrice", form.getLaborPrice(), java.math.BigDecimal.class);
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not set the value of field: laborPrice from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: laborPrice from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    s.setVar("relativeGainSP", form.getRelativeGainSP(), Double.class);
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not set the value of field: relativeGainSP from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: relativeGainSP from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    s.setVar("absoluteGainSP", form.getAbsoluteGainSP(), java.math.BigDecimal.class);
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not set the value of field: absoluteGainSP from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: absoluteGainSP from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    s.setVar("relativeGainPP", form.getRelativeGainPP(), Double.class);
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not set the value of field: relativeGainPP from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: relativeGainPP from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    s.setVar("absoluteGainPP", form.getAbsoluteGainPP(), java.math.BigDecimal.class);
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not set the value of field: absoluteGainPP from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: absoluteGainPP from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
     }
 
@@ -599,7 +617,8 @@ public abstract class SistemBean
 	        r.addField("name", (String)field);
 	    }
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not get the value of field: name from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: name from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    field = s.getVar("code", String.class);
@@ -609,7 +628,8 @@ public abstract class SistemBean
 	        r.addField("code", (String)field);
 	    }
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not get the value of field: code from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: code from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    field = s.getVar("categoryId", Integer.class);
@@ -619,7 +639,8 @@ public abstract class SistemBean
 	        r.addField("categoryId", (Integer)field);
 	    }
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not get the value of field: categoryId from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: categoryId from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    field = s.getVar("entryPrice", java.math.BigDecimal.class);
@@ -629,7 +650,8 @@ public abstract class SistemBean
 	        r.addField("entryPrice", (java.math.BigDecimal)field);
 	    }
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not get the value of field: entryPrice from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: entryPrice from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    field = s.getVar("sellPrice", java.math.BigDecimal.class);
@@ -639,7 +661,8 @@ public abstract class SistemBean
 	        r.addField("sellPrice", (java.math.BigDecimal)field);
 	    }
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not get the value of field: sellPrice from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: sellPrice from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    field = s.getVar("partPrice", java.math.BigDecimal.class);
@@ -649,7 +672,8 @@ public abstract class SistemBean
 	        r.addField("partPrice", (java.math.BigDecimal)field);
 	    }
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not get the value of field: partPrice from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: partPrice from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    field = s.getVar("laborPrice", java.math.BigDecimal.class);
@@ -659,7 +683,8 @@ public abstract class SistemBean
 	        r.addField("laborPrice", (java.math.BigDecimal)field);
 	    }
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not get the value of field: laborPrice from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: laborPrice from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    field = s.getVar("relativeGainSP", Double.class);
@@ -669,7 +694,8 @@ public abstract class SistemBean
 	        r.addField("relativeGainSP", (Double)field);
 	    }
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not get the value of field: relativeGainSP from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: relativeGainSP from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    field = s.getVar("absoluteGainSP", java.math.BigDecimal.class);
@@ -679,7 +705,8 @@ public abstract class SistemBean
 	        r.addField("absoluteGainSP", (java.math.BigDecimal)field);
 	    }
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not get the value of field: absoluteGainSP from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: absoluteGainSP from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    field = s.getVar("relativeGainPP", Double.class);
@@ -689,7 +716,8 @@ public abstract class SistemBean
 	        r.addField("relativeGainPP", (Double)field);
 	    }
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not get the value of field: relativeGainPP from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: relativeGainPP from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    field = s.getVar("absoluteGainPP", java.math.BigDecimal.class);
@@ -699,7 +727,8 @@ public abstract class SistemBean
 	        r.addField("absoluteGainPP", (java.math.BigDecimal)field);
 	    }
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not get the value of field: absoluteGainPP from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: absoluteGainPP from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
     }
 

@@ -804,114 +804,143 @@ public abstract class ClientsBean
      */
     protected void addFieldsToScript(Script s) {
 	try {
+            s.setVar("logger", logger, Logger.class);
+        } catch (ScriptErrorException e) {
+            logger.log(BasicLevel.ERROR, "Can not set the logger variable in the script" +
+                       e.getMessage());
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
 	    s.setVar("isCompany", form.getIsCompany(), Integer.class);
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not set the value of field: isCompany from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: isCompany from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    s.setVar("firstName", form.getFirstName(), String.class);
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not set the value of field: firstName from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: firstName from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    s.setVar("lastName", form.getLastName(), String.class);
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not set the value of field: lastName from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: lastName from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    s.setVar("companyName", form.getCompanyName(), String.class);
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not set the value of field: companyName from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: companyName from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    s.setVar("address", form.getAddress(), String.class);
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not set the value of field: address from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: address from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    s.setVar("postalCode", form.getPostalCode(), String.class);
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not set the value of field: postalCode from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: postalCode from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    s.setVar("city", form.getCity(), String.class);
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not set the value of field: city from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: city from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    s.setVar("countryCode", form.getCountryCode(), String.class);
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not set the value of field: countryCode from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: countryCode from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    s.setVar("companyCode", form.getCompanyCode(), String.class);
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not set the value of field: companyCode from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: companyCode from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    s.setVar("phone", form.getPhone(), String.class);
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not set the value of field: phone from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: phone from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    s.setVar("iban", form.getIban(), String.class);
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not set the value of field: iban from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: iban from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    s.setVar("bank", form.getBank(), String.class);
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not set the value of field: bank from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: bank from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    s.setVar("comment", form.getComment(), String.class);
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not set the value of field: comment from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: comment from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    s.setVar("contactFirstName", form.getContactFirstName(), String.class);
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not set the value of field: contactFirstName from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: contactFirstName from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    s.setVar("contactLastName", form.getContactLastName(), String.class);
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not set the value of field: contactLastName from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: contactLastName from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    s.setVar("contactDepartment", form.getContactDepartment(), String.class);
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not set the value of field: contactDepartment from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: contactDepartment from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    s.setVar("contactPhone", form.getContactPhone(), String.class);
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not set the value of field: contactPhone from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: contactPhone from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    s.setVar("contactMobile", form.getContactMobile(), String.class);
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not set the value of field: contactMobile from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: contactMobile from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    s.setVar("contactFax", form.getContactFax(), String.class);
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not set the value of field: contactFax from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: contactFax from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    s.setVar("contactEmail", form.getContactEmail(), String.class);
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not set the value of field: contactEmail from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: contactEmail from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    s.setVar("contactTitle", form.getContactTitle(), String.class);
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not set the value of field: contactTitle from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: contactTitle from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    s.setVar("contactComment", form.getContactComment(), String.class);
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not set the value of field: contactComment from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: contactComment from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
     }
 
@@ -929,7 +958,8 @@ public abstract class ClientsBean
 	        r.addField("isCompany", (Integer)field);
 	    }
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not get the value of field: isCompany from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: isCompany from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    field = s.getVar("firstName", String.class);
@@ -939,7 +969,8 @@ public abstract class ClientsBean
 	        r.addField("firstName", (String)field);
 	    }
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not get the value of field: firstName from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: firstName from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    field = s.getVar("lastName", String.class);
@@ -949,7 +980,8 @@ public abstract class ClientsBean
 	        r.addField("lastName", (String)field);
 	    }
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not get the value of field: lastName from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: lastName from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    field = s.getVar("companyName", String.class);
@@ -959,7 +991,8 @@ public abstract class ClientsBean
 	        r.addField("companyName", (String)field);
 	    }
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not get the value of field: companyName from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: companyName from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    field = s.getVar("address", String.class);
@@ -969,7 +1002,8 @@ public abstract class ClientsBean
 	        r.addField("address", (String)field);
 	    }
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not get the value of field: address from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: address from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    field = s.getVar("postalCode", String.class);
@@ -979,7 +1013,8 @@ public abstract class ClientsBean
 	        r.addField("postalCode", (String)field);
 	    }
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not get the value of field: postalCode from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: postalCode from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    field = s.getVar("city", String.class);
@@ -989,7 +1024,8 @@ public abstract class ClientsBean
 	        r.addField("city", (String)field);
 	    }
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not get the value of field: city from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: city from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    field = s.getVar("countryCode", String.class);
@@ -999,7 +1035,8 @@ public abstract class ClientsBean
 	        r.addField("countryCode", (String)field);
 	    }
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not get the value of field: countryCode from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: countryCode from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    field = s.getVar("companyCode", String.class);
@@ -1009,7 +1046,8 @@ public abstract class ClientsBean
 	        r.addField("companyCode", (String)field);
 	    }
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not get the value of field: companyCode from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: companyCode from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    field = s.getVar("phone", String.class);
@@ -1019,7 +1057,8 @@ public abstract class ClientsBean
 	        r.addField("phone", (String)field);
 	    }
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not get the value of field: phone from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: phone from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    field = s.getVar("iban", String.class);
@@ -1029,7 +1068,8 @@ public abstract class ClientsBean
 	        r.addField("iban", (String)field);
 	    }
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not get the value of field: iban from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: iban from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    field = s.getVar("bank", String.class);
@@ -1039,7 +1079,8 @@ public abstract class ClientsBean
 	        r.addField("bank", (String)field);
 	    }
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not get the value of field: bank from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: bank from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    field = s.getVar("comment", String.class);
@@ -1049,7 +1090,8 @@ public abstract class ClientsBean
 	        r.addField("comment", (String)field);
 	    }
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not get the value of field: comment from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: comment from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    field = s.getVar("contactFirstName", String.class);
@@ -1059,7 +1101,8 @@ public abstract class ClientsBean
 	        r.addField("contactFirstName", (String)field);
 	    }
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not get the value of field: contactFirstName from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: contactFirstName from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    field = s.getVar("contactLastName", String.class);
@@ -1069,7 +1112,8 @@ public abstract class ClientsBean
 	        r.addField("contactLastName", (String)field);
 	    }
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not get the value of field: contactLastName from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: contactLastName from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    field = s.getVar("contactDepartment", String.class);
@@ -1079,7 +1123,8 @@ public abstract class ClientsBean
 	        r.addField("contactDepartment", (String)field);
 	    }
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not get the value of field: contactDepartment from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: contactDepartment from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    field = s.getVar("contactPhone", String.class);
@@ -1089,7 +1134,8 @@ public abstract class ClientsBean
 	        r.addField("contactPhone", (String)field);
 	    }
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not get the value of field: contactPhone from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: contactPhone from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    field = s.getVar("contactMobile", String.class);
@@ -1099,7 +1145,8 @@ public abstract class ClientsBean
 	        r.addField("contactMobile", (String)field);
 	    }
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not get the value of field: contactMobile from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: contactMobile from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    field = s.getVar("contactFax", String.class);
@@ -1109,7 +1156,8 @@ public abstract class ClientsBean
 	        r.addField("contactFax", (String)field);
 	    }
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not get the value of field: contactFax from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: contactFax from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    field = s.getVar("contactEmail", String.class);
@@ -1119,7 +1167,8 @@ public abstract class ClientsBean
 	        r.addField("contactEmail", (String)field);
 	    }
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not get the value of field: contactEmail from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: contactEmail from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    field = s.getVar("contactTitle", String.class);
@@ -1129,7 +1178,8 @@ public abstract class ClientsBean
 	        r.addField("contactTitle", (String)field);
 	    }
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not get the value of field: contactTitle from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: contactTitle from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
 	try {
 	    field = s.getVar("contactComment", String.class);
@@ -1139,7 +1189,8 @@ public abstract class ClientsBean
 	        r.addField("contactComment", (String)field);
 	    }
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not get the value of field: contactComment from the script", e);
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: contactComment from the script");
+            logger.log(BasicLevel.DEBUG, e);
         }
     }
 
