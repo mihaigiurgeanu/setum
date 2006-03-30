@@ -317,7 +317,8 @@ public class StandardOfferBean extends ro.kds.erp.biz.setum.basic.StandardOfferB
      */
     public Collection lineItemsCollectionMap() {
 	Collection reportData;
-	
+	logger.log(BasicLevel.DEBUG, "Creating offer line items collection for report");
+
 	try {
 	    InitialContext ic = new InitialContext();
 	    Context env = (Context)ic.lookup("java:comp/env");
@@ -333,6 +334,9 @@ public class StandardOfferBean extends ro.kds.erp.biz.setum.basic.StandardOfferB
 		HashMap dataRow = new HashMap();
 		ProductLocal p = item.getProduct();
 		CategoryLocal cat = p.getCategory();
+
+		logger.log(BasicLevel.DEBUG, "Adding item " + p.getCode()
+			   + "/" + p.getName() + "/" + item.getPrice());
 		dataRow.put("name", cat.getName() + 
 			    " - " + p.getName());
 		dataRow.put("code", p.getCode());

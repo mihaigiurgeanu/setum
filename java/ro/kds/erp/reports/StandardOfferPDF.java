@@ -60,7 +60,8 @@ public class StandardOfferPDF extends HttpServlet {
 	try {
 	    StandardOffer offer = (StandardOffer)httpServletRequest
 		.getSession().getAttribute(SESSION_ATTR);
-	    
+	    log("SESSION_ATTR: " + SESSION_ATTR);
+	    log("StandardOffer: " + offer);
 	    Collection reportData = offer.lineItemsCollectionMap();
 	    JRDataSource ds = new JRMapCollectionDataSource(reportData);
 	    InputStream jasperFile = getServletContext().
