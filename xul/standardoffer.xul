@@ -27,7 +27,7 @@
     <command id="remove-line" oncommand="theForm.remove_item(crtItem()['id']);load_items();" />
 
 
-    <command id="onprint" oncommand="open('http://localhost:9000/setum/standardoffer.pdf', 'OfertaSisteme', '');" />
+    <command id="onprint" oncommand="open('http://setumserver:9000/setum/standardoffer.pdf', 'OfertaSisteme', '');" />
 
     <command id="onlaunch" oncommand="launch_offer()"/>
     <command id="ondiscontinue" oncommand="discontinue_offer()"/>
