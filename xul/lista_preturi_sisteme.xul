@@ -15,7 +15,7 @@
   <commandset>
     <command id="command-save" oncommand="save();" disabled="true" />
     <command id="command-add" oncommand="addnew();" />
-    <command id="onprint" oncommand="open('http://localhost:9000/reports/OfertaSisteme.pdf', 'OfertaSisteme', '');" />
+    <command id="onprint" oncommand="open('http://setumserver:9000/reports/OfertaSisteme.pdf', 'OfertaSisteme', '');" />
     <command id="onAdjustPrices" oncommand="adjustPricesDlg()" />
     <command id="onCalcPretMag" 
 	     oncommand="document.getElementById('pretmagsistem').value = document.getElementById('pretintsistem').value * 1.20;" />
