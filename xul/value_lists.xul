@@ -189,11 +189,11 @@
 	      <textbox id="productSellPrice"/>
 	    </row>
 	    <row>
-	      <label control="productPrice1" value="Pret 1:"/>
+	      <label control="productPrice1" value="Pret cu usa:"/>
 	      <textbox id="productPrice1"/>
 	    </row>
 	    <row>
-	      <label control="productPrice2" value="Pret 2:"/>
+	      <label control="productPrice2" value="Manopera:"/>
 	      <textbox id="productPrice2"/>
 	    </row>
 	    <row>
