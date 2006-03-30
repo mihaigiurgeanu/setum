@@ -53,7 +53,7 @@ public class DataInit extends HttpServlet {
 	    addSub(sistemeCat, 9997, "Cilindru");
 	    addSub(sistemeCat, 9996, "Sild");
 	    addSub(sistemeCat, 9995, "Yalla");
-	    createCategory(9994, "Vizor");
+	    addSub(sistemeCat, 9994, "Vizor");
 	    createCategory(9993, "Usa standard");
 	    createCategory(9992, "Usa simpla");
 	    createCategory(9990, "Usa metalica");
