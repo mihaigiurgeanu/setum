@@ -28,7 +28,7 @@ import java.util.Comparator;
 
 /**
  * Instantiates an JasperReports report.
- *
+ * DEPRECATED: use StandardOffer instead.
  *
  * Created: Mon Oct 10 06:12:57 2005
  *
