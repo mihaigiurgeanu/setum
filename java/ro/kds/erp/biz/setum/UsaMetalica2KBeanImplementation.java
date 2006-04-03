@@ -42,7 +42,7 @@ import ro.kds.erp.biz.Products;
  * Created: Fri Nov 18 15:34:24 2005
  *
  * @author <a href="mailto:Mihai Giurgeanu@CRIMIRA"></a>
- * @version $Id: UsaMetalica2KBeanImplementation.java,v 1.12 2006/03/30 00:16:57 mihai Exp $
+ * @version $Id: UsaMetalica2KBeanImplementation.java,v 1.13 2006/04/03 04:58:33 mihai Exp $
  */
 public class UsaMetalica2KBeanImplementation 
     extends ro.kds.erp.biz.setum.basic.UsaMetalica2KBean {
@@ -513,6 +513,9 @@ public class UsaMetalica2KBeanImplementation
 	r.addValueList("manerSemicilindruId",
 		       ValueLists.makeVLForCategoryRef("manerSemicilindruId"));
 
+
+
+	
 	try {
 	    InitialContext ic = new InitialContext();
 	    Map sistemeVL = ValueLists.makeVLForSubcategories

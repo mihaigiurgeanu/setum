@@ -467,10 +467,11 @@ public class StandardOfferBean extends ro.kds.erp.biz.setum.basic.StandardOfferB
 	ResponseBean r;
 	OfferLocal offer = getCurrentOffer();
 	if(offer == null) {
-	    r = new ResponseBean();
-	    r.setCode(4);
-	    r.setMessage("Nu este selectata nici o oferta");
-	} else {
+	    r = saveFormData();
+	    offer = getCurrentOffer();
+	}
+
+	if(offer != null) {	    
 	    try {
 		InitialContext ic = new InitialContext();
 		Context env = (Context) ic.lookup("java:comp/env");
@@ -487,13 +488,15 @@ public class StandardOfferBean extends ro.kds.erp.biz.setum.basic.StandardOfferB
 		    (env.lookup("ejb/ProductHome"), ProductLocalHome.class);
 		offerItem.setProduct(ph.findByPrimaryKey(form.getProductId()));
 		offerItem.setPrice(form.getPrice());
-		r = new ResponseBean();
+		r = validate();
 	    } catch (Exception e) {
-		r = new ResponseBean();
-		r.setCode(1);
-		r.setMessage("Eroare la operatia de salvare. Datele nu pot fi salvate");
+		r = ResponseBean.ERR_UNEXPECTED;
 		logger.log(BasicLevel.ERROR, e);
 	    }
+	    
+	} else {
+	    r = ResponseBean.ERR_NOTCURRENT;
+	    logger.log(BasicLevel.ERROR, "Can not locate the master record");
 	}
 	return r;
     }

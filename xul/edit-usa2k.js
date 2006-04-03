@@ -74,11 +74,11 @@ theForm.afterpost = function afterpost() {
 	switch(k.selectedItem.value) {
 	case "1":
 	    log("edit-usa2k: usa cu 1 canat");
-	    usa2Kstatus.setAttribute("disabled", "true");
+	    usa2Kstatus.setAttribute("readonly", "true");
 	    break;
 	case "2":
 	    log("edit-usa2k: usa cu 2 canate");
-	    usa2Kstatus.setAttribute("disabled", "false");
+	    usa2Kstatus.setAttribute("readonly", "false");
 	    break;
 	default:
 	    log("edit-usa2k: valoare nepermisa pentru k: " + k.selectedItem.value);

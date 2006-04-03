@@ -16,8 +16,8 @@
 
 
   <commandset>
-    <command id="command-save" oncommand="theForm.save(); load_usi();"/>
-    <command id="command-add" oncommand="theForm.addnew(); document.getElementById('maintab').selectedIndex=1;"/>
+    <command id="command-save" oncommand="save()"/>
+    <command id="command-add" oncommand="addnew()"/>
   </commandset>
 
 

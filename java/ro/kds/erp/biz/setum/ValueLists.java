@@ -152,7 +152,7 @@ public class ValueLists {
 		Collection products = subCat.getProducts();
 		for(Iterator i = products.iterator(); i.hasNext();) {
 		    ProductLocal p = (ProductLocal)i.next();
-		    vl.put(p.getName(), p.getId());
+		    vl.put(subCat.getName() + " - " + p.getName(), p.getId());
 		}
 	    }
 	} catch(Exception e) {

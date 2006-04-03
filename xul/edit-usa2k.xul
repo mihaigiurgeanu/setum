@@ -29,7 +29,7 @@ windows.arguments[0].select(productId)
   <script src="js/businessCategory.js"/>
 
   <broadcasterset>
-    <broadcaster id="usa2Kstatus" disabled="true"/>
+    <broadcaster id="usa2Kstatus" readonly="true"/>
   </broadcasterset>
 
   <commandset>
@@ -70,7 +70,7 @@ windows.arguments[0].select(productId)
       -->
     </tabs>
     <tabpanels>
-      <tabpanel orient="vertical" style="overflow:auto" maxheight="650">
+      <tabpanel orient="vertical" style="overflow:auto" maxheight="600">
 	<hbox>
 	  <groupbox orient="vertical">
 	    <caption label="Definire usa" />
@@ -97,12 +97,14 @@ windows.arguments[0].select(productId)
 		    <menupopup id="version-popup"/>
 		  </menulist>
 		</row>
+		<!--
 		<row>
 		  <label control="material" value="Material:"/>
 		  <menulist id="material" >
 		    <menupopup id="material-popup" />
 		  </menulist>
 		</row>
+		-->
 		<row>
 		  <label value="Dimensiuni gol:"/>
 		  <box>
@@ -130,7 +132,7 @@ windows.arguments[0].select(productId)
 			</row>
 			<row>
 			  <label control="lCurrent" value="L curenta =" observes="usa2Kstatus"/>
-			  <textbox id="lCurrent" observes="usa2Kstatus" />
+			  <textbox id="lCurrent" observes="usa2Kstatus"/>
 			</row>
 			<row>
 			  <radiogroup id="kType"  observes="usa2Kstatus">
@@ -178,7 +180,7 @@ windows.arguments[0].select(productId)
 	    <label value="Canat principal" class="newgroup"/>
 
 	    <hbox>
-	      <label>La interior placata cu tabla 2 randuri</label>
+	      <label>La interior tabla</label>
 	      <menulist id="intFoil" >
 		<menupopup id="intFoil-popup"/>
 	      </menulist>
@@ -188,7 +190,7 @@ windows.arguments[0].select(productId)
 	      <radiogroup id="ieFoil" >
 		<radio id="ieFoil.1" value="1" label="la fel ca la interior"/>
 		<hbox>
-		  <radio id="ieFoil.2" value="2" label="placata cu tabla 2 randuri"/>
+		  <radio id="ieFoil.2" value="2" label="tabla"/>
 		  <menulist id="extFoil" >
 		    <menupopup id="extFoil-popup"/>
 		  </menulist>
@@ -201,7 +203,7 @@ windows.arguments[0].select(productId)
 	    <label value="Canat secundar" observes="usa2Kstatus" class="newgroup"/>
 
 	    <hbox>
-	      <label observes="usa2Kstatus">La interior placata cu tabla 2 randuri</label>
+	      <label observes="usa2Kstatus">La interior tabla</label>
 	      <menulist id="intFoilSec" observes="usa2Kstatus" >
 		<menupopup id="intFoilSec-popup" observes="usa2Kstatus"/>
 	      </menulist>
@@ -214,7 +216,7 @@ windows.arguments[0].select(productId)
 		       observes="usa2Kstatus"/>
 		<hbox>
 		  <radio id="ieFoilSec.2" value="2" 
-			 label="placata cu tabla 2 randuri"
+			 label="tabla"
 			 observes="usa2Kstatus"/>
 		  <menulist id="extFoilSec" observes="usa2Kstatus" >
 		    <menupopup id="extFoilSec-popup"/>
@@ -224,12 +226,14 @@ windows.arguments[0].select(productId)
 	    </hbox>
 
 	    <separator class="newgroup"/>
+	    <!--
 	    <hbox>
 	      <label control="isolation" value="Izolatie:"/>
 	      <menulist id="isolation" >
 		<menupopup id="isolation-popup"/>
 	      </menulist>
 	    </hbox>
+	    -->
 	    <hbox>
 	      <label control="openingDir" value="Sens deschidere:"/>
 	      <vbox>
@@ -349,7 +353,7 @@ windows.arguments[0].select(productId)
 	  Optiuni 
       -->
 
-      <tabpanel orient="vertical">
+      <tabpanel orient="vertical" maxheight="600">
 	<hbox class="mytoolbar">
 	  <button label="Adauga optiune" popup="addnew-menu"/>
 	  <button label="Sterge optiune" command="delete-option" />
@@ -401,7 +405,7 @@ windows.arguments[0].select(productId)
 	   Sisteme
       -->
 
-      <tabpanel style="overflow:auto" maxheight="650">
+      <tabpanel style="overflow:auto" maxheight="600">
 	<vbox>
 	  <radiogroup id="montareSistem">
 	    <hbox>

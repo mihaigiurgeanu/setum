@@ -21,5 +21,22 @@ function load_usi() {
      });
 }
 
+
+function save() {
+    var req = theForm.get_request();
+    req.add("command", "saveFormData");
+    theForm.post_save_rquest(req);
+    load_usi();
+    document.getElementById('maintab').selectedIndex=0;
+}
+
+function addnew() {
+
+    var req = theForm.get_request();
+    req.add("command", "newFormData");
+    theForm.post_save_request(req);
+    document.getElementById('maintab').selectedIndex=1;
+}
+
 theForm.setupEventListeners();
 load_usi();

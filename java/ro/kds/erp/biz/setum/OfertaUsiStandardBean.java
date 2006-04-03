@@ -134,7 +134,7 @@ public class OfertaUsiStandardBean
     public final ResponseBean saveFormData() {
 	ResponseBean r = new ResponseBean();
 	try {
-	    InitialContext ic = new InitialContext();
+    	    InitialContext ic = new InitialContext();
 	    Context env = (Context)ic.lookup("java:comp/env");
 	    
 	    OfferLocalHome oh = (OfferLocalHome)PortableRemoteObject.
@@ -157,22 +157,20 @@ public class OfertaUsiStandardBean
 	    offer.setName(form.getName());
 	    offer.setDescription(form.getDescription());
 	    offer.setComment(form.getComment());
+
+	    r = validate();
 	} catch (NamingException e) {
 	    logger.log(BasicLevel.ERROR, "Naming exception was thrown. Is ejb/OfferHome defined?", e);
-	    r.setCode(1);
-	    r.setMessage("Eroare de configurare. Datele nu au fost salvate");
+	    r = ResponseBean.ERR_CONFIG_NAMING;
 	} catch (DataLayerException e) {
 	    logger.log(BasicLevel.ERROR, "DataLayerException caught. Is the name ejb/DocumentHome defined in the database?", e);
-	    r.setCode(1);
-	    r.setMessage("Eroare de configurare. Datele nu au fost salvate");
+	    r = ResponseBean.ERR_UNEXPECTED;
 	} catch (CreateException e) {
 	    logger.log(BasicLevel.ERROR, "Can not create the new offer object", e);
-	    r.setCode(3);
-	    r.setMessage("Eroare in baza de date la creerea unei noi inregistrari. Datele nu au fost salvate!");
+	    r = ResponseBean.ERR_CREATE;
 	} catch (FinderException e) {
 	    logger.log(BasicLevel.ERROR, "No such object for offer id = " + id, e);
-	    r.setCode(3);
-	    r.setMessage("Aceasta oferta nu a fost gasita in baza de date. Datele nu au putut fi salvate!");
+	    r = ResponseBean.ERR_NOTFOUND;
 	}
 	return r;
     }
@@ -417,17 +415,6 @@ public class OfertaUsiStandardBean
 	    ProductLocalHome ph = (ProductLocalHome)PortableRemoteObject.narrow
 		(env.lookup("ejb/ProductHome"), ProductLocalHome.class);
 	    ProductLocal p = ph.findByPrimaryKey(productId);
-	    CompositeProductLocal cp = p.getCompositeProduct();
-	    if(cp == null) {
-		throw new FinderException("There is no CompositeProduct associated with this product, for productId " + productId);
-	    }
-	    
-	    BigDecimal price = new BigDecimal(0);
-	    Collection parts = cp.getComponents();
-	    for(Iterator i = parts.iterator(); i.hasNext();) {
-		ProductLocal part = (ProductLocal)i.next();
-		price = price.add(part.getSellPrice());
-	    }
 
 	    OfferItemLocalHome oih = 
 		(OfferItemLocalHome)PortableRemoteObject.narrow
@@ -435,35 +422,39 @@ public class OfertaUsiStandardBean
 	    OfferLocalHome oh = (OfferLocalHome)PortableRemoteObject.narrow
 		(env.lookup("ejb/OfferHome"), OfferLocalHome.class);
 
-	    // id is the instance var containing the id of current offer
-	    OfferLocal o = oh.findByPrimaryKey(id);
-	    
 	    // OfferItem is the instance var containg the current item
 	    offerItem = oih.create();
 	    offerItem.setProduct(p);
-	    offerItem.setPrice(price);
-	    
-	    o.getItems().add(offerItem);
-	    r = new ResponseBean();
+	    offerItem.setPrice(p.getSellPrice());
+
+	    r = null; // to avoid compile time error
+
+	    // id is the instance var containing the id of current offer
+	    if(id == null) {
+		r = saveFormData();
+	    }
+	    if(id != null) {
+		OfferLocal o = oh.findByPrimaryKey(id);
+		o.getItems().add(offerItem);
+		r = ResponseBean.SUCCESS;
+	    }
 	} catch (NamingException e) {
 	    
-	    r = new ResponseBean();
-	    r.setCode(1);
-	    r.setMessage("Eroare de configurare a aplicatiei. Produsul nu poate fi adaugat la oferta");
-
+	    r = ResponseBean.ERR_CONFIG_NAMING;
 	    logger.log(BasicLevel.ERROR, "Error while adding product id " + 
 		       productId + 
 		       " to the current offer", e);
 	} catch (CreateException e) {
-	    r = new ResponseBean();
-	    r.setCode(3);
-	    r.setMessage("Eroare in baza de date. Produsul nu poate fi adaugat la oferta");
-
+	    r = ResponseBean.ERR_CREATE;
 	    logger.log(BasicLevel.ERROR, "Error while adding product id " + 
 		       productId + 
 		       " to the current offer", e);
+	} catch (FinderException e) {
+	    r = ResponseBean.ERR_NOTFOUND;
+	    logger.log(BasicLevel.ERROR, "The offer with id " + id 
+		       + " could not be found");
+	    logger.log(BasicLevel.INFO, e);
 	}
-
 	return r;
     }
 
