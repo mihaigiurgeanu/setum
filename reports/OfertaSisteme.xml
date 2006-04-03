@@ -25,6 +25,24 @@
 	<reportFont name="titlu" isDefault="false" fontName="Arial" size="14" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="CP1252" isPdfEmbedded="false"/>
 	<reportFont name="header" isDefault="false" fontName="Arial" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="CP1252" isPdfEmbedded="false"/>
 	<reportFont name="footer" isDefault="false" fontName="Arial" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="CP1252" isPdfEmbedded="false"/>
+	<parameter name="offerNo" isForPrompting="false" class="java.lang.String">
+		<parameterDescription><![CDATA[Numar oferta]]></parameterDescription>
+	</parameter>
+	<parameter name="docDate" isForPrompting="false" class="java.util.Date">
+		<parameterDescription><![CDATA[Data documentului]]></parameterDescription>
+	</parameter>
+	<parameter name="offerDateFrom" isForPrompting="false" class="java.util.Date">
+		<parameterDescription><![CDATA[Data de la care oferta este valabila]]></parameterDescription>
+	</parameter>
+	<parameter name="offerDateTo" isForPrompting="false" class="java.util.Date">
+		<parameterDescription><![CDATA[Data pana la care ofera este valabila]]></parameterDescription>
+	</parameter>
+	<parameter name="offerPeriod" isForPrompting="false" class="java.lang.Integer">
+		<parameterDescription><![CDATA[Numarul de zile de valabilitate a ofertei]]></parameterDescription>
+	</parameter>
+	<parameter name="offerName" isForPrompting="false" class="java.lang.String"/>
+	<parameter name="offerDescription" isForPrompting="false" class="java.lang.String"/>
+	<parameter name="offerComment" isForPrompting="false" class="java.lang.String"/>
 	<queryString><![CDATA[SELECT code, name, sellPrice FROM Product
   WHERE categoryId in (SELECT id FROM category WHERE parentId = 9999)]]></queryString>
 	<field name="code" class="java.lang.String"/>
@@ -127,17 +145,17 @@ Capital social: 14,10 miliarde lei]]></text>
 			</band>
 		</title>
 		<pageHeader>
-			<band height="64"  isSplitAllowed="true" >
-				<staticText>
+			<band height="124"  isSplitAllowed="true" >
+				<textField isStretchWithOverflow="false" pattern="" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
-						mode="Opaque"
+						mode="Transparent"
 						x="92"
 						y="8"
 						width="370"
 						height="50"
 						forecolor="#000000"
 						backcolor="#FFFFFF"
-						key="staticText"
+						key="textField-18"
 						stretchType="NoStretch"
 						positionType="FixRelativeToTop"
 						isPrintRepeatedValues="true"
@@ -146,10 +164,32 @@ Capital social: 14,10 miliarde lei]]></text>
 						isPrintWhenDetailOverflows="false"/>
 					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
 					<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" lineSpacing="Single">
-						<font reportFont="titlu" fontName="sansserif"/>
+						<font reportFont="titlu"/>
 					</textElement>
-				<text><![CDATA[LISTA DE PRETURI PENTRU FERONERIE ABUS]]></text>
-				</staticText>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{offerName}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						mode="Transparent"
+						x="1"
+						y="63"
+						width="550"
+						height="55"
+						forecolor="#000000"
+						backcolor="#FFFFFF"
+						key="textField-19"
+						stretchType="NoStretch"
+						positionType="FixRelativeToTop"
+						isPrintRepeatedValues="true"
+						isRemoveLineWhenBlank="false"
+						isPrintInFirstWholeBand="false"
+						isPrintWhenDetailOverflows="false"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" lineSpacing="Single">
+						<font reportFont="normal"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{offerDescription}]]></textFieldExpression>
+				</textField>
 			</band>
 		</pageHeader>
 		<columnHeader>
@@ -179,9 +219,9 @@ Capital social: 14,10 miliarde lei]]></text>
 				<staticText>
 					<reportElement
 						mode="Opaque"
-						x="57"
+						x="60"
 						y="0"
-						width="339"
+						width="336"
 						height="30"
 						forecolor="#000000"
 						backcolor="#FFFFFF"
@@ -203,7 +243,7 @@ Capital social: 14,10 miliarde lei]]></text>
 						mode="Opaque"
 						x="400"
 						y="0"
-						width="94"
+						width="98"
 						height="30"
 						forecolor="#000000"
 						backcolor="#FFFFFF"
@@ -277,7 +317,7 @@ Capital social: 14,10 miliarde lei]]></text>
 				<line direction="TopDown">
 					<reportElement
 						mode="Opaque"
-						x="494"
+						x="499"
 						y="0"
 						width="0"
 						height="30"
@@ -315,7 +355,7 @@ Capital social: 14,10 miliarde lei]]></text>
 						mode="Opaque"
 						x="30"
 						y="0"
-						width="464"
+						width="469"
 						height="0"
 						forecolor="#000000"
 						backcolor="#FFFFFF"
@@ -357,9 +397,9 @@ Capital social: 14,10 miliarde lei]]></text>
 				<textField isStretchWithOverflow="false" pattern="" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
 						mode="Opaque"
-						x="57"
+						x="60"
 						y="2"
-						width="339"
+						width="336"
 						height="20"
 						forecolor="#000000"
 						backcolor="#FFFFFF"
@@ -379,9 +419,9 @@ Capital social: 14,10 miliarde lei]]></text>
 				<textField isStretchWithOverflow="false" pattern="#,##0.00" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
 						mode="Opaque"
-						x="401"
+						x="400"
 						y="2"
-						width="92"
+						width="98"
 						height="20"
 						forecolor="#000000"
 						backcolor="#FFFFFF"
@@ -403,7 +443,7 @@ Capital social: 14,10 miliarde lei]]></text>
 						mode="Opaque"
 						x="30"
 						y="25"
-						width="464"
+						width="469"
 						height="0"
 						forecolor="#000000"
 						backcolor="#FFFFFF"
@@ -473,7 +513,7 @@ Capital social: 14,10 miliarde lei]]></text>
 				<line direction="TopDown">
 					<reportElement
 						mode="Opaque"
-						x="494"
+						x="499"
 						y="0"
 						width="0"
 						height="26"
@@ -495,12 +535,12 @@ Capital social: 14,10 miliarde lei]]></text>
 			</band>
 		</columnFooter>
 		<pageFooter>
-			<band height="41"  isSplitAllowed="true" >
+			<band height="49"  isSplitAllowed="true" >
 				<staticText>
 					<reportElement
 						mode="Opaque"
 						x="1"
-						y="18"
+						y="26"
 						width="553"
 						height="21"
 						forecolor="#000000"
@@ -522,7 +562,7 @@ Capital social: 14,10 miliarde lei]]></text>
 					<reportElement
 						mode="Opaque"
 						x="0"
-						y="19"
+						y="27"
 						width="555"
 						height="0"
 						forecolor="#000000"
@@ -540,7 +580,7 @@ Capital social: 14,10 miliarde lei]]></text>
 					<reportElement
 						mode="Transparent"
 						x="353"
-						y="1"
+						y="9"
 						width="100"
 						height="18"
 						forecolor="#000000"
@@ -562,7 +602,7 @@ Capital social: 14,10 miliarde lei]]></text>
 					<reportElement
 						mode="Transparent"
 						x="453"
-						y="1"
+						y="9"
 						width="100"
 						height="18"
 						forecolor="#000000"
@@ -583,7 +623,173 @@ Capital social: 14,10 miliarde lei]]></text>
 			</band>
 		</pageFooter>
 		<summary>
-			<band height="0"  isSplitAllowed="true" >
+			<band height="120"  isSplitAllowed="true" >
+				<textField isStretchWithOverflow="false" pattern="" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						mode="Transparent"
+						x="4"
+						y="75"
+						width="547"
+						height="36"
+						forecolor="#000000"
+						backcolor="#FFFFFF"
+						key="textField-20"
+						stretchType="NoStretch"
+						positionType="FixRelativeToTop"
+						isPrintRepeatedValues="true"
+						isRemoveLineWhenBlank="false"
+						isPrintInFirstWholeBand="false"
+						isPrintWhenDetailOverflows="false"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" lineSpacing="Single">
+						<font reportFont="normal"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{offerComment}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement
+						mode="Transparent"
+						x="4"
+						y="9"
+						width="121"
+						height="18"
+						forecolor="#000000"
+						backcolor="#FFFFFF"
+						key="staticText-1"
+						stretchType="NoStretch"
+						positionType="FixRelativeToTop"
+						isPrintRepeatedValues="true"
+						isRemoveLineWhenBlank="false"
+						isPrintInFirstWholeBand="false"
+						isPrintWhenDetailOverflows="false">
+							<printWhenExpression><![CDATA[new java.lang.Boolean($P{offerPeriod}.intValue() > 0)]]></printWhenExpression>
+						</reportElement>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" lineSpacing="Single">
+						<font fontName="Arial" pdfFontName="Helvetica" size="10" isBold="false" isItalic="false" isUnderline="false" isPdfEmbedded ="false" pdfEncoding ="Cp1252" isStrikeThrough="false" />
+					</textElement>
+				<text><![CDATA[Valabilitate oferta:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						mode="Transparent"
+						x="4"
+						y="28"
+						width="121"
+						height="18"
+						forecolor="#000000"
+						backcolor="#FFFFFF"
+						key="staticText-2"
+						stretchType="NoStretch"
+						positionType="FixRelativeToTop"
+						isPrintRepeatedValues="true"
+						isRemoveLineWhenBlank="false"
+						isPrintInFirstWholeBand="false"
+						isPrintWhenDetailOverflows="false">
+							<printWhenExpression><![CDATA[new java.lang.Boolean($P{offerPeriod}.intValue() > 0)]]></printWhenExpression>
+						</reportElement>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" lineSpacing="Single">
+						<font fontName="Arial" pdfFontName="Helvetica" size="10" isBold="false" isItalic="false" isUnderline="false" isPdfEmbedded ="false" pdfEncoding ="Cp1252" isStrikeThrough="false" />
+					</textElement>
+				<text><![CDATA[Incepand cu:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						mode="Transparent"
+						x="4"
+						y="48"
+						width="121"
+						height="18"
+						forecolor="#000000"
+						backcolor="#FFFFFF"
+						key="staticText-3"
+						stretchType="NoStretch"
+						positionType="FixRelativeToTop"
+						isPrintRepeatedValues="true"
+						isRemoveLineWhenBlank="false"
+						isPrintInFirstWholeBand="false"
+						isPrintWhenDetailOverflows="false">
+							<printWhenExpression><![CDATA[new java.lang.Boolean($P{offerPeriod}.intValue() > 0)]]></printWhenExpression>
+						</reportElement>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" lineSpacing="Single">
+						<font fontName="Arial" pdfFontName="Helvetica" size="10" isBold="false" isItalic="false" isUnderline="false" isPdfEmbedded ="false" pdfEncoding ="Cp1252" isStrikeThrough="false" />
+					</textElement>
+				<text><![CDATA[Pana:]]></text>
+				</staticText>
+				<textField isStretchWithOverflow="false" pattern="dd/MM/yyyy" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						mode="Transparent"
+						x="127"
+						y="28"
+						width="140"
+						height="18"
+						forecolor="#000000"
+						backcolor="#FFFFFF"
+						key="textField-21"
+						stretchType="NoStretch"
+						positionType="FixRelativeToTop"
+						isPrintRepeatedValues="true"
+						isRemoveLineWhenBlank="false"
+						isPrintInFirstWholeBand="false"
+						isPrintWhenDetailOverflows="false">
+							<printWhenExpression><![CDATA[new java.lang.Boolean($P{offerPeriod}.intValue() > 0)]]></printWhenExpression>
+						</reportElement>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" lineSpacing="Single">
+						<font fontName="Arial" pdfFontName="Helvetica" size="10" isBold="false" isItalic="false" isUnderline="false" isPdfEmbedded ="false" pdfEncoding ="Cp1252" isStrikeThrough="false" />
+					</textElement>
+				<textFieldExpression   class="java.util.Date"><![CDATA[$P{offerDateFrom}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="dd/MM/yyyy" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						mode="Transparent"
+						x="127"
+						y="48"
+						width="140"
+						height="18"
+						forecolor="#000000"
+						backcolor="#FFFFFF"
+						key="textField-22"
+						stretchType="NoStretch"
+						positionType="FixRelativeToTop"
+						isPrintRepeatedValues="true"
+						isRemoveLineWhenBlank="false"
+						isPrintInFirstWholeBand="false"
+						isPrintWhenDetailOverflows="false">
+							<printWhenExpression><![CDATA[new java.lang.Boolean($P{offerPeriod}.intValue() > 0)]]></printWhenExpression>
+						</reportElement>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" lineSpacing="Single">
+						<font fontName="Arial" pdfFontName="Helvetica" size="10" isBold="false" isItalic="false" isUnderline="false" isPdfEmbedded ="false" pdfEncoding ="Cp1252" isStrikeThrough="false" />
+					</textElement>
+				<textFieldExpression   class="java.util.Date"><![CDATA[$P{offerDateTo}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						mode="Transparent"
+						x="127"
+						y="9"
+						width="140"
+						height="18"
+						forecolor="#000000"
+						backcolor="#FFFFFF"
+						key="textField-23"
+						stretchType="NoStretch"
+						positionType="FixRelativeToTop"
+						isPrintRepeatedValues="true"
+						isRemoveLineWhenBlank="false"
+						isPrintInFirstWholeBand="false"
+						isPrintWhenDetailOverflows="false">
+							<printWhenExpression><![CDATA[new java.lang.Boolean($P{offerPeriod}.intValue() > 0)]]></printWhenExpression>
+						</reportElement>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" lineSpacing="Single">
+						<font fontName="Arial" pdfFontName="Helvetica" size="10" isBold="false" isItalic="false" isUnderline="false" isPdfEmbedded ="false" pdfEncoding ="Cp1252" isStrikeThrough="false" />
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{offerPeriod} + " zile"]]></textFieldExpression>
+				</textField>
 			</band>
 		</summary>
 </jasperReport>

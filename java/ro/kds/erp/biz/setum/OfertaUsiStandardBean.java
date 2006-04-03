@@ -671,8 +671,9 @@ public class OfertaUsiStandardBean
     /**
      * Creates a map of pairs field name -- field value to be used as
      * a parameters map for a report displaying the list of items.
+     * The fields are values of the main record.
      */
-    public Map fieldsMap() {
+    public Map getOfferFieldsMap() {
 	Map theMap = new HashMap();
 	theMap.put("offerNo", form.getNo());
 	theMap.put("docDate", form.getDocDate());

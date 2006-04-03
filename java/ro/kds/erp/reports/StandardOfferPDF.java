@@ -17,6 +17,7 @@ import java.util.Collection;
 import java.io.InputStream;
 import java.io.OutputStream;
 import javax.servlet.ServletException;
+import java.util.Map;
 
 
 /**
@@ -64,9 +65,11 @@ public class StandardOfferPDF extends HttpServlet {
 	    log("StandardOffer: " + offer);
 	    Collection reportData = offer.lineItemsCollectionMap();
 	    JRDataSource ds = new JRMapCollectionDataSource(reportData);
+	    Map reportParams = offer.getOfferFieldsMap();
+
 	    InputStream jasperFile = getServletContext().
 		getResourceAsStream("/WEB-INF/reports/OfertaSisteme.jasper");
-	    JasperPrint report = JasperFillManager.fillReport(jasperFile, new HashMap(), ds);
+	    JasperPrint report = JasperFillManager.fillReport(jasperFile, reportParams, ds);
 
 	    OutputStream outputStream = httpServletResponse.getOutputStream();
 	    httpServletResponse.setContentType("application/pdf");

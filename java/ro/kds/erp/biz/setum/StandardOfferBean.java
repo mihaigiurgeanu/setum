@@ -352,6 +352,27 @@ public class StandardOfferBean extends ro.kds.erp.biz.setum.basic.StandardOfferB
 	return new ArrayList(reportData);
     }
 
+
+    /**
+     * Creates a map of pairs field name -- field value to be used as
+     * a parameters map for a report displaying the list of items.
+     * The fields are values of the main record.
+     */
+    public Map getOfferFieldsMap() {
+	Map theMap = new HashMap();
+	theMap.put("offerNo", form.getNo());
+	theMap.put("docDate", form.getDocDate());
+	theMap.put("offerDateFrom", form.getDateFrom());
+	theMap.put("offerDateTo", form.getDateTo());
+	theMap.put("offerPeriod", form.getPeriod());
+	theMap.put("offerName", form.getName());
+	theMap.put("offerDescription", form.getDescription());
+	theMap.put("offerComment", form.getComment());
+
+	return theMap;
+    }
+
+
     public ResponseBean loadSubForm(Integer loadId) {
 	ResponseBean r;
 

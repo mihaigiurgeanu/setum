@@ -92,5 +92,6 @@
     <method>java.util.Collection lineItemsCollectionMap() throws RemoteException</method>
     <method>ResponseBean makeCurrent() throws RemoteException</method>
     <method>ResponseBean discontinue() throws RemoteException</method>
+    <method>java.util.Map getOfferFieldsMap() throws RemoteException</method>
   </remote>
 </class>

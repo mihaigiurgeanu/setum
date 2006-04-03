@@ -51,4 +51,5 @@ public interface StandardOffer extends EJBObject {
     public java.util.Collection lineItemsCollectionMap() throws RemoteException;
     public ResponseBean makeCurrent() throws RemoteException;
     public ResponseBean discontinue() throws RemoteException;
+    public java.util.Map getOfferFieldsMap() throws RemoteException;
 }

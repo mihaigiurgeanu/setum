@@ -21,6 +21,7 @@ import javax.ejb.FinderException;
 import java.math.BigDecimal;
 import ro.kds.erp.scripting.Script;
 import java.rmi.RemoteException;
+import ro.kds.erp.utils.NullHandler;
 
 /**
  * Gestiunea usilor standard. Usile standard sunt produse compuse obtinute
@@ -28,7 +29,7 @@ import java.rmi.RemoteException;
  * yalla, vizor.
  *
  *
- * $Id: UsaStandardBean.java,v 1.2 2006/01/09 10:15:49 mihai Exp $
+ * $Id: UsaStandardBean.java,v 1.3 2006/04/03 17:34:43 mihai Exp $
  *
  * @author <a href="mailto:Mihai Giurgeanu@CRIMIRA"></a>
  * @version 1.0
@@ -166,50 +167,60 @@ public class UsaStandardBean
 	    BigDecimal sellPrice = new BigDecimal(0);
 	    BigDecimal entryPrice = new BigDecimal(0);
 	    BigDecimal price1 = new BigDecimal(0);
+	    BigDecimal price2 = new BigDecimal(0);
 
-	    sellPrice = sellPrice.add(usa.getSellPrice());
-	    entryPrice = entryPrice.add(usa.getEntryPrice());
-	    price1 = price1.add(usa.getPrice1());
+	    NullHandler nz = new NullHandler(new BigDecimal(0));
+
+	    sellPrice = sellPrice.add((BigDecimal)nz.val(usa.getSellPrice()));
+	    entryPrice = entryPrice.add((BigDecimal)nz.val(usa.getEntryPrice()));
+	    price1 = price1.add((BigDecimal)nz.val(usa.getPrice1())); 
+	    price2 = price2.add((BigDecimal)nz.val(usa.getPrice2()));
 
 	    if(! form.getBroascaId().equals(new Integer(0))) {
 		ProductLocal part = ph.findByPrimaryKey(form.getBroascaId()); 
 		parts.add(part);
-		sellPrice = sellPrice.add(part.getSellPrice());
-		entryPrice = entryPrice.add(part.getEntryPrice());
-		price1 = price1.add(part.getPrice1());
+		sellPrice = sellPrice.add((BigDecimal)nz.val(part.getSellPrice()));
+		entryPrice = entryPrice.add((BigDecimal)nz.val(part.getEntryPrice()));
+		price1 = price1.add((BigDecimal)nz.val(part.getPrice1()));
+		price2 = price2.add((BigDecimal)nz.val(part.getPrice2()));
 	    }
 	    if(! form.getCilindruId().equals(new Integer(0))) {
 		ProductLocal part = ph.findByPrimaryKey(form.getCilindruId());
 		parts.add(part);
-		sellPrice = sellPrice.add(part.getSellPrice());
-		entryPrice = entryPrice.add(part.getEntryPrice());
-		price1 = price1.add(part.getPrice1());
+		sellPrice = sellPrice.add((BigDecimal)nz.val(part.getSellPrice()));
+		entryPrice = entryPrice.add((BigDecimal)nz.val(part.getEntryPrice()));
+		price1 = price1.add((BigDecimal)nz.val(part.getPrice1()));
+		price2 = price2.add((BigDecimal)nz.val(part.getPrice2()));
 	    }
 	    if(! form.getSildId().equals(new Integer(0))) {
 		ProductLocal part = ph.findByPrimaryKey(form.getSildId()); 
 		parts.add(part);
-		sellPrice = sellPrice.add(part.getSellPrice());
-		entryPrice = entryPrice.add(part.getEntryPrice());
-		price1 = price1.add(part.getPrice1());
+		sellPrice = sellPrice.add((BigDecimal)nz.val(part.getSellPrice()));
+		entryPrice = entryPrice.add((BigDecimal)nz.val(part.getEntryPrice()));
+		price1 = price1.add((BigDecimal)nz.val(part.getPrice1()));
+		price2 = price2.add((BigDecimal)nz.val(part.getPrice2()));
 	    }
 	    if(! form.getYallaId().equals(new Integer(0))) {
 		ProductLocal part = ph.findByPrimaryKey(form.getYallaId());
 		parts.add(part);
-		sellPrice = sellPrice.add(part.getSellPrice());
-		entryPrice = entryPrice.add(part.getEntryPrice());
-		price1 = price1.add(part.getPrice1());
+		sellPrice = sellPrice.add((BigDecimal)nz.val(part.getSellPrice()));
+		entryPrice = entryPrice.add((BigDecimal)nz.val(part.getEntryPrice()));
+		price1 = price1.add((BigDecimal)nz.val(part.getPrice1()));
+		price2 = price2.add((BigDecimal)nz.val(part.getPrice2()));
 	    }
 	    if(! form.getVizorId().equals(new Integer(0))) {
 		ProductLocal part = ph.findByPrimaryKey(form.getVizorId());
 		parts.add(part);
-		sellPrice = sellPrice.add(part.getSellPrice());
-		entryPrice = entryPrice.add(part.getEntryPrice());
-		price1 = price1.add(part.getPrice1());
+		sellPrice = sellPrice.add((BigDecimal)nz.val(part.getSellPrice()));
+		entryPrice = entryPrice.add((BigDecimal)nz.val(part.getEntryPrice()));
+		price1 = price1.add((BigDecimal)nz.val(part.getPrice1()));
+		price2 = price2.add((BigDecimal)nz.val(part.getPrice2()));
 	    }
 
-	    product.setSellPrice(sellPrice);
+	    product.setSellPrice(price1.add(price2));
 	    product.setEntryPrice(entryPrice);
-	    product.setPrice1(price1);
+	    product.setPrice1(new BigDecimal(0));
+	    product.setPrice2(new BigDecimal(0));
 
 	    r = new ResponseBean();
 	    

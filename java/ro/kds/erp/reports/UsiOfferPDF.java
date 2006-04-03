@@ -47,7 +47,7 @@ public class UsiOfferPDF extends HttpServlet {
 		.getSession().getAttribute(SESSION_ATTR);
 	    
 	    Collection reportData = offer.lineItemsCollectionMap();
-	    Map reportParams = offer.fieldsMap();
+	    Map reportParams = offer.getOfferFieldsMap();
 
 	    JRDataSource ds = new JRMapCollectionDataSource(reportData);
 	    InputStream jasperFile = getServletContext().
