@@ -5,10 +5,10 @@
 		 name="OfertaUsiStandard"
 		 columnCount="1"
 		 printOrder="Vertical"
-		 orientation="Portrait"
-		 pageWidth="595"
-		 pageHeight="842"
-		 columnWidth="535"
+		 orientation="Landscape"
+		 pageWidth="842"
+		 pageHeight="595"
+		 columnWidth="782"
 		 columnSpacing="0"
 		 leftMargin="30"
 		 rightMargin="30"
@@ -110,7 +110,7 @@
 						mode="Transparent"
 						x="97"
 						y="23"
-						width="78"
+						width="139"
 						height="27"
 						forecolor="#000000"
 						backcolor="#FFFFFF"
@@ -130,9 +130,9 @@
 				<staticText>
 					<reportElement
 						mode="Transparent"
-						x="175"
+						x="236"
 						y="23"
-						width="78"
+						width="139"
 						height="27"
 						forecolor="#000000"
 						backcolor="#FFFFFF"
@@ -152,9 +152,9 @@
 				<staticText>
 					<reportElement
 						mode="Transparent"
-						x="253"
+						x="375"
 						y="23"
-						width="78"
+						width="139"
 						height="27"
 						forecolor="#000000"
 						backcolor="#FFFFFF"
@@ -174,9 +174,9 @@
 				<staticText>
 					<reportElement
 						mode="Transparent"
-						x="331"
+						x="514"
 						y="23"
-						width="78"
+						width="139"
 						height="27"
 						forecolor="#000000"
 						backcolor="#FFFFFF"
@@ -196,7 +196,7 @@
 				<staticText>
 					<reportElement
 						mode="Transparent"
-						x="409"
+						x="653"
 						y="23"
 						width="126"
 						height="27"
@@ -220,7 +220,7 @@
 						mode="Transparent"
 						x="1"
 						y="2"
-						width="532"
+						width="780"
 						height="19"
 						forecolor="#000000"
 						backcolor="#FFFFFF"
@@ -281,7 +281,7 @@
 						mode="Opaque"
 						x="0"
 						y="6"
-						width="535"
+						width="780"
 						height="1"
 						forecolor="#000000"
 						backcolor="#FFFFFF"
@@ -299,7 +299,7 @@
 						mode="Opaque"
 						x="0"
 						y="117"
-						width="535"
+						width="780"
 						height="1"
 						forecolor="#000000"
 						backcolor="#FFFFFF"
@@ -334,7 +334,7 @@
 				<staticText>
 					<reportElement
 						mode="Opaque"
-						x="277"
+						x="522"
 						y="13"
 						width="258"
 						height="96"
@@ -365,7 +365,7 @@ Capital social: 14,10 miliarde lei]]></text>
 						mode="Transparent"
 						x="2"
 						y="140"
-						width="531"
+						width="780"
 						height="46"
 						forecolor="#000000"
 						backcolor="#FFFFFF"
@@ -385,9 +385,9 @@ Capital social: 14,10 miliarde lei]]></text>
 				<textField isStretchWithOverflow="false" pattern="" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
 						mode="Transparent"
-						x="3"
+						x="2"
 						y="188"
-						width="531"
+						width="780"
 						height="45"
 						forecolor="#000000"
 						backcolor="#FFFFFF"
@@ -434,7 +434,7 @@ Capital social: 14,10 miliarde lei]]></text>
 					</textElement>
 				<textFieldExpression   class="java.lang.Integer"><![CDATA[$V{nrcrt}]]></textFieldExpression>
 				</textField>
-				<textField isStretchWithOverflow="false" pattern="" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+				<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
 						mode="Transparent"
 						x="17"
@@ -461,7 +461,7 @@ Capital social: 14,10 miliarde lei]]></text>
 						mode="Transparent"
 						x="97"
 						y="0"
-						width="78"
+						width="139"
 						height="27"
 						forecolor="#000000"
 						backcolor="#FFFFFF"
@@ -481,9 +481,9 @@ Capital social: 14,10 miliarde lei]]></text>
 				<textField isStretchWithOverflow="false" pattern="" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
 						mode="Transparent"
-						x="175"
+						x="236"
 						y="0"
-						width="78"
+						width="139"
 						height="27"
 						forecolor="#000000"
 						backcolor="#FFFFFF"
@@ -503,9 +503,9 @@ Capital social: 14,10 miliarde lei]]></text>
 				<textField isStretchWithOverflow="false" pattern="" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
 						mode="Transparent"
-						x="253"
+						x="375"
 						y="0"
-						width="78"
+						width="139"
 						height="27"
 						forecolor="#000000"
 						backcolor="#FFFFFF"
@@ -525,9 +525,9 @@ Capital social: 14,10 miliarde lei]]></text>
 				<textField isStretchWithOverflow="false" pattern="" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
 						mode="Transparent"
-						x="331"
+						x="514"
 						y="0"
-						width="78"
+						width="139"
 						height="27"
 						forecolor="#000000"
 						backcolor="#FFFFFF"
@@ -547,7 +547,7 @@ Capital social: 14,10 miliarde lei]]></text>
 				<textField isStretchWithOverflow="false" pattern="#,##0.00" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
 						mode="Transparent"
-						x="409"
+						x="653"
 						y="0"
 						width="126"
 						height="27"
@@ -579,7 +579,7 @@ Capital social: 14,10 miliarde lei]]></text>
 						mode="Opaque"
 						x="0"
 						y="29"
-						width="535"
+						width="780"
 						height="21"
 						forecolor="#000000"
 						backcolor="#FFFFFF"
@@ -598,10 +598,10 @@ Capital social: 14,10 miliarde lei]]></text>
 				</staticText>
 				<textField isStretchWithOverflow="false" pattern="" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
-						mode="Opaque"
-						x="448"
-						y="9"
-						width="30"
+						mode="Transparent"
+						x="580"
+						y="10"
+						width="100"
 						height="18"
 						forecolor="#000000"
 						backcolor="#FFFFFF"
@@ -616,40 +616,18 @@ Capital social: 14,10 miliarde lei]]></text>
 					<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" lineSpacing="Single">
 						<font fontName="Arial" pdfFontName="Helvetica" size="10" isBold="false" isItalic="false" isUnderline="false" isPdfEmbedded ="false" pdfEncoding ="Cp1252" isStrikeThrough="false" />
 					</textElement>
-				<textFieldExpression   class="java.lang.Integer"><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+				<textFieldExpression   class="java.lang.String"><![CDATA["Pagina " + $V{PAGE_NUMBER} + " din "]]></textFieldExpression>
 				</textField>
-				<staticText>
+				<textField isStretchWithOverflow="false" pattern="" isBlankWhenNull="false" evaluationTime="Report" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
-						mode="Opaque"
-						x="396"
-						y="9"
-						width="50"
+						mode="Transparent"
+						x="680"
+						y="10"
+						width="100"
 						height="18"
 						forecolor="#000000"
 						backcolor="#FFFFFF"
-						key="staticText-1"
-						stretchType="NoStretch"
-						positionType="FixRelativeToTop"
-						isPrintRepeatedValues="true"
-						isRemoveLineWhenBlank="false"
-						isPrintInFirstWholeBand="false"
-						isPrintWhenDetailOverflows="false"/>
-					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
-					<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" lineSpacing="Single">
-						<font fontName="Arial" pdfFontName="Helvetica" size="10" isBold="false" isItalic="false" isUnderline="false" isPdfEmbedded ="false" pdfEncoding ="Cp1252" isStrikeThrough="false" />
-					</textElement>
-				<text><![CDATA[Pagina:]]></text>
-				</staticText>
-				<staticText>
-					<reportElement
-						mode="Transparent"
-						x="481"
-						y="9"
-						width="16"
-						height="16"
-						forecolor="#000000"
-						backcolor="#FFFFFF"
-						key="staticText-15"
+						key="textField"
 						stretchType="NoStretch"
 						positionType="FixRelativeToTop"
 						isPrintRepeatedValues="true"
@@ -660,29 +638,7 @@ Capital social: 14,10 miliarde lei]]></text>
 					<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" lineSpacing="Single">
 						<font fontName="Arial" pdfFontName="Helvetica" size="10" isBold="false" isItalic="false" isUnderline="false" isPdfEmbedded ="false" pdfEncoding ="Cp1252" isStrikeThrough="false" />
 					</textElement>
-				<text><![CDATA[din]]></text>
-				</staticText>
-				<textField isStretchWithOverflow="false" pattern="" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
-					<reportElement
-						mode="Opaque"
-						x="500"
-						y="9"
-						width="30"
-						height="18"
-						forecolor="#000000"
-						backcolor="#FFFFFF"
-						key="textField-16"
-						stretchType="NoStretch"
-						positionType="FixRelativeToTop"
-						isPrintRepeatedValues="true"
-						isRemoveLineWhenBlank="false"
-						isPrintInFirstWholeBand="false"
-						isPrintWhenDetailOverflows="false"/>
-					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
-					<textElement textAlignment="Right" verticalAlignment="Top" rotation="None" lineSpacing="Single">
-						<font fontName="Arial" pdfFontName="Helvetica" size="10" isBold="false" isItalic="false" isUnderline="false" isPdfEmbedded ="false" pdfEncoding ="Cp1252" isStrikeThrough="false" />
-					</textElement>
-				<textFieldExpression   class="java.lang.Integer"><![CDATA[$V{PAGE_COUNT}]]></textFieldExpression>
+				<textFieldExpression   class="java.lang.String"><![CDATA["" + $V{PAGE_NUMBER} + ""]]></textFieldExpression>
 				</textField>
 			</band>
 		</pageFooter>
