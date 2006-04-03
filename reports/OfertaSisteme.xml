@@ -218,7 +218,7 @@ Capital social: 14,10 miliarde lei]]></text>
 					<textElement textAlignment="Right" verticalAlignment="Middle" rotation="None" lineSpacing="Single">
 						<font reportFont="header"/>
 					</textElement>
-				<text><![CDATA[Pret cu TVA]]></text>
+				<text><![CDATA[Pret cu TVA (RON)]]></text>
 				</staticText>
 				<line direction="TopDown">
 					<reportElement
