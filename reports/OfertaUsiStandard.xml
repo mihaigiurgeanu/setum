@@ -255,15 +255,51 @@
 						isPrintWhenDetailOverflows="false"/>
 					<graphicElement stretchType="NoStretch" pen="Thin" fill="Solid" />
 				</line>
+				<line direction="TopDown">
+					<reportElement
+						mode="Opaque"
+						x="0"
+						y="52"
+						width="782"
+						height="0"
+						forecolor="#000000"
+						backcolor="#FFFFFF"
+						key="line-6"
+						stretchType="NoStretch"
+						positionType="FixRelativeToTop"
+						isPrintRepeatedValues="true"
+						isRemoveLineWhenBlank="false"
+						isPrintInFirstWholeBand="false"
+						isPrintWhenDetailOverflows="false"/>
+					<graphicElement stretchType="NoStretch" pen="Thin" fill="Solid" />
+				</line>
+				<line direction="TopDown">
+					<reportElement
+						mode="Opaque"
+						x="0"
+						y="21"
+						width="782"
+						height="0"
+						forecolor="#000000"
+						backcolor="#FFFFFF"
+						key="line-7"
+						stretchType="NoStretch"
+						positionType="FixRelativeToTop"
+						isPrintRepeatedValues="true"
+						isRemoveLineWhenBlank="false"
+						isPrintInFirstWholeBand="false"
+						isPrintWhenDetailOverflows="false"/>
+					<graphicElement stretchType="NoStretch" pen="Thin" fill="Solid" />
+				</line>
 			</band>
 			</groupHeader>
 			<groupFooter>
-			<band height="82"  isSplitAllowed="true" >
+			<band height="91"  isSplitAllowed="true" >
 				<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
 						mode="Transparent"
 						x="1"
-						y="64"
+						y="72"
 						width="780"
 						height="16"
 						forecolor="#000000"
@@ -285,7 +321,7 @@
 					<reportElement
 						mode="Transparent"
 						x="2"
-						y="4"
+						y="12"
 						width="121"
 						height="18"
 						forecolor="#000000"
@@ -309,7 +345,7 @@
 					<reportElement
 						mode="Transparent"
 						x="2"
-						y="23"
+						y="31"
 						width="121"
 						height="18"
 						forecolor="#000000"
@@ -333,7 +369,7 @@
 					<reportElement
 						mode="Transparent"
 						x="2"
-						y="43"
+						y="51"
 						width="121"
 						height="18"
 						forecolor="#000000"
@@ -357,7 +393,7 @@
 					<reportElement
 						mode="Transparent"
 						x="125"
-						y="23"
+						y="31"
 						width="140"
 						height="18"
 						forecolor="#000000"
@@ -381,7 +417,7 @@
 					<reportElement
 						mode="Transparent"
 						x="125"
-						y="43"
+						y="51"
 						width="140"
 						height="18"
 						forecolor="#000000"
@@ -405,7 +441,7 @@
 					<reportElement
 						mode="Transparent"
 						x="125"
-						y="4"
+						y="12"
 						width="140"
 						height="18"
 						forecolor="#000000"
@@ -750,7 +786,7 @@ Capital social: 14,10 miliarde lei]]></text>
 					<reportElement
 						mode="Opaque"
 						x="0"
-						y="1"
+						y="0"
 						width="782"
 						height="0"
 						forecolor="#000000"
