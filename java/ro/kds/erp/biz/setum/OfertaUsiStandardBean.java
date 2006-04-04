@@ -336,8 +336,6 @@ public class OfertaUsiStandardBean
 	    if(p != null) {
 		CompositeProductLocal cp = p.getCompositeProduct();
 		Collection parts = cp.getComponents();
-		BigDecimal entryPrice = new BigDecimal(0);
-		BigDecimal sellPrice = new BigDecimal(0);
 		for(Iterator i = parts.iterator(); i.hasNext();) {
 		    ProductLocal part = (ProductLocal)i.next();
 		    Integer catid = part.getCategory().getId();
@@ -358,11 +356,9 @@ public class OfertaUsiStandardBean
 				   " has an unknown component type " 
 				   + part.getCategory().getName());
 		    }
-		    sellPrice = sellPrice.add(part.getSellPrice());
-		    entryPrice = entryPrice.add(part.getEntryPrice());
 		}
-		form.setEntryPrice(entryPrice);
-		form.setSellPrice(sellPrice);
+		form.setEntryPrice(p.getEntryPrice());
+		form.setSellPrice(p.getSellPrice());
 		form.setProductCategory(p.getCategory().getName());
 		form.setProductCode(p.getCode());
 		form.setProductName(p.getName());
