@@ -57,12 +57,16 @@
 			</band>
 		</background>
 		<title>
-			<band height="113"  isSplitAllowed="true" >
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</title>
+		<pageHeader>
+			<band height="172"  isSplitAllowed="true" >
 				<staticText>
 					<reportElement
 						mode="Opaque"
 						x="296"
-						y="4"
+						y="6"
 						width="258"
 						height="96"
 						forecolor="#000000"
@@ -91,7 +95,7 @@ Capital social: 14,10 miliarde lei]]></text>
 					<reportElement
 						mode="Opaque"
 						x="0"
-						y="105"
+						y="107"
 						width="555"
 						height="0"
 						forecolor="#000000"
@@ -109,7 +113,7 @@ Capital social: 14,10 miliarde lei]]></text>
 					<reportElement
 						mode="Opaque"
 						x="0"
-						y="5"
+						y="7"
 						width="255"
 						height="96"
 						forecolor="#000000"
@@ -128,7 +132,7 @@ Capital social: 14,10 miliarde lei]]></text>
 					<reportElement
 						mode="Opaque"
 						x="0"
-						y="2"
+						y="4"
 						width="555"
 						height="0"
 						forecolor="#000000"
@@ -142,17 +146,13 @@ Capital social: 14,10 miliarde lei]]></text>
 						isPrintWhenDetailOverflows="false"/>
 					<graphicElement stretchType="NoStretch" pen="2Point" fill="Solid" />
 				</line>
-			</band>
-		</title>
-		<pageHeader>
-			<band height="124"  isSplitAllowed="true" >
 				<textField isStretchWithOverflow="false" pattern="" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
 						mode="Transparent"
 						x="92"
-						y="8"
+						y="112"
 						width="370"
-						height="50"
+						height="36"
 						forecolor="#000000"
 						backcolor="#FFFFFF"
 						key="textField-18"
@@ -168,13 +168,13 @@ Capital social: 14,10 miliarde lei]]></text>
 					</textElement>
 				<textFieldExpression   class="java.lang.String"><![CDATA[$P{offerName}]]></textFieldExpression>
 				</textField>
-				<textField isStretchWithOverflow="false" pattern="" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+				<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
 						mode="Transparent"
 						x="1"
-						y="63"
+						y="153"
 						width="550"
-						height="55"
+						height="16"
 						forecolor="#000000"
 						backcolor="#FFFFFF"
 						key="textField-19"
@@ -212,7 +212,7 @@ Capital social: 14,10 miliarde lei]]></text>
 						isPrintWhenDetailOverflows="false"/>
 					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
 					<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" lineSpacing="Single">
-						<font reportFont="header"/>
+						<font reportFont="header" isBold="false" isItalic="true"/>
 					</textElement>
 				<text><![CDATA[Nr. Crt.]]></text>
 				</staticText>
@@ -234,7 +234,7 @@ Capital social: 14,10 miliarde lei]]></text>
 						isPrintWhenDetailOverflows="false"/>
 					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
 					<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" lineSpacing="Single">
-						<font reportFont="header"/>
+						<font reportFont="header" isBold="false" isItalic="true"/>
 					</textElement>
 				<text><![CDATA[Denumire produs]]></text>
 				</staticText>
@@ -256,100 +256,10 @@ Capital social: 14,10 miliarde lei]]></text>
 						isPrintWhenDetailOverflows="false"/>
 					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
 					<textElement textAlignment="Right" verticalAlignment="Middle" rotation="None" lineSpacing="Single">
-						<font reportFont="header"/>
+						<font reportFont="header" isBold="false" isItalic="true"/>
 					</textElement>
 				<text><![CDATA[Pret cu TVA (RON)]]></text>
 				</staticText>
-				<line direction="TopDown">
-					<reportElement
-						mode="Opaque"
-						x="30"
-						y="29"
-						width="464"
-						height="0"
-						forecolor="#000000"
-						backcolor="#FFFFFF"
-						key="line"
-						stretchType="NoStretch"
-						positionType="FixRelativeToTop"
-						isPrintRepeatedValues="true"
-						isRemoveLineWhenBlank="false"
-						isPrintInFirstWholeBand="false"
-						isPrintWhenDetailOverflows="false"/>
-					<graphicElement stretchType="NoStretch" pen="Thin" fill="Solid" />
-				</line>
-				<line direction="TopDown">
-					<reportElement
-						mode="Opaque"
-						x="56"
-						y="0"
-						width="0"
-						height="30"
-						forecolor="#000000"
-						backcolor="#FFFFFF"
-						key="line-3"
-						stretchType="NoStretch"
-						positionType="FixRelativeToTop"
-						isPrintRepeatedValues="true"
-						isRemoveLineWhenBlank="false"
-						isPrintInFirstWholeBand="false"
-						isPrintWhenDetailOverflows="false"/>
-					<graphicElement stretchType="NoStretch" pen="Thin" fill="Solid" />
-				</line>
-				<line direction="TopDown">
-					<reportElement
-						mode="Opaque"
-						x="399"
-						y="0"
-						width="0"
-						height="30"
-						forecolor="#000000"
-						backcolor="#FFFFFF"
-						key="line-4"
-						stretchType="NoStretch"
-						positionType="FixRelativeToTop"
-						isPrintRepeatedValues="true"
-						isRemoveLineWhenBlank="false"
-						isPrintInFirstWholeBand="false"
-						isPrintWhenDetailOverflows="false"/>
-					<graphicElement stretchType="NoStretch" pen="Thin" fill="Solid" />
-				</line>
-				<line direction="TopDown">
-					<reportElement
-						mode="Opaque"
-						x="499"
-						y="0"
-						width="0"
-						height="30"
-						forecolor="#000000"
-						backcolor="#FFFFFF"
-						key="line-5"
-						stretchType="NoStretch"
-						positionType="FixRelativeToTop"
-						isPrintRepeatedValues="true"
-						isRemoveLineWhenBlank="false"
-						isPrintInFirstWholeBand="false"
-						isPrintWhenDetailOverflows="false"/>
-					<graphicElement stretchType="NoStretch" pen="Thin" fill="Solid" />
-				</line>
-				<line direction="TopDown">
-					<reportElement
-						mode="Opaque"
-						x="30"
-						y="0"
-						width="0"
-						height="30"
-						forecolor="#000000"
-						backcolor="#FFFFFF"
-						key="line-6"
-						stretchType="NoStretch"
-						positionType="FixRelativeToTop"
-						isPrintRepeatedValues="true"
-						isRemoveLineWhenBlank="false"
-						isPrintInFirstWholeBand="false"
-						isPrintWhenDetailOverflows="false"/>
-					<graphicElement stretchType="NoStretch" pen="Thin" fill="Solid" />
-				</line>
 				<line direction="TopDown">
 					<reportElement
 						mode="Opaque"
@@ -372,6 +282,24 @@ Capital social: 14,10 miliarde lei]]></text>
 		</columnHeader>
 		<detail>
 			<band height="26"  isSplitAllowed="true" >
+				<line direction="TopDown">
+					<reportElement
+						mode="Opaque"
+						x="30"
+						y="1"
+						width="469"
+						height="0"
+						forecolor="#000000"
+						backcolor="#FFFFFF"
+						key="line"
+						stretchType="NoStretch"
+						positionType="FixRelativeToTop"
+						isPrintRepeatedValues="true"
+						isRemoveLineWhenBlank="false"
+						isPrintInFirstWholeBand="false"
+						isPrintWhenDetailOverflows="false"/>
+					<graphicElement stretchType="NoStretch" pen="Thin" fill="Solid" />
+				</line>
 				<textField isStretchWithOverflow="false" pattern="" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
 						mode="Opaque"
@@ -394,7 +322,7 @@ Capital social: 14,10 miliarde lei]]></text>
 					</textElement>
 				<textFieldExpression   class="java.lang.String"><![CDATA[$V{nrcrt}.toString() + "."]]></textFieldExpression>
 				</textField>
-				<textField isStretchWithOverflow="false" pattern="" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+				<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
 						mode="Opaque"
 						x="60"
@@ -438,96 +366,6 @@ Capital social: 14,10 miliarde lei]]></text>
 					</textElement>
 				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$F{sellPrice}]]></textFieldExpression>
 				</textField>
-				<line direction="TopDown">
-					<reportElement
-						mode="Opaque"
-						x="30"
-						y="25"
-						width="469"
-						height="0"
-						forecolor="#000000"
-						backcolor="#FFFFFF"
-						key="line-1"
-						stretchType="NoStretch"
-						positionType="FixRelativeToTop"
-						isPrintRepeatedValues="true"
-						isRemoveLineWhenBlank="false"
-						isPrintInFirstWholeBand="false"
-						isPrintWhenDetailOverflows="false"/>
-					<graphicElement stretchType="NoStretch" pen="Thin" fill="Solid" />
-				</line>
-				<line direction="TopDown">
-					<reportElement
-						mode="Opaque"
-						x="30"
-						y="0"
-						width="0"
-						height="26"
-						forecolor="#000000"
-						backcolor="#FFFFFF"
-						key="line-7"
-						stretchType="NoStretch"
-						positionType="FixRelativeToTop"
-						isPrintRepeatedValues="true"
-						isRemoveLineWhenBlank="false"
-						isPrintInFirstWholeBand="false"
-						isPrintWhenDetailOverflows="false"/>
-					<graphicElement stretchType="NoStretch" pen="Thin" fill="Solid" />
-				</line>
-				<line direction="TopDown">
-					<reportElement
-						mode="Opaque"
-						x="56"
-						y="0"
-						width="0"
-						height="26"
-						forecolor="#000000"
-						backcolor="#FFFFFF"
-						key="line-8"
-						stretchType="NoStretch"
-						positionType="FixRelativeToTop"
-						isPrintRepeatedValues="true"
-						isRemoveLineWhenBlank="false"
-						isPrintInFirstWholeBand="false"
-						isPrintWhenDetailOverflows="false"/>
-					<graphicElement stretchType="NoStretch" pen="Thin" fill="Solid" />
-				</line>
-				<line direction="TopDown">
-					<reportElement
-						mode="Opaque"
-						x="399"
-						y="0"
-						width="0"
-						height="26"
-						forecolor="#000000"
-						backcolor="#FFFFFF"
-						key="line-9"
-						stretchType="NoStretch"
-						positionType="FixRelativeToTop"
-						isPrintRepeatedValues="true"
-						isRemoveLineWhenBlank="false"
-						isPrintInFirstWholeBand="false"
-						isPrintWhenDetailOverflows="false"/>
-					<graphicElement stretchType="NoStretch" pen="Thin" fill="Solid" />
-				</line>
-				<line direction="TopDown">
-					<reportElement
-						mode="Opaque"
-						x="499"
-						y="0"
-						width="0"
-						height="26"
-						forecolor="#000000"
-						backcolor="#FFFFFF"
-						key="line-10"
-						stretchType="NoStretch"
-						positionType="FixRelativeToTop"
-						isPrintRepeatedValues="true"
-						isRemoveLineWhenBlank="false"
-						isPrintInFirstWholeBand="false"
-						isPrintWhenDetailOverflows="false"/>
-					<graphicElement stretchType="NoStretch" pen="Thin" fill="Solid" />
-				</line>
 			</band>
 		</detail>
 		<columnFooter>
@@ -623,14 +461,32 @@ Capital social: 14,10 miliarde lei]]></text>
 			</band>
 		</pageFooter>
 		<summary>
-			<band height="120"  isSplitAllowed="true" >
-				<textField isStretchWithOverflow="false" pattern="" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+			<band height="92"  isSplitAllowed="true" >
+				<line direction="TopDown">
+					<reportElement
+						mode="Opaque"
+						x="30"
+						y="1"
+						width="469"
+						height="0"
+						forecolor="#000000"
+						backcolor="#FFFFFF"
+						key="line-1"
+						stretchType="NoStretch"
+						positionType="FixRelativeToTop"
+						isPrintRepeatedValues="true"
+						isRemoveLineWhenBlank="false"
+						isPrintInFirstWholeBand="false"
+						isPrintWhenDetailOverflows="false"/>
+					<graphicElement stretchType="NoStretch" pen="Thin" fill="Solid" />
+				</line>
+				<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
 						mode="Transparent"
 						x="4"
 						y="75"
 						width="547"
-						height="36"
+						height="15"
 						forecolor="#000000"
 						backcolor="#FFFFFF"
 						key="textField-20"
