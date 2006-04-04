@@ -1,17 +1,11 @@
-<?xml version="1.0" encoding="ISO-8859-15"?>
-
-<ejb-jar xmlns="http://java.sun.com/xml/ns/j2ee"
-		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-		 version="2.1">
-
+<?xml version="1.0" encoding="ISO-8859-2"?>
+<ejb-jar version="2.1" xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <!--
 		 xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee
 		 http://java.sun.com/xml/ns/j2ee/ejb-jar_2_1.xsd"
   -->
-
   <description>Business logic of the application</description>
   <display-name>setumbiz</display-name>
-  
   <enterprise-beans>
     <!--
     <session>
@@ -198,8 +192,7 @@
       </ejb-local-ref>
     </session>
     -->
-
-    <session>
+    <session id="UsaMetalica2KEJB">
       <description>Manage the editing of a special kind of Product</description>
       <display-name>setumbiz/UsaMetalica2KEJB</display-name>
       <ejb-name>UsaMetalica2KEJB</ejb-name>
@@ -209,155 +202,154 @@
       <session-type>Stateful</session-type>
       <transaction-type>Container</transaction-type>
       <env-entry>
-	<description>The id of the category these products are in</description>
-	<env-entry-name>categoryId</env-entry-name>
-	<env-entry-type>java.lang.Integer</env-entry-type>
-	<env-entry-value>9990</env-entry-value>
+        <description>The id of the category these products are in</description>
+        <env-entry-name>categoryId</env-entry-name>
+        <env-entry-type>java.lang.Integer</env-entry-type>
+        <env-entry-value>9990</env-entry-value>
       </env-entry>
       <env-entry>
-	<description>The category id for a value list</description>
-	<env-entry-name>broascaId</env-entry-name>
-	<env-entry-type>java.lang.Integer</env-entry-type>
-	<env-entry-value>9998</env-entry-value>
+        <description>The category id for a value list</description>
+        <env-entry-name>broascaId</env-entry-name>
+        <env-entry-type>java.lang.Integer</env-entry-type>
+        <env-entry-value>9998</env-entry-value>
       </env-entry>
       <env-entry>
-	<description>The category id for a value list</description>
-	<env-entry-name>cilindruId</env-entry-name>
-	<env-entry-type>java.lang.Integer</env-entry-type>
-	<env-entry-value>9997</env-entry-value>
+        <description>The category id for a value list</description>
+        <env-entry-name>cilindruId</env-entry-name>
+        <env-entry-type>java.lang.Integer</env-entry-type>
+        <env-entry-value>9997</env-entry-value>
       </env-entry>
       <env-entry>
-	<description>The category id for a value list</description>
-	<env-entry-name>copiatCheieId</env-entry-name>
-	<env-entry-type>java.lang.Integer</env-entry-type>
-	<env-entry-value>10006</env-entry-value>
+        <description>The category id for a value list</description>
+        <env-entry-name>copiatCheieId</env-entry-name>
+        <env-entry-type>java.lang.Integer</env-entry-type>
+        <env-entry-value>10006</env-entry-value>
       </env-entry>
       <env-entry>
-	<description>The category id for a value list</description>
-	<env-entry-name>manerSemicilindruId</env-entry-name>
-	<env-entry-type>java.lang.Integer</env-entry-type>
-	<env-entry-value>10007</env-entry-value>
+        <description>The category id for a value list</description>
+        <env-entry-name>manerSemicilindruId</env-entry-name>
+        <env-entry-type>java.lang.Integer</env-entry-type>
+        <env-entry-value>10007</env-entry-value>
       </env-entry>
       <env-entry>
-	<description>The category id for a value list</description>
-	<env-entry-name>sildId</env-entry-name>
-	<env-entry-type>java.lang.Integer</env-entry-type>
-	<env-entry-value>9996</env-entry-value>
+        <description>The category id for a value list</description>
+        <env-entry-name>sildId</env-entry-name>
+        <env-entry-type>java.lang.Integer</env-entry-type>
+        <env-entry-value>9996</env-entry-value>
       </env-entry>
       <env-entry>
-	<description>The category id for a value list</description>
-	<env-entry-name>rozetaId</env-entry-name>
-	<env-entry-type>java.lang.Integer</env-entry-type>
-	<env-entry-value>10004</env-entry-value>
+        <description>The category id for a value list</description>
+        <env-entry-name>rozetaId</env-entry-name>
+        <env-entry-type>java.lang.Integer</env-entry-type>
+        <env-entry-value>10004</env-entry-value>
       </env-entry>
       <env-entry>
-	<description>The category id for a value list</description>
-	<env-entry-name>manerId</env-entry-name>
-	<env-entry-type>java.lang.Integer</env-entry-type>
-	<env-entry-value>9977</env-entry-value>
+        <description>The category id for a value list</description>
+        <env-entry-name>manerId</env-entry-name>
+        <env-entry-type>java.lang.Integer</env-entry-type>
+        <env-entry-value>9977</env-entry-value>
       </env-entry>
       <env-entry>
-	<description>The category id for a value list</description>
-	<env-entry-name>yallaId</env-entry-name>
-	<env-entry-type>java.lang.Integer</env-entry-type>
-	<env-entry-value>9995</env-entry-value>
+        <description>The category id for a value list</description>
+        <env-entry-name>yallaId</env-entry-name>
+        <env-entry-type>java.lang.Integer</env-entry-type>
+        <env-entry-value>9995</env-entry-value>
       </env-entry>
       <env-entry>
-	<description>The category id for a value list</description>
-	<env-entry-name>baraAntipanicaId</env-entry-name>
-	<env-entry-type>java.lang.Integer</env-entry-type>
-	<env-entry-value>9976</env-entry-value>
+        <description>The category id for a value list</description>
+        <env-entry-name>baraAntipanicaId</env-entry-name>
+        <env-entry-type>java.lang.Integer</env-entry-type>
+        <env-entry-value>9976</env-entry-value>
       </env-entry>
       <env-entry>
-	<description>The category id for a value list</description>
-	<env-entry-name>selectorOrdineId</env-entry-name>
-	<env-entry-type>java.lang.Integer</env-entry-type>
-	<env-entry-value>9975</env-entry-value>
+        <description>The category id for a value list</description>
+        <env-entry-name>selectorOrdineId</env-entry-name>
+        <env-entry-type>java.lang.Integer</env-entry-type>
+        <env-entry-value>9975</env-entry-value>
       </env-entry>
       <env-entry>
-	<description>The category id for a value list</description>
-	<env-entry-name>amortizorId</env-entry-name>
-	<env-entry-type>java.lang.Integer</env-entry-type>
-	<env-entry-value>10001</env-entry-value>
+        <description>The category id for a value list</description>
+        <env-entry-name>amortizorId</env-entry-name>
+        <env-entry-type>java.lang.Integer</env-entry-type>
+        <env-entry-value>10001</env-entry-value>
       </env-entry>
       <env-entry>
-	<description>The category id for a value list</description>
-	<env-entry-name>decupareSistemId</env-entry-name>
-	<env-entry-type>java.lang.Integer</env-entry-type>
-	<env-entry-value>9974</env-entry-value>
+        <description>The category id for a value list</description>
+        <env-entry-name>decupareSistemId</env-entry-name>
+        <env-entry-type>java.lang.Integer</env-entry-type>
+        <env-entry-value>9974</env-entry-value>
       </env-entry>
       <env-entry>
-	<description>The category id for a value list</description>
-	<env-entry-name>sistemeId</env-entry-name>
-	<env-entry-type>java.lang.Integer</env-entry-type>
-	<env-entry-value>9999</env-entry-value>
+        <description>The category id for a value list</description>
+        <env-entry-name>sistemeId</env-entry-name>
+        <env-entry-type>java.lang.Integer</env-entry-type>
+        <env-entry-value>9999</env-entry-value>
       </env-entry>
       <ejb-ref>
-	<description>Preferences bean</description>
-	<ejb-ref-name>ejb/PreferencesEJB</ejb-ref-name>
-	<ejb-ref-type>Session</ejb-ref-type>
-	<home>ro.kds.erp.biz.PreferencesHome</home>
-	<remote>ro.kds.erp.biz.Preferences</remote>
+        <description>Preferences bean</description>
+        <ejb-ref-name>ejb/PreferencesEJB</ejb-ref-name>
+        <ejb-ref-type>Session</ejb-ref-type>
+        <home>ro.kds.erp.biz.PreferencesHome</home>
+        <remote>ro.kds.erp.biz.Preferences</remote>
       </ejb-ref>
       <ejb-ref>
-	<description>Sequence generator (for offer no)</description>
-	<ejb-ref-name>ejb/SequenceHome</ejb-ref-name>
-	<ejb-ref-type>Session</ejb-ref-type>
-	<home>ro.kds.erp.biz.SequenceHome</home>
-	<remote>ro.kds.erp.biz.Sequence</remote>
+        <description>Sequence generator (for offer no)</description>
+        <ejb-ref-name>ejb/SequenceHome</ejb-ref-name>
+        <ejb-ref-type>Session</ejb-ref-type>
+        <home>ro.kds.erp.biz.SequenceHome</home>
+        <remote>ro.kds.erp.biz.Sequence</remote>
       </ejb-ref>
       <ejb-local-ref>
-	<ejb-ref-name>ejb/ProductLocalHome</ejb-ref-name>
-	<ejb-ref-type>Entity</ejb-ref-type>
-	<local-home>ro.kds.erp.data.ProductLocalHome</local-home>
-	<local>ro.kds.erp.data.ProductLocal</local>
-	<ejb-link>datalayer.jar#ProductEJB</ejb-link>
+        <ejb-ref-name>ejb/ProductLocalHome</ejb-ref-name>
+        <ejb-ref-type>Entity</ejb-ref-type>
+        <local-home>ro.kds.erp.data.ProductLocalHome</local-home>
+        <local>ro.kds.erp.data.ProductLocal</local>
+        <ejb-link>datalayer.jar#ProductEJB</ejb-link>
       </ejb-local-ref>
       <ejb-local-ref>
-	<ejb-ref-name>ejb/ProductHome</ejb-ref-name>
-	<ejb-ref-type>Entity</ejb-ref-type>
-	<local-home>ro.kds.erp.data.ProductLocalHome</local-home>
-	<local>ro.kds.erp.data.ProductLocal</local>
-	<ejb-link>datalayer.jar#ProductEJB</ejb-link>
+        <ejb-ref-name>ejb/ProductHome</ejb-ref-name>
+        <ejb-ref-type>Entity</ejb-ref-type>
+        <local-home>ro.kds.erp.data.ProductLocalHome</local-home>
+        <local>ro.kds.erp.data.ProductLocal</local>
+        <ejb-link>datalayer.jar#ProductEJB</ejb-link>
       </ejb-local-ref>
       <ejb-local-ref>
-	<ejb-ref-name>ejb/AttributeLocalHome</ejb-ref-name>
-	<ejb-ref-type>Entity</ejb-ref-type>
-	<local-home>ro.kds.erp.data.AttributeLocalHome</local-home>
-	<local>ro.kds.erp.data.AttributeLocal</local>
-	<ejb-link>datalayer.jar#AttributeEJB</ejb-link>
+        <ejb-ref-name>ejb/AttributeLocalHome</ejb-ref-name>
+        <ejb-ref-type>Entity</ejb-ref-type>
+        <local-home>ro.kds.erp.data.AttributeLocalHome</local-home>
+        <local>ro.kds.erp.data.AttributeLocal</local>
+        <ejb-link>datalayer.jar#AttributeEJB</ejb-link>
       </ejb-local-ref>
       <ejb-local-ref>
-	<ejb-ref-name>ejb/AttributeHome</ejb-ref-name>
-	<ejb-ref-type>Entity</ejb-ref-type>
-	<local-home>ro.kds.erp.data.AttributeLocalHome</local-home>
-	<local>ro.kds.erp.data.AttributeLocal</local>
-	<ejb-link>datalayer.jar#AttributeEJB</ejb-link>
+        <ejb-ref-name>ejb/AttributeHome</ejb-ref-name>
+        <ejb-ref-type>Entity</ejb-ref-type>
+        <local-home>ro.kds.erp.data.AttributeLocalHome</local-home>
+        <local>ro.kds.erp.data.AttributeLocal</local>
+        <ejb-link>datalayer.jar#AttributeEJB</ejb-link>
       </ejb-local-ref>
       <ejb-local-ref>
-	<ejb-ref-name>ejb/CategoryLocalHome</ejb-ref-name>
-	<ejb-ref-type>Entity</ejb-ref-type>
-	<local-home>ro.kds.erp.data.CategoryLocalHome</local-home>
-	<local>ro.kds.erp.data.CategoryLocal</local>
-	<ejb-link>datalayer.jar#CategoryEJB</ejb-link>
+        <ejb-ref-name>ejb/CategoryLocalHome</ejb-ref-name>
+        <ejb-ref-type>Entity</ejb-ref-type>
+        <local-home>ro.kds.erp.data.CategoryLocalHome</local-home>
+        <local>ro.kds.erp.data.CategoryLocal</local>
+        <ejb-link>datalayer.jar#CategoryEJB</ejb-link>
       </ejb-local-ref>
       <ejb-local-ref>
-	<ejb-ref-name>ejb/CategoryHome</ejb-ref-name>
-	<ejb-ref-type>Entity</ejb-ref-type>
-	<local-home>ro.kds.erp.data.CategoryLocalHome</local-home>
-	<local>ro.kds.erp.data.CategoryLocal</local>
-	<ejb-link>datalayer.jar#CategoryEJB</ejb-link>
+        <ejb-ref-name>ejb/CategoryHome</ejb-ref-name>
+        <ejb-ref-type>Entity</ejb-ref-type>
+        <local-home>ro.kds.erp.data.CategoryLocalHome</local-home>
+        <local>ro.kds.erp.data.CategoryLocal</local>
+        <ejb-link>datalayer.jar#CategoryEJB</ejb-link>
       </ejb-local-ref>
       <ejb-local-ref>
-	<ejb-ref-name>ejb/CompositeProductLocalHome</ejb-ref-name>
-	<ejb-ref-type>Entity</ejb-ref-type>
-	<local-home>ro.kds.erp.data.CompositeProductLocalHome</local-home>
-	<local>ro.kds.erp.data.CompositeProductLocal</local>
-	<ejb-link>datalayer.jar#CompositeProductEJB</ejb-link>
+        <ejb-ref-name>ejb/CompositeProductLocalHome</ejb-ref-name>
+        <ejb-ref-type>Entity</ejb-ref-type>
+        <local-home>ro.kds.erp.data.CompositeProductLocalHome</local-home>
+        <local>ro.kds.erp.data.CompositeProductLocal</local>
+        <ejb-link>datalayer.jar#CompositeProductEJB</ejb-link>
       </ejb-local-ref>
     </session>
-
-    <session>
+    <session id="UsiMetalice2KEJB">
       <description>Retrieves the list of products</description>
       <display-name>setumbiz/UsiMetalice2KEJB</display-name>
       <ejb-name>UsiMetalice2KEJB</ejb-name>
@@ -367,43 +359,41 @@
       <session-type>Stateless</session-type>
       <transaction-type>Container</transaction-type>
       <env-entry>
-	<description>The id of the category these products are in</description>
-	<env-entry-name>categoryId</env-entry-name>
-	<env-entry-type>java.lang.Integer</env-entry-type>
-	<env-entry-value>9990</env-entry-value>
+        <description>The id of the category these products are in</description>
+        <env-entry-name>categoryId</env-entry-name>
+        <env-entry-type>java.lang.Integer</env-entry-type>
+        <env-entry-value>9990</env-entry-value>
       </env-entry>
       <ejb-local-ref>
-	<ejb-ref-name>ejb/ProductLocalHome</ejb-ref-name>
-	<ejb-ref-type>Entity</ejb-ref-type>
-	<local-home>ro.kds.erp.data.ProductLocalHome</local-home>
-	<local>ro.kds.erp.data.ProductLocal</local>
-	<ejb-link>datalayer.jar#ProductEJB</ejb-link>
+        <ejb-ref-name>ejb/ProductLocalHome</ejb-ref-name>
+        <ejb-ref-type>Entity</ejb-ref-type>
+        <local-home>ro.kds.erp.data.ProductLocalHome</local-home>
+        <local>ro.kds.erp.data.ProductLocal</local>
+        <ejb-link>datalayer.jar#ProductEJB</ejb-link>
       </ejb-local-ref>
       <ejb-local-ref>
-	<ejb-ref-name>ejb/AttributeLocalHome</ejb-ref-name>
-	<ejb-ref-type>Entity</ejb-ref-type>
-	<local-home>ro.kds.erp.data.AttributeLocalHome</local-home>
-	<local>ro.kds.erp.data.AttributeLocal</local>
-	<ejb-link>datalayer.jar#AttributeEJB</ejb-link>
+        <ejb-ref-name>ejb/AttributeLocalHome</ejb-ref-name>
+        <ejb-ref-type>Entity</ejb-ref-type>
+        <local-home>ro.kds.erp.data.AttributeLocalHome</local-home>
+        <local>ro.kds.erp.data.AttributeLocal</local>
+        <ejb-link>datalayer.jar#AttributeEJB</ejb-link>
       </ejb-local-ref>
       <ejb-local-ref>
-	<ejb-ref-name>ejb/CategoryLocalHome</ejb-ref-name>
-	<ejb-ref-type>Entity</ejb-ref-type>
-	<local-home>ro.kds.erp.data.CategoryLocalHome</local-home>
-	<local>ro.kds.erp.data.CategoryLocal</local>
-	<ejb-link>datalayer.jar#CategoryEJB</ejb-link>
+        <ejb-ref-name>ejb/CategoryLocalHome</ejb-ref-name>
+        <ejb-ref-type>Entity</ejb-ref-type>
+        <local-home>ro.kds.erp.data.CategoryLocalHome</local-home>
+        <local>ro.kds.erp.data.CategoryLocal</local>
+        <ejb-link>datalayer.jar#CategoryEJB</ejb-link>
       </ejb-local-ref>
       <ejb-local-ref>
-	<ejb-ref-name>ejb/CompositeProductLocalHome</ejb-ref-name>
-	<ejb-ref-type>Entity</ejb-ref-type>
-	<local-home>ro.kds.erp.data.CompositeProductLocalHome</local-home>
-	<local>ro.kds.erp.data.CompositeProductLocal</local>
-	<ejb-link>datalayer.jar#CompositeProductEJB</ejb-link>
+        <ejb-ref-name>ejb/CompositeProductLocalHome</ejb-ref-name>
+        <ejb-ref-type>Entity</ejb-ref-type>
+        <local-home>ro.kds.erp.data.CompositeProductLocalHome</local-home>
+        <local>ro.kds.erp.data.CompositeProductLocal</local>
+        <ejb-link>datalayer.jar#CompositeProductEJB</ejb-link>
       </ejb-local-ref>
     </session>
-
-
-    <session>
+    <session id="StandardOfferEJB">
       <description>Manage a session of editing data on an Offer</description>
       <display-name>StandardOfferEJB</display-name>
       <ejb-name>StandardOfferEJB</ejb-name>
@@ -413,77 +403,76 @@
       <session-type>Stateful</session-type>
       <transaction-type>Container</transaction-type>
       <env-entry>
-	<description>The category containing categories of allowed products for the standard offer.</description>
-	<env-entry-name>rootCategoryId</env-entry-name>
-	<env-entry-type>java.lang.Integer</env-entry-type>
-	<env-entry-value>9999</env-entry-value>
+        <description>The category containing categories of allowed products for the standard offer.</description>
+        <env-entry-name>rootCategoryId</env-entry-name>
+        <env-entry-type>java.lang.Integer</env-entry-type>
+        <env-entry-value>9999</env-entry-value>
       </env-entry>
       <ejb-ref>
-	<description>The preferences bean</description>
-	<ejb-ref-name>ejb/PreferencesEJB</ejb-ref-name>
-	<ejb-ref-type>Session</ejb-ref-type>
-	<home>ro.kds.erp.biz.PreferencesHome</home>
-	<remote>ro.kds.erp.biz.Preferences</remote>
+        <description>The preferences bean</description>
+        <ejb-ref-name>ejb/PreferencesEJB</ejb-ref-name>
+        <ejb-ref-type>Session</ejb-ref-type>
+        <home>ro.kds.erp.biz.PreferencesHome</home>
+        <remote>ro.kds.erp.biz.Preferences</remote>
       </ejb-ref>
       <ejb-ref>
-	<description>Sequence generator (for offer no)</description>
-	<ejb-ref-name>ejb/SequenceHome</ejb-ref-name>
-	<ejb-ref-type>Session</ejb-ref-type>
-	<home>ro.kds.erp.biz.SequenceHome</home>
-	<remote>ro.kds.erp.biz.Sequence</remote>
+        <description>Sequence generator (for offer no)</description>
+        <ejb-ref-name>ejb/SequenceHome</ejb-ref-name>
+        <ejb-ref-type>Session</ejb-ref-type>
+        <home>ro.kds.erp.biz.SequenceHome</home>
+        <remote>ro.kds.erp.biz.Sequence</remote>
       </ejb-ref>
       <ejb-local-ref>
-	<ejb-ref-name>ejb/DocumentHome</ejb-ref-name>
-	<ejb-ref-type>Entity</ejb-ref-type>
-	<local-home>ro.kds.erp.data.DocumentLocalHome</local-home>
-	<local>ro.kds.erp.data.DocumentLocal</local>
-	<ejb-link>datalayer.jar#DocumentEJB</ejb-link>
+        <ejb-ref-name>ejb/DocumentHome</ejb-ref-name>
+        <ejb-ref-type>Entity</ejb-ref-type>
+        <local-home>ro.kds.erp.data.DocumentLocalHome</local-home>
+        <local>ro.kds.erp.data.DocumentLocal</local>
+        <ejb-link>datalayer.jar#DocumentEJB</ejb-link>
       </ejb-local-ref>
       <ejb-local-ref>
-	<ejb-ref-name>ejb/OfferHome</ejb-ref-name>
-	<ejb-ref-type>Entity</ejb-ref-type>
-	<local-home>ro.kds.erp.data.OfferLocalHome</local-home>
-	<local>ro.kds.erp.data.OfferLocal</local>
-	<ejb-link>datalayer.jar#OfferEJB</ejb-link>
+        <ejb-ref-name>ejb/OfferHome</ejb-ref-name>
+        <ejb-ref-type>Entity</ejb-ref-type>
+        <local-home>ro.kds.erp.data.OfferLocalHome</local-home>
+        <local>ro.kds.erp.data.OfferLocal</local>
+        <ejb-link>datalayer.jar#OfferEJB</ejb-link>
       </ejb-local-ref>
       <ejb-local-ref>
-	<ejb-ref-name>ejb/OfferItemHome</ejb-ref-name>
-	<ejb-ref-type>Entity</ejb-ref-type>
-	<local-home>ro.kds.erp.data.OfferItemLocalHome</local-home>
-	<local>ro.kds.erp.data.OfferItemLocal</local>
-	<ejb-link>datalayer.jar#OfferItemEJB</ejb-link>
+        <ejb-ref-name>ejb/OfferItemHome</ejb-ref-name>
+        <ejb-ref-type>Entity</ejb-ref-type>
+        <local-home>ro.kds.erp.data.OfferItemLocalHome</local-home>
+        <local>ro.kds.erp.data.OfferItemLocal</local>
+        <ejb-link>datalayer.jar#OfferItemEJB</ejb-link>
       </ejb-local-ref>
       <ejb-local-ref>
-	<description>The product used for line item</description>
-	<ejb-ref-name>ejb/ProductHome</ejb-ref-name>
-	<ejb-ref-type>Entity</ejb-ref-type>
-	<local-home>ro.kds.erp.data.ProductLocalHome</local-home>
-	<local>ro.kds.erp.data.ProductLocal</local>
-	<ejb-link>datalayer.jar#ProductEJB</ejb-link>
+        <description>The product used for line item</description>
+        <ejb-ref-name>ejb/ProductHome</ejb-ref-name>
+        <ejb-ref-type>Entity</ejb-ref-type>
+        <local-home>ro.kds.erp.data.ProductLocalHome</local-home>
+        <local>ro.kds.erp.data.ProductLocal</local>
+        <ejb-link>datalayer.jar#ProductEJB</ejb-link>
       </ejb-local-ref>
       <ejb-local-ref>
-	<description>The category bean used for locating the products to be put on the line items.</description>
-	<ejb-ref-name>ejb/CategoryHome</ejb-ref-name>
-	<ejb-ref-type>Entity</ejb-ref-type>
-	<local-home>ro.kds.erp.data.CategoryLocalHome</local-home>
-	<local>ro.kds.erp.data.CategoryLocal</local>
-	<ejb-link>datalayer.jar#CategoryEJB</ejb-link>
+        <description>The category bean used for locating the products to be put on the line items.</description>
+        <ejb-ref-name>ejb/CategoryHome</ejb-ref-name>
+        <ejb-ref-type>Entity</ejb-ref-type>
+        <local-home>ro.kds.erp.data.CategoryLocalHome</local-home>
+        <local>ro.kds.erp.data.CategoryLocal</local>
+        <ejb-link>datalayer.jar#CategoryEJB</ejb-link>
       </ejb-local-ref>
       <resource-ref>
-	<description>JMS connection factory</description>
-	<res-ref-name>jms/CF</res-ref-name>
-	<res-type>javax.jms.ConnectionFactory</res-type>
-	<res-auth>Container</res-auth>
+        <description>JMS connection factory</description>
+        <res-ref-name>jms/CF</res-ref-name>
+        <res-type>javax.jms.ConnectionFactory</res-type>
+        <res-auth>Container</res-auth>
       </resource-ref>
       <message-destination-ref>
-	<description>Used to notify application of price updates</description>
-	<message-destination-ref-name>jms/priceUpdate</message-destination-ref-name>
-	<message-destination-type>javax.jms.Topic</message-destination-type>
-	<message-destination-usage>Produces</message-destination-usage>
+        <description>Used to notify application of price updates</description>
+        <message-destination-ref-name>jms/priceUpdate</message-destination-ref-name>
+        <message-destination-type>javax.jms.Topic</message-destination-type>
+        <message-destination-usage>Produces</message-destination-usage>
       </message-destination-ref>
     </session>
-
-    <session>
+    <session id="SistemEJB">
       <description>Business logic for a kind of standard products</description>
       <ejb-name>SistemEJB</ejb-name>
       <home>ro.kds.erp.biz.setum.basic.SistemHome</home>
@@ -492,51 +481,46 @@
       <session-type>Stateful</session-type>
       <transaction-type>Container</transaction-type>
       <env-entry>
-	<description>The id of the category who contains all the 
-	subcategories of the products allowed for this form.</description>
-	<env-entry-name>rootCategoryId</env-entry-name>
-	<env-entry-type>java.lang.Integer</env-entry-type>
-	<env-entry-value>9999</env-entry-value>
+        <description>The id of the category who contains all the   subcategories of the products allowed for this form.</description>
+        <env-entry-name>rootCategoryId</env-entry-name>
+        <env-entry-type>java.lang.Integer</env-entry-type>
+        <env-entry-value>9999</env-entry-value>
       </env-entry>
       <ejb-ref>
-	<description>The preferences bean, referred by the scripting engine.</description>
-	<ejb-ref-name>ejb/PreferencesEJB</ejb-ref-name>
-	<ejb-ref-type>Session</ejb-ref-type>
-	<home>ro.kds.erp.biz.PreferencesHome</home>
-	<remote>ro.kds.erp.biz.Preferences</remote>
+        <description>The preferences bean, referred by the scripting engine.</description>
+        <ejb-ref-name>ejb/PreferencesEJB</ejb-ref-name>
+        <ejb-ref-type>Session</ejb-ref-type>
+        <home>ro.kds.erp.biz.PreferencesHome</home>
+        <remote>ro.kds.erp.biz.Preferences</remote>
       </ejb-ref>
       <ejb-local-ref>
-	<ejb-ref-name>ejb/CategoryHome</ejb-ref-name>
-	<ejb-ref-type>Entity</ejb-ref-type>
-	<local-home>ro.kds.erp.data.CategoryLocalHome</local-home>
-	<local>ro.kds.erp.data.CategoryLocal</local>
-	<ejb-link>datalayer.jar#CategoryEJB</ejb-link>
+        <ejb-ref-name>ejb/CategoryHome</ejb-ref-name>
+        <ejb-ref-type>Entity</ejb-ref-type>
+        <local-home>ro.kds.erp.data.CategoryLocalHome</local-home>
+        <local>ro.kds.erp.data.CategoryLocal</local>
+        <ejb-link>datalayer.jar#CategoryEJB</ejb-link>
       </ejb-local-ref>
       <ejb-local-ref>
-	<ejb-ref-name>ejb/ProductHome</ejb-ref-name>
-	<ejb-ref-type>Entity</ejb-ref-type>
-	<local-home>ro.kds.erp.data.ProductLocalHome</local-home>
-	<local>ro.kds.erp.data.ProductLocal</local>
-	<ejb-link>datalayer.jar#ProductEJB</ejb-link>
+        <ejb-ref-name>ejb/ProductHome</ejb-ref-name>
+        <ejb-ref-type>Entity</ejb-ref-type>
+        <local-home>ro.kds.erp.data.ProductLocalHome</local-home>
+        <local>ro.kds.erp.data.ProductLocal</local>
+        <ejb-link>datalayer.jar#ProductEJB</ejb-link>
       </ejb-local-ref>
       <resource-ref>
-	<description>JMS connection factory</description>
-	<res-ref-name>jms/CF</res-ref-name>
-	<res-type>javax.jms.ConnectionFactory</res-type>
-	<res-auth>Container</res-auth>
+        <description>JMS connection factory</description>
+        <res-ref-name>jms/CF</res-ref-name>
+        <res-type>javax.jms.ConnectionFactory</res-type>
+        <res-auth>Container</res-auth>
       </resource-ref>
       <message-destination-ref>
-	<description>Used to notify application of price updates</description>
-	<message-destination-ref-name>jms/priceUpdate</message-destination-ref-name>
-	<message-destination-type>javax.jms.Topic</message-destination-type>
-	<message-destination-usage>Produces</message-destination-usage>
+        <description>Used to notify application of price updates</description>
+        <message-destination-ref-name>jms/priceUpdate</message-destination-ref-name>
+        <message-destination-type>javax.jms.Topic</message-destination-type>
+        <message-destination-usage>Produces</message-destination-usage>
       </message-destination-ref>
     </session>
-
-
-
-
-    <session>
+    <session id="OtherProductsEJB">
       <description>Business logic for a kind of standard products</description>
       <ejb-name>OtherProductsEJB</ejb-name>
       <home>ro.kds.erp.biz.setum.basic.SistemHome</home>
@@ -545,51 +529,46 @@
       <session-type>Stateful</session-type>
       <transaction-type>Container</transaction-type>
       <env-entry>
-	<description>The id of the category who contains all the 
-	subcategories of the products allowed for this form.</description>
-	<env-entry-name>rootCategoryId</env-entry-name>
-	<env-entry-type>java.lang.Integer</env-entry-type>
-	<env-entry-value>9988</env-entry-value>
+        <description>The id of the category who contains all the   subcategories of the products allowed for this form.</description>
+        <env-entry-name>rootCategoryId</env-entry-name>
+        <env-entry-type>java.lang.Integer</env-entry-type>
+        <env-entry-value>9988</env-entry-value>
       </env-entry>
       <ejb-ref>
-	<description>The preferences bean, referred by the scripting engine.</description>
-	<ejb-ref-name>ejb/PreferencesEJB</ejb-ref-name>
-	<ejb-ref-type>Session</ejb-ref-type>
-	<home>ro.kds.erp.biz.PreferencesHome</home>
-	<remote>ro.kds.erp.biz.Preferences</remote>
+        <description>The preferences bean, referred by the scripting engine.</description>
+        <ejb-ref-name>ejb/PreferencesEJB</ejb-ref-name>
+        <ejb-ref-type>Session</ejb-ref-type>
+        <home>ro.kds.erp.biz.PreferencesHome</home>
+        <remote>ro.kds.erp.biz.Preferences</remote>
       </ejb-ref>
       <ejb-local-ref>
-	<ejb-ref-name>ejb/CategoryHome</ejb-ref-name>
-	<ejb-ref-type>Entity</ejb-ref-type>
-	<local-home>ro.kds.erp.data.CategoryLocalHome</local-home>
-	<local>ro.kds.erp.data.CategoryLocal</local>
-	<ejb-link>datalayer.jar#CategoryEJB</ejb-link>
+        <ejb-ref-name>ejb/CategoryHome</ejb-ref-name>
+        <ejb-ref-type>Entity</ejb-ref-type>
+        <local-home>ro.kds.erp.data.CategoryLocalHome</local-home>
+        <local>ro.kds.erp.data.CategoryLocal</local>
+        <ejb-link>datalayer.jar#CategoryEJB</ejb-link>
       </ejb-local-ref>
       <ejb-local-ref>
-	<ejb-ref-name>ejb/ProductHome</ejb-ref-name>
-	<ejb-ref-type>Entity</ejb-ref-type>
-	<local-home>ro.kds.erp.data.ProductLocalHome</local-home>
-	<local>ro.kds.erp.data.ProductLocal</local>
-	<ejb-link>datalayer.jar#ProductEJB</ejb-link>
+        <ejb-ref-name>ejb/ProductHome</ejb-ref-name>
+        <ejb-ref-type>Entity</ejb-ref-type>
+        <local-home>ro.kds.erp.data.ProductLocalHome</local-home>
+        <local>ro.kds.erp.data.ProductLocal</local>
+        <ejb-link>datalayer.jar#ProductEJB</ejb-link>
       </ejb-local-ref>
       <resource-ref>
-	<description>JMS connection factory</description>
-	<res-ref-name>jms/CF</res-ref-name>
-	<res-type>javax.jms.ConnectionFactory</res-type>
-	<res-auth>Container</res-auth>
+        <description>JMS connection factory</description>
+        <res-ref-name>jms/CF</res-ref-name>
+        <res-type>javax.jms.ConnectionFactory</res-type>
+        <res-auth>Container</res-auth>
       </resource-ref>
       <message-destination-ref>
-	<description>Used to notify application of price updates</description>
-	<message-destination-ref-name>jms/priceUpdate</message-destination-ref-name>
-	<message-destination-type>javax.jms.Topic</message-destination-type>
-	<message-destination-usage>Produces</message-destination-usage>
+        <description>Used to notify application of price updates</description>
+        <message-destination-ref-name>jms/priceUpdate</message-destination-ref-name>
+        <message-destination-type>javax.jms.Topic</message-destination-type>
+        <message-destination-usage>Produces</message-destination-usage>
       </message-destination-ref>
     </session>
-
-
-
-
-    <session>
+    <session id="UsaNeechipataEJB">
       <description>Data entry pentru usi standard neechipate</description>
       <ejb-name>UsaStdNeechipataEJB</ejb-name>
       <home>ro.kds.erp.biz.setum.basic.UsaStdNeechipataHome</home>
@@ -598,48 +577,46 @@
       <session-type>Stateful</session-type>
       <transaction-type>Container</transaction-type>
       <env-entry>
-	<description>The product's category</description>
-	<env-entry-name>categoryId</env-entry-name>
-	<env-entry-type>java.lang.Integer</env-entry-type>
-	<env-entry-value>9992</env-entry-value>
+        <description>The product's category</description>
+        <env-entry-name>categoryId</env-entry-name>
+        <env-entry-type>java.lang.Integer</env-entry-type>
+        <env-entry-value>9992</env-entry-value>
       </env-entry>
       <ejb-ref>
-	<description>The preferences bean, referred by the scripting engine.</description>
-	<ejb-ref-name>ejb/PreferencesEJB</ejb-ref-name>
-	<ejb-ref-type>Session</ejb-ref-type>
-	<home>ro.kds.erp.biz.PreferencesHome</home>
-	<remote>ro.kds.erp.biz.Preferences</remote>
+        <description>The preferences bean, referred by the scripting engine.</description>
+        <ejb-ref-name>ejb/PreferencesEJB</ejb-ref-name>
+        <ejb-ref-type>Session</ejb-ref-type>
+        <home>ro.kds.erp.biz.PreferencesHome</home>
+        <remote>ro.kds.erp.biz.Preferences</remote>
       </ejb-ref>
       <ejb-local-ref>
-	<ejb-ref-name>ejb/CategoryHome</ejb-ref-name>
-	<ejb-ref-type>Entity</ejb-ref-type>
-	<local-home>ro.kds.erp.data.CategoryLocaHome</local-home>
-	<local>ro.kds.erp.data.CategoryLocal</local>
-	<ejb-link>datalayer.jar#CategoryEJB</ejb-link>
+        <ejb-ref-name>ejb/CategoryHome</ejb-ref-name>
+        <ejb-ref-type>Entity</ejb-ref-type>
+        <local-home>ro.kds.erp.data.CategoryLocaHome</local-home>
+        <local>ro.kds.erp.data.CategoryLocal</local>
+        <ejb-link>datalayer.jar#CategoryEJB</ejb-link>
       </ejb-local-ref>
       <ejb-local-ref>
-	<ejb-ref-name>ejb/ProductHome</ejb-ref-name>
-	<ejb-ref-type>Entity</ejb-ref-type>
-	<local-home>ro.kds.erp.data.ProductLocalHome</local-home>
-	<local>ro.kds.erp.data.ProductLocal</local>
-	<ejb-link>datalayer.jar#ProductEJB</ejb-link>
+        <ejb-ref-name>ejb/ProductHome</ejb-ref-name>
+        <ejb-ref-type>Entity</ejb-ref-type>
+        <local-home>ro.kds.erp.data.ProductLocalHome</local-home>
+        <local>ro.kds.erp.data.ProductLocal</local>
+        <ejb-link>datalayer.jar#ProductEJB</ejb-link>
       </ejb-local-ref>
       <resource-ref>
-	<description>JMS connection factory</description>
-	<res-ref-name>jms/CF</res-ref-name>
-	<res-type>javax.jms.ConnectionFactory</res-type>
-	<res-auth>Container</res-auth>
+        <description>JMS connection factory</description>
+        <res-ref-name>jms/CF</res-ref-name>
+        <res-type>javax.jms.ConnectionFactory</res-type>
+        <res-auth>Container</res-auth>
       </resource-ref>
       <message-destination-ref>
-	<description>Used to notify application of price updates</description>
-	<message-destination-ref-name>jms/priceUpdate</message-destination-ref-name>
-	<message-destination-type>javax.jms.Topic</message-destination-type>
-	<message-destination-usage>Produces</message-destination-usage>
+        <description>Used to notify application of price updates</description>
+        <message-destination-ref-name>jms/priceUpdate</message-destination-ref-name>
+        <message-destination-type>javax.jms.Topic</message-destination-type>
+        <message-destination-usage>Produces</message-destination-usage>
       </message-destination-ref>
     </session>
-
-
-    <session>
+    <session id="UsaStandardEJB">
       <description>Editare/Vizualizare/Regasire produse UsiStandard</description>
       <ejb-name>UsaStandardEJB</ejb-name>
       <home>ro.kds.erp.biz.setum.basic.UsaStandardHome</home>
@@ -648,91 +625,83 @@
       <session-type>Stateful</session-type>
       <transaction-type>Container</transaction-type>
       <env-entry>
-	<description>Setum's special product category</description>
-	<env-entry-name>setum/category/sistemeId</env-entry-name>
-	<env-entry-type>java.lang.Integer</env-entry-type>
-	<env-entry-value>9999</env-entry-value>
+        <description>Setum's special product category</description>
+        <env-entry-name>setum/category/sistemeId</env-entry-name>
+        <env-entry-type>java.lang.Integer</env-entry-type>
+        <env-entry-value>9999</env-entry-value>
       </env-entry>
       <env-entry>
-	<description>Setum's special product category</description>
-	<env-entry-name>setum/category/broascaId</env-entry-name>
-	<env-entry-type>java.lang.Integer</env-entry-type>
-	<env-entry-value>9998</env-entry-value>
+        <description>Setum's special product category</description>
+        <env-entry-name>setum/category/broascaId</env-entry-name>
+        <env-entry-type>java.lang.Integer</env-entry-type>
+        <env-entry-value>9998</env-entry-value>
       </env-entry>
       <env-entry>
-	<description>Setum's special product category</description>
-	<env-entry-name>setum/category/cilindruId</env-entry-name>
-	<env-entry-type>java.lang.Integer</env-entry-type>
-	<env-entry-value>9997</env-entry-value>
+        <description>Setum's special product category</description>
+        <env-entry-name>setum/category/cilindruId</env-entry-name>
+        <env-entry-type>java.lang.Integer</env-entry-type>
+        <env-entry-value>9997</env-entry-value>
       </env-entry>
       <env-entry>
-	<description>Setum's special product category</description>
-	<env-entry-name>setum/category/sildId</env-entry-name>
-	<env-entry-type>java.lang.Integer</env-entry-type>
-	<env-entry-value>9996</env-entry-value>
+        <description>Setum's special product category</description>
+        <env-entry-name>setum/category/sildId</env-entry-name>
+        <env-entry-type>java.lang.Integer</env-entry-type>
+        <env-entry-value>9996</env-entry-value>
       </env-entry>
       <env-entry>
-	<description>Setum's special product category</description>
-	<env-entry-name>setum/category/yallaId</env-entry-name>
-	<env-entry-type>java.lang.Integer</env-entry-type>
-	<env-entry-value>9995</env-entry-value>
+        <description>Setum's special product category</description>
+        <env-entry-name>setum/category/yallaId</env-entry-name>
+        <env-entry-type>java.lang.Integer</env-entry-type>
+        <env-entry-value>9995</env-entry-value>
       </env-entry>
       <env-entry>
-	<description>Setum's special product category</description>
-	<env-entry-name>setum/category/vizorId</env-entry-name>
-	<env-entry-type>java.lang.Integer</env-entry-type>
-	<env-entry-value>9994</env-entry-value>
+        <description>Setum's special product category</description>
+        <env-entry-name>setum/category/vizorId</env-entry-name>
+        <env-entry-type>java.lang.Integer</env-entry-type>
+        <env-entry-value>9994</env-entry-value>
       </env-entry>
       <env-entry>
-	<description>
-	  Usa standard este o usa compusa dintr-o usa simpla
-	  la care se pot sau nu adauga broasca, cilindru, sild, yalla si vizor
-	</description>
-	<env-entry-name>setum/category/usaStdId</env-entry-name>
-	<env-entry-type>java.lang.Integer</env-entry-type>
-	<env-entry-value>9993</env-entry-value>
+        <description>    Usa standard este o usa compusa dintr-o usa simpla    la care se pot sau nu adauga broasca, cilindru, sild, yalla si vizor</description>
+        <env-entry-name>setum/category/usaStdId</env-entry-name>
+        <env-entry-type>java.lang.Integer</env-entry-type>
+        <env-entry-value>9993</env-entry-value>
       </env-entry>
       <env-entry>
-	<description>
-	  Usa simpla este o usa cu finisaje fara sisteme, 
-	  folosita drept baza pentru oferta de usi standard
-	</description>
-	<env-entry-name>setum/category/usaSimplaId</env-entry-name>
-	<env-entry-type>java.lang.Integer</env-entry-type>
-	<env-entry-value>9992</env-entry-value>
+        <description>    Usa simpla este o usa cu finisaje fara sisteme,     folosita drept baza pentru oferta de usi standard</description>
+        <env-entry-name>setum/category/usaSimplaId</env-entry-name>
+        <env-entry-type>java.lang.Integer</env-entry-type>
+        <env-entry-value>9992</env-entry-value>
       </env-entry>
       <ejb-ref>
-	<description>The preferences bean, referred by the scripting engine.</description>
-	<ejb-ref-name>ejb/PreferencesEJB</ejb-ref-name>
-	<ejb-ref-type>Session</ejb-ref-type>
-	<home>ro.kds.erp.biz.PreferencesHome</home>
-	<remote>ro.kds.erp.biz.Preferences</remote>
+        <description>The preferences bean, referred by the scripting engine.</description>
+        <ejb-ref-name>ejb/PreferencesEJB</ejb-ref-name>
+        <ejb-ref-type>Session</ejb-ref-type>
+        <home>ro.kds.erp.biz.PreferencesHome</home>
+        <remote>ro.kds.erp.biz.Preferences</remote>
       </ejb-ref>
       <ejb-local-ref>
-	<ejb-ref-name>ejb/CategoryHome</ejb-ref-name>
-	<ejb-ref-type>Entity</ejb-ref-type>
-	<local-home>ro.kds.erp.data.CategoryLocaHome</local-home>
-	<local>ro.kds.erp.data.CategoryLocal</local>
-	<ejb-link>datalayer.jar#CategoryEJB</ejb-link>
+        <ejb-ref-name>ejb/CategoryHome</ejb-ref-name>
+        <ejb-ref-type>Entity</ejb-ref-type>
+        <local-home>ro.kds.erp.data.CategoryLocaHome</local-home>
+        <local>ro.kds.erp.data.CategoryLocal</local>
+        <ejb-link>datalayer.jar#CategoryEJB</ejb-link>
       </ejb-local-ref>
       <ejb-local-ref>
-	<ejb-ref-name>ejb/ProductHome</ejb-ref-name>
-	<ejb-ref-type>Entity</ejb-ref-type>
-	<local-home>ro.kds.erp.data.ProductLocalHome</local-home>
-	<local>ro.kds.erp.data.ProductLocal</local>
-	<ejb-link>datalayer.jar#ProductEJB</ejb-link>
+        <ejb-ref-name>ejb/ProductHome</ejb-ref-name>
+        <ejb-ref-type>Entity</ejb-ref-type>
+        <local-home>ro.kds.erp.data.ProductLocalHome</local-home>
+        <local>ro.kds.erp.data.ProductLocal</local>
+        <ejb-link>datalayer.jar#ProductEJB</ejb-link>
       </ejb-local-ref>
       <ejb-local-ref>
-	<ejb-ref-name>ejb/CompositeProductHome</ejb-ref-name>
-	<ejb-ref-type>Entity</ejb-ref-type>
-	<local-home>ro.kds.erp.data.CompositeProductLocalHome</local-home>
-	<local>ro.kds.erp.data.CompositeProductLocal</local>
-	<ejb-link>datalayer.jar#CompositeProductEJB</ejb-link>
+        <ejb-ref-name>ejb/CompositeProductHome</ejb-ref-name>
+        <ejb-ref-type>Entity</ejb-ref-type>
+        <local-home>ro.kds.erp.data.CompositeProductLocalHome</local-home>
+        <local>ro.kds.erp.data.CompositeProductLocal</local>
+        <ejb-link>datalayer.jar#CompositeProductEJB</ejb-link>
       </ejb-local-ref>
     </session>
-
-
-    <session>
+    <session id="OfertaUsiStandardEJB">
       <description>Oferta de usi standard</description>
       <ejb-name>OfertaUsiStandardEJB</ejb-name>
       <home>ro.kds.erp.biz.setum.basic.OfertaUsiStandardHome</home>
@@ -740,115 +709,104 @@
       <ejb-class>ro.kds.erp.biz.setum.OfertaUsiStandardBean</ejb-class>
       <session-type>Stateful</session-type>
       <transaction-type>Container</transaction-type>
-
       <env-entry>
-	<description>Setum's special product category</description>
-	<env-entry-name>setum/category/sistemeId</env-entry-name>
-	<env-entry-type>java.lang.Integer</env-entry-type>
-	<env-entry-value>9999</env-entry-value>
+        <description>Setum's special product category</description>
+        <env-entry-name>setum/category/sistemeId</env-entry-name>
+        <env-entry-type>java.lang.Integer</env-entry-type>
+        <env-entry-value>9999</env-entry-value>
       </env-entry>
       <env-entry>
-	<description>Setum's special product category</description>
-	<env-entry-name>setum/category/broascaId</env-entry-name>
-	<env-entry-type>java.lang.Integer</env-entry-type>
-	<env-entry-value>9998</env-entry-value>
+        <description>Setum's special product category</description>
+        <env-entry-name>setum/category/broascaId</env-entry-name>
+        <env-entry-type>java.lang.Integer</env-entry-type>
+        <env-entry-value>9998</env-entry-value>
       </env-entry>
       <env-entry>
-	<description>Setum's special product category</description>
-	<env-entry-name>setum/category/cilindruId</env-entry-name>
-	<env-entry-type>java.lang.Integer</env-entry-type>
-	<env-entry-value>9997</env-entry-value>
+        <description>Setum's special product category</description>
+        <env-entry-name>setum/category/cilindruId</env-entry-name>
+        <env-entry-type>java.lang.Integer</env-entry-type>
+        <env-entry-value>9997</env-entry-value>
       </env-entry>
       <env-entry>
-	<description>Setum's special product category</description>
-	<env-entry-name>setum/category/sildId</env-entry-name>
-	<env-entry-type>java.lang.Integer</env-entry-type>
-	<env-entry-value>9996</env-entry-value>
+        <description>Setum's special product category</description>
+        <env-entry-name>setum/category/sildId</env-entry-name>
+        <env-entry-type>java.lang.Integer</env-entry-type>
+        <env-entry-value>9996</env-entry-value>
       </env-entry>
       <env-entry>
-	<description>Setum's special product category</description>
-	<env-entry-name>setum/category/yallaId</env-entry-name>
-	<env-entry-type>java.lang.Integer</env-entry-type>
-	<env-entry-value>9995</env-entry-value>
+        <description>Setum's special product category</description>
+        <env-entry-name>setum/category/yallaId</env-entry-name>
+        <env-entry-type>java.lang.Integer</env-entry-type>
+        <env-entry-value>9995</env-entry-value>
       </env-entry>
       <env-entry>
-	<description>Setum's special product category</description>
-	<env-entry-name>setum/category/vizorId</env-entry-name>
-	<env-entry-type>java.lang.Integer</env-entry-type>
-	<env-entry-value>9994</env-entry-value>
+        <description>Setum's special product category</description>
+        <env-entry-name>setum/category/vizorId</env-entry-name>
+        <env-entry-type>java.lang.Integer</env-entry-type>
+        <env-entry-value>9994</env-entry-value>
       </env-entry>
       <env-entry>
-	<description>
-	  Usa standard este o usa compusa dintr-o usa simpla
-	  la care se pot sau nu adauga broasca, cilindru, sild, yalla si vizor
-	</description>
-	<env-entry-name>setum/category/usaStdId</env-entry-name>
-	<env-entry-type>java.lang.Integer</env-entry-type>
-	<env-entry-value>9993</env-entry-value>
+        <description>    Usa standard este o usa compusa dintr-o usa simpla    la care se pot sau nu adauga broasca, cilindru, sild, yalla si vizor</description>
+        <env-entry-name>setum/category/usaStdId</env-entry-name>
+        <env-entry-type>java.lang.Integer</env-entry-type>
+        <env-entry-value>9993</env-entry-value>
       </env-entry>
       <env-entry>
-	<description>
-	  Usa simpla este o usa cu finisaje fara sisteme, 
-	  folosita drept baza pentru oferta de usi standard
-	</description>
-	<env-entry-name>setum/category/usaSimplaId</env-entry-name>
-	<env-entry-type>java.lang.Integer</env-entry-type>
-	<env-entry-value>9992</env-entry-value>
+        <description>    Usa simpla este o usa cu finisaje fara sisteme,     folosita drept baza pentru oferta de usi standard</description>
+        <env-entry-name>setum/category/usaSimplaId</env-entry-name>
+        <env-entry-type>java.lang.Integer</env-entry-type>
+        <env-entry-value>9992</env-entry-value>
       </env-entry>
-
-
       <ejb-ref>
-	<ejb-ref-name>ejb/PreferencesEJB</ejb-ref-name>
-	<ejb-ref-type>Session</ejb-ref-type>
-	<home>ro.kds.erp.biz.PreferencesHome</home>
-	<remote>ro.kds.erp.biz.Preferences</remote>
+        <ejb-ref-name>ejb/PreferencesEJB</ejb-ref-name>
+        <ejb-ref-type>Session</ejb-ref-type>
+        <home>ro.kds.erp.biz.PreferencesHome</home>
+        <remote>ro.kds.erp.biz.Preferences</remote>
       </ejb-ref>
       <ejb-ref>
-	<description>Sequence generator (for offer no)</description>
-	<ejb-ref-name>ejb/SequenceHome</ejb-ref-name>
-	<ejb-ref-type>Session</ejb-ref-type>
-	<home>ro.kds.erp.biz.SequenceHome</home>
-	<remote>ro.kds.erp.biz.Sequence</remote>
+        <description>Sequence generator (for offer no)</description>
+        <ejb-ref-name>ejb/SequenceHome</ejb-ref-name>
+        <ejb-ref-type>Session</ejb-ref-type>
+        <home>ro.kds.erp.biz.SequenceHome</home>
+        <remote>ro.kds.erp.biz.Sequence</remote>
       </ejb-ref>
       <ejb-local-ref>
-	<ejb-ref-name>ejb/CategoryHome</ejb-ref-name>
-	<ejb-ref-type>Entity</ejb-ref-type>
-	<local-home>ro.kds.erp.data.CategoryLocalHome</local-home>
-	<local>ro.kds.erp.data.CategoryLocal</local>
-	<ejb-link>datalayer.jar#CategoryEJB</ejb-link>
+        <ejb-ref-name>ejb/CategoryHome</ejb-ref-name>
+        <ejb-ref-type>Entity</ejb-ref-type>
+        <local-home>ro.kds.erp.data.CategoryLocalHome</local-home>
+        <local>ro.kds.erp.data.CategoryLocal</local>
+        <ejb-link>datalayer.jar#CategoryEJB</ejb-link>
       </ejb-local-ref>
       <ejb-local-ref>
-	<ejb-ref-name>ejb/ProductHome</ejb-ref-name>
-	<ejb-ref-type>Entity</ejb-ref-type>
-	<local-home>ro.kds.erp.data.ProductLocalHome</local-home>
-	<local>ro.kds.erp.data.ProductLocal</local>
-	<ejb-link>datalayer.jar#ProductEJB</ejb-link>
+        <ejb-ref-name>ejb/ProductHome</ejb-ref-name>
+        <ejb-ref-type>Entity</ejb-ref-type>
+        <local-home>ro.kds.erp.data.ProductLocalHome</local-home>
+        <local>ro.kds.erp.data.ProductLocal</local>
+        <ejb-link>datalayer.jar#ProductEJB</ejb-link>
       </ejb-local-ref>
       <ejb-local-ref>
-	<ejb-ref-name>ejb/CompositeProductHome</ejb-ref-name>
-	<ejb-ref-type>Entity</ejb-ref-type>
-	<local-home>ro.kds.erp.data.CompositeProductLocalHome</local-home>
-	<local>ro.kds.erp.data.CompositeProductLocal</local>
-	<ejb-link>datalayer.jar#CompositeProductEJB</ejb-link>
+        <ejb-ref-name>ejb/CompositeProductHome</ejb-ref-name>
+        <ejb-ref-type>Entity</ejb-ref-type>
+        <local-home>ro.kds.erp.data.CompositeProductLocalHome</local-home>
+        <local>ro.kds.erp.data.CompositeProductLocal</local>
+        <ejb-link>datalayer.jar#CompositeProductEJB</ejb-link>
       </ejb-local-ref>
       <ejb-local-ref>
-	<ejb-ref-name>ejb/OfferHome</ejb-ref-name>
-	<ejb-ref-type>Entity</ejb-ref-type>
-	<local-home>ro.kds.erp.data.OfferLocalHome</local-home>
-	<local>ro.kds.erp.data.OfferLocal</local>
-	<ejb-link>datalayer.jar#OfferEJB</ejb-link>
+        <ejb-ref-name>ejb/OfferHome</ejb-ref-name>
+        <ejb-ref-type>Entity</ejb-ref-type>
+        <local-home>ro.kds.erp.data.OfferLocalHome</local-home>
+        <local>ro.kds.erp.data.OfferLocal</local>
+        <ejb-link>datalayer.jar#OfferEJB</ejb-link>
       </ejb-local-ref>
       <ejb-local-ref>
-	<ejb-ref-name>ejb/OfferItemHome</ejb-ref-name>
-	<ejb-ref-type>Entity</ejb-ref-type>
-	<local-home>ro.kds.erp.data.OfferItemLocalHome</local-home>
-	<local>ro.kds.erp.data.OfferItemLocal</local>
-	<ejb-link>datalayer.jar#OfferItemEJB</ejb-link>
+        <ejb-ref-name>ejb/OfferItemHome</ejb-ref-name>
+        <ejb-ref-type>Entity</ejb-ref-type>
+        <local-home>ro.kds.erp.data.OfferItemLocalHome</local-home>
+        <local>ro.kds.erp.data.OfferItemLocal</local>
+        <ejb-link>datalayer.jar#OfferItemEJB</ejb-link>
       </ejb-local-ref>
     </session>
-
-
-    <session>
+    <session id="ArbitraryOfferEJB">
       <description>Logic for managing customized offers that may include any kind of product.</description>
       <ejb-name>ArbitraryOfferEJB</ejb-name>
       <home>ro.kds.erp.biz.setum.basic.ArbitraryOfferHome</home>
@@ -857,57 +815,56 @@
       <session-type>Stateful</session-type>
       <transaction-type>Container</transaction-type>
       <ejb-ref>
-	<description>Preferences access</description>
-	<ejb-ref-name>ejb/PreferencesEJB</ejb-ref-name>
-	<ejb-ref-type>Session</ejb-ref-type>
-	<home>ro.kds.erp.biz.PreferencesHome</home>
-	<remote>ro.kds.erp.biz.Preferences</remote>
+        <description>Preferences access</description>
+        <ejb-ref-name>ejb/PreferencesEJB</ejb-ref-name>
+        <ejb-ref-type>Session</ejb-ref-type>
+        <home>ro.kds.erp.biz.PreferencesHome</home>
+        <remote>ro.kds.erp.biz.Preferences</remote>
       </ejb-ref>
       <ejb-ref>
-	<description>Sequence generator (for offer no)</description>
-	<ejb-ref-name>ejb/SequenceHome</ejb-ref-name>
-	<ejb-ref-type>Session</ejb-ref-type>
-	<home>ro.kds.erp.biz.SequenceHome</home>
-	<remote>ro.kds.erp.biz.Sequence</remote>
+        <description>Sequence generator (for offer no)</description>
+        <ejb-ref-name>ejb/SequenceHome</ejb-ref-name>
+        <ejb-ref-type>Session</ejb-ref-type>
+        <home>ro.kds.erp.biz.SequenceHome</home>
+        <remote>ro.kds.erp.biz.Sequence</remote>
       </ejb-ref>
       <ejb-local-ref>
-	<ejb-ref-name>ejb/CategoryHome</ejb-ref-name>
-	<ejb-ref-type>Entity</ejb-ref-type>
-	<local-home>ro.kds.erp.data.CategoryLocalHome</local-home>
-	<local>ro.kds.erp.data.CategoryLocal</local>
-	<ejb-link>datalayer.jar#CategoryEJB</ejb-link>
+        <ejb-ref-name>ejb/CategoryHome</ejb-ref-name>
+        <ejb-ref-type>Entity</ejb-ref-type>
+        <local-home>ro.kds.erp.data.CategoryLocalHome</local-home>
+        <local>ro.kds.erp.data.CategoryLocal</local>
+        <ejb-link>datalayer.jar#CategoryEJB</ejb-link>
       </ejb-local-ref>
       <ejb-local-ref>
-	<ejb-ref-name>ejb/ProductHome</ejb-ref-name>
-	<ejb-ref-type>Entity</ejb-ref-type>
-	<local-home>ro.kds.erp.data.ProductLocalHome</local-home>
-	<local>ro.kds.erp.data.ProductLocal</local>
-	<ejb-link>datalayer.jar#ProductEJB</ejb-link>
+        <ejb-ref-name>ejb/ProductHome</ejb-ref-name>
+        <ejb-ref-type>Entity</ejb-ref-type>
+        <local-home>ro.kds.erp.data.ProductLocalHome</local-home>
+        <local>ro.kds.erp.data.ProductLocal</local>
+        <ejb-link>datalayer.jar#ProductEJB</ejb-link>
       </ejb-local-ref>
       <ejb-local-ref>
-	<ejb-ref-name>ejb/CompositeProductHome</ejb-ref-name>
-	<ejb-ref-type>Entity</ejb-ref-type>
-	<local-home>ro.kds.erp.data.CompositeProductLocalHome</local-home>
-	<local>ro.kds.erp.data.CompositeProductLocal</local>
-	<ejb-link>datalayer.jar#CompositeProductEJB</ejb-link>
+        <ejb-ref-name>ejb/CompositeProductHome</ejb-ref-name>
+        <ejb-ref-type>Entity</ejb-ref-type>
+        <local-home>ro.kds.erp.data.CompositeProductLocalHome</local-home>
+        <local>ro.kds.erp.data.CompositeProductLocal</local>
+        <ejb-link>datalayer.jar#CompositeProductEJB</ejb-link>
       </ejb-local-ref>
       <ejb-local-ref>
-	<ejb-ref-name>ejb/OfferHome</ejb-ref-name>
-	<ejb-ref-type>Entity</ejb-ref-type>
-	<local-home>ro.kds.erp.data.OfferLocalHome</local-home>
-	<local>ro.kds.erp.data.OfferLocal</local>
-	<ejb-link>datalayer.jar#OfferEJB</ejb-link>
+        <ejb-ref-name>ejb/OfferHome</ejb-ref-name>
+        <ejb-ref-type>Entity</ejb-ref-type>
+        <local-home>ro.kds.erp.data.OfferLocalHome</local-home>
+        <local>ro.kds.erp.data.OfferLocal</local>
+        <ejb-link>datalayer.jar#OfferEJB</ejb-link>
       </ejb-local-ref>
       <ejb-local-ref>
-	<ejb-ref-name>ejb/OfferItemHome</ejb-ref-name>
-	<ejb-ref-type>Entity</ejb-ref-type>
-	<local-home>ro.kds.erp.data.OfferItemLocalHome</local-home>
-	<local>ro.kds.erp.data.OfferItemLocal</local>
-	<ejb-link>datalayer.jar#OfferItemEJB</ejb-link>
+        <ejb-ref-name>ejb/OfferItemHome</ejb-ref-name>
+        <ejb-ref-type>Entity</ejb-ref-type>
+        <local-home>ro.kds.erp.data.OfferItemLocalHome</local-home>
+        <local>ro.kds.erp.data.OfferItemLocal</local>
+        <ejb-link>datalayer.jar#OfferItemEJB</ejb-link>
       </ejb-local-ref>
     </session>
-
-    <session>
+    <session id="FereastraEJB">
       <description>Editarea parametrilor ferestrei unei usi metalice</description>
       <ejb-name>FereastraEJB</ejb-name>
       <home>ro.kds.erp.biz.setum.basic.FereastraHome</home>
@@ -916,165 +873,154 @@
       <session-type>Stateful</session-type>
       <transaction-type>Container</transaction-type>
       <env-entry>
-	<description>Categoria din care face parte acest producs</description>
-	<env-entry-name>categoryId</env-entry-name>
-	<env-entry-type>java.lang.Integer</env-entry-type>
-	<env-entry-value>9989</env-entry-value>
+        <description>Categoria din care face parte acest producs</description>
+        <env-entry-name>categoryId</env-entry-name>
+        <env-entry-type>java.lang.Integer</env-entry-type>
+        <env-entry-value>9989</env-entry-value>
       </env-entry>
       <env-entry>
-	<description>Categorie produs component</description>
-	<env-entry-name>geamuriCategoryId</env-entry-name>
-	<env-entry-type>java.lang.Integer</env-entry-type>
-	<env-entry-value>9987</env-entry-value>
+        <description>Categorie produs component</description>
+        <env-entry-name>geamuriCategoryId</env-entry-name>
+        <env-entry-type>java.lang.Integer</env-entry-type>
+        <env-entry-value>9987</env-entry-value>
       </env-entry>
       <env-entry>
-	<description>Categorie produs component</description>
-	<env-entry-name>termopaneCategoryId</env-entry-name>
-	<env-entry-type>java.lang.Integer</env-entry-type>
-	<env-entry-value>9986</env-entry-value>
+        <description>Categorie produs component</description>
+        <env-entry-name>termopaneCategoryId</env-entry-name>
+        <env-entry-type>java.lang.Integer</env-entry-type>
+        <env-entry-value>9986</env-entry-value>
       </env-entry>
       <env-entry>
-	<description>Categorie produs component</description>
-	<env-entry-name>grilajeCategoryId</env-entry-name>
-	<env-entry-type>java.lang.Integer</env-entry-type>
-	<env-entry-value>9985</env-entry-value>
+        <description>Categorie produs component</description>
+        <env-entry-name>grilajeCategoryId</env-entry-name>
+        <env-entry-type>java.lang.Integer</env-entry-type>
+        <env-entry-value>9985</env-entry-value>
       </env-entry>
       <env-entry>
-	<description>Categorie produs component</description>
-	<env-entry-name>tablaCategoryId</env-entry-name>
-	<env-entry-type>java.lang.Integer</env-entry-type>
-	<env-entry-value>9984</env-entry-value>
+        <description>Categorie produs component</description>
+        <env-entry-name>tablaCategoryId</env-entry-name>
+        <env-entry-type>java.lang.Integer</env-entry-type>
+        <env-entry-value>9984</env-entry-value>
       </env-entry>
       <ejb-ref>
-	<ejb-ref-name>ejb/PreferencesEJB</ejb-ref-name>
-	<ejb-ref-type>Session</ejb-ref-type>
-	<home>ro.kds.erp.biz.PreferencesHome</home>
-	<remote>ro.kds.erp.biz.Preferences</remote>
+        <ejb-ref-name>ejb/PreferencesEJB</ejb-ref-name>
+        <ejb-ref-type>Session</ejb-ref-type>
+        <home>ro.kds.erp.biz.PreferencesHome</home>
+        <remote>ro.kds.erp.biz.Preferences</remote>
       </ejb-ref>
       <ejb-local-ref>
-	<ejb-ref-name>ejb/ProductHome</ejb-ref-name>
-	<ejb-ref-type>Entity</ejb-ref-type>
-	<local-home>ro.kds.erp.data.ProductLocalHome</local-home>
-	<local>ro.kds.erp.data.ProductLocal</local>
-	<ejb-link>datalayer.jar#ProductEJB</ejb-link>
+        <ejb-ref-name>ejb/ProductHome</ejb-ref-name>
+        <ejb-ref-type>Entity</ejb-ref-type>
+        <local-home>ro.kds.erp.data.ProductLocalHome</local-home>
+        <local>ro.kds.erp.data.ProductLocal</local>
+        <ejb-link>datalayer.jar#ProductEJB</ejb-link>
       </ejb-local-ref>
       <ejb-local-ref>
-	<ejb-ref-name>ejb/CategoryHome</ejb-ref-name>
-	<ejb-ref-type>Entity</ejb-ref-type>
-	<local-home>ro.kds.erp.data.CategoryLocalHome</local-home>
-	<local>ro.kds.erp.data.CategoryLocal</local>
-	<ejb-link>datalayer.jar#CategoryEJB</ejb-link>
+        <ejb-ref-name>ejb/CategoryHome</ejb-ref-name>
+        <ejb-ref-type>Entity</ejb-ref-type>
+        <local-home>ro.kds.erp.data.CategoryLocalHome</local-home>
+        <local>ro.kds.erp.data.CategoryLocal</local>
+        <ejb-link>datalayer.jar#CategoryEJB</ejb-link>
       </ejb-local-ref>
       <ejb-local-ref>
-	<ejb-ref-name>ejb/AttributeHome</ejb-ref-name>
-	<ejb-ref-type>Entity</ejb-ref-type>
-	<local-home>ro.kds.erp.data.AttributeLocalHome</local-home>
-	<local>ro.kds.erp.data.AttributeLocal</local>
-	<ejb-link>datalayer.jar#AttributeEJB</ejb-link>
+        <ejb-ref-name>ejb/AttributeHome</ejb-ref-name>
+        <ejb-ref-type>Entity</ejb-ref-type>
+        <local-home>ro.kds.erp.data.AttributeLocalHome</local-home>
+        <local>ro.kds.erp.data.AttributeLocal</local>
+        <ejb-link>datalayer.jar#AttributeEJB</ejb-link>
       </ejb-local-ref>
     </session>
-
-    <session>
+    <session id="GrilaVentilatieEJB">
       <description>Datele despre grila de ventilatie</description>
       <ejb-name>GrilaVentilatieEJB</ejb-name>
       <home>ro.kds.erp.biz.setum.basic.GrilaVentilatieHome</home>
       <remote>ro.kds.erp.biz.setum.basic.GrilaVentilatie</remote>
       <ejb-class>ro.kds.erp.biz.setum.GrilaVentilatieBizBean</ejb-class>
-
       <session-type>Stateful</session-type>
       <transaction-type>Container</transaction-type>
-
       <env-entry>
-	<description>The id of the category for this product</description>
-	<env-entry-name>categoryId</env-entry-name>
-	<env-entry-type>java.lang.Integer</env-entry-type>
-	<env-entry-value>9983</env-entry-value>
+        <description>The id of the category for this product</description>
+        <env-entry-name>categoryId</env-entry-name>
+        <env-entry-type>java.lang.Integer</env-entry-type>
+        <env-entry-value>9983</env-entry-value>
       </env-entry>
       <env-entry>
-	<description>The category holding the price for this product. This category should only contain one product. It's price is given per square meter.</description>
-	<env-entry-name>priceCategoryId</env-entry-name>
-	<env-entry-type>java.lang.Integer</env-entry-type>
-	<env-entry-value>9978</env-entry-value>
+        <description>The category holding the price for this product. This category should only contain one product. It's price is given per square meter.</description>
+        <env-entry-name>priceCategoryId</env-entry-name>
+        <env-entry-type>java.lang.Integer</env-entry-type>
+        <env-entry-value>9978</env-entry-value>
       </env-entry>
       <ejb-ref>
-	<ejb-ref-name>ejb/PreferencesEJB</ejb-ref-name>
-	<ejb-ref-type>Session</ejb-ref-type>
-	<home>ro.kds.erp.biz.PreferencesHome</home>
-	<remote>ro.kds.erp.biz.Preferences</remote>
+        <ejb-ref-name>ejb/PreferencesEJB</ejb-ref-name>
+        <ejb-ref-type>Session</ejb-ref-type>
+        <home>ro.kds.erp.biz.PreferencesHome</home>
+        <remote>ro.kds.erp.biz.Preferences</remote>
       </ejb-ref>
       <ejb-local-ref>
-	<ejb-ref-name>ejb/CategoryHome</ejb-ref-name>
-	<ejb-ref-type>Entity</ejb-ref-type>
-	<local-home>ro.kds.erp.data.CategoryLocalHome</local-home>
-	<local>ro.kds.erp.data.CategoryLocal</local>
-	<ejb-link>datalayer.jar#CategoryEJB</ejb-link>
+        <ejb-ref-name>ejb/CategoryHome</ejb-ref-name>
+        <ejb-ref-type>Entity</ejb-ref-type>
+        <local-home>ro.kds.erp.data.CategoryLocalHome</local-home>
+        <local>ro.kds.erp.data.CategoryLocal</local>
+        <ejb-link>datalayer.jar#CategoryEJB</ejb-link>
       </ejb-local-ref>
       <ejb-local-ref>
-	<ejb-ref-name>ejb/ProductHome</ejb-ref-name>
-	<ejb-ref-type>Entity</ejb-ref-type>
-	<local-home>ro.kds.erp.data.ProductLocalHome</local-home>
-	<local>ro.kds.erp.data.ProductLoal</local>
-	<ejb-link>datalayer.jar#ProductEJB</ejb-link>
+        <ejb-ref-name>ejb/ProductHome</ejb-ref-name>
+        <ejb-ref-type>Entity</ejb-ref-type>
+        <local-home>ro.kds.erp.data.ProductLocalHome</local-home>
+        <local>ro.kds.erp.data.ProductLoal</local>
+        <ejb-link>datalayer.jar#ProductEJB</ejb-link>
       </ejb-local-ref>
       <ejb-local-ref>
-	<ejb-ref-name>ejb/AttributeHome</ejb-ref-name>
-	<ejb-ref-type>Entity</ejb-ref-type>
-	<local-home>ro.kds.erp.data.AttributeLocalHome</local-home>
-	<local>ro.kds.erp.data.Attribute</local>
-	<ejb-link>datalayer.jar#AttributeEJB</ejb-link>
+        <ejb-ref-name>ejb/AttributeHome</ejb-ref-name>
+        <ejb-ref-type>Entity</ejb-ref-type>
+        <local-home>ro.kds.erp.data.AttributeLocalHome</local-home>
+        <local>ro.kds.erp.data.Attribute</local>
+        <ejb-link>datalayer.jar#AttributeEJB</ejb-link>
       </ejb-local-ref>
     </session>
-
-
-    <session>
+    <session id="GauriAerisireEJB">
       <description>Datele despre gaurile de aerisire</description>
       <ejb-name>GauriAerisireEJB</ejb-name>
       <home>ro.kds.erp.biz.setum.basic.GauriAerisireHome</home>
       <remote>ro.kds.erp.biz.setum.basic.GauriAerisire</remote>
       <ejb-class>ro.kds.erp.biz.setum.GauriAerisireBizBean</ejb-class>
-
       <session-type>Stateful</session-type>
       <transaction-type>Container</transaction-type>
-
       <env-entry>
-	<description>The id of the category for this product</description>
-	<env-entry-name>categoryId</env-entry-name>
-	<env-entry-type>java.lang.Integer</env-entry-type>
-	<env-entry-value>9983</env-entry-value>
+        <description>The id of the category for this product</description>
+        <env-entry-name>categoryId</env-entry-name>
+        <env-entry-type>java.lang.Integer</env-entry-type>
+        <env-entry-value>9983</env-entry-value>
       </env-entry>
       <ejb-ref>
-	<ejb-ref-name>ejb/PreferencesEJB</ejb-ref-name>
-	<ejb-ref-type>Session</ejb-ref-type>
-	<home>ro.kds.erp.biz.PreferencesHome</home>
-	<remote>ro.kds.erp.biz.Preferences</remote>
+        <ejb-ref-name>ejb/PreferencesEJB</ejb-ref-name>
+        <ejb-ref-type>Session</ejb-ref-type>
+        <home>ro.kds.erp.biz.PreferencesHome</home>
+        <remote>ro.kds.erp.biz.Preferences</remote>
       </ejb-ref>
       <ejb-local-ref>
-	<ejb-ref-name>ejb/CategoryHome</ejb-ref-name>
-	<ejb-ref-type>Entity</ejb-ref-type>
-	<local-home>ro.kds.erp.data.CategoryLocalHome</local-home>
-	<local>ro.kds.erp.data.CategoryLocal</local>
-	<ejb-link>datalayer.jar#CategoryEJB</ejb-link>
+        <ejb-ref-name>ejb/CategoryHome</ejb-ref-name>
+        <ejb-ref-type>Entity</ejb-ref-type>
+        <local-home>ro.kds.erp.data.CategoryLocalHome</local-home>
+        <local>ro.kds.erp.data.CategoryLocal</local>
+        <ejb-link>datalayer.jar#CategoryEJB</ejb-link>
       </ejb-local-ref>
       <ejb-local-ref>
-	<ejb-ref-name>ejb/ProductHome</ejb-ref-name>
-	<ejb-ref-type>Entity</ejb-ref-type>
-	<local-home>ro.kds.erp.data.ProductLocalHome</local-home>
-	<local>ro.kds.erp.data.ProductLoal</local>
-	<ejb-link>datalayer.jar#ProductEJB</ejb-link>
+        <ejb-ref-name>ejb/ProductHome</ejb-ref-name>
+        <ejb-ref-type>Entity</ejb-ref-type>
+        <local-home>ro.kds.erp.data.ProductLocalHome</local-home>
+        <local>ro.kds.erp.data.ProductLoal</local>
+        <ejb-link>datalayer.jar#ProductEJB</ejb-link>
       </ejb-local-ref>
       <ejb-local-ref>
-	<ejb-ref-name>ejb/AttributeHome</ejb-ref-name>
-	<ejb-ref-type>Entity</ejb-ref-type>
-	<local-home>ro.kds.erp.data.AttributeLocalHome</local-home>
-	<local>ro.kds.erp.data.Attribute</local>
-	<ejb-link>datalayer.jar#AttributeEJB</ejb-link>
+        <ejb-ref-name>ejb/AttributeHome</ejb-ref-name>
+        <ejb-ref-type>Entity</ejb-ref-type>
+        <local-home>ro.kds.erp.data.AttributeLocalHome</local-home>
+        <local>ro.kds.erp.data.Attribute</local>
+        <ejb-link>datalayer.jar#AttributeEJB</ejb-link>
       </ejb-local-ref>
     </session>
-
-
-
-    <!-- ClientsEJB -->
-    <session>
+    <session id="ClientsEJB">
       <description>Manage the business logic of storing and retrieving client and contacts.</description>
       <ejb-name>ClientsEJB</ejb-name>
       <home>ro.kds.erp.biz.setum.basic.ClientsHome</home>
@@ -1083,40 +1029,37 @@
       <session-type>Stateful</session-type>
       <transaction-type>Container</transaction-type>
       <ejb-ref>
-	<description>Required by the scripting engine.</description>
-	<ejb-ref-name>ejb/PreferencesEJB</ejb-ref-name>
-	<ejb-ref-type>Session</ejb-ref-type>
-	<home>ro.kds.erp.biz.PreferencesHome</home>
-	<remote>ro.kds.erp.biz.Preferences</remote>
+        <description>Required by the scripting engine.</description>
+        <ejb-ref-name>ejb/PreferencesEJB</ejb-ref-name>
+        <ejb-ref-type>Session</ejb-ref-type>
+        <home>ro.kds.erp.biz.PreferencesHome</home>
+        <remote>ro.kds.erp.biz.Preferences</remote>
       </ejb-ref>
       <ejb-local-ref>
-	<ejb-ref-name>ejb/ClientHome</ejb-ref-name>
-	<ejb-ref-type>Entity</ejb-ref-type>
-	<local-home>ro.kds.erp.data.ClientLocalHome</local-home>
-	<local>ro.kds.erp.data.ClientLocal</local>
-	<ejb-link>datalayer.jar#ClientEJB</ejb-link>
+        <ejb-ref-name>ejb/ClientHome</ejb-ref-name>
+        <ejb-ref-type>Entity</ejb-ref-type>
+        <local-home>ro.kds.erp.data.ClientLocalHome</local-home>
+        <local>ro.kds.erp.data.ClientLocal</local>
+        <ejb-link>datalayer.jar#ClientEJB</ejb-link>
       </ejb-local-ref>
       <ejb-local-ref>
-	<ejb-ref-name>ejb/ContactHome</ejb-ref-name>
-	<ejb-ref-type>Entity</ejb-ref-type>
-	<local-home>ro.kds.erp.data.ContactLocalHome</local-home>
-	<local>ro.kds.erp.data.ContactLocal</local>
-	<ejb-link>datalayer.jar#ContactEJB</ejb-link>
+        <ejb-ref-name>ejb/ContactHome</ejb-ref-name>
+        <ejb-ref-type>Entity</ejb-ref-type>
+        <local-home>ro.kds.erp.data.ContactLocalHome</local-home>
+        <local>ro.kds.erp.data.ContactLocal</local>
+        <ejb-link>datalayer.jar#ContactEJB</ejb-link>
       </ejb-local-ref>
       <ejb-local-ref>
-	<description>Used to locate country value list</description>
-	<ejb-ref-name>ejb/CategoryHome</ejb-ref-name>
-	<ejb-ref-type>Entity</ejb-ref-type>
-	<local-home>ro.kds.erp.data.CategoryLocalHome</local-home>
-	<local>ro.kds.erp.data.CategoryLocal</local>
-	<ejb-link>datalayer.jar#CategoryEJB</ejb-link>
+        <description>Used to locate country value list</description>
+        <ejb-ref-name>ejb/CategoryHome</ejb-ref-name>
+        <ejb-ref-type>Entity</ejb-ref-type>
+        <local-home>ro.kds.erp.data.CategoryLocalHome</local-home>
+        <local>ro.kds.erp.data.CategoryLocal</local>
+        <ejb-link>datalayer.jar#CategoryEJB</ejb-link>
       </ejb-local-ref>
     </session>
-
-
-    <session>
-      <description>The logic of selecting and editing categories
-      and there direct products.</description>
+    <session id="GenericProductsEJB">
+      <description>The logic of selecting and editing categories       and there direct products.</description>
       <ejb-name>GenericProductsEJB</ejb-name>
       <home>ro.kds.erp.biz.basic.GenericProductsHome</home>
       <remote>ro.kds.erp.biz.basic.GenericProducts</remote>
@@ -1124,179 +1067,158 @@
       <session-type>Stateful</session-type>
       <transaction-type>Container</transaction-type>
       <env-entry>
-	<description>The category id containing the list of subcategories that will be edited by this bean.</description>
-	<description>It points to the "ValueLists" category.</description>
-	<env-entry-name>rootCategoryId</env-entry-name>
-	<env-entry-type>java.lang.Integer</env-entry-type>
-	<env-entry-value>9973</env-entry-value>
+        <description>The category id containing the list of subcategories that will be edited by this bean.</description>
+        <description>It points to the &quot;ValueLists&quot; category.</description>
+        <env-entry-name>rootCategoryId</env-entry-name>
+        <env-entry-type>java.lang.Integer</env-entry-type>
+        <env-entry-value>9973</env-entry-value>
       </env-entry>
       <ejb-ref>
-	<description>Required by the scripting engine.</description>
-	<ejb-ref-name>ejb/PreferencesEJB</ejb-ref-name>
-	<ejb-ref-type>Session</ejb-ref-type>
-	<home>ro.kds.erp.biz.PreferencesHome</home>
-	<remote>ro.kds.erp.biz.Preferences</remote>
+        <description>Required by the scripting engine.</description>
+        <ejb-ref-name>ejb/PreferencesEJB</ejb-ref-name>
+        <ejb-ref-type>Session</ejb-ref-type>
+        <home>ro.kds.erp.biz.PreferencesHome</home>
+        <remote>ro.kds.erp.biz.Preferences</remote>
       </ejb-ref>
       <ejb-ref>
-	<description>Sequence used to generate Category ids</description>
-	<ejb-ref-name>ejb/SequenceHome</ejb-ref-name>
-	<ejb-ref-type>Session</ejb-ref-type>
-	<home>ro.kds.erp.biz.SequenceHome</home>
-	<remote>ro.kds.erp.biz.Sequence</remote>
+        <description>Sequence used to generate Category ids</description>
+        <ejb-ref-name>ejb/SequenceHome</ejb-ref-name>
+        <ejb-ref-type>Session</ejb-ref-type>
+        <home>ro.kds.erp.biz.SequenceHome</home>
+        <remote>ro.kds.erp.biz.Sequence</remote>
       </ejb-ref>
       <ejb-local-ref>
-	<ejb-ref-name>ejb/CategoryHome</ejb-ref-name>
-	<ejb-ref-type>Entity</ejb-ref-type>
-	<local-home>ro.kds.erp.data.CategoryLocalHome</local-home>
-	<local>ro.kds.erp.data.CategoryLocal</local>
-	<ejb-link>datalayer.jar#CategoryEJB</ejb-link>
+        <ejb-ref-name>ejb/CategoryHome</ejb-ref-name>
+        <ejb-ref-type>Entity</ejb-ref-type>
+        <local-home>ro.kds.erp.data.CategoryLocalHome</local-home>
+        <local>ro.kds.erp.data.CategoryLocal</local>
+        <ejb-link>datalayer.jar#CategoryEJB</ejb-link>
       </ejb-local-ref>
       <ejb-local-ref>
-	<ejb-ref-name>ejb/ProductHome</ejb-ref-name>
-	<ejb-ref-type>Entity</ejb-ref-type>
-	<local-home>ro.kds.erp.data.ProductLocalHome</local-home>
-	<local>ro.kds.erp.data.ProductLocal</local>
-	<ejb-link>datalayer.jar#ProductEJB</ejb-link>
+        <ejb-ref-name>ejb/ProductHome</ejb-ref-name>
+        <ejb-ref-type>Entity</ejb-ref-type>
+        <local-home>ro.kds.erp.data.ProductLocalHome</local-home>
+        <local>ro.kds.erp.data.ProductLocal</local>
+        <ejb-link>datalayer.jar#ProductEJB</ejb-link>
       </ejb-local-ref>
       <ejb-local-ref>
-	<ejb-ref-name>ejb/AttributeHome</ejb-ref-name>
-	<ejb-ref-type>Entity</ejb-ref-type>
-	<local-home>ro.kds.erp.data.AttributeLocalHome</local-home>
-	<local>ro.kds.erp.data.AttributeLocal</local>
-	<ejb-link>datalayer.jar#AttributeEJB</ejb-link>
+        <ejb-ref-name>ejb/AttributeHome</ejb-ref-name>
+        <ejb-ref-type>Entity</ejb-ref-type>
+        <local-home>ro.kds.erp.data.AttributeLocalHome</local-home>
+        <local>ro.kds.erp.data.AttributeLocal</local>
+        <ejb-link>datalayer.jar#AttributeEJB</ejb-link>
       </ejb-local-ref>
     </session>
-
   </enterprise-beans>
-
-
-
-
   <assembly-descriptor>
-
     <container-transaction>
       <method>
-	<ejb-name>UsaMetalica1KEJB</ejb-name>
-	<method-name>*</method-name>
+        <ejb-name>UsaMetalica1KEJB</ejb-name>
+        <method-name>*</method-name>
       </method>
       <method>
-	<ejb-name>UsiMetalice1KEJB</ejb-name>
-	<method-name>*</method-name>
+        <ejb-name>UsiMetalice1KEJB</ejb-name>
+        <method-name>*</method-name>
       </method>
       <method>
-	<ejb-name>UsaMetalica2KEJB</ejb-name>
-	<method-name>*</method-name>
+        <ejb-name>UsaMetalica2KEJB</ejb-name>
+        <method-name>*</method-name>
       </method>
       <method>
-	<ejb-name>UsiMetalice2KEJB</ejb-name>
-	<method-name>*</method-name>
+        <ejb-name>UsiMetalice2KEJB</ejb-name>
+        <method-name>*</method-name>
       </method>
       <trans-attribute>Required</trans-attribute>
     </container-transaction>
-
     <container-transaction>
       <method>
-	<description>All methods of StandardOfferEJB</description>
-	<ejb-name>StandardOfferEJB</ejb-name>
-	<method-name>*</method-name>
+        <description>All methods of StandardOfferEJB</description>
+        <ejb-name>StandardOfferEJB</ejb-name>
+        <method-name>*</method-name>
       </method>
       <trans-attribute>Required</trans-attribute>
     </container-transaction>
-
     <container-transaction>
       <method>
-	<description>All methods of SistemEJB</description>
-	<ejb-name>SistemEJB</ejb-name>
-	<method-name>*</method-name>
+        <description>All methods of SistemEJB</description>
+        <ejb-name>SistemEJB</ejb-name>
+        <method-name>*</method-name>
       </method>
       <trans-attribute>Required</trans-attribute>
     </container-transaction>
-
     <container-transaction>
       <method>
-	<description>All methods of OtherProducsEJB</description>
-	<ejb-name>OtherProductsEJB</ejb-name>
-	<method-name>*</method-name>
+        <description>All methods of OtherProducsEJB</description>
+        <ejb-name>OtherProductsEJB</ejb-name>
+        <method-name>*</method-name>
       </method>
       <trans-attribute>Required</trans-attribute>
     </container-transaction>
-
     <container-transaction>
       <method>
-	<description>All methods of UsaStdNeechipataBean</description>
-	<ejb-name>UsaStdNeechipataEJB</ejb-name>
-	<method-name>*</method-name>
+        <description>All methods of UsaStdNeechipataBean</description>
+        <ejb-name>UsaStdNeechipataEJB</ejb-name>
+        <method-name>*</method-name>
       </method>
       <trans-attribute>Required</trans-attribute>
     </container-transaction>
-
     <container-transaction>
       <method>
-	<description>All methods of UsaStdNeechipataBean</description>
-	<ejb-name>UsaStandardEJB</ejb-name>
-	<method-name>*</method-name>
+        <description>All methods of UsaStdNeechipataBean</description>
+        <ejb-name>UsaStandardEJB</ejb-name>
+        <method-name>*</method-name>
       </method>
       <trans-attribute>Required</trans-attribute>
     </container-transaction>
-
     <container-transaction>
       <method>
-	<description>All methods of OfrtaUsiStandard</description>
-	<ejb-name>OfertaUsiStandardEJB</ejb-name>
-	<method-name>*</method-name>
+        <description>All methods of OfrtaUsiStandard</description>
+        <ejb-name>OfertaUsiStandardEJB</ejb-name>
+        <method-name>*</method-name>
       </method>
       <trans-attribute>Required</trans-attribute>
     </container-transaction>
-
     <container-transaction>
       <method>
-	<ejb-name>ArbitraryOfferEJB</ejb-name>
-	<method-name>*</method-name>
+        <ejb-name>ArbitraryOfferEJB</ejb-name>
+        <method-name>*</method-name>
       </method>
       <trans-attribute>Required</trans-attribute>
     </container-transaction>
-
     <container-transaction>
       <method>
-	<ejb-name>FereastraEJB</ejb-name>
-	<method-name>*</method-name>
+        <ejb-name>FereastraEJB</ejb-name>
+        <method-name>*</method-name>
       </method>
       <trans-attribute>Required</trans-attribute>
     </container-transaction>
-
     <container-transaction>
       <method>
-	<ejb-name>GrilaVentilatieEJB</ejb-name>
-	<method-name>*</method-name>
+        <ejb-name>GrilaVentilatieEJB</ejb-name>
+        <method-name>*</method-name>
       </method>
       <trans-attribute>Required</trans-attribute>
     </container-transaction>
-
     <container-transaction>
       <method>
-	<ejb-name>GauriAerisireEJB</ejb-name>
-	<method-name>*</method-name>
+        <ejb-name>GauriAerisireEJB</ejb-name>
+        <method-name>*</method-name>
       </method>
       <trans-attribute>Required</trans-attribute>
     </container-transaction>
-
     <container-transaction>
       <method>
-	<ejb-name>ClientsEJB</ejb-name>
-	<method-name>*</method-name>
+        <ejb-name>ClientsEJB</ejb-name>
+        <method-name>*</method-name>
       </method>
       <trans-attribute>Required</trans-attribute>
     </container-transaction>
-
     <container-transaction>
       <method>
-	<ejb-name>GenericProductsEJB</ejb-name>
-	<method-name>*</method-name>
+        <ejb-name>GenericProductsEJB</ejb-name>
+        <method-name>*</method-name>
       </method>
       <trans-attribute>Required</trans-attribute>
     </container-transaction>
   </assembly-descriptor>
-
-
 </ejb-jar>
-
