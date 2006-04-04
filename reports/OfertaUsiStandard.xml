@@ -88,7 +88,7 @@
 						mode="Transparent"
 						x="19"
 						y="23"
-						width="155"
+						width="140"
 						height="27"
 						forecolor="#000000"
 						backcolor="#FFFFFF"
@@ -108,9 +108,9 @@
 				<staticText>
 					<reportElement
 						mode="Transparent"
-						x="176"
+						x="161"
 						y="23"
-						width="155"
+						width="140"
 						height="27"
 						forecolor="#000000"
 						backcolor="#FFFFFF"
@@ -130,9 +130,9 @@
 				<staticText>
 					<reportElement
 						mode="Transparent"
-						x="333"
+						x="303"
 						y="23"
-						width="155"
+						width="170"
 						height="27"
 						forecolor="#000000"
 						backcolor="#FFFFFF"
@@ -152,9 +152,9 @@
 				<staticText>
 					<reportElement
 						mode="Transparent"
-						x="490"
+						x="475"
 						y="23"
-						width="155"
+						width="170"
 						height="27"
 						forecolor="#000000"
 						backcolor="#FFFFFF"
@@ -213,7 +213,7 @@
 					<textElement textAlignment="Right" verticalAlignment="Bottom" rotation="None" lineSpacing="Single">
 						<font fontName="Arial" pdfFontName="Helvetica" size="10" isBold="true" isItalic="true" isUnderline="false" isPdfEmbedded ="false" pdfEncoding ="Cp1252" isStrikeThrough="false" />
 					</textElement>
-				<text><![CDATA[Pret (RON) ]]></text>
+				<text><![CDATA[Pret cu TVA (RON) ]]></text>
 				</staticText>
 				<textField isStretchWithOverflow="false" pattern="" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
@@ -655,7 +655,7 @@ Capital social: 14,10 miliarde lei]]></text>
 						mode="Transparent"
 						x="19"
 						y="3"
-						width="155"
+						width="140"
 						height="27"
 						forecolor="#000000"
 						backcolor="#FFFFFF"
@@ -675,9 +675,9 @@ Capital social: 14,10 miliarde lei]]></text>
 				<textField isStretchWithOverflow="false" pattern="" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
 						mode="Transparent"
-						x="176"
+						x="161"
 						y="3"
-						width="155"
+						width="140"
 						height="27"
 						forecolor="#000000"
 						backcolor="#FFFFFF"
@@ -697,9 +697,9 @@ Capital social: 14,10 miliarde lei]]></text>
 				<textField isStretchWithOverflow="false" pattern="" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
 						mode="Transparent"
-						x="333"
+						x="303"
 						y="3"
-						width="155"
+						width="170"
 						height="27"
 						forecolor="#000000"
 						backcolor="#FFFFFF"
@@ -719,9 +719,9 @@ Capital social: 14,10 miliarde lei]]></text>
 				<textField isStretchWithOverflow="false" pattern="" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
 						mode="Transparent"
-						x="490"
+						x="475"
 						y="3"
-						width="155"
+						width="170"
 						height="27"
 						forecolor="#000000"
 						backcolor="#FFFFFF"
