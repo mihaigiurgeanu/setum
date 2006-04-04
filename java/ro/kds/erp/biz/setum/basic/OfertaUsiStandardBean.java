@@ -649,6 +649,78 @@ public abstract class OfertaUsiStandardBean
 	computeCalculatedFields(r);
 	return r;
     }
+    public ResponseBean updateUsaCode(String usaCode) {
+        ResponseBean r = new ResponseBean();
+	String oldVal = form.getUsaCode();
+	form.setUsaCode(usaCode);
+	r.addRecord();
+	r.addField("usaCode", usaCode); // for number format
+	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.OfertaUsiStandard.usaCode");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
+		script.setVar(FORM_VARNAME, form, OfertaUsiStandardForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the usaCode", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
+    public ResponseBean updateUsaId(Integer usaId) {
+        ResponseBean r = new ResponseBean();
+	Integer oldVal = form.getUsaId();
+	form.setUsaId(usaId);
+	r.addRecord();
+	r.addField("usaId", usaId); // for number format
+	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.OfertaUsiStandard.usaId");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
+		script.setVar(FORM_VARNAME, form, OfertaUsiStandardForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the usaId", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
+    public ResponseBean updateUsaDescription(String usaDescription) {
+        ResponseBean r = new ResponseBean();
+	String oldVal = form.getUsaDescription();
+	form.setUsaDescription(usaDescription);
+	r.addRecord();
+	r.addField("usaDescription", usaDescription); // for number format
+	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.OfertaUsiStandard.usaDescription");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
+		script.setVar(FORM_VARNAME, form, OfertaUsiStandardForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the usaDescription", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
     public ResponseBean updateBroasca(String broasca) {
         ResponseBean r = new ResponseBean();
 	String oldVal = form.getBroasca();
@@ -839,6 +911,9 @@ public abstract class OfertaUsiStandardBean
 	r.addField("productCode", form.getProductCode());
 	r.addField("productName", form.getProductName());
 	r.addField("usa", form.getUsa());
+	r.addField("usaCode", form.getUsaCode());
+	r.addField("usaId", form.getUsaId());
+	r.addField("usaDescription", form.getUsaDescription());
 	r.addField("broasca", form.getBroasca());
 	r.addField("cilindru", form.getCilindru());
 	r.addField("sild", form.getSild());
@@ -960,6 +1035,24 @@ public abstract class OfertaUsiStandardBean
 	    s.setVar("usa", form.getUsa(), String.class);
 	} catch (ScriptErrorException e) {
 	    logger.log(BasicLevel.WARN, "Can not set the value of field: usa from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    s.setVar("usaCode", form.getUsaCode(), String.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: usaCode from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    s.setVar("usaId", form.getUsaId(), Integer.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: usaId from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    s.setVar("usaDescription", form.getUsaDescription(), String.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: usaDescription from the script");
             logger.log(BasicLevel.DEBUG, e);
         }
 	try {
@@ -1197,6 +1290,39 @@ public abstract class OfertaUsiStandardBean
 	    }
 	} catch (ScriptErrorException e) {
 	    logger.log(BasicLevel.WARN, "Can not get the value of field: usa from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    field = s.getVar("usaCode", String.class);
+	    if(!field.equals(form.getUsaCode())) {
+	        logger.log(BasicLevel.DEBUG, "Field usaCode modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setUsaCode((String)field);
+	        r.addField("usaCode", (String)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: usaCode from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    field = s.getVar("usaId", Integer.class);
+	    if(!field.equals(form.getUsaId())) {
+	        logger.log(BasicLevel.DEBUG, "Field usaId modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setUsaId((Integer)field);
+	        r.addField("usaId", (Integer)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: usaId from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    field = s.getVar("usaDescription", String.class);
+	    if(!field.equals(form.getUsaDescription())) {
+	        logger.log(BasicLevel.DEBUG, "Field usaDescription modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setUsaDescription((String)field);
+	        r.addField("usaDescription", (String)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: usaDescription from the script");
             logger.log(BasicLevel.DEBUG, e);
         }
 	try {

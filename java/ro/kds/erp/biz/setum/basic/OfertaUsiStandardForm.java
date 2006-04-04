@@ -32,6 +32,9 @@ public class OfertaUsiStandardForm implements Serializable {
     String productCode;
     String productName;
     String usa;
+    String usaCode;
+    Integer usaId;
+    String usaDescription;
     String broasca;
     String cilindru;
     String sild;
@@ -112,6 +115,18 @@ public class OfertaUsiStandardForm implements Serializable {
 
 
        this.usa = "";
+
+
+
+       this.usaCode = "";
+
+
+
+       this.usaId = new Integer(0);
+
+
+
+       this.usaDescription = "";
 
 
 
@@ -373,6 +388,51 @@ public class OfertaUsiStandardForm implements Serializable {
 	AttributeLocal a = (AttributeLocal)attributes.get("usa");
 	if(a != null) {
 	    this.setUsa(a.getStringValue());
+	}
+    }
+
+    public void setUsaCode(String newUsaCode) {
+        this.usaCode = newUsaCode;
+    }
+
+    public String getUsaCode() {
+        return usaCode;
+    }
+
+    public void readUsaCode(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("usaCode");
+	if(a != null) {
+	    this.setUsaCode(a.getStringValue());
+	}
+    }
+
+    public void setUsaId(Integer newUsaId) {
+        this.usaId = newUsaId;
+    }
+
+    public Integer getUsaId() {
+        return usaId;
+    }
+
+    public void readUsaId(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("usaId");
+	if(a != null) {
+	    this.setUsaId(a.getIntValue());
+	}
+    }
+
+    public void setUsaDescription(String newUsaDescription) {
+        this.usaDescription = newUsaDescription;
+    }
+
+    public String getUsaDescription() {
+        return usaDescription;
+    }
+
+    public void readUsaDescription(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("usaDescription");
+	if(a != null) {
+	    this.setUsaDescription(a.getStringValue());
 	}
     }
 

@@ -116,19 +116,9 @@ public class UsaStdNeechipataBean
 	    p.setCode(form.getCode());
 	    p.setDescription(form.getDescription());
 	    p.setEntryPrice(form.getEntryPrice());
+	    p.setSellPrice(form.getSellPrice());
 	    p.setPrice1(form.getSellPrice());
-	    if(p.getSellPrice() == null ||
-	       ! p.getSellPrice().equals(form.getSellPrice())) {
-		p.setSellPrice(form.getSellPrice());
-
-
-		try {
-		    PricesUpdater.updatePrices(); // composite products prices
-		} catch (Exception e) {
-		    logger.log(BasicLevel.ERROR, "Failed notifying the message bean about price updates.");
-		}
-		
-	    }
+	    p.setPrice2(new BigDecimal(0));
 
 	    r = new ResponseBean();
 	} catch (NamingException e) {

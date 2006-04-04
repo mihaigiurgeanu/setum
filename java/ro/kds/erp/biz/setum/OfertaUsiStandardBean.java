@@ -115,7 +115,10 @@ public class OfertaUsiStandardBean
 	form.setAbsoluteGain(new BigDecimal(0));
 
 	// read only fields on subform
+	form.setUsaId(new Integer(0));
+	form.setUsaCode("");
 	form.setUsa("");
+	form.setUsaDescription("");
 	form.setBroasca("");
 	form.setCilindru("");
 	form.setSild("");
@@ -333,6 +336,20 @@ public class OfertaUsiStandardBean
 	    offerItem = oh.findByPrimaryKey(loadId);
 
 	    ProductLocal p = offerItem.getProduct();	    
+	    form.setUsa("");
+	    form.setUsaId(new Integer(0));
+	    form.setUsaCode("");
+	    form.setUsaDescription("");
+	    form.setBroasca("");
+	    form.setCilindru("");
+	    form.setSild("");
+	    form.setYalla("");
+	    form.setVizor("");
+	    form.setEntryPrice(new BigDecimal(0));
+	    form.setSellPrice(new BigDecimal(0));
+	    form.setProductCategory("");
+	    form.setProductCode("");
+	    form.setProductName("");
 	    if(p != null) {
 		CompositeProductLocal cp = p.getCompositeProduct();
 		Collection parts = cp.getComponents();
@@ -340,7 +357,10 @@ public class OfertaUsiStandardBean
 		    ProductLocal part = (ProductLocal)i.next();
 		    Integer catid = part.getCategory().getId();
 		    if(catid.equals(USA_SIMPLA_ID)) {
+			form.setUsaId(part.getId());
+			form.setUsaCode(part.getCode());
 			form.setUsa(part.getName());
+			form.setUsaDescription(part.getDescription());
 		    } else if(catid.equals(BROASCA_ID)) {
 			form.setBroasca(part.getName());
 		    } else if(catid.equals(CILINDRU_ID)) {
@@ -364,18 +384,7 @@ public class OfertaUsiStandardBean
 		form.setProductName(p.getName());
 	    }
 	    else {
-		logger.log(BasicLevel.WARN, "No product associated with this offer " + id);
-		form.setUsa("");
-		form.setBroasca("");
-		form.setCilindru("");
-		form.setSild("");
-		form.setYalla("");
-		form.setVizor("");
-		form.setEntryPrice(new BigDecimal(0));
-		form.setSellPrice(new BigDecimal(0));
-		form.setProductCategory("");
-		form.setProductCode("");
-		form.setProductName("");
+		logger.log(BasicLevel.WARN, "No product associated with this offer item " + loadId);
 	    }
 
 	    form.setPrice(offerItem.getPrice());
@@ -589,7 +598,11 @@ public class OfertaUsiStandardBean
 		dataRow.put("name", form.getProductName());
 		dataRow.put("code", form.getProductCode());
 		dataRow.put("sellPrice", form.getVatPrice());
-		
+
+		dataRow.put("usa_code", form.getUsaCode());
+		dataRow.put("usa_name", form.getUsa());
+		dataRow.put("usa_id", form.getUsaId());
+		dataRow.put("usa_description", form.getUsaDescription());
 		dataRow.put("broasca_name", form.getBroasca());
 		dataRow.put("cilindru_name", form.getCilindru());
 		dataRow.put("sild_name", form.getSild());

@@ -38,6 +38,9 @@ public interface OfertaUsiStandard extends EJBObject {
     public ResponseBean updateProductCode(String newProductCode) throws RemoteException;
     public ResponseBean updateProductName(String newProductName) throws RemoteException;
     public ResponseBean updateUsa(String newUsa) throws RemoteException;
+    public ResponseBean updateUsaCode(String newUsaCode) throws RemoteException;
+    public ResponseBean updateUsaId(Integer newUsaId) throws RemoteException;
+    public ResponseBean updateUsaDescription(String newUsaDescription) throws RemoteException;
     public ResponseBean updateBroasca(String newBroasca) throws RemoteException;
     public ResponseBean updateCilindru(String newCilindru) throws RemoteException;
     public ResponseBean updateSild(String newSild) throws RemoteException;

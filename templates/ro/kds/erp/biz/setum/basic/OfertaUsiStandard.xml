@@ -74,6 +74,18 @@
     <type>String</type>
   </field>
   <field>
+    <name>usaCode</name>
+    <type>String</type>
+  </field>
+  <field>
+    <name>usaId</name>
+    <type>Integer</type>
+  </field>
+  <field>
+    <name>usaDescription</name>
+    <type>String</type>
+  </field>
+  <field>
     <name>broasca</name>
     <type>String</type>
   </field>
