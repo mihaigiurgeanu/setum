@@ -363,6 +363,9 @@ public class OfertaUsiStandardBean
 		}
 		form.setEntryPrice(entryPrice);
 		form.setSellPrice(sellPrice);
+		form.setProductCategory(p.getCategory().getName());
+		form.setProductCode(p.getCode());
+		form.setProductName(p.getName());
 	    }
 	    else {
 		logger.log(BasicLevel.WARN, "No product associated with this offer " + id);
@@ -374,6 +377,9 @@ public class OfertaUsiStandardBean
 		form.setVizor("");
 		form.setEntryPrice(new BigDecimal(0));
 		form.setSellPrice(new BigDecimal(0));
+		form.setProductCategory("");
+		form.setProductCode("");
+		form.setProductName("");
 	    }
 
 	    form.setPrice(offerItem.getPrice());
@@ -583,57 +589,17 @@ public class OfertaUsiStandardBean
 	    for(Iterator i = offerItems.iterator(); i.hasNext();) {
 		OfferItemLocal item = (OfferItemLocal)i.next();
 		HashMap dataRow = new HashMap();
-		ProductLocal p = item.getProduct();
-		CategoryLocal cat = p.getCategory();
-		dataRow.put("name", p.getName());
-		dataRow.put("code", p.getCode());
-		dataRow.put("sellPrice", item.getPrice());
+		loadSubForm(item.getId());
+		dataRow.put("name", form.getProductName());
+		dataRow.put("code", form.getProductCode());
+		dataRow.put("sellPrice", form.getVatPrice());
 		
-		dataRow.put("broasca_name", "-");
-		dataRow.put("cilindru_name", "-");
-		dataRow.put("sild_name", "-");
-		dataRow.put("yalla_name", "-");
-		dataRow.put("vizor_name", "-");
+		dataRow.put("broasca_name", form.getBroasca());
+		dataRow.put("cilindru_name", form.getCilindru());
+		dataRow.put("sild_name", form.getSild());
+		dataRow.put("yalla_name", form.getYalla());
+		dataRow.put("vizor_name", form.getVizor());
 
-		for(Iterator j = p.getCompositeProduct().getComponents()
-			.iterator(); j.hasNext(); ) {
-		    ProductLocal part = (ProductLocal)j.next();
-
-		    if(part.getCategory().getId().intValue() == 
-		       USA_SIMPLA_ID.intValue()) {
-			
-			dataRow.put("usa_id", part.getId());
-			dataRow.put("usa_name", part.getName());
-			dataRow.put("usa_description", part.getDescription());
-			dataRow.put("usa_code", part.getCode());
-		    }
-		    if(part.getCategory().getId().intValue() == 
-		       BROASCA_ID.intValue()) {
-			dataRow.put("broasca_name", part.getName());
-		
-		    }
-		    if(part.getCategory().getId().intValue() == 
-		       CILINDRU_ID.intValue()) {
-			dataRow.put("cilindru_name", part.getName());
-			
-		    }
-		    if(part.getCategory().getId().intValue() == 
-		       SILD_ID.intValue()) {
-			dataRow.put("sild_name", part.getName());
-			
-		    }
-		    if(part.getCategory().getId().intValue() == 
-		       YALLA_ID.intValue()) {
-			dataRow.put("yalla_name", part.getName());
-			
-		    }
-		    if(part.getCategory().getId().intValue() == 
-		       VIZOR_ID.intValue()) {
-			
-			dataRow.put("vizor_name", part.getName());
-		    }
-		    
-		}
 
 		reportData.add(dataRow);
 	    }

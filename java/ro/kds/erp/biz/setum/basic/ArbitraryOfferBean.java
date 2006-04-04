@@ -505,6 +505,30 @@ public abstract class ArbitraryOfferBean
 	computeCalculatedFields(r);
 	return r;
     }
+    public ResponseBean updateVatPrice(java.math.BigDecimal vatPrice) {
+        ResponseBean r = new ResponseBean();
+	java.math.BigDecimal oldVal = form.getVatPrice();
+	form.setVatPrice(vatPrice);
+	r.addRecord();
+	r.addField("vatPrice", vatPrice); // for number format
+	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.ArbitraryOffer.vatPrice");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(OLDVAL_VARNAME, oldVal, java.math.BigDecimal.class);
+		script.setVar(FORM_VARNAME, form, ArbitraryOfferForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the vatPrice", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
     public ResponseBean updateRelativeGain(Double relativeGain) {
         ResponseBean r = new ResponseBean();
 	Double oldVal = form.getRelativeGain();
@@ -713,6 +737,7 @@ public abstract class ArbitraryOfferBean
 	r.addField("comment", form.getComment());
 	r.addField("productId", form.getProductId());
 	r.addField("price", form.getPrice());
+	r.addField("vatPrice", form.getVatPrice());
 	r.addField("relativeGain", form.getRelativeGain());
 	r.addField("absoluteGain", form.getAbsoluteGain());
 	r.addField("productCategory", form.getProductCategory());
@@ -799,6 +824,12 @@ public abstract class ArbitraryOfferBean
 	    s.setVar("price", form.getPrice(), java.math.BigDecimal.class);
 	} catch (ScriptErrorException e) {
 	    logger.log(BasicLevel.WARN, "Can not set the value of field: price from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    s.setVar("vatPrice", form.getVatPrice(), java.math.BigDecimal.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: vatPrice from the script");
             logger.log(BasicLevel.DEBUG, e);
         }
 	try {
@@ -976,6 +1007,17 @@ public abstract class ArbitraryOfferBean
 	    }
 	} catch (ScriptErrorException e) {
 	    logger.log(BasicLevel.WARN, "Can not get the value of field: price from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    field = s.getVar("vatPrice", java.math.BigDecimal.class);
+	    if(!field.equals(form.getVatPrice())) {
+	        logger.log(BasicLevel.DEBUG, "Field vatPrice modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setVatPrice((java.math.BigDecimal)field);
+	        r.addField("vatPrice", (java.math.BigDecimal)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: vatPrice from the script");
             logger.log(BasicLevel.DEBUG, e);
         }
 	try {

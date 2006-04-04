@@ -26,6 +26,7 @@ public class ArbitraryOfferForm implements Serializable {
     String comment;
     Integer productId;
     java.math.BigDecimal price;
+    java.math.BigDecimal vatPrice;
     Double relativeGain;
     java.math.BigDecimal absoluteGain;
     String productCategory;
@@ -83,6 +84,10 @@ public class ArbitraryOfferForm implements Serializable {
 
 
        this.price = new java.math.BigDecimal(0);
+
+
+
+       this.vatPrice = new java.math.BigDecimal(0);
 
 
 
@@ -258,6 +263,21 @@ public class ArbitraryOfferForm implements Serializable {
 	AttributeLocal a = (AttributeLocal)attributes.get("price");
 	if(a != null) {
 	    this.setPrice(a.getDecimalValue());
+	}
+    }
+
+    public void setVatPrice(java.math.BigDecimal newVatPrice) {
+        this.vatPrice = newVatPrice;
+    }
+
+    public java.math.BigDecimal getVatPrice() {
+        return vatPrice;
+    }
+
+    public void readVatPrice(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("vatPrice");
+	if(a != null) {
+	    this.setVatPrice(a.getDecimalValue());
 	}
     }
 

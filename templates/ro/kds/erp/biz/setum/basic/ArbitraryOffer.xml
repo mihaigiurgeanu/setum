@@ -50,6 +50,10 @@
     <type>java.math.BigDecimal</type>
   </field>
   <field>
+    <name>vatPrice</name>
+    <type>java.math.BigDecimal</type>
+  </field>
+  <field>
     <name>relativeGain</name>
     <type>Double</type>
   </field>

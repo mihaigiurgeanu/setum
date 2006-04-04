@@ -332,16 +332,14 @@ public class StandardOfferBean extends ro.kds.erp.biz.setum.basic.StandardOfferB
 	    for(Iterator i = offerItems.iterator(); i.hasNext();) {
 		OfferItemLocal item = (OfferItemLocal)i.next();
 		HashMap dataRow = new HashMap();
-		ProductLocal p = item.getProduct();
-		CategoryLocal cat = p.getCategory();
+		loadSubForm(item.getId());
 
-		logger.log(BasicLevel.DEBUG, "Adding item " + p.getCode()
-			   + "/" + p.getName() + "/" + item.getPrice());
-		dataRow.put("name", cat.getName() + 
-			    " - " + p.getName());
-		dataRow.put("code", p.getCode());
-		dataRow.put("sellPrice", item.getPrice());
-		sortedData.put(cat.getName() + " - " + p.getName(), dataRow);
+		dataRow.put("name", form.getProductCategory() + 
+			    " - " + form.getProductName());
+		dataRow.put("code", form.getProductCode());
+		dataRow.put("sellPrice", form.getVatPrice());
+		sortedData.put(form.getProductCategory() + 
+			       " - " + form.getProductName(), dataRow);
 	    }
 	    reportData = sortedData.values();
 	} catch (Exception e) {

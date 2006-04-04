@@ -481,6 +481,30 @@ public abstract class OfertaUsiStandardBean
 	computeCalculatedFields(r);
 	return r;
     }
+    public ResponseBean updateVatPrice(java.math.BigDecimal vatPrice) {
+        ResponseBean r = new ResponseBean();
+	java.math.BigDecimal oldVal = form.getVatPrice();
+	form.setVatPrice(vatPrice);
+	r.addRecord();
+	r.addField("vatPrice", vatPrice); // for number format
+	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.OfertaUsiStandard.vatPrice");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(OLDVAL_VARNAME, oldVal, java.math.BigDecimal.class);
+		script.setVar(FORM_VARNAME, form, OfertaUsiStandardForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the vatPrice", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
     public ResponseBean updateRelativeGain(Double relativeGain) {
         ResponseBean r = new ResponseBean();
 	Double oldVal = form.getRelativeGain();
@@ -524,6 +548,78 @@ public abstract class OfertaUsiStandardBean
 						// fields to the response also
 	   } catch (ScriptErrorException e) {
 	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the absoluteGain", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
+    public ResponseBean updateProductCategory(String productCategory) {
+        ResponseBean r = new ResponseBean();
+	String oldVal = form.getProductCategory();
+	form.setProductCategory(productCategory);
+	r.addRecord();
+	r.addField("productCategory", productCategory); // for number format
+	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.OfertaUsiStandard.productCategory");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
+		script.setVar(FORM_VARNAME, form, OfertaUsiStandardForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the productCategory", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
+    public ResponseBean updateProductCode(String productCode) {
+        ResponseBean r = new ResponseBean();
+	String oldVal = form.getProductCode();
+	form.setProductCode(productCode);
+	r.addRecord();
+	r.addField("productCode", productCode); // for number format
+	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.OfertaUsiStandard.productCode");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
+		script.setVar(FORM_VARNAME, form, OfertaUsiStandardForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the productCode", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
+    public ResponseBean updateProductName(String productName) {
+        ResponseBean r = new ResponseBean();
+	String oldVal = form.getProductName();
+	form.setProductName(productName);
+	r.addRecord();
+	r.addField("productName", productName); // for number format
+	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.OfertaUsiStandard.productName");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
+		script.setVar(FORM_VARNAME, form, OfertaUsiStandardForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the productName", e);
            }
         }
 	computeCalculatedFields(r);
@@ -736,8 +832,12 @@ public abstract class OfertaUsiStandardBean
 	r.addField("description", form.getDescription());
 	r.addField("comment", form.getComment());
 	r.addField("price", form.getPrice());
+	r.addField("vatPrice", form.getVatPrice());
 	r.addField("relativeGain", form.getRelativeGain());
 	r.addField("absoluteGain", form.getAbsoluteGain());
+	r.addField("productCategory", form.getProductCategory());
+	r.addField("productCode", form.getProductCode());
+	r.addField("productName", form.getProductName());
 	r.addField("usa", form.getUsa());
 	r.addField("broasca", form.getBroasca());
 	r.addField("cilindru", form.getCilindru());
@@ -821,6 +921,12 @@ public abstract class OfertaUsiStandardBean
             logger.log(BasicLevel.DEBUG, e);
         }
 	try {
+	    s.setVar("vatPrice", form.getVatPrice(), java.math.BigDecimal.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: vatPrice from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
 	    s.setVar("relativeGain", form.getRelativeGain(), Double.class);
 	} catch (ScriptErrorException e) {
 	    logger.log(BasicLevel.WARN, "Can not set the value of field: relativeGain from the script");
@@ -830,6 +936,24 @@ public abstract class OfertaUsiStandardBean
 	    s.setVar("absoluteGain", form.getAbsoluteGain(), java.math.BigDecimal.class);
 	} catch (ScriptErrorException e) {
 	    logger.log(BasicLevel.WARN, "Can not set the value of field: absoluteGain from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    s.setVar("productCategory", form.getProductCategory(), String.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: productCategory from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    s.setVar("productCode", form.getProductCode(), String.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: productCode from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    s.setVar("productName", form.getProductName(), String.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: productName from the script");
             logger.log(BasicLevel.DEBUG, e);
         }
 	try {
@@ -999,6 +1123,17 @@ public abstract class OfertaUsiStandardBean
             logger.log(BasicLevel.DEBUG, e);
         }
 	try {
+	    field = s.getVar("vatPrice", java.math.BigDecimal.class);
+	    if(!field.equals(form.getVatPrice())) {
+	        logger.log(BasicLevel.DEBUG, "Field vatPrice modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setVatPrice((java.math.BigDecimal)field);
+	        r.addField("vatPrice", (java.math.BigDecimal)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: vatPrice from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
 	    field = s.getVar("relativeGain", Double.class);
 	    if(!field.equals(form.getRelativeGain())) {
 	        logger.log(BasicLevel.DEBUG, "Field relativeGain modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
@@ -1018,6 +1153,39 @@ public abstract class OfertaUsiStandardBean
 	    }
 	} catch (ScriptErrorException e) {
 	    logger.log(BasicLevel.WARN, "Can not get the value of field: absoluteGain from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    field = s.getVar("productCategory", String.class);
+	    if(!field.equals(form.getProductCategory())) {
+	        logger.log(BasicLevel.DEBUG, "Field productCategory modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setProductCategory((String)field);
+	        r.addField("productCategory", (String)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: productCategory from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    field = s.getVar("productCode", String.class);
+	    if(!field.equals(form.getProductCode())) {
+	        logger.log(BasicLevel.DEBUG, "Field productCode modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setProductCode((String)field);
+	        r.addField("productCode", (String)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: productCode from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    field = s.getVar("productName", String.class);
+	    if(!field.equals(form.getProductName())) {
+	        logger.log(BasicLevel.DEBUG, "Field productName modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setProductName((String)field);
+	        r.addField("productName", (String)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: productName from the script");
             logger.log(BasicLevel.DEBUG, e);
         }
 	try {

@@ -46,12 +46,28 @@
     <type>java.math.BigDecimal</type>
   </field>
   <field>
+    <name>vatPrice</name>
+    <type>java.math.BigDecimal</type>
+  </field>
+  <field>
     <name>relativeGain</name>
     <type>Double</type>
   </field>
   <field>
     <name>absoluteGain</name>
     <type>java.math.BigDecimal</type>
+  </field>
+  <field>
+    <name>productCategory</name>
+    <type>String</type>
+  </field>
+  <field>
+    <name>productCode</name>
+    <type>String</type>
+  </field>
+  <field>
+    <name>productName</name>
+    <type>String</type>
   </field>
   <field>
     <name>usa</name>

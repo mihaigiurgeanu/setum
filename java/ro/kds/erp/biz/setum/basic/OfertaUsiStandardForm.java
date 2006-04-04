@@ -25,8 +25,12 @@ public class OfertaUsiStandardForm implements Serializable {
     String description;
     String comment;
     java.math.BigDecimal price;
+    java.math.BigDecimal vatPrice;
     Double relativeGain;
     java.math.BigDecimal absoluteGain;
+    String productCategory;
+    String productCode;
+    String productName;
     String usa;
     String broasca;
     String cilindru;
@@ -83,11 +87,27 @@ public class OfertaUsiStandardForm implements Serializable {
 
 
 
+       this.vatPrice = new java.math.BigDecimal(0);
+
+
+
        this.relativeGain = new Double(0);
    
 
 
        this.absoluteGain = new java.math.BigDecimal(0);
+
+
+
+       this.productCategory = "";
+
+
+
+       this.productCode = "";
+
+
+
+       this.productName = "";
 
 
 
@@ -251,6 +271,21 @@ public class OfertaUsiStandardForm implements Serializable {
 	}
     }
 
+    public void setVatPrice(java.math.BigDecimal newVatPrice) {
+        this.vatPrice = newVatPrice;
+    }
+
+    public java.math.BigDecimal getVatPrice() {
+        return vatPrice;
+    }
+
+    public void readVatPrice(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("vatPrice");
+	if(a != null) {
+	    this.setVatPrice(a.getDecimalValue());
+	}
+    }
+
     public void setRelativeGain(Double newRelativeGain) {
         this.relativeGain = newRelativeGain;
     }
@@ -278,6 +313,51 @@ public class OfertaUsiStandardForm implements Serializable {
 	AttributeLocal a = (AttributeLocal)attributes.get("absoluteGain");
 	if(a != null) {
 	    this.setAbsoluteGain(a.getDecimalValue());
+	}
+    }
+
+    public void setProductCategory(String newProductCategory) {
+        this.productCategory = newProductCategory;
+    }
+
+    public String getProductCategory() {
+        return productCategory;
+    }
+
+    public void readProductCategory(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("productCategory");
+	if(a != null) {
+	    this.setProductCategory(a.getStringValue());
+	}
+    }
+
+    public void setProductCode(String newProductCode) {
+        this.productCode = newProductCode;
+    }
+
+    public String getProductCode() {
+        return productCode;
+    }
+
+    public void readProductCode(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("productCode");
+	if(a != null) {
+	    this.setProductCode(a.getStringValue());
+	}
+    }
+
+    public void setProductName(String newProductName) {
+        this.productName = newProductName;
+    }
+
+    public String getProductName() {
+        return productName;
+    }
+
+    public void readProductName(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("productName");
+	if(a != null) {
+	    this.setProductName(a.getStringValue());
 	}
     }
 
