@@ -38,5 +38,12 @@ function addnew() {
     document.getElementById('maintab').selectedIndex=1;
 }
 
+function remove_selected_product() {
+    var req = theForm.get_request();
+    req.add("command", "removeProductDefinition");
+    theForm.post_request(req);
+    load_usi();
+}
+
 theForm.setupEventListeners();
 load_usi();

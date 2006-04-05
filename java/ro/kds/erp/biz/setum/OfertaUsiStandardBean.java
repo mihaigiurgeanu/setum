@@ -277,31 +277,34 @@ public class OfertaUsiStandardBean
 		r.addRecord();
 		r.addField("id", item.getId());
 		ProductLocal p = item.getProduct();
-
-		CompositeProductLocal cp = p.getCompositeProduct();
-		Collection parts = cp.getComponents();
-		for(Iterator j=parts.iterator(); j.hasNext();) {
-		    ProductLocal part = (ProductLocal)j.next();
-		    Integer partCatId = part.getCategory().getId();
-		    if(partCatId.equals(USA_SIMPLA_ID)) {
-			r.addField("col-usa", part.getName());
-		    } else if (partCatId.equals(BROASCA_ID)) {
-			r.addField("col-broasca", part.getName());
-		    } else if (partCatId.equals(CILINDRU_ID)) {
-			r.addField("col-cilindru", part.getName());
-		    } else if (partCatId.equals(SILD_ID)) {
-			r.addField("col-sild", part.getName());
-		    } else if (partCatId.equals(YALLA_ID)) {
-			r.addField("col-yalla", part.getName());
-		    } else if (partCatId.equals(VIZOR_ID)) {
-			r.addField("col-vizor", part.getName());
-		    } else {
-			logger.log(BasicLevel.WARN, "Productd " + p.getId() + 
-				   " has an unknown component type " 
-				   + part.getCategory().getName());
+		if(p == null) {
+		    logger.log(BasicLevel.WARN, "There is no product associated with current item "
+			       + item.getId() + ". Probably it was deleted from master table!");
+		} else {
+		    CompositeProductLocal cp = p.getCompositeProduct();
+		    Collection parts = cp.getComponents();
+		    for(Iterator j=parts.iterator(); j.hasNext();) {
+			ProductLocal part = (ProductLocal)j.next();
+			Integer partCatId = part.getCategory().getId();
+			if(partCatId.equals(USA_SIMPLA_ID)) {
+			    r.addField("col-usa", part.getName());
+			} else if (partCatId.equals(BROASCA_ID)) {
+			    r.addField("col-broasca", part.getName());
+			} else if (partCatId.equals(CILINDRU_ID)) {
+			    r.addField("col-cilindru", part.getName());
+			} else if (partCatId.equals(SILD_ID)) {
+			    r.addField("col-sild", part.getName());
+			} else if (partCatId.equals(YALLA_ID)) {
+			    r.addField("col-yalla", part.getName());
+			} else if (partCatId.equals(VIZOR_ID)) {
+			    r.addField("col-vizor", part.getName());
+			} else {
+			    logger.log(BasicLevel.WARN, "Productd " + p.getId() + 
+				       " has an unknown component type " 
+				       + part.getCategory().getName());
+			}
 		    }
 		}
-
 		r.addField("col-price", item.getPrice());
 		
 	    }

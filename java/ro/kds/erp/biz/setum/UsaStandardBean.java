@@ -22,6 +22,7 @@ import java.math.BigDecimal;
 import ro.kds.erp.scripting.Script;
 import java.rmi.RemoteException;
 import ro.kds.erp.utils.NullHandler;
+import javax.ejb.RemoveException;
 
 /**
  * Gestiunea usilor standard. Usile standard sunt produse compuse obtinute
@@ -29,7 +30,7 @@ import ro.kds.erp.utils.NullHandler;
  * yalla, vizor.
  *
  *
- * $Id: UsaStandardBean.java,v 1.3 2006/04/03 17:34:43 mihai Exp $
+ * $Id: UsaStandardBean.java,v 1.4 2006/04/05 20:14:07 mihai Exp $
  *
  * @author <a href="mailto:Mihai Giurgeanu@CRIMIRA"></a>
  * @version 1.0
@@ -294,6 +295,55 @@ public class UsaStandardBean
 	return r;
     }
 
+    /**
+     * Removes the currently selected product
+     */
+    public ResponseBean removeProductDefinition() {
+	ResponseBean r;
+	
+	if (id == null) {
+	    r = ResponseBean.ERR_NOTCURRENT;
+	    logger.log(BasicLevel.DEBUG, "No product selected when trying to delete");
+	} else {
+
+	    try {
+		InitialContext ic = new InitialContext();
+		Context env = (Context)ic.lookup("java:comp/env");
+		ProductLocalHome ph = (ProductLocalHome)PortableRemoteObject.narrow
+		    (env.lookup("ejb/ProductHome"), ProductLocalHome.class);
+		CompositeProductLocalHome cph = 
+		    (CompositeProductLocalHome)PortableRemoteObject.narrow
+		    (env.lookup("ejb/CompositeProductHome"),
+		     CompositeProductLocalHome.class);
+		
+		ProductLocal product;
+		CompositeProductLocal p;
+
+		p = cph.findByPrimaryKey(id);
+		product = p.getProduct();
+		
+		p.remove();
+		product.remove();
+
+		r = ResponseBean.SUCCESS;
+
+	    } catch (NamingException e) {
+		r = ResponseBean.ERR_CONFIG_NAMING;
+		logger.log(BasicLevel.ERROR, e);
+	    } catch (RemoveException e) {
+		r = ResponseBean.ERR_REMOVE;
+		logger.log(BasicLevel.INFO, e);
+		logger.log(BasicLevel.INFO, "Product " + id +
+			   " could not be removed");
+		ejbContext.setRollbackOnly();
+	    } catch (FinderException e) {
+		r = ResponseBean.ERR_NOTFOUND;
+		logger.log(BasicLevel.ERROR, e);
+	    }
+	}
+
+	return r;
+    }
 
     /**
      * Recalculate the price for products in this category.
