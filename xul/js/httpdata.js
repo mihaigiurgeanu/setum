@@ -35,6 +35,11 @@ function httpRequestExecute() {
 	return false;
     }
   
+    var waitCursor = document.documentElement.hasAttribute("wait-cursor");
+    log("Saving current cursor wait status: " + waitCursor);
+    log("Setting cursor wait status to true");
+    document.documentElement.setAttribute("wait-cursor", 0);
+
     //Make the connection and send our data
     try {
 	var txt = "";
@@ -57,10 +62,17 @@ function httpRequestExecute() {
 	httpRequest.open("POST", targetURL, false, null, null);  
 	httpRequest.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
 	httpRequest.send(txt);
+
+
     }catch (e){
 	alert('An error has occured calling the external site: '+e);
 	return false;
-    } 
+    } finally {
+	log("Restoring cursor wait status: " + waitCursor);
+	if(! waitCursor) {
+	    document.documentElement.removeAttribute("wait-cursor");
+	}
+    }
 
     //Make sure we received a valid response
     switch(httpRequest.readyState) {
@@ -171,10 +183,6 @@ function ValueListItem(value, label) {
 }
 
 function post_data(request) {
-    var waitCursor = window.getAttribute("wait-cursor");
-
-    window.setAttribute("wait-cursor", true);
-
     var result;
     var response = request.execute();
     if(response) {
@@ -192,7 +200,6 @@ function post_data(request) {
 	result = false;
     }
 
-    window.setAttribute("wait-cursor", waitCursor);
     return result;
 }
 

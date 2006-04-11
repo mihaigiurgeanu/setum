@@ -45,21 +45,21 @@ Arguments:
 
   <script language="javascript"><![CDATA[
 
-    var theForm = new FormObject();
-    theForm.do_link = "/usistd/echipate.do";
-    
-    var usi = theForm.load_listing();
+    var do_link = "/usistd/echipate.do";
+
+
+    usi = new RemoteDataView(do_link, "loadListing", "getListingLength");
     document.getElementById('listingUsi').view = make_treeview
-    (usi,
-     function(row, column) {
-	 return usi[row][column];
-     });
+	(usi,
+	 function(row, column) {
+	     return usi.get_cell_text(row, column);
+	 });
     
     function doOk() {
 	tree = document.getElementById('listingUsi');
 	for(var i=0; i<usi.length; i++) {
 	    if(tree.view.selection.isSelected(i)) {
-		window.arguments[0].select(usi[i]['id']);
+		window.arguments[0].select(usi.get_cell_text(i, 'id'));
 	    }
 	}
 	

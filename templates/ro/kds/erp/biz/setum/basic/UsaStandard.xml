@@ -37,7 +37,8 @@
   </field>
 
   <remote>
-    <method>ResponseBean loadListing() throws RemoteException</method>
+    <method>ResponseBean loadListing(Integer startRow) throws RemoteException</method>
+    <method>ResponseBean getListingLength() throws RemoteException</method>
     <method>void recalculatePrices() throws RemoteException</method>
     <method>ResponseBean removeProductDefinition() throws RemoteException</method>
   </remote>

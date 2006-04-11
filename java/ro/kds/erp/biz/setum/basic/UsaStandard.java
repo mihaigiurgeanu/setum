@@ -30,7 +30,8 @@ public interface UsaStandard extends EJBObject {
     public ResponseBean updateYallaId(Integer newYallaId) throws RemoteException;
     public ResponseBean updateVizorId(Integer newVizorId) throws RemoteException;
 
-    public ResponseBean loadListing() throws RemoteException;
+    public ResponseBean loadListing(Integer startRow) throws RemoteException;
+    public ResponseBean getListingLength() throws RemoteException;
     public void recalculatePrices() throws RemoteException;
     public ResponseBean removeProductDefinition() throws RemoteException;
 }

@@ -66,7 +66,7 @@ function FormObject() {
     // DEPRECATED
     // use instead:
     //  var req = theForm.get_request();
-    //  req.add("command", "loadObjects");
+    //  req.add("command", "loadListing");
     //  req.add("param0", paramValue);
     //  var records = load_records(req);
     this.load_listing = load_listing;
@@ -512,7 +512,7 @@ function save_sub(save_cmd) {
 // DEPRECATED
 // use instead:
 //  var req = theForm.get_request();
-//  req.add("command", "loadObjects");
+//  req.add("command", "");
 //  req.add("param0", paramValue);
 //  var records = load_records(req);
 function load_listing() {
@@ -525,7 +525,7 @@ function load_listing() {
 // DEPRECATED
 // use instead:
 //  var req = theForm.get_request();
-//  req.add("command", "loadObjects");
+//  req.add("command", "loadListing");
 //  req.add("param0", paramValue);
 //  var records = load_records(req);
 function load_param_listing(param) {
@@ -538,8 +538,7 @@ function load_param_listing(param) {
 // DEPRECATED
 // use instead:
 //  var req = theForm.get_request();
-//  req.add("command", "loadObjects");
-//  req.add("param0", paramValue);
+//  req.add("command", listing_cmd);
 //  var records = load_records(req);
 function load_sub_listing(listing_cmd) {
     var req = new HTTPDataRequest(this.do_link);

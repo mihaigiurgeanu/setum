@@ -43,34 +43,28 @@ Dialog for selecting a certain type of products.
   <script language="javascript">
       <![CDATA[
 
-	       var theForm = new FormObject();
-	       theForm.do_link = "/usistd/echipate.do";
-	       // The main tree (main listing)
-	       var usi;
-	       function load_usi() {
-		   usi = theForm.load_listing();
-		   document.getElementById('listingUsi').view = make_treeview
-		       (usi,
-			function(row, column) {
-			    return usi[row][column];
-			});
-	       }
-	       
-	       theForm.setupEventListeners();
-	       load_usi();
-	       
-	       function doOk() {
-		   tree = document.getElementById('listingUsi');
-		   for(var i=0; i<usi.length; i++) {
-		       if(tree.view.selection.isSelected(i)) {
-			   window.opener.addProduct(usi[i]['id']);
-		       }
-		   }
-		   
-		   window.opener.load_items();
-		   return true;
-	       }
-	 ]]>
+    var do_link = "/usistd/echipate.do";
+
+
+    usi = new RemoteDataView(do_link, "loadListing", "getListingLength");
+    document.getElementById('listingUsi').view = make_treeview
+	(usi,
+	 function(row, column) {
+	     return usi.get_cell_text(row, column);
+	 });
+    
+    function doOk() {
+	tree = document.getElementById('listingUsi');
+	for(var i=0; i<usi.length; i++) {
+	    if(tree.view.selection.isSelected(i)) {
+		window.opener.addProduct(usi.get_cell_text(i, 'id'));
+	    }
+	}
+	window.opener.load_items();
+	return true;
+    }
+
+      ]]>
       </script>
   
 </dialog>

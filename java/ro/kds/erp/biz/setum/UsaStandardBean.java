@@ -23,6 +23,7 @@ import ro.kds.erp.scripting.Script;
 import java.rmi.RemoteException;
 import ro.kds.erp.utils.NullHandler;
 import javax.ejb.RemoveException;
+import java.util.ArrayList;
 
 /**
  * Gestiunea usilor standard. Usile standard sunt produse compuse obtinute
@@ -30,7 +31,7 @@ import javax.ejb.RemoveException;
  * yalla, vizor.
  *
  *
- * $Id: UsaStandardBean.java,v 1.4 2006/04/05 20:14:07 mihai Exp $
+ * $Id: UsaStandardBean.java,v 1.5 2006/04/11 18:24:01 mihai Exp $
  *
  * @author <a href="mailto:Mihai Giurgeanu@CRIMIRA"></a>
  * @version 1.0
@@ -38,6 +39,12 @@ import javax.ejb.RemoveException;
 public class UsaStandardBean 
     extends ro.kds.erp.biz.setum.basic.UsaStandardBean {
 
+
+    /**
+     * This is a cache of the products listing. It is used
+     * to return only a partial listing to the UI interface.
+     */
+    private ArrayList productsListing;
     
     /**
      * Form data initialization
@@ -241,11 +248,18 @@ public class UsaStandardBean
     }
 
     /**
-     * Loads the listing of composite products in this category.
+     * Returns the number of products in the listing managed by this bean.
+     * It also initializes a listing cache from which the loadListing method
+     * will read data to return partial listings.
+     *
+     * This method should be called before loadListing method.
+     *
+     * @returns a <code>ResponseBean</code> containing a single record
+     * that has the field <code>records-count</code> set to the number
+     * of products usi-standard.
      */
-    public ResponseBean loadListing() {
+    public ResponseBean getListingLength() {
 	ResponseBean r;
-	 
 	try {
 	    InitialContext ic = new InitialContext();
 	    Context env = (Context)ic.lookup("java:comp/env");
@@ -255,43 +269,63 @@ public class UsaStandardBean
 	    CategoryLocal c = ch.findByPrimaryKey(USA_STD_ID);
 	    
 	    Collection products = c.getProducts();
+	    productsListing = new ArrayList(products);
+ 
 	    r = new ResponseBean();
-	    for(Iterator i = products.iterator(); i.hasNext(); ) {
-		ProductLocal p = (ProductLocal)i.next();
-		CompositeProductLocal cp = p.getCompositeProduct();
-		Collection parts = cp.getComponents();
-		r.addRecord();
-		r.addField("id", cp.getId());
-		for(Iterator j=parts.iterator(); j.hasNext();) {
-		    ProductLocal part = (ProductLocal)j.next();
-		    Integer partCatId = part.getCategory().getId();
-		    if(partCatId.equals(USA_SIMPLA_ID)) {
-			r.addField("col-usa", part.getName());
-		    } else if (partCatId.equals(BROASCA_ID)) {
-			r.addField("col-broasca", part.getName());
-		    } else if (partCatId.equals(CILINDRU_ID)) {
-			r.addField("col-cilindru", part.getName());
-		    } else if (partCatId.equals(SILD_ID)) {
-			r.addField("col-sild", part.getName());
-		    } else if (partCatId.equals(YALLA_ID)) {
-			r.addField("col-yalla", part.getName());
-		    } else if (partCatId.equals(VIZOR_ID)) {
-			r.addField("col-vizor", part.getName());
-		    }
+	    r.addRecord();
+	    r.addField("records-count", productsListing.size());
+
+	} catch (NamingException e) {
+	    logger.log(BasicLevel.ERROR, e.getMessage(), e);
+	    r = ResponseBean.ERR_CONFIG_NAMING;
+	} catch (FinderException e) {
+	    logger.log(BasicLevel.ERROR, e.getMessage(), e);
+	    r = ResponseBean.ERR_CONFIG_NOTFOUND;
+	} catch (Exception e) {
+	    logger.log(BasicLevel.ERROR, e.getMessage(), e);
+	    r = ResponseBean.ERR_UNEXPECTED;
+	}
+	return r;
+    }
+
+    /**
+     * Loads the listing of composite products in this category.
+     * Returns only a partial listing starting with the given row number.
+     */
+    public ResponseBean loadListing(Integer startRow) {
+	ResponseBean r;
+	 
+	r = new ResponseBean();
+
+	for(int i = startRow.intValue(); 
+	    i < (startRow.intValue() + 50) 
+		&& i < productsListing.size(); 
+	    i++) {
+
+	    ProductLocal p = (ProductLocal)productsListing.get(i);
+	    CompositeProductLocal cp = p.getCompositeProduct();
+	    Collection parts = cp.getComponents();
+	    r.addRecord();
+	    r.addField("id", cp.getId());
+	    for(Iterator j=parts.iterator(); j.hasNext();) {
+		ProductLocal part = (ProductLocal)j.next();
+		Integer partCatId = part.getCategory().getId();
+		if(partCatId.equals(USA_SIMPLA_ID)) {
+		    r.addField("col-usa", part.getName());
+		} else if (partCatId.equals(BROASCA_ID)) {
+		    r.addField("col-broasca", part.getName());
+		} else if (partCatId.equals(CILINDRU_ID)) {
+		    r.addField("col-cilindru", part.getName());
+		} else if (partCatId.equals(SILD_ID)) {
+		    r.addField("col-sild", part.getName());
+		} else if (partCatId.equals(YALLA_ID)) {
+		    r.addField("col-yalla", part.getName());
+		} else if (partCatId.equals(VIZOR_ID)) {
+		    r.addField("col-vizor", part.getName());
 		}
 	    }
-	} catch (NamingException e) {
-	    r = new ResponseBean();
-	    r.setCode(1);
-	    r.setMessage("Eroare la configurarea aplicatiei. Lista de produse nu poate fi incarcata.");
-	    logger.log(BasicLevel.ERROR, e.getMessage(), e);
-	} catch (Exception e) {
-	    r = new ResponseBean();
-	    r.setCode(3);
-	    r.setMessage("Eroare la incarcarea listei. Lista de produse nu poate fi incarcata.");
-	    logger.log(BasicLevel.ERROR, e.getMessage(), e);
 	}
-
+	
 	return r;
     }
 

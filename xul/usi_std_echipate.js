@@ -13,12 +13,12 @@ theForm.do_link = "/usistd/echipate.do";
 // The main tree (main listing)
 var usi;
 function load_usi() {
-  usi = theForm.load_listing();
-  document.getElementById('listingUsi').view = make_treeview
-    (usi,
-     function(row, column) {
-       return usi[row][column];
-     });
+    usi = new RemoteDataView(theForm.do_link, "loadListing", "getListingLength");
+    document.getElementById('listingUsi').view = make_treeview
+	(usi,
+	 function(row, column) {
+	     return usi.get_cell_text(row, column);
+	 });
 }
 
 
