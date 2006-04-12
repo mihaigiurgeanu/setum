@@ -280,6 +280,15 @@ public class OfertaUsiStandardBean
 		if(p == null) {
 		    logger.log(BasicLevel.WARN, "There is no product associated with current item "
 			       + item.getId() + ". Probably it was deleted from master table!");
+
+
+		    r.addField("col-usa", "XXX");
+		    r.addField("col-broasca", "XXX");
+		    r.addField("col-cilindru", "XXX");
+		    r.addField("col-sild", "XXX");
+		    r.addField("col-yalla", "XXX");
+		    r.addField("col-vizor", "XXX");
+
 		} else {
 		    CompositeProductLocal cp = p.getCompositeProduct();
 		    Collection parts = cp.getComponents();
