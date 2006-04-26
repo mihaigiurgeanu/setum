@@ -87,6 +87,15 @@
     <cleanup>create</cleanup>
   </jonas-entity>
 
+  <jonas-entity>
+    <ejb-name>ProductsSelectionEJB</ejb-name>
+    <jndi-local-name>ProductsSelectionHome</jndi-local-name>
+    <jdbc-mapping>
+      <jndi-name>erpsetumdb</jndi-name>
+      <automatic-pk>true</automatic-pk>
+    </jdbc-mapping>
+    <cleanup>create</cleanup>
+  </jonas-entity>
 
   <jonas-ejb-relation>
     <ejb-relation-name>ProductAttribute</ejb-relation-name>
@@ -94,6 +103,22 @@
       <ejb-relationship-role-name>AttributeWithProductValue</ejb-relationship-role-name>
       <foreign-key-jdbc-mapping>
 	<foreign-key-jdbc-name>ProductValue</foreign-key-jdbc-name>
+      </foreign-key-jdbc-mapping>
+    </jonas-ejb-relationship-role>
+  </jonas-ejb-relation>
+
+  <jonas-ejb-relation>
+    <ejb-relation-name>ProductsSelectionSelfJoin</ejb-relation-name>
+    <jonas-ejb-relationship-role>
+      <ejb-relationship-role-name>ProductsSelectionParent</ejb-relationship-role-name>
+      <foreign-key-jdbc-mapping>
+	<foreign-key-jdbc-name>ProductsSelectionChildId</foreign-key-jdbc-name>
+      </foreign-key-jdbc-mapping>
+    </jonas-ejb-relationship-role>
+    <jonas-ejb-relationship-role>
+      <ejb-relationship-role-name>ProductsSelectionChild</ejb-relationship-role-name>
+      <foreign-key-jdbc-mapping>
+	<foreign-key-jdbc-name>ProductsSelectionParentId</foreign-key-jdbc-name>
       </foreign-key-jdbc-mapping>
     </jonas-ejb-relationship-role>
   </jonas-ejb-relation>

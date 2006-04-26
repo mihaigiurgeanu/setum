@@ -468,6 +468,54 @@
       </cmp-field>
       <primkey-field>id</primkey-field>
     </entity>
+
+    <entity>
+      <description>It represents a selection of products. Selections
+      are like categories, but more general in the sense that they
+      do not form a tree. There are more selections a product can belong to
+      and a selection can hold more products. The selections can also be
+      grouped in other selections so one can model a selections of products by
+      manufacturer, this selections containing selections of products by each
+      particular manufacturer.</description>
+
+      <ejb-name>ProductsSelectionEJB</ejb-name>
+      <local-home>ro.kds.erp.data.ProductsSelectionLocalHome</local-home>
+      <local>ro.kds.erp.data.ProductsSelectionLocal</local>
+      <ejb-class>ro.kds.erp.data.ProductsSelectionBean</ejb-class>
+      <persistence-type>Container</persistence-type>
+      <prim-key-class>java.lang.Integer</prim-key-class>
+      <reentrant>true</reentrant>
+      <cmp-version>2.x</cmp-version>
+      <abstract-schema-name>ProductsSelection</abstract-schema-name>
+      <cmp-field>
+	<description>Primary key</description>
+	<field-name>id</field-name>
+      </cmp-field>
+      <cmp-field>
+	<description>The code is a unique identifier meant to be readible to the user</description>
+	<field-name>code</field-name>
+      </cmp-field>
+      <cmp-field>
+	<description>A clear name for the field</description>
+	<field-name>name</field-name>
+      </cmp-field>
+      <cmp-field>
+	<field-name>description</field-name>
+      </cmp-field>
+
+      <primkey-field>id</primkey-field>
+
+      <query>
+	<query-method>
+	  <method-name>findByCode</method-name>
+	  <method-params>
+	    <method-param>java.lang.String</method-param>
+	  </method-params>
+	</query-method>
+	<ejb-ql>SELECT OBJECT(s) FROM ProductsSelection s WHERE s.code=?1</ejb-ql>
+      </query>
+    </entity>
+
   </enterprise-beans>
 
 
@@ -709,6 +757,53 @@
       </ejb-relationship-role>
     </ejb-relation>
 
+    <ejb-relation>
+      <description>Many to many relation between ProductsSelection and Product</description>
+      <ejb-relation-name>ProductsSelectionProduct</ejb-relation-name>
+      <ejb-relationship-role>
+	<description>ProductsSelection has many products</description>
+	<ejb-relationship-role-name>SelectionOfProducts</ejb-relationship-role-name>
+	<multiplicity>Many</multiplicity>
+	<relationship-role-source>
+	  <ejb-name>ProductsSelectionEJB</ejb-name>
+	</relationship-role-source>
+	<cmr-field>
+	  <cmr-field-name>products</cmr-field-name>
+	  <cmr-field-type>java.util.Collection</cmr-field-type>
+	</cmr-field>
+      </ejb-relationship-role>
+      <ejb-relationship-role>
+	<description>A product can be part of many selections.</description>
+	<ejb-relationship-role-name>ProductInSelections</ejb-relationship-role-name>
+	<multiplicity>Many</multiplicity>
+	<relationship-role-source>
+	  <ejb-name>ProductEJB</ejb-name>
+	</relationship-role-source>
+      </ejb-relationship-role>
+    </ejb-relation>
+
+    <ejb-relation>
+      <description>Selections may contain other selections as well</description>
+      <ejb-relation-name>ProductsSelectionSelfJoin</ejb-relation-name>
+      <ejb-relationship-role>
+	<ejb-relationship-role-name>ProductsSelectionParent</ejb-relationship-role-name>
+	<multiplicity>Many</multiplicity>
+	<relationship-role-source>
+	  <ejb-name>ProductsSelectionEJB</ejb-name>
+	</relationship-role-source>
+	<cmr-field>
+	  <cmr-field-name>selections</cmr-field-name>
+	  <cmr-field-type>java.util.Collection</cmr-field-type>
+	</cmr-field>
+      </ejb-relationship-role>
+      <ejb-relationship-role>
+	<ejb-relationship-role-name>ProductsSelectionChild</ejb-relationship-role-name>
+	<multiplicity>Many</multiplicity>
+	<relationship-role-source>
+	  <ejb-name>ProductsSelectionEJB</ejb-name>
+	</relationship-role-source>
+      </ejb-relationship-role>
+    </ejb-relation>
   </relationships>
 
 
@@ -786,6 +881,14 @@
       <trans-attribute>Supports</trans-attribute>
     </container-transaction>
 
+    <container-transaction>
+      <method>
+	<description>Default transaction attribute</description>
+	<ejb-name>ProductsSelectionEJB</ejb-name>
+	<method-name>*</method-name>
+      </method>
+      <trans-attribute>Supports</trans-attribute>
+    </container-transaction>
   </assembly-descriptor>
 
 </ejb-jar>
