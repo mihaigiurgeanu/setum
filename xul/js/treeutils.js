@@ -56,9 +56,12 @@ function RemoteDataView(do_link, load_data_request, get_length_request) {
 
 
 RemoteDataView.prototype.get_cell_text = function (row, col) {
+    return this.get_row(row)[col];
+}
 
+RemoteDataView.prototype.get_row = function (row) {
     if(row < 0) {
-	log("RemoteDataView.get_cell_text: row is less then 0: " + row);
+	log("RemoteDataView.get_row: row is less then 0: " + row);
 	return undefined;
     }
     if(this.rows[row] == undefined) {
@@ -77,9 +80,9 @@ RemoteDataView.prototype.get_cell_text = function (row, col) {
 	    }
 	}
     }
-    
-    return this.rows[row][col];
+    return this.rows[row];
 }
+
 
 RemoteDataView.prototype.clear = function () {
     var req = new HTTPDataRequest(this.do_link);

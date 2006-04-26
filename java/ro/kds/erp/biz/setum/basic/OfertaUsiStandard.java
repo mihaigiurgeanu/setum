@@ -50,7 +50,8 @@ public interface OfertaUsiStandard extends EJBObject {
     public ResponseBean updateSellPrice(java.math.BigDecimal newSellPrice) throws RemoteException;
 
     public ResponseBean loadListing() throws RemoteException;
-    public ResponseBean lineItemsListing() throws RemoteException;
+    public ResponseBean lineItemsListing(Integer startRow) throws RemoteException;
+    public ResponseBean lineItemsCount() throws RemoteException;
     public ResponseBean loadSubForm(Integer loadId) throws RemoteException;
     public ResponseBean addProduct(Integer id) throws RemoteException, FinderException;
     public ResponseBean removeItem() throws RemoteException;

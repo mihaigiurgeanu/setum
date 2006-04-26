@@ -49,6 +49,11 @@ public class OfertaUsiStandardBean
     extends ro.kds.erp.biz.setum.basic.OfertaUsiStandardBean {
 
 
+    /**
+     * Cache the line items listing. The cache is initialized
+     * by the call to <code>lineItemsCount</code> method.
+     */
+    private ArrayList lineItemsListingCache;
 
     /**
      * The category for offers managed by this bean.
@@ -254,11 +259,79 @@ public class OfertaUsiStandardBean
     }
 
     /**
-     * Builds the list of line items for the selected offer. The instance
-     * variable <code>id</code> must contain the value of the primary key
-     * of the currently selected offer.
+     * Builds the list of line items for the selected offer. Returns only
+     * 30 rows starting with start row from the cached listing in the
+     * <code>lineItemsListingCache</code> instance variable. The cache
+     * is initialized by a call to <code>lineItemsCount</code> method.
      */
-    public ResponseBean lineItemsListing() {
+    public ResponseBean lineItemsListing(Integer startRow) {
+	ResponseBean r;
+
+	r = new ResponseBean();
+	for(int i = startRow.intValue(); 
+	    i < lineItemsListingCache.size() && i < startRow.intValue() + 30; i++) {
+	    OfferItemLocal item = (OfferItemLocal)lineItemsListingCache.get(i);
+
+	    r.addRecord();
+	    r.addField("id", item.getId());
+	    ProductLocal p = item.getProduct();
+	    if(p == null) {
+		logger.log(BasicLevel.WARN, "There is no product associated with current item "
+			   + item.getId() + ". Probably it was deleted from master table!");
+
+
+		r.addField("col-usa", "XXX");
+		r.addField("col-broasca", "XXX");
+		r.addField("col-cilindru", "XXX");
+		r.addField("col-sild", "XXX");
+		r.addField("col-yalla", "XXX");
+		r.addField("col-vizor", "XXX");
+
+	    } else {
+		CompositeProductLocal cp = p.getCompositeProduct();
+		Collection parts = cp.getComponents();
+		for(Iterator j=parts.iterator(); j.hasNext();) {
+		    ProductLocal part = (ProductLocal)j.next();
+		    Integer partCatId = part.getCategory().getId();
+		    if(partCatId.equals(USA_SIMPLA_ID)) {
+			r.addField("col-usa", part.getName());
+		    } else if (partCatId.equals(BROASCA_ID)) {
+			r.addField("col-broasca", part.getName());
+		    } else if (partCatId.equals(CILINDRU_ID)) {
+			r.addField("col-cilindru", part.getName());
+		    } else if (partCatId.equals(SILD_ID)) {
+			r.addField("col-sild", part.getName());
+		    } else if (partCatId.equals(YALLA_ID)) {
+			r.addField("col-yalla", part.getName());
+		    } else if (partCatId.equals(VIZOR_ID)) {
+			r.addField("col-vizor", part.getName());
+		    } else {
+			logger.log(BasicLevel.WARN, "Productd " + p.getId() + 
+				   " has an unknown component type " 
+				   + part.getCategory().getName());
+		    }
+		}
+	    }
+	    r.addField("col-price", item.getPrice());
+		
+	}
+
+	return r;
+    }
+
+
+    /**
+     * Returns the number of lineitems on this offer. This would tipically be used
+     * by the user interface to optimally display the listing, without loading it
+     * all.
+     * 
+     * This method should be called before loadLineItemsListing method.
+     *
+     * @returns a <code>ResponseBean</code> containing a single record
+     * that has the field <code>records-count</code> set to the number
+     * of line items.
+     */
+    public ResponseBean lineItemsCount() {
 	ResponseBean r;
 
 	try {
@@ -271,63 +344,25 @@ public class OfertaUsiStandardBean
 	    OfferLocal offer = oh.findByPrimaryKey(id);
 
 	    Collection offerItems = offer.getItems();
+	    lineItemsListingCache = new ArrayList(offerItems);
 	    r = new ResponseBean();
-	    for(Iterator i = offerItems.iterator(); i.hasNext();) {
-		OfferItemLocal item = (OfferItemLocal)i.next();
-		r.addRecord();
-		r.addField("id", item.getId());
-		ProductLocal p = item.getProduct();
-		if(p == null) {
-		    logger.log(BasicLevel.WARN, "There is no product associated with current item "
-			       + item.getId() + ". Probably it was deleted from master table!");
+	    r.addRecord();
+	    r.addField("records-count", lineItemsListingCache.size());
 
 
-		    r.addField("col-usa", "XXX");
-		    r.addField("col-broasca", "XXX");
-		    r.addField("col-cilindru", "XXX");
-		    r.addField("col-sild", "XXX");
-		    r.addField("col-yalla", "XXX");
-		    r.addField("col-vizor", "XXX");
-
-		} else {
-		    CompositeProductLocal cp = p.getCompositeProduct();
-		    Collection parts = cp.getComponents();
-		    for(Iterator j=parts.iterator(); j.hasNext();) {
-			ProductLocal part = (ProductLocal)j.next();
-			Integer partCatId = part.getCategory().getId();
-			if(partCatId.equals(USA_SIMPLA_ID)) {
-			    r.addField("col-usa", part.getName());
-			} else if (partCatId.equals(BROASCA_ID)) {
-			    r.addField("col-broasca", part.getName());
-			} else if (partCatId.equals(CILINDRU_ID)) {
-			    r.addField("col-cilindru", part.getName());
-			} else if (partCatId.equals(SILD_ID)) {
-			    r.addField("col-sild", part.getName());
-			} else if (partCatId.equals(YALLA_ID)) {
-			    r.addField("col-yalla", part.getName());
-			} else if (partCatId.equals(VIZOR_ID)) {
-			    r.addField("col-vizor", part.getName());
-			} else {
-			    logger.log(BasicLevel.WARN, "Productd " + p.getId() + 
-				       " has an unknown component type " 
-				       + part.getCategory().getName());
-			}
-		    }
-		}
-		r.addField("col-price", item.getPrice());
-		
-	    }
-
+	} catch (NamingException e) {
+	    logger.log(BasicLevel.ERROR, e.getMessage(), e);
+	    r = ResponseBean.ERR_CONFIG_NAMING;
+	} catch (FinderException e) {
+	    logger.log(BasicLevel.ERROR, e.getMessage(), e);
+	    r = ResponseBean.ERR_CONFIG_NOTFOUND;
 	} catch (Exception e) {
-	    logger.log(BasicLevel.WARN, "Current offer can not be selected", 
-		       e);
-	    r = new ResponseBean();
-	    r.setCode(4);
-	    r.setMessage("Nu se poate incarca lista de oferte. Ati selectat o oferta?");
+	    logger.log(BasicLevel.ERROR, e.getMessage(), e);
+	    r = ResponseBean.ERR_UNEXPECTED;
 	}
 	return r;
-    }
 
+    }
 
     /**
      * The data for a given subform is loaded from the database into

@@ -117,7 +117,8 @@
   <!-- additional methods for the remote interface -->
   <remote>
     <method>ResponseBean loadListing() throws RemoteException</method>
-    <method>ResponseBean lineItemsListing() throws RemoteException</method>
+    <method>ResponseBean lineItemsListing(Integer startRow) throws RemoteException</method>
+    <method>ResponseBean lineItemsCount() throws RemoteException</method>
     <method>ResponseBean loadSubForm(Integer loadId) throws RemoteException</method>
     <method>ResponseBean addProduct(Integer id) throws RemoteException, FinderException</method>
     <method>ResponseBean removeItem() throws RemoteException</method>

@@ -4,23 +4,23 @@
 // The main tree
 var offers;
 function load_offers() {
-  offers = theForm.load_listing();
-  document.getElementById('offersListing').view = make_treeview
-    (offers,
-     function(row,column) {
-       return offers[row][column];
-     });
+    offers = theForm.load_listing();
+    document.getElementById('offersListing').view = make_treeview
+	(offers,
+	 function(row,column) {
+	     return offers[row][column];
+	 });
 }
 
 // The list of offer items
 var line_items;
 function load_items() {
-  line_items = theForm.load_sub_listing("lineItemsListing");
-  document.getElementById('offerLines').view = make_treeview
-    (line_items,
-     function(row,column) {
-       return line_items[row][column];
-     });
+    line_items = new RemoteDataView(theForm.do_link, "lineItemsListing", "lineItemsCount");
+    document.getElementById('offerLines').view = make_treeview
+	(line_items,
+	 function(row,column) {
+	     return line_items.get_cell_text(row, column);
+	 });
 }
 
 // Global variable theForm that will be used by event handlers
@@ -43,20 +43,20 @@ load_offers();
 // be added to the offer; the products are added with the standard
 // reference price
 function addProducts() {
-  window.openDialog("select_usistd.xul", "usistdselction", "chrome");
+    window.openDialog("select_usistd.xul", "usistdselction", "chrome");
 }
 
 // add the specified product to the offer
 function addProduct(id) {
-  log("addProduct id " + id);
-  var req = new HTTPDataRequest(theForm.do_link);
+    log("addProduct id " + id);
+    var req = new HTTPDataRequest(theForm.do_link);
 
-  req.add("command", "addProduct");
-  req.add("param0", id);
-  theForm.post_request(req);
+    req.add("command", "addProduct");
+    req.add("param0", id);
+    theForm.post_request(req);
 
 }
 
 function crtItem() {
-    return line_items[document.getElementById('offerLines').currentIndex];
+    return line_items.get_row(document.getElementById('offerLines').currentIndex);
 }
