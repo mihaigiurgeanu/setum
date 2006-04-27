@@ -18,11 +18,11 @@ import ro.kds.erp.scripting.TclFileScript;
 import ro.kds.erp.scripting.ScriptErrorException;
 
 /**
- * Standard implementation of the UsaStdNeechipata session bean.
+ * Standard implementation of the OneLevelSelections session bean.
  * You will have to extend this class to proivde code for the abstract
  * methods loadFormData, newForm and saveSaveFormData.
  */
-public abstract class UsaStdNeechipataBean 
+public abstract class OneLevelSelectionsBean 
 	implements SessionBean {
 
     static protected Logger logger = null;
@@ -42,7 +42,7 @@ public abstract class UsaStdNeechipataBean
 
     public void setSessionContext(SessionContext ctx) {
         if (logger == null) {
-            logger = Monolog.getMonologFactory().getLogger("ro.kds.erp.biz.setum.basic.UsaStdNeechipata");
+            logger = Monolog.getMonologFactory().getLogger("ro.kds.erp.biz.setum.basic.OneLevelSelections");
         }
         logger.log(BasicLevel.DEBUG, "");
         ejbContext = ctx;
@@ -69,9 +69,9 @@ public abstract class UsaStdNeechipataBean
     }
 
     // ------------------------------------------------------------------
-    // UsaStdNeechipata implementation
+    // OneLevelSelections implementation
     // ------------------------------------------------------------------
-    protected UsaStdNeechipataForm form;
+    protected OneLevelSelectionsForm form;
     
     /**
      * Initialization of a new object. On calling saveFormData method, the
@@ -96,7 +96,7 @@ public abstract class UsaStdNeechipataBean
      * Load the form from the database.
      */
      public ResponseBean loadFormData(Integer loadId) throws FinderException {
-	logger.log(BasicLevel.DEBUG, "Loading UsaStdNeechipata with id = " + loadId);
+	logger.log(BasicLevel.DEBUG, "Loading OneLevelSelections with id = " + loadId);
 	createNewFormBean();
 	id = loadId;
 
@@ -117,12 +117,12 @@ public abstract class UsaStdNeechipataBean
      public abstract ResponseBean loadFields() throws FinderException;
 
     /**
-     * Create a new UsaStdNeechipataForm and initialize the 
+     * Create a new OneLevelSelectionsForm and initialize the 
      * <code>this.form</code> instance variable. Overwrite this method
      * if you want to provide other code for initializing the form bean.
      */
     protected void createNewFormBean() {
-	form = new UsaStdNeechipataForm();
+	form = new OneLevelSelectionsForm();
     }
 
     /**
@@ -163,7 +163,7 @@ public abstract class UsaStdNeechipataBean
      * Evaluates the script for computing the values of the calculated
      * fields. The script is located by the script loader using the key:
      * 
-     * <code>ro.kds.erp.biz.setum.basic.UsaStdNeechipata_calculatedFields</code>
+     * <code>ro.kds.erp.biz.setum.basic.OneLevelSelections_calculatedFields</code>
      * 
      * The values of the modified fields are copied back into the form and
      * also in the ResponseBean passed to this method as parameter.
@@ -181,11 +181,11 @@ public abstract class UsaStdNeechipataBean
 	   r.addRecord();
         }
 	Script script = TclFileScript
-		.loadScript("ro.kds.erp.biz.setum.basic.UsaStdNeechipata_calculatedFields");
+		.loadScript("ro.kds.erp.biz.setum.basic.OneLevelSelections_calculatedFields");
 	if(script.loaded()) {
 	    try {
 		script.setVar(FORM_VARNAME, form, 
-			      UsaStdNeechipataForm.class);
+			      OneLevelSelectionsForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
 
 		addFieldsToScript(script);
@@ -194,7 +194,7 @@ public abstract class UsaStdNeechipataBean
 		getFieldsFromScript(script, r);
 
 	    } catch (ScriptErrorException e) {
-		logger.log(BasicLevel.ERROR, "Error executing rules script for UsaStdNeechipata", e);
+		logger.log(BasicLevel.ERROR, "Error executing rules script for OneLevelSelections", e);
 	    }
 	}
 	return r;
@@ -205,7 +205,7 @@ public abstract class UsaStdNeechipataBean
      * Evaluates the validation script. The script loader loades the script
      * file corresponding to:
      *
-     * <code>ro.kds.erp.biz.setum.basic.UsaStdNeechipata_validation</code>
+     * <code>ro.kds.erp.biz.setum.basic.OneLevelSelections_validation</code>
      *
      * The return is a ResponseBean that has records representing the
      * number validation errors. A record in the response contains the fields:
@@ -223,11 +223,11 @@ public abstract class UsaStdNeechipataBean
       	ResponseBean r = new ResponseBean();
 
 	Script script = TclFileScript
-		.loadScript("ro.kds.erp.biz.setum.basic.UsaStdNeechipata_validation");
+		.loadScript("ro.kds.erp.biz.setum.basic.OneLevelSelections_validation");
 	if(script.loaded()) {
 	    try {
 		script.setVar(FORM_VARNAME, form, 
-			      UsaStdNeechipataForm.class);
+			      OneLevelSelectionsForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
 		addFieldsToScript(script);
 		script.run();
@@ -236,31 +236,31 @@ public abstract class UsaStdNeechipataBean
 		// so any fields modifications made in the script will
 		// be ignored.
 	    } catch (ScriptErrorException e) {
-		logger.log(BasicLevel.ERROR, "Error executing rules script for UsaStdNeechipata", e);
+		logger.log(BasicLevel.ERROR, "Error executing rules script for OneLevelSelections", e);
 	    }
 	}
 	return r;
     }
 
-    public ResponseBean updateName(String name) {
+    public ResponseBean updateId(Integer id) {
         ResponseBean r = new ResponseBean();
-	String oldVal = form.getName();
-	form.setName(name);
+	Integer oldVal = form.getId();
+	form.setId(id);
 	r.addRecord();
-	r.addField("name", name); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.UsaStdNeechipata.name");
+	r.addField("id", id); // for number format
+	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.OneLevelSelections.id");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
-		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
-		script.setVar(FORM_VARNAME, form, UsaStdNeechipataForm.class);
+		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
+		script.setVar(FORM_VARNAME, form, OneLevelSelectionsForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
 						// fields to the response also
 	   } catch (ScriptErrorException e) {
-	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the name", e);
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the id", e);
            }
         }
 	computeCalculatedFields(r);
@@ -272,12 +272,12 @@ public abstract class UsaStdNeechipataBean
 	form.setCode(code);
 	r.addRecord();
 	r.addField("code", code); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.UsaStdNeechipata.code");
+	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.OneLevelSelections.code");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
 		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
-		script.setVar(FORM_VARNAME, form, UsaStdNeechipataForm.class);
+		script.setVar(FORM_VARNAME, form, OneLevelSelectionsForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
 		addFieldsToScript(script);
 		script.run();
@@ -290,18 +290,42 @@ public abstract class UsaStdNeechipataBean
 	computeCalculatedFields(r);
 	return r;
     }
+    public ResponseBean updateName(String name) {
+        ResponseBean r = new ResponseBean();
+	String oldVal = form.getName();
+	form.setName(name);
+	r.addRecord();
+	r.addField("name", name); // for number format
+	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.OneLevelSelections.name");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
+		script.setVar(FORM_VARNAME, form, OneLevelSelectionsForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the name", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
     public ResponseBean updateDescription(String description) {
         ResponseBean r = new ResponseBean();
 	String oldVal = form.getDescription();
 	form.setDescription(description);
 	r.addRecord();
 	r.addField("description", description); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.UsaStdNeechipata.description");
+	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.OneLevelSelections.description");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
 		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
-		script.setVar(FORM_VARNAME, form, UsaStdNeechipataForm.class);
+		script.setVar(FORM_VARNAME, form, OneLevelSelectionsForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
 		addFieldsToScript(script);
 		script.run();
@@ -314,114 +338,15 @@ public abstract class UsaStdNeechipataBean
 	computeCalculatedFields(r);
 	return r;
     }
-    public ResponseBean updateEntryPrice(java.math.BigDecimal entryPrice) {
-        ResponseBean r = new ResponseBean();
-	java.math.BigDecimal oldVal = form.getEntryPrice();
-	form.setEntryPrice(entryPrice);
-	r.addRecord();
-	r.addField("entryPrice", entryPrice); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.UsaStdNeechipata.entryPrice");
-	if(script.loaded()) {
-	   try {
-		script.setVar(LOGIC_VARNAME, this);
-		script.setVar(OLDVAL_VARNAME, oldVal, java.math.BigDecimal.class);
-		script.setVar(FORM_VARNAME, form, UsaStdNeechipataForm.class);
-		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
-		addFieldsToScript(script);
-		script.run();
-		getFieldsFromScript(script, r); // add all the changed
-						// fields to the response also
-	   } catch (ScriptErrorException e) {
-	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the entryPrice", e);
-           }
-        }
-	computeCalculatedFields(r);
-	return r;
-    }
-    public ResponseBean updateSellPrice(java.math.BigDecimal sellPrice) {
-        ResponseBean r = new ResponseBean();
-	java.math.BigDecimal oldVal = form.getSellPrice();
-	form.setSellPrice(sellPrice);
-	r.addRecord();
-	r.addField("sellPrice", sellPrice); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.UsaStdNeechipata.sellPrice");
-	if(script.loaded()) {
-	   try {
-		script.setVar(LOGIC_VARNAME, this);
-		script.setVar(OLDVAL_VARNAME, oldVal, java.math.BigDecimal.class);
-		script.setVar(FORM_VARNAME, form, UsaStdNeechipataForm.class);
-		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
-		addFieldsToScript(script);
-		script.run();
-		getFieldsFromScript(script, r); // add all the changed
-						// fields to the response also
-	   } catch (ScriptErrorException e) {
-	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the sellPrice", e);
-           }
-        }
-	computeCalculatedFields(r);
-	return r;
-    }
-    public ResponseBean updateRelativeGain(Double relativeGain) {
-        ResponseBean r = new ResponseBean();
-	Double oldVal = form.getRelativeGain();
-	form.setRelativeGain(relativeGain);
-	r.addRecord();
-	r.addField("relativeGain", relativeGain); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.UsaStdNeechipata.relativeGain");
-	if(script.loaded()) {
-	   try {
-		script.setVar(LOGIC_VARNAME, this);
-		script.setVar(OLDVAL_VARNAME, oldVal, Double.class);
-		script.setVar(FORM_VARNAME, form, UsaStdNeechipataForm.class);
-		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
-		addFieldsToScript(script);
-		script.run();
-		getFieldsFromScript(script, r); // add all the changed
-						// fields to the response also
-	   } catch (ScriptErrorException e) {
-	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the relativeGain", e);
-           }
-        }
-	computeCalculatedFields(r);
-	return r;
-    }
-    public ResponseBean updateAbsoluteGain(java.math.BigDecimal absoluteGain) {
-        ResponseBean r = new ResponseBean();
-	java.math.BigDecimal oldVal = form.getAbsoluteGain();
-	form.setAbsoluteGain(absoluteGain);
-	r.addRecord();
-	r.addField("absoluteGain", absoluteGain); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.UsaStdNeechipata.absoluteGain");
-	if(script.loaded()) {
-	   try {
-		script.setVar(LOGIC_VARNAME, this);
-		script.setVar(OLDVAL_VARNAME, oldVal, java.math.BigDecimal.class);
-		script.setVar(FORM_VARNAME, form, UsaStdNeechipataForm.class);
-		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
-		addFieldsToScript(script);
-		script.run();
-		getFieldsFromScript(script, r); // add all the changed
-						// fields to the response also
-	   } catch (ScriptErrorException e) {
-	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the absoluteGain", e);
-           }
-        }
-	computeCalculatedFields(r);
-	return r;
-    }
 
     /**
      * Get the fields stored internaly and adds them to the response.
      */
     protected void copyFieldsToResponse(ResponseBean r) {
-	r.addField("name", form.getName());
+	r.addField("id", form.getId());
 	r.addField("code", form.getCode());
+	r.addField("name", form.getName());
 	r.addField("description", form.getDescription());
-	r.addField("entryPrice", form.getEntryPrice());
-	r.addField("sellPrice", form.getSellPrice());
-	r.addField("relativeGain", form.getRelativeGain());
-	r.addField("absoluteGain", form.getAbsoluteGain());
 	loadValueLists(r);
     }
 
@@ -437,9 +362,9 @@ public abstract class UsaStdNeechipataBean
             logger.log(BasicLevel.DEBUG, e);
         }
 	try {
-	    s.setVar("name", form.getName(), String.class);
+	    s.setVar("id", form.getId(), Integer.class);
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not set the value of field: name from the script");
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: id from the script");
             logger.log(BasicLevel.DEBUG, e);
         }
 	try {
@@ -449,33 +374,15 @@ public abstract class UsaStdNeechipataBean
             logger.log(BasicLevel.DEBUG, e);
         }
 	try {
+	    s.setVar("name", form.getName(), String.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: name from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
 	    s.setVar("description", form.getDescription(), String.class);
 	} catch (ScriptErrorException e) {
 	    logger.log(BasicLevel.WARN, "Can not set the value of field: description from the script");
-            logger.log(BasicLevel.DEBUG, e);
-        }
-	try {
-	    s.setVar("entryPrice", form.getEntryPrice(), java.math.BigDecimal.class);
-	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not set the value of field: entryPrice from the script");
-            logger.log(BasicLevel.DEBUG, e);
-        }
-	try {
-	    s.setVar("sellPrice", form.getSellPrice(), java.math.BigDecimal.class);
-	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not set the value of field: sellPrice from the script");
-            logger.log(BasicLevel.DEBUG, e);
-        }
-	try {
-	    s.setVar("relativeGain", form.getRelativeGain(), Double.class);
-	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not set the value of field: relativeGain from the script");
-            logger.log(BasicLevel.DEBUG, e);
-        }
-	try {
-	    s.setVar("absoluteGain", form.getAbsoluteGain(), java.math.BigDecimal.class);
-	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not set the value of field: absoluteGain from the script");
             logger.log(BasicLevel.DEBUG, e);
         }
     }
@@ -487,14 +394,14 @@ public abstract class UsaStdNeechipataBean
     protected void getFieldsFromScript(Script s, ResponseBean r) {
 	Object field;
 	try {
-	    field = s.getVar("name", String.class);
-	    if(!field.equals(form.getName())) {
-	        logger.log(BasicLevel.DEBUG, "Field name modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
-	        form.setName((String)field);
-	        r.addField("name", (String)field);
+	    field = s.getVar("id", Integer.class);
+	    if(!field.equals(form.getId())) {
+	        logger.log(BasicLevel.DEBUG, "Field id modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setId((Integer)field);
+	        r.addField("id", (Integer)field);
 	    }
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not get the value of field: name from the script");
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: id from the script");
             logger.log(BasicLevel.DEBUG, e);
         }
 	try {
@@ -509,6 +416,17 @@ public abstract class UsaStdNeechipataBean
             logger.log(BasicLevel.DEBUG, e);
         }
 	try {
+	    field = s.getVar("name", String.class);
+	    if(!field.equals(form.getName())) {
+	        logger.log(BasicLevel.DEBUG, "Field name modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setName((String)field);
+	        r.addField("name", (String)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: name from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
 	    field = s.getVar("description", String.class);
 	    if(!field.equals(form.getDescription())) {
 	        logger.log(BasicLevel.DEBUG, "Field description modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
@@ -517,50 +435,6 @@ public abstract class UsaStdNeechipataBean
 	    }
 	} catch (ScriptErrorException e) {
 	    logger.log(BasicLevel.WARN, "Can not get the value of field: description from the script");
-            logger.log(BasicLevel.DEBUG, e);
-        }
-	try {
-	    field = s.getVar("entryPrice", java.math.BigDecimal.class);
-	    if(!field.equals(form.getEntryPrice())) {
-	        logger.log(BasicLevel.DEBUG, "Field entryPrice modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
-	        form.setEntryPrice((java.math.BigDecimal)field);
-	        r.addField("entryPrice", (java.math.BigDecimal)field);
-	    }
-	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not get the value of field: entryPrice from the script");
-            logger.log(BasicLevel.DEBUG, e);
-        }
-	try {
-	    field = s.getVar("sellPrice", java.math.BigDecimal.class);
-	    if(!field.equals(form.getSellPrice())) {
-	        logger.log(BasicLevel.DEBUG, "Field sellPrice modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
-	        form.setSellPrice((java.math.BigDecimal)field);
-	        r.addField("sellPrice", (java.math.BigDecimal)field);
-	    }
-	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not get the value of field: sellPrice from the script");
-            logger.log(BasicLevel.DEBUG, e);
-        }
-	try {
-	    field = s.getVar("relativeGain", Double.class);
-	    if(!field.equals(form.getRelativeGain())) {
-	        logger.log(BasicLevel.DEBUG, "Field relativeGain modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
-	        form.setRelativeGain((Double)field);
-	        r.addField("relativeGain", (Double)field);
-	    }
-	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not get the value of field: relativeGain from the script");
-            logger.log(BasicLevel.DEBUG, e);
-        }
-	try {
-	    field = s.getVar("absoluteGain", java.math.BigDecimal.class);
-	    if(!field.equals(form.getAbsoluteGain())) {
-	        logger.log(BasicLevel.DEBUG, "Field absoluteGain modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
-	        form.setAbsoluteGain((java.math.BigDecimal)field);
-	        r.addField("absoluteGain", (java.math.BigDecimal)field);
-	    }
-	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not get the value of field: absoluteGain from the script");
             logger.log(BasicLevel.DEBUG, e);
         }
     }

@@ -3,13 +3,14 @@ package ro.kds.erp.biz.setum.basic;
 import javax.ejb.SessionBean;
 import javax.ejb.SessionSynchronization;
 import javax.ejb.SessionContext;
+import org.objectweb.util.monolog.Monolog;
 import org.objectweb.util.monolog.api.BasicLevel;
+import org.objectweb.util.monolog.api.Logger;
+//import org.objectweb.jonas.common.Log;
 import javax.ejb.CreateException;
 import ro.kds.erp.biz.ResponseBean;
 import javax.naming.InitialContext;
 import javax.ejb.FinderException;
-import org.objectweb.util.monolog.api.Logger;
-import org.objectweb.jonas.common.Log;
 import java.util.Collection;
 import java.util.Iterator;
 import ro.kds.erp.scripting.Script;
@@ -41,7 +42,7 @@ public abstract class SistemBean
 
     public void setSessionContext(SessionContext ctx) {
         if (logger == null) {
-            logger = Log.getLogger("ro.kds.erp.biz.setum.basic.Sistem");
+            logger = Monolog.getMonologFactory().getLogger("ro.kds.erp.biz.setum.basic.Sistem");
         }
         logger.log(BasicLevel.DEBUG, "");
         ejbContext = ctx;
