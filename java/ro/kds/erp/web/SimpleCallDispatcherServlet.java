@@ -2,6 +2,8 @@ package ro.kds.erp.web;
 
 import javax.servlet.ServletException;
 import org.objectweb.util.monolog.api.BasicLevel;
+import org.objectweb.util.monolog.api.Logger;
+import org.objectweb.util.monolog.Monolog;
 import java.util.HashMap;
 import org.apache.commons.beanutils.ConvertUtils;
 import ro.kds.erp.utils.DateConverter;
@@ -20,9 +22,7 @@ import javax.ejb.EJBHome;
 import javax.rmi.PortableRemoteObject;
 import java.util.Map.Entry;
 import javax.naming.Context;
-import org.objectweb.util.monolog.api.Logger;
 import java.lang.reflect.Method;
-import org.objectweb.jonas.common.Log;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Date;
@@ -58,7 +58,7 @@ import javax.servlet.http.HttpServlet;
  * Created: Tue Mar 14 17:09:40 2006
  *
  * @author <a href="mailto:Mihai Giurgeanu@CRIMIRA"></a>
- * @version $Id: SimpleCallDispatcherServlet.java,v 1.1 2006/03/19 20:19:23 mihai Exp $
+ * @version $Id: SimpleCallDispatcherServlet.java,v 1.2 2006/04/27 05:29:13 mihai Exp $
  */
 public class SimpleCallDispatcherServlet extends HttpServlet {
 
@@ -93,7 +93,7 @@ public class SimpleCallDispatcherServlet extends HttpServlet {
      * @exception ServletException if an error occurs
      */
     public final void init() throws ServletException {
-	logger = Log.getLogger("ro.kds.erp.web.SimpleCallDispatcherServlet");
+	logger = Monolog.getMonologFactory().getLogger("ro.kds.erp.web.SimpleCallDispatcherServlet");
         logger.log(BasicLevel.DEBUG, "");
 
 	try {

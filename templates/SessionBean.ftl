@@ -4,13 +4,14 @@ package ${.node.class.package};
 import javax.ejb.SessionBean;
 import javax.ejb.SessionSynchronization;
 import javax.ejb.SessionContext;
+import org.objectweb.util.monolog.Monolog;
 import org.objectweb.util.monolog.api.BasicLevel;
+import org.objectweb.util.monolog.api.Logger;
+//import org.objectweb.jonas.common.Log;
 import javax.ejb.CreateException;
 import ro.kds.erp.biz.ResponseBean;
 import javax.naming.InitialContext;
 import javax.ejb.FinderException;
-import org.objectweb.util.monolog.api.Logger;
-import org.objectweb.jonas.common.Log;
 import java.util.Collection;
 import java.util.Iterator;
 import ro.kds.erp.scripting.Script;
@@ -45,7 +46,7 @@ public abstract class ${.node.class.name}Bean
 
     public void setSessionContext(SessionContext ctx) {
         if (logger == null) {
-            logger = Log.getLogger("${.node.class.package}.${.node.class.name}");
+            logger = Monolog.getMonologFactory().getLogger("${.node.class.package}.${.node.class.name}");
         }
         logger.log(BasicLevel.DEBUG, "");
         ejbContext = ctx;
