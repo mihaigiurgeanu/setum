@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<!-- $Id: build.xml,v 1.1.1.1.2.5 2006/03/26 09:43:12 mihai Exp $ -->
+<!-- $Id: build.xml,v 1.1.1.1.2.6 2006/05/02 06:51:25 mihai Exp $ -->
 
 <project name="setumerp" default="application">
   <description>
@@ -30,6 +30,7 @@
   <taskdef name="ejbjar"
 	   classname="org.objectweb.jonas.ant.EjbJar"
 	   classpath="${jonas.root}/lib/common/ow_jonas_ant.jar" />
+
   <taskdef name="freemarker" classname="freemarker.ext.ant.FreemarkerXmlTask"
 	   classpath="C:/lib/freemarker-2.3.4/lib/freemarker.jar"/>
   <taskdef name="jrc" 
