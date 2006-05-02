@@ -6,10 +6,11 @@ import javax.ejb.RemoveException;
 import javax.ejb.EntityBean;
 import javax.ejb.EntityContext;
 import javax.ejb.EJBException;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import javax.ejb.CreateException;
 import java.util.Collection;
+import org.objectweb.util.monolog.Monolog;
+import org.objectweb.util.monolog.api.BasicLevel;
+import org.objectweb.util.monolog.api.Logger;
 
 /**
  * Describe class ProductsSelectionBean here.
@@ -22,12 +23,12 @@ import java.util.Collection;
  */
 public abstract class ProductsSelectionBean implements EntityBean {
 
-    static private Log logger;
+    static private Logger logger;
     private EntityContext ejbContext;
 
 
     public Integer ejbCreate() throws javax.ejb.CreateException{
-        logger.trace("");
+        logger.log(BasicLevel.DEBUG, "");
 
         // Init here the bean fields
 
@@ -35,7 +36,7 @@ public abstract class ProductsSelectionBean implements EntityBean {
     }
 
     public void ejbPostCreate() {
-        logger.trace("");
+        logger.log(BasicLevel.DEBUG, "");
     }
 
     // ------------------------------------------------------------------
@@ -71,35 +72,35 @@ public abstract class ProductsSelectionBean implements EntityBean {
 
     public void setEntityContext(EntityContext entityContext) throws EJBException, RemoteException {
 	if(logger == null) {
-	    logger = LogFactory.getLog(ProductsSelectionBean.class);
+	    logger = Monolog.getMonologFactory().getLogger("ro.kds.erp.data.ProductsSelectionBean");
 	}
-	logger.trace("");
+	logger.log(BasicLevel.DEBUG, "");
 	this.ejbContext = entityContext;
     }
 
     public void unsetEntityContext() throws EJBException, RemoteException {
-	logger.trace("");
+	logger.log(BasicLevel.DEBUG, "");
 	ejbContext = null;
     }
 
     public void ejbRemove() throws RemoveException, EJBException, RemoteException {
-	logger.trace("");
+	logger.log(BasicLevel.DEBUG, "");
     }
 
     public void ejbActivate() throws EJBException, RemoteException {
-	logger.trace("");
+	logger.log(BasicLevel.DEBUG, "");
     }
 
     public void ejbPassivate() throws EJBException, RemoteException {
-	logger.trace("");
+	logger.log(BasicLevel.DEBUG, "");
     }
 
     public void ejbLoad() throws EJBException, RemoteException {
-	logger.trace("");
+	logger.log(BasicLevel.DEBUG, "");
     }
 
     public void ejbStore() throws EJBException, RemoteException {
-	logger.trace("");
+	logger.log(BasicLevel.DEBUG, "");
     }
 
 }

@@ -74,7 +74,7 @@ public class OneLevelSelectionsBizBean extends OneLevelSelectionsBean {
      *
      * @return a <code>ResponseBean</code> value
      */
-    public final ResponseBean saveFormData() {
+    public ResponseBean saveFormData() {
 	return null;
     }
 
@@ -84,10 +84,30 @@ public class OneLevelSelectionsBizBean extends OneLevelSelectionsBean {
      * @return a <code>ResponseBean</code> value
      * @exception FinderException if an error occurs
      */
-    public final ResponseBean loadFields() throws FinderException {
+    public ResponseBean loadFields() throws FinderException {
 	return null;
     }
-     
+
+    /**
+     * Add a product to the selection.
+     */
+    public ResponseBean addProduct(Integer productId) {
+	return null;
+    }
+
+    /**
+     * Remove a product from the selection.
+     */
+    public ResponseBean removeProduct(Integer productId) {
+	return null;
+    }
+
+    /**
+     * Get the products in the current selection.
+     */
+    public ResponseBean productsListing() {
+	return null;
+    }
 
     /**
      * Locates a reference to the parent selection
