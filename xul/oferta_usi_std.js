@@ -43,7 +43,7 @@ load_offers();
 // be added to the offer; the products are added with the standard
 // reference price
 function addProducts() {
-    window.openDialog("select_usistd.xul", "usistdselction", "chrome");
+    window.openDialog("select_usistd.xul", "usistdselction", "chrome,modal");
 }
 
 // add the specified product to the offer

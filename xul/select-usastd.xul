@@ -62,6 +62,10 @@ Arguments:
 		window.arguments[0].select(usi.get_cell_text(i, 'id'));
 	    }
 	}
+
+	if(window.arguments[0].select_end) {
+	    window.arguments[0].select_end();
+	}
 	
 	return true;
     }
