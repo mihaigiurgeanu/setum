@@ -890,6 +890,30 @@ public abstract class OfertaUsiStandardBean
 	computeCalculatedFields(r);
 	return r;
     }
+    public ResponseBean updateSelectionCode(String selectionCode) {
+        ResponseBean r = new ResponseBean();
+	String oldVal = form.getSelectionCode();
+	form.setSelectionCode(selectionCode);
+	r.addRecord();
+	r.addField("selectionCode", selectionCode); // for number format
+	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.OfertaUsiStandard.selectionCode");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
+		script.setVar(FORM_VARNAME, form, OfertaUsiStandardForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the selectionCode", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
 
     /**
      * Get the fields stored internaly and adds them to the response.
@@ -922,6 +946,7 @@ public abstract class OfertaUsiStandardBean
 	r.addField("vizor", form.getVizor());
 	r.addField("entryPrice", form.getEntryPrice());
 	r.addField("sellPrice", form.getSellPrice());
+	r.addField("selectionCode", form.getSelectionCode());
 	loadValueLists(r);
     }
 
@@ -1096,6 +1121,12 @@ public abstract class OfertaUsiStandardBean
 	    s.setVar("sellPrice", form.getSellPrice(), java.math.BigDecimal.class);
 	} catch (ScriptErrorException e) {
 	    logger.log(BasicLevel.WARN, "Can not set the value of field: sellPrice from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    s.setVar("selectionCode", form.getSelectionCode(), String.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: selectionCode from the script");
             logger.log(BasicLevel.DEBUG, e);
         }
     }
@@ -1401,6 +1432,17 @@ public abstract class OfertaUsiStandardBean
 	    }
 	} catch (ScriptErrorException e) {
 	    logger.log(BasicLevel.WARN, "Can not get the value of field: sellPrice from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    field = s.getVar("selectionCode", String.class);
+	    if(!field.equals(form.getSelectionCode())) {
+	        logger.log(BasicLevel.DEBUG, "Field selectionCode modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setSelectionCode((String)field);
+	        r.addField("selectionCode", (String)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: selectionCode from the script");
             logger.log(BasicLevel.DEBUG, e);
         }
     }

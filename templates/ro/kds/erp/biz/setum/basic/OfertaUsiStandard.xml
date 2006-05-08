@@ -114,6 +114,13 @@
     <type>java.math.BigDecimal</type>
   </field>
 
+
+  <!-- Print selection -->
+  <field>
+    <name>selectionCode</name>
+    <type>String</type>
+  </field>
+
   <!-- additional methods for the remote interface -->
   <remote>
     <method>ResponseBean loadListing() throws RemoteException</method>

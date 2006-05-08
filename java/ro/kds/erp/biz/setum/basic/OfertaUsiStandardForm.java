@@ -42,6 +42,7 @@ public class OfertaUsiStandardForm implements Serializable {
     String vizor;
     java.math.BigDecimal entryPrice;
     java.math.BigDecimal sellPrice;
+    String selectionCode;
 
     public OfertaUsiStandardForm() {
 
@@ -155,6 +156,10 @@ public class OfertaUsiStandardForm implements Serializable {
 
 
        this.sellPrice = new java.math.BigDecimal(0);
+
+
+
+       this.selectionCode = "";
 
 
 
@@ -538,6 +543,21 @@ public class OfertaUsiStandardForm implements Serializable {
 	AttributeLocal a = (AttributeLocal)attributes.get("sellPrice");
 	if(a != null) {
 	    this.setSellPrice(a.getDecimalValue());
+	}
+    }
+
+    public void setSelectionCode(String newSelectionCode) {
+        this.selectionCode = newSelectionCode;
+    }
+
+    public String getSelectionCode() {
+        return selectionCode;
+    }
+
+    public void readSelectionCode(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("selectionCode");
+	if(a != null) {
+	    this.setSelectionCode(a.getStringValue());
 	}
     }
 

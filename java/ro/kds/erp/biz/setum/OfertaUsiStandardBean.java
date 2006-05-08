@@ -617,6 +617,36 @@ public class OfertaUsiStandardBean
 
 
     /**
+     * Overwrites the default method to store the current selection into an
+     * internal variable. This is useful because there are multiple ways to
+     * select the current selection, updateSelectionCode beeing just one of
+     * them.
+     */
+    public ResponseBean updateSelectionCode(String code) {
+	ResponseBean r = super.updateSelectionCode(code);
+	
+	// TODO: set the current selection, to be used by the lineItemsCollectionMap
+	return r;
+    }
+
+
+    /**
+     * Business logic that allows current printing selection to be specified by
+     * its id instead of its code.
+     *
+     * @returns a <code>ResponseBean</code> containing the value of the code of
+     * of the current selection.
+     */
+    public ResponseBean selectSelection(Integer selectionId) {
+	ResponseBean r;
+
+	// TODO: get the selection for the given id, set it as current and 
+	// TODO: update the selectionCode.
+	r = new ResponseBean();
+	return r;
+    }
+
+    /**
      * Builds a <code>Collection</code> of <code>Map</code> objects to be
      * used in generating the offer report. For each item of the current
      * offer, puts a <code>Map</code> object into returned 

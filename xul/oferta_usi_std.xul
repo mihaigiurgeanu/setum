@@ -24,7 +24,7 @@
 	     oncommand="addProducts();" />
 
 
-    <command id="onprint" oncommand="openDialog('print-oferta_usi_std_dlg.xul', 'print-oferta_usi_std_dlg', 'chrome,modal'" />
+    <command id="onprint" oncommand="openDialog('print-oferta_usi_std_dlg.xul', 'print-oferta_usi_std_dlg', 'chrome,modal')" />
 
     <command id="remove-line" oncommand="theForm.remove_item(crtItem()['id']);load_items();" />
   </commandset>

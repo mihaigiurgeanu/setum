@@ -1,5 +1,6 @@
 <?xml version="1.0"?>
 <locatingRules xmlns="http://thaiopensource.com/ns/locating-rules/1.0">
+  <uri resource="OfertaUsiStandard.xml" uri="../../../../../../../schema/class.rnc"/>
   <uri resource="OneLevelSelections.xml" uri="../../../../../../../schema/class.rnc"/>
   <uri resource="UsaStandard.xml" uri="../../../../../../../schema/class.rnc"/>
   <uri resource="Finisaje.xml" uri="../../../../../../../schema/class.rnc"/>

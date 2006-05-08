@@ -10,11 +10,23 @@
 	ondialogcancel="return doCancel();">
 
 
+  <script src="js/logging.js"/>
+  <script src="js/treeutils.js"/>
+  <script src="js/httpdata.js"/>
+  <script src="js/formobject.js"/>
+
+  <commandset>
+    <command id="select-selection-code-cmd"
+	     oncommand="do_selection_dlg()"/>
+  </commandset>
+
   <hbox>
     <label control="slectionCode" value="Selectie de tiparit"/>
     <textbox id="selectionCode"/>
-    <button label="..."/>
+    <button label="..." command="select-selction-code-cmd" />
   </hbox>
+
+
 
   <script language="javascript">
     <![CDATA[
@@ -25,6 +37,36 @@
 	     function doCancel() {
 		 return true;
 	     }
+
+	     function do_selection_dlg() {
+		 select_handler = {
+		     theForm: theForm,
+		     select: function (selectionId) {
+			 var request = this.theForm.get_request();
+			 request.add("command", "selectSelection")
+			 request.add("param0", selectionId);
+			 this.theForm.post_request(req);
+		     },
+		     select_end: function () {
+			 // nothing to do
+		     }
+		 }
+
+		 window.openDialog("selection.xul", "print-selection-dlg", select_handler);
+	     }
+
+	     var theForm = new FormObject();
+	     theForm.do_link = "/oferta_usi_std.do";
+	     theForm.text_fields = new Array("selectionCode");
+
+
+	     theForm.combo_fields = new Array();
+	     theForm.radio_fields = new Array();
+	     theForm.setupEventListeners();
     ]]>
   </script>
+
+
+
+
 </dialog>
