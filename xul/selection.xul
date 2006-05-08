@@ -262,6 +262,20 @@
 	     function save_selection() {
 		 
 	     }
+
+	     var theForm = new FormObject();
+	     theForm.text_fields = new Array(
+					     "code",
+					     "name",
+					     "description"
+					     );
+
+	     theForm.combo_fields = new Array();
+	     theForm.radio_fields = new Array();
+	     
+	     theForm.setupEventListeners();
+
+	     load_selections();
     ]]>
   </script>
 </dialog>

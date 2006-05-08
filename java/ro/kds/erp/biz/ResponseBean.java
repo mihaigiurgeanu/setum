@@ -344,4 +344,6 @@ public class ResponseBean implements Serializable {
 	new ResponseBean(8, "Operatia nu este implementata");
     public static final ResponseBean ERR_REMOVE = 
 	new ResponseBean(9, "Eroare la executarea operatiei de stergere");
+    public static final ResponseBean ERR_OUT_OF_ORDER_OPERATION = 
+	new ResponseBean(10, "Metoda apelata gresit ...");
 }

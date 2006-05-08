@@ -13,6 +13,8 @@ import java.util.Collection;
 import ro.kds.erp.biz.ResponseBean;
 import ro.kds.erp.biz.ResponseBean;
 import javax.ejb.FinderException;
+import org.objectweb.util.monolog.api.BasicLevel;
+import java.util.ArrayList;
 
 /**
  * Extends auto generated <code>OneLevelSelectionsBean</code> class and give
@@ -49,25 +51,77 @@ public class OneLevelSelectionsBizBean extends OneLevelSelectionsBean {
      */
     private ProductsSelectionLocalHome selectionHome;
 
+
+    /**
+     * A cache of the items in the main listing (selections listing)
+     * used to optimize the comunication between client UI and server
+     * business logic.
+     */
+    private ArrayList selectionsListingCache;
+
     /**
      * Build the listing of selections contained in the parent category.
      */
-    public ResponseBean getListing() {
+    public ResponseBean loadListing(Integer startRow) {
 	ResponseBean r;
 
+	if(selectionsListingCache == null) {
+	    r = ResponseBean.ERR_OUT_OF_ORDER_OPERATION;
+	    logger.log(BasicLevel.WARN, "selectionsListingCache not initialized!");
+	} else {
+	    r = new ResponseBean();
+	    for(int i = startRow.intValue(); 
+		i<selectionsListingCache.size() && i<startRow.intValue() + 30;
+		i ++) {
+
+		ProductsSelectionLocal s = 
+		    (ProductsSelectionLocal) selectionsListingCache.get(i);
+
+
+		r.addRecord();
+		r.addField("selction.id", s.getId());
+		r.addField("selection.code", s.getCode());
+		r.addField("selection.name", s.getName());
+		//r.addField("selection.description", s.getDescription());
+	    }
+	}
+
+	return r;
+    }
+
+    /**
+     * Counts the number of records in the listing and also initializes
+     * a listing operation. This method must be called before <code>loadListing
+     * </code> method.
+     *
+     * The method has a side efect of initializing a listing cache, so the
+     * records returned by the <code>loadListing</code> method will not be
+     * affected by other operations made by other users. The refresh of the
+     * listing will be done by another call to <code>getListingLength</code>
+     * method, and thus, the user interface will handle the listing in a 
+     * natural way.
+     *
+     * @returns a <code>ResponseBean</code> with a single record containing
+     * the field <code>records-count</code>.
+     */
+    public ResponseBean getListingLength() { 
+	ResponseBean r;
 	try {
 	    ProductsSelectionLocal parent = getParentSelection();
 	    Collection selections = parent.getSelections();
 
+	    selectionsListingCache = new ArrayList(selections);
 	    r = new ResponseBean();
+	    r.addRecord();
+	    r.addField("records-count", selectionsListingCache.size());
+
 	} catch (NamingException e) {
 	    r = ResponseBean.ERR_CONFIG_NAMING;
 	} catch (FinderException e) {
 	    r = ResponseBean.ERR_CONFIG_NOTFOUND;
 	}
-
 	return r;
-    }
+   }
 
     /**
      * Describe <code>saveFormData</code> method here.
