@@ -76,7 +76,7 @@
 	  DETAILS
 	  contains form controls and a listing (tree) of products in the crt selection
       -->
-      <tabpanel id="maintab.details">
+      <tabpanel id="maintab.details" orient="vertical">
 	
 
 	<hbox class="mytoolbar">
@@ -165,6 +165,7 @@
 		     }
 		 }
 		 window.arguments[0].select_end();
+		 return true;
 	     }
 
 	     // Process Cancel button
@@ -203,7 +204,7 @@
 			 req.add("param0", productId);
 			 this.theForm.post_request(req);
 		     },
-		     select_end: products_added;
+		     select_end: products_added
 		 };
 
 		 window.openDialog("select_usistd.xul", "usistdselction", "chrome,modal", select_handler);

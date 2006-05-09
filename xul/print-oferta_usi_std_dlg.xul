@@ -23,7 +23,7 @@
   <hbox>
     <label control="slectionCode" value="Selectie de tiparit"/>
     <textbox id="selectionCode"/>
-    <button label="..." command="select-selction-code-cmd" />
+    <button label="..." command="select-selection-code-cmd" />
   </hbox>
 
 
@@ -39,7 +39,7 @@
 	     }
 
 	     function do_selection_dlg() {
-		 select_handler = {
+		 var select_handler = {
 		     theForm: theForm,
 		     select: function (selectionId) {
 			 var request = this.theForm.get_request();
@@ -50,9 +50,8 @@
 		     select_end: function () {
 			 // nothing to do
 		     }
-		 }
-
-		 window.openDialog("selection.xul", "print-selection-dlg", select_handler);
+		 };
+		 openDialog("selection.xul", "choose-selection-dlg", "chrome,modal", select_handler);
 	     }
 
 	     var theForm = new FormObject();
@@ -65,6 +64,8 @@
 	     theForm.setupEventListeners();
     ]]>
   </script>
+
+
 
 
 
