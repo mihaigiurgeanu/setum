@@ -15,6 +15,7 @@ import ro.kds.erp.biz.ResponseBean;
 import javax.ejb.FinderException;
 import org.objectweb.util.monolog.api.BasicLevel;
 import java.util.ArrayList;
+import javax.ejb.CreateException;
 
 /**
  * Extends auto generated <code>OneLevelSelectionsBean</code> class and give
@@ -117,7 +118,7 @@ public class OneLevelSelectionsBizBean extends OneLevelSelectionsBean {
 
 	} catch (NamingException e) {
 	    r = ResponseBean.ERR_CONFIG_NAMING;
-	} catch (FinderException e) {
+	} catch (CreateException e) {
 	    r = ResponseBean.ERR_CONFIG_NOTFOUND;
 	}
 	return r;
@@ -164,10 +165,11 @@ public class OneLevelSelectionsBizBean extends OneLevelSelectionsBean {
     }
 
     /**
-     * Locates a reference to the parent selection
+     * Locates a reference to the parent selection. If the parent
+     * selection does not exist yet, it is created.
      */
     private ProductsSelectionLocal getParentSelection() 
-	throws NamingException, FinderException {
+	throws NamingException, CreateException {
 
 	if (parentSelection == null ) {
 	    Context ic = new InitialContext();
@@ -175,7 +177,13 @@ public class OneLevelSelectionsBizBean extends OneLevelSelectionsBean {
 	    String parentCode = (String) env.lookup(PARENT_PARAM);
 
 	    ProductsSelectionLocalHome ph = getSelectionHome();
-	    parentSelection = ph.findByCode(parentCode);
+	    try {
+		parentSelection = ph.findByCode(parentCode);
+	    } catch (FinderException e) {
+		parentSelection = ph.create();
+		parentSelection.setCode(parentCode);
+		logger.log(BasicLevel.INFO, "Parent selection created");
+	    }
 	}
 
 	return parentSelection;

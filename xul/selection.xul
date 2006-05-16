@@ -265,6 +265,7 @@
 	     }
 
 	     var theForm = new FormObject();
+	     theForm.do_link="";
 	     theForm.text_fields = new Array(
 					     "code",
 					     "name",

@@ -1,4 +1,5 @@
 <?xml version="1.0"?>
 <locatingRules xmlns="http://thaiopensource.com/ns/locating-rules/1.0">
+  <uri resource="web.xml" uri="../../../../schemas/web-app_2_4.rnc"/>
   <uri resource="jonas-web.xml" uri="../../../../../../../Apps/emacs-21.3/site-lisp/nxml-mode-20041004/schema/jonas-web-app_4_2.rnc"/>
 </locatingRules>

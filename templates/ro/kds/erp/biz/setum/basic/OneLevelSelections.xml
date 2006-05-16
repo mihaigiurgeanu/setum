@@ -26,6 +26,7 @@ products and that are grouped in a given ProductsSelection parent.
   </field>
 
   <remote>
-    <method>ResponseBean getListing() throws RemoteException</method>
+    <method>ResponseBean loadListing(Integer startRow) throws RemoteException</method>
+    <method>ResponseBean getListingLength() throws RemoteException</method>
   </remote>
 </class>

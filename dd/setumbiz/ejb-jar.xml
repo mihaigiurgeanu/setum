@@ -1109,7 +1109,58 @@
         <ejb-link>datalayer.jar#AttributeEJB</ejb-link>
       </ejb-local-ref>
     </session>
+
+
+    <session>
+      <description>
+	Add/Edit/Delete product selections to be printed on the offer of
+	usi-standard
+      </description>
+      <ejb-name>UsiStdSelectionsEJB</ejb-name>
+      <home>ro.kds.erp.biz.setum.basic.OneLevelSelectionsHome</home>
+      <remote>ro.kds.erp.biz.setum.basic.OneLevelSelections</remote>
+      <ejb-class>ro.kds.erp.biz.setum.OneLevelSelectionsBizBean</ejb-class>
+      <session-type>Stateful</session-type>
+      <transaction-type>Container</transaction-type>
+      <env-entry>
+	<description>The code of the toplevel selection</description>
+	<env-entry-name>parent</env-entry-name>
+	<env-entry-type>java.lang.String</env-entry-type>
+	<env-entry-value>US-000</env-entry-value>
+      </env-entry>
+      <ejb-ref>
+        <description>Required by the scripting engine.</description>
+        <ejb-ref-name>ejb/PreferencesEJB</ejb-ref-name>
+        <ejb-ref-type>Session</ejb-ref-type>
+        <home>ro.kds.erp.biz.PreferencesHome</home>
+        <remote>ro.kds.erp.biz.Preferences</remote>
+      </ejb-ref>
+      <ejb-ref>
+        <description>Sequence used to generate Category ids</description>
+        <ejb-ref-name>ejb/SequenceHome</ejb-ref-name>
+        <ejb-ref-type>Session</ejb-ref-type>
+        <home>ro.kds.erp.biz.SequenceHome</home>
+        <remote>ro.kds.erp.biz.Sequence</remote>
+      </ejb-ref>
+      <ejb-local-ref>
+	<ejb-ref-name>ejb/ProductsSelectionHome</ejb-ref-name>
+	<ejb-ref-type>Entity</ejb-ref-type>
+	<local-home>ro.kds.erp.data.ProductsSelectionLocalHome</local-home>
+	<local>ro.kds.erp.data.ProductsSelectionLocal</local>
+	<ejb-link>datalayer.jar#ProductsSelectionEJB</ejb-link>
+      </ejb-local-ref>
+      <ejb-local-ref>
+	<ejb-ref-name>ejb/ProductHome</ejb-ref-name>
+	<ejb-ref-type>Entity</ejb-ref-type>
+	<local-home>ro.kds.erp.data.ProductLocalHome</local-home>
+	<local>ro.kds.erp.data.ProductLocal</local>
+	<ejb-link>datalayer.jar#ProductEJB</ejb-link>
+      </ejb-local-ref>
+    </session>
+
   </enterprise-beans>
+
+
   <assembly-descriptor>
     <container-transaction>
       <method>
@@ -1217,6 +1268,14 @@
       <method>
         <ejb-name>GenericProductsEJB</ejb-name>
         <method-name>*</method-name>
+      </method>
+      <trans-attribute>Required</trans-attribute>
+    </container-transaction>
+
+    <container-transaction>
+      <method>
+	<ejb-name>UsiStdSelectiosnEJB</ejb-name>
+	<method-name>*</method-name>
       </method>
       <trans-attribute>Required</trans-attribute>
     </container-transaction>

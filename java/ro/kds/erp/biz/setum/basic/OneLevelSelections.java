@@ -26,5 +26,6 @@ public interface OneLevelSelections extends EJBObject {
     public ResponseBean updateName(String newName) throws RemoteException;
     public ResponseBean updateDescription(String newDescription) throws RemoteException;
 
-    public ResponseBean getListing() throws RemoteException;
+    public ResponseBean loadListing(Integer startRow) throws RemoteException;
+    public ResponseBean getListingLength() throws RemoteException;
 }

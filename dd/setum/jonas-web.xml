@@ -91,4 +91,9 @@
     <ejb-ref-name>ejb/GenericProductsHome</ejb-ref-name>
     <jndi-name>GenericProductsHome</jndi-name>
   </jonas-ejb-ref>
+  
+  <jonas-ejb-ref>
+    <ejb-ref-name>ejb/UsiStdSelectionsHome</ejb-ref-name>
+    <jndi-name>UsiStdSelectionsHome</jndi-name>
+  </jonas-ejb-ref>
 </jonas-web-app>

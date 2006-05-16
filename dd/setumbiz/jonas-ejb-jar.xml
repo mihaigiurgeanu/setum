@@ -204,4 +204,17 @@
     </jonas-ejb-ref>
   </jonas-session>
 
+  <jonas-session>
+    <ejb-name>UsiStdSelectionsEJB</ejb-name>
+    <jndi-name>UsiStdSelectionsHome</jndi-name>
+    <jonas-ejb-ref>
+      <ejb-ref-name>ejb/PreferencesEJB</ejb-ref-name>
+      <jndi-name>PreferencesHome</jndi-name>
+    </jonas-ejb-ref>
+    <jonas-ejb-ref>
+      <ejb-ref-name>ejb/SequenceHome</ejb-ref-name>
+      <jndi-name>SequenceHome</jndi-name>
+    </jonas-ejb-ref>
+  </jonas-session>
+
 </jonas-ejb-jar>
