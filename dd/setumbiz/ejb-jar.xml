@@ -1274,7 +1274,7 @@
 
     <container-transaction>
       <method>
-	<ejb-name>UsiStdSelectiosnEJB</ejb-name>
+	<ejb-name>UsiStdSelectionsEJB</ejb-name>
 	<method-name>*</method-name>
       </method>
       <trans-attribute>Required</trans-attribute>

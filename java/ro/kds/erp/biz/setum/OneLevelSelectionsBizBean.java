@@ -52,6 +52,11 @@ public class OneLevelSelectionsBizBean extends OneLevelSelectionsBean {
      */
     private ProductsSelectionLocalHome selectionHome;
 
+    /**
+     * Cache of the home interface. Accessed through <code>getProductHome</code>
+     * method.
+     */
+    private ProductLocalHome productHomeCache;
 
     /**
      * A cache of the items in the main listing (selections listing)
@@ -59,6 +64,16 @@ public class OneLevelSelectionsBizBean extends OneLevelSelectionsBean {
      * business logic.
      */
     private ArrayList selectionsListingCache;
+
+    /**
+     * Hash map that contains the products in the current selection.
+     * The values of <code>products</code> are of type
+     * <code>ProductLocal</code> and the keys are <code>Integer</code>,
+     * represeneting the primary key of the product object.
+     * We use a <code>HashMap</code> to ensure that there are no duplicates
+     * in the selections.
+     */
+    private ArrayList products;
 
     /**
      * Build the listing of selections contained in the parent category.
@@ -130,7 +145,49 @@ public class OneLevelSelectionsBizBean extends OneLevelSelectionsBean {
      * @return a <code>ResponseBean</code> value
      */
     public ResponseBean saveFormData() {
-	return null;
+	ResponseBean r;
+
+	try {
+	    r = new ResponseBean();
+	    r.addRecord();
+	    ProductsSelectionLocal s = getCurrent();
+	    if(s == null) {
+		ProductsSelectionLocalHome sh = getSelectionHome();
+		s = sh.create();
+		
+		ProductsSelectionLocal parent = getParentSelection();
+		parent.getSelections().add(s);
+		
+		this.id = s.getId();
+		r.addField("id", this.id);
+	    }
+
+	    s.setName(form.getName());
+	    s.setCode(form.getCode());
+	    s.setDescription(form.getDescription());
+	    s.setProducts(products);
+	} catch (FinderException e) {
+	    logger.log(BasicLevel.ERROR, "Can not find the product id " + this.id);
+	    logger.log(BasicLevel.DEBUG, e);
+	    r = ResponseBean.ERR_NOTFOUND;
+	} catch (NamingException e) {
+	    logger.log(BasicLevel.ERROR, e.getMessage());
+	    logger.log(BasicLevel.DEBUG, e);
+	    r = ResponseBean.ERR_CONFIG_NAMING;
+	} catch (CreateException e) {
+	    logger.log(BasicLevel.ERROR, "Can not create the selection entity");
+	    logger.log(BasicLevel.DEBUG, e);
+	    r = ResponseBean.ERR_CREATE;
+	}
+	return r;
+    }
+
+    /**
+     * Overwrite the default implentation to initialize the products hashmap.
+     */
+    protected void createNewFormBean() {
+	super.createNewFormBean();
+	products = new HashMap();
     }
 
     /**
@@ -140,28 +197,95 @@ public class OneLevelSelectionsBizBean extends OneLevelSelectionsBean {
      * @exception FinderException if an error occurs
      */
     public ResponseBean loadFields() throws FinderException {
-	return null;
+	ResponseBean r;
+	try {
+	    ProductsSelctionLocal s = getCurrent();
+	    if(s == null) {
+		r = ResponseBean.ERR_NOTCURRENT;
+	    } else {
+		form.setId(s.getId());
+		form.setCode(s.getCode());
+		form.setName(s.getName());
+		form.setDescription(s.getDescription());
+		products = new HashMap();
+		for(Iterator i = s.getProducts().iterator(); i.hasNext(); ) {
+		    (ProductLocal)p = (ProductLocal)i.next();
+		    products.put(p.getPrimaryKey(), p);
+		}
+		products = new ArrayList(s.getProducts());
+		r = new ResponseBean();
+		
+	    }
+	} catch (NamingException e) {
+	    logger.log(BasicLevel.ERROR, "Naming exception occured");
+	    logger.log(BasicLevel.DEBUG, e);
+	    r = ResponseBean.ERR_CONFIG_NAMING;
+	}
+	return r;
     }
 
     /**
      * Add a product to the selection.
      */
     public ResponseBean addProduct(Integer productId) {
-	return null;
+	ResponseBean r;
+	if(products.containsKey(productId)) {
+	    logger.log(BasicLevel.DEBUG, "Product with id " + productId +
+		       " already added");
+	    r = ResponseBean.SUCCESS;
+	} else {
+	    try {
+		ProductLocalHome ph = getProductHome();
+		products.put(productId, ph.findByPrimaryId(productId));
+		logger.log(BasicLevel.DEBUG, "Product " + productId +
+			   " added to the current selection -- id " + this.id);
+		r = ResponseBean.SUCCESS;
+	    } catch (NamingException e) {
+		logger.log(BasicLevel.ERROR, "Naming exception while getting the product home interface");
+		logger.log(BasicLevel.DEBUG, e);
+		r = ResponseBean.ERR_CONFIG_NAMING;
+	    } catch (FinderException e) {
+		logger.log(BasicLevel.ERROR, "Product with id " + productId +
+			   " not found");
+		logger.log(BasicLevel.DEBUG, e);
+		r = ResponseBean.ERR_NOTFOUND;
+	    }
+	}
+	return r;
     }
 
     /**
      * Remove a product from the selection.
      */
     public ResponseBean removeProduct(Integer productId) {
-	return null;
+	products.remove(productId);
     }
 
     /**
      * Get the products in the current selection.
      */
     public ResponseBean productsListing() {
-	return null;
+	ResponseBean r = new ResponseBean();
+	r.addRecord();
+    }
+
+    /**
+     * Current entity for the main form.
+     * @returns an entity bean that has the primary key <code>this.id</code>
+     * or null if there is no current id selected -- that is <code>this.id == null</code>.
+     *
+     * @throws FinderException if there is no entity for the given primary key
+     *
+     */
+    private ProductsSelectionLocal getCurrent() throws FinderException, NamingException {
+	if (this.id == null) {
+	    logger.log(BasicLevel.DEBUG, "No current selection selected");
+	    return null;
+	}
+
+	ProductsSelectionLocalHome sh = getSelectionHome();
+
+	return sh.findByPrimaryKey(this.id);
     }
 
     /**
@@ -201,6 +325,21 @@ public class OneLevelSelectionsBizBean extends OneLevelSelectionsBean {
 		.narrow(env.lookup("ejb/ProductsSelectionHome"), ProductsSelectionLocalHome.class);
 	}
 	return selectionHome;
+    }
+
+    /**
+     * Get a reference to the ProductLocalHome object. It caches the result.
+     */
+    private ProductLocalHome getProductHome() 
+	throws NamingException {
+	
+	if(productHomeCache == null) {
+	    Context ic = new InitialContext();
+	    Context env = (Context)ic.lookup("java:comp/env");
+	    productHomeCache = (ProductLocalHome)PortableRemoteObject
+		.narrow(env.lookup("ejb/ProductLocalHome"), ProductLocalHome.class);
+	}
+	return productHomeCache;
     }
 }
 
