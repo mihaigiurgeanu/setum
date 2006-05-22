@@ -34,6 +34,9 @@ import ro.kds.erp.biz.Sequence;
 import java.util.Collections;
 
 import java.util.Comparator;
+import ro.kds.erp.data.ProductsSelectionLocalHome;
+import ro.kds.erp.data.ProductsSelectionLocal;
+import java.util.TreeSet;
 
 /**
  * Business logic pentru form-ul de vizualizare/modificare oferte
@@ -67,12 +70,19 @@ public class OfertaUsiStandardBean
     OfferItemLocal offerItem;
 
     /**
+     * The products selection that will be printed on the offer report.
+     */
+    private ProductsSelectionLocal currentSelection;
+
+    /**
      * Initialize the form fields.
      *
      */
     public final void createNewFormBean() {
 	super.createNewFormBean(); // create the FormBean
 	offerItem = null;
+
+	currentSelection = null;
 
 	// get the preferences
 	int availability; // the number of days the offer should be available
@@ -623,28 +633,69 @@ public class OfertaUsiStandardBean
      * them.
      */
     public ResponseBean updateSelectionCode(String code) {
-	ResponseBean r = super.updateSelectionCode(code);
+	ResponseBean r;
+	if(code.length() == 0) {
+	    currentSelection = null;
+	    r = super.updateSelectionCode("");
+	} else {
+	    try {
+		InitialContext ic = new InitialContext();
+		Context env = (Context)ic.lookup("java:comp/env");
+		
+		ProductsSelectionLocalHome sh = (ProductsSelectionLocalHome)PortableRemoteObject.
+		    narrow(env.lookup("ejb/ProductsSelectionHome"), ProductsSelectionLocalHome.class);
+		ProductsSelectionLocal s = sh.findByCode(code);
+		
+		currentSelection = s;
+		r = super.updateSelectionCode(code);
 	
-	// TODO: set the current selection, to be used by the lineItemsCollectionMap
+	    } catch (FinderException e) {
+		r = ResponseBean.ERR_NOTFOUND;
+		logger.log(BasicLevel.ERROR, e);
+	    } catch (NamingException e) {
+		r = ResponseBean.ERR_CONFIG_NAMING;
+		logger.log(BasicLevel.ERROR, e);
+	    }
+	}
+
 	return r;
     }
 
 
     /**
-     * Business logic that allows current printing selection to be specified by
-     * its id instead of its code.
-     *
-     * @returns a <code>ResponseBean</code> containing the value of the code of
-     * of the current selection.
+     * Called when a new selection is activated for the report. It returns
+     * details about the given selection.
      */
     public ResponseBean selectSelection(Integer selectionId) {
 	ResponseBean r;
 
-	// TODO: get the selection for the given id, set it as current and 
-	// TODO: update the selectionCode.
-	r = new ResponseBean();
+	try {
+	    InitialContext ic = new InitialContext();
+	    Context env = (Context)ic.lookup("java:comp/env");
+	    
+	    ProductsSelectionLocalHome sh = (ProductsSelectionLocalHome)PortableRemoteObject.
+		narrow(env.lookup("ejb/ProductsSelectionHome"), ProductsSelectionLocalHome.class);
+	    ProductsSelectionLocal s = sh.findByPrimaryKey(selectionId);
+
+	    r = new ResponseBean();
+	    r.addRecord();
+	    r.addField("selectionCode", s.getCode());
+	    r.addField("selectionName", s.getName());
+	    r.addField("selectionDescription", s.getDescription());
+
+	    currentSelection = s;
+
+	} catch (FinderException e) {
+	    r = ResponseBean.ERR_NOTFOUND;
+	    logger.log(BasicLevel.ERROR, e);
+	} catch (NamingException e) {
+	    r = ResponseBean.ERR_CONFIG_NAMING;
+	    logger.log(BasicLevel.ERROR, e);
+	}
+
 	return r;
     }
+
 
     /**
      * Builds a <code>Collection</code> of <code>Map</code> objects to be
@@ -668,26 +719,41 @@ public class OfertaUsiStandardBean
 
 	    Collection offerItems = offer.getItems();
 	    reportData = new ArrayList();
+
+	    TreeSet selectionSet;
+
+	    if(currentSelection != null) {
+		selectionSet  = new TreeSet();
+		Collection selprods = currentSelection.getProducts();
+		for(Iterator i = selprods.iterator(); i.hasNext();) {
+		    ProductLocal p = (ProductLocal)i.next();
+		    selectionSet.add(p.getId());
+		}
+	    } else {
+		selectionSet = null;
+	    }
 	    for(Iterator i = offerItems.iterator(); i.hasNext();) {
 		OfferItemLocal item = (OfferItemLocal)i.next();
-		HashMap dataRow = new HashMap();
-		loadSubForm(item.getId());
-		dataRow.put("name", form.getProductName());
-		dataRow.put("code", form.getProductCode());
-		dataRow.put("sellPrice", form.getVatPrice());
 
-		dataRow.put("usa_code", form.getUsaCode());
-		dataRow.put("usa_name", form.getUsa());
-		dataRow.put("usa_id", form.getUsaId());
-		dataRow.put("usa_description", form.getUsaDescription());
-		dataRow.put("broasca_name", form.getBroasca());
-		dataRow.put("cilindru_name", form.getCilindru());
-		dataRow.put("sild_name", form.getSild());
-		dataRow.put("yalla_name", form.getYalla());
-		dataRow.put("vizor_name", form.getVizor());
+		if(selectionSet == null || selectionSet.contains(item.getProduct().getId())) {
+		    HashMap dataRow = new HashMap();
+		    loadSubForm(item.getId());
+		    dataRow.put("name", form.getProductName());
+		    dataRow.put("code", form.getProductCode());
+		    dataRow.put("sellPrice", form.getVatPrice());
+		    
+		    dataRow.put("usa_code", form.getUsaCode());
+		    dataRow.put("usa_name", form.getUsa());
+		    dataRow.put("usa_id", form.getUsaId());
+		    dataRow.put("usa_description", form.getUsaDescription());
+		    dataRow.put("broasca_name", form.getBroasca());
+		    dataRow.put("cilindru_name", form.getCilindru());
+		    dataRow.put("sild_name", form.getSild());
+		    dataRow.put("yalla_name", form.getYalla());
+		    dataRow.put("vizor_name", form.getVizor());
+		    reportData.add(dataRow);
+		}
 
-
-		reportData.add(dataRow);
 	    }
 	} catch (Exception e) {
 	    logger.log(BasicLevel.ERROR,

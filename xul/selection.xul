@@ -147,12 +147,23 @@
 	     var products;
 	     var productsListing = document.getElementById("productsListing");
 	     function load_products() {
+		 /*
 		 products = new RemoteDataView(theForm.do_link, "loadProductsListing",
 					       "getProductsListingLength");
 		 productsListing.view = make_treeview
 		     (products,
 		      function (row, column) {
 			  return products.get_cell_text(row, column);
+		      });
+		 */
+
+		 var req = theForm.get_request();
+		 req.add("command", "productsListing");
+		 products = load_records(req);
+		 productsListing.view = make_treeview
+		     (products,
+		      function (row, column) {
+			  return products[row][column];
 		      });
 	     }
 
@@ -207,7 +218,7 @@
 		     select_end: products_added
 		 };
 
-		 window.openDialog("select_usistd.xul", "usistdselction", "chrome,modal", select_handler);
+		 window.openDialog("select-usastd.xul", "usistdselction", "chrome,modal", select_handler);
 	     }
 
 	     // removes the selected product
@@ -250,9 +261,12 @@
 	     // method called at click event on the tree that displays the listing
 	     // of the products in the current selection
 	     function on_select_product() {
+		 /*
 		 var selid = products.
 		 get_cell_text(productsListing.currentIndex,
 			       "product.id");
+		 */
+		 var selid = products[productsListing.currentIndex]["id"];
 		 var req = theForm.get_request();
 		 req.add("command", "selectProduct");
 		 req.add("param0", selid);
@@ -261,11 +275,16 @@
 
 	     // save the changes on the edited selection
 	     function save_selection() {
+		 var req = theForm.get_request();
+		 req.add("command", "saveFormData");
+		 theForm.post_save_request(req);
+		 load_selections();
+		 maintab.selectedIndex = 0;
 		 
 	     }
 
 	     var theForm = new FormObject();
-	     theForm.do_link="";
+	     theForm.do_link="/usi-std-selections.do";
 	     theForm.text_fields = new Array(
 					     "code",
 					     "name",

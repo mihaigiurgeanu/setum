@@ -16,6 +16,10 @@ import javax.ejb.FinderException;
 import org.objectweb.util.monolog.api.BasicLevel;
 import java.util.ArrayList;
 import javax.ejb.CreateException;
+import ro.kds.erp.data.ProductLocalHome;
+import java.util.HashMap;
+import ro.kds.erp.data.ProductLocal;
+import java.util.Iterator;
 
 /**
  * Extends auto generated <code>OneLevelSelectionsBean</code> class and give
@@ -48,6 +52,12 @@ public class OneLevelSelectionsBizBean extends OneLevelSelectionsBean {
     private ProductsSelectionLocal parentSelection;
 
     /**
+     * Indicates the current product in this selection. <code>null</code>
+     * value indicates that no product is selected.
+     */
+    private Integer selectedProductId;
+
+    /**
      * Cache of a reference to the <code>ProductsSelectionLocalHome</code>
      */
     private ProductsSelectionLocalHome selectionHome;
@@ -73,7 +83,7 @@ public class OneLevelSelectionsBizBean extends OneLevelSelectionsBean {
      * We use a <code>HashMap</code> to ensure that there are no duplicates
      * in the selections.
      */
-    private ArrayList products;
+    private HashMap products;
 
     /**
      * Build the listing of selections contained in the parent category.
@@ -95,7 +105,7 @@ public class OneLevelSelectionsBizBean extends OneLevelSelectionsBean {
 
 
 		r.addRecord();
-		r.addField("selction.id", s.getId());
+		r.addField("selection.id", s.getId());
 		r.addField("selection.code", s.getCode());
 		r.addField("selection.name", s.getName());
 		//r.addField("selection.description", s.getDescription());
@@ -165,7 +175,7 @@ public class OneLevelSelectionsBizBean extends OneLevelSelectionsBean {
 	    s.setName(form.getName());
 	    s.setCode(form.getCode());
 	    s.setDescription(form.getDescription());
-	    s.setProducts(products);
+	    s.setProducts(products.values());
 	} catch (FinderException e) {
 	    logger.log(BasicLevel.ERROR, "Can not find the product id " + this.id);
 	    logger.log(BasicLevel.DEBUG, e);
@@ -182,12 +192,23 @@ public class OneLevelSelectionsBizBean extends OneLevelSelectionsBean {
 	return r;
     }
 
+
     /**
-     * Overwrite the default implentation to initialize the products hashmap.
+     * The user selected a product in the current selection.
+     */
+    public ResponseBean selectProduct(Integer productId) {
+	this.selectedProductId = productId;
+	return ResponseBean.SUCCESS;
+    }
+
+    /**
+     * Together with the initialization of the form bean, it will initialize
+     * the state variables added by this implementation.
      */
     protected void createNewFormBean() {
 	super.createNewFormBean();
 	products = new HashMap();
+	selectedProductId = null;
     }
 
     /**
@@ -199,7 +220,7 @@ public class OneLevelSelectionsBizBean extends OneLevelSelectionsBean {
     public ResponseBean loadFields() throws FinderException {
 	ResponseBean r;
 	try {
-	    ProductsSelctionLocal s = getCurrent();
+	    ProductsSelectionLocal s = getCurrent();
 	    if(s == null) {
 		r = ResponseBean.ERR_NOTCURRENT;
 	    } else {
@@ -209,10 +230,9 @@ public class OneLevelSelectionsBizBean extends OneLevelSelectionsBean {
 		form.setDescription(s.getDescription());
 		products = new HashMap();
 		for(Iterator i = s.getProducts().iterator(); i.hasNext(); ) {
-		    (ProductLocal)p = (ProductLocal)i.next();
+		    ProductLocal p = (ProductLocal)i.next();
 		    products.put(p.getPrimaryKey(), p);
 		}
-		products = new ArrayList(s.getProducts());
 		r = new ResponseBean();
 		
 	    }
@@ -236,7 +256,7 @@ public class OneLevelSelectionsBizBean extends OneLevelSelectionsBean {
 	} else {
 	    try {
 		ProductLocalHome ph = getProductHome();
-		products.put(productId, ph.findByPrimaryId(productId));
+		products.put(productId, ph.findByPrimaryKey(productId));
 		logger.log(BasicLevel.DEBUG, "Product " + productId +
 			   " added to the current selection -- id " + this.id);
 		r = ResponseBean.SUCCESS;
@@ -257,8 +277,15 @@ public class OneLevelSelectionsBizBean extends OneLevelSelectionsBean {
     /**
      * Remove a product from the selection.
      */
-    public ResponseBean removeProduct(Integer productId) {
-	products.remove(productId);
+    public ResponseBean removeProduct() {
+	ResponseBean r;
+	if(this.selectedProductId != null) {
+	    products.remove(this.selectedProductId);
+	    r = ResponseBean.SUCCESS;
+	} else {
+	    r = ResponseBean.ERR_NOTCURRENT;
+	}
+	return r;
     }
 
     /**
@@ -266,7 +293,24 @@ public class OneLevelSelectionsBizBean extends OneLevelSelectionsBean {
      */
     public ResponseBean productsListing() {
 	ResponseBean r = new ResponseBean();
-	r.addRecord();
+
+	for(Iterator i = products.values().iterator(); i.hasNext();) {
+	    ProductLocal p = (ProductLocal)i.next();
+	    
+	    r.addRecord();
+	    r.addField("product.id", p.getId());
+	    r.addField("product.code", p.getCode());
+	    r.addField("product.name", p.getName());
+	    r.addField("product.description", p.getDescription());
+	    r.addField("product.categoru", p.getCategory().getName());
+	    r.addField("product.price1", p.getPrice1());
+	    r.addField("product.price2", p.getPrice2());
+	    r.addField("product.price3", p.getPrice3());
+	    r.addField("product.price4", p.getPrice4());
+	    r.addField("product.price5", p.getPrice5());
+	}
+
+	return r;
     }
 
     /**
@@ -337,7 +381,7 @@ public class OneLevelSelectionsBizBean extends OneLevelSelectionsBean {
 	    Context ic = new InitialContext();
 	    Context env = (Context)ic.lookup("java:comp/env");
 	    productHomeCache = (ProductLocalHome)PortableRemoteObject
-		.narrow(env.lookup("ejb/ProductLocalHome"), ProductLocalHome.class);
+		.narrow(env.lookup("ejb/ProductHome"), ProductLocalHome.class);
 	}
 	return productHomeCache;
     }

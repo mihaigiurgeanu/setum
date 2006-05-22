@@ -28,5 +28,9 @@ products and that are grouped in a given ProductsSelection parent.
   <remote>
     <method>ResponseBean loadListing(Integer startRow) throws RemoteException</method>
     <method>ResponseBean getListingLength() throws RemoteException</method>
+    <method>ResponseBean productsListing() throws RemoteException</method>
+    <method>ResponseBean selectProduct(Integer productId) throws RemoteException</method>
+    <method>ResponseBean addProduct(Integer productId) throws RemoteException</method>
+    <method>ResponseBean removeProduct() throws RemoteException</method>
   </remote>
 </class>

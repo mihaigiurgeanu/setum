@@ -878,12 +878,12 @@
     <init-param>
       <description>The class name of the remote interface</description>
       <param-name>sessionClass</param-name>
-      <param-value>ro.kds.erp.biz.setum.basic.OneLevelSelection</param-value>
+      <param-value>ro.kds.erp.biz.setum.basic.OneLevelSelections</param-value>
     </init-param>
     <init-param>
       <description>The class name of the home interface</description>
       <param-name>sessionHome</param-name>
-      <param-value>ro.kds.erp.biz.basic.OneLevelSelectionHome</param-value>
+      <param-value>ro.kds.erp.biz.setum.basic.OneLevelSelectionsHome</param-value>
     </init-param>
   </servlet>
 

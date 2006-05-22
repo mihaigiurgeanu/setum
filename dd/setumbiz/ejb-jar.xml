@@ -792,6 +792,13 @@
         <ejb-link>datalayer.jar#CompositeProductEJB</ejb-link>
       </ejb-local-ref>
       <ejb-local-ref>
+	<ejb-ref-name>ejb/ProductsSelectionHome</ejb-ref-name>
+	<ejb-ref-type>Entity</ejb-ref-type>
+	<local-home>ro.kds.erp.data.ProductsSelectionLocalHome</local-home>
+	<local>ro.kds.erp.data.ProductsSelectionLocal</local>
+	<ejb-link>datalayer.jar#ProductsSelectionEJB</ejb-link>
+      </ejb-local-ref>
+      <ejb-local-ref>
         <ejb-ref-name>ejb/OfferHome</ejb-ref-name>
         <ejb-ref-type>Entity</ejb-ref-type>
         <local-home>ro.kds.erp.data.OfferLocalHome</local-home>

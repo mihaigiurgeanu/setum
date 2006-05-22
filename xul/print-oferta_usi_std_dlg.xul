@@ -31,6 +31,12 @@
   <script language="javascript">
     <![CDATA[
 	     function doOk() {
+		 var req = theForm.get_request();
+		 req.add("command", "change");
+		 req.add("field", "selectionCode");
+		 req.add("value", document.getElementById("selectionCode").value);
+		 theForm.post_request(req);
+
 		 open('http://setumserver:9000/setum/oferta-usi-standard.pdf', 'Usi standard', '');
 		 return true;
 	     }
@@ -45,7 +51,7 @@
 			 var request = this.theForm.get_request();
 			 request.add("command", "selectSelection")
 			 request.add("param0", selectionId);
-			 this.theForm.post_request(req);
+			 this.theForm.post_request(request);
 		     },
 		     select_end: function () {
 			 // nothing to do
