@@ -43,6 +43,12 @@ public class OfertaUsiStandardForm implements Serializable {
     java.math.BigDecimal entryPrice;
     java.math.BigDecimal sellPrice;
     String selectionCode;
+    String FilterUsa;
+    String FilterBroasca;
+    String FilterCilindru;
+    String FilterSild;
+    String FilterYalla;
+    String FilterVizor;
 
     public OfertaUsiStandardForm() {
 
@@ -160,6 +166,30 @@ public class OfertaUsiStandardForm implements Serializable {
 
 
        this.selectionCode = "";
+
+
+
+       this.FilterUsa = "";
+
+
+
+       this.FilterBroasca = "";
+
+
+
+       this.FilterCilindru = "";
+
+
+
+       this.FilterSild = "";
+
+
+
+       this.FilterYalla = "";
+
+
+
+       this.FilterVizor = "";
 
 
 
@@ -558,6 +588,96 @@ public class OfertaUsiStandardForm implements Serializable {
 	AttributeLocal a = (AttributeLocal)attributes.get("selectionCode");
 	if(a != null) {
 	    this.setSelectionCode(a.getStringValue());
+	}
+    }
+
+    public void setFilterUsa(String newFilterUsa) {
+        this.FilterUsa = newFilterUsa;
+    }
+
+    public String getFilterUsa() {
+        return FilterUsa;
+    }
+
+    public void readFilterUsa(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("FilterUsa");
+	if(a != null) {
+	    this.setFilterUsa(a.getStringValue());
+	}
+    }
+
+    public void setFilterBroasca(String newFilterBroasca) {
+        this.FilterBroasca = newFilterBroasca;
+    }
+
+    public String getFilterBroasca() {
+        return FilterBroasca;
+    }
+
+    public void readFilterBroasca(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("FilterBroasca");
+	if(a != null) {
+	    this.setFilterBroasca(a.getStringValue());
+	}
+    }
+
+    public void setFilterCilindru(String newFilterCilindru) {
+        this.FilterCilindru = newFilterCilindru;
+    }
+
+    public String getFilterCilindru() {
+        return FilterCilindru;
+    }
+
+    public void readFilterCilindru(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("FilterCilindru");
+	if(a != null) {
+	    this.setFilterCilindru(a.getStringValue());
+	}
+    }
+
+    public void setFilterSild(String newFilterSild) {
+        this.FilterSild = newFilterSild;
+    }
+
+    public String getFilterSild() {
+        return FilterSild;
+    }
+
+    public void readFilterSild(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("FilterSild");
+	if(a != null) {
+	    this.setFilterSild(a.getStringValue());
+	}
+    }
+
+    public void setFilterYalla(String newFilterYalla) {
+        this.FilterYalla = newFilterYalla;
+    }
+
+    public String getFilterYalla() {
+        return FilterYalla;
+    }
+
+    public void readFilterYalla(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("FilterYalla");
+	if(a != null) {
+	    this.setFilterYalla(a.getStringValue());
+	}
+    }
+
+    public void setFilterVizor(String newFilterVizor) {
+        this.FilterVizor = newFilterVizor;
+    }
+
+    public String getFilterVizor() {
+        return FilterVizor;
+    }
+
+    public void readFilterVizor(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("FilterVizor");
+	if(a != null) {
+	    this.setFilterVizor(a.getStringValue());
 	}
     }
 

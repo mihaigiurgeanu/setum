@@ -121,6 +121,34 @@
     <type>String</type>
   </field>
 
+  <!-- Filter -->
+  <field>
+    <name>FilterUsa</name>
+    <type>String</type>
+  </field>
+  <field>
+    <name>FilterBroasca</name>
+    <type>String</type>
+  </field>
+  <field>
+    <name>FilterCilindru</name>
+    <type>String</type>
+  </field>
+  <field>
+    <name>FilterSild</name>
+    <type>String</type>
+  </field>
+  <field>
+    <name>FilterYalla</name>
+    <type>String</type>
+  </field>
+  <field>
+    <name>FilterVizor</name>
+    <type>String</type>
+  </field>
+
+
+
   <!-- additional methods for the remote interface -->
   <remote>
     <method>ResponseBean loadListing() throws RemoteException</method>
@@ -133,5 +161,6 @@
     <method>ResponseBean selectSelection(Integer selectionId) throws RemoteException</method>
     <method>java.util.Collection lineItemsCollectionMap() throws RemoteException</method>
     <method>java.util.Map getOfferFieldsMap() throws RemoteException</method>
+    <method>ResponseBean clearFilter() throws RemoteException</method>
   </remote>
 </class>

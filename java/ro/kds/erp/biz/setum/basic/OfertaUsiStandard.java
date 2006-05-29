@@ -49,6 +49,12 @@ public interface OfertaUsiStandard extends EJBObject {
     public ResponseBean updateEntryPrice(java.math.BigDecimal newEntryPrice) throws RemoteException;
     public ResponseBean updateSellPrice(java.math.BigDecimal newSellPrice) throws RemoteException;
     public ResponseBean updateSelectionCode(String newSelectionCode) throws RemoteException;
+    public ResponseBean updateFilterUsa(String newFilterUsa) throws RemoteException;
+    public ResponseBean updateFilterBroasca(String newFilterBroasca) throws RemoteException;
+    public ResponseBean updateFilterCilindru(String newFilterCilindru) throws RemoteException;
+    public ResponseBean updateFilterSild(String newFilterSild) throws RemoteException;
+    public ResponseBean updateFilterYalla(String newFilterYalla) throws RemoteException;
+    public ResponseBean updateFilterVizor(String newFilterVizor) throws RemoteException;
 
     public ResponseBean loadListing() throws RemoteException;
     public ResponseBean lineItemsListing(Integer startRow) throws RemoteException;
@@ -60,4 +66,5 @@ public interface OfertaUsiStandard extends EJBObject {
     public ResponseBean selectSelection(Integer selectionId) throws RemoteException;
     public java.util.Collection lineItemsCollectionMap() throws RemoteException;
     public java.util.Map getOfferFieldsMap() throws RemoteException;
+    public ResponseBean clearFilter() throws RemoteException;
 }

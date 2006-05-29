@@ -29,7 +29,9 @@ theForm.text_fields = new Array("no", "docDate", "dateFrom", "dateTo",
 				"period", "name", "description", "comment",
 				"price", "relativeGain", "absoluteGain",
 				"usa", "broasca", "cilindru", "sild",
-				"yalla", "vizor", "sellPrice", "entryPrice");
+				"yalla", "vizor", "sellPrice", "entryPrice",
+				"filterUsa", "filterBroasca", "filterSild", 
+				"filterCilindru", "filterYalla", "filterVizor");
 
 theForm.combo_fields = new Array();
 theForm.radio_fields = new Array();
