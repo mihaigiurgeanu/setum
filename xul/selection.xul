@@ -82,7 +82,7 @@
 	<hbox class="mytoolbar">
 	  <button label="Salvare" command="saveCmd"/>
 	  <button label="Adauga ..." command="addProductsCmd"/>
-	  <button label="Sterge" command="saveCmd"/>
+	  <button label="Sterge" command="removeProductCmd"/>
 	</hbox>
 	<hbox class="title">
 	  <label>Detalii selectie produse</label>
@@ -266,7 +266,7 @@
 		 get_cell_text(productsListing.currentIndex,
 			       "product.id");
 		 */
-		 var selid = products[productsListing.currentIndex]["id"];
+		 var selid = products[productsListing.currentIndex]["product.id"];
 		 var req = theForm.get_request();
 		 req.add("command", "selectProduct");
 		 req.add("param0", selid);

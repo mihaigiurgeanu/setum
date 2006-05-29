@@ -57,7 +57,7 @@
 			 // nothing to do
 		     }
 		 };
-		 openDialog("selection.xul", "choose-selection-dlg", "chrome,modal", select_handler);
+		 openDialog("selection.xul", "choose-selection-dlg", "chrome,modal,resizable", select_handler);
 	     }
 
 	     var theForm = new FormObject();

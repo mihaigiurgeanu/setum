@@ -281,6 +281,7 @@ public class OneLevelSelectionsBizBean extends OneLevelSelectionsBean {
 	ResponseBean r;
 	if(this.selectedProductId != null) {
 	    products.remove(this.selectedProductId);
+	    logger.log(BasicLevel.DEBUG, "Remove product id: " + this.selectedProductId);
 	    r = ResponseBean.SUCCESS;
 	} else {
 	    r = ResponseBean.ERR_NOTCURRENT;
