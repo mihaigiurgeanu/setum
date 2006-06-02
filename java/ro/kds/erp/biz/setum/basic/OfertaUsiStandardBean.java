@@ -458,6 +458,30 @@ public abstract class OfertaUsiStandardBean
 	computeCalculatedFields(r);
 	return r;
     }
+    public ResponseBean updateVat(java.math.BigDecimal vat) {
+        ResponseBean r = new ResponseBean();
+	java.math.BigDecimal oldVal = form.getVat();
+	form.setVat(vat);
+	r.addRecord();
+	r.addField("vat", vat); // for number format
+	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.OfertaUsiStandard.vat");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(OLDVAL_VARNAME, oldVal, java.math.BigDecimal.class);
+		script.setVar(FORM_VARNAME, form, OfertaUsiStandardForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the vat", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
     public ResponseBean updatePrice(java.math.BigDecimal price) {
         ResponseBean r = new ResponseBean();
 	java.math.BigDecimal oldVal = form.getPrice();
@@ -1072,6 +1096,7 @@ public abstract class OfertaUsiStandardBean
 	r.addField("name", form.getName());
 	r.addField("description", form.getDescription());
 	r.addField("comment", form.getComment());
+	r.addField("vat", form.getVat());
 	r.addField("price", form.getPrice());
 	r.addField("vatPrice", form.getVatPrice());
 	r.addField("relativeGain", form.getRelativeGain());
@@ -1163,6 +1188,12 @@ public abstract class OfertaUsiStandardBean
 	    s.setVar("comment", form.getComment(), String.class);
 	} catch (ScriptErrorException e) {
 	    logger.log(BasicLevel.WARN, "Can not set the value of field: comment from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    s.setVar("vat", form.getVat(), java.math.BigDecimal.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: vat from the script");
             logger.log(BasicLevel.DEBUG, e);
         }
 	try {
@@ -1420,6 +1451,17 @@ public abstract class OfertaUsiStandardBean
 	    }
 	} catch (ScriptErrorException e) {
 	    logger.log(BasicLevel.WARN, "Can not get the value of field: comment from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    field = s.getVar("vat", java.math.BigDecimal.class);
+	    if(!field.equals(form.getVat())) {
+	        logger.log(BasicLevel.DEBUG, "Field vat modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setVat((java.math.BigDecimal)field);
+	        r.addField("vat", (java.math.BigDecimal)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: vat from the script");
             logger.log(BasicLevel.DEBUG, e);
         }
 	try {

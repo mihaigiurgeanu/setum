@@ -27,7 +27,7 @@ function load_items() {
 var theForm = new FormObject();
 theForm.text_fields = new Array("no", "docDate", "dateFrom", "dateTo", 
 				"period", "name", "description", "comment",
-				"price", "relativeGain", "absoluteGain",
+				"vatPrice", "relativeGain", "absoluteGain",
 				"usa", "broasca", "cilindru", "sild",
 				"yalla", "vizor", "sellPrice", "entryPrice",
 				"filterUsa", "filterBroasca", "filterSild", 

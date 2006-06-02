@@ -1,3 +1,5 @@
+set price [expr round($vatPrice / (1 + $vat))]
+
 set absoluteGain [expr $price - $entryPrice]
 
 if { $entryPrice != 0 } {
@@ -6,4 +8,4 @@ if { $entryPrice != 0 } {
 
 set period [expr ($dateTo - $dateFrom)/(3600 * 24)]
 
-set vatPrice [expr round($price * 1.19)]
+

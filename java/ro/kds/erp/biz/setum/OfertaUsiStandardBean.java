@@ -53,6 +53,11 @@ public class OfertaUsiStandardBean
 
 
     /**
+     * Constant VAT value
+     */
+    private static final BigDecimal VAT = new BigDecimal(0.19);
+
+    /**
      * Cache the line items listing. The cache is initialized
      * by the call to <code>lineItemsCount</code> method.
      */
@@ -124,8 +129,13 @@ public class OfertaUsiStandardBean
 	form.setDescription("");
 	form.setComment("");
 
+
+	form.setVat(VAT); // constant for this form
+
+
 	// subform fields
 	form.setPrice(new BigDecimal(0));
+	form.setVatPrice(new BigDecimal(0));
 	form.setRelativeGain(new Double(0));
 	form.setAbsoluteGain(new BigDecimal(0));
 
@@ -400,17 +410,17 @@ public class OfertaUsiStandardBean
 		    ProductLocal part = (ProductLocal)j.next();
 		    Integer catid = part.getCategory().getId();
 		    if(catid.equals(USA_SIMPLA_ID)) {
-			usa = part.getCode();
+			usa = part.getName();
 		    } else if(catid.equals(BROASCA_ID)) {
-			broasca = part.getCode();
+			broasca = part.getName();
 		    } else if(catid.equals(CILINDRU_ID)) {
-			cilindru = part.getCode();
+			cilindru = part.getName();
 		    } else if(catid.equals(SILD_ID)) {
-			sild = part.getCode();
+			sild = part.getName();
 		    } else if(catid.equals(YALLA_ID)) {
-			yalla = part.getCode();
+			yalla = part.getName();
 		    } else if(catid.equals(VIZOR_ID)) {
-			vizor = part.getCode();
+			vizor = part.getName();
 		    } else {
 			logger.log(BasicLevel.WARN, "Productd " + p.getId() + 
 				   " has an unknown component type " 
@@ -454,6 +464,7 @@ public class OfertaUsiStandardBean
      * Delete the current filter, so all the items will be displayd.
      */
     public ResponseBean clearFilter() {
+	form.setFilterUsa("");
 	form.setFilterBroasca("");
 	form.setFilterCilindru("");
 	form.setFilterCilindru("");
@@ -533,7 +544,7 @@ public class OfertaUsiStandardBean
 		logger.log(BasicLevel.WARN, "No product associated with this offer item " + loadId);
 	    }
 
-	    form.setPrice(offerItem.getPrice());
+	    form.setVatPrice(offerItem.getPrice());
 	    computeCalculatedFields(null);
 	    
 	    r = new ResponseBean();
@@ -582,7 +593,7 @@ public class OfertaUsiStandardBean
 	    // OfferItem is the instance var containg the current item
 	    offerItem = oih.create();
 	    offerItem.setProduct(p);
-	    offerItem.setPrice(p.getSellPrice());
+	    offerItem.setPrice(round(computeVATPrice(p.getSellPrice())));
 
 	    r = null; // to avoid compile time error
 
@@ -621,7 +632,7 @@ public class OfertaUsiStandardBean
     public ResponseBean saveSubForm() {
 	ResponseBean r;
 	
-	offerItem.setPrice(form.getPrice());
+	offerItem.setPrice(form.getVatPrice());
 	
 	r = new ResponseBean();
 
@@ -894,5 +905,22 @@ public class OfertaUsiStandardBean
 	return theMap;
     }
 
+
+    /**
+     * The method that will get the rounded value of price. The argument
+     * is the price of the product to be rounded.
+     */
+    static public BigDecimal round(BigDecimal price) {
+	long lPrice = price.longValue();
+	long digit = lPrice % 10;
+	lPrice /= 10;
+	if(digit > 0)
+	    lPrice += 1;
+	return new BigDecimal(lPrice * 10);
+    }
+
+    private BigDecimal computeVATPrice(BigDecimal price) {
+	return price.multiply(form.getVat().add(new BigDecimal(1)));
+    }
 }
 

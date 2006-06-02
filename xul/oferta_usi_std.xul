@@ -17,7 +17,7 @@
 
   <commandset>
     <command id="command-save" oncommand="theForm.save();load_offers();document.getElementById('maintab').selectedIndex=0" />
-    <command id="command-add" oncommand="theForm.addnew(); document.getElementById('maintab').selectedIndex=1;" />
+    <command id="command-add" oncommand="theForm.addnew(); load_items(); document.getElementById('maintab').selectedIndex=1;" />
     <command id="command-save-subform" 
 	     oncommand="theForm.save_sub('saveSubForm');load_items();document.getElementById('maintab').selectedIndex=1" />
     <command id="command-add-products"
@@ -209,8 +209,12 @@
 	  <grid>
 	    <rows>
 	      <row>
-		<label control="price" value="Pret"/>
-		<textbox id="price"/>
+		<box/>
+		<label>Pretul include TVA!</label>
+	      </row>
+	      <row>
+		<label control="vatPrice" value="Pret"/>
+		<textbox id="vatPrice"/>
 	      </row>
 	      <row>
 		<label control="relativeGain" value="Adaos (%):"/>
@@ -251,6 +255,10 @@
 	      <row>
 		<label control="vizor" value="Vizor:"/>
 		<textbox id="vizor" readonly="true"/>
+	      </row>
+	      <row>
+		<box/>
+		<label>Preturile nu includ TVA!</label>
 	      </row>
 	      <row>
 		<label control="entryPrice" value="Pret de intrare:"/>

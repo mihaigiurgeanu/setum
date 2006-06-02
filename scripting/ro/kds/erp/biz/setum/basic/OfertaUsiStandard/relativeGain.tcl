@@ -1,1 +1,2 @@
-set price [expr $entryPrice * (100 + $relativeGain)/100]
+
+set vatPrice [expr (1 + $vat) * $entryPrice * (100 + $relativeGain)/100]

@@ -1,1 +1,2 @@
-set price [expr $entryPrice + $absoluteGain]
+
+set vatPrice [expr ($vat + 1) * ($entryPrice + $absoluteGain)]

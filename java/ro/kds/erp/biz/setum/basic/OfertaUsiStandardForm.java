@@ -24,6 +24,7 @@ public class OfertaUsiStandardForm implements Serializable {
     String name;
     String description;
     String comment;
+    java.math.BigDecimal vat;
     java.math.BigDecimal price;
     java.math.BigDecimal vatPrice;
     Double relativeGain;
@@ -90,6 +91,10 @@ public class OfertaUsiStandardForm implements Serializable {
 
 
        this.comment = "";
+
+
+
+       this.vat = new java.math.BigDecimal(0);
 
 
 
@@ -303,6 +308,21 @@ public class OfertaUsiStandardForm implements Serializable {
 	AttributeLocal a = (AttributeLocal)attributes.get("comment");
 	if(a != null) {
 	    this.setComment(a.getStringValue());
+	}
+    }
+
+    public void setVat(java.math.BigDecimal newVat) {
+        this.vat = newVat;
+    }
+
+    public java.math.BigDecimal getVat() {
+        return vat;
+    }
+
+    public void readVat(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("vat");
+	if(a != null) {
+	    this.setVat(a.getDecimalValue());
 	}
     }
 

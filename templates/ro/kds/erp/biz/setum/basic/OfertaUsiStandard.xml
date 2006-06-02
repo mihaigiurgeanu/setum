@@ -39,14 +39,20 @@
     <name>comment</name>
     <type>String</type>
   </field>
+  <field>
+    <!--VAT is a constant field filled in by the business logic
+    but used in different users scripts -->
+    <name>vat</name>
+    <type>java.math.BigDecimal</type>
+  </field>
 
   <!-- Subform fields -->
-  <field>
+  <field> <!-- The price without VAT -->
     <name>price</name>
     <type>java.math.BigDecimal</type>
   </field>
   <field>
-    <name>vatPrice</name>
+    <name>vatPrice</name> <!-- The price including VAT -->
     <type>java.math.BigDecimal</type>
   </field>
   <field>
