@@ -60,6 +60,22 @@
     <type>Double</type>
   </field>
   <field>
+    <name>lUtil</name>
+    <type>Double</type>
+  </field>
+  <field>
+    <name>hUtil</name>
+    <type>Double</type>
+  </field>
+  <field>
+    <name>lFoaie</name>
+    <type>Double</type>
+  </field>
+  <field>
+    <name>hFoaie</name>
+    <type>Double</type>
+  </field>
+  <field>
     <name>kType</name>
     <type>Integer</type>
   </field>

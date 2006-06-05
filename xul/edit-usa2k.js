@@ -56,7 +56,7 @@ theForm.combo_fields = new Array("subclass", "version", "material",
 				 "intFinisajFereastraId",
 				 "intFinisajSupraluminaId",
 				 "intFinisajPanouLateralId");
-theForm.radio_fields = new Array("k", "ieFoil", "ieFoilSec", 
+theForm.radio_fields = new Array("k", "kType", "ieFoil", "ieFoilSec", 
 				 "frameType", "tresholdType",
 				 "tresholdSpace", "montareSistem", 
 				 "sistemSetumSauBeneficiar");

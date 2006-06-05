@@ -81,6 +81,10 @@ Argumentele primite la deschiderea dialogului:
 	      <menupopup id="pozitionareBalamale-popup"/>
 	    </menulist>
 	  </row>
+	  <row>
+	    <label controls="quantity" value="Nr. bucati:"/>
+	    <textbox id="quantity"/>
+	  </row>
 	</rows>
       </grid>
     </vbox>
@@ -175,7 +179,7 @@ Argumentele primite la deschiderea dialogului:
 	     
 	     theForm.do_link = "/edit-fereastra.do";
 	     theForm.text_fields = new Array("lf", "hf", "pozitionare1", "pozitionare2",
-					     "pozitionare3", "valoareGrilajAtipic");
+					     "pozitionare3", "valoareGrilajAtipic", "quantity");
 	     theForm.combo_fields = new Array("canat", "sensDeschidere", 
 					      "pozitionareBalamale", "componenta",
 					      "geamSimpluId", "geamTermopanId",

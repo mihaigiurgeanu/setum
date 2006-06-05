@@ -578,6 +578,102 @@ public abstract class UsaMetalica2KBean
 	computeCalculatedFields(r);
 	return r;
     }
+    public ResponseBean updateLUtil(Double lUtil) {
+        ResponseBean r = new ResponseBean();
+	Double oldVal = form.getLUtil();
+	form.setLUtil(lUtil);
+	r.addRecord();
+	r.addField("lUtil", lUtil); // for number format
+	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.UsaMetalica2K.lUtil");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(OLDVAL_VARNAME, oldVal, Double.class);
+		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the lUtil", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
+    public ResponseBean updateHUtil(Double hUtil) {
+        ResponseBean r = new ResponseBean();
+	Double oldVal = form.getHUtil();
+	form.setHUtil(hUtil);
+	r.addRecord();
+	r.addField("hUtil", hUtil); // for number format
+	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.UsaMetalica2K.hUtil");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(OLDVAL_VARNAME, oldVal, Double.class);
+		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the hUtil", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
+    public ResponseBean updateLFoaie(Double lFoaie) {
+        ResponseBean r = new ResponseBean();
+	Double oldVal = form.getLFoaie();
+	form.setLFoaie(lFoaie);
+	r.addRecord();
+	r.addField("lFoaie", lFoaie); // for number format
+	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.UsaMetalica2K.lFoaie");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(OLDVAL_VARNAME, oldVal, Double.class);
+		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the lFoaie", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
+    public ResponseBean updateHFoaie(Double hFoaie) {
+        ResponseBean r = new ResponseBean();
+	Double oldVal = form.getHFoaie();
+	form.setHFoaie(hFoaie);
+	r.addRecord();
+	r.addField("hFoaie", hFoaie); // for number format
+	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.UsaMetalica2K.hFoaie");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(OLDVAL_VARNAME, oldVal, Double.class);
+		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the hFoaie", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
     public ResponseBean updateKType(Integer kType) {
         ResponseBean r = new ResponseBean();
 	Integer oldVal = form.getKType();
@@ -2973,6 +3069,10 @@ public abstract class UsaMetalica2KBean
 	r.addField("lcorrection", form.getLcorrection());
 	r.addField("hcorrection", form.getHcorrection());
 	r.addField("lCurrent", form.getLCurrent());
+	r.addField("lUtil", form.getLUtil());
+	r.addField("hUtil", form.getHUtil());
+	r.addField("lFoaie", form.getLFoaie());
+	r.addField("hFoaie", form.getHFoaie());
 	r.addField("kType", form.getKType());
 	r.addField("intFoil", form.getIntFoil());
 	r.addField("ieFoil", form.getIeFoil());
@@ -3168,6 +3268,30 @@ public abstract class UsaMetalica2KBean
 	    s.setVar("lCurrent", form.getLCurrent(), Double.class);
 	} catch (ScriptErrorException e) {
 	    logger.log(BasicLevel.WARN, "Can not set the value of field: lCurrent from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    s.setVar("lUtil", form.getLUtil(), Double.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: lUtil from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    s.setVar("hUtil", form.getHUtil(), Double.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: hUtil from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    s.setVar("lFoaie", form.getLFoaie(), Double.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: lFoaie from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    s.setVar("hFoaie", form.getHFoaie(), Double.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: hFoaie from the script");
             logger.log(BasicLevel.DEBUG, e);
         }
 	try {
@@ -3924,6 +4048,50 @@ public abstract class UsaMetalica2KBean
 	    }
 	} catch (ScriptErrorException e) {
 	    logger.log(BasicLevel.WARN, "Can not get the value of field: lCurrent from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    field = s.getVar("lUtil", Double.class);
+	    if(!field.equals(form.getLUtil())) {
+	        logger.log(BasicLevel.DEBUG, "Field lUtil modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setLUtil((Double)field);
+	        r.addField("lUtil", (Double)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: lUtil from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    field = s.getVar("hUtil", Double.class);
+	    if(!field.equals(form.getHUtil())) {
+	        logger.log(BasicLevel.DEBUG, "Field hUtil modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setHUtil((Double)field);
+	        r.addField("hUtil", (Double)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: hUtil from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    field = s.getVar("lFoaie", Double.class);
+	    if(!field.equals(form.getLFoaie())) {
+	        logger.log(BasicLevel.DEBUG, "Field lFoaie modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setLFoaie((Double)field);
+	        r.addField("lFoaie", (Double)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: lFoaie from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    field = s.getVar("hFoaie", Double.class);
+	    if(!field.equals(form.getHFoaie())) {
+	        logger.log(BasicLevel.DEBUG, "Field hFoaie modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setHFoaie((Double)field);
+	        r.addField("hFoaie", (Double)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: hFoaie from the script");
             logger.log(BasicLevel.DEBUG, e);
         }
 	try {

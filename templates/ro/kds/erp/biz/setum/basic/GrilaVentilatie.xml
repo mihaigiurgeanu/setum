@@ -39,4 +39,8 @@
     <name>businessCategory</name>
     <type>String</type>
   </field>
+  <field>
+    <name>quantity</name>
+    <type>Integer</type>
+  </field>
 </class>

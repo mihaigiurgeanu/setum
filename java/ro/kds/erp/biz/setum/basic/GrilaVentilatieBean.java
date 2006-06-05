@@ -458,6 +458,30 @@ public abstract class GrilaVentilatieBean
 	computeCalculatedFields(r);
 	return r;
     }
+    public ResponseBean updateQuantity(Integer quantity) {
+        ResponseBean r = new ResponseBean();
+	Integer oldVal = form.getQuantity();
+	form.setQuantity(quantity);
+	r.addRecord();
+	r.addField("quantity", quantity); // for number format
+	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.GrilaVentilatie.quantity");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
+		script.setVar(FORM_VARNAME, form, GrilaVentilatieForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the quantity", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
 
     /**
      * Get the fields stored internaly and adds them to the response.
@@ -472,6 +496,7 @@ public abstract class GrilaVentilatieBean
 	r.addField("entryPrice", form.getEntryPrice());
 	r.addField("price1", form.getPrice1());
 	r.addField("businessCategory", form.getBusinessCategory());
+	r.addField("quantity", form.getQuantity());
 	loadValueLists(r);
     }
 
@@ -538,6 +563,12 @@ public abstract class GrilaVentilatieBean
 	    s.setVar("businessCategory", form.getBusinessCategory(), String.class);
 	} catch (ScriptErrorException e) {
 	    logger.log(BasicLevel.WARN, "Can not set the value of field: businessCategory from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    s.setVar("quantity", form.getQuantity(), Integer.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: quantity from the script");
             logger.log(BasicLevel.DEBUG, e);
         }
     }
@@ -645,6 +676,17 @@ public abstract class GrilaVentilatieBean
 	    }
 	} catch (ScriptErrorException e) {
 	    logger.log(BasicLevel.WARN, "Can not get the value of field: businessCategory from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    field = s.getVar("quantity", Integer.class);
+	    if(!field.equals(form.getQuantity())) {
+	        logger.log(BasicLevel.DEBUG, "Field quantity modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setQuantity((Integer)field);
+	        r.addField("quantity", (Integer)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: quantity from the script");
             logger.log(BasicLevel.DEBUG, e);
         }
     }

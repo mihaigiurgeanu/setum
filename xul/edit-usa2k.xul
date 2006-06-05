@@ -131,7 +131,7 @@ windows.arguments[0].select(productId)
 			  <textbox id="hcorrection" />
 			</row>
 			<row>
-			  <label control="lCurrent" value="L curenta =" observes="usa2Kstatus"/>
+			  <label control="lCurrent" value="L curenta ="/>
 			  <textbox id="lCurrent" observes="usa2Kstatus"/>
 			</row>
 			<row>

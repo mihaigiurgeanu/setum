@@ -29,6 +29,10 @@ public class UsaMetalica2KForm implements Serializable {
     Double lcorrection;
     Double hcorrection;
     Double lCurrent;
+    Double lUtil;
+    Double hUtil;
+    Double lFoaie;
+    Double hFoaie;
     Integer kType;
     Integer intFoil;
     Integer ieFoil;
@@ -185,6 +189,22 @@ public class UsaMetalica2KForm implements Serializable {
 
 
        this.lCurrent = new Double(0);
+   
+
+
+       this.lUtil = new Double(0);
+   
+
+
+       this.hUtil = new Double(0);
+   
+
+
+       this.lFoaie = new Double(0);
+   
+
+
+       this.hFoaie = new Double(0);
    
 
 
@@ -793,6 +813,66 @@ public class UsaMetalica2KForm implements Serializable {
 	AttributeLocal a = (AttributeLocal)attributes.get("lCurrent");
 	if(a != null) {
 	    this.setLCurrent(a.getDoubleValue());
+	}
+    }
+
+    public void setLUtil(Double newLUtil) {
+        this.lUtil = newLUtil;
+    }
+
+    public Double getLUtil() {
+        return lUtil;
+    }
+
+    public void readLUtil(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("lUtil");
+	if(a != null) {
+	    this.setLUtil(a.getDoubleValue());
+	}
+    }
+
+    public void setHUtil(Double newHUtil) {
+        this.hUtil = newHUtil;
+    }
+
+    public Double getHUtil() {
+        return hUtil;
+    }
+
+    public void readHUtil(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("hUtil");
+	if(a != null) {
+	    this.setHUtil(a.getDoubleValue());
+	}
+    }
+
+    public void setLFoaie(Double newLFoaie) {
+        this.lFoaie = newLFoaie;
+    }
+
+    public Double getLFoaie() {
+        return lFoaie;
+    }
+
+    public void readLFoaie(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("lFoaie");
+	if(a != null) {
+	    this.setLFoaie(a.getDoubleValue());
+	}
+    }
+
+    public void setHFoaie(Double newHFoaie) {
+        this.hFoaie = newHFoaie;
+    }
+
+    public Double getHFoaie() {
+        return hFoaie;
+    }
+
+    public void readHFoaie(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("hFoaie");
+	if(a != null) {
+	    this.setHFoaie(a.getDoubleValue());
 	}
     }
 

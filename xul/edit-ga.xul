@@ -43,6 +43,10 @@ La apasarea butonului ok, se va apela window.arguments[0].select(productId).
 	<textbox id="pozitionare2"/>
 	<textbox id="pozitionare3"/>
       </row>
+      <row>
+	<label controls="quantity" value="Nr. bucati:"/>
+	<textbox id="quantity" readonly="true"/>
+      </row>
     </rows>
   </grid>
 
@@ -57,7 +61,8 @@ La apasarea butonului ok, se va apela window.arguments[0].select(productId).
 	     theForm.do_link = "/edit-ga.do";
 	     theForm.text_fields = new Array("diametru", "pas", "nrRanduri",
 					     "pozitionare1", 
-					     "pozitionare2", "pozitionare3");
+					     "pozitionare2", "pozitionare3",
+					     "quantity");
 	     theForm.setupEventListeners();
 	     theForm.load_current();
 	     
