@@ -29,7 +29,7 @@ windows.arguments[0].select(productId)
   <script src="js/businessCategory.js"/>
 
   <broadcasterset>
-    <broadcaster id="usa2Kstatus" readonly="true"/>
+    <broadcaster id="usa2Kstatus" />
   </broadcasterset>
 
   <commandset>
@@ -149,13 +149,44 @@ windows.arguments[0].select(productId)
 		  </box>
 		</row>
 		<row>
+		  <label controls="lUtil" value="L util ="/>
+		  <hbox>
+		    <textbox id="lUtil"/>
+		    <spacer flex="1"/>
+		  </hbox>
+		</row>
+		<row>
+		  <label controls="hUtil" value="H util ="/>
+		  <hbox>
+		    <textbox id="hUtil"/>
+		    <spacer flex="1"/>
+		  </hbox>
+		</row>
+		<row>
+		  <label controls="lFoaie" value="L foaie ="/>
+		  <hbox>
+		    <textbox id="lFoaie"/>
+		    <spacer flex="1"/>
+		  </hbox>
+		</row>
+		<row>
+		  <label controls="hFoaie" value="H foaie ="/>
+		  <hbox>
+		    <textbox id="hFoaie"/>
+		    <spacer flex="1"/>
+		  </hbox>
+		</row>
+		<row>
+		  <label controls="lFoaieSec" value="L foaie (canat secundar) ="/>
+		  <hbox>
+		    <textbox id="lFoaieSec" observes="usa2Kstatus"/>
+		    <spacer flex="1"/>
+		  </hbox>
+		</row>
+		<row>
 		  <label value="Dimensiuni executie:"/>
 		  <box>
 		    <grid>
-		      <columns>
-			<column/>
-			<column/>
-		      </columns>
 		      <rows>
 			<row>
 			  <label control="le" value="Le ="/>

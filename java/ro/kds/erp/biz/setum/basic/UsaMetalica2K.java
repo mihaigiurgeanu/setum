@@ -39,6 +39,7 @@ public interface UsaMetalica2K extends EJBObject {
     public ResponseBean updateHUtil(Double newHUtil) throws RemoteException;
     public ResponseBean updateLFoaie(Double newLFoaie) throws RemoteException;
     public ResponseBean updateHFoaie(Double newHFoaie) throws RemoteException;
+    public ResponseBean updateLFoaieSec(Double newLFoaieSec) throws RemoteException;
     public ResponseBean updateKType(Integer newKType) throws RemoteException;
     public ResponseBean updateIntFoil(Integer newIntFoil) throws RemoteException;
     public ResponseBean updateIeFoil(Integer newIeFoil) throws RemoteException;

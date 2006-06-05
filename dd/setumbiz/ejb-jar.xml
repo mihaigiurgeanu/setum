@@ -997,7 +997,7 @@
         <description>The id of the category for this product</description>
         <env-entry-name>categoryId</env-entry-name>
         <env-entry-type>java.lang.Integer</env-entry-type>
-        <env-entry-value>9983</env-entry-value>
+        <env-entry-value>9982</env-entry-value>
       </env-entry>
       <ejb-ref>
         <ejb-ref-name>ejb/PreferencesEJB</ejb-ref-name>

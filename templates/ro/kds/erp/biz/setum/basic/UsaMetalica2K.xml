@@ -76,6 +76,10 @@
     <type>Double</type>
   </field>
   <field>
+    <name>lFoaieSec</name>
+    <type>Double</type>
+  </field>
+  <field>
     <name>kType</name>
     <type>Integer</type>
   </field>

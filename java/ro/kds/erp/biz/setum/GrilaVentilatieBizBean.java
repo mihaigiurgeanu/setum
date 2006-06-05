@@ -90,6 +90,7 @@ public class GrilaVentilatieBizBean extends GrilaVentilatieBean {
 	    attributes.add(ah.create("pozitionare1", form.getPozitionare1()));
 	    attributes.add(ah.create("pozitionare2", form.getPozitionare2()));
 	    attributes.add(ah.create("pozitionare3", form.getPozitionare3()));
+	    attributes.add(ah.create("quantity", form.getQuantity()));
 	    attributes.add(ah.create("businessCategory", form.getBusinessCategory()));
 
 	    p.setAttributes(attributes);
@@ -144,6 +145,9 @@ public class GrilaVentilatieBizBean extends GrilaVentilatieBean {
 
 	    if((a = (AttributeLocal)as.get("pozitionare3")) != null)
 		form.setPozitionare3(a.getStringValue());
+
+	    if((a = (AttributeLocal)as.get("quantity")) != null)
+		form.setQuantity(a.getIntValue());
 
 	    if((a = (AttributeLocal)as.get("businessCategory")) != null)
 		form.setBusinessCategory(a.getStringValue());

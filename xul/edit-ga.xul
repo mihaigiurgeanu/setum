@@ -45,7 +45,7 @@ La apasarea butonului ok, se va apela window.arguments[0].select(productId).
       </row>
       <row>
 	<label controls="quantity" value="Nr. bucati:"/>
-	<textbox id="quantity" readonly="true"/>
+	<textbox id="quantity" disabled="true"/>
       </row>
     </rows>
   </grid>

@@ -674,6 +674,30 @@ public abstract class UsaMetalica2KBean
 	computeCalculatedFields(r);
 	return r;
     }
+    public ResponseBean updateLFoaieSec(Double lFoaieSec) {
+        ResponseBean r = new ResponseBean();
+	Double oldVal = form.getLFoaieSec();
+	form.setLFoaieSec(lFoaieSec);
+	r.addRecord();
+	r.addField("lFoaieSec", lFoaieSec); // for number format
+	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.UsaMetalica2K.lFoaieSec");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(OLDVAL_VARNAME, oldVal, Double.class);
+		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the lFoaieSec", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
     public ResponseBean updateKType(Integer kType) {
         ResponseBean r = new ResponseBean();
 	Integer oldVal = form.getKType();
@@ -3073,6 +3097,7 @@ public abstract class UsaMetalica2KBean
 	r.addField("hUtil", form.getHUtil());
 	r.addField("lFoaie", form.getLFoaie());
 	r.addField("hFoaie", form.getHFoaie());
+	r.addField("lFoaieSec", form.getLFoaieSec());
 	r.addField("kType", form.getKType());
 	r.addField("intFoil", form.getIntFoil());
 	r.addField("ieFoil", form.getIeFoil());
@@ -3292,6 +3317,12 @@ public abstract class UsaMetalica2KBean
 	    s.setVar("hFoaie", form.getHFoaie(), Double.class);
 	} catch (ScriptErrorException e) {
 	    logger.log(BasicLevel.WARN, "Can not set the value of field: hFoaie from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    s.setVar("lFoaieSec", form.getLFoaieSec(), Double.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: lFoaieSec from the script");
             logger.log(BasicLevel.DEBUG, e);
         }
 	try {
@@ -4092,6 +4123,17 @@ public abstract class UsaMetalica2KBean
 	    }
 	} catch (ScriptErrorException e) {
 	    logger.log(BasicLevel.WARN, "Can not get the value of field: hFoaie from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    field = s.getVar("lFoaieSec", Double.class);
+	    if(!field.equals(form.getLFoaieSec())) {
+	        logger.log(BasicLevel.DEBUG, "Field lFoaieSec modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setLFoaieSec((Double)field);
+	        r.addField("lFoaieSec", (Double)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: lFoaieSec from the script");
             logger.log(BasicLevel.DEBUG, e);
         }
 	try {

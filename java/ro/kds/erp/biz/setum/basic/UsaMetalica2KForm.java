@@ -33,6 +33,7 @@ public class UsaMetalica2KForm implements Serializable {
     Double hUtil;
     Double lFoaie;
     Double hFoaie;
+    Double lFoaieSec;
     Integer kType;
     Integer intFoil;
     Integer ieFoil;
@@ -205,6 +206,10 @@ public class UsaMetalica2KForm implements Serializable {
 
 
        this.hFoaie = new Double(0);
+   
+
+
+       this.lFoaieSec = new Double(0);
    
 
 
@@ -873,6 +878,21 @@ public class UsaMetalica2KForm implements Serializable {
 	AttributeLocal a = (AttributeLocal)attributes.get("hFoaie");
 	if(a != null) {
 	    this.setHFoaie(a.getDoubleValue());
+	}
+    }
+
+    public void setLFoaieSec(Double newLFoaieSec) {
+        this.lFoaieSec = newLFoaieSec;
+    }
+
+    public Double getLFoaieSec() {
+        return lFoaieSec;
+    }
+
+    public void readLFoaieSec(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("lFoaieSec");
+	if(a != null) {
+	    this.setLFoaieSec(a.getDoubleValue());
 	}
     }
 

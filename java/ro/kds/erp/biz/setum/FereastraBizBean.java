@@ -93,6 +93,7 @@ public class FereastraBizBean extends FereastraBean {
 	    attributes.add(ah.create("componenta", form.getComponenta()));
 	    attributes.add(ah.create("tipComponenta", form.getTipComponenta()));
 	    attributes.add(ah.create("tipGeam", form.getTipGeam()));
+	    attributes.add(ah.create("quantity", form.getQuantity()));
 
 
 	    try {
@@ -220,6 +221,9 @@ public class FereastraBizBean extends FereastraBean {
 
 // 	    if((a = (AttributeLocal)attributes.get("tabla")) != null)
 // 		form.setTablaId(a.getProduct().getId());
+
+	    if((a = (AttributeLocal)attributes.get("quantity")) != null)
+		form.setQuantity(a.getIntValue());
 
 	    if((a = (AttributeLocal)attributes.get("businessCategory")) != null)
 		form.setBusinessCategory(a.getStringValue());
