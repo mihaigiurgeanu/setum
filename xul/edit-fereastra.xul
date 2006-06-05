@@ -109,63 +109,48 @@ Argumentele primite la deschiderea dialogului:
 
       <separator class="newgroup"/>
 
-      <groupbox>
-	<radiogroup id="tipComponenta">
-	  <grid>
-	    <columns>
-	      <column/><column/>
-	    </columns>
-	    <rows>
-	      <row align="start">
-		<radio id="tipComponenta.1" value="1" label="geam"/>
-		<radiogroup id="tipGeam" orient="vertical">
-		  <grid>
-		    <columns><column/><column/></columns>
-		    <rows>
-		      <row>
-			<radio id="tipGeam.1" value="1" label="simplu"/>
-			<menulist id="geamSimpluId">
-			  <menupopup id="geamSimpluId-popup"/>
-			</menulist>
-		      </row>
-		      <row>
-			<radio id="tipGeam.2" value="2" label="termopan"/>
-			<menulist id="geamTermopanId">
-			  <menupopup id="geamTermopanId-popup"/>
-			</menulist>
-		      </row>
-		    </rows>
-		  </grid>
-		</radiogroup>
-	      </row>
+      <label>Geam:</label>
+      <radiogroup id="tipGeam" orient="vertical">
+	<grid>
+	  <columns><column/><column/></columns>
+	  <rows>
+	    <row>
+	      <radio id="tipGeam.1" value="1" label="simplu"/>
+	      <menulist id="geamSimpluId">
+		<menupopup id="geamSimpluId-popup"/>
+	      </menulist>
+	    </row>
+	    <row>
+	      <radio id="tipGeam.2" value="2" label="termopan"/>
+	      <menulist id="geamTermopanId">
+		<menupopup id="geamTermopanId-popup"/>
+	      </menulist>
+	    </row>
+	  </rows>
+	</grid>
+      </radiogroup>
 
-	      <separator class="newgroup"/>
-	      
-	      <row align="start">
-		<radio id="tipComponenta.2" value="2" label="grilaj"/>
-		<radiogroup id="tipGrilaj" orient="vertical">
-		  <grid>
-		    <columns><column/><column/></columns>
-		    <rows>
-		      <row>
-			<radio id="tipGrilaj.1" value="1" label="STAS"/>
-			<menulist id="grilajStasId">
-			  <menupopup id="grilajStasId-popup"/>
-			</menulist>
-		      </row>
-		      <row>
-			<radio id="tipGrilaj.2" value="2" label="atipic, Valoare:"/>
-			<textbox id="valoareGrilajAtipic"/>
-		      </row>
-		    </rows>
-		  </grid>
-		</radiogroup>
-	      </row>
+      <separator class="newgroup"/>
+      <label>Grilaj:</label>
+      <radiogroup id="tipGrilaj" orient="vertical">
+	<grid>
+	  <columns><column/><column/></columns>
+	  <rows>
+	    <row>
+	      <radio id="tipGrilaj.1" value="1" label="STAS"/>
+	      <menulist id="grilajStasId">
+		<menupopup id="grilajStasId-popup"/>
+	      </menulist>
+	    </row>
+	    <row>
+	      <radio id="tipGrilaj.2" value="2" label="atipic, Valoare:"/>
+	      <textbox id="valoareGrilajAtipic"/>
+	    </row>
+	  </rows>
+	</grid>
+      </radiogroup>
 
-	    </rows>
-	  </grid>
-	</radiogroup>
-      </groupbox>
+
     </vbox>
   </hbox>
 
