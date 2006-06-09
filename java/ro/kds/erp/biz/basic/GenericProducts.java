@@ -53,4 +53,5 @@ public interface GenericProducts extends EJBObject {
     public ResponseBean removeCategory() throws RemoteException;
     public ResponseBean removeProduct() throws RemoteException;
     public ResponseBean removeAttribute() throws RemoteException;
+
 }

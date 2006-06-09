@@ -1059,6 +1059,7 @@ public abstract class UsaMetalica1KBean
 	return r;
     }
 
+
     /**
      * Get the fields stored internaly and adds them to the response.
      */

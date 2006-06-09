@@ -383,50 +383,56 @@ public class OfertaUsiStandardBean
     private ArrayList getFilteredItems() throws NamingException, FinderException {
 	ArrayList items = new ArrayList();
 
-	InitialContext ic = new InitialContext();
-	Context env = (Context)ic.lookup("java:comp/env");
-	
-	OfferLocalHome oh = (OfferLocalHome)PortableRemoteObject.
-	    narrow(env.lookup("ejb/OfferHome"), OfferLocalHome.class);
-	
-	OfferLocal offer = oh.findByPrimaryKey(id);
+	if(id != null) { // the current offer is not a new one
 
-	for(Iterator i = offer.getItems().iterator();
-	    i.hasNext(); ) {
+	    InitialContext ic = new InitialContext();
+	    Context env = (Context)ic.lookup("java:comp/env");
 	    
-	    OfferItemLocal oi = (OfferItemLocal)i.next();
-	    ProductLocal p = oi.getProduct();
+	    OfferLocalHome oh = (OfferLocalHome)PortableRemoteObject.
+		narrow(env.lookup("ejb/OfferHome"), OfferLocalHome.class);
+	
+	    OfferLocal offer = oh.findByPrimaryKey(id);
 
-	    if(p!=null) {
-		CompositeProductLocal cp = p.getCompositeProduct();
-		Collection parts = cp.getComponents();
-		String usa = "";
-		String broasca = "";
-		String cilindru = "";
-		String sild = "";
-		String yalla = "";
-		String vizor = "";
-		for(Iterator j = parts.iterator(); j.hasNext(); ) {
-		    ProductLocal part = (ProductLocal)j.next();
-		    Integer catid = part.getCategory().getId();
-		    if(catid.equals(USA_SIMPLA_ID)) {
-			usa = part.getName();
-		    } else if(catid.equals(BROASCA_ID)) {
-			broasca = part.getName();
-		    } else if(catid.equals(CILINDRU_ID)) {
-			cilindru = part.getName();
-		    } else if(catid.equals(SILD_ID)) {
-			sild = part.getName();
-		    } else if(catid.equals(YALLA_ID)) {
-			yalla = part.getName();
-		    } else if(catid.equals(VIZOR_ID)) {
-			vizor = part.getName();
-		    } else {
-			logger.log(BasicLevel.WARN, "Productd " + p.getId() + 
-				   " has an unknown component type " 
-				   + part.getCategory().getName());
+	    logger.log(BasicLevel.DEBUG, "Count of line items: " +
+		       offer.getItems().size());
+
+	    for(Iterator i = offer.getItems().iterator();
+		i.hasNext(); ) {
+	    
+		OfferItemLocal oi = (OfferItemLocal)i.next();
+		ProductLocal p = oi.getProduct();
+
+		if(p!=null) {
+		    CompositeProductLocal cp = p.getCompositeProduct();
+		    Collection parts = cp.getComponents();
+		    String usa = "";
+		    String broasca = "";
+		    String cilindru = "";
+		    String sild = "";
+		    String yalla = "";
+		    String vizor = "";
+		    for(Iterator j = parts.iterator(); j.hasNext(); ) {
+			ProductLocal part = (ProductLocal)j.next();
+			Integer catid = part.getCategory().getId();
+			if(catid.equals(USA_SIMPLA_ID)) {
+			    usa = part.getName();
+			} else if(catid.equals(BROASCA_ID)) {
+			    broasca = part.getName();
+			} else if(catid.equals(CILINDRU_ID)) {
+			    cilindru = part.getName();
+			} else if(catid.equals(SILD_ID)) {
+			    sild = part.getName();
+			} else if(catid.equals(YALLA_ID)) {
+			    yalla = part.getName();
+			} else if(catid.equals(VIZOR_ID)) {
+			    vizor = part.getName();
+			} else {
+			    logger.log(BasicLevel.WARN, "Productd " + p.getId() + 
+				       " has an unknown component type " 
+				       + part.getCategory().getName());
+			}
+
 		    }
-
 		    if(stringFilter(usa, form.getFilterUsa()) &&
 		       stringFilter(broasca, form.getFilterBroasca()) &&
 		       stringFilter(sild, form.getFilterSild()) &&

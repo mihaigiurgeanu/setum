@@ -318,6 +318,59 @@ public abstract class ${.node.class.name}Bean
     }
     [/#list]
 
+    [#list .node.class.services.method as method]
+    /**
+     * Generated implementation of the ${method.name} service. It will call
+     * the script ${.node.class.package}.${.node.class.name}.${method.name}
+     * to execute the request.
+     * [#if method.@returnType = "standard"]
+     * The <code>ResponseBean</code> to be returned will be automatically populated with the
+     * fields modified by the script and the changes will be automatically added to the
+     * form bean.
+     *
+     * @returns a <code>ResponseBean</code> containing the field values that were changed by
+     * the script and any of the fields added to it by the script.
+     * [#else]
+     * The method does not automatically add the changed values to the <code>ResponseBean</code>
+     * and does not add the values of changed variables to the form. The script is responsible
+     * to build the <code>ResponseBean</code> by using the <code>response</code> variable in the
+     * script and to make the changes in the form bean by using <code>form</code> variable in
+     * the script.
+     *
+     * @return the <code>ResponseBean</code> that the script can access through the <code>response</code>
+     * variable.
+     * [/#if]
+     */
+    public ResponseBean ${method.name} (
+        [#list method.params.param as param]
+        ${param.type} ${param.name}[#if param_has_next],[/#if]
+        [/#list]
+    ) [#if method.throws?has_content]throws [#list method.throws.throw as throw]${throw}[#if throw_has_next],[/#if] [/#list][/#if]{
+
+
+        ResponseBean r = new ResponseBean();
+        [#if method.@returnType = "standard"]
+        r.addRecord();
+        [/#if]
+	Script script = TclFileScript.loadScript("${.node.class.package}.${.node.class.name}.${method.name}");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(FORM_VARNAME, form, ${.node.class.name}Form.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		addFieldsToScript(script);
+		script.run();
+                [#if method.@returnType = "standard"]
+                getFieldsFromScript(script, r);
+                [/#if]
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for service ${method.name}", e);
+           }
+        }
+	return r;
+    }
+    [/#list]
+
     /**
      * Get the fields stored internaly and adds them to the response.
      */

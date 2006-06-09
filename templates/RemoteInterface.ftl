@@ -34,4 +34,12 @@ public interface ${.node.class.name} extends EJBObject {
     [#list .node.class.remote.method as method]
     public ${method};
     [/#list]
+
+    [#list .node.class.services.method as method]
+    public ResponseBean ${method.name} (
+        [#list method.params.param as param]
+        ${param.type} ${param.name}[#if param_has_next],[/#if]
+        [/#list]
+    ) throws RemoteException[#list method.throws.throw as throw], ${throw}[/#list];
+    [/#list]
 }

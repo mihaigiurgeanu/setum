@@ -68,4 +68,5 @@ public interface OfertaUsiStandard extends EJBObject {
     public java.util.Collection lineItemsCollectionMap() throws RemoteException;
     public java.util.Map getOfferFieldsMap() throws RemoteException;
     public ResponseBean clearFilter() throws RemoteException;
+
 }

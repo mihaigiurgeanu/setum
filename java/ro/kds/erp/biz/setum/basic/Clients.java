@@ -51,4 +51,5 @@ public interface Clients extends EJBObject {
     public ResponseBean removeContact() throws RemoteException;
     public ResponseBean saveSubForm() throws RemoteException;
     public java.util.Collection clientsCollectionMap() throws RemoteException;
+
 }

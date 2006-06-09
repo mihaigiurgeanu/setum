@@ -56,4 +56,8 @@
     <!-- loadListing returneaza lista de sisteme -->
     <method>ResponseBean loadListing() throws RemoteException</method>
   </remote>
+
+  <services>
+    
+  </services>
 </class>

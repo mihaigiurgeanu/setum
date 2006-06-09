@@ -32,4 +32,5 @@ public interface OneLevelSelections extends EJBObject {
     public ResponseBean selectProduct(Integer productId) throws RemoteException;
     public ResponseBean addProduct(Integer productId) throws RemoteException;
     public ResponseBean removeProduct() throws RemoteException;
+
 }

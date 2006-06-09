@@ -37,5 +37,8 @@
     <method>ResponseBean loadListing() throws RemoteException</method>
   </remote>
 
+  <services>
+    
+  </services>
 </class>
 

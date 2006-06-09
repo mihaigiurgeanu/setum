@@ -30,4 +30,5 @@ public interface UsaStdNeechipata extends EJBObject {
     public ResponseBean updateAbsoluteGain(java.math.BigDecimal newAbsoluteGain) throws RemoteException;
 
     public ResponseBean loadListing() throws RemoteException;
+
 }

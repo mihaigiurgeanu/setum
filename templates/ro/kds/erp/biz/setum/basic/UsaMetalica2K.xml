@@ -487,10 +487,48 @@
     <type>Integer</type>
   </field>
 
-
+  <!--
   <remote>
     <method>ResponseBean addOption(Integer optionId, String businessCategory) throws RemoteException</method>
     <method>ResponseBean getOptionsListing() throws RemoteException</method>
     <method>ResponseBean removeOption (Integer optionId) throws RemoteException</method>
   </remote>
+  -->
+
+  <services>
+    <method returnType="script">
+      <name>addOption</name>
+      <params>
+	<param>
+	  <name>optionId</name>
+	  <type>Integer</type>
+	</param>
+	<param>
+	  <name>businessCategory</name>
+	  <type>String</type>
+	</param>
+      </params>
+
+
+    </method>
+
+    <method returnType="script">
+      <name>getOptionsListing</name>
+      <params>
+      </params>
+    </method>
+
+    <method returnType="script">
+      <name>removeOption</name>
+      <params>
+	<param>
+	  <name>optionId</name>
+	  <type>Integer</type>
+	</param>
+      </params>
+    </method>
+  </services>
+
+
 </class>
+

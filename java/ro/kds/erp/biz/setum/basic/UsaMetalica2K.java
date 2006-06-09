@@ -140,7 +140,14 @@ public interface UsaMetalica2K extends EJBObject {
     public ResponseBean updateIntFinisajPanouLateral(String newIntFinisajPanouLateral) throws RemoteException;
     public ResponseBean updateIntFinisajPanouLateralId(Integer newIntFinisajPanouLateralId) throws RemoteException;
 
-    public ResponseBean addOption(Integer optionId, String businessCategory) throws RemoteException;
-    public ResponseBean getOptionsListing() throws RemoteException;
-    public ResponseBean removeOption (Integer optionId) throws RemoteException;
+
+    public ResponseBean addOption (
+        Integer optionId,
+        String businessCategory
+    ) throws RemoteException;
+    public ResponseBean getOptionsListing (
+    ) throws RemoteException;
+    public ResponseBean removeOption (
+        Integer optionId
+    ) throws RemoteException;
 }

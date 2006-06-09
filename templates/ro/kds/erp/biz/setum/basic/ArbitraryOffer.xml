@@ -95,4 +95,8 @@
     <method>ResponseBean removeItem() throws RemoteException</method>
     <method>ResponseBean saveSubForm() throws RemoteException</method>
   </remote>
+
+  <services>
+    
+  </services>
 </class>

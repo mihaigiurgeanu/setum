@@ -43,4 +43,7 @@
     <method>ResponseBean removeProductDefinition() throws RemoteException</method>
   </remote>
 
+  <services>
+    
+  </services>
 </class>

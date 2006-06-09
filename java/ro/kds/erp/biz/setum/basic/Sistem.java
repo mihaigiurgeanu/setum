@@ -34,4 +34,5 @@ public interface Sistem extends EJBObject {
     public ResponseBean updateAbsoluteGainPP(java.math.BigDecimal newAbsoluteGainPP) throws RemoteException;
 
     public ResponseBean loadListing() throws RemoteException;
+
 }

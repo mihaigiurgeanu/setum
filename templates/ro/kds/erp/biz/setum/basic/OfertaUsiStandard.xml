@@ -169,4 +169,8 @@
     <method>java.util.Map getOfferFieldsMap() throws RemoteException</method>
     <method>ResponseBean clearFilter() throws RemoteException</method>
   </remote>
+
+  <services>
+    
+  </services>
 </class>

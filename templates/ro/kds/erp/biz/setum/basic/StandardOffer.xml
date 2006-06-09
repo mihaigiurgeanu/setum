@@ -98,4 +98,8 @@
     <method>ResponseBean discontinue() throws RemoteException</method>
     <method>java.util.Map getOfferFieldsMap() throws RemoteException</method>
   </remote>
+
+  <services>
+    
+  </services>
 </class>

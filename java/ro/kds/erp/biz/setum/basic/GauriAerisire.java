@@ -33,4 +33,5 @@ public interface GauriAerisire extends EJBObject {
     public ResponseBean updateBusinessCategory(String newBusinessCategory) throws RemoteException;
     public ResponseBean updateQuantity(Integer newQuantity) throws RemoteException;
 
+
 }

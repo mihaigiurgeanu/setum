@@ -56,4 +56,5 @@ public interface UsaMetalica1K extends EJBObject {
     public ResponseBean updateEntryPrice(java.math.BigDecimal newEntryPrice) throws RemoteException;
     public ResponseBean updateSellPrice(java.math.BigDecimal newSellPrice) throws RemoteException;
 
+
 }

@@ -18,5 +18,21 @@ element class {
    # Add more definitions to the remote interface
    element remote {
       element method { text }+
-   } ?
+   } ?,
+
+   element services {
+      element method {
+        attribute returnType { "standard" | "script" },
+        element name { text },
+	element params {
+           element param {
+              element name { text },
+              element type { text }
+           } *
+        },
+        element throws {
+	    element throw { text }+
+        }?
+      }*
+   }
 }

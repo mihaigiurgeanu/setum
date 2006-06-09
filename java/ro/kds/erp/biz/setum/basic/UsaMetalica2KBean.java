@@ -3076,6 +3076,112 @@ public abstract class UsaMetalica2KBean
     }
 
     /**
+     * Generated implementation of the addOption service. It will call
+     * the script ro.kds.erp.biz.setum.basic.UsaMetalica2K.addOption
+     * to execute the request.
+     * 
+     * The method does not automatically add the changed values to the <code>ResponseBean</code>
+     * and does not add the values of changed variables to the form. The script is responsible
+     * to build the <code>ResponseBean</code> by using the <code>response</code> variable in the
+     * script and to make the changes in the form bean by using <code>form</code> variable in
+     * the script.
+     *
+     * @return the <code>ResponseBean</code> that the script can access through the <code>response</code>
+     * variable.
+     * 
+     */
+    public ResponseBean addOption (
+        Integer optionId,
+        String businessCategory
+    ) {
+
+
+        ResponseBean r = new ResponseBean();
+	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.UsaMetalica2K.addOption");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		addFieldsToScript(script);
+		script.run();
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for service addOption", e);
+           }
+        }
+	return r;
+    }
+    /**
+     * Generated implementation of the getOptionsListing service. It will call
+     * the script ro.kds.erp.biz.setum.basic.UsaMetalica2K.getOptionsListing
+     * to execute the request.
+     * 
+     * The method does not automatically add the changed values to the <code>ResponseBean</code>
+     * and does not add the values of changed variables to the form. The script is responsible
+     * to build the <code>ResponseBean</code> by using the <code>response</code> variable in the
+     * script and to make the changes in the form bean by using <code>form</code> variable in
+     * the script.
+     *
+     * @return the <code>ResponseBean</code> that the script can access through the <code>response</code>
+     * variable.
+     * 
+     */
+    public ResponseBean getOptionsListing (
+    ) {
+
+
+        ResponseBean r = new ResponseBean();
+	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.UsaMetalica2K.getOptionsListing");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		addFieldsToScript(script);
+		script.run();
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for service getOptionsListing", e);
+           }
+        }
+	return r;
+    }
+    /**
+     * Generated implementation of the removeOption service. It will call
+     * the script ro.kds.erp.biz.setum.basic.UsaMetalica2K.removeOption
+     * to execute the request.
+     * 
+     * The method does not automatically add the changed values to the <code>ResponseBean</code>
+     * and does not add the values of changed variables to the form. The script is responsible
+     * to build the <code>ResponseBean</code> by using the <code>response</code> variable in the
+     * script and to make the changes in the form bean by using <code>form</code> variable in
+     * the script.
+     *
+     * @return the <code>ResponseBean</code> that the script can access through the <code>response</code>
+     * variable.
+     * 
+     */
+    public ResponseBean removeOption (
+        Integer optionId
+    ) {
+
+
+        ResponseBean r = new ResponseBean();
+	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.UsaMetalica2K.removeOption");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		addFieldsToScript(script);
+		script.run();
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for service removeOption", e);
+           }
+        }
+	return r;
+    }
+
+    /**
      * Get the fields stored internaly and adds them to the response.
      */
     protected void copyFieldsToResponse(ResponseBean r) {

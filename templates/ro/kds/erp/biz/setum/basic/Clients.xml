@@ -106,4 +106,7 @@
     <method>java.util.Collection clientsCollectionMap() throws RemoteException</method>
   </remote>
 
+  <services>
+    
+  </services>
 </class>

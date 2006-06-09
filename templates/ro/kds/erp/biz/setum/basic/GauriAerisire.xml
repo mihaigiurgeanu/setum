@@ -47,4 +47,8 @@
     <name>quantity</name>
     <type>Integer</type>
   </field>
+
+  <services>
+    
+  </services>
 </class>

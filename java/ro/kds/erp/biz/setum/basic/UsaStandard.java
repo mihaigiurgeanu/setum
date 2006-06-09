@@ -34,4 +34,5 @@ public interface UsaStandard extends EJBObject {
     public ResponseBean getListingLength() throws RemoteException;
     public void recalculatePrices() throws RemoteException;
     public ResponseBean removeProductDefinition() throws RemoteException;
+
 }

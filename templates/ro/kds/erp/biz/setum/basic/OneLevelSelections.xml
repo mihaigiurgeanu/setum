@@ -33,4 +33,8 @@ products and that are grouped in a given ProductsSelection parent.
     <method>ResponseBean addProduct(Integer productId) throws RemoteException</method>
     <method>ResponseBean removeProduct() throws RemoteException</method>
   </remote>
+
+  <services>
+    
+  </services>
 </class>
