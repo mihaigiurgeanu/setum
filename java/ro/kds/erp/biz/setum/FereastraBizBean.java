@@ -272,6 +272,7 @@ public class FereastraBizBean extends FereastraBean {
 	r.addValueList("componenta", ValueLists.makeStdValueList(11070));
 	r.addValueList("tipGrilaj", ValueLists.makeStdValueList(11075));
 // 	r.addValueList("tipTabla", ValueLists.makeStdValueList(11080));
+	r.addValueList("standard", ValueLists.makeStdValueList(11090));
 
 	// geamSimpluId
 	vl = new LinkedHashMap();
@@ -359,6 +360,41 @@ public class FereastraBizBean extends FereastraBean {
 // 	}
 // 	r.addValueList("tablaId", vl);
 	
+    }
+
+    public ResponseBean updateStandard(Integer standard) {
+	ResponseBean r = super.updateStandard(standard);
+	if(standard.intValue() != 0) {
+	    try {
+		InitialContext ic = new InitialContext();
+		Context env = (Context)ic.lookup("java:comp/env");
+		CategoryLocalHome ch = (CategoryLocalHome)PortableRemoteObject.narrow
+		    (env.lookup("ejb/CategoryHome"), CategoryLocalHome.class);
+		CategoryLocal c = ch.findByPrimaryKey(new Integer(11090));
+		ProductLocal p = c.getProductByCode(standard);
+		Map attributes = p.getAttributesMap();
+		
+		AttributeLocal l = (AttributeLocal)attributes.get("L");
+		AttributeLocal h = (AttributeLocal)attributes.get("H");
+		if(l != null) {
+		    form.setLf(l.getDoubleValue());
+		    r.addField("lf", l.getDoubleValue());
+		} else {
+		    logger.log(BasicLevel.DEBUG, "The attibute L does not exists");
+		}
+		if(h != null) {
+		    form.setHf(h.getDoubleValue());
+		    r.addField("hf", h.getDoubleValue());
+		} else {
+		    logger.log(BasicLevel.DEBUG, "The attribute H does not exists");
+		}
+	    } catch (Exception e) {
+		logger.log(BasicLevel.WARN, 
+			   "Error while updating lf and hf fields based on standard field",
+			   e);
+	    }
+	}
+	return r;
     }
 
 }

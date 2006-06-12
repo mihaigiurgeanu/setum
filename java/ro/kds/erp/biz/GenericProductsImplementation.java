@@ -31,7 +31,7 @@ import java.util.ArrayList;
  * Created: Tue Mar 14 18:58:14 2006
  *
  * @author <a href="mailto:Mihai Giurgeanu@CRIMIRA"></a>
- * @version $Id: GenericProductsImplementation.java,v 1.4 2006/03/25 22:05:20 mihai Exp $
+ * @version $Id: GenericProductsImplementation.java,v 1.5 2006/06/12 06:16:34 mihai Exp $
  */
 public class GenericProductsImplementation extends GenericProductsBean {
 
@@ -478,7 +478,7 @@ public class GenericProductsImplementation extends GenericProductsBean {
 	    a.setStringValue(form.getAttrString());
 	    a.setIntValue(form.getAttrInt());
 	    a.setDecimalValue(form.getAttrDecimal());
-	    a.setDoubleValue(form.getAttrDouble());
+	    //a.setDoubleValue(form.getAttrDouble());
 
 	    form.setAttrId(attributeId);
 	    r = new ResponseBean();

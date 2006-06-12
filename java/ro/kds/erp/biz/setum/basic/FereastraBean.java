@@ -242,6 +242,30 @@ public abstract class FereastraBean
 	return r;
     }
 
+    public ResponseBean updateStandard(Integer standard) {
+        ResponseBean r = new ResponseBean();
+	Integer oldVal = form.getStandard();
+	form.setStandard(standard);
+	r.addRecord();
+	r.addField("standard", standard); // for number format
+	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.Fereastra.standard");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
+		script.setVar(FORM_VARNAME, form, FereastraForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the standard", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
     public ResponseBean updateCanat(Integer canat) {
         ResponseBean r = new ResponseBean();
 	Integer oldVal = form.getCanat();
@@ -776,6 +800,7 @@ public abstract class FereastraBean
      * Get the fields stored internaly and adds them to the response.
      */
     protected void copyFieldsToResponse(ResponseBean r) {
+	r.addField("standard", form.getStandard());
 	r.addField("canat", form.getCanat());
 	r.addField("lf", form.getLf());
 	r.addField("hf", form.getHf());
@@ -810,6 +835,12 @@ public abstract class FereastraBean
         } catch (ScriptErrorException e) {
             logger.log(BasicLevel.ERROR, "Can not set the logger variable in the script" +
                        e.getMessage());
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    s.setVar("standard", form.getStandard(), Integer.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: standard from the script");
             logger.log(BasicLevel.DEBUG, e);
         }
 	try {
@@ -952,6 +983,17 @@ public abstract class FereastraBean
      */
     protected void getFieldsFromScript(Script s, ResponseBean r) {
 	Object field;
+	try {
+	    field = s.getVar("standard", Integer.class);
+	    if(!field.equals(form.getStandard())) {
+	        logger.log(BasicLevel.DEBUG, "Field standard modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setStandard((Integer)field);
+	        r.addField("standard", (Integer)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: standard from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
 	try {
 	    field = s.getVar("canat", Integer.class);
 	    if(!field.equals(form.getCanat())) {

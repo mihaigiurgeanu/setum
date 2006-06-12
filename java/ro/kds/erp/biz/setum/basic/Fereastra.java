@@ -21,6 +21,7 @@ public interface Fereastra extends EJBObject {
     public ResponseBean getCurrentFormData() throws RemoteException;
     public ResponseBean getLoadedPrimaryKey() throws RemoteException;
 
+    public ResponseBean updateStandard(Integer newStandard) throws RemoteException;
     public ResponseBean updateCanat(Integer newCanat) throws RemoteException;
     public ResponseBean updateLf(Double newLf) throws RemoteException;
     public ResponseBean updateHf(Double newHf) throws RemoteException;

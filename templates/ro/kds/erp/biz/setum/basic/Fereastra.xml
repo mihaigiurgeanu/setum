@@ -4,6 +4,10 @@
   <package>ro.kds.erp.biz.setum.basic</package>
   <name>Fereastra</name>
   <field>
+    <name>standard</name>
+    <type>Integer</type>
+  </field>
+  <field>
     <name>canat</name>
     <type>Integer</type>
   </field>

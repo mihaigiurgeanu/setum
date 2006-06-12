@@ -238,9 +238,11 @@
 		     label="Valoare intreaga"
 		     flex="1"
 		     persist="ordinal width hidden"/>
+	    <!--
 	    <treecol id="attr.decimal"
 		     label="Valoare rationala"
 		     persist="ordinal width hidden"/>
+	    -->
 	    <treecol id="attr.double"
 		     label="Valoare reala"
 		     persist="ordinal width hidden"/>
@@ -285,10 +287,12 @@
 	      <label control="attrDecimal" value="Valoare rationala:"/>
 	      <textbox id="attrDecimal"/>
 	    </row>
+	    <!--
 	    <row>
 	      <label control="attrDouble" value="Valoare reala:"/>
 	      <textbox id="attrDouble"/>
 	    </row>
+	    -->
 	  </rows>
 	</grid>
       </tabpanel> <!-- maintab.attribute -->

@@ -398,7 +398,7 @@ windows.arguments[0].select(productId)
 	      enableColumnDrag="true" 
 	      persist="ordinal width height hidden" 
 	      seltype="single"   
-	      ondblclick="" 
+	      ondblclick="edit_option()" 
 	      onclick="">
 	  <treecols>		    
 	    <treecol id="options.categoryName" label="Tip" flex="1"

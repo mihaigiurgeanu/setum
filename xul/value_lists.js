@@ -156,8 +156,7 @@ theForm.text_fields = new Array(
 				"attrName",
 				"attrString",
 				"attrInt",
-				"attrDecimal",
-				"attrDouble"
+				"attrDecimal"
 				);
 theForm.combo_fields = new Array();
 theForm.radio_fields = new Array();

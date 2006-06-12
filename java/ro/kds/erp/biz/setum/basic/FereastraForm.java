@@ -15,6 +15,7 @@ import ro.kds.erp.data.AttributeLocal;
  */
 public class FereastraForm implements Serializable {
         
+    Integer standard;
     Integer canat;
     Double lf;
     Double hf;
@@ -39,6 +40,10 @@ public class FereastraForm implements Serializable {
     Integer quantity;
 
     public FereastraForm() {
+
+
+       this.standard = new Integer(0);
+
 
 
        this.canat = new Integer(0);
@@ -129,6 +134,21 @@ public class FereastraForm implements Serializable {
 
 
 
+    }
+
+    public void setStandard(Integer newStandard) {
+        this.standard = newStandard;
+    }
+
+    public Integer getStandard() {
+        return standard;
+    }
+
+    public void readStandard(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("standard");
+	if(a != null) {
+	    this.setStandard(a.getIntValue());
+	}
     }
 
     public void setCanat(Integer newCanat) {

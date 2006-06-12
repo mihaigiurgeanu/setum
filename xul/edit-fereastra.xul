@@ -42,6 +42,12 @@ Argumentele primite la deschiderea dialogului:
 	    </menulist>
 	  </row>
 	  <row>
+	    <label controls="standard" value="STAS fereastra:"/>
+	    <menulist id="standard">
+	      <menupopup id="standard-popup"/>
+	    </menulist>
+	  </row>
+	  <row>
 	    <label controls="lf" value="Lf = "/>
 	    <textbox id="lf"/>
 	  </row>
@@ -165,7 +171,7 @@ Argumentele primite la deschiderea dialogului:
 	     theForm.do_link = "/edit-fereastra.do";
 	     theForm.text_fields = new Array("lf", "hf", "pozitionare1", "pozitionare2",
 					     "pozitionare3", "valoareGrilajAtipic", "quantity");
-	     theForm.combo_fields = new Array("canat", "sensDeschidere", 
+	     theForm.combo_fields = new Array("standard", "canat", "sensDeschidere", 
 					      "pozitionareBalamale", "componenta",
 					      "geamSimpluId", "geamTermopanId",
 				 "grilajStasId", "tipTabla", "tablaId");
