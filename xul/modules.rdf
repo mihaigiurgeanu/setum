@@ -189,4 +189,14 @@
     <modules:xulfile>edit-ga.xul</modules:xulfile>
   </rdf:Description>
 
+  <!-- edit-supralumina -->
+  <rdf:Description rdf:about="http://www.kds.ro/erp/modules/setum/edit-supralumina">
+    <modules:xulfile>edit-supralumina.xul</modules:xulfile>
+  </rdf:Description>
+
+  <!-- edit-panoulateral -->
+  <rdf:Description rdf:about="http://www.kds.ro/erp/modules/setum/edit-panoulateral">
+    <modules:xulfile>edit-panoulateral.xul</modules:xulfile>
+  </rdf:Description>
+
 </rdf:RDF>

@@ -83,6 +83,16 @@
   </jonas-ejb-ref>
 
   <jonas-ejb-ref>
+    <ejb-ref-name>ejb/SupraluminaHome</ejb-ref-name>
+    <jndi-name>SupraluminaHome</jndi-name>
+  </jonas-ejb-ref>
+
+  <jonas-ejb-ref>
+    <ejb-ref-name>ejb/PanouLateralHome</ejb-ref-name>
+    <jndi-name>PanouLateralHome</jndi-name>
+  </jonas-ejb-ref>
+
+  <jonas-ejb-ref>
     <ejb-ref-name>ejb/ClientsHome</ejb-ref-name>
     <jndi-name>ClientsHome</jndi-name>
   </jonas-ejb-ref>

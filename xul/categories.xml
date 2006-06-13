@@ -106,6 +106,22 @@ function to call when the called module ends.
   </rdf:Description>
 
 
+  <rdf:Description rdf:about="http://www.kds.ro/erp/businessCategory/setum/optiuni/supralumina">
+    <category:title>Supralumina</category:title>
+    <category:service>/edit-supralumina.do</category:service>
+    <category:module rdf:resource="http://www.kds.ro/erp/modules/setum/edit-supralumina"/>
+    <category:onnew>newFormData</category:onnew>
+    <category:load>loadFormData</category:load>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="http://www.kds.ro/erp/businessCategory/setum/optiuni/panoulateral">
+    <category:title>Panou lateral</category:title>
+    <category:service>/edit-panoulateral.do</category:service>
+    <category:module rdf:resource="http://www.kds.ro/erp/modules/setum/edit-panoulateral"/>
+    <category:onnew>newFormData</category:onnew>
+    <category:load>loadFormData</category:load>
+  </rdf:Description>
+
   <!-- 
        Optiuni usa metalica
   -->
@@ -113,6 +129,8 @@ function to call when the called module ends.
     <rdf:li rdf:resource="http://www.kds.ro/erp/businessCategory/setum/optiuni/fereastra"/>
     <rdf:li rdf:resource="http://www.kds.ro/erp/businessCategory/setum/optiuni/gv"/>
     <rdf:li rdf:resource="http://www.kds.ro/erp/businessCategory/setum/optiuni/ga"/>
+    <rdf:li rdf:resource="http://www.kds.ro/erp/businessCategory/setum/optiuni/supralumina"/>
+    <rdf:li rdf:resource="http://www.kds.ro/erp/businessCategory/setum/optiuni/panoulateral"/>
   </rdf:Seq>
 
 </rdf:RDF>
