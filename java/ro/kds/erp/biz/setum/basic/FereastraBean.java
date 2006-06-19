@@ -16,6 +16,7 @@ import java.util.Iterator;
 import ro.kds.erp.scripting.Script;
 import ro.kds.erp.scripting.TclFileScript;
 import ro.kds.erp.scripting.ScriptErrorException;
+import javax.naming.*;
 
 /**
  * Standard implementation of the Fereastra session bean.
@@ -34,6 +35,19 @@ public abstract class FereastraBean
     final static String LOGIC_VARNAME = "logic";
     final static String OLDVAL_VARNAME = "oldVal";
 
+    /**
+     * The name of the env parameter containing the script prefix.
+     * The script prefix should be composed by words separated by the dot
+     * in the same way as a fully qualified java class name would look like.
+     * The scripts will be located by different script aware methods using
+     * this prefix.
+     */
+    final static String SCRIPT_PREFIX_NAME = "script.prefix";
+
+    /**
+     * Cache for the script prefix read from environment variables.
+     */
+     private String scriptPrefix;
 
     // ------------------------------------------------------------------
     // SessionBean implementation
@@ -181,7 +195,7 @@ public abstract class FereastraBean
 	   r.addRecord();
         }
 	Script script = TclFileScript
-		.loadScript("ro.kds.erp.biz.setum.basic.Fereastra_calculatedFields");
+		.loadScript(getScriptPrefix() + "_calculatedFields");
 	if(script.loaded()) {
 	    try {
 		script.setVar(FORM_VARNAME, form, 
@@ -223,7 +237,7 @@ public abstract class FereastraBean
       	ResponseBean r = new ResponseBean();
 
 	Script script = TclFileScript
-		.loadScript("ro.kds.erp.biz.setum.basic.Fereastra_validation");
+		.loadScript(getScriptPrefix() + "_validation");
 	if(script.loaded()) {
 	    try {
 		script.setVar(FORM_VARNAME, form, 
@@ -248,7 +262,7 @@ public abstract class FereastraBean
 	form.setStandard(standard);
 	r.addRecord();
 	r.addField("standard", standard); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.Fereastra.standard");
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".standard");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
@@ -272,7 +286,7 @@ public abstract class FereastraBean
 	form.setCanat(canat);
 	r.addRecord();
 	r.addField("canat", canat); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.Fereastra.canat");
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".canat");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
@@ -296,7 +310,7 @@ public abstract class FereastraBean
 	form.setLf(lf);
 	r.addRecord();
 	r.addField("lf", lf); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.Fereastra.lf");
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".lf");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
@@ -320,7 +334,7 @@ public abstract class FereastraBean
 	form.setHf(hf);
 	r.addRecord();
 	r.addField("hf", hf); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.Fereastra.hf");
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".hf");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
@@ -344,7 +358,7 @@ public abstract class FereastraBean
 	form.setPozitionare1(pozitionare1);
 	r.addRecord();
 	r.addField("pozitionare1", pozitionare1); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.Fereastra.pozitionare1");
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".pozitionare1");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
@@ -368,7 +382,7 @@ public abstract class FereastraBean
 	form.setPozitionare2(pozitionare2);
 	r.addRecord();
 	r.addField("pozitionare2", pozitionare2); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.Fereastra.pozitionare2");
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".pozitionare2");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
@@ -392,7 +406,7 @@ public abstract class FereastraBean
 	form.setPozitionare3(pozitionare3);
 	r.addRecord();
 	r.addField("pozitionare3", pozitionare3); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.Fereastra.pozitionare3");
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".pozitionare3");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
@@ -416,7 +430,7 @@ public abstract class FereastraBean
 	form.setDeschidere(deschidere);
 	r.addRecord();
 	r.addField("deschidere", deschidere); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.Fereastra.deschidere");
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".deschidere");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
@@ -440,7 +454,7 @@ public abstract class FereastraBean
 	form.setSensDeschidere(sensDeschidere);
 	r.addRecord();
 	r.addField("sensDeschidere", sensDeschidere); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.Fereastra.sensDeschidere");
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".sensDeschidere");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
@@ -464,7 +478,7 @@ public abstract class FereastraBean
 	form.setPozitionareBalamale(pozitionareBalamale);
 	r.addRecord();
 	r.addField("pozitionareBalamale", pozitionareBalamale); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.Fereastra.pozitionareBalamale");
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".pozitionareBalamale");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
@@ -488,7 +502,7 @@ public abstract class FereastraBean
 	form.setComponenta(componenta);
 	r.addRecord();
 	r.addField("componenta", componenta); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.Fereastra.componenta");
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".componenta");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
@@ -512,7 +526,7 @@ public abstract class FereastraBean
 	form.setTipComponenta(tipComponenta);
 	r.addRecord();
 	r.addField("tipComponenta", tipComponenta); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.Fereastra.tipComponenta");
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".tipComponenta");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
@@ -536,7 +550,7 @@ public abstract class FereastraBean
 	form.setTipGeam(tipGeam);
 	r.addRecord();
 	r.addField("tipGeam", tipGeam); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.Fereastra.tipGeam");
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".tipGeam");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
@@ -560,7 +574,7 @@ public abstract class FereastraBean
 	form.setGeamSimpluId(geamSimpluId);
 	r.addRecord();
 	r.addField("geamSimpluId", geamSimpluId); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.Fereastra.geamSimpluId");
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".geamSimpluId");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
@@ -584,7 +598,7 @@ public abstract class FereastraBean
 	form.setGeamTermopanId(geamTermopanId);
 	r.addRecord();
 	r.addField("geamTermopanId", geamTermopanId); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.Fereastra.geamTermopanId");
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".geamTermopanId");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
@@ -608,7 +622,7 @@ public abstract class FereastraBean
 	form.setTipGrilaj(tipGrilaj);
 	r.addRecord();
 	r.addField("tipGrilaj", tipGrilaj); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.Fereastra.tipGrilaj");
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".tipGrilaj");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
@@ -632,7 +646,7 @@ public abstract class FereastraBean
 	form.setGrilajStasId(grilajStasId);
 	r.addRecord();
 	r.addField("grilajStasId", grilajStasId); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.Fereastra.grilajStasId");
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".grilajStasId");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
@@ -656,7 +670,7 @@ public abstract class FereastraBean
 	form.setValoareGrilajAtipic(valoareGrilajAtipic);
 	r.addRecord();
 	r.addField("valoareGrilajAtipic", valoareGrilajAtipic); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.Fereastra.valoareGrilajAtipic");
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".valoareGrilajAtipic");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
@@ -680,7 +694,7 @@ public abstract class FereastraBean
 	form.setSellPrice(sellPrice);
 	r.addRecord();
 	r.addField("sellPrice", sellPrice); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.Fereastra.sellPrice");
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".sellPrice");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
@@ -704,7 +718,7 @@ public abstract class FereastraBean
 	form.setEntryPrice(entryPrice);
 	r.addRecord();
 	r.addField("entryPrice", entryPrice); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.Fereastra.entryPrice");
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".entryPrice");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
@@ -728,7 +742,7 @@ public abstract class FereastraBean
 	form.setPrice1(price1);
 	r.addRecord();
 	r.addField("price1", price1); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.Fereastra.price1");
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".price1");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
@@ -752,7 +766,7 @@ public abstract class FereastraBean
 	form.setBusinessCategory(businessCategory);
 	r.addRecord();
 	r.addField("businessCategory", businessCategory); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.Fereastra.businessCategory");
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".businessCategory");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
@@ -776,7 +790,7 @@ public abstract class FereastraBean
 	form.setQuantity(quantity);
 	r.addRecord();
 	r.addField("quantity", quantity); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.Fereastra.quantity");
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".quantity");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
@@ -795,6 +809,74 @@ public abstract class FereastraBean
 	return r;
     }
 
+    /**
+     * Generated implementation of the faraGeam service. It will call
+     * the script ro.kds.erp.biz.setum.basic.Fereastra.faraGeam
+     * to execute the request.
+     * 
+     * The <code>ResponseBean</code> to be returned will be automatically populated with the
+     * fields modified by the script and the changes will be automatically added to the
+     * form bean.
+     *
+     * @returns a <code>ResponseBean</code> containing the field values that were changed by
+     * the script and any of the fields added to it by the script.
+     * 
+     */
+    public ResponseBean faraGeam (
+    ) {
+
+
+        ResponseBean r = new ResponseBean();
+        r.addRecord();
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".faraGeam");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(FORM_VARNAME, form, FereastraForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		addFieldsToScript(script);
+		script.run();
+                getFieldsFromScript(script, r);
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for service faraGeam", e);
+           }
+        }
+	return r;
+    }
+    /**
+     * Generated implementation of the faraGrilaj service. It will call
+     * the script ro.kds.erp.biz.setum.basic.Fereastra.faraGrilaj
+     * to execute the request.
+     * 
+     * The <code>ResponseBean</code> to be returned will be automatically populated with the
+     * fields modified by the script and the changes will be automatically added to the
+     * form bean.
+     *
+     * @returns a <code>ResponseBean</code> containing the field values that were changed by
+     * the script and any of the fields added to it by the script.
+     * 
+     */
+    public ResponseBean faraGrilaj (
+    ) {
+
+
+        ResponseBean r = new ResponseBean();
+        r.addRecord();
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".faraGrilaj");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(FORM_VARNAME, form, FereastraForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		addFieldsToScript(script);
+		script.run();
+                getFieldsFromScript(script, r);
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for service faraGrilaj", e);
+           }
+        }
+	return r;
+    }
 
     /**
      * Get the fields stored internaly and adds them to the response.
@@ -1246,5 +1328,28 @@ public abstract class FereastraBean
      * loading or when a new object is to be created.
      */
      protected void loadValueLists(ResponseBean r) {}
+
+
+    /**
+     * Convinience method to get the script prefix value from environment vars.
+     * It caches the value, so only one call would search the jndi directory.
+     */
+     protected String getScriptPrefix() {
+         if(scriptPrefix != null)
+             return scriptPrefix;
+
+         try {
+             InitialContext ic = new InitialContext();
+             Context env = (Context)ic.lookup("java:comp/env");
+             scriptPrefix = (String)env.lookup(SCRIPT_PREFIX_NAME);
+             return scriptPrefix;
+
+         } catch (NamingException e) {
+             logger.log(BasicLevel.WARN, "The value for script prefix can not be read from environment");
+             logger.log(BasicLevel.DEBUG, e);
+             return "ro.kds.erp.biz.setum.basic.Fereastra";
+         }
+         
+     }
 }
 

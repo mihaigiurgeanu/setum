@@ -16,6 +16,7 @@ import java.util.Iterator;
 import ro.kds.erp.scripting.Script;
 import ro.kds.erp.scripting.TclFileScript;
 import ro.kds.erp.scripting.ScriptErrorException;
+import javax.naming.*;
 
 /**
  * Standard implementation of the Supralumina session bean.
@@ -34,6 +35,19 @@ public abstract class SupraluminaBean
     final static String LOGIC_VARNAME = "logic";
     final static String OLDVAL_VARNAME = "oldVal";
 
+    /**
+     * The name of the env parameter containing the script prefix.
+     * The script prefix should be composed by words separated by the dot
+     * in the same way as a fully qualified java class name would look like.
+     * The scripts will be located by different script aware methods using
+     * this prefix.
+     */
+    final static String SCRIPT_PREFIX_NAME = "script.prefix";
+
+    /**
+     * Cache for the script prefix read from environment variables.
+     */
+     private String scriptPrefix;
 
     // ------------------------------------------------------------------
     // SessionBean implementation
@@ -181,7 +195,7 @@ public abstract class SupraluminaBean
 	   r.addRecord();
         }
 	Script script = TclFileScript
-		.loadScript("ro.kds.erp.biz.setum.basic.Supralumina_calculatedFields");
+		.loadScript(getScriptPrefix() + "_calculatedFields");
 	if(script.loaded()) {
 	    try {
 		script.setVar(FORM_VARNAME, form, 
@@ -223,7 +237,7 @@ public abstract class SupraluminaBean
       	ResponseBean r = new ResponseBean();
 
 	Script script = TclFileScript
-		.loadScript("ro.kds.erp.biz.setum.basic.Supralumina_validation");
+		.loadScript(getScriptPrefix() + "_validation");
 	if(script.loaded()) {
 	    try {
 		script.setVar(FORM_VARNAME, form, 
@@ -248,7 +262,7 @@ public abstract class SupraluminaBean
 	form.setTip(tip);
 	r.addRecord();
 	r.addField("tip", tip); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.Supralumina.tip");
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".tip");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
@@ -272,7 +286,7 @@ public abstract class SupraluminaBean
 	form.setLs(ls);
 	r.addRecord();
 	r.addField("ls", ls); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.Supralumina.ls");
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".ls");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
@@ -296,7 +310,7 @@ public abstract class SupraluminaBean
 	form.setHs(hs);
 	r.addRecord();
 	r.addField("hs", hs); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.Supralumina.hs");
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".hs");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
@@ -320,7 +334,7 @@ public abstract class SupraluminaBean
 	form.setCells(cells);
 	r.addRecord();
 	r.addField("cells", cells); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.Supralumina.cells");
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".cells");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
@@ -344,7 +358,7 @@ public abstract class SupraluminaBean
 	form.setDeschidere(deschidere);
 	r.addRecord();
 	r.addField("deschidere", deschidere); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.Supralumina.deschidere");
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".deschidere");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
@@ -368,7 +382,7 @@ public abstract class SupraluminaBean
 	form.setSensDeschidere(sensDeschidere);
 	r.addRecord();
 	r.addField("sensDeschidere", sensDeschidere); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.Supralumina.sensDeschidere");
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".sensDeschidere");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
@@ -392,7 +406,7 @@ public abstract class SupraluminaBean
 	form.setPozitionareBalamale(pozitionareBalamale);
 	r.addRecord();
 	r.addField("pozitionareBalamale", pozitionareBalamale); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.Supralumina.pozitionareBalamale");
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".pozitionareBalamale");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
@@ -416,7 +430,7 @@ public abstract class SupraluminaBean
 	form.setComponenta(componenta);
 	r.addRecord();
 	r.addField("componenta", componenta); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.Supralumina.componenta");
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".componenta");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
@@ -440,7 +454,7 @@ public abstract class SupraluminaBean
 	form.setTipComponenta(tipComponenta);
 	r.addRecord();
 	r.addField("tipComponenta", tipComponenta); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.Supralumina.tipComponenta");
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".tipComponenta");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
@@ -464,7 +478,7 @@ public abstract class SupraluminaBean
 	form.setTipGeam(tipGeam);
 	r.addRecord();
 	r.addField("tipGeam", tipGeam); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.Supralumina.tipGeam");
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".tipGeam");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
@@ -488,7 +502,7 @@ public abstract class SupraluminaBean
 	form.setGeamSimpluId(geamSimpluId);
 	r.addRecord();
 	r.addField("geamSimpluId", geamSimpluId); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.Supralumina.geamSimpluId");
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".geamSimpluId");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
@@ -512,7 +526,7 @@ public abstract class SupraluminaBean
 	form.setGeamTermopanId(geamTermopanId);
 	r.addRecord();
 	r.addField("geamTermopanId", geamTermopanId); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.Supralumina.geamTermopanId");
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".geamTermopanId");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
@@ -536,7 +550,7 @@ public abstract class SupraluminaBean
 	form.setTipGrilaj(tipGrilaj);
 	r.addRecord();
 	r.addField("tipGrilaj", tipGrilaj); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.Supralumina.tipGrilaj");
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".tipGrilaj");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
@@ -560,7 +574,7 @@ public abstract class SupraluminaBean
 	form.setGrilajStasId(grilajStasId);
 	r.addRecord();
 	r.addField("grilajStasId", grilajStasId); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.Supralumina.grilajStasId");
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".grilajStasId");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
@@ -584,7 +598,7 @@ public abstract class SupraluminaBean
 	form.setValoareGrilajAtipic(valoareGrilajAtipic);
 	r.addRecord();
 	r.addField("valoareGrilajAtipic", valoareGrilajAtipic); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.Supralumina.valoareGrilajAtipic");
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".valoareGrilajAtipic");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
@@ -608,7 +622,7 @@ public abstract class SupraluminaBean
 	form.setTipTabla(tipTabla);
 	r.addRecord();
 	r.addField("tipTabla", tipTabla); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.Supralumina.tipTabla");
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".tipTabla");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
@@ -632,7 +646,7 @@ public abstract class SupraluminaBean
 	form.setTablaId(tablaId);
 	r.addRecord();
 	r.addField("tablaId", tablaId); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.Supralumina.tablaId");
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".tablaId");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
@@ -656,7 +670,7 @@ public abstract class SupraluminaBean
 	form.setSellPrice(sellPrice);
 	r.addRecord();
 	r.addField("sellPrice", sellPrice); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.Supralumina.sellPrice");
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".sellPrice");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
@@ -680,7 +694,7 @@ public abstract class SupraluminaBean
 	form.setEntryPrice(entryPrice);
 	r.addRecord();
 	r.addField("entryPrice", entryPrice); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.Supralumina.entryPrice");
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".entryPrice");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
@@ -704,7 +718,7 @@ public abstract class SupraluminaBean
 	form.setPrice1(price1);
 	r.addRecord();
 	r.addField("price1", price1); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.Supralumina.price1");
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".price1");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
@@ -728,7 +742,7 @@ public abstract class SupraluminaBean
 	form.setBusinessCategory(businessCategory);
 	r.addRecord();
 	r.addField("businessCategory", businessCategory); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.Supralumina.businessCategory");
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".businessCategory");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
@@ -752,7 +766,7 @@ public abstract class SupraluminaBean
 	form.setQuantity(quantity);
 	r.addRecord();
 	r.addField("quantity", quantity); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.Supralumina.quantity");
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".quantity");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
@@ -1204,5 +1218,28 @@ public abstract class SupraluminaBean
      * loading or when a new object is to be created.
      */
      protected void loadValueLists(ResponseBean r) {}
+
+
+    /**
+     * Convinience method to get the script prefix value from environment vars.
+     * It caches the value, so only one call would search the jndi directory.
+     */
+     protected String getScriptPrefix() {
+         if(scriptPrefix != null)
+             return scriptPrefix;
+
+         try {
+             InitialContext ic = new InitialContext();
+             Context env = (Context)ic.lookup("java:comp/env");
+             scriptPrefix = (String)env.lookup(SCRIPT_PREFIX_NAME);
+             return scriptPrefix;
+
+         } catch (NamingException e) {
+             logger.log(BasicLevel.WARN, "The value for script prefix can not be read from environment");
+             logger.log(BasicLevel.DEBUG, e);
+             return "ro.kds.erp.biz.setum.basic.Supralumina";
+         }
+         
+     }
 }
 

@@ -17,6 +17,7 @@ import java.util.Iterator;
 import ro.kds.erp.scripting.Script;
 import ro.kds.erp.scripting.TclFileScript;
 import ro.kds.erp.scripting.ScriptErrorException;
+import javax.naming.*;
 
 /**
  * Standard implementation of the ${.node.class.name} session bean.
@@ -38,6 +39,19 @@ public abstract class ${.node.class.name}Bean
     final static String LOGIC_VARNAME = "logic";
     final static String OLDVAL_VARNAME = "oldVal";
 
+    /**
+     * The name of the env parameter containing the script prefix.
+     * The script prefix should be composed by words separated by the dot
+     * in the same way as a fully qualified java class name would look like.
+     * The scripts will be located by different script aware methods using
+     * this prefix.
+     */
+    final static String SCRIPT_PREFIX_NAME = "script.prefix";
+
+    /**
+     * Cache for the script prefix read from environment variables.
+     */
+     private String scriptPrefix;
 
     // ------------------------------------------------------------------
     // SessionBean implementation
@@ -230,7 +244,7 @@ public abstract class ${.node.class.name}Bean
 	   r.addRecord();
         }
 	Script script = TclFileScript
-		.loadScript("${.node.class.package}.${.node.class.name}_calculatedFields");
+		.loadScript(getScriptPrefix() + "_calculatedFields");
 	if(script.loaded()) {
 	    try {
 		script.setVar(FORM_VARNAME, form, 
@@ -272,7 +286,7 @@ public abstract class ${.node.class.name}Bean
       	ResponseBean r = new ResponseBean();
 
 	Script script = TclFileScript
-		.loadScript("${.node.class.package}.${.node.class.name}_validation");
+		.loadScript(getScriptPrefix() + "_validation");
 	if(script.loaded()) {
 	    try {
 		script.setVar(FORM_VARNAME, form, 
@@ -298,7 +312,7 @@ public abstract class ${.node.class.name}Bean
 	form.set${field.name?cap_first}(${field.name});
 	r.addRecord();
 	r.addField("${field.name}", ${field.name}); // for number format
-	Script script = TclFileScript.loadScript("${.node.class.package}.${.node.class.name}.${field.name}");
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".${field.name}");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
@@ -352,7 +366,7 @@ public abstract class ${.node.class.name}Bean
         [#if method.@returnType = "standard"]
         r.addRecord();
         [/#if]
-	Script script = TclFileScript.loadScript("${.node.class.package}.${.node.class.name}.${method.name}");
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".${method.name}");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
@@ -431,5 +445,28 @@ public abstract class ${.node.class.name}Bean
      * loading or when a new object is to be created.
      */
      protected void loadValueLists(ResponseBean r) {}
+
+
+    /**
+     * Convinience method to get the script prefix value from environment vars.
+     * It caches the value, so only one call would search the jndi directory.
+     */
+     protected String getScriptPrefix() {
+         if(scriptPrefix != null)
+             return scriptPrefix;
+
+         try {
+             InitialContext ic = new InitialContext();
+             Context env = (Context)ic.lookup("java:comp/env");
+             scriptPrefix = (String)env.lookup(SCRIPT_PREFIX_NAME);
+             return scriptPrefix;
+
+         } catch (NamingException e) {
+             logger.log(BasicLevel.WARN, "The value for script prefix can not be read from environment");
+             logger.log(BasicLevel.DEBUG, e);
+             return "${.node.class.package}.${.node.class.name}";
+         }
+         
+     }
 }
 

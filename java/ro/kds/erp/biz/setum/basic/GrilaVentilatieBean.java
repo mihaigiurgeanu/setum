@@ -16,6 +16,7 @@ import java.util.Iterator;
 import ro.kds.erp.scripting.Script;
 import ro.kds.erp.scripting.TclFileScript;
 import ro.kds.erp.scripting.ScriptErrorException;
+import javax.naming.*;
 
 /**
  * Standard implementation of the GrilaVentilatie session bean.
@@ -34,6 +35,19 @@ public abstract class GrilaVentilatieBean
     final static String LOGIC_VARNAME = "logic";
     final static String OLDVAL_VARNAME = "oldVal";
 
+    /**
+     * The name of the env parameter containing the script prefix.
+     * The script prefix should be composed by words separated by the dot
+     * in the same way as a fully qualified java class name would look like.
+     * The scripts will be located by different script aware methods using
+     * this prefix.
+     */
+    final static String SCRIPT_PREFIX_NAME = "script.prefix";
+
+    /**
+     * Cache for the script prefix read from environment variables.
+     */
+     private String scriptPrefix;
 
     // ------------------------------------------------------------------
     // SessionBean implementation
@@ -181,7 +195,7 @@ public abstract class GrilaVentilatieBean
 	   r.addRecord();
         }
 	Script script = TclFileScript
-		.loadScript("ro.kds.erp.biz.setum.basic.GrilaVentilatie_calculatedFields");
+		.loadScript(getScriptPrefix() + "_calculatedFields");
 	if(script.loaded()) {
 	    try {
 		script.setVar(FORM_VARNAME, form, 
@@ -223,7 +237,7 @@ public abstract class GrilaVentilatieBean
       	ResponseBean r = new ResponseBean();
 
 	Script script = TclFileScript
-		.loadScript("ro.kds.erp.biz.setum.basic.GrilaVentilatie_validation");
+		.loadScript(getScriptPrefix() + "_validation");
 	if(script.loaded()) {
 	    try {
 		script.setVar(FORM_VARNAME, form, 
@@ -248,7 +262,7 @@ public abstract class GrilaVentilatieBean
 	form.setLgv(lgv);
 	r.addRecord();
 	r.addField("lgv", lgv); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.GrilaVentilatie.lgv");
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".lgv");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
@@ -272,7 +286,7 @@ public abstract class GrilaVentilatieBean
 	form.setHgv(hgv);
 	r.addRecord();
 	r.addField("hgv", hgv); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.GrilaVentilatie.hgv");
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".hgv");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
@@ -296,7 +310,7 @@ public abstract class GrilaVentilatieBean
 	form.setPozitionare1(pozitionare1);
 	r.addRecord();
 	r.addField("pozitionare1", pozitionare1); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.GrilaVentilatie.pozitionare1");
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".pozitionare1");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
@@ -320,7 +334,7 @@ public abstract class GrilaVentilatieBean
 	form.setPozitionare2(pozitionare2);
 	r.addRecord();
 	r.addField("pozitionare2", pozitionare2); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.GrilaVentilatie.pozitionare2");
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".pozitionare2");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
@@ -344,7 +358,7 @@ public abstract class GrilaVentilatieBean
 	form.setPozitionare3(pozitionare3);
 	r.addRecord();
 	r.addField("pozitionare3", pozitionare3); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.GrilaVentilatie.pozitionare3");
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".pozitionare3");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
@@ -368,7 +382,7 @@ public abstract class GrilaVentilatieBean
 	form.setSellPrice(sellPrice);
 	r.addRecord();
 	r.addField("sellPrice", sellPrice); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.GrilaVentilatie.sellPrice");
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".sellPrice");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
@@ -392,7 +406,7 @@ public abstract class GrilaVentilatieBean
 	form.setEntryPrice(entryPrice);
 	r.addRecord();
 	r.addField("entryPrice", entryPrice); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.GrilaVentilatie.entryPrice");
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".entryPrice");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
@@ -416,7 +430,7 @@ public abstract class GrilaVentilatieBean
 	form.setPrice1(price1);
 	r.addRecord();
 	r.addField("price1", price1); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.GrilaVentilatie.price1");
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".price1");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
@@ -440,7 +454,7 @@ public abstract class GrilaVentilatieBean
 	form.setBusinessCategory(businessCategory);
 	r.addRecord();
 	r.addField("businessCategory", businessCategory); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.GrilaVentilatie.businessCategory");
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".businessCategory");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
@@ -464,7 +478,7 @@ public abstract class GrilaVentilatieBean
 	form.setQuantity(quantity);
 	r.addRecord();
 	r.addField("quantity", quantity); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.GrilaVentilatie.quantity");
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".quantity");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
@@ -700,5 +714,28 @@ public abstract class GrilaVentilatieBean
      * loading or when a new object is to be created.
      */
      protected void loadValueLists(ResponseBean r) {}
+
+
+    /**
+     * Convinience method to get the script prefix value from environment vars.
+     * It caches the value, so only one call would search the jndi directory.
+     */
+     protected String getScriptPrefix() {
+         if(scriptPrefix != null)
+             return scriptPrefix;
+
+         try {
+             InitialContext ic = new InitialContext();
+             Context env = (Context)ic.lookup("java:comp/env");
+             scriptPrefix = (String)env.lookup(SCRIPT_PREFIX_NAME);
+             return scriptPrefix;
+
+         } catch (NamingException e) {
+             logger.log(BasicLevel.WARN, "The value for script prefix can not be read from environment");
+             logger.log(BasicLevel.DEBUG, e);
+             return "ro.kds.erp.biz.setum.basic.GrilaVentilatie";
+         }
+         
+     }
 }
 

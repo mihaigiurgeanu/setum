@@ -16,6 +16,7 @@ import java.util.Iterator;
 import ro.kds.erp.scripting.Script;
 import ro.kds.erp.scripting.TclFileScript;
 import ro.kds.erp.scripting.ScriptErrorException;
+import javax.naming.*;
 
 /**
  * Standard implementation of the Clients session bean.
@@ -34,6 +35,19 @@ public abstract class ClientsBean
     final static String LOGIC_VARNAME = "logic";
     final static String OLDVAL_VARNAME = "oldVal";
 
+    /**
+     * The name of the env parameter containing the script prefix.
+     * The script prefix should be composed by words separated by the dot
+     * in the same way as a fully qualified java class name would look like.
+     * The scripts will be located by different script aware methods using
+     * this prefix.
+     */
+    final static String SCRIPT_PREFIX_NAME = "script.prefix";
+
+    /**
+     * Cache for the script prefix read from environment variables.
+     */
+     private String scriptPrefix;
 
     // ------------------------------------------------------------------
     // SessionBean implementation
@@ -181,7 +195,7 @@ public abstract class ClientsBean
 	   r.addRecord();
         }
 	Script script = TclFileScript
-		.loadScript("ro.kds.erp.biz.setum.basic.Clients_calculatedFields");
+		.loadScript(getScriptPrefix() + "_calculatedFields");
 	if(script.loaded()) {
 	    try {
 		script.setVar(FORM_VARNAME, form, 
@@ -223,7 +237,7 @@ public abstract class ClientsBean
       	ResponseBean r = new ResponseBean();
 
 	Script script = TclFileScript
-		.loadScript("ro.kds.erp.biz.setum.basic.Clients_validation");
+		.loadScript(getScriptPrefix() + "_validation");
 	if(script.loaded()) {
 	    try {
 		script.setVar(FORM_VARNAME, form, 
@@ -248,7 +262,7 @@ public abstract class ClientsBean
 	form.setIsCompany(isCompany);
 	r.addRecord();
 	r.addField("isCompany", isCompany); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.Clients.isCompany");
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".isCompany");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
@@ -272,7 +286,7 @@ public abstract class ClientsBean
 	form.setFirstName(firstName);
 	r.addRecord();
 	r.addField("firstName", firstName); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.Clients.firstName");
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".firstName");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
@@ -296,7 +310,7 @@ public abstract class ClientsBean
 	form.setLastName(lastName);
 	r.addRecord();
 	r.addField("lastName", lastName); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.Clients.lastName");
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".lastName");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
@@ -320,7 +334,7 @@ public abstract class ClientsBean
 	form.setCompanyName(companyName);
 	r.addRecord();
 	r.addField("companyName", companyName); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.Clients.companyName");
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".companyName");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
@@ -344,7 +358,7 @@ public abstract class ClientsBean
 	form.setAddress(address);
 	r.addRecord();
 	r.addField("address", address); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.Clients.address");
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".address");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
@@ -368,7 +382,7 @@ public abstract class ClientsBean
 	form.setPostalCode(postalCode);
 	r.addRecord();
 	r.addField("postalCode", postalCode); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.Clients.postalCode");
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".postalCode");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
@@ -392,7 +406,7 @@ public abstract class ClientsBean
 	form.setCity(city);
 	r.addRecord();
 	r.addField("city", city); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.Clients.city");
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".city");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
@@ -416,7 +430,7 @@ public abstract class ClientsBean
 	form.setCountryCode(countryCode);
 	r.addRecord();
 	r.addField("countryCode", countryCode); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.Clients.countryCode");
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".countryCode");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
@@ -440,7 +454,7 @@ public abstract class ClientsBean
 	form.setCompanyCode(companyCode);
 	r.addRecord();
 	r.addField("companyCode", companyCode); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.Clients.companyCode");
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".companyCode");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
@@ -464,7 +478,7 @@ public abstract class ClientsBean
 	form.setPhone(phone);
 	r.addRecord();
 	r.addField("phone", phone); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.Clients.phone");
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".phone");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
@@ -488,7 +502,7 @@ public abstract class ClientsBean
 	form.setIban(iban);
 	r.addRecord();
 	r.addField("iban", iban); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.Clients.iban");
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".iban");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
@@ -512,7 +526,7 @@ public abstract class ClientsBean
 	form.setBank(bank);
 	r.addRecord();
 	r.addField("bank", bank); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.Clients.bank");
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".bank");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
@@ -536,7 +550,7 @@ public abstract class ClientsBean
 	form.setComment(comment);
 	r.addRecord();
 	r.addField("comment", comment); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.Clients.comment");
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".comment");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
@@ -560,7 +574,7 @@ public abstract class ClientsBean
 	form.setContactFirstName(contactFirstName);
 	r.addRecord();
 	r.addField("contactFirstName", contactFirstName); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.Clients.contactFirstName");
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".contactFirstName");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
@@ -584,7 +598,7 @@ public abstract class ClientsBean
 	form.setContactLastName(contactLastName);
 	r.addRecord();
 	r.addField("contactLastName", contactLastName); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.Clients.contactLastName");
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".contactLastName");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
@@ -608,7 +622,7 @@ public abstract class ClientsBean
 	form.setContactDepartment(contactDepartment);
 	r.addRecord();
 	r.addField("contactDepartment", contactDepartment); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.Clients.contactDepartment");
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".contactDepartment");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
@@ -632,7 +646,7 @@ public abstract class ClientsBean
 	form.setContactPhone(contactPhone);
 	r.addRecord();
 	r.addField("contactPhone", contactPhone); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.Clients.contactPhone");
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".contactPhone");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
@@ -656,7 +670,7 @@ public abstract class ClientsBean
 	form.setContactMobile(contactMobile);
 	r.addRecord();
 	r.addField("contactMobile", contactMobile); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.Clients.contactMobile");
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".contactMobile");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
@@ -680,7 +694,7 @@ public abstract class ClientsBean
 	form.setContactFax(contactFax);
 	r.addRecord();
 	r.addField("contactFax", contactFax); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.Clients.contactFax");
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".contactFax");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
@@ -704,7 +718,7 @@ public abstract class ClientsBean
 	form.setContactEmail(contactEmail);
 	r.addRecord();
 	r.addField("contactEmail", contactEmail); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.Clients.contactEmail");
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".contactEmail");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
@@ -728,7 +742,7 @@ public abstract class ClientsBean
 	form.setContactTitle(contactTitle);
 	r.addRecord();
 	r.addField("contactTitle", contactTitle); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.Clients.contactTitle");
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".contactTitle");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
@@ -752,7 +766,7 @@ public abstract class ClientsBean
 	form.setContactComment(contactComment);
 	r.addRecord();
 	r.addField("contactComment", contactComment); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.Clients.contactComment");
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".contactComment");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
@@ -1204,5 +1218,28 @@ public abstract class ClientsBean
      * loading or when a new object is to be created.
      */
      protected void loadValueLists(ResponseBean r) {}
+
+
+    /**
+     * Convinience method to get the script prefix value from environment vars.
+     * It caches the value, so only one call would search the jndi directory.
+     */
+     protected String getScriptPrefix() {
+         if(scriptPrefix != null)
+             return scriptPrefix;
+
+         try {
+             InitialContext ic = new InitialContext();
+             Context env = (Context)ic.lookup("java:comp/env");
+             scriptPrefix = (String)env.lookup(SCRIPT_PREFIX_NAME);
+             return scriptPrefix;
+
+         } catch (NamingException e) {
+             logger.log(BasicLevel.WARN, "The value for script prefix can not be read from environment");
+             logger.log(BasicLevel.DEBUG, e);
+             return "ro.kds.erp.biz.setum.basic.Clients";
+         }
+         
+     }
 }
 

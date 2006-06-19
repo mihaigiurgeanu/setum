@@ -16,6 +16,7 @@ import java.util.Iterator;
 import ro.kds.erp.scripting.Script;
 import ro.kds.erp.scripting.TclFileScript;
 import ro.kds.erp.scripting.ScriptErrorException;
+import javax.naming.*;
 
 /**
  * Standard implementation of the StandardOffer session bean.
@@ -34,6 +35,19 @@ public abstract class StandardOfferBean
     final static String LOGIC_VARNAME = "logic";
     final static String OLDVAL_VARNAME = "oldVal";
 
+    /**
+     * The name of the env parameter containing the script prefix.
+     * The script prefix should be composed by words separated by the dot
+     * in the same way as a fully qualified java class name would look like.
+     * The scripts will be located by different script aware methods using
+     * this prefix.
+     */
+    final static String SCRIPT_PREFIX_NAME = "script.prefix";
+
+    /**
+     * Cache for the script prefix read from environment variables.
+     */
+     private String scriptPrefix;
 
     // ------------------------------------------------------------------
     // SessionBean implementation
@@ -181,7 +195,7 @@ public abstract class StandardOfferBean
 	   r.addRecord();
         }
 	Script script = TclFileScript
-		.loadScript("ro.kds.erp.biz.setum.basic.StandardOffer_calculatedFields");
+		.loadScript(getScriptPrefix() + "_calculatedFields");
 	if(script.loaded()) {
 	    try {
 		script.setVar(FORM_VARNAME, form, 
@@ -223,7 +237,7 @@ public abstract class StandardOfferBean
       	ResponseBean r = new ResponseBean();
 
 	Script script = TclFileScript
-		.loadScript("ro.kds.erp.biz.setum.basic.StandardOffer_validation");
+		.loadScript(getScriptPrefix() + "_validation");
 	if(script.loaded()) {
 	    try {
 		script.setVar(FORM_VARNAME, form, 
@@ -248,7 +262,7 @@ public abstract class StandardOfferBean
 	form.setNo(no);
 	r.addRecord();
 	r.addField("no", no); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.StandardOffer.no");
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".no");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
@@ -272,7 +286,7 @@ public abstract class StandardOfferBean
 	form.setDocDate(docDate);
 	r.addRecord();
 	r.addField("docDate", docDate); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.StandardOffer.docDate");
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".docDate");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
@@ -296,7 +310,7 @@ public abstract class StandardOfferBean
 	form.setDateFrom(dateFrom);
 	r.addRecord();
 	r.addField("dateFrom", dateFrom); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.StandardOffer.dateFrom");
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".dateFrom");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
@@ -320,7 +334,7 @@ public abstract class StandardOfferBean
 	form.setDateTo(dateTo);
 	r.addRecord();
 	r.addField("dateTo", dateTo); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.StandardOffer.dateTo");
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".dateTo");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
@@ -344,7 +358,7 @@ public abstract class StandardOfferBean
 	form.setDiscontinued(discontinued);
 	r.addRecord();
 	r.addField("discontinued", discontinued); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.StandardOffer.discontinued");
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".discontinued");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
@@ -368,7 +382,7 @@ public abstract class StandardOfferBean
 	form.setPeriod(period);
 	r.addRecord();
 	r.addField("period", period); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.StandardOffer.period");
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".period");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
@@ -392,7 +406,7 @@ public abstract class StandardOfferBean
 	form.setName(name);
 	r.addRecord();
 	r.addField("name", name); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.StandardOffer.name");
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".name");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
@@ -416,7 +430,7 @@ public abstract class StandardOfferBean
 	form.setDescription(description);
 	r.addRecord();
 	r.addField("description", description); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.StandardOffer.description");
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".description");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
@@ -440,7 +454,7 @@ public abstract class StandardOfferBean
 	form.setComment(comment);
 	r.addRecord();
 	r.addField("comment", comment); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.StandardOffer.comment");
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".comment");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
@@ -464,7 +478,7 @@ public abstract class StandardOfferBean
 	form.setProductId(productId);
 	r.addRecord();
 	r.addField("productId", productId); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.StandardOffer.productId");
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".productId");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
@@ -488,7 +502,7 @@ public abstract class StandardOfferBean
 	form.setPrice(price);
 	r.addRecord();
 	r.addField("price", price); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.StandardOffer.price");
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".price");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
@@ -512,7 +526,7 @@ public abstract class StandardOfferBean
 	form.setVatPrice(vatPrice);
 	r.addRecord();
 	r.addField("vatPrice", vatPrice); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.StandardOffer.vatPrice");
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".vatPrice");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
@@ -536,7 +550,7 @@ public abstract class StandardOfferBean
 	form.setRelativeGain(relativeGain);
 	r.addRecord();
 	r.addField("relativeGain", relativeGain); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.StandardOffer.relativeGain");
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".relativeGain");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
@@ -560,7 +574,7 @@ public abstract class StandardOfferBean
 	form.setAbsoluteGain(absoluteGain);
 	r.addRecord();
 	r.addField("absoluteGain", absoluteGain); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.StandardOffer.absoluteGain");
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".absoluteGain");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
@@ -584,7 +598,7 @@ public abstract class StandardOfferBean
 	form.setProductCategory(productCategory);
 	r.addRecord();
 	r.addField("productCategory", productCategory); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.StandardOffer.productCategory");
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".productCategory");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
@@ -608,7 +622,7 @@ public abstract class StandardOfferBean
 	form.setProductCode(productCode);
 	r.addRecord();
 	r.addField("productCode", productCode); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.StandardOffer.productCode");
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".productCode");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
@@ -632,7 +646,7 @@ public abstract class StandardOfferBean
 	form.setProductName(productName);
 	r.addRecord();
 	r.addField("productName", productName); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.StandardOffer.productName");
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".productName");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
@@ -656,7 +670,7 @@ public abstract class StandardOfferBean
 	form.setEntryPrice(entryPrice);
 	r.addRecord();
 	r.addField("entryPrice", entryPrice); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.StandardOffer.entryPrice");
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".entryPrice");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
@@ -680,7 +694,7 @@ public abstract class StandardOfferBean
 	form.setSellPrice(sellPrice);
 	r.addRecord();
 	r.addField("sellPrice", sellPrice); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.StandardOffer.sellPrice");
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".sellPrice");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
@@ -1078,5 +1092,28 @@ public abstract class StandardOfferBean
      * loading or when a new object is to be created.
      */
      protected void loadValueLists(ResponseBean r) {}
+
+
+    /**
+     * Convinience method to get the script prefix value from environment vars.
+     * It caches the value, so only one call would search the jndi directory.
+     */
+     protected String getScriptPrefix() {
+         if(scriptPrefix != null)
+             return scriptPrefix;
+
+         try {
+             InitialContext ic = new InitialContext();
+             Context env = (Context)ic.lookup("java:comp/env");
+             scriptPrefix = (String)env.lookup(SCRIPT_PREFIX_NAME);
+             return scriptPrefix;
+
+         } catch (NamingException e) {
+             logger.log(BasicLevel.WARN, "The value for script prefix can not be read from environment");
+             logger.log(BasicLevel.DEBUG, e);
+             return "ro.kds.erp.biz.setum.basic.StandardOffer";
+         }
+         
+     }
 }
 

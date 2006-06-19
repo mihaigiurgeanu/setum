@@ -27,6 +27,11 @@ Argumentele primite la deschiderea dialogului:
   <script src="js/httpdata.js"/>
   <script src="js/formobject.js"/>
 
+  <commandset>
+    <command id="farageam_cmd" oncommand="clear_geam()"/>
+    <command id="faragrilaj_cmd" oncommand="clear_grilaj()"/>
+  </commandset>
+
   <hbox style="overflow:auto">
     <!-- partea stanga -->
     <vbox>
@@ -118,13 +123,13 @@ Argumentele primite la deschiderea dialogului:
       <label>Geam:</label>
       <radiogroup id="tipGeam" orient="vertical">
 	<grid>
-	  <columns><column/><column/></columns>
 	  <rows>
 	    <row>
 	      <radio id="tipGeam.1" value="1" label="simplu"/>
 	      <menulist id="geamSimpluId">
 		<menupopup id="geamSimpluId-popup"/>
 	      </menulist>
+	      <button label="Fara geam" command="farageam_cmd"/>
 	    </row>
 	    <row>
 	      <radio id="tipGeam.2" value="2" label="termopan"/>
@@ -147,6 +152,7 @@ Argumentele primite la deschiderea dialogului:
 	      <menulist id="grilajStasId">
 		<menupopup id="grilajStasId-popup"/>
 	      </menulist>
+	      <button label="Fara grilaj" command="faragrilaj_cmd"/>
 	    </row>
 	    <row>
 	      <radio id="tipGrilaj.2" value="2" label="atipic, Valoare:"/>
@@ -193,6 +199,18 @@ Argumentele primite la deschiderea dialogului:
 		     return true;
 		 }
 		 return false;
+	     }
+	     
+	     function clear_geam() {
+		 var req = theForm.get_request();
+		 req.add("command", "faraGeam");
+		 theForm.post_request(req);
+	     }
+
+	     function clear_grilaj() {
+		 var req = theForm.get_request();
+		 req.add("command", "faraGrilaj");
+		 theForm.post_request(req);
 	     }
 
     ]]></script>

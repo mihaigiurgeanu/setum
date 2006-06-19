@@ -58,7 +58,7 @@ import javax.servlet.http.HttpServlet;
  * Created: Tue Mar 14 17:09:40 2006
  *
  * @author <a href="mailto:Mihai Giurgeanu@CRIMIRA"></a>
- * @version $Id: SimpleCallDispatcherServlet.java,v 1.2 2006/04/27 05:29:13 mihai Exp $
+ * @version $Id: SimpleCallDispatcherServlet.java,v 1.3 2006/06/19 12:04:14 mihai Exp $
  */
 public class SimpleCallDispatcherServlet extends HttpServlet {
 
@@ -296,6 +296,8 @@ public class SimpleCallDispatcherServlet extends HttpServlet {
      * @param request is the current HttpServletRequest.
      */
     private void removeSessionBean(HttpServletRequest request) {
+	logger.log(BasicLevel.DEBUG, "Removing session bean " 
+		   + SESSION_ATTR);
 	try {
 	    EJBObject bean = (EJBObject)request.getSession()
 		.getAttribute(SESSION_ATTR);

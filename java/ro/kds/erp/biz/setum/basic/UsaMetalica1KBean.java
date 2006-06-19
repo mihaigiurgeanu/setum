@@ -16,6 +16,7 @@ import java.util.Iterator;
 import ro.kds.erp.scripting.Script;
 import ro.kds.erp.scripting.TclFileScript;
 import ro.kds.erp.scripting.ScriptErrorException;
+import javax.naming.*;
 
 /**
  * Standard implementation of the UsaMetalica1K session bean.
@@ -34,6 +35,19 @@ public abstract class UsaMetalica1KBean
     final static String LOGIC_VARNAME = "logic";
     final static String OLDVAL_VARNAME = "oldVal";
 
+    /**
+     * The name of the env parameter containing the script prefix.
+     * The script prefix should be composed by words separated by the dot
+     * in the same way as a fully qualified java class name would look like.
+     * The scripts will be located by different script aware methods using
+     * this prefix.
+     */
+    final static String SCRIPT_PREFIX_NAME = "script.prefix";
+
+    /**
+     * Cache for the script prefix read from environment variables.
+     */
+     private String scriptPrefix;
 
     // ------------------------------------------------------------------
     // SessionBean implementation
@@ -181,7 +195,7 @@ public abstract class UsaMetalica1KBean
 	   r.addRecord();
         }
 	Script script = TclFileScript
-		.loadScript("ro.kds.erp.biz.setum.basic.UsaMetalica1K_calculatedFields");
+		.loadScript(getScriptPrefix() + "_calculatedFields");
 	if(script.loaded()) {
 	    try {
 		script.setVar(FORM_VARNAME, form, 
@@ -223,7 +237,7 @@ public abstract class UsaMetalica1KBean
       	ResponseBean r = new ResponseBean();
 
 	Script script = TclFileScript
-		.loadScript("ro.kds.erp.biz.setum.basic.UsaMetalica1K_validation");
+		.loadScript(getScriptPrefix() + "_validation");
 	if(script.loaded()) {
 	    try {
 		script.setVar(FORM_VARNAME, form, 
@@ -248,7 +262,7 @@ public abstract class UsaMetalica1KBean
 	form.setCode(code);
 	r.addRecord();
 	r.addField("code", code); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.UsaMetalica1K.code");
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".code");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
@@ -272,7 +286,7 @@ public abstract class UsaMetalica1KBean
 	form.setName(name);
 	r.addRecord();
 	r.addField("name", name); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.UsaMetalica1K.name");
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".name");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
@@ -296,7 +310,7 @@ public abstract class UsaMetalica1KBean
 	form.setDescription(description);
 	r.addRecord();
 	r.addField("description", description); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.UsaMetalica1K.description");
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".description");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
@@ -320,7 +334,7 @@ public abstract class UsaMetalica1KBean
 	form.setSubclass(subclass);
 	r.addRecord();
 	r.addField("subclass", subclass); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.UsaMetalica1K.subclass");
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".subclass");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
@@ -344,7 +358,7 @@ public abstract class UsaMetalica1KBean
 	form.setVersion(version);
 	r.addRecord();
 	r.addField("version", version); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.UsaMetalica1K.version");
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".version");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
@@ -368,7 +382,7 @@ public abstract class UsaMetalica1KBean
 	form.setMaterial(material);
 	r.addRecord();
 	r.addField("material", material); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.UsaMetalica1K.material");
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".material");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
@@ -392,7 +406,7 @@ public abstract class UsaMetalica1KBean
 	form.setLg(lg);
 	r.addRecord();
 	r.addField("lg", lg); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.UsaMetalica1K.lg");
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".lg");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
@@ -416,7 +430,7 @@ public abstract class UsaMetalica1KBean
 	form.setHg(hg);
 	r.addRecord();
 	r.addField("hg", hg); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.UsaMetalica1K.hg");
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".hg");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
@@ -440,7 +454,7 @@ public abstract class UsaMetalica1KBean
 	form.setLe(le);
 	r.addRecord();
 	r.addField("le", le); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.UsaMetalica1K.le");
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".le");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
@@ -464,7 +478,7 @@ public abstract class UsaMetalica1KBean
 	form.setHe(he);
 	r.addRecord();
 	r.addField("he", he); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.UsaMetalica1K.he");
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".he");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
@@ -488,7 +502,7 @@ public abstract class UsaMetalica1KBean
 	form.setLcorrection(lcorrection);
 	r.addRecord();
 	r.addField("lcorrection", lcorrection); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.UsaMetalica1K.lcorrection");
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".lcorrection");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
@@ -512,7 +526,7 @@ public abstract class UsaMetalica1KBean
 	form.setHcorrection(hcorrection);
 	r.addRecord();
 	r.addField("hcorrection", hcorrection); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.UsaMetalica1K.hcorrection");
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".hcorrection");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
@@ -536,7 +550,7 @@ public abstract class UsaMetalica1KBean
 	form.setIntFoil(intFoil);
 	r.addRecord();
 	r.addField("intFoil", intFoil); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.UsaMetalica1K.intFoil");
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".intFoil");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
@@ -560,7 +574,7 @@ public abstract class UsaMetalica1KBean
 	form.setIeFoil(ieFoil);
 	r.addRecord();
 	r.addField("ieFoil", ieFoil); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.UsaMetalica1K.ieFoil");
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".ieFoil");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
@@ -584,7 +598,7 @@ public abstract class UsaMetalica1KBean
 	form.setExtFoil(extFoil);
 	r.addRecord();
 	r.addField("extFoil", extFoil); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.UsaMetalica1K.extFoil");
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".extFoil");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
@@ -608,7 +622,7 @@ public abstract class UsaMetalica1KBean
 	form.setIsolation(isolation);
 	r.addRecord();
 	r.addField("isolation", isolation); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.UsaMetalica1K.isolation");
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".isolation");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
@@ -632,7 +646,7 @@ public abstract class UsaMetalica1KBean
 	form.setOpeningDir(openingDir);
 	r.addRecord();
 	r.addField("openingDir", openingDir); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.UsaMetalica1K.openingDir");
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".openingDir");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
@@ -656,7 +670,7 @@ public abstract class UsaMetalica1KBean
 	form.setOpeningSide(openingSide);
 	r.addRecord();
 	r.addField("openingSide", openingSide); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.UsaMetalica1K.openingSide");
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".openingSide");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
@@ -680,7 +694,7 @@ public abstract class UsaMetalica1KBean
 	form.setFrameType(frameType);
 	r.addRecord();
 	r.addField("frameType", frameType); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.UsaMetalica1K.frameType");
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".frameType");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
@@ -704,7 +718,7 @@ public abstract class UsaMetalica1KBean
 	form.setLFrame(lFrame);
 	r.addRecord();
 	r.addField("lFrame", lFrame); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.UsaMetalica1K.lFrame");
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".lFrame");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
@@ -728,7 +742,7 @@ public abstract class UsaMetalica1KBean
 	form.setBFrame(bFrame);
 	r.addRecord();
 	r.addField("bFrame", bFrame); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.UsaMetalica1K.bFrame");
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".bFrame");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
@@ -752,7 +766,7 @@ public abstract class UsaMetalica1KBean
 	form.setCFrame(cFrame);
 	r.addRecord();
 	r.addField("cFrame", cFrame); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.UsaMetalica1K.cFrame");
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".cFrame");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
@@ -776,7 +790,7 @@ public abstract class UsaMetalica1KBean
 	form.setFoilPosition(foilPosition);
 	r.addRecord();
 	r.addField("foilPosition", foilPosition); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.UsaMetalica1K.foilPosition");
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".foilPosition");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
@@ -800,7 +814,7 @@ public abstract class UsaMetalica1KBean
 	form.setTresholdType(tresholdType);
 	r.addRecord();
 	r.addField("tresholdType", tresholdType); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.UsaMetalica1K.tresholdType");
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".tresholdType");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
@@ -824,7 +838,7 @@ public abstract class UsaMetalica1KBean
 	form.setLTreshold(lTreshold);
 	r.addRecord();
 	r.addField("lTreshold", lTreshold); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.UsaMetalica1K.lTreshold");
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".lTreshold");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
@@ -848,7 +862,7 @@ public abstract class UsaMetalica1KBean
 	form.setHTreshold(hTreshold);
 	r.addRecord();
 	r.addField("hTreshold", hTreshold); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.UsaMetalica1K.hTreshold");
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".hTreshold");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
@@ -872,7 +886,7 @@ public abstract class UsaMetalica1KBean
 	form.setCTreshold(cTreshold);
 	r.addRecord();
 	r.addField("cTreshold", cTreshold); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.UsaMetalica1K.cTreshold");
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".cTreshold");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
@@ -896,7 +910,7 @@ public abstract class UsaMetalica1KBean
 	form.setTresholdSpace(tresholdSpace);
 	r.addRecord();
 	r.addField("tresholdSpace", tresholdSpace); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.UsaMetalica1K.tresholdSpace");
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".tresholdSpace");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
@@ -920,7 +934,7 @@ public abstract class UsaMetalica1KBean
 	form.setH1Treshold(h1Treshold);
 	r.addRecord();
 	r.addField("h1Treshold", h1Treshold); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.UsaMetalica1K.h1Treshold");
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".h1Treshold");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
@@ -944,7 +958,7 @@ public abstract class UsaMetalica1KBean
 	form.setH2Treshold(h2Treshold);
 	r.addRecord();
 	r.addField("h2Treshold", h2Treshold); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.UsaMetalica1K.h2Treshold");
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".h2Treshold");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
@@ -968,7 +982,7 @@ public abstract class UsaMetalica1KBean
 	form.setFereastraId(fereastraId);
 	r.addRecord();
 	r.addField("fereastraId", fereastraId); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.UsaMetalica1K.fereastraId");
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".fereastraId");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
@@ -992,7 +1006,7 @@ public abstract class UsaMetalica1KBean
 	form.setFereastra(fereastra);
 	r.addRecord();
 	r.addField("fereastra", fereastra); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.UsaMetalica1K.fereastra");
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".fereastra");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
@@ -1016,7 +1030,7 @@ public abstract class UsaMetalica1KBean
 	form.setEntryPrice(entryPrice);
 	r.addRecord();
 	r.addField("entryPrice", entryPrice); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.UsaMetalica1K.entryPrice");
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".entryPrice");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
@@ -1040,7 +1054,7 @@ public abstract class UsaMetalica1KBean
 	form.setSellPrice(sellPrice);
 	r.addRecord();
 	r.addField("sellPrice", sellPrice); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.UsaMetalica1K.sellPrice");
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".sellPrice");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
@@ -1708,5 +1722,28 @@ public abstract class UsaMetalica1KBean
      * loading or when a new object is to be created.
      */
      protected void loadValueLists(ResponseBean r) {}
+
+
+    /**
+     * Convinience method to get the script prefix value from environment vars.
+     * It caches the value, so only one call would search the jndi directory.
+     */
+     protected String getScriptPrefix() {
+         if(scriptPrefix != null)
+             return scriptPrefix;
+
+         try {
+             InitialContext ic = new InitialContext();
+             Context env = (Context)ic.lookup("java:comp/env");
+             scriptPrefix = (String)env.lookup(SCRIPT_PREFIX_NAME);
+             return scriptPrefix;
+
+         } catch (NamingException e) {
+             logger.log(BasicLevel.WARN, "The value for script prefix can not be read from environment");
+             logger.log(BasicLevel.DEBUG, e);
+             return "ro.kds.erp.biz.setum.basic.UsaMetalica1K";
+         }
+         
+     }
 }
 

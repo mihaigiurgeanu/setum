@@ -16,6 +16,7 @@ import java.util.Iterator;
 import ro.kds.erp.scripting.Script;
 import ro.kds.erp.scripting.TclFileScript;
 import ro.kds.erp.scripting.ScriptErrorException;
+import javax.naming.*;
 
 /**
  * Standard implementation of the GauriAerisire session bean.
@@ -34,6 +35,19 @@ public abstract class GauriAerisireBean
     final static String LOGIC_VARNAME = "logic";
     final static String OLDVAL_VARNAME = "oldVal";
 
+    /**
+     * The name of the env parameter containing the script prefix.
+     * The script prefix should be composed by words separated by the dot
+     * in the same way as a fully qualified java class name would look like.
+     * The scripts will be located by different script aware methods using
+     * this prefix.
+     */
+    final static String SCRIPT_PREFIX_NAME = "script.prefix";
+
+    /**
+     * Cache for the script prefix read from environment variables.
+     */
+     private String scriptPrefix;
 
     // ------------------------------------------------------------------
     // SessionBean implementation
@@ -181,7 +195,7 @@ public abstract class GauriAerisireBean
 	   r.addRecord();
         }
 	Script script = TclFileScript
-		.loadScript("ro.kds.erp.biz.setum.basic.GauriAerisire_calculatedFields");
+		.loadScript(getScriptPrefix() + "_calculatedFields");
 	if(script.loaded()) {
 	    try {
 		script.setVar(FORM_VARNAME, form, 
@@ -223,7 +237,7 @@ public abstract class GauriAerisireBean
       	ResponseBean r = new ResponseBean();
 
 	Script script = TclFileScript
-		.loadScript("ro.kds.erp.biz.setum.basic.GauriAerisire_validation");
+		.loadScript(getScriptPrefix() + "_validation");
 	if(script.loaded()) {
 	    try {
 		script.setVar(FORM_VARNAME, form, 
@@ -248,7 +262,7 @@ public abstract class GauriAerisireBean
 	form.setDiametru(diametru);
 	r.addRecord();
 	r.addField("diametru", diametru); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.GauriAerisire.diametru");
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".diametru");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
@@ -272,7 +286,7 @@ public abstract class GauriAerisireBean
 	form.setPas(pas);
 	r.addRecord();
 	r.addField("pas", pas); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.GauriAerisire.pas");
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".pas");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
@@ -296,7 +310,7 @@ public abstract class GauriAerisireBean
 	form.setNrRanduri(nrRanduri);
 	r.addRecord();
 	r.addField("nrRanduri", nrRanduri); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.GauriAerisire.nrRanduri");
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".nrRanduri");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
@@ -320,7 +334,7 @@ public abstract class GauriAerisireBean
 	form.setPozitionare1(pozitionare1);
 	r.addRecord();
 	r.addField("pozitionare1", pozitionare1); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.GauriAerisire.pozitionare1");
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".pozitionare1");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
@@ -344,7 +358,7 @@ public abstract class GauriAerisireBean
 	form.setPozitionare2(pozitionare2);
 	r.addRecord();
 	r.addField("pozitionare2", pozitionare2); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.GauriAerisire.pozitionare2");
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".pozitionare2");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
@@ -368,7 +382,7 @@ public abstract class GauriAerisireBean
 	form.setPozitionare3(pozitionare3);
 	r.addRecord();
 	r.addField("pozitionare3", pozitionare3); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.GauriAerisire.pozitionare3");
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".pozitionare3");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
@@ -392,7 +406,7 @@ public abstract class GauriAerisireBean
 	form.setSellPrice(sellPrice);
 	r.addRecord();
 	r.addField("sellPrice", sellPrice); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.GauriAerisire.sellPrice");
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".sellPrice");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
@@ -416,7 +430,7 @@ public abstract class GauriAerisireBean
 	form.setEntryPrice(entryPrice);
 	r.addRecord();
 	r.addField("entryPrice", entryPrice); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.GauriAerisire.entryPrice");
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".entryPrice");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
@@ -440,7 +454,7 @@ public abstract class GauriAerisireBean
 	form.setPrice1(price1);
 	r.addRecord();
 	r.addField("price1", price1); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.GauriAerisire.price1");
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".price1");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
@@ -464,7 +478,7 @@ public abstract class GauriAerisireBean
 	form.setBusinessCategory(businessCategory);
 	r.addRecord();
 	r.addField("businessCategory", businessCategory); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.GauriAerisire.businessCategory");
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".businessCategory");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
@@ -488,7 +502,7 @@ public abstract class GauriAerisireBean
 	form.setQuantity(quantity);
 	r.addRecord();
 	r.addField("quantity", quantity); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.GauriAerisire.quantity");
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".quantity");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
@@ -742,5 +756,28 @@ public abstract class GauriAerisireBean
      * loading or when a new object is to be created.
      */
      protected void loadValueLists(ResponseBean r) {}
+
+
+    /**
+     * Convinience method to get the script prefix value from environment vars.
+     * It caches the value, so only one call would search the jndi directory.
+     */
+     protected String getScriptPrefix() {
+         if(scriptPrefix != null)
+             return scriptPrefix;
+
+         try {
+             InitialContext ic = new InitialContext();
+             Context env = (Context)ic.lookup("java:comp/env");
+             scriptPrefix = (String)env.lookup(SCRIPT_PREFIX_NAME);
+             return scriptPrefix;
+
+         } catch (NamingException e) {
+             logger.log(BasicLevel.WARN, "The value for script prefix can not be read from environment");
+             logger.log(BasicLevel.DEBUG, e);
+             return "ro.kds.erp.biz.setum.basic.GauriAerisire";
+         }
+         
+     }
 }
 

@@ -16,6 +16,7 @@ import java.util.Iterator;
 import ro.kds.erp.scripting.Script;
 import ro.kds.erp.scripting.TclFileScript;
 import ro.kds.erp.scripting.ScriptErrorException;
+import javax.naming.*;
 
 /**
  * Standard implementation of the GenericProducts session bean.
@@ -36,6 +37,19 @@ public abstract class GenericProductsBean
     final static String LOGIC_VARNAME = "logic";
     final static String OLDVAL_VARNAME = "oldVal";
 
+    /**
+     * The name of the env parameter containing the script prefix.
+     * The script prefix should be composed by words separated by the dot
+     * in the same way as a fully qualified java class name would look like.
+     * The scripts will be located by different script aware methods using
+     * this prefix.
+     */
+    final static String SCRIPT_PREFIX_NAME = "script.prefix";
+
+    /**
+     * Cache for the script prefix read from environment variables.
+     */
+     private String scriptPrefix;
 
     // ------------------------------------------------------------------
     // SessionBean implementation
@@ -265,7 +279,7 @@ public abstract class GenericProductsBean
 	   r.addRecord();
         }
 	Script script = TclFileScript
-		.loadScript("ro.kds.erp.biz.basic.GenericProducts_calculatedFields");
+		.loadScript(getScriptPrefix() + "_calculatedFields");
 	if(script.loaded()) {
 	    try {
 		script.setVar(FORM_VARNAME, form, 
@@ -307,7 +321,7 @@ public abstract class GenericProductsBean
       	ResponseBean r = new ResponseBean();
 
 	Script script = TclFileScript
-		.loadScript("ro.kds.erp.biz.basic.GenericProducts_validation");
+		.loadScript(getScriptPrefix() + "_validation");
 	if(script.loaded()) {
 	    try {
 		script.setVar(FORM_VARNAME, form, 
@@ -332,7 +346,7 @@ public abstract class GenericProductsBean
 	form.setCategoryId(categoryId);
 	r.addRecord();
 	r.addField("categoryId", categoryId); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.basic.GenericProducts.categoryId");
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".categoryId");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
@@ -356,7 +370,7 @@ public abstract class GenericProductsBean
 	form.setCategoryName(categoryName);
 	r.addRecord();
 	r.addField("categoryName", categoryName); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.basic.GenericProducts.categoryName");
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".categoryName");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
@@ -380,7 +394,7 @@ public abstract class GenericProductsBean
 	form.setProductId(productId);
 	r.addRecord();
 	r.addField("productId", productId); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.basic.GenericProducts.productId");
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".productId");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
@@ -404,7 +418,7 @@ public abstract class GenericProductsBean
 	form.setProductName(productName);
 	r.addRecord();
 	r.addField("productName", productName); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.basic.GenericProducts.productName");
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".productName");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
@@ -428,7 +442,7 @@ public abstract class GenericProductsBean
 	form.setProductDescription(productDescription);
 	r.addRecord();
 	r.addField("productDescription", productDescription); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.basic.GenericProducts.productDescription");
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".productDescription");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
@@ -452,7 +466,7 @@ public abstract class GenericProductsBean
 	form.setProductCode(productCode);
 	r.addRecord();
 	r.addField("productCode", productCode); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.basic.GenericProducts.productCode");
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".productCode");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
@@ -476,7 +490,7 @@ public abstract class GenericProductsBean
 	form.setProductEntryPrice(productEntryPrice);
 	r.addRecord();
 	r.addField("productEntryPrice", productEntryPrice); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.basic.GenericProducts.productEntryPrice");
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".productEntryPrice");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
@@ -500,7 +514,7 @@ public abstract class GenericProductsBean
 	form.setProductSellPrice(productSellPrice);
 	r.addRecord();
 	r.addField("productSellPrice", productSellPrice); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.basic.GenericProducts.productSellPrice");
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".productSellPrice");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
@@ -524,7 +538,7 @@ public abstract class GenericProductsBean
 	form.setProductPrice1(productPrice1);
 	r.addRecord();
 	r.addField("productPrice1", productPrice1); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.basic.GenericProducts.productPrice1");
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".productPrice1");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
@@ -548,7 +562,7 @@ public abstract class GenericProductsBean
 	form.setProductPrice2(productPrice2);
 	r.addRecord();
 	r.addField("productPrice2", productPrice2); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.basic.GenericProducts.productPrice2");
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".productPrice2");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
@@ -572,7 +586,7 @@ public abstract class GenericProductsBean
 	form.setProductPrice3(productPrice3);
 	r.addRecord();
 	r.addField("productPrice3", productPrice3); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.basic.GenericProducts.productPrice3");
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".productPrice3");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
@@ -596,7 +610,7 @@ public abstract class GenericProductsBean
 	form.setProductPrice4(productPrice4);
 	r.addRecord();
 	r.addField("productPrice4", productPrice4); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.basic.GenericProducts.productPrice4");
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".productPrice4");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
@@ -620,7 +634,7 @@ public abstract class GenericProductsBean
 	form.setProductPrice5(productPrice5);
 	r.addRecord();
 	r.addField("productPrice5", productPrice5); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.basic.GenericProducts.productPrice5");
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".productPrice5");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
@@ -644,7 +658,7 @@ public abstract class GenericProductsBean
 	form.setAttrId(attrId);
 	r.addRecord();
 	r.addField("attrId", attrId); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.basic.GenericProducts.attrId");
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".attrId");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
@@ -668,7 +682,7 @@ public abstract class GenericProductsBean
 	form.setAttrName(attrName);
 	r.addRecord();
 	r.addField("attrName", attrName); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.basic.GenericProducts.attrName");
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".attrName");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
@@ -692,7 +706,7 @@ public abstract class GenericProductsBean
 	form.setAttrString(attrString);
 	r.addRecord();
 	r.addField("attrString", attrString); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.basic.GenericProducts.attrString");
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".attrString");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
@@ -716,7 +730,7 @@ public abstract class GenericProductsBean
 	form.setAttrInt(attrInt);
 	r.addRecord();
 	r.addField("attrInt", attrInt); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.basic.GenericProducts.attrInt");
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".attrInt");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
@@ -740,7 +754,7 @@ public abstract class GenericProductsBean
 	form.setAttrDecimal(attrDecimal);
 	r.addRecord();
 	r.addField("attrDecimal", attrDecimal); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.basic.GenericProducts.attrDecimal");
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".attrDecimal");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
@@ -764,7 +778,7 @@ public abstract class GenericProductsBean
 	form.setAttrDouble(attrDouble);
 	r.addRecord();
 	r.addField("attrDouble", attrDouble); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.basic.GenericProducts.attrDouble");
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".attrDouble");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
@@ -1162,5 +1176,28 @@ public abstract class GenericProductsBean
      * loading or when a new object is to be created.
      */
      protected void loadValueLists(ResponseBean r) {}
+
+
+    /**
+     * Convinience method to get the script prefix value from environment vars.
+     * It caches the value, so only one call would search the jndi directory.
+     */
+     protected String getScriptPrefix() {
+         if(scriptPrefix != null)
+             return scriptPrefix;
+
+         try {
+             InitialContext ic = new InitialContext();
+             Context env = (Context)ic.lookup("java:comp/env");
+             scriptPrefix = (String)env.lookup(SCRIPT_PREFIX_NAME);
+             return scriptPrefix;
+
+         } catch (NamingException e) {
+             logger.log(BasicLevel.WARN, "The value for script prefix can not be read from environment");
+             logger.log(BasicLevel.DEBUG, e);
+             return "ro.kds.erp.biz.basic.GenericProducts";
+         }
+         
+     }
 }
 

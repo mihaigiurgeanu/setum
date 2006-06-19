@@ -12,6 +12,7 @@
   <jonas-session>
     <ejb-name>UsaMetalica1KEJB</ejb-name>
     <jndi-name>UsaMetalica1KHome</jndi-name>
+    <session-timeout>3600</session-timeout>
     <jonas-ejb-ref>
       <ejb-ref-name>ejb/PreferencesEJB</ejb-ref-name>
       <jndi-name>PreferencesHome</jndi-name>
@@ -30,6 +31,7 @@
   <jonas-session>
     <ejb-name>UsaMetalica2KEJB</ejb-name>
     <jndi-name>UsaMetalica2KHome</jndi-name>
+    <session-timeout>3600</session-timeout>
     <jonas-ejb-ref>
       <ejb-ref-name>ejb/PreferencesEJB</ejb-ref-name>
       <jndi-name>PreferencesHome</jndi-name>
@@ -48,6 +50,7 @@
   <jonas-session>
     <ejb-name>StandardOfferEJB</ejb-name>
     <jndi-name>StandardOfferHome</jndi-name>
+    <session-timeout>3600</session-timeout>
     <jonas-ejb-ref>
       <ejb-ref-name>ejb/PreferencesEJB</ejb-ref-name>
       <jndi-name>PreferencesHome</jndi-name>
@@ -69,6 +72,7 @@
   <jonas-session>
     <ejb-name>SistemEJB</ejb-name>
     <jndi-name>SistemHome</jndi-name>
+    <session-timeout>3600</session-timeout>
     <jonas-ejb-ref>
       <ejb-ref-name>ejb/PreferencesEJB</ejb-ref-name>
       <jndi-name>PreferencesHome</jndi-name>
@@ -87,6 +91,7 @@
   <jonas-session>
     <ejb-name>OtherProductsEJB</ejb-name>
     <jndi-name>OtherProductsHome</jndi-name>
+    <session-timeout>3600</session-timeout>
     <jonas-ejb-ref>
       <ejb-ref-name>ejb/PreferencesEJB</ejb-ref-name>
       <jndi-name>PreferencesHome</jndi-name>
@@ -105,6 +110,7 @@
   <jonas-session>
     <ejb-name>UsaStdNeechipataEJB</ejb-name>
     <jndi-name>UsaStdNeechipataHome</jndi-name>
+    <session-timeout>3600</session-timeout>
     <jonas-ejb-ref>
       <ejb-ref-name>ejb/PreferencesEJB</ejb-ref-name>
       <jndi-name>PreferencesHome</jndi-name>
@@ -122,6 +128,7 @@
   <jonas-session>
     <ejb-name>UsaStandardEJB</ejb-name>
     <jndi-name>UsaStandardHome</jndi-name>
+    <session-timeout>3600</session-timeout>
     <jonas-ejb-ref>
       <ejb-ref-name>ejb/PreferencesEJB</ejb-ref-name>
       <jndi-name>PreferencesHome</jndi-name>
@@ -132,6 +139,7 @@
   <jonas-session>
     <ejb-name>OfertaUsiStandardEJB</ejb-name>
     <jndi-name>OfertaUsiStandardHome</jndi-name>
+    <session-timeout>3600</session-timeout>
     <jonas-ejb-ref>
       <ejb-ref-name>ejb/PreferencesEJB</ejb-ref-name>
       <jndi-name>PreferencesHome</jndi-name>
@@ -145,6 +153,7 @@
   <jonas-session>
     <ejb-name>ArbitraryOfferEJB</ejb-name>
     <jndi-name>ArbitraryOfferHome</jndi-name>
+    <session-timeout>3600</session-timeout>
     <jonas-ejb-ref>
       <ejb-ref-name>ejb/PreferencesEJB</ejb-ref-name>
       <jndi-name>PreferencesHome</jndi-name>
@@ -158,6 +167,7 @@
   <jonas-session>
     <ejb-name>FereastraEJB</ejb-name>
     <jndi-name>FereastraHome</jndi-name>
+    <session-timeout>3600</session-timeout>
     <jonas-ejb-ref>
       <ejb-ref-name>ejb/PreferencesEJB</ejb-ref-name>
       <jndi-name>PreferencesHome</jndi-name>
@@ -167,6 +177,7 @@
   <jonas-session>
     <ejb-name>GrilaVentilatieEJB</ejb-name>
     <jndi-name>GrilaVentilatieHome</jndi-name>
+    <session-timeout>3600</session-timeout>
     <jonas-ejb-ref>
       <ejb-ref-name>ejb/PreferencesEJB</ejb-ref-name>
       <jndi-name>PreferencesHome</jndi-name>
@@ -176,6 +187,7 @@
   <jonas-session>
     <ejb-name>GauriAerisireEJB</ejb-name>
     <jndi-name>GauriAerisireHome</jndi-name>
+    <session-timeout>3600</session-timeout>
     <jonas-ejb-ref>
       <ejb-ref-name>ejb/PreferencesEJB</ejb-ref-name>
       <jndi-name>PreferencesHome</jndi-name>
@@ -185,6 +197,7 @@
   <jonas-session>
     <ejb-name>SupraluminaEJB</ejb-name>
     <jndi-name>SupraluminaHome</jndi-name>
+    <session-timeout>3600</session-timeout>
     <jonas-ejb-ref>
       <ejb-ref-name>ejb/PreferencesEJB</ejb-ref-name>
       <jndi-name>PreferencesHome</jndi-name>
@@ -194,6 +207,7 @@
   <jonas-session>
     <ejb-name>PanouLateralEJB</ejb-name>
     <jndi-name>PanouLateralHome</jndi-name>
+    <session-timeout>3600</session-timeout>
     <jonas-ejb-ref>
       <ejb-ref-name>ejb/PreferencesEJB</ejb-ref-name>
       <jndi-name>PreferencesHome</jndi-name>
@@ -203,6 +217,7 @@
   <jonas-session>
     <ejb-name>ClientsEJB</ejb-name>
     <jndi-name>ClientsHome</jndi-name>
+    <session-timeout>3600</session-timeout>
     <jonas-ejb-ref>
       <ejb-ref-name>ejb/PreferencesEJB</ejb-ref-name>
       <jndi-name>PreferencesHome</jndi-name>
@@ -212,6 +227,7 @@
   <jonas-session>
     <ejb-name>GenericProductsEJB</ejb-name>
     <jndi-name>GenericProductsHome</jndi-name>
+    <session-timeout>3600</session-timeout>
     <jonas-ejb-ref>
       <ejb-ref-name>ejb/PreferencesEJB</ejb-ref-name>
       <jndi-name>PreferencesHome</jndi-name>
@@ -225,6 +241,7 @@
   <jonas-session>
     <ejb-name>UsiStdSelectionsEJB</ejb-name>
     <jndi-name>UsiStdSelectionsHome</jndi-name>
+    <session-timeout>3600</session-timeout>
     <jonas-ejb-ref>
       <ejb-ref-name>ejb/PreferencesEJB</ejb-ref-name>
       <jndi-name>PreferencesHome</jndi-name>

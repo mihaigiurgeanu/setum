@@ -106,4 +106,5 @@
     <ejb-ref-name>ejb/UsiStdSelectionsHome</ejb-ref-name>
     <jndi-name>UsiStdSelectionsHome</jndi-name>
   </jonas-ejb-ref>
+
 </jonas-web-app>

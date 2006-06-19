@@ -16,6 +16,7 @@ import java.util.Iterator;
 import ro.kds.erp.scripting.Script;
 import ro.kds.erp.scripting.TclFileScript;
 import ro.kds.erp.scripting.ScriptErrorException;
+import javax.naming.*;
 
 /**
  * Standard implementation of the Sistem session bean.
@@ -34,6 +35,19 @@ public abstract class SistemBean
     final static String LOGIC_VARNAME = "logic";
     final static String OLDVAL_VARNAME = "oldVal";
 
+    /**
+     * The name of the env parameter containing the script prefix.
+     * The script prefix should be composed by words separated by the dot
+     * in the same way as a fully qualified java class name would look like.
+     * The scripts will be located by different script aware methods using
+     * this prefix.
+     */
+    final static String SCRIPT_PREFIX_NAME = "script.prefix";
+
+    /**
+     * Cache for the script prefix read from environment variables.
+     */
+     private String scriptPrefix;
 
     // ------------------------------------------------------------------
     // SessionBean implementation
@@ -181,7 +195,7 @@ public abstract class SistemBean
 	   r.addRecord();
         }
 	Script script = TclFileScript
-		.loadScript("ro.kds.erp.biz.setum.basic.Sistem_calculatedFields");
+		.loadScript(getScriptPrefix() + "_calculatedFields");
 	if(script.loaded()) {
 	    try {
 		script.setVar(FORM_VARNAME, form, 
@@ -223,7 +237,7 @@ public abstract class SistemBean
       	ResponseBean r = new ResponseBean();
 
 	Script script = TclFileScript
-		.loadScript("ro.kds.erp.biz.setum.basic.Sistem_validation");
+		.loadScript(getScriptPrefix() + "_validation");
 	if(script.loaded()) {
 	    try {
 		script.setVar(FORM_VARNAME, form, 
@@ -248,7 +262,7 @@ public abstract class SistemBean
 	form.setName(name);
 	r.addRecord();
 	r.addField("name", name); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.Sistem.name");
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".name");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
@@ -272,7 +286,7 @@ public abstract class SistemBean
 	form.setCode(code);
 	r.addRecord();
 	r.addField("code", code); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.Sistem.code");
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".code");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
@@ -296,7 +310,7 @@ public abstract class SistemBean
 	form.setCategoryId(categoryId);
 	r.addRecord();
 	r.addField("categoryId", categoryId); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.Sistem.categoryId");
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".categoryId");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
@@ -320,7 +334,7 @@ public abstract class SistemBean
 	form.setEntryPrice(entryPrice);
 	r.addRecord();
 	r.addField("entryPrice", entryPrice); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.Sistem.entryPrice");
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".entryPrice");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
@@ -344,7 +358,7 @@ public abstract class SistemBean
 	form.setSellPrice(sellPrice);
 	r.addRecord();
 	r.addField("sellPrice", sellPrice); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.Sistem.sellPrice");
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".sellPrice");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
@@ -368,7 +382,7 @@ public abstract class SistemBean
 	form.setPartPrice(partPrice);
 	r.addRecord();
 	r.addField("partPrice", partPrice); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.Sistem.partPrice");
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".partPrice");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
@@ -392,7 +406,7 @@ public abstract class SistemBean
 	form.setLaborPrice(laborPrice);
 	r.addRecord();
 	r.addField("laborPrice", laborPrice); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.Sistem.laborPrice");
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".laborPrice");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
@@ -416,7 +430,7 @@ public abstract class SistemBean
 	form.setRelativeGainSP(relativeGainSP);
 	r.addRecord();
 	r.addField("relativeGainSP", relativeGainSP); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.Sistem.relativeGainSP");
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".relativeGainSP");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
@@ -440,7 +454,7 @@ public abstract class SistemBean
 	form.setAbsoluteGainSP(absoluteGainSP);
 	r.addRecord();
 	r.addField("absoluteGainSP", absoluteGainSP); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.Sistem.absoluteGainSP");
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".absoluteGainSP");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
@@ -464,7 +478,7 @@ public abstract class SistemBean
 	form.setRelativeGainPP(relativeGainPP);
 	r.addRecord();
 	r.addField("relativeGainPP", relativeGainPP); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.Sistem.relativeGainPP");
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".relativeGainPP");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
@@ -488,7 +502,7 @@ public abstract class SistemBean
 	form.setAbsoluteGainPP(absoluteGainPP);
 	r.addRecord();
 	r.addField("absoluteGainPP", absoluteGainPP); // for number format
-	Script script = TclFileScript.loadScript("ro.kds.erp.biz.setum.basic.Sistem.absoluteGainPP");
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".absoluteGainPP");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
@@ -742,5 +756,28 @@ public abstract class SistemBean
      * loading or when a new object is to be created.
      */
      protected void loadValueLists(ResponseBean r) {}
+
+
+    /**
+     * Convinience method to get the script prefix value from environment vars.
+     * It caches the value, so only one call would search the jndi directory.
+     */
+     protected String getScriptPrefix() {
+         if(scriptPrefix != null)
+             return scriptPrefix;
+
+         try {
+             InitialContext ic = new InitialContext();
+             Context env = (Context)ic.lookup("java:comp/env");
+             scriptPrefix = (String)env.lookup(SCRIPT_PREFIX_NAME);
+             return scriptPrefix;
+
+         } catch (NamingException e) {
+             logger.log(BasicLevel.WARN, "The value for script prefix can not be read from environment");
+             logger.log(BasicLevel.DEBUG, e);
+             return "ro.kds.erp.biz.setum.basic.Sistem";
+         }
+         
+     }
 }
 
