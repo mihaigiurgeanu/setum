@@ -27,6 +27,13 @@ Argumentele primite la deschiderea dialogului:
   <script src="js/httpdata.js"/>
   <script src="js/formobject.js"/>
 
+
+  <commandset>
+    <command id="farageam_cmd" oncommand="clear_geam()"/>
+    <command id="faragrilaj_cmd" oncommand="clear_grilaj()"/>
+    <command id="faratabla_cmd" oncommand="clear_tabla()"/>
+  </commandset>
+
   <hbox style="overflow:auto" flex="1">
     <!-- partea stanga -->
     <vbox>
@@ -56,8 +63,8 @@ Argumentele primite la deschiderea dialogului:
 	  <separator/>
 	  <row>
 	    <radiogroup id="deschidere">
-	      <radio id="deschidere.1" value="1" label="Fereastra fixa"/>
-	      <radio id="deschidere.2" value="2" label="Fereastra mobila"/>
+	      <radio id="deschidere.1" value="1" label="FIX"/>
+	      <radio id="deschidere.2" value="2" label="MOBIL"/>
 	    </radiogroup>
 	  </row>
 	  <separator/>
@@ -111,6 +118,7 @@ Argumentele primite la deschiderea dialogului:
 	      <menulist id="geamSimpluId">
 		<menupopup id="geamSimpluId-popup"/>
 	      </menulist>
+	      <button label="Fara geam" command="farageam_cmd"/>
 	    </row>
 	    <row>
 	      <radio id="tipGeam.2" value="2" label="termopan"/>
@@ -134,6 +142,7 @@ Argumentele primite la deschiderea dialogului:
 	      <menulist id="grilajStasId">
 		<menupopup id="grilajStasId-popup"/>
 	      </menulist>
+	      <button label="Fara grilaj" command="faragrilaj_cmd"/>
 	    </row>
 	    <row>
 	      <radio id="tipGrilaj.2" value="2" label="atipic, Valoare:"/>
@@ -143,7 +152,25 @@ Argumentele primite la deschiderea dialogului:
 	</grid>
       </radiogroup>
 
+      <separator class="newgroup"/>
 
+      <grid>
+	<rows>
+	  <row>
+	    <label controls="tipTabla" value="Tabla:" />
+	    <menulist id="tipTabla">
+	      <menupopup id="tipTabla-popup"/>
+	    </menulist>
+	    <menulist id="tablaId">
+	      <menupopup id="tablaId-popup"/>
+	    </menulist>
+	  </row>
+	  <row>
+	    <button command="faratabla_cmd" label="Fara tabla"/>
+	  </row>
+	</rows>
+      </grid>
+      
     </vbox>
   </hbox>
 
@@ -179,6 +206,25 @@ Argumentele primite la deschiderea dialogului:
 		     return true;
 		 }
 		 return false;
+	     }
+
+
+	     function clear_geam() {
+		 var req = theForm.get_request();
+		 req.add("command", "faraGeam");
+		 theForm.post_request(req);
+	     }
+
+	     function clear_grilaj() {
+		 var req = theForm.get_request();
+		 req.add("command", "faraGrilaj");
+		 theForm.post_request(req);
+	     }
+
+	     function clear_tabla() {
+		 var req = theForm.get_request();
+		 req.add("command", "faraTabla");
+		 theForm.post_request(req);
 	     }
 
     ]]></script>

@@ -45,4 +45,10 @@ public interface Supralumina extends EJBObject {
     public ResponseBean updateQuantity(Integer newQuantity) throws RemoteException;
 
 
+    public ResponseBean faraGeam (
+    ) throws RemoteException;
+    public ResponseBean faraGrilaj (
+    ) throws RemoteException;
+    public ResponseBean faraTabla (
+    ) throws RemoteException;
 }

@@ -22,6 +22,7 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.ArrayList;
 import ro.kds.erp.data.CategoryLocal;
+import ro.kds.erp.biz.ResponseBean;
 
 /**
  * Specific business rules implementation of the FerastraEJB session bean.
@@ -253,6 +254,7 @@ public class FereastraBizBean extends FereastraBean {
 
 	form.setDeschidere(new Integer(1));
 	form.setTipComponenta(new Integer(1));
+	form.setComponenta(new Integer(1));
 	form.setTipGeam(new Integer(1));
 	form.setTipGrilaj(new Integer(1));
     }
@@ -397,4 +399,51 @@ public class FereastraBizBean extends FereastraBean {
 	return r;
     }
 
+    /**
+     * Update different fields when changing the value for grilaj
+     *
+     * @param integer an <code>Integer</code> value
+     * @return a <code>ResponseBean</code> value
+     */
+    public ResponseBean updateGrilajStasId(final Integer grilajId) {
+	// run the usual scripts
+	// the response bean already has a record added
+	ResponseBean r = super.updateGrilajStasId(grilajId);
+
+	if(form.getGrilajStasId().intValue() != 0) {
+	    // there is a selection
+	    try {
+		InitialContext ic = new InitialContext();
+		Context env = (Context)ic.lookup("java:comp/env");
+		
+		ProductLocalHome ph = (ProductLocalHome)PortableRemoteObject.
+		    narrow(env.lookup("ejb/ProductHome"), ProductLocalHome.class);
+		ProductLocal p = ph.findByPrimaryKey(form.getGrilajStasId());
+		Map attribs = p.getAttributesMap();
+
+		AttributeLocal lAttr = (AttributeLocal)attribs.get("L");
+		AttributeLocal hAttr = (AttributeLocal)attribs.get("H");
+		
+		if(lAttr != null && lAttr.getDoubleValue() != null &&
+		   hAttr != null && hAttr.getDoubleValue() != null &&
+		   ( lAttr.getDoubleValue().doubleValue() != 0 || 
+		     hAttr.getDoubleValue().doubleValue() != 0)) {
+		    
+		    form.setLf(lAttr.getDoubleValue());
+		    r.addField("lf", lAttr.getDoubleValue());
+
+		    form.setHf(lAttr.getDoubleValue());
+		    r.addField("hf", hAttr.getDoubleValue());
+		} else {
+		    logger.log(BasicLevel.DEBUG, "Grilajul STAS nu are atributele L sau H");
+		}
+
+	    } catch (Exception e) {
+		logger.log(BasicLevel.WARN, "Can not retrieve product", e);
+	    }
+	}
+
+	return r;
+    }
+  
 }

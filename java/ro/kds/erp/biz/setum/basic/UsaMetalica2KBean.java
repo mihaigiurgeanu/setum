@@ -2896,9 +2896,9 @@ public abstract class UsaMetalica2KBean
 	computeCalculatedFields(r);
 	return r;
     }
-    public ResponseBean updateIntFinisajGrilaj(Integer intFinisajGrilaj) {
+    public ResponseBean updateIntFinisajGrilaj(String intFinisajGrilaj) {
         ResponseBean r = new ResponseBean();
-	Integer oldVal = form.getIntFinisajGrilaj();
+	String oldVal = form.getIntFinisajGrilaj();
 	form.setIntFinisajGrilaj(intFinisajGrilaj);
 	r.addRecord();
 	r.addField("intFinisajGrilaj", intFinisajGrilaj); // for number format
@@ -2906,7 +2906,7 @@ public abstract class UsaMetalica2KBean
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
-		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
+		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
 		addFieldsToScript(script);
@@ -3992,7 +3992,7 @@ public abstract class UsaMetalica2KBean
             logger.log(BasicLevel.DEBUG, e);
         }
 	try {
-	    s.setVar("intFinisajGrilaj", form.getIntFinisajGrilaj(), Integer.class);
+	    s.setVar("intFinisajGrilaj", form.getIntFinisajGrilaj(), String.class);
 	} catch (ScriptErrorException e) {
 	    logger.log(BasicLevel.WARN, "Can not set the value of field: intFinisajGrilaj from the script");
             logger.log(BasicLevel.DEBUG, e);
@@ -5258,11 +5258,11 @@ public abstract class UsaMetalica2KBean
             logger.log(BasicLevel.DEBUG, e);
         }
 	try {
-	    field = s.getVar("intFinisajGrilaj", Integer.class);
+	    field = s.getVar("intFinisajGrilaj", String.class);
 	    if(!field.equals(form.getIntFinisajGrilaj())) {
 	        logger.log(BasicLevel.DEBUG, "Field intFinisajGrilaj modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
-	        form.setIntFinisajGrilaj((Integer)field);
-	        r.addField("intFinisajGrilaj", (Integer)field);
+	        form.setIntFinisajGrilaj((String)field);
+	        r.addField("intFinisajGrilaj", (String)field);
 	    }
 	} catch (ScriptErrorException e) {
 	    logger.log(BasicLevel.WARN, "Can not get the value of field: intFinisajGrilaj from the script");

@@ -785,6 +785,108 @@ public abstract class SupraluminaBean
 	return r;
     }
 
+    /**
+     * Generated implementation of the faraGeam service. It will call
+     * the script ro.kds.erp.biz.setum.basic.Supralumina.faraGeam
+     * to execute the request.
+     * 
+     * The <code>ResponseBean</code> to be returned will be automatically populated with the
+     * fields modified by the script and the changes will be automatically added to the
+     * form bean.
+     *
+     * @returns a <code>ResponseBean</code> containing the field values that were changed by
+     * the script and any of the fields added to it by the script.
+     * 
+     */
+    public ResponseBean faraGeam (
+    ) {
+
+
+        ResponseBean r = new ResponseBean();
+        r.addRecord();
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".faraGeam");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(FORM_VARNAME, form, SupraluminaForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		addFieldsToScript(script);
+		script.run();
+                getFieldsFromScript(script, r);
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for service faraGeam", e);
+           }
+        }
+	return r;
+    }
+    /**
+     * Generated implementation of the faraGrilaj service. It will call
+     * the script ro.kds.erp.biz.setum.basic.Supralumina.faraGrilaj
+     * to execute the request.
+     * 
+     * The <code>ResponseBean</code> to be returned will be automatically populated with the
+     * fields modified by the script and the changes will be automatically added to the
+     * form bean.
+     *
+     * @returns a <code>ResponseBean</code> containing the field values that were changed by
+     * the script and any of the fields added to it by the script.
+     * 
+     */
+    public ResponseBean faraGrilaj (
+    ) {
+
+
+        ResponseBean r = new ResponseBean();
+        r.addRecord();
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".faraGrilaj");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(FORM_VARNAME, form, SupraluminaForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		addFieldsToScript(script);
+		script.run();
+                getFieldsFromScript(script, r);
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for service faraGrilaj", e);
+           }
+        }
+	return r;
+    }
+    /**
+     * Generated implementation of the faraTabla service. It will call
+     * the script ro.kds.erp.biz.setum.basic.Supralumina.faraTabla
+     * to execute the request.
+     * 
+     * The <code>ResponseBean</code> to be returned will be automatically populated with the
+     * fields modified by the script and the changes will be automatically added to the
+     * form bean.
+     *
+     * @returns a <code>ResponseBean</code> containing the field values that were changed by
+     * the script and any of the fields added to it by the script.
+     * 
+     */
+    public ResponseBean faraTabla (
+    ) {
+
+
+        ResponseBean r = new ResponseBean();
+        r.addRecord();
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".faraTabla");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(FORM_VARNAME, form, SupraluminaForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		addFieldsToScript(script);
+		script.run();
+                getFieldsFromScript(script, r);
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for service faraTabla", e);
+           }
+        }
+	return r;
+    }
 
     /**
      * Get the fields stored internaly and adds them to the response.

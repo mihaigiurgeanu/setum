@@ -152,6 +152,24 @@ function delete_option() {
 }
 
 
+// open dialog for editing finisaje
+function edit_finisaj(fieldName) {
+    var select_handler = {
+	theForm: theForm,
+	fieldName: fieldName,
+	select: function change_finisaje_id(productId) {
+	    var req = this.theForm.get_request();
+	    req.add("command", "change");
+	    req.add("field", this.fieldName);
+	    req.add("value", productId);
+	    this.theForm.post_request(req);
+	}
+    };
+    window.openDialog("edit-finisaje.xul", "edit-finisaj", "chrome,modal", select_handler);
+}
+
+
+
 function doOk() {
     if(theForm.save()) {
 	window.arguments[0].select(theForm.get_loaded_id());

@@ -92,7 +92,18 @@
   </field>
 
   <services>
-    
+    <method returnType="standard">
+      <name>faraGeam</name>
+      <params></params>
+    </method>
+    <method returnType="standard">
+      <name>faraGrilaj</name>
+      <params></params>
+    </method>
+    <method returnType="standard">
+      <name>faraTabla</name>
+      <params></params>
+    </method>
   </services>
 
 

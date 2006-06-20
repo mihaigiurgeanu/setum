@@ -42,6 +42,14 @@ windows.arguments[0].select(productId)
     <command id="delete-option" oncommand="delete_option()"/>
     <command id="modify-option" oncommand="edit_option()"/>
 
+
+    <command id="editFinisajBlat_cmd" oncommand="edit_finisaj('intFinisajBlatId')"/>
+    <command id="editFinisajToc_cmd" oncommand="edit_finisaj('intFinisajTocId')"/>
+    <command id="editFinisajGrilaj_cmd" oncommand="edit_finisaj('intFinisajGrilajId')"/>
+    <command id="editFinisajFereastra_cmd" oncommand="edit_finisaj('intFinisajFereastraId')"/>
+    <command id="editFinisajSupralumina_cmd" oncommand="edit_finisaj('intFinisajSupraluminaId')"/>
+    <command id="editFinisajPanou_cmd" oncommand="edit_finisaj('intFinisajPanouLateralId')"/>
+
   </commandset>
 
 
@@ -65,9 +73,7 @@ windows.arguments[0].select(productId)
       <tab label="Definire usa"/>
       <tab label="Optiuni"/>
       <tab label="Sisteme"/>
-      <!--
       <tab label="Finisaje"/>
-      -->
     </tabs>
     <tabpanels>
       <tabpanel orient="vertical" style="overflow:auto" maxheight="600">
@@ -710,12 +716,61 @@ windows.arguments[0].select(productId)
 	</vbox>
       </tabpanel>
 
+
+
       <!-- Finisaje -->
-      <!--
-      <tabpanel>
-	
+
+
+      <tabpanel style="overflow:auto" maxheight="600">
+
+	<grid flex="1">
+	  <columns>
+	    <column/>
+	    <column flex="1"/>
+	    <column/>
+	  </columns>
+	  <rows>
+	    <row>
+	      <label controls="intFinisajBlat" value="Finisaj blat: "/>
+	      <textbox id="intFinisajBlat" readonly="true"/>
+	      <button command="editFinisajBlat_cmd" label="..."/>
+	    </row>
+
+	    <row>
+	      <label controls="intFinisajToc" value="Finisaj toc: "/>
+	      <textbox id="intFinisajToc" readonly="true"/>
+	      <button command="editFinisajToc_cmd" label="..."/>
+	    </row>
+
+	    <row>
+	      <label controls="intFinisajGrilaj" value="Finisaj grilaj: "/>
+	      <textbox id="intFinisajGrilaj" readonly="true"/>
+	      <button command="editFinisajGrilaj_cmd" label="..."/>
+	    </row>
+
+	    <row>
+	      <label controls="intFinisajFereastra" value="Finisaj fereastra: "/>
+	      <textbox id="intFinisajFereastra" readonly="true"/>
+	      <button command="editFinisajFereastra_cmd" label="..."/>
+	    </row>
+
+	    <row>
+	      <label controls="intFinisajSupralumina" value="Finisaj supralumina: "/>
+	      <textbox id="intFinisajSupralumina" readonly="true"/>
+	      <button command="editFinisajSupralumina_cmd" label="..."/>
+	    </row>
+
+	    <row>
+	      <label controls="intFinisajPanouLateral" value="Finisaj panou: "/>
+	      <textbox id="intFinisajPanouLateral" readonly="true"/>
+	      <button command="editFinisajPanou_cmd" label="..."/>
+	    </row>
+	  </rows>
+	</grid>
       </tabpanel>
-      -->
+
+
+
     </tabpanels>
   </tabbox>
 

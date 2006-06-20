@@ -52,6 +52,16 @@
     <type>java.math.BigDecimal</type>
   </field>
 
+  <!-- Dimensiuni pentru sisteme. Folosite de OtherProducts pentru grilaj si geam -->
+  <field>
+    <name>l</name>
+    <type>Double</type>
+  </field>
+  <field>
+    <name>h</name>
+    <type>Double</type>
+  </field>
+
   <remote>
     <!-- loadListing returneaza lista de sisteme -->
     <method>ResponseBean loadListing() throws RemoteException</method>

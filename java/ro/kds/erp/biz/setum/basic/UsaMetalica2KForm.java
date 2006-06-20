@@ -125,7 +125,7 @@ public class UsaMetalica2KForm implements Serializable {
     Integer intFinisajBlatId;
     String intFinisajToc;
     Integer intFinisajTocId;
-    Integer intFinisajGrilaj;
+    String intFinisajGrilaj;
     Integer intFinisajGrilajId;
     String intFinisajFereastra;
     Integer intFinisajFereastraId;
@@ -577,7 +577,7 @@ public class UsaMetalica2KForm implements Serializable {
 
 
 
-       this.intFinisajGrilaj = new Integer(0);
+       this.intFinisajGrilaj = "";
 
 
 
@@ -2261,18 +2261,18 @@ public class UsaMetalica2KForm implements Serializable {
 	}
     }
 
-    public void setIntFinisajGrilaj(Integer newIntFinisajGrilaj) {
+    public void setIntFinisajGrilaj(String newIntFinisajGrilaj) {
         this.intFinisajGrilaj = newIntFinisajGrilaj;
     }
 
-    public Integer getIntFinisajGrilaj() {
+    public String getIntFinisajGrilaj() {
         return intFinisajGrilaj;
     }
 
     public void readIntFinisajGrilaj(Map attributes) {
 	AttributeLocal a = (AttributeLocal)attributes.get("intFinisajGrilaj");
 	if(a != null) {
-	    this.setIntFinisajGrilaj(a.getIntValue());
+	    this.setIntFinisajGrilaj(a.getStringValue());
 	}
     }
 

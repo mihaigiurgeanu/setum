@@ -126,6 +126,14 @@
 	      <label control="laborPrice" value="Pret montare:"/>
 	      <textbox id="laborPrice"/>
 	    </row>
+	    <row>
+	      <label control="l" value="L ="/>
+	      <textbox id="l"/>
+	    </row>
+	    <row>
+	      <label control="h" value="H ="/>
+	      <textbox id="h"/>
+	    </row>
 	  </rows>
 	</grid>
 
@@ -152,7 +160,7 @@ var theForm = new FormObject();
 theForm.text_fields = new Array("code", "name", "entryPrice", "sellPrice",
 				"partPrice", "laborPrice", "relativeGainSP", 
 				"absoluteGainSP", "relativeGainPP",
-				"absoluteGainPP");
+				"absoluteGainPP", "l", "h");
 
 theForm.combo_fields = new Array("categoryId");
 theForm.radio_fields = new Array();

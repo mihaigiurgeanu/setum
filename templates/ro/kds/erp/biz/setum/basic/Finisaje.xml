@@ -60,5 +60,9 @@
     <name>price1</name>
     <type>java.math.BigDecimal</type>
   </field>
+
+  <services>
+    
+  </services>
 </class>
 

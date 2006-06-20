@@ -246,6 +246,7 @@ public class SupraluminaBizBean extends SupraluminaBean {
 
 	form.setDeschidere(new Integer(1));
 	form.setTipComponenta(new Integer(1));
+	form.setComponenta(new Integer(1));
 	form.setTipGeam(new Integer(1));
 	form.setTipGrilaj(new Integer(1));
 	form.setTip(new Integer(1));

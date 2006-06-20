@@ -20,11 +20,17 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.Collections;
+import ro.kds.erp.data.AttributeLocal;
+import java.util.List;
+import java.util.Comparator;
+import java.util.ArrayList;
+
 import java.util.List;
 
 import java.util.Comparator;
 
 import java.util.ArrayList;
+import ro.kds.erp.data.AttributeLocalHome;
 
 /**
  * Bussines logic for recording and managing products of type "sisteme".
@@ -83,6 +89,14 @@ public class SistemBean extends ro.kds.erp.biz.setum.basic.SistemBean {
 	    form.setPartPrice(p.getPrice1());
 	    form.setLaborPrice(p.getPrice2());
 
+	    Map attributes = p.getAttributesMap();
+	    AttributeLocal a;
+	    if((a = (AttributeLocal)attributes.get("L")) != null)
+		form.setL(a.getDoubleValue());
+	    
+	    if((a = (AttributeLocal)attributes.get("H")) != null)
+		form.setH(a.getDoubleValue());
+	    
 	    r = new ResponseBean();
 
 	    // the fields will be added to the response by the 
@@ -128,6 +142,15 @@ public class SistemBean extends ro.kds.erp.biz.setum.basic.SistemBean {
 	    p.setSellPrice(form.getSellPrice());
 	    p.setPrice1(form.getPartPrice());
 	    p.setPrice2(form.getLaborPrice());
+
+	    AttributeLocalHome ah = (AttributeLocalHome)PortableRemoteObject.
+		narrow(env.lookup("ejb/AttributeHome"), AttributeLocalHome.class);
+	    ArrayList attributes = new ArrayList();
+
+	    attributes.add(ah.create("L", form.getL()));
+	    attributes.add(ah.create("H", form.getH()));
+	    
+	    p.setAttributes(attributes);
 	       
 	    r = new ResponseBean();
 	} catch (NamingException e) {
@@ -205,8 +228,8 @@ public class SistemBean extends ro.kds.erp.biz.setum.basic.SistemBean {
 		    r.addField("col-partPrice", p.getPrice1());
 
 		}
+
 	    }
-	    
 	} catch (NamingException e) {
 	    r = new ResponseBean();
 	    r.setCode(1);

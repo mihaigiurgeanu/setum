@@ -26,6 +26,8 @@ public class SistemForm implements Serializable {
     java.math.BigDecimal absoluteGainSP;
     Double relativeGainPP;
     java.math.BigDecimal absoluteGainPP;
+    Double l;
+    Double h;
 
     public SistemForm() {
 
@@ -72,6 +74,14 @@ public class SistemForm implements Serializable {
 
        this.absoluteGainPP = new java.math.BigDecimal(0);
 
+
+
+       this.l = new Double(0);
+   
+
+
+       this.h = new Double(0);
+   
 
 
     }
@@ -238,6 +248,36 @@ public class SistemForm implements Serializable {
 	AttributeLocal a = (AttributeLocal)attributes.get("absoluteGainPP");
 	if(a != null) {
 	    this.setAbsoluteGainPP(a.getDecimalValue());
+	}
+    }
+
+    public void setL(Double newL) {
+        this.l = newL;
+    }
+
+    public Double getL() {
+        return l;
+    }
+
+    public void readL(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("l");
+	if(a != null) {
+	    this.setL(a.getDoubleValue());
+	}
+    }
+
+    public void setH(Double newH) {
+        this.h = newH;
+    }
+
+    public Double getH() {
+        return h;
+    }
+
+    public void readH(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("h");
+	if(a != null) {
+	    this.setH(a.getDoubleValue());
 	}
     }
 

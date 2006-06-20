@@ -32,6 +32,8 @@ public interface Sistem extends EJBObject {
     public ResponseBean updateAbsoluteGainSP(java.math.BigDecimal newAbsoluteGainSP) throws RemoteException;
     public ResponseBean updateRelativeGainPP(Double newRelativeGainPP) throws RemoteException;
     public ResponseBean updateAbsoluteGainPP(java.math.BigDecimal newAbsoluteGainPP) throws RemoteException;
+    public ResponseBean updateL(Double newL) throws RemoteException;
+    public ResponseBean updateH(Double newH) throws RemoteException;
 
     public ResponseBean loadListing() throws RemoteException;
 

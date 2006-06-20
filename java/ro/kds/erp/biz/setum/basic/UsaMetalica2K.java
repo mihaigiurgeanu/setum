@@ -131,7 +131,7 @@ public interface UsaMetalica2K extends EJBObject {
     public ResponseBean updateIntFinisajBlatId(Integer newIntFinisajBlatId) throws RemoteException;
     public ResponseBean updateIntFinisajToc(String newIntFinisajToc) throws RemoteException;
     public ResponseBean updateIntFinisajTocId(Integer newIntFinisajTocId) throws RemoteException;
-    public ResponseBean updateIntFinisajGrilaj(Integer newIntFinisajGrilaj) throws RemoteException;
+    public ResponseBean updateIntFinisajGrilaj(String newIntFinisajGrilaj) throws RemoteException;
     public ResponseBean updateIntFinisajGrilajId(Integer newIntFinisajGrilajId) throws RemoteException;
     public ResponseBean updateIntFinisajFereastra(String newIntFinisajFereastra) throws RemoteException;
     public ResponseBean updateIntFinisajFereastraId(Integer newIntFinisajFereastraId) throws RemoteException;

@@ -42,7 +42,7 @@ import ro.kds.erp.biz.Products;
  * Created: Fri Nov 18 15:34:24 2005
  *
  * @author <a href="mailto:Mihai Giurgeanu@CRIMIRA"></a>
- * @version $Id: UsaMetalica2KBeanImplementation.java,v 1.13 2006/04/03 04:58:33 mihai Exp $
+ * @version $Id: UsaMetalica2KBeanImplementation.java,v 1.14 2006/06/20 03:37:14 mihai Exp $
  */
 public class UsaMetalica2KBeanImplementation 
     extends ro.kds.erp.biz.setum.basic.UsaMetalica2KBean {
@@ -199,7 +199,8 @@ public class UsaMetalica2KBeanImplementation
 	    attribs.add(ah.create("intFinisajFereastraId", form.getIntFinisajFereastraId()));
 	    attribs.add(ah.create("intFinisajSupralumina", form.getIntFinisajSupralumina()));
 	    attribs.add(ah.create("intFinisajSupraluminaId", form.getIntFinisajSupraluminaId()));
-	    attribs.add(ah.create("intFinisajPanouLateral", form.getIntFinisajPanouLateralId()));
+	    attribs.add(ah.create("intFinisajPanouLateral", form.getIntFinisajPanouLateral()));
+	    attribs.add(ah.create("intFinisajPanouLateralId", form.getIntFinisajPanouLateralId()));
 
 	    r = validate();
 	} catch (Exception e) {
@@ -339,17 +340,17 @@ public class UsaMetalica2KBeanImplementation
 	    form.readBenefAlteSisteme2(amap);
 	    form.readBenefAlteSisteme2Buc(amap);
 
-	    form.readIntFinisajBlat(amap);
+	    //form.readIntFinisajBlat(amap);
 	    form.readIntFinisajBlatId(amap);
-	    form.readIntFinisajToc(amap);
+	    //form.readIntFinisajToc(amap);
 	    form.readIntFinisajTocId(amap);
-	    form.readIntFinisajGrilaj(amap);
+	    //form.readIntFinisajGrilaj(amap);
 	    form.readIntFinisajGrilajId(amap);
-	    form.readIntFinisajFereastra(amap);
+	    //form.readIntFinisajFereastra(amap);
 	    form.readIntFinisajFereastraId(amap);
-	    form.readIntFinisajSupralumina(amap);
+	    //form.readIntFinisajSupralumina(amap);
 	    form.readIntFinisajSupraluminaId(amap);
-	    form.readIntFinisajPanouLateral(amap);
+	    //form.readIntFinisajPanouLateral(amap);
 	    form.readIntFinisajPanouLateralId(amap);
 
 
@@ -684,8 +685,82 @@ public class UsaMetalica2KBeanImplementation
     }
 
     public ResponseBean computeCalculatedFields(ResponseBean r) {
-	return super.computeCalculatedFields(r);
+	r = super.computeCalculatedFields(r);
+
+	load_finisaje(r);
+
+	return r;
     }
+
+
+    private void load_finisaje(ResponseBean r) {
+	
+	try {
+	    InitialContext ic = new InitialContext();
+	    Context env = (Context)ic.lookup("java:comp/env");
+	    ProductLocalHome ph = (ProductLocalHome)PortableRemoteObject
+		.narrow(env.lookup("ejb/ProductHome"), ProductLocalHome.class);
+	    
+
+	    if(form.getIntFinisajBlatId().intValue() != 0) {
+		ProductLocal p;
+		p = ph.findByPrimaryKey(form.getIntFinisajBlatId());
+		if(r != null && form.getIntFinisajBlat().compareTo(p.getDescription()) != 0) {
+		    r.addField("intFinisajBlat", p.getDescription());
+		}		
+		form.setIntFinisajBlat(p.getDescription());
+	    }
+
+	    if(form.getIntFinisajTocId().intValue() != 0) {
+		ProductLocal p;
+		p = ph.findByPrimaryKey(form.getIntFinisajTocId());
+		if(r != null && form.getIntFinisajToc().compareTo(p.getDescription()) != 0) {
+		    r.addField("intFinisajToc", p.getDescription());
+		}
+		form.setIntFinisajToc(p.getDescription());
+	    }
+
+	    if(form.getIntFinisajGrilajId().intValue() != 0) {
+		ProductLocal p;
+		p = ph.findByPrimaryKey(form.getIntFinisajGrilajId());
+		if(r != null && form.getIntFinisajGrilaj().compareTo(p.getDescription()) != 0) {
+		    r.addField("intFinisajGrilaj", p.getDescription());
+		}
+		form.setIntFinisajGrilaj(p.getDescription());
+	    }
+
+	    if(form.getIntFinisajFereastraId().intValue() != 0) {
+		ProductLocal p;
+		p = ph.findByPrimaryKey(form.getIntFinisajFereastraId());
+		if(r != null && form.getIntFinisajFereastra().compareTo(p.getDescription()) != 0) {
+		    r.addField("intFinisajFerestra", p.getDescription());
+		}
+		form.setIntFinisajFereastra(p.getDescription());
+	    }
+
+	    if(form.getIntFinisajSupraluminaId().intValue() != 0) {
+		ProductLocal p;
+		p = ph.findByPrimaryKey(form.getIntFinisajSupraluminaId());
+		if(r != null && form.getIntFinisajSupralumina().compareTo(p.getDescription()) != 0) {
+		    r.addField("intFinisajSupralumina", p.getDescription());
+		}
+		form.setIntFinisajSupralumina(p.getDescription());
+	    }
+
+	    if(form.getIntFinisajPanouLateralId().intValue() != 0) {
+		ProductLocal p;
+		p = ph.findByPrimaryKey(form.getIntFinisajPanouLateralId());
+		if(r != null && form.getIntFinisajPanouLateral().compareTo(p.getDescription()) != 0) {
+		    r.addField("intFinisajPanouLateral", p.getDescription());
+		}
+		form.setIntFinisajPanouLateral(p.getDescription());
+	    }
+	    
+	} catch (Exception e) {
+	    logger.log(BasicLevel.WARN, "Can not read finisaje", e);
+	}
+
+    } 
 
     /**
      * Add to the script suplimentary product references for allowing the script

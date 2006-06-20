@@ -520,6 +520,54 @@ public abstract class SistemBean
 	computeCalculatedFields(r);
 	return r;
     }
+    public ResponseBean updateL(Double l) {
+        ResponseBean r = new ResponseBean();
+	Double oldVal = form.getL();
+	form.setL(l);
+	r.addRecord();
+	r.addField("l", l); // for number format
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".l");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(OLDVAL_VARNAME, oldVal, Double.class);
+		script.setVar(FORM_VARNAME, form, SistemForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the l", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
+    public ResponseBean updateH(Double h) {
+        ResponseBean r = new ResponseBean();
+	Double oldVal = form.getH();
+	form.setH(h);
+	r.addRecord();
+	r.addField("h", h); // for number format
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".h");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(OLDVAL_VARNAME, oldVal, Double.class);
+		script.setVar(FORM_VARNAME, form, SistemForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the h", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
 
 
     /**
@@ -537,6 +585,8 @@ public abstract class SistemBean
 	r.addField("absoluteGainSP", form.getAbsoluteGainSP());
 	r.addField("relativeGainPP", form.getRelativeGainPP());
 	r.addField("absoluteGainPP", form.getAbsoluteGainPP());
+	r.addField("l", form.getL());
+	r.addField("h", form.getH());
 	loadValueLists(r);
     }
 
@@ -615,6 +665,18 @@ public abstract class SistemBean
 	    s.setVar("absoluteGainPP", form.getAbsoluteGainPP(), java.math.BigDecimal.class);
 	} catch (ScriptErrorException e) {
 	    logger.log(BasicLevel.WARN, "Can not set the value of field: absoluteGainPP from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    s.setVar("l", form.getL(), Double.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: l from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    s.setVar("h", form.getH(), Double.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: h from the script");
             logger.log(BasicLevel.DEBUG, e);
         }
     }
@@ -744,6 +806,28 @@ public abstract class SistemBean
 	    }
 	} catch (ScriptErrorException e) {
 	    logger.log(BasicLevel.WARN, "Can not get the value of field: absoluteGainPP from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    field = s.getVar("l", Double.class);
+	    if(!field.equals(form.getL())) {
+	        logger.log(BasicLevel.DEBUG, "Field l modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setL((Double)field);
+	        r.addField("l", (Double)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: l from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    field = s.getVar("h", Double.class);
+	    if(!field.equals(form.getH())) {
+	        logger.log(BasicLevel.DEBUG, "Field h modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setH((Double)field);
+	        r.addField("h", (Double)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: h from the script");
             logger.log(BasicLevel.DEBUG, e);
         }
     }

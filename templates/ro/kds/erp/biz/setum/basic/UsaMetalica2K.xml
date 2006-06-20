@@ -456,7 +456,7 @@
   </field>
   <field>
     <name>intFinisajGrilaj</name>
-    <type>Integer</type>
+    <type>String</type>
   </field>
   <field>
     <name>intFinisajGrilajId</name>

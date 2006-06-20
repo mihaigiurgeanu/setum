@@ -133,6 +133,7 @@ function popup_new_item(categoryURI) {
 }
 
 
+
 // Global variable theForm that will be used by event handlers
 var theForm = new FormObject();
 theForm.text_fields = new Array("no", "docDate", "dateFrom", "dateTo", 
