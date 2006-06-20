@@ -507,6 +507,13 @@
         <local>ro.kds.erp.data.ProductLocal</local>
         <ejb-link>datalayer.jar#ProductEJB</ejb-link>
       </ejb-local-ref>
+      <ejb-local-ref>
+        <ejb-ref-name>ejb/AttributeHome</ejb-ref-name>
+        <ejb-ref-type>Entity</ejb-ref-type>
+        <local-home>ro.kds.erp.data.AttributeLocalHome</local-home>
+        <local>ro.kds.erp.data.AttributeLocal</local>
+        <ejb-link>datalayer.jar#AttributeEJB</ejb-link>
+      </ejb-local-ref>
       <resource-ref>
         <description>JMS connection factory</description>
         <res-ref-name>jms/CF</res-ref-name>
@@ -554,6 +561,13 @@
         <local-home>ro.kds.erp.data.ProductLocalHome</local-home>
         <local>ro.kds.erp.data.ProductLocal</local>
         <ejb-link>datalayer.jar#ProductEJB</ejb-link>
+      </ejb-local-ref>
+      <ejb-local-ref>
+        <ejb-ref-name>ejb/AttributeHome</ejb-ref-name>
+        <ejb-ref-type>Entity</ejb-ref-type>
+        <local-home>ro.kds.erp.data.AttributeLocalHome</local-home>
+        <local>ro.kds.erp.data.AttributeLocal</local>
+        <ejb-link>datalayer.jar#AttributeEJB</ejb-link>
       </ejb-local-ref>
       <resource-ref>
         <description>JMS connection factory</description>
