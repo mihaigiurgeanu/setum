@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<!-- $Id: build.xml,v 1.1.1.1.2.6 2006/05/02 06:51:25 mihai Exp $ -->
+<!-- $Id: build.xml,v 1.1.1.1.2.7 2006/07/05 21:10:30 mihai Exp $ -->
 
 <project name="setumerp" default="application">
   <description>
@@ -26,13 +26,26 @@
   <property name="src.remote" value="${source}"/>
   <property name="src.sessionbean" value="${source}"/>
 
+  <property name="jonas.base" value="${jonas.root}"/>
+  <property name="jonas.name" value="jonas"/>
+
   <!-- ejbjar task  -->
   <taskdef name="ejbjar"
 	   classname="org.objectweb.jonas.ant.EjbJar"
 	   classpath="${jonas.root}/lib/common/ow_jonas_ant.jar" />
 
+  <taskdef name="jonas"
+           classname="org.objectweb.jonas.ant.JOnASTask"
+           classpath="${jonas.root}/lib/common/ow_jonas_ant.jar" />
+
+  <taskdef name="serverdeploy"
+           classname="org.objectweb.jonas.ant.ServerDeploy"
+           classpath="${jonas.root}/lib/common/ow_jonas_ant.jar" />
+
+
   <taskdef name="freemarker" classname="freemarker.ext.ant.FreemarkerXmlTask"
 	   classpath="C:/lib/freemarker-2.3.4/lib/freemarker.jar"/>
+
   <taskdef name="jrc" 
 	   classname="net.sf.jasperreports.ant.JRAntCompileTask"> 
     <classpath>
@@ -41,6 +54,7 @@
       </fileset>
     </classpath>
   </taskdef>
+
 
   <path id="compilation.classpath">
     <pathelement location="${build}" />
@@ -181,15 +195,29 @@
   </target>
 
   <target name="deploy" >
+    <serverdeploy source="${jonas.root}/apps/setum.ear" action="deploy">
+      <jonas jonasRoot="${jonas.root}"
+	     jonasBase="${jonas.base}"
+	     servername="${jonas.name}" />
+    </serverdeploy>
+    <!--
     <exec executable="${jonas.root}/bin/nt/jonas.bat" dir="${jonas.root}/apps">
       <arg line="admin -a setum.ear"/>
     </exec>
+    -->
   </target>
 
   <target name="undeploy" >
+    <serverdeploy source="${jonas.root}/apps/setum.ear" action="undeploy">
+      <jonas jonasRoot="${jonas.root}"
+	     jonasBase="${jonas.base}"
+	     servername="${jonas.name}" />
+    </serverdeploy>
+    <!--
     <exec executable="${jonas.root}/bin/nt/jonas.bat" dir="${jonas.root}/apps">
       <arg line="admin -r setum.ear"/>
     </exec>
+    -->
   </target>
 
   <!-- Building the ear -->
