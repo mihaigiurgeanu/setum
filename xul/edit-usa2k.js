@@ -35,7 +35,13 @@ theForm.text_fields = new Array("lg", "hg", "lcorrection", "hcorrection",
 				"intFinisajGrilaj",
 				"intFinisajFereastra",
 				"intFinisajSupralumina",
-				"intFinisajPanouLateral");
+				"intFinisajPanouLateral",
+				"extFinisajBlat",
+				"extFinisajToc",
+				"extFinisajGrilaj",
+				"extFinisajFereastra",
+				"extFinisajSupralumina",
+				"extFinisajPanouLateral");
 theForm.combo_fields = new Array("subclass", "version", "material", 
 				 "intFoil", "extFoil", "isolation",
 				 "intFoilSec", "extFoilSec", 
@@ -50,20 +56,26 @@ theForm.combo_fields = new Array("subclass", "version", "material",
 				 "benefCilindruTip",
 				 "benefSildTip",
 				 "benefYallaTip",
-				 "benefBaraAntipanicaTip",
-				 "intFinisajBlatId",
-				 "intFinisajTocId",
-				 "intFinisajGrilajId",
-				 "intFinisajFereastraId",
-				 "intFinisajSupraluminaId",
-				 "intFinisajPanouLateralId");
+				 "benefBaraAntipanicaTip");
 theForm.radio_fields = new Array("k", "kType", "ieFoil", "ieFoilSec", 
 				 "frameType", "tresholdType",
 				 "tresholdSpace", "montareSistem", 
 				 "sistemSetumSauBeneficiar");
 
 
-theForm.hidden_fields = new Array();
+theForm.hidden_fields = new Array(
+				 "intFinisajBlatId",
+				 "intFinisajTocId",
+				 "intFinisajGrilajId",
+				 "intFinisajFereastraId",
+				 "intFinisajSupraluminaId",
+				 "intFinisajPanouLateralId",
+				 "extFinisajBlatId",
+				 "extFinisajTocId",
+				 "extFinisajGrilajId",
+				 "extFinisajFereastraId",
+				 "extFinisajSupraluminaId",
+				 "extFinisajPanouLateralId");
 theForm.do_link = "/usametalica2k.do";
 
 theForm.afterpost = function afterpost() {

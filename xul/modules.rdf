@@ -16,7 +16,9 @@
     <rdf:li rdf:resource="http://www.kds.ro/erp/modules/setum/sisteme" />
     <rdf:li rdf:resource="http://www.kds.ro/erp/modules/setum/usisimple" />
     <rdf:li rdf:resource="http://www.kds.ro/erp/modules/setum/usistandard" />
+    <!-- Other products are not needed any more - using value lists instead
     <rdf:li rdf:resource="http://www.kds.ro/erp/modules/setum/otherProducts" />
+    -->
   </rdf:Seq>
 
 

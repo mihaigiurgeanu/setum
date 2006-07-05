@@ -276,92 +276,11 @@ public class FereastraBizBean extends FereastraBean {
 // 	r.addValueList("tipTabla", ValueLists.makeStdValueList(11080));
 	r.addValueList("standard", ValueLists.makeStdValueList(11090));
 
-	// geamSimpluId
-	vl = new LinkedHashMap();
-	try {
-	    InitialContext ic = new InitialContext();
-	    Context env = (Context) ic.lookup("java:comp/env");
-	    Integer categoryId = (Integer)env.lookup("geamuriCategoryId");
-	    CategoryLocalHome ch = 
-		(CategoryLocalHome)PortableRemoteObject.narrow
-		(env.lookup("ejb/CategoryHome"), CategoryLocalHome.class);
-	    CategoryLocal categ = ch.findByPrimaryKey(categoryId);
-	    Collection products = categ.getProducts();
-	    for(Iterator i = products.iterator(); i.hasNext(); ) {
-		ProductLocal p = (ProductLocal)i.next();
-		vl.put(p.getName(), p.getId());
-	    }
-	} catch (Exception e) {
-	    logger.log(BasicLevel.ERROR, 
-		       "Can not build vl for geamSimpluId", e);
-	}
-	r.addValueList("geamSimpluId", vl);
-
-	// geamTermopanId
-	vl = new LinkedHashMap();
-	try {
-	    InitialContext ic = new InitialContext();
-	    Context env = (Context) ic.lookup("java:comp/env");
-	    Integer categoryId = (Integer)env.lookup("termopaneCategoryId");
-	    CategoryLocalHome ch = 
-		(CategoryLocalHome)PortableRemoteObject.narrow
-		(env.lookup("ejb/CategoryHome"), CategoryLocalHome.class);
-	    CategoryLocal categ = ch.findByPrimaryKey(categoryId);
-	    Collection products = categ.getProducts();
-	    for(Iterator i = products.iterator(); i.hasNext(); ) {
-		ProductLocal p = (ProductLocal)i.next();
-		vl.put(p.getName(), p.getId());
-	    }
-	} catch (Exception e) {
-	    logger.log(BasicLevel.ERROR, 
-		       "Can not build vl for geamTermopanId", e);
-	}
-	r.addValueList("geamTermopanId", vl);
-
-
-	// grilajStasId
-	vl = new LinkedHashMap();
-	try {
-	    InitialContext ic = new InitialContext();
-	    Context env = (Context) ic.lookup("java:comp/env");
-	    Integer categoryId = (Integer)env.lookup("grilajeCategoryId");
-	    CategoryLocalHome ch = 
-		(CategoryLocalHome)PortableRemoteObject.narrow
-		(env.lookup("ejb/CategoryHome"), CategoryLocalHome.class);
-	    CategoryLocal categ = ch.findByPrimaryKey(categoryId);
-	    Collection products = categ.getProducts();
-	    for(Iterator i = products.iterator(); i.hasNext(); ) {
-		ProductLocal p = (ProductLocal)i.next();
-		vl.put(p.getName(), p.getId());
-	    }
-	} catch (Exception e) {
-	    logger.log(BasicLevel.ERROR, 
-		       "Can not build vl for geamTermopanId", e);
-	}
-	r.addValueList("grilajStasId", vl);
-	
-	
-// 	// tablaId
-// 	vl = new LinkedHashMap();
-// 	try {
-// 	    InitialContext ic = new InitialContext();
-// 	    Context env = (Context) ic.lookup("java:comp/env");
-// 	    Integer categoryId = (Integer)env.lookup("tablaCategoryId");
-// 	    CategoryLocalHome ch = 
-// 		(CategoryLocalHome)PortableRemoteObject.narrow
-// 		(env.lookup("ejb/CategoryHome"), CategoryLocalHome.class);
-// 	    CategoryLocal categ = ch.findByPrimaryKey(categoryId);
-// 	    Collection products = categ.getProducts();
-// 	    for(Iterator i = products.iterator(); i.hasNext(); ) {
-// 		ProductLocal p = (ProductLocal)i.next();
-// 		vl.put(p.getName(), p.getId());
-// 	    }
-// 	} catch (Exception e) {
-// 	    logger.log(BasicLevel.ERROR, 
-// 		       "Can not build vl for geamTermopanId", e);
-// 	}
-// 	r.addValueList("tablaId", vl);
-	
+	r.addValueList("geamSimpluId", ValueLists.makeVLForCategoryId(new Integer(11086)));
+	r.addValueList("geamTermopanId", ValueLists.makeVLForCategoryId(new Integer(11087)));
+	r.addValueList("grilajStasId", ValueLists.makeVLForCategoryId(new Integer(11077)));
+//	r.addValueList("tablaId", ValueLists.makeVLForCategoryId(new Integer(11081)));
+		
     }
 
     public ResponseBean updateStandard(Integer standard) {

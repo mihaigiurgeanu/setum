@@ -42,7 +42,7 @@ import ro.kds.erp.biz.Products;
  * Created: Fri Nov 18 15:34:24 2005
  *
  * @author <a href="mailto:Mihai Giurgeanu@CRIMIRA"></a>
- * @version $Id: UsaMetalica2KBeanImplementation.java,v 1.14 2006/06/20 03:37:14 mihai Exp $
+ * @version $Id: UsaMetalica2KBeanImplementation.java,v 1.15 2006/07/05 21:10:30 mihai Exp $
  */
 public class UsaMetalica2KBeanImplementation 
     extends ro.kds.erp.biz.setum.basic.UsaMetalica2KBean {
@@ -189,18 +189,32 @@ public class UsaMetalica2KBeanImplementation
 	    attribs.add(ah.create("benefAlteSisteme2", form.getBenefAlteSisteme2()));
 	    attribs.add(ah.create("benefAlteSisteme2Buc", form.getBenefAlteSisteme2Buc()));
 
-	    attribs.add(ah.create("intFinisajBlat", form.getIntFinisajBlat()));
 	    attribs.add(ah.create("intFinisajBlatId", form.getIntFinisajBlatId()));
-	    attribs.add(ah.create("intFinisajToc", form.getIntFinisajToc()));
 	    attribs.add(ah.create("intFinisajTocId", form.getIntFinisajTocId()));
-	    attribs.add(ah.create("intFinisajGrilaj", form.getIntFinisajGrilaj()));
 	    attribs.add(ah.create("intFinisajGrilajId", form.getIntFinisajGrilajId()));
-	    attribs.add(ah.create("intFinisajFereastra", form.getIntFinisajFereastra()));
 	    attribs.add(ah.create("intFinisajFereastraId", form.getIntFinisajFereastraId()));
-	    attribs.add(ah.create("intFinisajSupralumina", form.getIntFinisajSupralumina()));
 	    attribs.add(ah.create("intFinisajSupraluminaId", form.getIntFinisajSupraluminaId()));
-	    attribs.add(ah.create("intFinisajPanouLateral", form.getIntFinisajPanouLateral()));
 	    attribs.add(ah.create("intFinisajPanouLateralId", form.getIntFinisajPanouLateralId()));
+
+	    attribs.add(ah.create("extFinisajBlatId", form.getExtFinisajBlatId()));
+	    attribs.add(ah.create("extFinisajTocId", form.getExtFinisajTocId()));
+	    attribs.add(ah.create("extFinisajGrilajId", form.getExtFinisajGrilajId()));
+	    attribs.add(ah.create("extFinisajFereastraId", form.getExtFinisajFereastraId()));
+	    attribs.add(ah.create("extFinisajSupraluminaId", form.getExtFinisajSupraluminaId()));
+	    attribs.add(ah.create("extFinisajPanouLateralId", form.getExtFinisajPanouLateralId()));
+
+	    attribs.add(ah.create("finisajTocBlat", form.getFinisajTocBlat()));
+	    attribs.add(ah.create("finisajGrilajBlat", form.getFinisajGrilajBlat()));
+	    attribs.add(ah.create("finisajFereastraBlat", form.getFinisajFereastraBlat()));
+	    attribs.add(ah.create("finisajSupraluminaBlat", form.getFinisajSupraluminaBlat()));
+	    attribs.add(ah.create("finisajPanouLateralBlat", form.getFinisajPanouLateralBlat()));
+	    attribs.add(ah.create("finisajBlatExtInt", form.getFinisajBlatExtInt()));
+	    attribs.add(ah.create("finisajTocExtInt", form.getFinisajTocExtInt()));
+	    attribs.add(ah.create("finisajGrilajExtInt", form.getFinisajGrilajExtInt()));
+	    attribs.add(ah.create("finisajFereastraExtInt", form.getFinisajFereastraExtInt()));
+	    attribs.add(ah.create("finisajSupraluminaExtInt", form.getFinisajSupraluminaExtInt()));
+	    attribs.add(ah.create("finisajPanouLateralExtInt", form.getFinisajPanouLateralExtInt()));
+    
 
 	    r = validate();
 	} catch (Exception e) {
@@ -353,6 +367,30 @@ public class UsaMetalica2KBeanImplementation
 	    //form.readIntFinisajPanouLateral(amap);
 	    form.readIntFinisajPanouLateralId(amap);
 
+	    //form.readExtFinisajBlat(amap);
+	    form.readExtFinisajBlatId(amap);
+	    //form.readExtFinisajToc(amap);
+	    form.readExtFinisajTocId(amap);
+	    //form.readExtFinisajGrilaj(amap);
+	    form.readExtFinisajGrilajId(amap);
+	    //form.readExtFinisajFereastra(amap);
+	    form.readExtFinisajFereastraId(amap);
+	    //form.readExtFinisajSupralumina(amap);
+	    form.readExtFinisajSupraluminaId(amap);
+	    //form.readExtFinisajPanouLateral(amap);
+	    form.readExtFinisajPanouLateralId(amap);
+
+	    form.readFinisajTocBlat(amap);
+	    form.readFinisajGrilajBlat(amap);
+	    form.readFinisajFereastraBlat(amap);
+	    form.readFinisajSupraluminaBlat(amap);
+	    form.readFinisajPanouLateralBlat(amap);
+	    form.readFinisajBlatExtInt(amap);
+	    form.readFinisajTocExtInt(amap);
+	    form.readFinisajGrilajExtInt(amap);
+	    form.readFinisajFereastraExtInt(amap);
+	    form.readFinisajSupraluminaExtInt(amap);
+	    form.readFinisajPanouLateralExtInt(amap);
 
 	} catch (NamingException e) {
 	    logger.log(BasicLevel.ERROR, e);
@@ -459,6 +497,21 @@ public class UsaMetalica2KBeanImplementation
 // 	form.setAlteSisteme2Buc(new Integer(0));
 // 	form.setAlteSisteme2Id(new Integer(0));
 // 	form.setSistemeComment("");
+
+
+	Boolean trueObj = new Boolean(true);
+
+	form.setFinisajTocBlat(trueObj);
+	form.setFinisajGrilajBlat(trueObj);
+	form.setFinisajFereastraBlat(trueObj);
+	form.setFinisajSupraluminaBlat(trueObj);
+	form.setFinisajPanouLateralBlat(trueObj);
+	form.setFinisajTocExtInt(trueObj);
+	form.setFinisajGrilajExtInt(trueObj);
+	form.setFinisajFereastraExtInt(trueObj);
+	form.setFinisajSupraluminaExtInt(trueObj);
+	form.setFinisajPanouLateralExtInt(trueObj);
+	    
     }
 
 

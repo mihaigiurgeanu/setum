@@ -133,6 +133,29 @@ public class UsaMetalica2KForm implements Serializable {
     Integer intFinisajSupraluminaId;
     String intFinisajPanouLateral;
     Integer intFinisajPanouLateralId;
+    String extFinisajBlat;
+    Integer extFinisajBlatId;
+    String extFinisajToc;
+    Integer extFinisajTocId;
+    String extFinisajGrilaj;
+    Integer extFinisajGrilajId;
+    String extFinisajFereastra;
+    Integer extFinisajFereastraId;
+    String extFinisajSupralumina;
+    Integer extFinisajSupraluminaId;
+    String extFinisajPanouLateral;
+    Integer extFinisajPanouLateralId;
+    Boolean finisajTocBlat;
+    Boolean finisajGrilajBlat;
+    Boolean finisajFereastraBlat;
+    Boolean finisajSupraluminaBlat;
+    Boolean finisajPanouLateralBlat;
+    Boolean finisajBlatExtInt;
+    Boolean finisajTocExtInt;
+    Boolean finisajGrilajExtInt;
+    Boolean finisajFereastraExtInt;
+    Boolean finisajSupraluminaExtInt;
+    Boolean finisajPanouLateralExtInt;
 
     public UsaMetalica2KForm() {
 
@@ -606,6 +629,98 @@ public class UsaMetalica2KForm implements Serializable {
 
 
        this.intFinisajPanouLateralId = new Integer(0);
+
+
+
+       this.extFinisajBlat = "";
+
+
+
+       this.extFinisajBlatId = new Integer(0);
+
+
+
+       this.extFinisajToc = "";
+
+
+
+       this.extFinisajTocId = new Integer(0);
+
+
+
+       this.extFinisajGrilaj = "";
+
+
+
+       this.extFinisajGrilajId = new Integer(0);
+
+
+
+       this.extFinisajFereastra = "";
+
+
+
+       this.extFinisajFereastraId = new Integer(0);
+
+
+
+       this.extFinisajSupralumina = "";
+
+
+
+       this.extFinisajSupraluminaId = new Integer(0);
+
+
+
+       this.extFinisajPanouLateral = "";
+
+
+
+       this.extFinisajPanouLateralId = new Integer(0);
+
+
+
+       this.finisajTocBlat = new Boolean(false);
+
+
+
+       this.finisajGrilajBlat = new Boolean(false);
+
+
+
+       this.finisajFereastraBlat = new Boolean(false);
+
+
+
+       this.finisajSupraluminaBlat = new Boolean(false);
+
+
+
+       this.finisajPanouLateralBlat = new Boolean(false);
+
+
+
+       this.finisajBlatExtInt = new Boolean(false);
+
+
+
+       this.finisajTocExtInt = new Boolean(false);
+
+
+
+       this.finisajGrilajExtInt = new Boolean(false);
+
+
+
+       this.finisajFereastraExtInt = new Boolean(false);
+
+
+
+       this.finisajSupraluminaExtInt = new Boolean(false);
+
+
+
+       this.finisajPanouLateralExtInt = new Boolean(false);
 
 
 
@@ -2378,6 +2493,351 @@ public class UsaMetalica2KForm implements Serializable {
 	AttributeLocal a = (AttributeLocal)attributes.get("intFinisajPanouLateralId");
 	if(a != null) {
 	    this.setIntFinisajPanouLateralId(a.getIntValue());
+	}
+    }
+
+    public void setExtFinisajBlat(String newExtFinisajBlat) {
+        this.extFinisajBlat = newExtFinisajBlat;
+    }
+
+    public String getExtFinisajBlat() {
+        return extFinisajBlat;
+    }
+
+    public void readExtFinisajBlat(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("extFinisajBlat");
+	if(a != null) {
+	    this.setExtFinisajBlat(a.getStringValue());
+	}
+    }
+
+    public void setExtFinisajBlatId(Integer newExtFinisajBlatId) {
+        this.extFinisajBlatId = newExtFinisajBlatId;
+    }
+
+    public Integer getExtFinisajBlatId() {
+        return extFinisajBlatId;
+    }
+
+    public void readExtFinisajBlatId(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("extFinisajBlatId");
+	if(a != null) {
+	    this.setExtFinisajBlatId(a.getIntValue());
+	}
+    }
+
+    public void setExtFinisajToc(String newExtFinisajToc) {
+        this.extFinisajToc = newExtFinisajToc;
+    }
+
+    public String getExtFinisajToc() {
+        return extFinisajToc;
+    }
+
+    public void readExtFinisajToc(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("extFinisajToc");
+	if(a != null) {
+	    this.setExtFinisajToc(a.getStringValue());
+	}
+    }
+
+    public void setExtFinisajTocId(Integer newExtFinisajTocId) {
+        this.extFinisajTocId = newExtFinisajTocId;
+    }
+
+    public Integer getExtFinisajTocId() {
+        return extFinisajTocId;
+    }
+
+    public void readExtFinisajTocId(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("extFinisajTocId");
+	if(a != null) {
+	    this.setExtFinisajTocId(a.getIntValue());
+	}
+    }
+
+    public void setExtFinisajGrilaj(String newExtFinisajGrilaj) {
+        this.extFinisajGrilaj = newExtFinisajGrilaj;
+    }
+
+    public String getExtFinisajGrilaj() {
+        return extFinisajGrilaj;
+    }
+
+    public void readExtFinisajGrilaj(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("extFinisajGrilaj");
+	if(a != null) {
+	    this.setExtFinisajGrilaj(a.getStringValue());
+	}
+    }
+
+    public void setExtFinisajGrilajId(Integer newExtFinisajGrilajId) {
+        this.extFinisajGrilajId = newExtFinisajGrilajId;
+    }
+
+    public Integer getExtFinisajGrilajId() {
+        return extFinisajGrilajId;
+    }
+
+    public void readExtFinisajGrilajId(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("extFinisajGrilajId");
+	if(a != null) {
+	    this.setExtFinisajGrilajId(a.getIntValue());
+	}
+    }
+
+    public void setExtFinisajFereastra(String newExtFinisajFereastra) {
+        this.extFinisajFereastra = newExtFinisajFereastra;
+    }
+
+    public String getExtFinisajFereastra() {
+        return extFinisajFereastra;
+    }
+
+    public void readExtFinisajFereastra(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("extFinisajFereastra");
+	if(a != null) {
+	    this.setExtFinisajFereastra(a.getStringValue());
+	}
+    }
+
+    public void setExtFinisajFereastraId(Integer newExtFinisajFereastraId) {
+        this.extFinisajFereastraId = newExtFinisajFereastraId;
+    }
+
+    public Integer getExtFinisajFereastraId() {
+        return extFinisajFereastraId;
+    }
+
+    public void readExtFinisajFereastraId(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("extFinisajFereastraId");
+	if(a != null) {
+	    this.setExtFinisajFereastraId(a.getIntValue());
+	}
+    }
+
+    public void setExtFinisajSupralumina(String newExtFinisajSupralumina) {
+        this.extFinisajSupralumina = newExtFinisajSupralumina;
+    }
+
+    public String getExtFinisajSupralumina() {
+        return extFinisajSupralumina;
+    }
+
+    public void readExtFinisajSupralumina(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("extFinisajSupralumina");
+	if(a != null) {
+	    this.setExtFinisajSupralumina(a.getStringValue());
+	}
+    }
+
+    public void setExtFinisajSupraluminaId(Integer newExtFinisajSupraluminaId) {
+        this.extFinisajSupraluminaId = newExtFinisajSupraluminaId;
+    }
+
+    public Integer getExtFinisajSupraluminaId() {
+        return extFinisajSupraluminaId;
+    }
+
+    public void readExtFinisajSupraluminaId(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("extFinisajSupraluminaId");
+	if(a != null) {
+	    this.setExtFinisajSupraluminaId(a.getIntValue());
+	}
+    }
+
+    public void setExtFinisajPanouLateral(String newExtFinisajPanouLateral) {
+        this.extFinisajPanouLateral = newExtFinisajPanouLateral;
+    }
+
+    public String getExtFinisajPanouLateral() {
+        return extFinisajPanouLateral;
+    }
+
+    public void readExtFinisajPanouLateral(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("extFinisajPanouLateral");
+	if(a != null) {
+	    this.setExtFinisajPanouLateral(a.getStringValue());
+	}
+    }
+
+    public void setExtFinisajPanouLateralId(Integer newExtFinisajPanouLateralId) {
+        this.extFinisajPanouLateralId = newExtFinisajPanouLateralId;
+    }
+
+    public Integer getExtFinisajPanouLateralId() {
+        return extFinisajPanouLateralId;
+    }
+
+    public void readExtFinisajPanouLateralId(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("extFinisajPanouLateralId");
+	if(a != null) {
+	    this.setExtFinisajPanouLateralId(a.getIntValue());
+	}
+    }
+
+    public void setFinisajTocBlat(Boolean newFinisajTocBlat) {
+        this.finisajTocBlat = newFinisajTocBlat;
+    }
+
+    public Boolean getFinisajTocBlat() {
+        return finisajTocBlat;
+    }
+
+    public void readFinisajTocBlat(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("finisajTocBlat");
+	if(a != null) {
+	    this.setFinisajTocBlat(a.getBoolValue());
+	}
+    }
+
+    public void setFinisajGrilajBlat(Boolean newFinisajGrilajBlat) {
+        this.finisajGrilajBlat = newFinisajGrilajBlat;
+    }
+
+    public Boolean getFinisajGrilajBlat() {
+        return finisajGrilajBlat;
+    }
+
+    public void readFinisajGrilajBlat(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("finisajGrilajBlat");
+	if(a != null) {
+	    this.setFinisajGrilajBlat(a.getBoolValue());
+	}
+    }
+
+    public void setFinisajFereastraBlat(Boolean newFinisajFereastraBlat) {
+        this.finisajFereastraBlat = newFinisajFereastraBlat;
+    }
+
+    public Boolean getFinisajFereastraBlat() {
+        return finisajFereastraBlat;
+    }
+
+    public void readFinisajFereastraBlat(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("finisajFereastraBlat");
+	if(a != null) {
+	    this.setFinisajFereastraBlat(a.getBoolValue());
+	}
+    }
+
+    public void setFinisajSupraluminaBlat(Boolean newFinisajSupraluminaBlat) {
+        this.finisajSupraluminaBlat = newFinisajSupraluminaBlat;
+    }
+
+    public Boolean getFinisajSupraluminaBlat() {
+        return finisajSupraluminaBlat;
+    }
+
+    public void readFinisajSupraluminaBlat(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("finisajSupraluminaBlat");
+	if(a != null) {
+	    this.setFinisajSupraluminaBlat(a.getBoolValue());
+	}
+    }
+
+    public void setFinisajPanouLateralBlat(Boolean newFinisajPanouLateralBlat) {
+        this.finisajPanouLateralBlat = newFinisajPanouLateralBlat;
+    }
+
+    public Boolean getFinisajPanouLateralBlat() {
+        return finisajPanouLateralBlat;
+    }
+
+    public void readFinisajPanouLateralBlat(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("finisajPanouLateralBlat");
+	if(a != null) {
+	    this.setFinisajPanouLateralBlat(a.getBoolValue());
+	}
+    }
+
+    public void setFinisajBlatExtInt(Boolean newFinisajBlatExtInt) {
+        this.finisajBlatExtInt = newFinisajBlatExtInt;
+    }
+
+    public Boolean getFinisajBlatExtInt() {
+        return finisajBlatExtInt;
+    }
+
+    public void readFinisajBlatExtInt(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("finisajBlatExtInt");
+	if(a != null) {
+	    this.setFinisajBlatExtInt(a.getBoolValue());
+	}
+    }
+
+    public void setFinisajTocExtInt(Boolean newFinisajTocExtInt) {
+        this.finisajTocExtInt = newFinisajTocExtInt;
+    }
+
+    public Boolean getFinisajTocExtInt() {
+        return finisajTocExtInt;
+    }
+
+    public void readFinisajTocExtInt(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("finisajTocExtInt");
+	if(a != null) {
+	    this.setFinisajTocExtInt(a.getBoolValue());
+	}
+    }
+
+    public void setFinisajGrilajExtInt(Boolean newFinisajGrilajExtInt) {
+        this.finisajGrilajExtInt = newFinisajGrilajExtInt;
+    }
+
+    public Boolean getFinisajGrilajExtInt() {
+        return finisajGrilajExtInt;
+    }
+
+    public void readFinisajGrilajExtInt(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("finisajGrilajExtInt");
+	if(a != null) {
+	    this.setFinisajGrilajExtInt(a.getBoolValue());
+	}
+    }
+
+    public void setFinisajFereastraExtInt(Boolean newFinisajFereastraExtInt) {
+        this.finisajFereastraExtInt = newFinisajFereastraExtInt;
+    }
+
+    public Boolean getFinisajFereastraExtInt() {
+        return finisajFereastraExtInt;
+    }
+
+    public void readFinisajFereastraExtInt(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("finisajFereastraExtInt");
+	if(a != null) {
+	    this.setFinisajFereastraExtInt(a.getBoolValue());
+	}
+    }
+
+    public void setFinisajSupraluminaExtInt(Boolean newFinisajSupraluminaExtInt) {
+        this.finisajSupraluminaExtInt = newFinisajSupraluminaExtInt;
+    }
+
+    public Boolean getFinisajSupraluminaExtInt() {
+        return finisajSupraluminaExtInt;
+    }
+
+    public void readFinisajSupraluminaExtInt(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("finisajSupraluminaExtInt");
+	if(a != null) {
+	    this.setFinisajSupraluminaExtInt(a.getBoolValue());
+	}
+    }
+
+    public void setFinisajPanouLateralExtInt(Boolean newFinisajPanouLateralExtInt) {
+        this.finisajPanouLateralExtInt = newFinisajPanouLateralExtInt;
+    }
+
+    public Boolean getFinisajPanouLateralExtInt() {
+        return finisajPanouLateralExtInt;
+    }
+
+    public void readFinisajPanouLateralExtInt(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("finisajPanouLateralExtInt");
+	if(a != null) {
+	    this.setFinisajPanouLateralExtInt(a.getBoolValue());
 	}
     }
 

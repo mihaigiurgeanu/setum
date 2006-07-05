@@ -43,12 +43,19 @@ windows.arguments[0].select(productId)
     <command id="modify-option" oncommand="edit_option()"/>
 
 
-    <command id="editFinisajBlat_cmd" oncommand="edit_finisaj('intFinisajBlatId')"/>
-    <command id="editFinisajToc_cmd" oncommand="edit_finisaj('intFinisajTocId')"/>
-    <command id="editFinisajGrilaj_cmd" oncommand="edit_finisaj('intFinisajGrilajId')"/>
-    <command id="editFinisajFereastra_cmd" oncommand="edit_finisaj('intFinisajFereastraId')"/>
-    <command id="editFinisajSupralumina_cmd" oncommand="edit_finisaj('intFinisajSupraluminaId')"/>
-    <command id="editFinisajPanou_cmd" oncommand="edit_finisaj('intFinisajPanouLateralId')"/>
+    <command id="editIntFinisajBlat_cmd" oncommand="edit_finisaj('intFinisajBlatId')"/>
+    <command id="editIntFinisajToc_cmd" oncommand="edit_finisaj('intFinisajTocId')"/>
+    <command id="editIntFinisajGrilaj_cmd" oncommand="edit_finisaj('intFinisajGrilajId')"/>
+    <command id="editIntFinisajFereastra_cmd" oncommand="edit_finisaj('intFinisajFereastraId')"/>
+    <command id="editIntFinisajSupralumina_cmd" oncommand="edit_finisaj('intFinisajSupraluminaId')"/>
+    <command id="editIntFinisajPanou_cmd" oncommand="edit_finisaj('intFinisajPanouLateralId')"/>
+
+    <command id="editExtfinisajBlat_cmd" oncommand="edit_finisaj('extFinisajBlatId')"/>
+    <command id="editExtfinisajToc_cmd" oncommand="edit_finisaj('extFinisajTocId')"/>
+    <command id="editExtfinisajGrilaj_cmd" oncommand="edit_finisaj('extFinisajGrilajId')"/>
+    <command id="editExtfinisajFereastra_cmd" oncommand="edit_finisaj('extFinisajFereastraId')"/>
+    <command id="editExtfinisajSupralumina_cmd" oncommand="edit_finisaj('extFinisajSupraluminaId')"/>
+    <command id="editExtfinisajPanou_cmd" oncommand="edit_finisaj('extFinisajPanouLateralId')"/>
 
   </commandset>
 
@@ -733,38 +740,77 @@ windows.arguments[0].select(productId)
 	    <row>
 	      <label controls="intFinisajBlat" value="Finisaj blat: "/>
 	      <textbox id="intFinisajBlat" readonly="true"/>
-	      <button command="editFinisajBlat_cmd" label="..."/>
+	      <button command="editIntFinisajBlat_cmd" label="..."/>
 	    </row>
 
 	    <row>
 	      <label controls="intFinisajToc" value="Finisaj toc: "/>
 	      <textbox id="intFinisajToc" readonly="true"/>
-	      <button command="editFinisajToc_cmd" label="..."/>
+	      <button command="editIntFinisajToc_cmd" label="..."/>
 	    </row>
 
 	    <row>
 	      <label controls="intFinisajGrilaj" value="Finisaj grilaj: "/>
 	      <textbox id="intFinisajGrilaj" readonly="true"/>
-	      <button command="editFinisajGrilaj_cmd" label="..."/>
+	      <button command="editIntFinisajGrilaj_cmd" label="..."/>
 	    </row>
 
 	    <row>
 	      <label controls="intFinisajFereastra" value="Finisaj fereastra: "/>
 	      <textbox id="intFinisajFereastra" readonly="true"/>
-	      <button command="editFinisajFereastra_cmd" label="..."/>
+	      <button command="editIntFinisajFereastra_cmd" label="..."/>
 	    </row>
 
 	    <row>
 	      <label controls="intFinisajSupralumina" value="Finisaj supralumina: "/>
 	      <textbox id="intFinisajSupralumina" readonly="true"/>
-	      <button command="editFinisajSupralumina_cmd" label="..."/>
+	      <button command="editIntFinisajSupralumina_cmd" label="..."/>
 	    </row>
 
 	    <row>
 	      <label controls="intFinisajPanouLateral" value="Finisaj panou: "/>
 	      <textbox id="intFinisajPanouLateral" readonly="true"/>
-	      <button command="editFinisajPanou_cmd" label="..."/>
+	      <button command="editIntFinisajPanou_cmd" label="..."/>
 	    </row>
+
+
+
+	    <row>
+	      <label controls="extFinisajBlat" value="Finisaj blat: "/>
+	      <textbox id="extFinisajBlat" readonly="true"/>
+	      <button command="editIntFinisajBlat_cmd" label="..."/>
+	    </row>
+
+	    <row>
+	      <label controls="extFinisajToc" value="Finisaj toc: "/>
+	      <textbox id="extFinisajToc" readonly="true"/>
+	      <button command="editIntFinisajToc_cmd" label="..."/>
+	    </row>
+
+	    <row>
+	      <label controls="extFinisajGrilaj" value="Finisaj grilaj: "/>
+	      <textbox id="extFinisajGrilaj" readonly="true"/>
+	      <button command="editIntFinisajGrilaj_cmd" label="..."/>
+	    </row>
+
+	    <row>
+	      <label controls="extFinisajFereastra" value="Finisaj fereastra: "/>
+	      <textbox id="extFinisajFereastra" readonly="true"/>
+	      <button command="editIntFinisajFereastra_cmd" label="..."/>
+	    </row>
+
+	    <row>
+	      <label controls="extFinisajSupralumina" value="Finisaj supralumina: "/>
+	      <textbox id="extFinisajSupralumina" readonly="true"/>
+	      <button command="editIntFinisajSupralumina_cmd" label="..."/>
+	    </row>
+
+	    <row>
+	      <label controls="extFinisajPanouLateral" value="Finisaj panou: "/>
+	      <textbox id="extFinisajPanouLateral" readonly="true"/>
+	      <button command="editIntFinisajPanou_cmd" label="..."/>
+	    </row>
+
 	  </rows>
 	</grid>
       </tabpanel>

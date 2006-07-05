@@ -88,6 +88,21 @@ public abstract class AttributeBean implements EntityBean {
         logger.log(BasicLevel.DEBUG, "");
     }
 
+
+    public  Integer ejbCreate(String name, Boolean value) throws CreateException {
+        logger.log(BasicLevel.DEBUG, "");
+	
+        // Init here the bean fields
+	setName(name);
+	setBoolValue(value);
+
+        return null;
+    }
+
+    public void ejbPostCreate(String name, Boolean value) {
+        logger.log(BasicLevel.DEBUG, "");
+    }
+
     public  Integer ejbCreate(String name, ProductLocal value) 
 	throws CreateException {
         logger.log(BasicLevel.DEBUG, "");
@@ -124,6 +139,9 @@ public abstract class AttributeBean implements EntityBean {
 
     public abstract ProductLocal getProduct();
     public abstract void setProduct(ProductLocal p);
+
+    public abstract Boolean getBoolValue();
+    public abstract void setBoolValue(Boolean attrValue);
 
     public Double getDoubleValue() {
 	return new Double(getDecimalValue().doubleValue());

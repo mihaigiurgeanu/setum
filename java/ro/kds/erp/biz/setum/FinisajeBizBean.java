@@ -124,6 +124,19 @@ public class FinisajeBizBean extends FinisajeBean {
     }
 
 
+    /**
+     * Makes a new copy of this product.
+     * Before calling this method, load the product you want to duplicate.
+     * After calling this method, the loaded product becomes the new copy of the
+     * previously loaded product.
+     * @returns the id of the new product
+     */
+    public Integer duplicate() {
+	id = null;
+	saveFormData();
+	return id;
+    }
+
 
     private ProductLocal getCurrentProduct() throws FinderException {
 	

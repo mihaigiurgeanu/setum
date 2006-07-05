@@ -26,4 +26,8 @@ public interface AttributeLocal extends javax.ejb.EJBLocalObject {
 
     public ProductLocal getProduct();
     public void setProduct(ProductLocal p);
+
+    public Boolean getBoolValue();
+    public void setBoolValue(Boolean attrValue);
+
 } // AttributeLocal

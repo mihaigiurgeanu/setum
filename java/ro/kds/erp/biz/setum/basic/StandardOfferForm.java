@@ -57,8 +57,7 @@ public class StandardOfferForm implements Serializable {
 
 
 
-
-       // No rule to initialize this.discontinued
+       this.discontinued = new Boolean(false);
 
 
 
@@ -170,6 +169,12 @@ public class StandardOfferForm implements Serializable {
         return discontinued;
     }
 
+    public void readDiscontinued(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("discontinued");
+	if(a != null) {
+	    this.setDiscontinued(a.getBoolValue());
+	}
+    }
 
     public void setPeriod(Integer newPeriod) {
         this.period = newPeriod;

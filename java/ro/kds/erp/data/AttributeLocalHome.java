@@ -15,5 +15,6 @@ public interface AttributeLocalHome extends javax.ejb.EJBLocalHome {
     AttributeLocal create(String name, BigDecimal value) throws CreateException;
     AttributeLocal create(String name, Double value) throws CreateException;
     AttributeLocal create(String name, ProductLocal value) throws CreateException;
+    AttributeLocal create(String name, Boolean value) throws CreateException;
     AttributeLocal findByPrimaryKey(java.lang.Integer pk) throws FinderException;
 } // AttributeLocalHome

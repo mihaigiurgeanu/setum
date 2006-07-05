@@ -63,22 +63,6 @@ public class GrilaVentilatieBizBean extends GrilaVentilatieBean {
 
 	    p.setDescription("Grila ventilatie " + form.getLgv() + "x" + form.getHgv());
 
-
-	    // The category found by ID value hold in the env property
-	    // priceCategoryId is used to configure the price by square
-	    // meter for this kind of product. So, this category shoul
-	    // contain one and only one product.
-	    Integer priceCatId = (Integer)env.lookup("priceCategoryId");
-	    CategoryLocal priceCategory = ch.findByPrimaryKey(priceCatId);
-	    ProductLocal priceProduct = (ProductLocal)
-		priceCategory.getProducts().iterator().next();
-
-	    BigDecimal surface = new BigDecimal(form.getLgv().doubleValue() *
-						form.getHgv().doubleValue());
-	    p.setSellPrice(priceProduct.getSellPrice().multiply(surface));
-	    p.setEntryPrice(priceProduct.getEntryPrice().multiply(surface));
-	    p.setPrice1(priceProduct.getPrice1().multiply(surface));
-
 	    AttributeLocalHome ah = (AttributeLocalHome)PortableRemoteObject.
 		narrow(env.lookup("ejb/AttributeHome"), 
 		       AttributeLocalHome.class);

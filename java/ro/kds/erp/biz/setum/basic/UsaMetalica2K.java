@@ -139,6 +139,29 @@ public interface UsaMetalica2K extends EJBObject {
     public ResponseBean updateIntFinisajSupraluminaId(Integer newIntFinisajSupraluminaId) throws RemoteException;
     public ResponseBean updateIntFinisajPanouLateral(String newIntFinisajPanouLateral) throws RemoteException;
     public ResponseBean updateIntFinisajPanouLateralId(Integer newIntFinisajPanouLateralId) throws RemoteException;
+    public ResponseBean updateExtFinisajBlat(String newExtFinisajBlat) throws RemoteException;
+    public ResponseBean updateExtFinisajBlatId(Integer newExtFinisajBlatId) throws RemoteException;
+    public ResponseBean updateExtFinisajToc(String newExtFinisajToc) throws RemoteException;
+    public ResponseBean updateExtFinisajTocId(Integer newExtFinisajTocId) throws RemoteException;
+    public ResponseBean updateExtFinisajGrilaj(String newExtFinisajGrilaj) throws RemoteException;
+    public ResponseBean updateExtFinisajGrilajId(Integer newExtFinisajGrilajId) throws RemoteException;
+    public ResponseBean updateExtFinisajFereastra(String newExtFinisajFereastra) throws RemoteException;
+    public ResponseBean updateExtFinisajFereastraId(Integer newExtFinisajFereastraId) throws RemoteException;
+    public ResponseBean updateExtFinisajSupralumina(String newExtFinisajSupralumina) throws RemoteException;
+    public ResponseBean updateExtFinisajSupraluminaId(Integer newExtFinisajSupraluminaId) throws RemoteException;
+    public ResponseBean updateExtFinisajPanouLateral(String newExtFinisajPanouLateral) throws RemoteException;
+    public ResponseBean updateExtFinisajPanouLateralId(Integer newExtFinisajPanouLateralId) throws RemoteException;
+    public ResponseBean updateFinisajTocBlat(Boolean newFinisajTocBlat) throws RemoteException;
+    public ResponseBean updateFinisajGrilajBlat(Boolean newFinisajGrilajBlat) throws RemoteException;
+    public ResponseBean updateFinisajFereastraBlat(Boolean newFinisajFereastraBlat) throws RemoteException;
+    public ResponseBean updateFinisajSupraluminaBlat(Boolean newFinisajSupraluminaBlat) throws RemoteException;
+    public ResponseBean updateFinisajPanouLateralBlat(Boolean newFinisajPanouLateralBlat) throws RemoteException;
+    public ResponseBean updateFinisajBlatExtInt(Boolean newFinisajBlatExtInt) throws RemoteException;
+    public ResponseBean updateFinisajTocExtInt(Boolean newFinisajTocExtInt) throws RemoteException;
+    public ResponseBean updateFinisajGrilajExtInt(Boolean newFinisajGrilajExtInt) throws RemoteException;
+    public ResponseBean updateFinisajFereastraExtInt(Boolean newFinisajFereastraExtInt) throws RemoteException;
+    public ResponseBean updateFinisajSupraluminaExtInt(Boolean newFinisajSupraluminaExtInt) throws RemoteException;
+    public ResponseBean updateFinisajPanouLateralExtInt(Boolean newFinisajPanouLateralExtInt) throws RemoteException;
 
 
     public ResponseBean addOption (

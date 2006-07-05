@@ -22,4 +22,7 @@ public interface Attribute extends javax.ejb.EJBObject {
     public Double getDoubleValue();
     public void setDoubleValue(Double attrValue);
 
+    public Boolean getBoolValue();
+    public void setBoolValue(Boolean attrValue);
+
 } // Attribute

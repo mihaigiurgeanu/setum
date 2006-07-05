@@ -36,6 +36,9 @@ public class ${.node.class.name}Form implements Serializable {
        [#elseif field.type = 'java.math.BigDecimal']
        this.${field.name} = new java.math.BigDecimal(0);
 
+       [#elseif field.type = 'Boolean']
+       this.${field.name} = new Boolean(false);
+
        [#else]
 
        // No rule to initialize this.${field.name}
@@ -74,6 +77,13 @@ public class ${.node.class.name}Form implements Serializable {
 	AttributeLocal a = (AttributeLocal)attributes.get("${field.name}");
 	if(a != null) {
 	    this.set${field.name?cap_first}(a.getDoubleValue());
+	}
+    }
+    [#elseif field.type = 'Boolean']
+    public void read${field.name?cap_first}(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("${field.name}");
+	if(a != null) {
+	    this.set${field.name?cap_first}(a.getBoolValue());
 	}
     }
     [#elseif field.type = 'java.math.BigDecimal']

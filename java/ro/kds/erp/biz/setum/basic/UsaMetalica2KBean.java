@@ -3088,6 +3088,558 @@ public abstract class UsaMetalica2KBean
 	computeCalculatedFields(r);
 	return r;
     }
+    public ResponseBean updateExtFinisajBlat(String extFinisajBlat) {
+        ResponseBean r = new ResponseBean();
+	String oldVal = form.getExtFinisajBlat();
+	form.setExtFinisajBlat(extFinisajBlat);
+	r.addRecord();
+	r.addField("extFinisajBlat", extFinisajBlat); // for number format
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".extFinisajBlat");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
+		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the extFinisajBlat", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
+    public ResponseBean updateExtFinisajBlatId(Integer extFinisajBlatId) {
+        ResponseBean r = new ResponseBean();
+	Integer oldVal = form.getExtFinisajBlatId();
+	form.setExtFinisajBlatId(extFinisajBlatId);
+	r.addRecord();
+	r.addField("extFinisajBlatId", extFinisajBlatId); // for number format
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".extFinisajBlatId");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
+		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the extFinisajBlatId", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
+    public ResponseBean updateExtFinisajToc(String extFinisajToc) {
+        ResponseBean r = new ResponseBean();
+	String oldVal = form.getExtFinisajToc();
+	form.setExtFinisajToc(extFinisajToc);
+	r.addRecord();
+	r.addField("extFinisajToc", extFinisajToc); // for number format
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".extFinisajToc");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
+		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the extFinisajToc", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
+    public ResponseBean updateExtFinisajTocId(Integer extFinisajTocId) {
+        ResponseBean r = new ResponseBean();
+	Integer oldVal = form.getExtFinisajTocId();
+	form.setExtFinisajTocId(extFinisajTocId);
+	r.addRecord();
+	r.addField("extFinisajTocId", extFinisajTocId); // for number format
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".extFinisajTocId");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
+		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the extFinisajTocId", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
+    public ResponseBean updateExtFinisajGrilaj(String extFinisajGrilaj) {
+        ResponseBean r = new ResponseBean();
+	String oldVal = form.getExtFinisajGrilaj();
+	form.setExtFinisajGrilaj(extFinisajGrilaj);
+	r.addRecord();
+	r.addField("extFinisajGrilaj", extFinisajGrilaj); // for number format
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".extFinisajGrilaj");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
+		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the extFinisajGrilaj", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
+    public ResponseBean updateExtFinisajGrilajId(Integer extFinisajGrilajId) {
+        ResponseBean r = new ResponseBean();
+	Integer oldVal = form.getExtFinisajGrilajId();
+	form.setExtFinisajGrilajId(extFinisajGrilajId);
+	r.addRecord();
+	r.addField("extFinisajGrilajId", extFinisajGrilajId); // for number format
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".extFinisajGrilajId");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
+		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the extFinisajGrilajId", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
+    public ResponseBean updateExtFinisajFereastra(String extFinisajFereastra) {
+        ResponseBean r = new ResponseBean();
+	String oldVal = form.getExtFinisajFereastra();
+	form.setExtFinisajFereastra(extFinisajFereastra);
+	r.addRecord();
+	r.addField("extFinisajFereastra", extFinisajFereastra); // for number format
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".extFinisajFereastra");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
+		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the extFinisajFereastra", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
+    public ResponseBean updateExtFinisajFereastraId(Integer extFinisajFereastraId) {
+        ResponseBean r = new ResponseBean();
+	Integer oldVal = form.getExtFinisajFereastraId();
+	form.setExtFinisajFereastraId(extFinisajFereastraId);
+	r.addRecord();
+	r.addField("extFinisajFereastraId", extFinisajFereastraId); // for number format
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".extFinisajFereastraId");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
+		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the extFinisajFereastraId", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
+    public ResponseBean updateExtFinisajSupralumina(String extFinisajSupralumina) {
+        ResponseBean r = new ResponseBean();
+	String oldVal = form.getExtFinisajSupralumina();
+	form.setExtFinisajSupralumina(extFinisajSupralumina);
+	r.addRecord();
+	r.addField("extFinisajSupralumina", extFinisajSupralumina); // for number format
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".extFinisajSupralumina");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
+		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the extFinisajSupralumina", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
+    public ResponseBean updateExtFinisajSupraluminaId(Integer extFinisajSupraluminaId) {
+        ResponseBean r = new ResponseBean();
+	Integer oldVal = form.getExtFinisajSupraluminaId();
+	form.setExtFinisajSupraluminaId(extFinisajSupraluminaId);
+	r.addRecord();
+	r.addField("extFinisajSupraluminaId", extFinisajSupraluminaId); // for number format
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".extFinisajSupraluminaId");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
+		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the extFinisajSupraluminaId", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
+    public ResponseBean updateExtFinisajPanouLateral(String extFinisajPanouLateral) {
+        ResponseBean r = new ResponseBean();
+	String oldVal = form.getExtFinisajPanouLateral();
+	form.setExtFinisajPanouLateral(extFinisajPanouLateral);
+	r.addRecord();
+	r.addField("extFinisajPanouLateral", extFinisajPanouLateral); // for number format
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".extFinisajPanouLateral");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
+		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the extFinisajPanouLateral", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
+    public ResponseBean updateExtFinisajPanouLateralId(Integer extFinisajPanouLateralId) {
+        ResponseBean r = new ResponseBean();
+	Integer oldVal = form.getExtFinisajPanouLateralId();
+	form.setExtFinisajPanouLateralId(extFinisajPanouLateralId);
+	r.addRecord();
+	r.addField("extFinisajPanouLateralId", extFinisajPanouLateralId); // for number format
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".extFinisajPanouLateralId");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
+		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the extFinisajPanouLateralId", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
+    public ResponseBean updateFinisajTocBlat(Boolean finisajTocBlat) {
+        ResponseBean r = new ResponseBean();
+	Boolean oldVal = form.getFinisajTocBlat();
+	form.setFinisajTocBlat(finisajTocBlat);
+	r.addRecord();
+	r.addField("finisajTocBlat", finisajTocBlat); // for number format
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".finisajTocBlat");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(OLDVAL_VARNAME, oldVal, Boolean.class);
+		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the finisajTocBlat", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
+    public ResponseBean updateFinisajGrilajBlat(Boolean finisajGrilajBlat) {
+        ResponseBean r = new ResponseBean();
+	Boolean oldVal = form.getFinisajGrilajBlat();
+	form.setFinisajGrilajBlat(finisajGrilajBlat);
+	r.addRecord();
+	r.addField("finisajGrilajBlat", finisajGrilajBlat); // for number format
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".finisajGrilajBlat");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(OLDVAL_VARNAME, oldVal, Boolean.class);
+		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the finisajGrilajBlat", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
+    public ResponseBean updateFinisajFereastraBlat(Boolean finisajFereastraBlat) {
+        ResponseBean r = new ResponseBean();
+	Boolean oldVal = form.getFinisajFereastraBlat();
+	form.setFinisajFereastraBlat(finisajFereastraBlat);
+	r.addRecord();
+	r.addField("finisajFereastraBlat", finisajFereastraBlat); // for number format
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".finisajFereastraBlat");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(OLDVAL_VARNAME, oldVal, Boolean.class);
+		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the finisajFereastraBlat", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
+    public ResponseBean updateFinisajSupraluminaBlat(Boolean finisajSupraluminaBlat) {
+        ResponseBean r = new ResponseBean();
+	Boolean oldVal = form.getFinisajSupraluminaBlat();
+	form.setFinisajSupraluminaBlat(finisajSupraluminaBlat);
+	r.addRecord();
+	r.addField("finisajSupraluminaBlat", finisajSupraluminaBlat); // for number format
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".finisajSupraluminaBlat");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(OLDVAL_VARNAME, oldVal, Boolean.class);
+		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the finisajSupraluminaBlat", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
+    public ResponseBean updateFinisajPanouLateralBlat(Boolean finisajPanouLateralBlat) {
+        ResponseBean r = new ResponseBean();
+	Boolean oldVal = form.getFinisajPanouLateralBlat();
+	form.setFinisajPanouLateralBlat(finisajPanouLateralBlat);
+	r.addRecord();
+	r.addField("finisajPanouLateralBlat", finisajPanouLateralBlat); // for number format
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".finisajPanouLateralBlat");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(OLDVAL_VARNAME, oldVal, Boolean.class);
+		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the finisajPanouLateralBlat", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
+    public ResponseBean updateFinisajBlatExtInt(Boolean finisajBlatExtInt) {
+        ResponseBean r = new ResponseBean();
+	Boolean oldVal = form.getFinisajBlatExtInt();
+	form.setFinisajBlatExtInt(finisajBlatExtInt);
+	r.addRecord();
+	r.addField("finisajBlatExtInt", finisajBlatExtInt); // for number format
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".finisajBlatExtInt");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(OLDVAL_VARNAME, oldVal, Boolean.class);
+		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the finisajBlatExtInt", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
+    public ResponseBean updateFinisajTocExtInt(Boolean finisajTocExtInt) {
+        ResponseBean r = new ResponseBean();
+	Boolean oldVal = form.getFinisajTocExtInt();
+	form.setFinisajTocExtInt(finisajTocExtInt);
+	r.addRecord();
+	r.addField("finisajTocExtInt", finisajTocExtInt); // for number format
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".finisajTocExtInt");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(OLDVAL_VARNAME, oldVal, Boolean.class);
+		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the finisajTocExtInt", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
+    public ResponseBean updateFinisajGrilajExtInt(Boolean finisajGrilajExtInt) {
+        ResponseBean r = new ResponseBean();
+	Boolean oldVal = form.getFinisajGrilajExtInt();
+	form.setFinisajGrilajExtInt(finisajGrilajExtInt);
+	r.addRecord();
+	r.addField("finisajGrilajExtInt", finisajGrilajExtInt); // for number format
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".finisajGrilajExtInt");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(OLDVAL_VARNAME, oldVal, Boolean.class);
+		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the finisajGrilajExtInt", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
+    public ResponseBean updateFinisajFereastraExtInt(Boolean finisajFereastraExtInt) {
+        ResponseBean r = new ResponseBean();
+	Boolean oldVal = form.getFinisajFereastraExtInt();
+	form.setFinisajFereastraExtInt(finisajFereastraExtInt);
+	r.addRecord();
+	r.addField("finisajFereastraExtInt", finisajFereastraExtInt); // for number format
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".finisajFereastraExtInt");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(OLDVAL_VARNAME, oldVal, Boolean.class);
+		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the finisajFereastraExtInt", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
+    public ResponseBean updateFinisajSupraluminaExtInt(Boolean finisajSupraluminaExtInt) {
+        ResponseBean r = new ResponseBean();
+	Boolean oldVal = form.getFinisajSupraluminaExtInt();
+	form.setFinisajSupraluminaExtInt(finisajSupraluminaExtInt);
+	r.addRecord();
+	r.addField("finisajSupraluminaExtInt", finisajSupraluminaExtInt); // for number format
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".finisajSupraluminaExtInt");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(OLDVAL_VARNAME, oldVal, Boolean.class);
+		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the finisajSupraluminaExtInt", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
+    public ResponseBean updateFinisajPanouLateralExtInt(Boolean finisajPanouLateralExtInt) {
+        ResponseBean r = new ResponseBean();
+	Boolean oldVal = form.getFinisajPanouLateralExtInt();
+	form.setFinisajPanouLateralExtInt(finisajPanouLateralExtInt);
+	r.addRecord();
+	r.addField("finisajPanouLateralExtInt", finisajPanouLateralExtInt); // for number format
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".finisajPanouLateralExtInt");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(OLDVAL_VARNAME, oldVal, Boolean.class);
+		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the finisajPanouLateralExtInt", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
 
     /**
      * Generated implementation of the addOption service. It will call
@@ -3317,6 +3869,29 @@ public abstract class UsaMetalica2KBean
 	r.addField("intFinisajSupraluminaId", form.getIntFinisajSupraluminaId());
 	r.addField("intFinisajPanouLateral", form.getIntFinisajPanouLateral());
 	r.addField("intFinisajPanouLateralId", form.getIntFinisajPanouLateralId());
+	r.addField("extFinisajBlat", form.getExtFinisajBlat());
+	r.addField("extFinisajBlatId", form.getExtFinisajBlatId());
+	r.addField("extFinisajToc", form.getExtFinisajToc());
+	r.addField("extFinisajTocId", form.getExtFinisajTocId());
+	r.addField("extFinisajGrilaj", form.getExtFinisajGrilaj());
+	r.addField("extFinisajGrilajId", form.getExtFinisajGrilajId());
+	r.addField("extFinisajFereastra", form.getExtFinisajFereastra());
+	r.addField("extFinisajFereastraId", form.getExtFinisajFereastraId());
+	r.addField("extFinisajSupralumina", form.getExtFinisajSupralumina());
+	r.addField("extFinisajSupraluminaId", form.getExtFinisajSupraluminaId());
+	r.addField("extFinisajPanouLateral", form.getExtFinisajPanouLateral());
+	r.addField("extFinisajPanouLateralId", form.getExtFinisajPanouLateralId());
+	r.addField("finisajTocBlat", form.getFinisajTocBlat());
+	r.addField("finisajGrilajBlat", form.getFinisajGrilajBlat());
+	r.addField("finisajFereastraBlat", form.getFinisajFereastraBlat());
+	r.addField("finisajSupraluminaBlat", form.getFinisajSupraluminaBlat());
+	r.addField("finisajPanouLateralBlat", form.getFinisajPanouLateralBlat());
+	r.addField("finisajBlatExtInt", form.getFinisajBlatExtInt());
+	r.addField("finisajTocExtInt", form.getFinisajTocExtInt());
+	r.addField("finisajGrilajExtInt", form.getFinisajGrilajExtInt());
+	r.addField("finisajFereastraExtInt", form.getFinisajFereastraExtInt());
+	r.addField("finisajSupraluminaExtInt", form.getFinisajSupraluminaExtInt());
+	r.addField("finisajPanouLateralExtInt", form.getFinisajPanouLateralExtInt());
 	loadValueLists(r);
     }
 
@@ -4037,6 +4612,144 @@ public abstract class UsaMetalica2KBean
 	    s.setVar("intFinisajPanouLateralId", form.getIntFinisajPanouLateralId(), Integer.class);
 	} catch (ScriptErrorException e) {
 	    logger.log(BasicLevel.WARN, "Can not set the value of field: intFinisajPanouLateralId from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    s.setVar("extFinisajBlat", form.getExtFinisajBlat(), String.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: extFinisajBlat from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    s.setVar("extFinisajBlatId", form.getExtFinisajBlatId(), Integer.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: extFinisajBlatId from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    s.setVar("extFinisajToc", form.getExtFinisajToc(), String.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: extFinisajToc from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    s.setVar("extFinisajTocId", form.getExtFinisajTocId(), Integer.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: extFinisajTocId from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    s.setVar("extFinisajGrilaj", form.getExtFinisajGrilaj(), String.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: extFinisajGrilaj from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    s.setVar("extFinisajGrilajId", form.getExtFinisajGrilajId(), Integer.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: extFinisajGrilajId from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    s.setVar("extFinisajFereastra", form.getExtFinisajFereastra(), String.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: extFinisajFereastra from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    s.setVar("extFinisajFereastraId", form.getExtFinisajFereastraId(), Integer.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: extFinisajFereastraId from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    s.setVar("extFinisajSupralumina", form.getExtFinisajSupralumina(), String.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: extFinisajSupralumina from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    s.setVar("extFinisajSupraluminaId", form.getExtFinisajSupraluminaId(), Integer.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: extFinisajSupraluminaId from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    s.setVar("extFinisajPanouLateral", form.getExtFinisajPanouLateral(), String.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: extFinisajPanouLateral from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    s.setVar("extFinisajPanouLateralId", form.getExtFinisajPanouLateralId(), Integer.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: extFinisajPanouLateralId from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    s.setVar("finisajTocBlat", form.getFinisajTocBlat(), Boolean.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: finisajTocBlat from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    s.setVar("finisajGrilajBlat", form.getFinisajGrilajBlat(), Boolean.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: finisajGrilajBlat from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    s.setVar("finisajFereastraBlat", form.getFinisajFereastraBlat(), Boolean.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: finisajFereastraBlat from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    s.setVar("finisajSupraluminaBlat", form.getFinisajSupraluminaBlat(), Boolean.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: finisajSupraluminaBlat from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    s.setVar("finisajPanouLateralBlat", form.getFinisajPanouLateralBlat(), Boolean.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: finisajPanouLateralBlat from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    s.setVar("finisajBlatExtInt", form.getFinisajBlatExtInt(), Boolean.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: finisajBlatExtInt from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    s.setVar("finisajTocExtInt", form.getFinisajTocExtInt(), Boolean.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: finisajTocExtInt from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    s.setVar("finisajGrilajExtInt", form.getFinisajGrilajExtInt(), Boolean.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: finisajGrilajExtInt from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    s.setVar("finisajFereastraExtInt", form.getFinisajFereastraExtInt(), Boolean.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: finisajFereastraExtInt from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    s.setVar("finisajSupraluminaExtInt", form.getFinisajSupraluminaExtInt(), Boolean.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: finisajSupraluminaExtInt from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    s.setVar("finisajPanouLateralExtInt", form.getFinisajPanouLateralExtInt(), Boolean.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: finisajPanouLateralExtInt from the script");
             logger.log(BasicLevel.DEBUG, e);
         }
     }
@@ -5343,6 +6056,259 @@ public abstract class UsaMetalica2KBean
 	    }
 	} catch (ScriptErrorException e) {
 	    logger.log(BasicLevel.WARN, "Can not get the value of field: intFinisajPanouLateralId from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    field = s.getVar("extFinisajBlat", String.class);
+	    if(!field.equals(form.getExtFinisajBlat())) {
+	        logger.log(BasicLevel.DEBUG, "Field extFinisajBlat modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setExtFinisajBlat((String)field);
+	        r.addField("extFinisajBlat", (String)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: extFinisajBlat from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    field = s.getVar("extFinisajBlatId", Integer.class);
+	    if(!field.equals(form.getExtFinisajBlatId())) {
+	        logger.log(BasicLevel.DEBUG, "Field extFinisajBlatId modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setExtFinisajBlatId((Integer)field);
+	        r.addField("extFinisajBlatId", (Integer)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: extFinisajBlatId from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    field = s.getVar("extFinisajToc", String.class);
+	    if(!field.equals(form.getExtFinisajToc())) {
+	        logger.log(BasicLevel.DEBUG, "Field extFinisajToc modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setExtFinisajToc((String)field);
+	        r.addField("extFinisajToc", (String)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: extFinisajToc from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    field = s.getVar("extFinisajTocId", Integer.class);
+	    if(!field.equals(form.getExtFinisajTocId())) {
+	        logger.log(BasicLevel.DEBUG, "Field extFinisajTocId modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setExtFinisajTocId((Integer)field);
+	        r.addField("extFinisajTocId", (Integer)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: extFinisajTocId from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    field = s.getVar("extFinisajGrilaj", String.class);
+	    if(!field.equals(form.getExtFinisajGrilaj())) {
+	        logger.log(BasicLevel.DEBUG, "Field extFinisajGrilaj modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setExtFinisajGrilaj((String)field);
+	        r.addField("extFinisajGrilaj", (String)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: extFinisajGrilaj from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    field = s.getVar("extFinisajGrilajId", Integer.class);
+	    if(!field.equals(form.getExtFinisajGrilajId())) {
+	        logger.log(BasicLevel.DEBUG, "Field extFinisajGrilajId modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setExtFinisajGrilajId((Integer)field);
+	        r.addField("extFinisajGrilajId", (Integer)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: extFinisajGrilajId from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    field = s.getVar("extFinisajFereastra", String.class);
+	    if(!field.equals(form.getExtFinisajFereastra())) {
+	        logger.log(BasicLevel.DEBUG, "Field extFinisajFereastra modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setExtFinisajFereastra((String)field);
+	        r.addField("extFinisajFereastra", (String)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: extFinisajFereastra from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    field = s.getVar("extFinisajFereastraId", Integer.class);
+	    if(!field.equals(form.getExtFinisajFereastraId())) {
+	        logger.log(BasicLevel.DEBUG, "Field extFinisajFereastraId modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setExtFinisajFereastraId((Integer)field);
+	        r.addField("extFinisajFereastraId", (Integer)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: extFinisajFereastraId from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    field = s.getVar("extFinisajSupralumina", String.class);
+	    if(!field.equals(form.getExtFinisajSupralumina())) {
+	        logger.log(BasicLevel.DEBUG, "Field extFinisajSupralumina modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setExtFinisajSupralumina((String)field);
+	        r.addField("extFinisajSupralumina", (String)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: extFinisajSupralumina from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    field = s.getVar("extFinisajSupraluminaId", Integer.class);
+	    if(!field.equals(form.getExtFinisajSupraluminaId())) {
+	        logger.log(BasicLevel.DEBUG, "Field extFinisajSupraluminaId modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setExtFinisajSupraluminaId((Integer)field);
+	        r.addField("extFinisajSupraluminaId", (Integer)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: extFinisajSupraluminaId from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    field = s.getVar("extFinisajPanouLateral", String.class);
+	    if(!field.equals(form.getExtFinisajPanouLateral())) {
+	        logger.log(BasicLevel.DEBUG, "Field extFinisajPanouLateral modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setExtFinisajPanouLateral((String)field);
+	        r.addField("extFinisajPanouLateral", (String)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: extFinisajPanouLateral from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    field = s.getVar("extFinisajPanouLateralId", Integer.class);
+	    if(!field.equals(form.getExtFinisajPanouLateralId())) {
+	        logger.log(BasicLevel.DEBUG, "Field extFinisajPanouLateralId modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setExtFinisajPanouLateralId((Integer)field);
+	        r.addField("extFinisajPanouLateralId", (Integer)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: extFinisajPanouLateralId from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    field = s.getVar("finisajTocBlat", Boolean.class);
+	    if(!field.equals(form.getFinisajTocBlat())) {
+	        logger.log(BasicLevel.DEBUG, "Field finisajTocBlat modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setFinisajTocBlat((Boolean)field);
+	        r.addField("finisajTocBlat", (Boolean)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: finisajTocBlat from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    field = s.getVar("finisajGrilajBlat", Boolean.class);
+	    if(!field.equals(form.getFinisajGrilajBlat())) {
+	        logger.log(BasicLevel.DEBUG, "Field finisajGrilajBlat modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setFinisajGrilajBlat((Boolean)field);
+	        r.addField("finisajGrilajBlat", (Boolean)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: finisajGrilajBlat from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    field = s.getVar("finisajFereastraBlat", Boolean.class);
+	    if(!field.equals(form.getFinisajFereastraBlat())) {
+	        logger.log(BasicLevel.DEBUG, "Field finisajFereastraBlat modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setFinisajFereastraBlat((Boolean)field);
+	        r.addField("finisajFereastraBlat", (Boolean)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: finisajFereastraBlat from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    field = s.getVar("finisajSupraluminaBlat", Boolean.class);
+	    if(!field.equals(form.getFinisajSupraluminaBlat())) {
+	        logger.log(BasicLevel.DEBUG, "Field finisajSupraluminaBlat modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setFinisajSupraluminaBlat((Boolean)field);
+	        r.addField("finisajSupraluminaBlat", (Boolean)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: finisajSupraluminaBlat from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    field = s.getVar("finisajPanouLateralBlat", Boolean.class);
+	    if(!field.equals(form.getFinisajPanouLateralBlat())) {
+	        logger.log(BasicLevel.DEBUG, "Field finisajPanouLateralBlat modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setFinisajPanouLateralBlat((Boolean)field);
+	        r.addField("finisajPanouLateralBlat", (Boolean)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: finisajPanouLateralBlat from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    field = s.getVar("finisajBlatExtInt", Boolean.class);
+	    if(!field.equals(form.getFinisajBlatExtInt())) {
+	        logger.log(BasicLevel.DEBUG, "Field finisajBlatExtInt modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setFinisajBlatExtInt((Boolean)field);
+	        r.addField("finisajBlatExtInt", (Boolean)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: finisajBlatExtInt from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    field = s.getVar("finisajTocExtInt", Boolean.class);
+	    if(!field.equals(form.getFinisajTocExtInt())) {
+	        logger.log(BasicLevel.DEBUG, "Field finisajTocExtInt modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setFinisajTocExtInt((Boolean)field);
+	        r.addField("finisajTocExtInt", (Boolean)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: finisajTocExtInt from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    field = s.getVar("finisajGrilajExtInt", Boolean.class);
+	    if(!field.equals(form.getFinisajGrilajExtInt())) {
+	        logger.log(BasicLevel.DEBUG, "Field finisajGrilajExtInt modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setFinisajGrilajExtInt((Boolean)field);
+	        r.addField("finisajGrilajExtInt", (Boolean)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: finisajGrilajExtInt from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    field = s.getVar("finisajFereastraExtInt", Boolean.class);
+	    if(!field.equals(form.getFinisajFereastraExtInt())) {
+	        logger.log(BasicLevel.DEBUG, "Field finisajFereastraExtInt modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setFinisajFereastraExtInt((Boolean)field);
+	        r.addField("finisajFereastraExtInt", (Boolean)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: finisajFereastraExtInt from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    field = s.getVar("finisajSupraluminaExtInt", Boolean.class);
+	    if(!field.equals(form.getFinisajSupraluminaExtInt())) {
+	        logger.log(BasicLevel.DEBUG, "Field finisajSupraluminaExtInt modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setFinisajSupraluminaExtInt((Boolean)field);
+	        r.addField("finisajSupraluminaExtInt", (Boolean)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: finisajSupraluminaExtInt from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    field = s.getVar("finisajPanouLateralExtInt", Boolean.class);
+	    if(!field.equals(form.getFinisajPanouLateralExtInt())) {
+	        logger.log(BasicLevel.DEBUG, "Field finisajPanouLateralExtInt modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setFinisajPanouLateralExtInt((Boolean)field);
+	        r.addField("finisajPanouLateralExtInt", (Boolean)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: finisajPanouLateralExtInt from the script");
             logger.log(BasicLevel.DEBUG, e);
         }
     }

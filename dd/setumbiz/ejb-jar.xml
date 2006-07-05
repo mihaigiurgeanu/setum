@@ -7,191 +7,7 @@
   <description>Business logic of the application</description>
   <display-name>setumbiz</display-name>
   <enterprise-beans>
-    <!--
-    <session>
-      <description>Manage the editing of a special kind of Product</description>
-      <display-name>setumbiz/UsaMetalica1KEJB</display-name>
-      <ejb-name>UsaMetalica1KEJB</ejb-name>
-      <home>ro.kds.erp.biz.setum.basic.UsaMetalica2KHome</home>
-      <remote>ro.kds.erp.biz.setum.basic.UsaMetalica2K</remote>
-      <ejb-class>ro.kds.erp.biz.setum.UsaMetalica2KBeanImplementation</ejb-class>
-      <session-type>Stateful</session-type>
-      <transaction-type>Container</transaction-type>
-      <env-entry>
-	<description>The id of the category these products are in</description>
-	<env-entry-name>categoryId</env-entry-name>
-	<env-entry-type>java.lang.Integer</env-entry-type>
-	<env-entry-value>9991</env-entry-value>
-      </env-entry>
-      <env-entry>
-	<description>The category id for a value list</description>
-	<env-entry-name>broascaId</env-entry-name>
-	<env-entry-type>java.lang.Integer</env-entry-type>
-	<env-entry-value>9998</env-entry-value>
-      </env-entry>
-      <env-entry>
-	<description>The category id for a value list</description>
-	<env-entry-name>cilindruId</env-entry-name>
-	<env-entry-type>java.lang.Integer</env-entry-type>
-	<env-entry-value>9997</env-entry-value>
-      </env-entry>
-      <env-entry>
-	<description>The category id for a value list</description>
-	<env-entry-name>copiatCheieId</env-entry-name>
-	<env-entry-type>java.lang.Integer</env-entry-type>
-	<env-entry-value>10006</env-entry-value>
-      </env-entry>
-      <env-entry>
-	<description>The category id for a value list</description>
-	<env-entry-name>sildId</env-entry-name>
-	<env-entry-type>java.lang.Integer</env-entry-type>
-	<env-entry-value>9996</env-entry-value>
-      </env-entry>
-      <env-entry>
-	<description>The category id for a value list</description>
-	<env-entry-name>rozetaId</env-entry-name>
-	<env-entry-type>java.lang.Integer</env-entry-type>
-	<env-entry-value>10004</env-entry-value>
-      </env-entry>
-      <env-entry>
-	<description>The category id for a value list</description>
-	<env-entry-name>manerId</env-entry-name>
-	<env-entry-type>java.lang.Integer</env-entry-type>
-	<env-entry-value>9977</env-entry-value>
-      </env-entry>
-      <env-entry>
-	<description>The category id for a value list</description>
-	<env-entry-name>yallaId</env-entry-name>
-	<env-entry-type>java.lang.Integer</env-entry-type>
-	<env-entry-value>9995</env-entry-value>
-      </env-entry>
-      <env-entry>
-	<description>The category id for a value list</description>
-	<env-entry-name>baraAntipanicaId</env-entry-name>
-	<env-entry-type>java.lang.Integer</env-entry-type>
-	<env-entry-value>9976</env-entry-value>
-      </env-entry>
-      <env-entry>
-	<description>The category id for a value list</description>
-	<env-entry-name>selectorOrdineId</env-entry-name>
-	<env-entry-type>java.lang.Integer</env-entry-type>
-	<env-entry-value>9975</env-entry-value>
-      </env-entry>
-      <env-entry>
-	<description>The category id for a value list</description>
-	<env-entry-name>amortizor</env-entry-name>
-	<env-entry-type>java.lang.Integer</env-entry-type>
-	<env-entry-value>10001</env-entry-value>
-      </env-entry>
-      <env-entry>
-	<description>The category id for a value list</description>
-	<env-entry-name>decupareSistemId</env-entry-name>
-	<env-entry-type>java.lang.Integer</env-entry-type>
-	<env-entry-value>9974</env-entry-value>
-      </env-entry>
-      <env-entry>
-	<description>The category id for a value list</description>
-	<env-entry-name>sistemeId</env-entry-name>
-	<env-entry-type>java.lang.Integer</env-entry-type>
-	<env-entry-value>9999</env-entry-value>
-      </env-entry>
-      <ejb-ref>
-	<description>Preferences bean</description>
-	<ejb-ref-name>ejb/PreferencesEJB</ejb-ref-name>
-	<ejb-ref-type>Session</ejb-ref-type>
-	<home>ro.kds.erp.biz.PreferencesHome</home>
-	<remote>ro.kds.erp.biz.Preferences</remote>
-      </ejb-ref>
-      <ejb-ref>
-	<description>Sequence generator (for offer no)</description>
-	<ejb-ref-name>ejb/SequenceHome</ejb-ref-name>
-	<ejb-ref-type>Session</ejb-ref-type>
-	<home>ro.kds.erp.biz.SequenceHome</home>
-	<remote>ro.kds.erp.biz.Sequence</remote>
-      </ejb-ref>
-      <ejb-local-ref>
-	<ejb-ref-name>ejb/ProductLocalHome</ejb-ref-name>
-	<ejb-ref-type>Entity</ejb-ref-type>
-	<local-home>ro.kds.erp.data.ProductLocalHome</local-home>
-	<local>ro.kds.erp.data.ProductLocal</local>
-	<ejb-link>datalayer.jar#ProductEJB</ejb-link>
-      </ejb-local-ref>
-      <ejb-local-ref>
-	<ejb-ref-name>ejb/AttributeLocalHome</ejb-ref-name>
-	<ejb-ref-type>Entity</ejb-ref-type>
-	<local-home>ro.kds.erp.data.AttributeLocalHome</local-home>
-	<local>ro.kds.erp.data.AttributeLocal</local>
-	<ejb-link>datalayer.jar#AttributeEJB</ejb-link>
-      </ejb-local-ref>
-      <ejb-local-ref>
-	<ejb-ref-name>ejb/CategoryLocalHome</ejb-ref-name>
-	<ejb-ref-type>Entity</ejb-ref-type>
-	<local-home>ro.kds.erp.data.CategoryLocalHome</local-home>
-	<local>ro.kds.erp.data.CategoryLocal</local>
-	<ejb-link>datalayer.jar#CategoryEJB</ejb-link>
-      </ejb-local-ref>
-      <ejb-local-ref>
-	<ejb-ref-name>ejb/CategoryHome</ejb-ref-name>
-	<ejb-ref-type>Entity</ejb-ref-type>
-	<local-home>ro.kds.erp.data.CategoryLocalHome</local-home>
-	<local>ro.kds.erp.data.CategoryLocal</local>
-	<ejb-link>datalayer.jar#CategoryEJB</ejb-link>
-      </ejb-local-ref>
-      <ejb-local-ref>
-	<ejb-ref-name>ejb/CompositeProductLocalHome</ejb-ref-name>
-	<ejb-ref-type>Entity</ejb-ref-type>
-	<local-home>ro.kds.erp.data.CompositeProductLocalHome</local-home>
-	<local>ro.kds.erp.data.CompositeProductLocal</local>
-	<ejb-link>datalayer.jar#CompositeProductEJB</ejb-link>
-      </ejb-local-ref>
-    </session>
 
-
-    <session>
-      <description>Retrieves the list of products</description>
-      <display-name>setumbiz/UsiMetalice1KEJB</display-name>
-      <ejb-name>UsiMetalice1KEJB</ejb-name>
-      <home>ro.kds.erp.biz.ListMakerBeanHome</home>
-      <remote>ro.kds.erp.biz.ListMakerBean</remote>
-      <ejb-class>ro.kds.erp.biz.setum.UsiMetaliceListBean</ejb-class>
-      <session-type>Stateless</session-type>
-      <transaction-type>Container</transaction-type>
-      <env-entry>
-	<description>The id of the category these products are in</description>
-	<env-entry-name>categoryId</env-entry-name>
-	<env-entry-type>java.lang.Integer</env-entry-type>
-	<env-entry-value>9991</env-entry-value>
-      </env-entry>
-      <ejb-local-ref>
-	<ejb-ref-name>ejb/ProductLocalHome</ejb-ref-name>
-	<ejb-ref-type>Entity</ejb-ref-type>
-	<local-home>ro.kds.erp.data.ProductLocalHome</local-home>
-	<local>ro.kds.erp.data.ProductLocal</local>
-	<ejb-link>datalayer.jar#ProductEJB</ejb-link>
-      </ejb-local-ref>
-      <ejb-local-ref>
-	<ejb-ref-name>ejb/AttributeLocalHome</ejb-ref-name>
-	<ejb-ref-type>Entity</ejb-ref-type>
-	<local-home>ro.kds.erp.data.AttributeLocalHome</local-home>
-	<local>ro.kds.erp.data.AttributeLocal</local>
-	<ejb-link>datalayer.jar#AttributeEJB</ejb-link>
-      </ejb-local-ref>
-      <ejb-local-ref>
-	<ejb-ref-name>ejb/CategoryLocalHome</ejb-ref-name>
-	<ejb-ref-type>Entity</ejb-ref-type>
-	<local-home>ro.kds.erp.data.CategoryLocalHome</local-home>
-	<local>ro.kds.erp.data.CategoryLocal</local>
-	<ejb-link>datalayer.jar#CategoryEJB</ejb-link>
-      </ejb-local-ref>
-      <ejb-local-ref>
-	<ejb-ref-name>ejb/CompositeProductLocalHome</ejb-ref-name>
-	<ejb-ref-type>Entity</ejb-ref-type>
-	<local-home>ro.kds.erp.data.CompositeProductLocalHome</local-home>
-	<local>ro.kds.erp.data.CompositeProductLocal</local>
-	<ejb-link>datalayer.jar#CompositeProductEJB</ejb-link>
-      </ejb-local-ref>
-    </session>
-    -->
     <session id="UsaMetalica2KEJB">
       <description>Manage the editing of a special kind of Product</description>
       <display-name>setumbiz/UsaMetalica2KEJB</display-name>
@@ -472,6 +288,8 @@
         <message-destination-usage>Produces</message-destination-usage>
       </message-destination-ref>
     </session>
+
+
     <session id="SistemEJB">
       <description>Business logic for a kind of standard products</description>
       <ejb-name>SistemEJB</ejb-name>
@@ -582,6 +400,8 @@
         <message-destination-usage>Produces</message-destination-usage>
       </message-destination-ref>
     </session>
+
+
     <session id="UsaNeechipataEJB">
       <description>Data entry pentru usi standard neechipate</description>
       <ejb-name>UsaStdNeechipataEJB</ejb-name>
@@ -630,6 +450,8 @@
         <message-destination-usage>Produces</message-destination-usage>
       </message-destination-ref>
     </session>
+
+
     <session id="UsaStandardEJB">
       <description>Editare/Vizualizare/Regasire produse UsiStandard</description>
       <ejb-name>UsaStandardEJB</ejb-name>
@@ -715,6 +537,8 @@
         <ejb-link>datalayer.jar#CompositeProductEJB</ejb-link>
       </ejb-local-ref>
     </session>
+
+
     <session id="OfertaUsiStandardEJB">
       <description>Oferta de usi standard</description>
       <ejb-name>OfertaUsiStandardEJB</ejb-name>
@@ -827,6 +651,9 @@
         <ejb-link>datalayer.jar#OfferItemEJB</ejb-link>
       </ejb-local-ref>
     </session>
+
+
+
     <session id="ArbitraryOfferEJB">
       <description>Logic for managing customized offers that may include any kind of product.</description>
       <ejb-name>ArbitraryOfferEJB</ejb-name>
@@ -885,6 +712,8 @@
         <ejb-link>datalayer.jar#OfferItemEJB</ejb-link>
       </ejb-local-ref>
     </session>
+
+
     <session id="FereastraEJB">
       <description>Editarea parametrilor ferestrei unei usi metalice</description>
       <ejb-name>FereastraEJB</ejb-name>
@@ -898,30 +727,6 @@
         <env-entry-name>categoryId</env-entry-name>
         <env-entry-type>java.lang.Integer</env-entry-type>
         <env-entry-value>9989</env-entry-value>
-      </env-entry>
-      <env-entry>
-        <description>Categorie produs component</description>
-        <env-entry-name>geamuriCategoryId</env-entry-name>
-        <env-entry-type>java.lang.Integer</env-entry-type>
-        <env-entry-value>9987</env-entry-value>
-      </env-entry>
-      <env-entry>
-        <description>Categorie produs component</description>
-        <env-entry-name>termopaneCategoryId</env-entry-name>
-        <env-entry-type>java.lang.Integer</env-entry-type>
-        <env-entry-value>9986</env-entry-value>
-      </env-entry>
-      <env-entry>
-        <description>Categorie produs component</description>
-        <env-entry-name>grilajeCategoryId</env-entry-name>
-        <env-entry-type>java.lang.Integer</env-entry-type>
-        <env-entry-value>9985</env-entry-value>
-      </env-entry>
-      <env-entry>
-        <description>Categorie produs component</description>
-        <env-entry-name>tablaCategoryId</env-entry-name>
-        <env-entry-type>java.lang.Integer</env-entry-type>
-        <env-entry-value>9984</env-entry-value>
       </env-entry>
       <ejb-ref>
         <ejb-ref-name>ejb/PreferencesEJB</ejb-ref-name>
@@ -951,6 +756,8 @@
         <ejb-link>datalayer.jar#AttributeEJB</ejb-link>
       </ejb-local-ref>
     </session>
+
+
     <session id="GrilaVentilatieEJB">
       <description>Datele despre grila de ventilatie</description>
       <ejb-name>GrilaVentilatieEJB</ejb-name>
@@ -964,12 +771,6 @@
         <env-entry-name>categoryId</env-entry-name>
         <env-entry-type>java.lang.Integer</env-entry-type>
         <env-entry-value>9983</env-entry-value>
-      </env-entry>
-      <env-entry>
-        <description>The category holding the price for this product. This category should only contain one product. It's price is given per square meter.</description>
-        <env-entry-name>priceCategoryId</env-entry-name>
-        <env-entry-type>java.lang.Integer</env-entry-type>
-        <env-entry-value>9978</env-entry-value>
       </env-entry>
       <ejb-ref>
         <ejb-ref-name>ejb/PreferencesEJB</ejb-ref-name>
@@ -999,6 +800,8 @@
         <ejb-link>datalayer.jar#AttributeEJB</ejb-link>
       </ejb-local-ref>
     </session>
+
+
     <session id="GauriAerisireEJB">
       <description>Datele despre gaurile de aerisire</description>
       <ejb-name>GauriAerisireEJB</ejb-name>
@@ -1060,30 +863,6 @@
         <env-entry-type>java.lang.Integer</env-entry-type>
         <env-entry-value>9981</env-entry-value>
       </env-entry>
-      <env-entry>
-        <description>Categorie produs component</description>
-        <env-entry-name>geamuriCategoryId</env-entry-name>
-        <env-entry-type>java.lang.Integer</env-entry-type>
-        <env-entry-value>9987</env-entry-value>
-      </env-entry>
-      <env-entry>
-        <description>Categorie produs component</description>
-        <env-entry-name>termopaneCategoryId</env-entry-name>
-        <env-entry-type>java.lang.Integer</env-entry-type>
-        <env-entry-value>9986</env-entry-value>
-      </env-entry>
-      <env-entry>
-        <description>Categorie produs component</description>
-        <env-entry-name>grilajeCategoryId</env-entry-name>
-        <env-entry-type>java.lang.Integer</env-entry-type>
-        <env-entry-value>9985</env-entry-value>
-      </env-entry>
-      <env-entry>
-        <description>Categorie produs component</description>
-        <env-entry-name>tablaCategoryId</env-entry-name>
-        <env-entry-type>java.lang.Integer</env-entry-type>
-        <env-entry-value>9984</env-entry-value>
-      </env-entry>
       <ejb-ref>
         <ejb-ref-name>ejb/PreferencesEJB</ejb-ref-name>
         <ejb-ref-type>Session</ejb-ref-type>
@@ -1129,30 +908,6 @@
         <env-entry-name>categoryId</env-entry-name>
         <env-entry-type>java.lang.Integer</env-entry-type>
         <env-entry-value>9980</env-entry-value>
-      </env-entry>
-      <env-entry>
-        <description>Categorie produs component</description>
-        <env-entry-name>geamuriCategoryId</env-entry-name>
-        <env-entry-type>java.lang.Integer</env-entry-type>
-        <env-entry-value>9987</env-entry-value>
-      </env-entry>
-      <env-entry>
-        <description>Categorie produs component</description>
-        <env-entry-name>termopaneCategoryId</env-entry-name>
-        <env-entry-type>java.lang.Integer</env-entry-type>
-        <env-entry-value>9986</env-entry-value>
-      </env-entry>
-      <env-entry>
-        <description>Categorie produs component</description>
-        <env-entry-name>grilajeCategoryId</env-entry-name>
-        <env-entry-type>java.lang.Integer</env-entry-type>
-        <env-entry-value>9985</env-entry-value>
-      </env-entry>
-      <env-entry>
-        <description>Categorie produs component</description>
-        <env-entry-name>tablaCategoryId</env-entry-name>
-        <env-entry-type>java.lang.Integer</env-entry-type>
-        <env-entry-value>9984</env-entry-value>
       </env-entry>
       <ejb-ref>
         <ejb-ref-name>ejb/PreferencesEJB</ejb-ref-name>

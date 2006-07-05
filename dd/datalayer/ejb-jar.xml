@@ -109,6 +109,9 @@
       <cmp-field>
 	<field-name>decimalValue</field-name>
       </cmp-field>      
+      <cmp-field>
+	<field-name>boolValue</field-name>
+      </cmp-field>      
       <primkey-field>id</primkey-field>
       <env-entry>
 	<env-entry-name>name1</env-entry-name>
