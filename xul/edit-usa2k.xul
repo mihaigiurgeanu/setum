@@ -735,80 +735,90 @@ windows.arguments[0].select(productId)
 	    <column/>
 	    <column flex="1"/>
 	    <column/>
+	    <column/>
 	  </columns>
 	  <rows>
 	    <row>
-	      <label controls="intFinisajBlat" value="Finisaj blat: "/>
+	      <label controls="intFinisajBlat" value="Finisaj blat (interior): "/>
 	      <textbox id="intFinisajBlat" readonly="true"/>
 	      <button command="editIntFinisajBlat_cmd" label="..."/>
 	    </row>
 
 	    <row>
-	      <label controls="intFinisajToc" value="Finisaj toc: "/>
+	      <label controls="intFinisajToc" value="Finisaj toc (interior): "/>
 	      <textbox id="intFinisajToc" readonly="true"/>
 	      <button command="editIntFinisajToc_cmd" label="..."/>
+	      <checkbox id="finisajTocBlat" label="Ca la blat"/>
 	    </row>
 
 	    <row>
-	      <label controls="intFinisajGrilaj" value="Finisaj grilaj: "/>
+	      <label controls="intFinisajGrilaj" value="Finisaj grilaj (interior): "/>
 	      <textbox id="intFinisajGrilaj" readonly="true"/>
 	      <button command="editIntFinisajGrilaj_cmd" label="..."/>
+	      <checkbox id="finisajGrilajBlat" label="Ca la blat"/>
 	    </row>
 
 	    <row>
-	      <label controls="intFinisajFereastra" value="Finisaj fereastra: "/>
+	      <label controls="intFinisajFereastra" value="Finisaj fereastra (interior): "/>
 	      <textbox id="intFinisajFereastra" readonly="true"/>
 	      <button command="editIntFinisajFereastra_cmd" label="..."/>
+	      <checkbox id="finisajFereastraBlat" label="Ca la blat"/>
 	    </row>
 
 	    <row>
-	      <label controls="intFinisajSupralumina" value="Finisaj supralumina: "/>
+	      <label controls="intFinisajSupralumina" value="Finisaj supralumina (interior): "/>
 	      <textbox id="intFinisajSupralumina" readonly="true"/>
 	      <button command="editIntFinisajSupralumina_cmd" label="..."/>
+	      <checkbox id="finisajSupraluminaBlat" label="Ca la blat"/>
 	    </row>
 
 	    <row>
-	      <label controls="intFinisajPanouLateral" value="Finisaj panou: "/>
+	      <label controls="intFinisajPanouLateral" value="Finisaj panou (interior): "/>
 	      <textbox id="intFinisajPanouLateral" readonly="true"/>
 	      <button command="editIntFinisajPanou_cmd" label="..."/>
+	      <checkbox id="finisajPanouLateralBlat" label="Ca la blat"/>
 	    </row>
 
-
-
 	    <row>
-	      <label controls="extFinisajBlat" value="Finisaj blat: "/>
+	      <label controls="extFinisajBlat" value="Finisaj blat (exterior): "/>
 	      <textbox id="extFinisajBlat" readonly="true"/>
 	      <button command="editIntFinisajBlat_cmd" label="..."/>
+	      <checkbox id="finisajBlatExtInt" label="Ca la interior"/>
 	    </row>
 
 	    <row>
-	      <label controls="extFinisajToc" value="Finisaj toc: "/>
+	      <label controls="extFinisajToc" value="Finisaj toc (exterior): "/>
 	      <textbox id="extFinisajToc" readonly="true"/>
 	      <button command="editIntFinisajToc_cmd" label="..."/>
+	      <checkbox id="finisajTocExtInt" label="Ca la interior"/>
 	    </row>
 
 	    <row>
-	      <label controls="extFinisajGrilaj" value="Finisaj grilaj: "/>
+	      <label controls="extFinisajGrilaj" value="Finisaj grilaj (exterior): "/>
 	      <textbox id="extFinisajGrilaj" readonly="true"/>
 	      <button command="editIntFinisajGrilaj_cmd" label="..."/>
+	      <checkbox id="finisajGrilajExtInt" label="Ca la interior"/>
 	    </row>
 
 	    <row>
-	      <label controls="extFinisajFereastra" value="Finisaj fereastra: "/>
+	      <label controls="extFinisajFereastra" value="Finisaj fereastra (exterior): "/>
 	      <textbox id="extFinisajFereastra" readonly="true"/>
 	      <button command="editIntFinisajFereastra_cmd" label="..."/>
+	      <checkbox id="finisajFereastraExtInt" label="Ca la interior"/>
 	    </row>
 
 	    <row>
-	      <label controls="extFinisajSupralumina" value="Finisaj supralumina: "/>
+	      <label controls="extFinisajSupralumina" value="Finisaj supralumina (exterior): "/>
 	      <textbox id="extFinisajSupralumina" readonly="true"/>
 	      <button command="editIntFinisajSupralumina_cmd" label="..."/>
+	      <checkbox id="finisajSupraluminaExtInt" label="Ca la interior"/>
 	    </row>
 
 	    <row>
-	      <label controls="extFinisajPanouLateral" value="Finisaj panou: "/>
+	      <label controls="extFinisajPanouLateral" value="Finisaj panou (exterior): "/>
 	      <textbox id="extFinisajPanouLateral" readonly="true"/>
 	      <button command="editIntFinisajPanou_cmd" label="..."/>
+	      <checkbox id="finisajPanouLateralExtInt" label="Ca la interior"/>
 	    </row>
 
 	  </rows>

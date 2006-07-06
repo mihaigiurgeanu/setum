@@ -5,6 +5,7 @@ function FormObject() {
     this.combo_fields = new Array();
     this.radio_fields = new Array();
     this.hidden_fields = new Array();
+    this.cb_fields = new Array();
 
     this.values = new Array();
     this.do_link = "";
@@ -78,7 +79,7 @@ function FormObject() {
     this.text_event_listener = { handleEvent: text_changed };
     this.combo_event_listener = { handleEvent: combo_changed };
     this.radio_event_listener = { handleEvent: radio_changed };
-
+    this.check_event_listener = { handleEvent: cb_changed };
 
 }
 
@@ -117,6 +118,18 @@ function setupEventListeners() {
 	} else {
 	    log("setupEventListeners Warning: Radio Field " 
 		+ this.radio_fields[i] 
+		+ " does not exists in this document");
+	}
+    }
+
+    for(i=0; i<this.cb_fields.length; i++) {
+	//log("Set up event listener for: " + this.cb_fields[i]);
+	if(document.getElementById(this.cb_fields[i])) {
+	    document.getElementById(this.cb_fields[i])
+		.addEventListener("click", this.check_event_listener, true);
+	} else {
+	    log("setupEventListeners Warning: Check Box field " 
+		+ this.cb_fields[i] 
 		+ " does not exists in this document");
 	}
     }
@@ -174,6 +187,19 @@ function text_changed(event) {
     theForm.post_request(req);
 }
 
+function cb_changed(event) {
+    var control = event.target;
+
+    log("Field changed: " + control.id + ". New value: " + control.checked);
+    
+    var req = new HTTPDataRequest(theForm.do_link);
+    req.add("command", "change");
+    req.add("field", control.id);
+    req.add("value", control.checked);
+    
+    theForm.post_request(req);
+}
+
 function set_value(fieldName, fieldValue) {
     log("Send set field value: " + fieldName + ". New value: " + fieldValue);
     log(" ... to " + this.do_link);
@@ -215,7 +241,7 @@ function update_fields(response) {
 	    log("Updating value list no " + i);
 	    update_valuelists(response.valueLists[i]);
 	}
-	records = response.records;
+	var records = response.records;
 	if(records[0]) {
 	    this.update_form(records[0]);
 	}	
@@ -252,6 +278,13 @@ function update_form(record) {
 	    this.values[this.radio_fields[i]] = record[this.radio_fields[i]];
 	}
     }
+
+    for(i=0; i<this.cb_fields.length; i++) {
+	update_cb(this.cb_fields[i], record);
+	if(record[this.cb_fields[i]] != undefined) {
+	    this.values[this.cb_fields[i]] = record[this.text_fields[i]];
+	}
+    }
 }
 
 function update_combo(field, record) {
@@ -277,6 +310,17 @@ function update_text(field, record) {
     }
 }
 
+function update_cb(field, record) {
+    log(" Checking new value for field " + field + ": " + record[field]);
+    if(record[field] != undefined && document.getElementById(field)) {
+	if(record[field] == "true") {
+	    document.getElementById(field).setAttribute("checked", "true");
+	} else {
+	    document.getElementById(field).removeAttribute("checked");
+	}
+    }
+}
+
 function update_valuelists(vlc) {
     // vlc is a value list container.
     // a value list container has the following components:
@@ -290,7 +334,9 @@ function update_valuelists(vlc) {
     var popup = document.getElementById(vlc.name + "-popup");
     if(popup) {
 	remove_children(popup);
+	var i;
 	for(i=0; i<vlc.length; i++) {
+	    var menuitem;
 	    menuitem = document.createElement("menuitem");
 	    menuitem.setAttribute("id", vlc.name + "." + vlc.valuelist[i].value);
 	    menuitem.setAttribute("label", vlc.valuelist[i].label);

@@ -939,6 +939,57 @@
     </session>
 
 
+    <!--Finisaje -->
+    <session id="FinisajeEJB">
+      <description>Editare finisaje pentru usa metalica</description>
+      <ejb-name>FinisajeEJB</ejb-name>
+      <home>ro.kds.erp.biz.setum.basic.FinisajeHome</home>
+      <remote>ro.kds.erp.biz.setum.basic.Finisaje</remote>
+      <ejb-class>ro.kds.erp.biz.setum.FinisajeBizBean</ejb-class>
+      <session-type>Stateful</session-type>
+      <transaction-type>Container</transaction-type>
+      <env-entry>
+        <description>Categoria din care face parte acest producs</description>
+        <env-entry-name>categoryId</env-entry-name>
+        <env-entry-type>java.lang.Integer</env-entry-type>
+        <env-entry-value>9972</env-entry-value>
+      </env-entry>
+      <env-entry>
+	<description>The prefix for building the scripts names.</description>
+	<env-entry-name>script.prefix</env-entry-name>
+	<env-entry-type>java.lang.String</env-entry-type>
+	<env-entry-value>Finisaje</env-entry-value>
+      </env-entry>
+      <ejb-ref>
+        <ejb-ref-name>ejb/PreferencesEJB</ejb-ref-name>
+        <ejb-ref-type>Session</ejb-ref-type>
+        <home>ro.kds.erp.biz.PreferencesHome</home>
+        <remote>ro.kds.erp.biz.Preferences</remote>
+      </ejb-ref>
+      <ejb-local-ref>
+        <ejb-ref-name>ejb/ProductHome</ejb-ref-name>
+        <ejb-ref-type>Entity</ejb-ref-type>
+        <local-home>ro.kds.erp.data.ProductLocalHome</local-home>
+        <local>ro.kds.erp.data.ProductLocal</local>
+        <ejb-link>datalayer.jar#ProductEJB</ejb-link>
+      </ejb-local-ref>
+      <ejb-local-ref>
+        <ejb-ref-name>ejb/CategoryHome</ejb-ref-name>
+        <ejb-ref-type>Entity</ejb-ref-type>
+        <local-home>ro.kds.erp.data.CategoryLocalHome</local-home>
+        <local>ro.kds.erp.data.CategoryLocal</local>
+        <ejb-link>datalayer.jar#CategoryEJB</ejb-link>
+      </ejb-local-ref>
+      <ejb-local-ref>
+        <ejb-ref-name>ejb/AttributeHome</ejb-ref-name>
+        <ejb-ref-type>Entity</ejb-ref-type>
+        <local-home>ro.kds.erp.data.AttributeLocalHome</local-home>
+        <local>ro.kds.erp.data.AttributeLocal</local>
+        <ejb-link>datalayer.jar#AttributeEJB</ejb-link>
+      </ejb-local-ref>
+    </session>
+
+
 
     <session id="ClientsEJB">
       <description>Manage the business logic of storing and retrieving client and contacts.</description>
@@ -1082,6 +1133,101 @@
 
 
   <assembly-descriptor>
+
+    <!-- Required for save methods -->
+    <container-transaction>
+      <method>
+        <ejb-name>UsaMetalica1KEJB</ejb-name>
+        <method-name>saveFormData</method-name>
+      </method>
+      <method>
+        <ejb-name>UsiMetalice1KEJB</ejb-name>
+        <method-name>saveFormData</method-name>
+      </method>
+      <method>
+        <ejb-name>UsaMetalica2KEJB</ejb-name>
+        <method-name>saveFormData</method-name>
+      </method>
+      <method>
+        <ejb-name>UsiMetalice2KEJB</ejb-name>
+        <method-name>saveFormData</method-name>
+      </method>
+      <method>
+        <description>All methods of StandardOfferEJB</description>
+        <ejb-name>StandardOfferEJB</ejb-name>
+        <method-name>saveFormData</method-name>
+      </method>
+      <method>
+        <description>All methods of SistemEJB</description>
+        <ejb-name>SistemEJB</ejb-name>
+        <method-name>saveFormData</method-name>
+      </method>
+      <method>
+        <description>All methods of OtherProducsEJB</description>
+        <ejb-name>OtherProductsEJB</ejb-name>
+        <method-name>saveFormData</method-name>
+      </method>
+      <method>
+        <description>All methods of UsaStdNeechipataBean</description>
+        <ejb-name>UsaStdNeechipataEJB</ejb-name>
+        <method-name>saveFormData</method-name>
+      </method>
+      <method>
+        <description>All methods of UsaStdNeechipataBean</description>
+        <ejb-name>UsaStandardEJB</ejb-name>
+        <method-name>saveFormData</method-name>
+      </method>
+      <method>
+        <description>All methods of OfrtaUsiStandard</description>
+        <ejb-name>OfertaUsiStandardEJB</ejb-name>
+        <method-name>saveFormData</method-name>
+      </method>
+      <method>
+        <ejb-name>ArbitraryOfferEJB</ejb-name>
+        <method-name>saveFormData</method-name>
+      </method>
+      <method>
+        <ejb-name>FereastraEJB</ejb-name>
+        <method-name>saveFormData</method-name>
+      </method>
+      <method>
+        <ejb-name>GrilaVentilatieEJB</ejb-name>
+        <method-name>saveFormData</method-name>
+      </method>
+      <method>
+        <ejb-name>SupraluminaEJB</ejb-name>
+        <method-name>saveFormData</method-name>
+      </method>
+      <method>
+        <ejb-name>PanouLateralEJB</ejb-name>
+        <method-name>saveFormData</method-name>
+      </method>
+      <method>
+        <ejb-name>GauriAerisireEJB</ejb-name>
+        <method-name>saveFormData</method-name>
+      </method>
+      <method>
+        <ejb-name>ClientsEJB</ejb-name>
+        <method-name>saveFormData</method-name>
+      </method>
+      <method>
+        <ejb-name>GenericProductsEJB</ejb-name>
+        <method-name>saveFormData</method-name>
+      </method>
+      <method>
+	<ejb-name>UsiStdSelectionsEJB</ejb-name>
+	<method-name>saveFormData</method-name>
+      </method>
+      <method>
+	<ejb-name>FinisajeEJB</ejb-name>
+	<method-name>saveFormData</method-name>
+      </method>
+      <trans-attribute>Required</trans-attribute>
+    </container-transaction>
+
+
+
+    <!-- Default Supports -->
     <container-transaction>
       <method>
         <ejb-name>UsaMetalica1KEJB</ejb-name>
@@ -1099,119 +1245,78 @@
         <ejb-name>UsiMetalice2KEJB</ejb-name>
         <method-name>*</method-name>
       </method>
-      <trans-attribute>Supports</trans-attribute>
-    </container-transaction>
-    <container-transaction>
       <method>
         <description>All methods of StandardOfferEJB</description>
         <ejb-name>StandardOfferEJB</ejb-name>
         <method-name>*</method-name>
       </method>
-      <trans-attribute>Supports</trans-attribute>
-    </container-transaction>
-    <container-transaction>
       <method>
         <description>All methods of SistemEJB</description>
         <ejb-name>SistemEJB</ejb-name>
         <method-name>*</method-name>
       </method>
-      <trans-attribute>Supports</trans-attribute>
-    </container-transaction>
-    <container-transaction>
       <method>
         <description>All methods of OtherProducsEJB</description>
         <ejb-name>OtherProductsEJB</ejb-name>
         <method-name>*</method-name>
       </method>
-      <trans-attribute>Supports</trans-attribute>
-    </container-transaction>
-    <container-transaction>
       <method>
         <description>All methods of UsaStdNeechipataBean</description>
         <ejb-name>UsaStdNeechipataEJB</ejb-name>
         <method-name>*</method-name>
       </method>
-      <trans-attribute>Supports</trans-attribute>
-    </container-transaction>
-    <container-transaction>
       <method>
         <description>All methods of UsaStdNeechipataBean</description>
         <ejb-name>UsaStandardEJB</ejb-name>
         <method-name>*</method-name>
       </method>
-      <trans-attribute>Supports</trans-attribute>
-    </container-transaction>
-    <container-transaction>
       <method>
         <description>All methods of OfrtaUsiStandard</description>
         <ejb-name>OfertaUsiStandardEJB</ejb-name>
         <method-name>*</method-name>
       </method>
-      <trans-attribute>Supports</trans-attribute>
-    </container-transaction>
-    <container-transaction>
       <method>
         <ejb-name>ArbitraryOfferEJB</ejb-name>
         <method-name>*</method-name>
       </method>
-      <trans-attribute>Supports</trans-attribute>
-    </container-transaction>
-    <container-transaction>
       <method>
         <ejb-name>FereastraEJB</ejb-name>
         <method-name>*</method-name>
       </method>
-      <trans-attribute>Supports</trans-attribute>
-    </container-transaction>
-    <container-transaction>
       <method>
         <ejb-name>GrilaVentilatieEJB</ejb-name>
         <method-name>*</method-name>
       </method>
-      <trans-attribute>Supports</trans-attribute>
-    </container-transaction>
-    <container-transaction>
       <method>
         <ejb-name>SupraluminaEJB</ejb-name>
         <method-name>*</method-name>
       </method>
-      <trans-attribute>Supports</trans-attribute>
-    </container-transaction>
-    <container-transaction>
       <method>
         <ejb-name>PanouLateralEJB</ejb-name>
         <method-name>*</method-name>
       </method>
-      <trans-attribute>Supports</trans-attribute>
-    </container-transaction>
-    <container-transaction>
       <method>
         <ejb-name>GauriAerisireEJB</ejb-name>
         <method-name>*</method-name>
       </method>
-      <trans-attribute>Supports</trans-attribute>
-    </container-transaction>
-    <container-transaction>
       <method>
         <ejb-name>ClientsEJB</ejb-name>
         <method-name>*</method-name>
       </method>
-      <trans-attribute>Supports</trans-attribute>
-    </container-transaction>
-    <container-transaction>
       <method>
         <ejb-name>GenericProductsEJB</ejb-name>
         <method-name>*</method-name>
       </method>
-      <trans-attribute>Supports</trans-attribute>
-    </container-transaction>
-
-    <container-transaction>
       <method>
 	<ejb-name>UsiStdSelectionsEJB</ejb-name>
 	<method-name>*</method-name>
       </method>
+      <method>
+	<ejb-name>FinisajeEJB</ejb-name>
+	<method-name>*</method-name>
+      </method>
       <trans-attribute>Supports</trans-attribute>
     </container-transaction>
+
   </assembly-descriptor>
 </ejb-jar>

@@ -133,4 +133,14 @@ function to call when the called module ends.
     <rdf:li rdf:resource="http://www.kds.ro/erp/businessCategory/setum/optiuni/panoulateral"/>
   </rdf:Seq>
 
+
+  <!-- Editare finisaje -->
+  <rdf:Description rdf:about="http://www.kds.ro/erp/businessCategory/setum/usaMetalica/finisaje">
+    <category:title>Finisaje</category:title>
+    <category:service>/edit-finisaje.do</category:service>
+    <category:module rdf:resource="http://www.kds.ro/erp/modules/setum/edit-finisaje"/>
+    <category:onnew>newFormData</category:onnew>
+    <category:load>loadFormData</category:load>
+  </rdf:Description>
+
 </rdf:RDF>

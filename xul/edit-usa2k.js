@@ -76,6 +76,20 @@ theForm.hidden_fields = new Array(
 				 "extFinisajFereastraId",
 				 "extFinisajSupraluminaId",
 				 "extFinisajPanouLateralId");
+
+theForm.cb_fields = new Array(
+			      "finisajTocBlat",
+			      "finisajGrilajBlat",
+			      "finisajFereastraBlat",
+			      "finisajSupraluminaBlat",
+			      "finisajPanouLateralBlat",
+			      "finisajBlatExtInt",
+			      "finisajTocExtInt",
+			      "finisajGrilajExtInt",
+			      "finisajFereastraExtInt",
+			      "finisajSupraluminaExtInt",
+			      "finisajPanouLateralExtInt");
+
 theForm.do_link = "/usametalica2k.do";
 
 theForm.afterpost = function afterpost() {
@@ -177,7 +191,17 @@ function edit_finisaj(fieldName) {
 	    this.theForm.post_request(req);
 	}
     };
-    window.openDialog("edit-finisaje.xul", "edit-finisaj", "chrome,modal", select_handler);
+
+    var current_id = theForm.values[fieldName];
+    var category = new BusinessCategory("http://www.kds.ro/erp/businessCategory/setum/usaMetalica/finisaje", theForm);
+    if(current_id != 0) {
+	// edit current object
+	category.edit_dlg(current_id, select_handler);
+    } else {
+	// add new object
+	category.addnew_dlg(select_handler);
+    }
+
 }
 
 

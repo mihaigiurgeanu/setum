@@ -201,4 +201,9 @@
     <modules:xulfile>edit-panoulateral.xul</modules:xulfile>
   </rdf:Description>
 
+
+  <!-- edit-finisaje -->
+  <rdf:Description rdf:about="http://www.kds.ro/erp/modules/setum/edit-finisaje">
+    <modules:xulfile>edit-finisaje.xul</modules:xulfile>
+  </rdf:Description>
 </rdf:RDF>

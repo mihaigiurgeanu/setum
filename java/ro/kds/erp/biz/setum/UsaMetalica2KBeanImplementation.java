@@ -42,7 +42,7 @@ import ro.kds.erp.biz.Products;
  * Created: Fri Nov 18 15:34:24 2005
  *
  * @author <a href="mailto:Mihai Giurgeanu@CRIMIRA"></a>
- * @version $Id: UsaMetalica2KBeanImplementation.java,v 1.15 2006/07/05 21:10:30 mihai Exp $
+ * @version $Id: UsaMetalica2KBeanImplementation.java,v 1.16 2006/07/06 07:17:43 mihai Exp $
  */
 public class UsaMetalica2KBeanImplementation 
     extends ro.kds.erp.biz.setum.basic.UsaMetalica2KBean {
@@ -517,7 +517,7 @@ public class UsaMetalica2KBeanImplementation
 
     /**
      * Add the value lists to the response. This method overrides the default
-     * implementation tha does nothing. It is called by different methods
+     * implementation that does nothing. It is called by different methods
      * that return data to be loaded in the form.
      */
     public void loadValueLists(ResponseBean r) {
@@ -807,6 +807,62 @@ public class UsaMetalica2KBeanImplementation
 		    r.addField("intFinisajPanouLateral", p.getDescription());
 		}
 		form.setIntFinisajPanouLateral(p.getDescription());
+	    }
+
+
+
+	    if(form.getExtFinisajBlatId().intValue() != 0) {
+		ProductLocal p;
+		p = ph.findByPrimaryKey(form.getExtFinisajBlatId());
+		if(r != null && form.getExtFinisajBlat().compareTo(p.getDescription()) != 0) {
+		    r.addField("intFinisajBlat", p.getDescription());
+		}		
+		form.setExtFinisajBlat(p.getDescription());
+	    }
+
+	    if(form.getExtFinisajTocId().intValue() != 0) {
+		ProductLocal p;
+		p = ph.findByPrimaryKey(form.getExtFinisajTocId());
+		if(r != null && form.getExtFinisajToc().compareTo(p.getDescription()) != 0) {
+		    r.addField("intFinisajToc", p.getDescription());
+		}
+		form.setExtFinisajToc(p.getDescription());
+	    }
+
+	    if(form.getExtFinisajGrilajId().intValue() != 0) {
+		ProductLocal p;
+		p = ph.findByPrimaryKey(form.getExtFinisajGrilajId());
+		if(r != null && form.getExtFinisajGrilaj().compareTo(p.getDescription()) != 0) {
+		    r.addField("intFinisajGrilaj", p.getDescription());
+		}
+		form.setExtFinisajGrilaj(p.getDescription());
+	    }
+
+	    if(form.getExtFinisajFereastraId().intValue() != 0) {
+		ProductLocal p;
+		p = ph.findByPrimaryKey(form.getExtFinisajFereastraId());
+		if(r != null && form.getExtFinisajFereastra().compareTo(p.getDescription()) != 0) {
+		    r.addField("intFinisajFerestra", p.getDescription());
+		}
+		form.setExtFinisajFereastra(p.getDescription());
+	    }
+
+	    if(form.getExtFinisajSupraluminaId().intValue() != 0) {
+		ProductLocal p;
+		p = ph.findByPrimaryKey(form.getExtFinisajSupraluminaId());
+		if(r != null && form.getExtFinisajSupralumina().compareTo(p.getDescription()) != 0) {
+		    r.addField("intFinisajSupralumina", p.getDescription());
+		}
+		form.setExtFinisajSupralumina(p.getDescription());
+	    }
+
+	    if(form.getExtFinisajPanouLateralId().intValue() != 0) {
+		ProductLocal p;
+		p = ph.findByPrimaryKey(form.getExtFinisajPanouLateralId());
+		if(r != null && form.getExtFinisajPanouLateral().compareTo(p.getDescription()) != 0) {
+		    r.addField("intFinisajPanouLateral", p.getDescription());
+		}
+		form.setExtFinisajPanouLateral(p.getDescription());
 	    }
 	    
 	} catch (Exception e) {

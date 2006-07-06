@@ -79,8 +79,10 @@ public class DataInit extends HttpServlet {
 	    addSub(sistemeCat, 9974, "Decupare sistem");
 
 
-
 	    CategoryLocal valueListsCategory = createCategory(9973, "Liste de valori");
+
+
+	    createCategory(9972, "Finisaje");
 
 
 	    addSub(sistemeCat, 10000, "Cheie");

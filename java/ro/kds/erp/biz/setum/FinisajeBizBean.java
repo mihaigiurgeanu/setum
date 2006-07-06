@@ -75,7 +75,7 @@ public class FinisajeBizBean extends FinisajeBean {
 	    ProductLocal p = getCurrentProduct();
 	    if(p == null) {
 		ProductLocalHome ph = getProductHome();
-		ph.create();
+		p = ph.create();
 		id = p.getId();
 		p.setCode(id.toString());
 
@@ -123,6 +123,24 @@ public class FinisajeBizBean extends FinisajeBean {
 	return r;
     }
 
+
+
+    /**
+     * Add the value lists to the response. This method overrides the default
+     * implementation that does nothing. It is called by different methods
+     * that return data to be loaded in the form.
+     */
+    public void loadValueLists(ResponseBean r) {
+
+
+	r.addValueList("zincare", ValueLists.makeStdValueList(11100));
+	r.addValueList("capitonare", ValueLists.makeStdValueList(11105));
+	r.addValueList("placare", ValueLists.makeStdValueList(11110));
+	r.addValueList("grundId", ValueLists.makeStdValueList(11115));
+	r.addValueList("vopsireTip", ValueLists.makeStdValueList(11120));
+	r.addValueList("ralStasId", ValueLists.makeStdValueList(11125));
+
+    }
 
     /**
      * Makes a new copy of this product.

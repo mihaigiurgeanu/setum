@@ -45,7 +45,7 @@ Argumentele primite la deschiderea dialogului:
 	<row>
 	  <label controls="placare" value="Placare:"/>
 	  <menulist id="placare">
-	    <menupopup id="placre-popup"/>
+	    <menupopup id="placare-popup"/>
 	  </menulist>
 	</row>
 	<row>
@@ -89,20 +89,25 @@ Argumentele primite la deschiderea dialogului:
 	     var theForm = new FormObject();
 	     
 	     theForm.do_link = "/edit-finisaje.do";
-	     theForm.text_fields = new Array();
-	     theForm.combo_fields = new Array();
+	     theForm.text_fields = new Array("ralOrder", "ralOrderValue");
+	     theForm.combo_fields = new Array("zincare", "capitonare", "placare",
+					      "grundId", "vopsireTip", "ralStasId");
 	     theForm.radio_fields = new Array();
 	     
 	     theForm.setupEventListeners();
 
+
+	     theForm.load_current();
+
+
 	     function doOk() {
-	     /*
-		 if(theForm.save()) {
+		 var req = theForm.get_request();
+		 req.add("command", "saveFormData");
+		 if(theForm.post_save_request(req)) {
 		     window.arguments[0].select(theForm.get_loaded_id());
 		     return true;
 		 }
 		 return false;
-	      */
 	     }
 	     
     ]]></script>

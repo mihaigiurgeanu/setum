@@ -107,4 +107,9 @@
     <jndi-name>UsiStdSelectionsHome</jndi-name>
   </jonas-ejb-ref>
 
+  <jonas-ejb-ref>
+    <ejb-ref-name>ejb/FinisajeHome</ejb-ref-name>
+    <jndi-name>FinisajeHome</jndi-name>
+  </jonas-ejb-ref>
+
 </jonas-web-app>
