@@ -22,7 +22,7 @@ public interface Finisaje extends EJBObject {
     public ResponseBean getLoadedPrimaryKey() throws RemoteException;
 
     public ResponseBean updateZincare(Integer newZincare) throws RemoteException;
-    public ResponseBean updateCapitonare(Integer newCapitonare) throws RemoteException;
+    public ResponseBean updateFurnir(Integer newFurnir) throws RemoteException;
     public ResponseBean updatePlacare(Integer newPlacare) throws RemoteException;
     public ResponseBean updateGrundId(Integer newGrundId) throws RemoteException;
     public ResponseBean updateVopsireTip(Integer newVopsireTip) throws RemoteException;
@@ -37,4 +37,6 @@ public interface Finisaje extends EJBObject {
     public ResponseBean updatePrice1(java.math.BigDecimal newPrice1) throws RemoteException;
 
 
+    public ResponseBean duplicate (
+    ) throws RemoteException;
 }

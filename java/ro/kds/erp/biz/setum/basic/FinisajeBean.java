@@ -280,13 +280,13 @@ public abstract class FinisajeBean
 	computeCalculatedFields(r);
 	return r;
     }
-    public ResponseBean updateCapitonare(Integer capitonare) {
+    public ResponseBean updateFurnir(Integer furnir) {
         ResponseBean r = new ResponseBean();
-	Integer oldVal = form.getCapitonare();
-	form.setCapitonare(capitonare);
+	Integer oldVal = form.getFurnir();
+	form.setFurnir(furnir);
 	r.addRecord();
-	r.addField("capitonare", capitonare); // for number format
-	Script script = TclFileScript.loadScript(getScriptPrefix() + ".capitonare");
+	r.addField("furnir", furnir); // for number format
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".furnir");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
@@ -298,7 +298,7 @@ public abstract class FinisajeBean
 		getFieldsFromScript(script, r); // add all the changed
 						// fields to the response also
 	   } catch (ScriptErrorException e) {
-	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the capitonare", e);
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the furnir", e);
            }
         }
 	computeCalculatedFields(r);
@@ -593,13 +593,47 @@ public abstract class FinisajeBean
 	return r;
     }
 
+    /**
+     * Generated implementation of the duplicate service. It will call
+     * the script ro.kds.erp.biz.setum.basic.Finisaje.duplicate
+     * to execute the request.
+     * 
+     * The <code>ResponseBean</code> to be returned will be automatically populated with the
+     * fields modified by the script and the changes will be automatically added to the
+     * form bean.
+     *
+     * @returns a <code>ResponseBean</code> containing the field values that were changed by
+     * the script and any of the fields added to it by the script.
+     * 
+     */
+    public ResponseBean duplicate (
+    ) {
+
+
+        ResponseBean r = new ResponseBean();
+        r.addRecord();
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".duplicate");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(FORM_VARNAME, form, FinisajeForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		addFieldsToScript(script);
+		script.run();
+                getFieldsFromScript(script, r);
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for service duplicate", e);
+           }
+        }
+	return r;
+    }
 
     /**
      * Get the fields stored internaly and adds them to the response.
      */
     protected void copyFieldsToResponse(ResponseBean r) {
 	r.addField("zincare", form.getZincare());
-	r.addField("capitonare", form.getCapitonare());
+	r.addField("furnir", form.getFurnir());
 	r.addField("placare", form.getPlacare());
 	r.addField("grundId", form.getGrundId());
 	r.addField("vopsireTip", form.getVopsireTip());
@@ -633,9 +667,9 @@ public abstract class FinisajeBean
             logger.log(BasicLevel.DEBUG, e);
         }
 	try {
-	    s.setVar("capitonare", form.getCapitonare(), Integer.class);
+	    s.setVar("furnir", form.getFurnir(), Integer.class);
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not set the value of field: capitonare from the script");
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: furnir from the script");
             logger.log(BasicLevel.DEBUG, e);
         }
 	try {
@@ -730,14 +764,14 @@ public abstract class FinisajeBean
             logger.log(BasicLevel.DEBUG, e);
         }
 	try {
-	    field = s.getVar("capitonare", Integer.class);
-	    if(!field.equals(form.getCapitonare())) {
-	        logger.log(BasicLevel.DEBUG, "Field capitonare modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
-	        form.setCapitonare((Integer)field);
-	        r.addField("capitonare", (Integer)field);
+	    field = s.getVar("furnir", Integer.class);
+	    if(!field.equals(form.getFurnir())) {
+	        logger.log(BasicLevel.DEBUG, "Field furnir modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setFurnir((Integer)field);
+	        r.addField("furnir", (Integer)field);
 	    }
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not get the value of field: capitonare from the script");
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: furnir from the script");
             logger.log(BasicLevel.DEBUG, e);
         }
 	try {

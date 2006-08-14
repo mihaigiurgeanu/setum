@@ -16,7 +16,7 @@ import ro.kds.erp.data.AttributeLocal;
 public class FinisajeForm implements Serializable {
         
     Integer zincare;
-    Integer capitonare;
+    Integer furnir;
     Integer placare;
     Integer grundId;
     Integer vopsireTip;
@@ -37,7 +37,7 @@ public class FinisajeForm implements Serializable {
 
 
 
-       this.capitonare = new Integer(0);
+       this.furnir = new Integer(0);
 
 
 
@@ -106,18 +106,18 @@ public class FinisajeForm implements Serializable {
 	}
     }
 
-    public void setCapitonare(Integer newCapitonare) {
-        this.capitonare = newCapitonare;
+    public void setFurnir(Integer newFurnir) {
+        this.furnir = newFurnir;
     }
 
-    public Integer getCapitonare() {
-        return capitonare;
+    public Integer getFurnir() {
+        return furnir;
     }
 
-    public void readCapitonare(Map attributes) {
-	AttributeLocal a = (AttributeLocal)attributes.get("capitonare");
+    public void readFurnir(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("furnir");
 	if(a != null) {
-	    this.setCapitonare(a.getIntValue());
+	    this.setFurnir(a.getIntValue());
 	}
     }
 
