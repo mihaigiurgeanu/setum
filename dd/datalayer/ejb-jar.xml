@@ -715,6 +715,29 @@
     </ejb-relation>
 
     <ejb-relation>
+      <description>An offer may be issued to a specific client</description>
+      <ejb-relation-name>Offer-Client</ejb-relation-name>
+      <ejb-relationship-role>
+	<description>The offer reffering a client</description>
+	<ejb-relationship-role-name>OffersIssuedToClient</ejb-relationship-role-name>
+	<multiplicity>Many</multiplicity>
+	<relationship-role-source>
+	  <ejb-name>OfferEJB</ejb-name>
+	</relationship-role-source>
+	<cmr-field>
+	  <cmr-field-name>client</cmr-field-name>
+	</cmr-field>
+      </ejb-relationship-role>
+      <ejb-relationship-role>
+	<ejb-relationship-role-name>ClientHavingOffer</ejb-relationship-role-name>
+	<multiplicity>One</multiplicity>
+	<relationship-role-source>
+	  <ejb-name>ClientEJB</ejb-name>
+	</relationship-role-source>
+      </ejb-relationship-role>
+    </ejb-relation>
+
+    <ejb-relation>
       <description>An attribute's value maybe another product</description>
       <ejb-relation-name>ProductAttribute</ejb-relation-name>
       <ejb-relationship-role>

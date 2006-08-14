@@ -121,6 +121,9 @@ public abstract class OfferBean implements EntityBean {
     public abstract Integer getCategory();
     public abstract void setCategory(Integer cat);
 
+    public abstract ClientLocal getClient();
+    public abstract void setClient(ClientLocal client);
+
     // Implementation of javax.ejb.EntityBean
 
     public void setEntityContext(EntityContext entityContext) throws EJBException, RemoteException {

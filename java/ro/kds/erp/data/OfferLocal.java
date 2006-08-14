@@ -134,4 +134,15 @@ public interface OfferLocal extends EJBLocalObject {
      * categories into different kinds of categories.
      */
     public void setCategory(Integer cat);
+
+    /**
+     * The client associated with this offer.
+     */
+    public ClientLocal getClient();
+
+    /**
+     * The client associated with this offer.
+     */
+    public void setClient(ClientLocal client);
+
 }
