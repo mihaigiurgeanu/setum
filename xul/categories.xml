@@ -141,6 +141,7 @@ function to call when the called module ends.
     <category:module rdf:resource="http://www.kds.ro/erp/modules/setum/edit-finisaje"/>
     <category:onnew>newFormData</category:onnew>
     <category:load>loadFormData</category:load>
+    <category:duplicate>duplicate</category:duplicate>
   </rdf:Description>
 
 </rdf:RDF>

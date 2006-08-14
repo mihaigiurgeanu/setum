@@ -177,9 +177,15 @@ function delete_option() {
     load_options();
 }
 
+// dialog editare sau duplicare, in functie de valoarea fieldDuplicateName
+function edit_or_dup_finisaj(fieldName, fieldDuplicateName) {
+    log("edit_or_dup_finisaj: " + fieldDuplicateName + " = " + theForm.values[fieldDuplicateName]);
+    edit_finisaj(fieldName, theForm.values[fieldDuplicateName] == "true");
+}
+
 
 // open dialog for editing finisaje
-function edit_finisaj(fieldName) {
+function edit_finisaj(fieldName, duplicate) {
     var select_handler = {
 	theForm: theForm,
 	fieldName: fieldName,
@@ -195,8 +201,12 @@ function edit_finisaj(fieldName) {
     var current_id = theForm.values[fieldName];
     var category = new BusinessCategory("http://www.kds.ro/erp/businessCategory/setum/usaMetalica/finisaje", theForm);
     if(current_id != 0) {
-	// edit current object
-	category.edit_dlg(current_id, select_handler);
+	if( duplicate ) {
+	    category.duplicate_dlg(current_id, select_handler);
+	} else {
+	    // edit current object
+	    category.edit_dlg(current_id, select_handler);
+	}
     } else {
 	// add new object
 	category.addnew_dlg(select_handler);

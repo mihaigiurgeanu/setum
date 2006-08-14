@@ -37,9 +37,9 @@ Argumentele primite la deschiderea dialogului:
 	  </menulist>
 	</row>
 	<row>
-	  <label controls="capitonare" value="Capitonare:"/>
-	  <menulist id="capitonare">
-	    <menupopup id="capitonare-popup"/>
+	  <label controls="furnir" value="Furnir:"/>
+	  <menulist id="furnir">
+	    <menupopup id="furnir-popup"/>
 	  </menulist>
 	</row>
 	<row>
@@ -90,7 +90,7 @@ Argumentele primite la deschiderea dialogului:
 	     
 	     theForm.do_link = "/edit-finisaje.do";
 	     theForm.text_fields = new Array("ralOrder", "ralOrderValue");
-	     theForm.combo_fields = new Array("zincare", "capitonare", "placare",
+	     theForm.combo_fields = new Array("zincare", "furnir", "placare",
 					      "grundId", "vopsireTip", "ralStasId");
 	     theForm.radio_fields = new Array();
 	     
