@@ -8,7 +8,7 @@
     <type>Integer</type>
   </field>
   <field>
-    <name>capitonare</name>
+    <name>furnir</name>
     <type>Integer</type>
   </field>
   <field>
@@ -62,7 +62,10 @@
   </field>
 
   <services>
-    
+    <method returnType="standard">
+      <name>duplicate</name>
+      <params/>
+    </method>
   </services>
 </class>
 
