@@ -45,6 +45,9 @@ function BusinessCategory(category, theForm) {
   // this category
   this.onload_predicate = rdfService.GetResource("http://www.kds.ro/erp/businessCategory#load");
 
+  // Points to the command name to be sent to the service to duplicate the currently loaded object
+  this.duplicate_predicate = rdfService.GetResource("http://www.kds.ro/erp/businessCategory#duplicate");
+
   // The predicate used in modules.rdf to point to the xulfile containing the definition
   // of the object to be opened and edited
   this.xulfile_predicate = rdfService.GetResource("http://www.kds.ro/erp/modules/definition#xulfile");
@@ -154,6 +157,69 @@ function BusinessCategory(category, theForm) {
       req.add("param0", objectId); /* send parameter for both old style load
 				    * and general style call procedures.
 				    */
+      req.execute(); // just send the addnew command; ignore the response
+      
+    }
+
+    var module_res =get_resource(categories_ds, 
+				 this.category, 
+				 this.module_predicate);
+    
+    window.openDialog(get_literal(modules_ds, 
+				  module_res, this.xulfile_predicate),
+		      get_literal(modules_ds, 
+				  module_res, this.xulfile_predicate),
+		      "chrome, resizable, scrollbars", select_handler);
+  };
+
+
+
+  // Duplicates the current object and opens a new dialog window for editing 
+  // its data.
+  // It first sends a "load" command to the service for this category with one
+  // param indicating the id of the object to be edited. After this, calls
+  // "duplicate" method. Then opens the dialog associated with this business category.
+  // After closing the dialog with OK button, the dialog calls the
+  // select_handler.select(id) method. You should provide the select_handler object.
+  //
+  // The select_handler can be something like this:
+  // select_handler = {
+  //	theForm: theForm,
+  //	select: function update_command(id) {
+  //		var req = this.theForm.get_request();
+  //		req.add("command", "change");
+  //		req.add("field", <field name>);
+  //		req.add("value", id);
+  //		this.theForm.post_request(req);
+  //	}
+  // }
+  //
+  // Calling change command will refresh the calling form data.
+  this.duplicate_dlg = function open_duplicate_dialog(objectId, select_handler) {
+
+    if(categories_ds.hasArcOut(this.category, this.onload_predicate)) {
+      var req = new HTTPDataRequest(get_literal(categories_ds,
+						this.category,
+						this.service_predicate));
+      req.add("command", get_literal(categories_ds,
+				     this.category,
+				     this.onload_predicate));
+      req.add("id", objectId);
+      req.add("param0", objectId); /* send parameter for both old style load
+				    * and general style call procedures.
+				    */
+      req.execute(); // just send the addnew command; ignore the response
+      
+    }
+
+
+    if(categories_ds.hasArcOut(this.category, this.duplicate_predicate)) {
+      var req = new HTTPDataRequest(get_literal(categories_ds,
+						this.category,
+						this.service_predicate));
+      req.add("command", get_literal(categories_ds,
+				     this.category,
+				     this.duplicate_predicate));
       req.execute(); // just send the addnew command; ignore the response
       
     }

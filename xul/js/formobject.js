@@ -282,7 +282,7 @@ function update_form(record) {
     for(i=0; i<this.cb_fields.length; i++) {
 	update_cb(this.cb_fields[i], record);
 	if(record[this.cb_fields[i]] != undefined) {
-	    this.values[this.cb_fields[i]] = record[this.text_fields[i]];
+	    this.values[this.cb_fields[i]] = record[this.cb_fields[i]];
 	}
     }
 }
