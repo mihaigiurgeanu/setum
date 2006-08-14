@@ -5,8 +5,8 @@ set description "Finisaje:"
 if { $zincare == 1 } {
     set description "$description Zincare"
 }
-if { $capitonare == 1 } {
-    set description "$description Capitonare"
+if { $furnir == 1 } {
+    set description "$description Furnir"
 }
 if { $placare == 1 } {
     set description "$description Placare"

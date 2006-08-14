@@ -103,3 +103,54 @@ if {$montareSistem == 2} {
 
     set sellPrice [expr $sellPrice + $val_tipBroascaBeneficiar + $val_tipCilindruBeneficiar + $val_tipSildBeneficiar + $val_tipYallaBeneficiar + $val_tipBaraAntipanicaBeneficiar + $val_broasca + $val_cilindru + $val_copiatCheie + $val_rozeta + $val_maner + $val_yalla1 + $val_yalla2 + $val_baraAntipanica + $val_selectorOrdine + $val_amortizor + $val_manerSemicilindru + $val_alteSisteme1 + $val_alteSisteme2]
 }
+
+
+if { $finisajTocBlat } {
+    set intFinisajTocId $intFinisajBlatId
+    set intFinisajToc $intFinisajBlat
+}
+
+if { $finisajGrilajBlat } {
+    set intFinisajGrilajId  $intFinisajBlatId
+    set intFinisajGrilaj $intFinisajBlat
+}
+
+if { $finisajFereastraBlat } {
+    set intFinisajFereastraId $intFinisajBlatId
+    set intFinisajFereastra $intFinisajBlat
+}
+
+if { $finisajSupraluminaBlat } {
+    set intFinisajSupraluminaId $intFinisajBlatId
+    set intFinisajSupralumina $intFinisajBlat
+}
+
+if { $finisajPanouLateralBlat } {
+    set intFinisajPanouLateralId $intFinisajBlatId
+    set intFinisajPanouLateral $intFinisajBlat
+}
+
+if { $finisajBlatExtInt } {
+    set extFinisajBlatId $intFinisajBlatId
+    set extFinisajBlat $intFinisajBlat
+}
+if { $finisajTocExtInt } {
+    set extFinisajTocId $intFinisajTocId
+    set extFinisajToc $intFinisajToc
+}
+if { $finisajGrilajExtInt } {
+    set extFinisajGrilajId $intFinisajGrilajId
+    set extFinisajGrilaj $intFinisajGrilaj
+}
+if { $finisajFereastraExtInt } {
+    set extFinisajFereastraId $intFinisajFereastraId
+    set extFinisajFereastra $intFinisajFereastra
+}
+if { $finisajSupraluminaExtInt } {
+    set extFinisajSupraluminaId $intFinisajSupraluminaId
+    set extFinisajSupralumina $intFinisajSupralumina
+}
+if { $finisajPanouLateralExtInt } {
+    set extFinisajPanouLateralId $intFinisajPanouLateralId
+    set extFinisajPanouLateral $intFinisajPanouLateral
+}
