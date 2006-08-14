@@ -1149,10 +1149,6 @@
         <method-name>saveFormData</method-name>
       </method>
       <method>
-        <ejb-name>UsiMetalice2KEJB</ejb-name>
-        <method-name>saveFormData</method-name>
-      </method>
-      <method>
         <description>All methods of StandardOfferEJB</description>
         <ejb-name>StandardOfferEJB</ejb-name>
         <method-name>saveFormData</method-name>
