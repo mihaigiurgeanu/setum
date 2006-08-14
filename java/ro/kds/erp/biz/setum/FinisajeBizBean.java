@@ -42,7 +42,7 @@ public class FinisajeBizBean extends FinisajeBean {
 
 	    Map amap = p.getAttributesMap();
 	    form.readZincare(amap);
-	    form.readCapitonare(amap);
+	    form.readFurnir(amap);
 	    form.readPlacare(amap);
 	    form.readGrundId(amap);
 	    form.readVopsireTip(amap);
@@ -99,7 +99,7 @@ public class FinisajeBizBean extends FinisajeBean {
 	    AttributeLocalHome ah = getAttributeHome();
 	    Collection attribs = new ArrayList();
 	    attribs.add(ah.create("zincare", form.getZincare()));
-	    attribs.add(ah.create("capitonare", form.getCapitonare()));
+	    attribs.add(ah.create("furnir", form.getFurnir()));
 	    attribs.add(ah.create("placare", form.getPlacare()));
 	    attribs.add(ah.create("grundId", form.getGrundId()));
 	    attribs.add(ah.create("vopsireTip", form.getVopsireTip()));
@@ -134,7 +134,7 @@ public class FinisajeBizBean extends FinisajeBean {
 
 
 	r.addValueList("zincare", ValueLists.makeStdValueList(11100));
-	r.addValueList("capitonare", ValueLists.makeStdValueList(11105));
+	r.addValueList("furnir", ValueLists.makeStdValueList(11107));
 	r.addValueList("placare", ValueLists.makeStdValueList(11110));
 	r.addValueList("grundId", ValueLists.makeStdValueList(11115));
 	r.addValueList("vopsireTip", ValueLists.makeStdValueList(11120));
@@ -143,16 +143,15 @@ public class FinisajeBizBean extends FinisajeBean {
     }
 
     /**
-     * Makes a new copy of this product.
-     * Before calling this method, load the product you want to duplicate.
-     * After calling this method, the loaded product becomes the new copy of the
-     * previously loaded product.
-     * @returns the id of the new product
+     * Makes a new copy of this product. It calls the default script (if exits) for duplicate method and
+     * then makes the current id null. This will make that the currently loaded values to refer to a new
+     * object to be inserted in the database.
+     * Before calling this method, load first the object you want to duplicate.
      */
-    public Integer duplicate() {
+    public ResponseBean duplicate() {
+	ResponseBean r = super.duplicate();
 	id = null;
-	saveFormData();
-	return id;
+	return r;
     }
 
 
@@ -177,6 +176,7 @@ public class FinisajeBizBean extends FinisajeBean {
 
 	return p;
     }
+
 
 
     /**
@@ -243,4 +243,5 @@ public class FinisajeBizBean extends FinisajeBean {
     ProductLocalHome pHome;
     CategoryLocalHome cHome;
     AttributeLocalHome aHome;
+
 }

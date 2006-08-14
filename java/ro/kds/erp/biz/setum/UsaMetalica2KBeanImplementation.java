@@ -42,7 +42,7 @@ import ro.kds.erp.biz.Products;
  * Created: Fri Nov 18 15:34:24 2005
  *
  * @author <a href="mailto:Mihai Giurgeanu@CRIMIRA"></a>
- * @version $Id: UsaMetalica2KBeanImplementation.java,v 1.16 2006/07/06 07:17:43 mihai Exp $
+ * @version $Id: UsaMetalica2KBeanImplementation.java,v 1.17 2006/08/14 19:42:50 mihai Exp $
  */
 public class UsaMetalica2KBeanImplementation 
     extends ro.kds.erp.biz.setum.basic.UsaMetalica2KBean {
@@ -501,16 +501,17 @@ public class UsaMetalica2KBeanImplementation
 
 	Boolean trueObj = new Boolean(true);
 
-	form.setFinisajTocBlat(trueObj);
-	form.setFinisajGrilajBlat(trueObj);
-	form.setFinisajFereastraBlat(trueObj);
-	form.setFinisajSupraluminaBlat(trueObj);
-	form.setFinisajPanouLateralBlat(trueObj);
-	form.setFinisajTocExtInt(trueObj);
-	form.setFinisajGrilajExtInt(trueObj);
-	form.setFinisajFereastraExtInt(trueObj);
-	form.setFinisajSupraluminaExtInt(trueObj);
-	form.setFinisajPanouLateralExtInt(trueObj);
+// 	form.setFinisajTocBlat(trueObj);
+// 	form.setFinisajGrilajBlat(trueObj);
+// 	form.setFinisajFereastraBlat(trueObj);
+// 	form.setFinisajSupraluminaBlat(trueObj);
+// 	form.setFinisajPanouLateralBlat(trueObj);
+// 	form.setFinisajBlatExtInt(trueObj);
+// 	form.setFinisajTocExtInt(trueObj);
+// 	form.setFinisajGrilajExtInt(trueObj);
+// 	form.setFinisajFereastraExtInt(trueObj);
+// 	form.setFinisajSupraluminaExtInt(trueObj);
+// 	form.setFinisajPanouLateralExtInt(trueObj);
 	    
     }
 
@@ -738,8 +739,8 @@ public class UsaMetalica2KBeanImplementation
     }
 
     public ResponseBean computeCalculatedFields(ResponseBean r) {
-	r = super.computeCalculatedFields(r);
 
+	r = super.computeCalculatedFields(r);
 	load_finisaje(r);
 
 	return r;
@@ -786,7 +787,7 @@ public class UsaMetalica2KBeanImplementation
 		ProductLocal p;
 		p = ph.findByPrimaryKey(form.getIntFinisajFereastraId());
 		if(r != null && form.getIntFinisajFereastra().compareTo(p.getDescription()) != 0) {
-		    r.addField("intFinisajFerestra", p.getDescription());
+		    r.addField("intFinisajFereastra", p.getDescription());
 		}
 		form.setIntFinisajFereastra(p.getDescription());
 	    }
@@ -815,7 +816,7 @@ public class UsaMetalica2KBeanImplementation
 		ProductLocal p;
 		p = ph.findByPrimaryKey(form.getExtFinisajBlatId());
 		if(r != null && form.getExtFinisajBlat().compareTo(p.getDescription()) != 0) {
-		    r.addField("intFinisajBlat", p.getDescription());
+		    r.addField("extFinisajBlat", p.getDescription());
 		}		
 		form.setExtFinisajBlat(p.getDescription());
 	    }
@@ -824,7 +825,7 @@ public class UsaMetalica2KBeanImplementation
 		ProductLocal p;
 		p = ph.findByPrimaryKey(form.getExtFinisajTocId());
 		if(r != null && form.getExtFinisajToc().compareTo(p.getDescription()) != 0) {
-		    r.addField("intFinisajToc", p.getDescription());
+		    r.addField("extFinisajToc", p.getDescription());
 		}
 		form.setExtFinisajToc(p.getDescription());
 	    }
@@ -833,7 +834,7 @@ public class UsaMetalica2KBeanImplementation
 		ProductLocal p;
 		p = ph.findByPrimaryKey(form.getExtFinisajGrilajId());
 		if(r != null && form.getExtFinisajGrilaj().compareTo(p.getDescription()) != 0) {
-		    r.addField("intFinisajGrilaj", p.getDescription());
+		    r.addField("extFinisajGrilaj", p.getDescription());
 		}
 		form.setExtFinisajGrilaj(p.getDescription());
 	    }
@@ -842,7 +843,7 @@ public class UsaMetalica2KBeanImplementation
 		ProductLocal p;
 		p = ph.findByPrimaryKey(form.getExtFinisajFereastraId());
 		if(r != null && form.getExtFinisajFereastra().compareTo(p.getDescription()) != 0) {
-		    r.addField("intFinisajFerestra", p.getDescription());
+		    r.addField("extFinisajFereastra", p.getDescription());
 		}
 		form.setExtFinisajFereastra(p.getDescription());
 	    }
@@ -851,7 +852,7 @@ public class UsaMetalica2KBeanImplementation
 		ProductLocal p;
 		p = ph.findByPrimaryKey(form.getExtFinisajSupraluminaId());
 		if(r != null && form.getExtFinisajSupralumina().compareTo(p.getDescription()) != 0) {
-		    r.addField("intFinisajSupralumina", p.getDescription());
+		    r.addField("extFinisajSupralumina", p.getDescription());
 		}
 		form.setExtFinisajSupralumina(p.getDescription());
 	    }
@@ -860,7 +861,7 @@ public class UsaMetalica2KBeanImplementation
 		ProductLocal p;
 		p = ph.findByPrimaryKey(form.getExtFinisajPanouLateralId());
 		if(r != null && form.getExtFinisajPanouLateral().compareTo(p.getDescription()) != 0) {
-		    r.addField("intFinisajPanouLateral", p.getDescription());
+		    r.addField("extFinisajPanouLateral", p.getDescription());
 		}
 		form.setExtFinisajPanouLateral(p.getDescription());
 	    }
