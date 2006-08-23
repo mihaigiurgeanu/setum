@@ -28,6 +28,14 @@
     <type>Integer</type>
   </field>
   <field>
+    <name>clientId</name>
+    <type>Integer</type>
+  </field>
+  <field>
+    <name>clientName</name>
+    <type>String</type>
+  </field>
+  <field>
     <name>name</name>
     <type>String</type>
   </field>

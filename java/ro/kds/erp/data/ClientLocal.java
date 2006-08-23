@@ -12,7 +12,7 @@ import java.util.Collection;
  * Created: Tue Jan 17 04:20:56 2006
  *
  * @author <a href="mailto:mihai@cris.kds.ro">Mihai Giurgeanu</a>
- * @version $Id: ClientLocal.java,v 1.1 2006/01/18 04:26:10 mihai Exp $
+ * @version $Id: ClientLocal.java,v 1.2 2006/08/23 03:50:06 mihai Exp $
  */
 
 public interface ClientLocal extends EJBLocalObject {
@@ -30,6 +30,11 @@ public interface ClientLocal extends EJBLocalObject {
 
     public String getCompanyName();
     public void setCompanyName(String compayName);
+
+    /**
+     * Convenience method to build the name of the client
+     */
+    public String getName();
 
     public String getAddress();
     public void setAddress(String address);

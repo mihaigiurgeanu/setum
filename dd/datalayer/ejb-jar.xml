@@ -424,6 +424,14 @@
 	</query-method>
 	<ejb-ql>SELECT OBJECT(c) FROM Client AS c WHERE c.isCompany=?1 ORDER BY c.companyName, c.lastName, c.firstName</ejb-ql>
       </query>
+      <query>
+	<description>Selects all clients</description>
+	<query-method>
+	  <method-name>findAll</method-name>
+	  <method-params/>
+	</query-method>
+	<ejb-ql>SELECT OBJECT(c) FROM Client AS c ORDER by c.companyName, c.lastName, c.firstName</ejb-ql>
+      </query>
     </entity>
 
 

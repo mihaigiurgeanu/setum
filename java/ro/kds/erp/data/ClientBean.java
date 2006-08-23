@@ -164,4 +164,17 @@ public abstract class ClientBean implements EntityBean {
     public abstract Collection getContacts();
     public abstract void setContacts(Collection contacts);
 
+
+
+    /**
+     * Convenience method to build the name of the client
+     */
+    public String getName() {
+	if(getIsCompany()) {
+	    return getCompanyName();
+	} else {
+	    return getFirstName() + " " + getLastName();
+	}
+    }
+
 } // ClientBean

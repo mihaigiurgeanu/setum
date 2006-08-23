@@ -30,6 +30,7 @@ Data-entry form for general purpose offers.
     <command id="command-save-subform" oncommand="save_item()" />
     <command id="edit-product" oncommand="edit_product()" />
     <command id="remove-line" oncommand="remove_item();" />
+    <command id="select-client-command" oncommand="select_client();" />
   </commandset>
 
   <popupset>
@@ -133,6 +134,13 @@ Data-entry form for general purpose offers.
 		  </row>
 		</rows>
 	      </grid>
+	    </row>
+	    <row>
+	      <label control="clientName" value="Client:"/>
+	      <hbox>
+		<textbox id="clientName" flex="1"/>
+		<button label="..." command="select-client-command"/>
+	      </hbox>
 	    </row>
 	    <row>
 	      <label control="name" value="Nume:"/>

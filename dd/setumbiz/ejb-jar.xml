@@ -711,6 +711,13 @@
         <local>ro.kds.erp.data.OfferItemLocal</local>
         <ejb-link>datalayer.jar#OfferItemEJB</ejb-link>
       </ejb-local-ref>
+      <ejb-local-ref>
+	<ejb-ref-name>ejb/ClientHome</ejb-ref-name>
+	<ejb-ref-type>Entity</ejb-ref-type>
+	<local-home>ro.kds.erp.data.ClientLocalHome</local-home>
+	<local>ro.kds.erp.data.ClientLocal</local>
+	<ejb-link>datalayer.jar#ClientEJB</ejb-link>
+      </ejb-local-ref>
     </session>
 
 

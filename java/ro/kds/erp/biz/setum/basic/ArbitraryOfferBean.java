@@ -400,6 +400,54 @@ public abstract class ArbitraryOfferBean
 	computeCalculatedFields(r);
 	return r;
     }
+    public ResponseBean updateClientId(Integer clientId) {
+        ResponseBean r = new ResponseBean();
+	Integer oldVal = form.getClientId();
+	form.setClientId(clientId);
+	r.addRecord();
+	r.addField("clientId", clientId); // for number format
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".clientId");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
+		script.setVar(FORM_VARNAME, form, ArbitraryOfferForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the clientId", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
+    public ResponseBean updateClientName(String clientName) {
+        ResponseBean r = new ResponseBean();
+	String oldVal = form.getClientName();
+	form.setClientName(clientName);
+	r.addRecord();
+	r.addField("clientName", clientName); // for number format
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".clientName");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
+		script.setVar(FORM_VARNAME, form, ArbitraryOfferForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the clientName", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
     public ResponseBean updateName(String name) {
         ResponseBean r = new ResponseBean();
 	String oldVal = form.getName();
@@ -748,6 +796,8 @@ public abstract class ArbitraryOfferBean
 	r.addField("dateTo", form.getDateTo());
 	r.addField("discontinued", form.getDiscontinued());
 	r.addField("period", form.getPeriod());
+	r.addField("clientId", form.getClientId());
+	r.addField("clientName", form.getClientName());
 	r.addField("name", form.getName());
 	r.addField("description", form.getDescription());
 	r.addField("comment", form.getComment());
@@ -810,6 +860,18 @@ public abstract class ArbitraryOfferBean
 	    s.setVar("period", form.getPeriod(), Integer.class);
 	} catch (ScriptErrorException e) {
 	    logger.log(BasicLevel.WARN, "Can not set the value of field: period from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    s.setVar("clientId", form.getClientId(), Integer.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: clientId from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    s.setVar("clientName", form.getClientName(), String.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: clientName from the script");
             logger.log(BasicLevel.DEBUG, e);
         }
 	try {
@@ -968,6 +1030,28 @@ public abstract class ArbitraryOfferBean
 	    }
 	} catch (ScriptErrorException e) {
 	    logger.log(BasicLevel.WARN, "Can not get the value of field: period from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    field = s.getVar("clientId", Integer.class);
+	    if(!field.equals(form.getClientId())) {
+	        logger.log(BasicLevel.DEBUG, "Field clientId modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setClientId((Integer)field);
+	        r.addField("clientId", (Integer)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: clientId from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    field = s.getVar("clientName", String.class);
+	    if(!field.equals(form.getClientName())) {
+	        logger.log(BasicLevel.DEBUG, "Field clientName modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setClientName((String)field);
+	        r.addField("clientName", (String)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: clientName from the script");
             logger.log(BasicLevel.DEBUG, e);
         }
 	try {

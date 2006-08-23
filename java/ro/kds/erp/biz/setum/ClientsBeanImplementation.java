@@ -27,7 +27,7 @@ import javax.ejb.RemoveException;
  * Created: Tue Jan 17 10:40:18 2006
  *
  * @author <a href="mailto:mihai@cris.kds.ro">Mihai Giurgeanu</a>
- * @version $Id: ClientsBeanImplementation.java,v 1.2 2006/01/18 09:57:57 mihai Exp $
+ * @version $Id: ClientsBeanImplementation.java,v 1.3 2006/08/23 03:50:02 mihai Exp $
  */
 public class ClientsBeanImplementation extends ClientsBean {
 
@@ -172,14 +172,32 @@ public class ClientsBeanImplementation extends ClientsBean {
 	    
 	    ClientLocalHome clh = (ClientLocalHome)PortableRemoteObject.narrow
 		(env.lookup("ejb/ClientHome"), ClientLocalHome.class);
-	    Collection clients = 
-		clh.findByCompanyFlag(isCompany.intValue()==0?false:true);
+
+	    Collection clients;
+	    switch(isCompany.intValue()) {
+	    case 0:
+		// select only persons
+		clients = clh.findByCompanyFlag(false);
+		break;
+	    case 1:
+		// selct only companies
+		clients = clh.findByCompanyFlag(true);
+	    case -1:
+		// select all
+		clients = clh.findAll();
+		break;
+	    default:
+		logger.log(BasicLevel.WARN, "Unknown value for isCompany flag: " + isCompany);
+		clients = clh.findAll();
+		break;
+	    }
 
 	    r = new ResponseBean();
 	    for(Iterator i = clients.iterator(); i.hasNext(); ) {
 		ClientLocal c = (ClientLocal)i.next();
 		r.addRecord();
 		r.addField("listing.id", c.getId());
+		r.addField("listing.name", c.getName());
 		r.addField("listing.companyName", c.getCompanyName());
 		r.addField("listing.firstName", c.getFirstName());
 		r.addField("listing.lastName", c.getLastName());
@@ -198,6 +216,8 @@ public class ClientsBeanImplementation extends ClientsBean {
 
 	return r;
     }
+
+
 
     /**
      * Gets the list of contacts for the current client.

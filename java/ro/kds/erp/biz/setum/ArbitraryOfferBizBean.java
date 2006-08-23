@@ -29,6 +29,8 @@ import ro.kds.erp.biz.Preferences;
 import ro.kds.erp.biz.SequenceHome;
 import ro.kds.erp.biz.Sequence;
 import ro.kds.erp.biz.ResponseBean;
+import ro.kds.erp.data.ClientLocalHome;
+import ro.kds.erp.data.ClientLocal;
 
 /**
  * Specific implemetation of business rules for ArbitraryOfferEJB.
@@ -145,7 +147,12 @@ public class ArbitraryOfferBizBean extends ArbitraryOfferBean {
 	    int period = (int)(form.getDateFrom().getTime() -
 			       form.getDateTo().getTime()) / (1000*3600*24);
 	    form.setPeriod(new Integer(period));
-	    
+
+	    if(offer.getClient() != null) {
+		form.setClientId(offer.getClient().getId());
+		form.setClientName(offer.getClient().getName());
+	    }
+
 	    form.setName(offer.getName());
 	    form.setDescription(offer.getDescription());
 	    form.setComment(offer.getComment());
@@ -189,6 +196,21 @@ public class ArbitraryOfferBizBean extends ArbitraryOfferBean {
 	    offer.setDateFrom(form.getDateFrom());
 	    offer.setDateTo(form.getDateTo());
 	    offer.setDiscontinued(form.getDiscontinued());
+
+	    if(form.getClientId() != null && form.getClientId().intValue() != 0) {
+		try {
+		    ClientLocalHome ch = (ClientLocalHome)PortableRemoteObject.
+			narrow(env.lookup("ejb/ClientHome"), ClientLocalHome.class);
+		    ClientLocal client = ch.findByPrimaryKey(form.getClientId());
+		    offer.setClient(client);
+		} catch (Exception e) {
+		    logger.log(BasicLevel.WARN, "Relation not set with client id " + form.getClientId());
+		    logger.log(BasicLevel.DEBUG, e);
+		}
+	    } else {
+		offer.setClient(null);
+	    }
+
 	    offer.setName(form.getName());
 	    offer.setDescription(form.getDescription());
 	    offer.setComment(form.getComment());
@@ -404,7 +426,37 @@ public class ArbitraryOfferBizBean extends ArbitraryOfferBean {
 	
 	return r;
     }
-    
+
+    public ResponseBean updateClientId(Integer clientId) {
+	ResponseBean r;
+	if(clientId != null && clientId.intValue() != 0) {
+	    try {
+		InitialContext ic = new InitialContext();
+		Context env = (Context)ic.lookup("java:comp/env");
+		ClientLocalHome ch = (ClientLocalHome)PortableRemoteObject.
+		    narrow(env.lookup("ejb/ClientHome"), ClientLocalHome.class);
+		ClientLocal client = ch.findByPrimaryKey(clientId);
+		form.setClientId(clientId);
+		form.setClientName(client.getName());
+		r = new ResponseBean();
+		r.addRecord();
+		r.addField("clientName", client.getName());
+	    } catch (Exception e) {
+		logger.log(BasicLevel.ERROR, 
+			   "Can not get the client info for client id: " + clientId);
+		logger.log(BasicLevel.DEBUG, e);
+		r = ResponseBean.ERR_UNEXPECTED;
+	    }
+	} else {
+	    form.setClientId(new Integer(0));
+	    form.setClientName("");
+	    r = new ResponseBean();
+	    r.addRecord();
+	    r.addField("clientName", "");
+	}
+	return r;
+    }
+	    
 
     /**
      * Adding a new item on an offer.

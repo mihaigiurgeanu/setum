@@ -27,6 +27,8 @@ public interface ArbitraryOffer extends EJBObject {
     public ResponseBean updateDateTo(java.util.Date newDateTo) throws RemoteException;
     public ResponseBean updateDiscontinued(Boolean newDiscontinued) throws RemoteException;
     public ResponseBean updatePeriod(Integer newPeriod) throws RemoteException;
+    public ResponseBean updateClientId(Integer newClientId) throws RemoteException;
+    public ResponseBean updateClientName(String newClientName) throws RemoteException;
     public ResponseBean updateName(String newName) throws RemoteException;
     public ResponseBean updateDescription(String newDescription) throws RemoteException;
     public ResponseBean updateComment(String newComment) throws RemoteException;

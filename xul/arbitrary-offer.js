@@ -112,7 +112,6 @@ function edit_product() {
 	.edit_dlg(crtItem()['productId'], select_handler);
 }
 
-
 // reload item data for the given product
 function popup_new_item(categoryURI) {
     theForm.save();
@@ -133,11 +132,28 @@ function popup_new_item(categoryURI) {
 }
 
 
+function select_client() {
+    var select_handler = {
+	theForm: theForm,
+	select: function update_client(clientId) {
+	    var req = this.theForm.get_request();
+	    req.add("command", "change");
+	    req.add("field", "clientId");
+	    req.add("value", clientId);
+	    this.theForm.post_request(req);
+	}
+    };
+    window.openDialog("select-client.xul", "select-client", "chrome", select_handler);
+}
+
+
+
 
 // Global variable theForm that will be used by event handlers
 var theForm = new FormObject();
 theForm.text_fields = new Array("no", "docDate", "dateFrom", "dateTo", 
-				"period", "name", "description", "comment",
+				"period", "clientName", "name", 
+				"description", "comment",
 				"price", "relativeGain", "absoluteGain",
 				"productCategory", "productCode",
 				"productName", "sellPrice", "entryPrice");

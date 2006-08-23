@@ -21,6 +21,8 @@ public class ArbitraryOfferForm implements Serializable {
     java.util.Date dateTo;
     Boolean discontinued;
     Integer period;
+    Integer clientId;
+    String clientName;
     String name;
     String description;
     String comment;
@@ -63,6 +65,14 @@ public class ArbitraryOfferForm implements Serializable {
 
 
        this.period = new Integer(0);
+
+
+
+       this.clientId = new Integer(0);
+
+
+
+       this.clientName = "";
 
 
 
@@ -193,6 +203,36 @@ public class ArbitraryOfferForm implements Serializable {
 	AttributeLocal a = (AttributeLocal)attributes.get("period");
 	if(a != null) {
 	    this.setPeriod(a.getIntValue());
+	}
+    }
+
+    public void setClientId(Integer newClientId) {
+        this.clientId = newClientId;
+    }
+
+    public Integer getClientId() {
+        return clientId;
+    }
+
+    public void readClientId(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("clientId");
+	if(a != null) {
+	    this.setClientId(a.getIntValue());
+	}
+    }
+
+    public void setClientName(String newClientName) {
+        this.clientName = newClientName;
+    }
+
+    public String getClientName() {
+        return clientName;
+    }
+
+    public void readClientName(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("clientName");
+	if(a != null) {
+	    this.setClientName(a.getStringValue());
 	}
     }
 
