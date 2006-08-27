@@ -466,14 +466,16 @@ windows.arguments[0].select(productId)
 	    <hbox flex="1">
 	      <spacer style="width:4em;"/>
 	      <vbox>
+
+		<!-- Sistemele pot fi atat setum cat si beneficiar in acelasi timp
 		<radiogroup id="sistemSetumSauBeneficiar">
 		  <radio id="sistemSetumSauBeneficiar.1" 
 			 label="Sisteme Setum" value="1"/>
+		-->
 
 
 
-
-
+		  <label value="Sisteme SETUM"/>
 		  <groupbox>
 		    <grid>
 		      <rows>
@@ -624,11 +626,11 @@ windows.arguments[0].select(productId)
 		  </groupbox>
 
 
-
+		  <!-- Sistemele pot fi atat SETUM cat si beneficiar in acelasi timp
 		  <radio id="sistemSetumSauBeneficiar.2"
 			 label="Sisteme Beneficiar" value="2"/>
-
-
+		  -->
+		  <label value="Sisteme beneficiar"/>
 		  <groupbox>
 		    <grid>
 		      <rows>
@@ -706,8 +708,9 @@ windows.arguments[0].select(productId)
 		      </rows>
 		    </grid>
 		  </groupbox>
-
+		<!-- Sistemele pot fi setum si beneficiar in acelasi timp  
 		</radiogroup>
+		-->
 
 	      </vbox>
 
