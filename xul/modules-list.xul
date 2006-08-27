@@ -13,6 +13,8 @@
     <command id="open-jsconsole" oncommand="open_jsconsole()"/>
   </commandset>
 
+  <script src="js/logging.js"/>
+
   <script language="JavaScript">
     <![CDATA[
 	       
@@ -20,8 +22,13 @@
 		 var tree = document.getElementById("appmodules");
 		 var view = tree.view;
 		 var pannel = document.getElementById("apppannel");
+		 if(tree.columns) {
+		     pannel.setAttribute("src", view.getCellText(tree.currentIndex, 
+								 tree.columns.getNamedColumn("xulfile")));
+		 } else {
 		 
-		 pannel.setAttribute("src", view.getCellText(tree.currentIndex, "xulfile"));
+		     pannel.setAttribute("src", view.getCellText(tree.currentIndex, "xulfile"));
+		 }
 		 
 	     }
 
@@ -49,6 +56,7 @@
 	  onselect="show_module();">
       <treecols>
 	<treecol id="modulename" label="Module" primary="true" flex="1"/>
+	<splitter class="tree-splitter"/>
 	<treecol id="xulfile" label="File" hidden="true"/>
       </treecols>
       
