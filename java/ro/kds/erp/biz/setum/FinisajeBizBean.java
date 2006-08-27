@@ -20,6 +20,7 @@ import java.util.HashMap;
 import java.util.ArrayList;
 
 import java.util.Collection;
+import ro.kds.erp.scripting.Script;
 
 /**
  * Describe class FinisajeBizBean here.
@@ -141,6 +142,25 @@ public class FinisajeBizBean extends FinisajeBean {
 	r.addValueList("ralStasId", ValueLists.makeStdValueList(11125));
 
     }
+
+    /**
+     * Overwrites default implementation to add <code>categoryHome</code>
+     * variable to the script.
+     *
+     * @param script a <code>Script</code> value
+     */
+    public void addFieldsToScript(Script script) {
+	super.addFieldsToScript(script);
+	try {
+	    logger.log(BasicLevel.DEBUG, "Adding categoryHome var to script");
+	    script.setVar("categoryHome", getCategoryHome());
+	} catch (Exception e) {
+	    logger.log(BasicLevel.WARN, "Can not add categoryHome var to the script");
+	    logger.log(BasicLevel.DEBUG, e);
+	}
+    }
+
+
 
     /**
      * Makes a new copy of this product. It calls the default script (if exits) for duplicate method and

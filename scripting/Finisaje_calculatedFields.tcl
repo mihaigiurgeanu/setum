@@ -12,15 +12,15 @@ if { $placare == 1 } {
     set description "$description Placare"
 }
 if { $grundId != 0 } {
-    set description "$description Grund $grundId"
+    set categoryGrund [$categoryHome findByPrimaryKey 11115]
+    set description "$description [[$categoryGrund getProductByCode $grundId] getName]"
 }
-if { $vopsireTip == 1 } {
-    set description "$description Vopsire normala"
-}
-if { $vopsireTip == 2 } {
-    set description "$description Vopsire VCE"
+if { $vopsireTip != 0 } {
+    set categoryVopsire [$categoryHome findByPrimaryKey 11120]
+    set description "$description [[$categoryVopsire getProductByCode $vopsireTip] getName]"
 }
 if { $ralStasId != 0 } {
-    set description "$description RAL STAS $ralStasId"
+    set categoryRal [$categoryHome findByPrimaryKey 11125]
+    set description "$description [[$categoryRal getProductByCode $ralStasId] getName]"
 }
 
