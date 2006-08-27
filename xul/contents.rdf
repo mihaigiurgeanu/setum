@@ -8,8 +8,9 @@
   </RDF:Seq>
 
   <RDF:Description about="urn:mozilla:package:setum"
-        chrome:displayName="My Application"
+        chrome:displayName="ReadyBeans"
         chrome:author="Key Digital Solutions"
-        chrome:name="setum">
+        chrome:name="setum"
+	chrome:extension="true">
   </RDF:Description>
 </RDF:RDF>
