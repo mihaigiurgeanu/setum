@@ -35,6 +35,7 @@ if (err == SUCCESS) {
     } else {
 	cancelInstall(err);
     }
+			  
 } else {
     cancelInstall(err);
 }
