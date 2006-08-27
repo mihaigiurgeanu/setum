@@ -50,6 +50,7 @@ function on_select_offer() {
     req.add("param0", selid);
     theForm.post_request(req);
     load_items();
+    document.getElementById("maintab.offerDetails").setAttribute("hidden", "false");
 }
 
 function on_select_item() {
@@ -58,6 +59,7 @@ function on_select_item() {
     req.add("command", "loadSubForm");
     req.add("param0", selid);
     theForm.post_request(req);
+    document.getElementById("maintab.lineItemsDetails").setAttribute("hidden", "false");
 }
 
 
@@ -67,6 +69,7 @@ function add_offer() {
     theForm.post_request(req);
     load_items();
     maintab.selectedIndex = 1;
+    document.getElementById("maintab.lineItemsDetails").setAttribute("hidden", "true");
 }
 
 function remove_item() {
@@ -82,6 +85,8 @@ function save_offer() {
     theForm.post_save_request(req);
     load_offers();
     maintab.selectedIndex = 0;
+    document.getElementById("maintab.lineItemsDetails").setAttribute("hidden", "true");
+    document.getElementById("maintab.offerDetails").setAttribute("hidden", "true");
 }
 
 function save_item() {
@@ -90,6 +95,7 @@ function save_item() {
     theForm.post_save_request(req);
     load_items();
     maintab.selectedIndex = 1;
+    document.getElementById("maintab.lineItemsDetails").setAttribute("hidden", "true");
 }
 
 
@@ -146,7 +152,15 @@ function select_client() {
     window.openDialog("select-client.xul", "select-client", "chrome", select_handler);
 }
 
+function show_offer_details() {
+    document.getElementById("maintab.offerDetails").setAttribute("hidden", "false");
+    maintab.selectedIndex=1;
+}
 
+function show_lineItem_details() {
+    document.getElementById("maintab.lineItemsDetails").setAttribute("hidden", "false");
+    maintab.selectedIndex=2;
+}
 
 
 // Global variable theForm that will be used by event handlers
