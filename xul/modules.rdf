@@ -7,6 +7,7 @@
   <rdf:Seq rdf:about="http://www.kds.ro/erp/modules">
     <rdf:li rdf:resource="http://www.kds.ro/erp/modules/setum/products" />
     <rdf:li rdf:resource="http://www.kds.ro/erp/modules/setum/offer" />
+    <rdf:li rdf:resource="http://www.kds.ro/erp/modules/setum/orders" />
     <rdf:li rdf:resource="http://www.kds.ro/erp/modules/setum/clienti" />
     <rdf:li rdf:resource="http://www.kds.ro/erp/modules/settings"/>
   </rdf:Seq>
@@ -142,6 +143,16 @@
     <modules:description>Modificare/adaugare usa cu 2 canate</modules:description>
     <modules:xulfile>edit-usa2k.xul</modules:xulfile>
   </rdf:Description>
+
+
+
+  <!-- Orders -->
+  <rdf:Description rdf:about="http://www.kds.ro/erp/modules/setum/orders">
+    <modules:displayName>Comenzi</modules:displayName>
+    <modules:description>Lista comenzilor</modules:description>
+    <modules:xulfile>orders.xul</modules:xulfile>
+  </rdf:Description>
+
 
   <!-- Clienti -->
   <rdf:Description rdf:about="http://www.kds.ro/erp/modules/setum/clienti">
