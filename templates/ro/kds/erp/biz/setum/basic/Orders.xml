@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="iso-8859-2"?>
+
+<!-- BusinessLogic for managing orders
+-->
+
+<class>
+  <package>ro.kds.erp.biz.setum.basic</package>
+  <name>Orders</name>
+  <field>
+    <name>number</name>
+    <type>Integer</type>
+  </field>
+  <field>
+    <name>date</name>
+    <type>Integer</type>
+  </field>
+  <field>
+    <name>clientId</name>
+    <type>Integer</type>
+  </field>
+  <field>
+    <name>clientName</name>
+    <type>String</type>
+  </field>
+  <field>
+    <name>montaj</name>
+    <type>Integer</type>
+  </field>
+  <field>
+    <name>localitate</name>
+    <type>Integer</type>
+  </field>
+  <field>
+    <name>localitateAlta</name>
+    <type>String</type>
+  </field>
+  <field>
+    <name>distanta</name>
+    <type>Double</type>
+  </field>
+  <field>
+    <name>observatii</name>
+    <type>String</type>
+  </field>
+  <field>
+    <name>total</name>
+    <type>java.math.BigDecimal</type>
+  </field>
+  <field>
+    <name>totalTva</name>
+    <type>java.math.BigDecimal</type>
+  </field>
+  <field>
+    <name>discount</name>
+    <type>java.math.BigDecimal</type>
+  </field>
+  <field>
+    <name>totalFinal</name>
+    <type>java.math.BigDecimal</type>
+  </field>
+  <field>
+    <name>totalFinalTva</name>
+    <type>java.math.BigDecimal</type>
+  </field>
+  <field>
+    <name>avans</name>
+    <type>java.math.BigDecimal</type>
+  </field>
+  <field>
+    <name>achitatCu</name>
+    <type>String</type>
+  </field>
+  <field>
+    <name>valoareAvans</name>
+    <type>java.math.BigDecimal</type>
+  </field>
+  <field>
+    <name>diferenta</name>
+    <type>java.math.BigDecimal</type>
+  </field>
+  <field>
+    <name>termenLivrare</name>
+    <type>java.util.Date</type>
+  </field>
+  <field>
+    <name>termenLivrare1</name>
+    <type>java.util.Date</type>
+  </field>
+  <field>
+    <name>adresaMontaj</name>
+    <type>String</type>
+  </field>
+  <field>
+    <name>adresaReper</name>
+    <type>String</type>
+  </field>
+  <field>
+    <name>telefon</name>
+    <type>String</type>
+  </field>
+  <field>
+    <name>contact</name>
+    <type>String</type>
+  </field>
+
+  <!-- Subform offerItem -->
+
+  <field>
+    <name>offerItemId</name>
+    <type>Integer</type>
+  </field>
+  <field>
+    <name>productName</name>
+    <type>String</type>
+  </field>
+  <field>
+    <name>productCode</name>
+    <type>String</type>
+  </field>
+  <field>
+    <name>price</name>
+    <type>java.math.BigDecimal</type>
+  </field>
+  <field>
+    <name>productPrice</name>
+    <type>java.math.BigDecimal</type>
+  </field>
+  <field>
+    <name>priceRatio</name>
+    <type>Double</type>
+  </field>
+  <field>
+    <name>quantity</name>
+    <type>java.math.BigDecimal</type>
+  </field>
+  <field>
+    <name>value</name>
+    <type>java.math.BigDecimal</type>
+  </field>
+  <field>
+    <name>tax</name>
+    <type>java.math.BigDecimal</type>
+  </field>
+
+  <subforms>
+    <subform name="offerItem"/>
+  </subforms>
+
+
+  <!-- Add method declaration to the remote interface -->
+  <remote>
+    <!-- Orders listing -->
+    <method>ResponseBean loadListing() throws RemoteException</method>
+
+    <!-- Order items listing -->
+    <method>ResponseBean loadItems() throws RemoteException</method>
+  </remote>
+
+  <!-- Services that may have scripts associated with -->
+  <services>
+
+    <!-- Make an order item out of an offered item -->
+    <method returnType="standard">
+      <name>addItem</name>
+      <params>
+	<param>
+	  <name>offerIntemId</name>
+	  <type>Integer</type>
+	</param>
+      </params>
+    </method>
+
+
+    <!-- Remove an order item -->
+    <method returnType="standard">
+      <name>removeItem</name>
+      <params>
+	<param>
+	  <name>itemId</name>
+	  <type>Integer</type>
+	</param>
+      </params>
+    </method>
+  </services>
+
+</class>
