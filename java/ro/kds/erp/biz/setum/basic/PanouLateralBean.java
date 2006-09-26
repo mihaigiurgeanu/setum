@@ -187,7 +187,7 @@ public abstract class PanouLateralBean
      * make sure that r.addRecord() has been called. This parameter can
      * be null in wich case a new ResponseBean will be created.
      *
-     * @returns a ResponseBean containing the modified field values.
+     * @return a ResponseBean containing the modified field values.
      */
      public ResponseBean computeCalculatedFields(ResponseBean r) {
 	if(r == null) {
@@ -770,7 +770,7 @@ public abstract class PanouLateralBean
      * fields modified by the script and the changes will be automatically added to the
      * form bean.
      *
-     * @returns a <code>ResponseBean</code> containing the field values that were changed by
+     * @return a <code>ResponseBean</code> containing the field values that were changed by
      * the script and any of the fields added to it by the script.
      * 
      */
@@ -804,7 +804,7 @@ public abstract class PanouLateralBean
      * fields modified by the script and the changes will be automatically added to the
      * form bean.
      *
-     * @returns a <code>ResponseBean</code> containing the field values that were changed by
+     * @return a <code>ResponseBean</code> containing the field values that were changed by
      * the script and any of the fields added to it by the script.
      * 
      */
@@ -838,7 +838,7 @@ public abstract class PanouLateralBean
      * fields modified by the script and the changes will be automatically added to the
      * form bean.
      *
-     * @returns a <code>ResponseBean</code> containing the field values that were changed by
+     * @return a <code>ResponseBean</code> containing the field values that were changed by
      * the script and any of the fields added to it by the script.
      * 
      */
@@ -1295,7 +1295,7 @@ public abstract class PanouLateralBean
              return scriptPrefix;
 
          } catch (NamingException e) {
-             logger.log(BasicLevel.WARN, "The value for script prefix can not be read from environment");
+             logger.log(BasicLevel.WARN, "The value for 'script.prefix' can not be read from environment. Use prefsadmin utility to set this value to the root directory where the script files are located.");
              logger.log(BasicLevel.DEBUG, e);
              return "ro.kds.erp.biz.setum.basic.PanouLateral";
          }

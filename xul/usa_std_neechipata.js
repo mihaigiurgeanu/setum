@@ -16,7 +16,9 @@ function load_usi() {
   document.getElementById('usiListing').view = make_treeview
     (usi,
      function(row, column) {
-       return usi[row][column];
+	     var col;
+	     if(column.id) col = column.id; else col = column;
+	     return usi[row][col];
      });
 }
 

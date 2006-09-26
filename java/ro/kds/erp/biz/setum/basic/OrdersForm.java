@@ -15,12 +15,14 @@ import ro.kds.erp.data.AttributeLocal;
  */
 public class OrdersForm implements Serializable {
         
+    String number;
+    java.util.Date date;
     Integer clientId;
     String clientName;
     Integer montaj;
     Integer localitate;
     String localitateAlta;
-    Double distanta;
+    java.math.BigDecimal distanta;
     String observatii;
     java.math.BigDecimal total;
     java.math.BigDecimal totalTva;
@@ -50,6 +52,15 @@ public class OrdersForm implements Serializable {
     public OrdersForm() {
 
 
+       this.number = "";
+
+
+
+
+       // No rule to initialize this.date
+
+
+
        this.clientId = new Integer(0);
 
 
@@ -70,8 +81,8 @@ public class OrdersForm implements Serializable {
 
 
 
-       this.distanta = new Double(0);
-   
+       this.distanta = new java.math.BigDecimal(0);
+
 
 
        this.observatii = "";
@@ -178,6 +189,30 @@ public class OrdersForm implements Serializable {
 
     }
 
+    public void setNumber(String newNumber) {
+        this.number = newNumber;
+    }
+
+    public String getNumber() {
+        return number;
+    }
+
+    public void readNumber(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("number");
+	if(a != null) {
+	    this.setNumber(a.getStringValue());
+	}
+    }
+
+    public void setDate(java.util.Date newDate) {
+        this.date = newDate;
+    }
+
+    public java.util.Date getDate() {
+        return date;
+    }
+
+
     public void setClientId(Integer newClientId) {
         this.clientId = newClientId;
     }
@@ -253,18 +288,18 @@ public class OrdersForm implements Serializable {
 	}
     }
 
-    public void setDistanta(Double newDistanta) {
+    public void setDistanta(java.math.BigDecimal newDistanta) {
         this.distanta = newDistanta;
     }
 
-    public Double getDistanta() {
+    public java.math.BigDecimal getDistanta() {
         return distanta;
     }
 
     public void readDistanta(Map attributes) {
 	AttributeLocal a = (AttributeLocal)attributes.get("distanta");
 	if(a != null) {
-	    this.setDistanta(a.getDoubleValue());
+	    this.setDistanta(a.getDecimalValue());
 	}
     }
 

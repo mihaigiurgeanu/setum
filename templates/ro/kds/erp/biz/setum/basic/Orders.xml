@@ -8,11 +8,11 @@
   <name>Orders</name>
   <field>
     <name>number</name>
-    <type>Integer</type>
+    <type>String</type>
   </field>
   <field>
     <name>date</name>
-    <type>Integer</type>
+    <type>java.util.Date</type>
   </field>
   <field>
     <name>clientId</name>
@@ -36,7 +36,7 @@
   </field>
   <field>
     <name>distanta</name>
-    <type>Double</type>
+    <type>java.math.BigDecimal</type>
   </field>
   <field>
     <name>observatii</name>
@@ -143,17 +143,18 @@
   </field>
 
   <subforms>
-    <subform name="offerItem"/>
+    <subform name="orderLine"/>
   </subforms>
 
 
   <!-- Add method declaration to the remote interface -->
   <remote>
     <!-- Orders listing -->
-    <method>ResponseBean loadListing() throws RemoteException</method>
+    <method>ResponseBean getOrdersCount() throws RemoteException</method>
+    <method>ResponseBean loadListing(Integer startRow) throws RemoteException</method>
 
     <!-- Order items listing -->
-    <method>ResponseBean loadItems() throws RemoteException</method>
+    <method>ResponseBean loadLines() throws RemoteException</method>
   </remote>
 
   <!-- Services that may have scripts associated with -->

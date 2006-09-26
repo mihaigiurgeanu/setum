@@ -4,12 +4,14 @@
 // The main tree
 var sisteme;
 function load_sisteme() {
-  sisteme = theForm.load_listing();
-  document.getElementById('sistemeListing').view = make_treeview
-    (sisteme,
-     function(row,column) {
-       return sisteme[row][column];
-     });
+    sisteme = theForm.load_listing();
+    document.getElementById('sistemeListing').view = make_treeview
+	(sisteme,
+	 function(row,column) {
+	     var col;
+	     if(column.id) col = column.id; else col = column;
+	     return sisteme[row][col];
+	 });
 }
 
 // Global variable theForm that will be used by event handlers
@@ -30,15 +32,15 @@ load_sisteme();
 
 
 function adjustPricesDlg() {
-  openDialog("adjustPriceDialog.xul", "AdjustPricesDlg", "chrome", adjustPrices);
+    openDialog("adjustPriceDialog.xul", "AdjustPricesDlg", "chrome", adjustPrices);
 }
 
 function adjustPrices(val, type) {
-  //alert("adjustPrices with " + val + " " + type);
-  var req = new HTTPDataRequest("/sisteme/ajustarepret.do");
-  req.add("value", val);
-  req.add("type", type);
-  if(post_data(req)) {
-    alert("Preturi ajustate");
-  }
+    //alert("adjustPrices with " + val + " " + type);
+    var req = new HTTPDataRequest("/sisteme/ajustarepret.do");
+    req.add("value", val);
+    req.add("type", type);
+    if(post_data(req)) {
+	alert("Preturi ajustate");
+    }
 }

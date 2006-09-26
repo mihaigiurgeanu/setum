@@ -11,7 +11,11 @@ function load_categories() {
     req.add("command", "loadCategories");
     categories = load_records(req);
     categoriesListing.view = make_treeview
-	(categories, function(row,col) { return categories[row][col]; });
+	(categories, function(row,column) { 
+	    var col;
+	    if(column.id) col = column.id; else col = column;
+	    return categories[row][col]; 
+	});
 }
 
 // products listing
@@ -22,7 +26,11 @@ function load_products() {
     req.add("command", "loadProducts");
     products = load_records(req);
     productsListing.view = make_treeview
-    (products, function(row,col) { return products[row][col]; });
+    (products, function(row,column) { 
+	var col;
+	if(column.id) col = column.id; else col = column;
+	return products[row][col]; 
+    });
 }
 
 // attributes listing
@@ -33,7 +41,11 @@ function load_attributes() {
     req.add("command", "loadAttributes");
     attributes = load_records(req);
     attributesListing.view = make_treeview
-	(attributes, function(row,col) { return attributes[row][col]; });
+	(attributes, function(row,column) { 
+	    var col;
+	    if(column.id) col = column.id; else col = column;
+	    return attributes[row][col]; 
+	});
 }
 
 // a selection was made in the category listing

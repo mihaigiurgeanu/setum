@@ -49,6 +49,19 @@ public class ArbitraryOfferBizBean extends ArbitraryOfferBean {
     public static final Integer OFFERS_CATEGORY =
 	new Integer(1002);
 
+
+
+    /**
+     * The name of the Offer entity.
+     */
+    public static final String ENTITY_OFFER = "Offer";
+    /**
+     * The name of the offer line entity.
+     */
+    public static final String ENTITY_OFFER_ITEM = "OfferItem";
+
+
+
     /**
      * The selected offer line in the subform.
      */

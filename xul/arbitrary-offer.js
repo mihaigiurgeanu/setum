@@ -14,7 +14,9 @@ function load_offers() {
     offersListing.view = make_treeview
 	(offers,
 	 function(row,column) {
-	     return offers[row][column];
+	     var col;
+	     if(column.id) col = column.id; else col = column;
+	     return offers[row][col];
 	 });
 }
 
@@ -28,7 +30,9 @@ function load_items() {
     lineItemsListing.view = make_treeview
 	(line_items,
 	 function(row,column) {
-	     return line_items[row][column];
+	     var col;
+	     if(column.id) col = column.id; else col = column;
+	     return line_items[row][col];
 	 });
 }
 

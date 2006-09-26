@@ -8,7 +8,9 @@ function load_offers() {
     document.getElementById('offersListing').view = make_treeview
 	(offers,
 	 function(row,column) {
-	     return offers[row][column];
+	     var col;
+	     if(column.id) col = column.id; else col = column;
+	     return offers[row][col];
 	 });
 }
 
@@ -19,7 +21,9 @@ function load_items() {
     document.getElementById('offerLines').view = make_treeview
 	(line_items,
 	 function(row,column) {
-	     return line_items.get_cell_text(row, column);
+	     var col;
+	     if(column.id) col = column.id; else col = col;
+	     return line_items.get_cell_text(row, col);
 	 });
 }
 

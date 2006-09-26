@@ -14,6 +14,41 @@
     <jdbc-mapping>
       <jndi-name>erpsetumdb</jndi-name>
       <automatic-pk>true</automatic-pk>
+      <cmp-field-jdbc-mapping>
+	<field-name>entryPrice</field-name>
+	<jdbc-field-name>entryPrice_</jdbc-field-name>
+	<sql-type>DECIMAL(12,4)</sql-type>
+      </cmp-field-jdbc-mapping>
+      <cmp-field-jdbc-mapping>
+	<field-name>sellPrice</field-name>
+	<jdbc-field-name>sellPrice_</jdbc-field-name>
+	<sql-type>DECIMAL(12,4)</sql-type>
+      </cmp-field-jdbc-mapping>
+      <cmp-field-jdbc-mapping>
+	<field-name>price1</field-name>
+	<jdbc-field-name>price1_</jdbc-field-name>
+	<sql-type>DECIMAL(12,4)</sql-type>
+      </cmp-field-jdbc-mapping>
+      <cmp-field-jdbc-mapping>
+	<field-name>price2</field-name>
+	<jdbc-field-name>price2_</jdbc-field-name>
+	<sql-type>DECIMAL(12,4)</sql-type>
+      </cmp-field-jdbc-mapping>
+      <cmp-field-jdbc-mapping>
+	<field-name>price3</field-name>
+	<jdbc-field-name>price3_</jdbc-field-name>
+	<sql-type>DECIMAL(12,4)</sql-type>
+      </cmp-field-jdbc-mapping>
+      <cmp-field-jdbc-mapping>
+	<field-name>price4</field-name>
+	<jdbc-field-name>price4_</jdbc-field-name>
+	<sql-type>DECIMAL(12,4)</sql-type>
+      </cmp-field-jdbc-mapping>
+      <cmp-field-jdbc-mapping>
+	<field-name>price5</field-name>
+	<jdbc-field-name>price5_</jdbc-field-name>
+	<sql-type>DECIMAL(12,4)</sql-type>
+      </cmp-field-jdbc-mapping>
     </jdbc-mapping>
     <cleanup>create</cleanup>
   </jonas-entity>
@@ -23,6 +58,11 @@
     <jdbc-mapping>
       <jndi-name>erpsetumdb</jndi-name>
       <automatic-pk>true</automatic-pk>
+      <cmp-field-jdbc-mapping>
+	<field-name>decimalValue</field-name>
+	<jdbc-field-name>decimalValue_</jdbc-field-name>
+	<sql-type>DECIMAL(12,4)</sql-type>
+      </cmp-field-jdbc-mapping>
     </jdbc-mapping>
     <cleanup>create</cleanup>
   </jonas-entity>
@@ -56,9 +96,51 @@
     <jdbc-mapping>
       <jndi-name>erpsetumdb</jndi-name>
       <automatic-pk>true</automatic-pk>
+
+      <cmp-field-jdbc-mapping>
+	<field-name>quantity</field-name>
+	<jdbc-field-name>quantity_</jdbc-field-name>
+	<sql-type>DECIMAL(12,4)</sql-type>
+      </cmp-field-jdbc-mapping>
+      <cmp-field-jdbc-mapping>
+	<field-name>price</field-name>
+	<jdbc-field-name>price_</jdbc-field-name>
+	<sql-type>DECIMAL(12,4)</sql-type>
+      </cmp-field-jdbc-mapping>
+      <cmp-field-jdbc-mapping>
+	<field-name>price1</field-name>
+	<jdbc-field-name>price1_</jdbc-field-name>
+	<sql-type>DECIMAL(12,4)</sql-type>
+      </cmp-field-jdbc-mapping>
+      <cmp-field-jdbc-mapping>
+	<field-name>price2</field-name>
+	<jdbc-field-name>price2_</jdbc-field-name>
+	<sql-type>DECIMAL(12,4)</sql-type>
+      </cmp-field-jdbc-mapping>
+      <cmp-field-jdbc-mapping>
+	<field-name>price3</field-name>
+	<jdbc-field-name>price3_</jdbc-field-name>
+	<sql-type>DECIMAL(12,4)</sql-type>
+      </cmp-field-jdbc-mapping>
+      <cmp-field-jdbc-mapping>
+	<field-name>price4</field-name>
+	<jdbc-field-name>price4_</jdbc-field-name>
+	<sql-type>DECIMAL(12,4)</sql-type>
+      </cmp-field-jdbc-mapping>
+      <cmp-field-jdbc-mapping>
+	<field-name>price5</field-name>
+	<jdbc-field-name>price5_</jdbc-field-name>
+	<sql-type>DECIMAL(12,4)</sql-type>
+      </cmp-field-jdbc-mapping>
+      <cmp-field-jdbc-mapping>
+	<field-name>discount</field-name>
+	<jdbc-field-name>discount_</jdbc-field-name>
+	<sql-type>DECIMAL(12,4)</sql-type>
+      </cmp-field-jdbc-mapping>
     </jdbc-mapping>    
     <cleanup>create</cleanup>
   </jonas-entity>
+
   <jonas-entity>
     <ejb-name>DocumentEJB</ejb-name>
     <jndi-local-name>DocumentLocalHome</jndi-local-name>
@@ -77,6 +159,7 @@
     </jdbc-mapping>
     <cleanup>create</cleanup>
   </jonas-entity>
+
   <jonas-entity>
     <ejb-name>ContactEJB</ejb-name>
     <jndi-local-name>ContactLocalHome</jndi-local-name>
@@ -96,6 +179,52 @@
     </jdbc-mapping>
     <cleanup>create</cleanup>
   </jonas-entity>
+
+
+  <jonas-entity>
+    <ejb-name>OrderEJB</ejb-name>
+    <jndi-local-name>OrderHome</jndi-local-name>
+    <jdbc-mapping>
+      <jndi-name>erpsetumdb</jndi-name>
+      <cmp-field-jdbc-mapping>
+	<field-name>deliveryDistance</field-name>
+	<jdbc-field-name>deliveryDistance_</jdbc-field-name>
+	<sql-type>DECIMAL(12,4)</sql-type>
+      </cmp-field-jdbc-mapping>
+      <cmp-field-jdbc-mapping>
+	<field-name>discount</field-name>
+	<jdbc-field-name>discount_</jdbc-field-name>
+	<sql-type>DECIMAL(12,4)</sql-type>
+      </cmp-field-jdbc-mapping>
+      <cmp-field-jdbc-mapping>
+	<field-name>advancePayment</field-name>
+	<jdbc-field-name>advancePayment_</jdbc-field-name>
+	<sql-type>DECIMAL(12,4)</sql-type>
+      </cmp-field-jdbc-mapping>
+    </jdbc-mapping>
+    <cleanup>create</cleanup>
+  </jonas-entity>
+
+
+  <jonas-entity>
+    <ejb-name>OrderLineEJB</ejb-name>
+    <jndi-local-name>OrderLineHome</jndi-local-name>
+    <jdbc-mapping>
+      <jndi-name>erpsetumdb</jndi-name>
+      <automatic-pk>true</automatic-pk>
+      <cmp-field-jdbc-mapping>
+	<field-name>price</field-name>
+	<jdbc-field-name>price_</jdbc-field-name>
+	<sql-type>DECIMAL(12,4)</sql-type>
+      </cmp-field-jdbc-mapping>
+      <cmp-field-jdbc-mapping>
+	<field-name>quantity</field-name>
+	<jdbc-field-name>quantity_</jdbc-field-name>
+	<sql-type>DECIMAL(12,4)</sql-type>
+      </cmp-field-jdbc-mapping>
+    </jdbc-mapping>
+  </jonas-entity>
+
 
   <jonas-ejb-relation>
     <ejb-relation-name>ProductAttribute</ejb-relation-name>
@@ -122,4 +251,8 @@
       </foreign-key-jdbc-mapping>
     </jonas-ejb-relationship-role>
   </jonas-ejb-relation>
+
+
+
+
 </jonas-ejb-jar>

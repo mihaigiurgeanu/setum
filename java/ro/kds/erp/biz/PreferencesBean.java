@@ -87,7 +87,7 @@ public class PreferencesBean implements SessionBean {
      * @param key is the name of the property.
      * @param def is the default value of the property (if the property
      * could not be accessed)
-     * @returns the value of the property or the default value, if the
+     * @return the value of the property or the default value, if the
      * property can not be accessed.
      */
     public String get(String key, String def) throws RemoteException {
@@ -101,7 +101,7 @@ public class PreferencesBean implements SessionBean {
      * @param key is the name of the property.
      * @param def is the default value of the property (if the property
      * could not be accessed)
-     * @returns the value of the property or the default value, if the
+     * @return the value of the property or the default value, if the
      * property can not be accessed.
      */
     public Double getDouble(String key, Double def) throws RemoteException {
@@ -115,7 +115,7 @@ public class PreferencesBean implements SessionBean {
      * @param key is the name of the property.
      * @param def is the default value of the property (if the property
      * could not be accessed)
-     * @returns the value of the property or the default value, if the
+     * @return the value of the property or the default value, if the
      * property can not be accessed.
      */
     public Integer getInteger(String key, Integer def) throws RemoteException {

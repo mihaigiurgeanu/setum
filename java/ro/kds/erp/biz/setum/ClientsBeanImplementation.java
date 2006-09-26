@@ -27,7 +27,7 @@ import javax.ejb.RemoveException;
  * Created: Tue Jan 17 10:40:18 2006
  *
  * @author <a href="mailto:mihai@cris.kds.ro">Mihai Giurgeanu</a>
- * @version $Id: ClientsBeanImplementation.java,v 1.3 2006/08/23 03:50:02 mihai Exp $
+ * @version $Id: ClientsBeanImplementation.java,v 1.4 2006/09/26 00:56:03 mihai Exp $
  */
 public class ClientsBeanImplementation extends ClientsBean {
 
@@ -35,6 +35,14 @@ public class ClientsBeanImplementation extends ClientsBean {
      * Holds the contact that is currently selected.
      */
     private ContactLocal selectedContact = null;
+
+
+    /**
+     * The name of the Client entity.
+     */
+    public static final String ENTITY_CLIENT = "Client";
+
+
 
     /**
      * Saves the data from the current main form (client form) to the

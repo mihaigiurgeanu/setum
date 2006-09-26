@@ -31,7 +31,7 @@ import java.util.ArrayList;
  * Created: Tue Mar 14 18:58:14 2006
  *
  * @author <a href="mailto:Mihai Giurgeanu@CRIMIRA"></a>
- * @version $Id: GenericProductsImplementation.java,v 1.5 2006/06/12 06:16:34 mihai Exp $
+ * @version $Id: GenericProductsImplementation.java,v 1.6 2006/09/26 00:56:03 mihai Exp $
  */
 public class GenericProductsImplementation extends GenericProductsBean {
 
@@ -47,7 +47,7 @@ public class GenericProductsImplementation extends GenericProductsBean {
      * category id is kept in the static constant 
      * <code>ROOT_CATEGORY_ID_PARAM</code>.
      *
-     * @returns a <code>ResponseBean</code> containing as records all
+     * @return a <code>ResponseBean</code> containing as records all
      * the rows that should be listed in the categories listing. The
      * fields in the listing are:
      * <ul>
@@ -102,7 +102,7 @@ public class GenericProductsImplementation extends GenericProductsBean {
     /**
      * Get all the products in the current selected category.
      *
-     * @returns a <code>ResponseBean</code> containing the product records.
+     * @return a <code>ResponseBean</code> containing the product records.
      * For each record, there are the following fields:
      * <ul>
      * <li>products.id</li>
@@ -156,7 +156,7 @@ public class GenericProductsImplementation extends GenericProductsBean {
     /**
      * Get all the attributes of the current product.
      *
-     * @returns a <code>ResponseBean</code> containing the attribute records.
+     * @return a <code>ResponseBean</code> containing the attribute records.
      * The fields of each record are:
      * <ul>
      * <li>attr.id</li>
@@ -204,7 +204,7 @@ public class GenericProductsImplementation extends GenericProductsBean {
      * not directly exposed in the remote interface. It is called
      * by the <code>loadFormData</code> bean method.
      *
-     * @returns a new <code>ResponseBean</code> with no record containing the
+     * @return a new <code>ResponseBean</code> with no record containing the
      * error code (0 for success, and 4 if no product is current). The returned value
      * should not be a standard error object, since the <code>loadFormData</code> 
      * methode will add fields to it.
@@ -233,7 +233,7 @@ public class GenericProductsImplementation extends GenericProductsBean {
      * not directly exposed in the remote interface. It is called
      * by the <code>loadProductData</code> bean method.
      *
-     * @returns a new <code>ResponseBean</code> with no record containing the
+     * @return a new <code>ResponseBean</code> with no record containing the
      * error code (0 for success, and 4 if no product is current). The returned object
      * should not be a standard error object, since the <code>loadFormData</code> 
      * methode will add fields to it.
@@ -271,7 +271,7 @@ public class GenericProductsImplementation extends GenericProductsBean {
      * not directly exposed in the remote interface. It is called
      * by the <code>loadAttributeData</code> bean method.
      *
-     * @returns a new <code>ResponseBean</code> with no record containing the
+     * @return a new <code>ResponseBean</code> with no record containing the
      * error code (0 for success, and 4 if no product is current). The returned object
      * should not be a standard error object, since the <code>loadFormData</code> 
      * methode will add fields to it.
@@ -332,7 +332,7 @@ public class GenericProductsImplementation extends GenericProductsBean {
      * The method is directly exposed through the remote interface,
      * no modifications of its returned data will be made.
      *
-     * @returns an <code>ResponseBean</code> object containing the
+     * @return an <code>ResponseBean</code> object containing the
      * error code (0 for success) and a record with the value of
      * categoryId field.
      */
@@ -377,9 +377,9 @@ public class GenericProductsImplementation extends GenericProductsBean {
 	Integer cId = form.getCategoryId();
 	if(cId.intValue() == 0) {
 	    cId = getNextCategoryId();
-	    logger.log(BasicLevel.DEBUG, "Create new category: " +
-		       cId + " " + form.getCategoryName());
 	}
+	logger.log(BasicLevel.DEBUG, "Create new category: " +
+		   cId + " " + form.getCategoryName());
 	CategoryLocalHome ch = getCategoryHome();
 	CategoryLocal c = ch.create(cId, form.getCategoryName());
 	CategoryLocal root = getRootCategory();
@@ -396,7 +396,7 @@ public class GenericProductsImplementation extends GenericProductsBean {
      * The method is directly exposed through the remote interface,
      * no modifications of its returned data will be made.
      *
-     * @returns an <code>ResponseBean</code> object containing the
+     * @return an <code>ResponseBean</code> object containing the
      * error code (0 for success) and a record with the value of
      * productId field.
      */
@@ -567,7 +567,7 @@ public class GenericProductsImplementation extends GenericProductsBean {
     /**
      * Convinience call to retrieve the category that is currently selected.
      *
-     * @returns a <code>CategoryLocal</code> object if a valid id was given, or
+     * @return a <code>CategoryLocal</code> object if a valid id was given, or
      * null if no category is currently selected (the <code>id</code> field is
      * null).
      * @throws FinderException if the current <code>id</code> can not be found
@@ -599,7 +599,7 @@ public class GenericProductsImplementation extends GenericProductsBean {
     /**
      * Convinience call to retrieve the product that is currently selected.
      *
-     * @returns a <code>ProductLocal</code> object if a valid productId was given, or
+     * @return a <code>ProductLocal</code> object if a valid productId was given, or
      * null if no category is product selected (the <code>productId</code> field is
      * null).
      * @throws FinderException if the current <code>productId</code> can not be found
@@ -630,7 +630,7 @@ public class GenericProductsImplementation extends GenericProductsBean {
     /**
      * Convinience call to retrieve the attribute that is currently selected.
      *
-     * @returns a <code>AttributeLocal</code> object if a valid attributeId was given, or
+     * @return a <code>AttributeLocal</code> object if a valid attributeId was given, or
      * null if no category is product selected (the <code>attributeId</code> field is
      * null).
      * @throws FinderException if the current <code>attributeId</code> can not be found

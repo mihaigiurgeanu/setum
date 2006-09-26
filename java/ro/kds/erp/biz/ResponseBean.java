@@ -324,26 +324,192 @@ public class ResponseBean implements Serializable {
     }
 
 
+
+    // Response codes and messages
+
+
+    public static final int CODE_SUCCESS		= 0;
+    public static final int CODE_ERR_CONFIG_NAMING	= 1;
+    public static final int CODE_ERR_REMOTE		= 2;
+    public static final int CODE_ERR_CREATE		= 3;
+    public static final int CODE_ERR_NOTCURRENT		= 4;
+    public static final int CODE_ERR_UNEXPECTED		= 5;
+    public static final int CODE_ERR_CONFIG_NOTFOUND	= 6;
+    public static final int CODE_ERR_NOTFOUND		= 7;
+    public static final int CODE_ERR_NOTIMPLEMENTED	= 8;
+    public static final int CODE_ERR_REMOVE		= 9;
+    public static final int CODE_ERR_OUT_OF_ORDERE_OPERATION = 10;
+    public static final int CODE_ERR_DATAMISSING	= 11;
+
+
     public static final ResponseBean SUCCESS = new ResponseBean();
+    /**
+     * Deprecated. Use <code>getErrConfigNaming(...)</code> instead
+     */
     public static final ResponseBean ERR_CONFIG_NAMING = 
 	new ResponseBean(1, "Eroare de sistem");
+    /**
+     * Deprecated. Use <code>getErrRemote(...)</code> instead
+     */
     public static final ResponseBean ERR_REMOTE = 
 	new ResponseBean(2, "Eroare comunicare cu serverul de aplicatie");
+    /**
+     * Deprecated. Use <code>getErrCreate(...)</code> instead
+     */
     public static final ResponseBean ERR_CREATE = 
 	new ResponseBean(3, "Eroare la insert in baza de date");
+    /**
+     * Deprecated. Use <code>getErrNotCurrent(...)</code> instead
+     */
     public static final ResponseBean ERR_NOTCURRENT = 
 	new ResponseBean(4, "Nu este nici o selectie curenta!" +
 			 " Alegeti ceva din lista!");
+    /**
+     * Deprecated. Use <code>getErrUnexpected(...)</code> instead
+     */
     public static final ResponseBean ERR_UNEXPECTED = 
 	new ResponseBean(5, "O eroare neasteptata a aparut la executia pe server");
+    /**
+     * Deprecated. Use <code>getErrConfigNotFound(...)</code> instead
+     */
     public static final ResponseBean ERR_CONFIG_NOTFOUND = 
 	new ResponseBean(6, "Eroare de sistem");
+    /**
+     * Deprecated. Use <code>getErrNotFound(...)</code> instead
+     */
     public static final ResponseBean ERR_NOTFOUND = 
 	new ResponseBean(7, "Informatia nu exista in baza de date");
+    /**
+     * Deprecated. Use <code>getErrNotImplemented(...)</code> instead
+     */
     public static final ResponseBean ERR_NOTIMPLEMENTED =
 	new ResponseBean(8, "Operatia nu este implementata");
+    /**
+     * Deprecated. Use <code>getErrRemove(...)</code> instead
+     */
     public static final ResponseBean ERR_REMOVE = 
 	new ResponseBean(9, "Eroare la executarea operatiei de stergere");
+    /**
+     * Deprecated. Use <code>getErrOutOfOrderOperation(...)</code> instead
+     */
     public static final ResponseBean ERR_OUT_OF_ORDER_OPERATION = 
 	new ResponseBean(10, "Metoda apelata gresit ...");
+
+
+    /**
+     * Builds a configuration error response regarding a naming service error.
+     *
+     * @param nameEntry is the naming entry that have not been found or that
+     * generated the error some how.
+     */
+    public static final ResponseBean getErrConfigNaming(String nameEntry) {
+	return new ResponseBean(CODE_ERR_CONFIG_NAMING, nameEntry);
+    }
+    
+    /**
+     * Builds an error response regarding a remote exception, meaning that something
+     * is wrong in comunicating with a server side business component.
+     * 
+     * @param componentName is a hint about the component which generated the error.
+     */
+    public static final ResponseBean getErrRemote(String componentName) {
+	return new ResponseBean(CODE_ERR_REMOTE, componentName);
+    }
+    
+    /**
+     * Builds an error response regarding the creation of an entity. The entity
+     * name is a name known by both ui and business engines.
+     *
+     * @param entityName is the name of the entity that could not be created.
+     */
+    public static final ResponseBean getErrCreate(String entityName) {
+	return new ResponseBean(CODE_ERR_CREATE, entityName);
+    }
+    
+    /**
+     * Builds an error response saying that a record has not been selected.
+     *
+     * @param formName is a hint to the user interface about the form/subform
+     * record that should of been selected prior to calling the operation that
+     * caused this error.
+     */
+    public static final ResponseBean getErrNotCurrent(String formName) {
+	return new ResponseBean(CODE_ERR_NOTCURRENT, formName);
+    }
+    
+    /**
+     * Builds an response about an unexpecting error. The <code>message</code>
+     * field of the response will contain an exception description.
+     *
+     * @param exception is the unexpected exception.
+     */
+    public static final ResponseBean getErrUnexpected(Exception e) {
+	return new ResponseBean(CODE_ERR_UNEXPECTED, e.toString());
+    }
+    
+    /**
+     * Builds a response message for reporting the error that the cofiguration
+     * needed was not found. When calling this function you would provide the name
+     * of the missing configuration. This name may
+     * be used by ui service to give an information to the user about what it is
+     * needed to be configured.
+     *
+     * @param configName is the name or the code of configuration. It is stored
+     * in the response's <code>message</code> field.
+     */
+    public static final ResponseBean getErrConfigNotFound(String configName) {
+	return new ResponseBean(CODE_ERR_CONFIG_NOTFOUND, configName);
+    }
+
+    /**
+     * Builds a response message for reporting when a entity was not found. Usually
+     * the entity lookup is done by its primary key. A call to this function will
+     * provide the name of the entity type. This name should be known by the ui engine so
+     * the ui engine could display an error message about the missing entity.
+     *
+     * @param entityName is the name of the missing entity. It will stored in the 
+     * <code>message</code> field of the response.
+     */
+    public static final ResponseBean getErrNotFound(String entityName) {
+	return new ResponseBean(CODE_ERR_NOTFOUND, entityName);
+    }
+
+    /**
+     * Buidls an error response message to report that the invoked functionality is
+     * not implemented. The call to this fuction should provide the name of the missing
+     * functionality. The name is a code of functionality that should be used by the 
+     * ui engine to display a localized error message.
+     *
+     * @param functionalityName is the name of missing fuctionality. This name is stored
+     * in the <code>message</code> field of the response.
+     */
+    public static final ResponseBean getErrNotImplemented(String functionalityName) {
+	return new ResponseBean(CODE_ERR_NOTIMPLEMENTED, functionalityName);
+    }
+
+    /**
+     * Builds an error response message to report that the entity deletion failed. The caller
+     * provides the name of the entity type that could not be deleted. This name is used by
+     * the ui service to provide a localized error message.
+     *
+     * @param entityName is the name of the entity type that could not be deleted. It will
+     * be stored in the <code>message</code> field of the response.
+     */
+    public static final ResponseBean getErrRemove(String entityName) {
+	return new ResponseBean(CODE_ERR_REMOVE, entityName);
+    }
+
+    /**
+     * Builds an error message about missing expected data. A missingData code
+     * will be provided when calling this function. The code will stay in the
+     * message field of the <code>ResponseBean</code> object.
+     *
+     * @param missingData is the code of missing field or data. This is
+     * a business field that must be agreed on between user interface and
+     * business level. It is usually the name of the field that is missing.
+     */
+    public static final ResponseBean getErrDataMissing(String missingData) {
+	return new ResponseBean(CODE_ERR_DATAMISSING, missingData);
+    }
+    
 }

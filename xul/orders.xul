@@ -78,9 +78,6 @@ Lista comenzilor, creere/vizualizare/stergere
 	    <treecol id="orders.distanta" label="Distanta"
 		     persist="ordinal width hidden"/>
 	    <splitter class="tree-splitter"/>
-	    <treecol id="orders.total" label="Valoare"
-		     persist="ordinal width hidden"/>
-	    <splitter class="tree-splitter"/>
 	    <treecol id="orders.avans" label="Avans"
 		     persist="ordinal width hidden"/>
 	    <splitter class="tree-splitter"/>
@@ -327,4 +324,9 @@ Lista comenzilor, creere/vizualizare/stergere
       </tabpanel>
     </tabpanels>
   </tabbox>
+
+
+  <script src="orders.js"/>
+
+
 </window>

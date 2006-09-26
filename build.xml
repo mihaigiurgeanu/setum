@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<!-- $Id: build.xml,v 1.7 2006/03/26 09:06:07 mihai Exp $ -->
+<!-- $Id: build.xml,v 1.8 2006/09/26 00:56:03 mihai Exp $ -->
 <project name="setumerp" default="application">
   <description>
     Targets for building and deploying the setumerp application.
@@ -22,14 +22,13 @@
   <property name="src.home" value="${source}"/>
   <property name="src.remote" value="${source}"/>
   <property name="src.sessionbean" value="${source}"/>
-  <property name="java.lib" value="/usr/share"/>
-
+  
   <!-- ejbjar task  -->
   <taskdef name="ejbjar"
 	   classname="org.objectweb.jonas.ant.EjbJar"
 	   classpath="${jonas.root}/lib/common/ow_jonas_ant.jar" />
   <taskdef name="freemarker" classname="freemarker.ext.ant.FreemarkerXmlTask"
-	   classpath="${java.lib}/freemarker-2.3.4/lib/freemarker.jar"/>
+	   classpath="${library}/freemarker.jar"/>
   <taskdef name="jrc" 
 	   classname="net.sf.jasperreports.ant.JRAntCompileTask"> 
     <classpath>
@@ -146,7 +145,8 @@
       <jonas destdir="${dist}"
 	     jonasroot="${jonas.root}"
 	     keepgenerated="true"
-	     verbose="false" />
+	     verbose="false" 
+	     novalidation="false" />
       <include name="**/*ejb-jar.xml"/>
       <exclude name="**/jonas-*"/>
     </ejbjar>
@@ -179,14 +179,24 @@
 
   <!-- deploying the ear on a linux machine -->
   <target name="deploy">
-    <exec executable="${jonas.root}/bin/unix/jonas"
+    <echo message="OS name: ${os.name}"/>
+    <exec os="Windows XP" executable="${jonas.root}/bin/nt/jonas.bat"
+	  dir="${jonas.root}/apps">
+      <arg line="admin -a setum.ear"/>
+    </exec>
+    <exec os="Linux" executable="${jonas.root}/bin/unix/jonas"
 	  dir="${jonas.root}/apps">
       <arg line="admin -a setum.ear"/>
     </exec>
   </target>
 
   <target name="undeploy">
-    <exec executable="${jonas.root}/bin/unix/jonas"
+    <echo message="OS name: ${os.name}"/>
+    <exec os="Windows XP" executable="${jonas.root}/bin/nt/jonas.bat"
+	  dir="${jonas.root}/apps">
+      <arg line="admin -r setum.ear"/>
+    </exec>
+    <exec os="Linux" executable="${jonas.root}/bin/unix/jonas"
 	  dir="${jonas.root}/apps">
       <arg line="admin -r setum.ear"/>
     </exec>
@@ -250,7 +260,7 @@
 		extension="Bean.java" />
   </target>
 
-  <target name="docs">
+  <target name="docs" description="Runs javadoc and generate source code documentation">
     <javadoc sourcepath="${source}" packagenames="ro.kds.erp.*" 
 	     destdir="${docs}" />
   </target>

@@ -30,7 +30,7 @@ public abstract class OrdersBean
     protected SessionContext ejbContext;
 
     protected Integer id;
-    protected Integer offerItemId;
+    protected Integer orderLineId;
     final static String FORM_VARNAME = "form";
     final static String RESPONSE_VARNAME = "response";
     final static String LOGIC_VARNAME = "logic";
@@ -98,7 +98,7 @@ public abstract class OrdersBean
 	ResponseBean r = new ResponseBean();
 	r.addRecord();
 	id = null; // a new product will be added
-        offerItemId = null;
+        orderLineId = null;
 	
 	// set values of the calculated fields
 	computeCalculatedFields(null);
@@ -146,10 +146,10 @@ public abstract class OrdersBean
      */
     public abstract ResponseBean saveFormData();
 
-    public ResponseBean newOfferItemData() {
-        initOfferItemFields();
+    public ResponseBean newOrderLineData() {
+        initOrderLineFields();
         ResponseBean r = new ResponseBean();
-        offerItemId = null;
+        orderLineId = null;
         computeCalculatedFields(null);
 
         r.addRecord();
@@ -157,18 +157,18 @@ public abstract class OrdersBean
         return r;
     }
 
-    protected abstract void initOfferItemFields();
+    protected abstract void initOrderLineFields();
 
     /**
-     * Load the data in the subform offerItem
+     * Load the data in the subform orderLine
      */
-    public ResponseBean loadOfferItemData(Integer loadId) throws FinderException {
+    public ResponseBean loadOrderLineData(Integer loadId) throws FinderException {
 
-	logger.log(BasicLevel.DEBUG, "Loading subform OfferItem for id = " + loadId);
-	initOfferItemFields();
-	offerItemId = loadId;
+	logger.log(BasicLevel.DEBUG, "Loading subform OrderLine for id = " + loadId);
+	initOrderLineFields();
+	orderLineId = loadId;
 
-	ResponseBean r = loadOfferItemFields();
+	ResponseBean r = loadOrderLineFields();
 	computeCalculatedFields(null);
 	r.addRecord();
 	copyFieldsToResponse(r);
@@ -176,15 +176,15 @@ public abstract class OrdersBean
     }
 
     /**
-     * Loads the fields corresponding to the subform offerItem
+     * Loads the fields corresponding to the subform orderLine
      * from the database.
      */
-    protected abstract ResponseBean loadOfferItemFields() throws FinderException;
+    protected abstract ResponseBean loadOrderLineFields() throws FinderException;
 
     /**
      * Save the current subform record into the database.
      */
-    public abstract ResponseBean saveOfferItemData();
+    public abstract ResponseBean saveOrderLineData();
 
 
 
@@ -229,7 +229,7 @@ public abstract class OrdersBean
      * make sure that r.addRecord() has been called. This parameter can
      * be null in wich case a new ResponseBean will be created.
      *
-     * @returns a ResponseBean containing the modified field values.
+     * @return a ResponseBean containing the modified field values.
      */
      public ResponseBean computeCalculatedFields(ResponseBean r) {
 	if(r == null) {
@@ -298,6 +298,54 @@ public abstract class OrdersBean
 	return r;
     }
 
+    public ResponseBean updateNumber(String number) {
+        ResponseBean r = new ResponseBean();
+	String oldVal = form.getNumber();
+	form.setNumber(number);
+	r.addRecord();
+	r.addField("number", number); // for number format
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".number");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
+		script.setVar(FORM_VARNAME, form, OrdersForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the number", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
+    public ResponseBean updateDate(java.util.Date date) {
+        ResponseBean r = new ResponseBean();
+	java.util.Date oldVal = form.getDate();
+	form.setDate(date);
+	r.addRecord();
+	r.addField("date", date); // for number format
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".date");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(OLDVAL_VARNAME, oldVal, java.util.Date.class);
+		script.setVar(FORM_VARNAME, form, OrdersForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the date", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
     public ResponseBean updateClientId(Integer clientId) {
         ResponseBean r = new ResponseBean();
 	Integer oldVal = form.getClientId();
@@ -418,9 +466,9 @@ public abstract class OrdersBean
 	computeCalculatedFields(r);
 	return r;
     }
-    public ResponseBean updateDistanta(Double distanta) {
+    public ResponseBean updateDistanta(java.math.BigDecimal distanta) {
         ResponseBean r = new ResponseBean();
-	Double oldVal = form.getDistanta();
+	java.math.BigDecimal oldVal = form.getDistanta();
 	form.setDistanta(distanta);
 	r.addRecord();
 	r.addField("distanta", distanta); // for number format
@@ -428,7 +476,7 @@ public abstract class OrdersBean
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this);
-		script.setVar(OLDVAL_VARNAME, oldVal, Double.class);
+		script.setVar(OLDVAL_VARNAME, oldVal, java.math.BigDecimal.class);
 		script.setVar(FORM_VARNAME, form, OrdersForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
 		addFieldsToScript(script);
@@ -1052,7 +1100,7 @@ public abstract class OrdersBean
      * fields modified by the script and the changes will be automatically added to the
      * form bean.
      *
-     * @returns a <code>ResponseBean</code> containing the field values that were changed by
+     * @return a <code>ResponseBean</code> containing the field values that were changed by
      * the script and any of the fields added to it by the script.
      * 
      */
@@ -1078,11 +1126,48 @@ public abstract class OrdersBean
         }
 	return r;
     }
+    /**
+     * Generated implementation of the removeItem service. It will call
+     * the script ro.kds.erp.biz.setum.basic.Orders.removeItem
+     * to execute the request.
+     * 
+     * The <code>ResponseBean</code> to be returned will be automatically populated with the
+     * fields modified by the script and the changes will be automatically added to the
+     * form bean.
+     *
+     * @return a <code>ResponseBean</code> containing the field values that were changed by
+     * the script and any of the fields added to it by the script.
+     * 
+     */
+    public ResponseBean removeItem (
+        Integer itemId
+    ) {
+
+
+        ResponseBean r = new ResponseBean();
+        r.addRecord();
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".removeItem");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(FORM_VARNAME, form, OrdersForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		addFieldsToScript(script);
+		script.run();
+                getFieldsFromScript(script, r);
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for service removeItem", e);
+           }
+        }
+	return r;
+    }
 
     /**
      * Get the fields stored internaly and adds them to the response.
      */
     protected void copyFieldsToResponse(ResponseBean r) {
+	r.addField("number", form.getNumber());
+	r.addField("date", form.getDate());
 	r.addField("clientId", form.getClientId());
 	r.addField("clientName", form.getClientName());
 	r.addField("montaj", form.getMontaj());
@@ -1129,6 +1214,18 @@ public abstract class OrdersBean
             logger.log(BasicLevel.DEBUG, e);
         }
 	try {
+	    s.setVar("number", form.getNumber(), String.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: number from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    s.setVar("date", form.getDate(), java.util.Date.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: date from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
 	    s.setVar("clientId", form.getClientId(), Integer.class);
 	} catch (ScriptErrorException e) {
 	    logger.log(BasicLevel.WARN, "Can not set the value of field: clientId from the script");
@@ -1159,7 +1256,7 @@ public abstract class OrdersBean
             logger.log(BasicLevel.DEBUG, e);
         }
 	try {
-	    s.setVar("distanta", form.getDistanta(), Double.class);
+	    s.setVar("distanta", form.getDistanta(), java.math.BigDecimal.class);
 	} catch (ScriptErrorException e) {
 	    logger.log(BasicLevel.WARN, "Can not set the value of field: distanta from the script");
             logger.log(BasicLevel.DEBUG, e);
@@ -1323,6 +1420,28 @@ public abstract class OrdersBean
     protected void getFieldsFromScript(Script s, ResponseBean r) {
 	Object field;
 	try {
+	    field = s.getVar("number", String.class);
+	    if(!field.equals(form.getNumber())) {
+	        logger.log(BasicLevel.DEBUG, "Field number modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setNumber((String)field);
+	        r.addField("number", (String)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: number from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    field = s.getVar("date", java.util.Date.class);
+	    if(!field.equals(form.getDate())) {
+	        logger.log(BasicLevel.DEBUG, "Field date modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setDate((java.util.Date)field);
+	        r.addField("date", (java.util.Date)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: date from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
 	    field = s.getVar("clientId", Integer.class);
 	    if(!field.equals(form.getClientId())) {
 	        logger.log(BasicLevel.DEBUG, "Field clientId modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
@@ -1378,11 +1497,11 @@ public abstract class OrdersBean
             logger.log(BasicLevel.DEBUG, e);
         }
 	try {
-	    field = s.getVar("distanta", Double.class);
+	    field = s.getVar("distanta", java.math.BigDecimal.class);
 	    if(!field.equals(form.getDistanta())) {
 	        logger.log(BasicLevel.DEBUG, "Field distanta modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
-	        form.setDistanta((Double)field);
-	        r.addField("distanta", (Double)field);
+	        form.setDistanta((java.math.BigDecimal)field);
+	        r.addField("distanta", (java.math.BigDecimal)field);
 	    }
 	} catch (ScriptErrorException e) {
 	    logger.log(BasicLevel.WARN, "Can not get the value of field: distanta from the script");
@@ -1690,7 +1809,7 @@ public abstract class OrdersBean
              return scriptPrefix;
 
          } catch (NamingException e) {
-             logger.log(BasicLevel.WARN, "The value for script prefix can not be read from environment");
+             logger.log(BasicLevel.WARN, "The value for 'script.prefix' can not be read from environment. Use prefsadmin utility to set this value to the root directory where the script files are located.");
              logger.log(BasicLevel.DEBUG, e);
              return "ro.kds.erp.biz.setum.basic.Orders";
          }

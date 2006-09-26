@@ -2,7 +2,7 @@
 <?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
 <?xml-stylesheet href="setum.css" type="text/css"?>
 
-<!-- $Id: companies.xul,v 1.5 2006/03/24 18:21:56 mihai Exp $ -->
+<!-- $Id: companies.xul,v 1.6 2006/09/26 00:56:03 mihai Exp $ -->
 
 <window
     id="companies-persons-win"
@@ -304,7 +304,9 @@ function load_clients() {
   document.getElementById('clients-listing-tree').view = make_treeview
     (clients,
      function(row,column) {
-       return clients[row][column];
+	 var col;
+	 if(column.id) col = column.id; else col = column;
+	 return clients[row][col];
      });
 }
 
@@ -315,7 +317,9 @@ function load_contacts() {
   document.getElementById('contacts-listing-tree').view = make_treeview
     (contacts,
      function(row,column) {
-       return contacts[row][column];
+	 var col;
+	 if(column.id) col = column.id; else col = column;
+       return contacts[row][col];
      });
 }
 

@@ -135,4 +135,9 @@ public interface OfferItemLocal extends EJBLocalObject {
      * user interface to know how to edit the corresponding product.
      */
     public void setBusinessCategory(String bc);
+
+    /**
+     * The offer containing this offer item.
+     */
+    public OfferLocal getOffer();
 }
