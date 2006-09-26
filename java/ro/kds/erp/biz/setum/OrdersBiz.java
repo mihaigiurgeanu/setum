@@ -28,6 +28,7 @@ import javax.ejb.RemoveException;
 import java.util.Iterator;
 
 import java.util.ArrayList;
+import ro.kds.erp.biz.ResponseBean;
 
 /**
  * Describe class OrdersBiz here.
@@ -531,7 +532,67 @@ public class OrdersBiz extends OrdersBean {
 	return r;
     }
 
+    /**
+     * Overriden method to get the client's name and other attribute.
+     *
+     * @param clientid is the id of the client owning the order.
+     * @return a <code>ResponseBean</code> with the name of the new client.
+     */
+    public ResponseBean updateClientId(final Integer clientid) {
+	ResponseBean r = super.updateClientId(clientid);
 
+	try {
+	    ClientLocal client = getFormClient();
+	    r.addField("clientName", client.getName());
+	} catch (NamingException e) {
+	    logger.log(BasicLevel.ERROR, "Can not get the client's name due to a naming configuration problem: " + e.getMessage());
+	    logger.log(BasicLevel.DEBUG, e);
+	    r = ResponseBean.getErrConfigNaming(e.getMessage());
+	} catch (FinderException e) {
+	    logger.log(BasicLevel.ERROR, "FinderException while serching for the client with id: " + id);
+	    logger.log(BasicLevel.DEBUG, e);
+	    r = ResponseBean.getErrNotFound(e.getMessage());
+	} catch (Exception e) {
+	    logger.log(BasicLevel.ERROR, "Unexpected exception " + e);
+	    logger.log(BasicLevel.DEBUG, e);
+	    r = ResponseBean.getErrUnexpected(e);
+	}
+
+	return r;
+    }
+  
+
+    /**
+     * Overwrites the default method to not allow the client's name to be
+     * updated inconsistently with the client's id. The default method and
+     * script will still be ran, but the client's name will be overwritten
+     * with the name corresponding to the client's id.
+     *
+     * @param clientName is the new name for the client's name field.
+     *
+     * @return a <code>ResponseBean</code> with the real client name.
+     */
+    public ResponseBean updateClientName(String clientName) {
+	ResponseBean r = super.updateClientName(clientName);
+	try {
+	    ClientLocal client = getFormClient();
+	    r.addField("clientName", client.getName());
+	} catch (NamingException e) {
+	    logger.log(BasicLevel.ERROR, "Can not get the client's name due to a naming configuration problem: " + e.getMessage());
+	    logger.log(BasicLevel.DEBUG, e);
+	    r = ResponseBean.getErrConfigNaming(e.getMessage());
+	} catch (FinderException e) {
+	    logger.log(BasicLevel.ERROR, "FinderException while serching for the client with id: " + form.getClientId());
+	    logger.log(BasicLevel.DEBUG, e);
+	    r = ResponseBean.getErrNotFound(e.getMessage());
+	} catch (Exception e) {
+	    logger.log(BasicLevel.ERROR, "Unexpected exception " + e);
+	    logger.log(BasicLevel.DEBUG, e);
+	    r = ResponseBean.getErrUnexpected(e);
+	}
+
+	return r;
+    }
 
 
 
