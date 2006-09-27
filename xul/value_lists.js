@@ -9,6 +9,7 @@ var categoriesListing = document.getElementById("categoriesListing");
 function load_categories() {
     var req = theForm.get_request();
     req.add("command", "loadCategories");
+    req.add("operation", "new-context");
     categories = load_records(req);
     categoriesListing.view = make_treeview
 	(categories, function(row,column) { 
@@ -79,6 +80,7 @@ function on_select_attribute() {
 
 function add_category() {
     var req = theForm.get_request();
+    req.add("operation", "new-context");
     req.add("command", "newFormData");
     theForm.post_request(req);
     load_products();
@@ -124,6 +126,7 @@ function remove_attribute() {
 function save_category() {
     var req = theForm.get_request();
     req.add("command", "saveFormData");
+    req.add("operation", "close-context");
     theForm.post_save_request(req);
     load_categories();
     maintab.selectedIndex = 0;
