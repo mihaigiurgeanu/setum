@@ -231,10 +231,10 @@ Lista comenzilor, creere/vizualizare/stergere
 	  </grid>
 	</hbox>
 
-	<hbox>
-	  <label id="observatii" value="Observatii"/>
+	<vbox>
+	  <label control="observatii" value="Observatii:"/>
 	  <textbox id="observatii" flex="1" multiline="true" rows="4"/>
-	</hbox>
+	</vbox>
 
 
 	<tree id="lineItemsListing"
