@@ -54,11 +54,22 @@ import javax.servlet.http.HttpServlet;
  *
  * </dl>
  *
+ * Parameter <code>operation</code> contains other additional operation commands related
+ * mostly with the context of command execution. The operations that may be invoked are:
+ * <dl>
+ * <dt>new-context
+ * <dd>When a <code>new-context</code> operation is received, a new session bean is created
+ * prior to executing the command.
+ * 
+ * <dt>close-context
+ * <dd>When a <code>close-context</code> operation is received, the session bean is removed
+ * after executing the command.
+ * </dl>
  *
  * Created: Tue Mar 14 17:09:40 2006
  *
  * @author <a href="mailto:Mihai Giurgeanu@CRIMIRA"></a>
- * @version $Id: SimpleCallDispatcherServlet.java,v 1.3 2006/06/19 12:04:14 mihai Exp $
+ * @version $Id: SimpleCallDispatcherServlet.java,v 1.4 2006/09/27 14:43:12 mihai Exp $
  */
 public class SimpleCallDispatcherServlet extends HttpServlet {
 
@@ -76,6 +87,13 @@ public class SimpleCallDispatcherServlet extends HttpServlet {
      * servlet's init parameter "sessionBean".
      */
     private String SESSION_JNDI;
+
+    /**
+     * A value of <code>true</code> will inhibit the automatic creation of bean
+     * whenever the bean is empty. The value of this variable is read from the
+     * servlet's init parameter with the name "explicitBeanCreation".
+     */
+    private boolean EXPLICIT_BEAN_CREATION;
 
     /**
      * The map of the methods in the session bean's class.
@@ -99,6 +117,13 @@ public class SimpleCallDispatcherServlet extends HttpServlet {
 	try {
 	    SESSION_ATTR = getServletConfig().getInitParameter("sessionName");
 	    SESSION_JNDI = getServletConfig().getInitParameter("sessionBean");
+	    
+	    String explicitBeanCreation = getServletConfig().getInitParameter("explicitBeanCreation");
+	    if(explicitBeanCreation != null && explicitBeanCreation.equals("true")) {
+		EXPLICIT_BEAN_CREATION = true;
+	    } else {
+		EXPLICIT_BEAN_CREATION = false;
+	    }
 
 	    Class beanClass = Class.forName(getServletConfig()
 					    .getInitParameter("sessionClass"));
@@ -139,132 +164,146 @@ public class SimpleCallDispatcherServlet extends HttpServlet {
 
 	logger.log(BasicLevel.DEBUG, "Component's path: " + 
 		   request.getRequestURI());
-	
-	EJBObject bean = (EJBObject)request.getSession()
-	    .getAttribute(SESSION_ATTR);
-	String command = request.getParameter("command");
-
-	logger.log(BasicLevel.DEBUG, "Command: " + command);
-	{
-	    String params = "";
-	    for(Iterator i = request.getParameterMap().entrySet().iterator(); 
-		i.hasNext();) {
-		
-		Map.Entry entry = (Map.Entry)i.next();
-		params += "<<" + entry.getKey() + ">> = ";
-		Object[] value = (Object []) entry.getValue();
-		for(int j=0; j<value.length; j++)
-		    params += "<<" + value[j] + ">> ";
-		params += "\n";
-	    }
-
-	    logger.log(BasicLevel.DEBUG, "Parameters: \n" + params);
-	}
 	ResponseBean r;
+	String operation = request.getParameter("operation");
 
-	if(command.equals("change")) {
-	    String field = request.getParameter("field");
-	    String value = request.getParameter("value");
-	    logger.log(BasicLevel.DEBUG, "Operation change for field <<" +
-		       field + ">> with value <<" + value + ">>");
-	    if(bean == null) {
-		r = new ResponseBean();
-		r.setCode(4);
-		r.setMessage("Trebuie sa selectati mai intai o inregistrare. Modificarea nu a fost salvata!");
-		logger.log(BasicLevel.INFO, "Change operation called but no itemwas selected");
+	try {
+	    EJBObject bean;
+
+	    if(operation != null && operation.equals("new-context")) {
+		removeSessionBean(request);
+		bean = newSessionBean(request);
 	    } else {
-		try {
-		    String methodName = "update" + 
-			new Character(Character.toUpperCase(field.charAt(0)))
-			.toString() + field.substring(1);
-		    logger.log(BasicLevel.DEBUG, "Searching for method name "
-			       + methodName);
+		bean = getSessionBean(request);
+	    }
+	
+	    String command = request.getParameter("command");
+
+	    logger.log(BasicLevel.DEBUG, "Command: " + command);
+	    {
+		String params = "";
+		for(Iterator i = request.getParameterMap().entrySet().iterator(); 
+		    i.hasNext();) {
+		
+		    Map.Entry entry = (Map.Entry)i.next();
+		    params += "<<" + entry.getKey() + ">> = ";
+		    Object[] value = (Object []) entry.getValue();
+		    for(int j=0; j<value.length; j++)
+			params += "<<" + value[j] + ">> ";
+		    params += "\n";
+		}
+
+		logger.log(BasicLevel.DEBUG, "Parameters: \n" + params);
+	    }
+
+	    if(command.equals("change")) {
+		String field = request.getParameter("field");
+		String value = request.getParameter("value");
+		logger.log(BasicLevel.DEBUG, "Operation change for field <<" +
+			   field + ">> with value <<" + value + ">>");
+		if(bean == null) {
+		    r = new ResponseBean();
+		    r.setCode(4);
+		    r.setMessage("Trebuie sa selectati mai intai o inregistrare. Modificarea nu a fost salvata!");
+		    logger.log(BasicLevel.INFO, "Change operation called but no itemwas selected");
+		} else {
+		    try {
+			String methodName = "update" + 
+			    new Character(Character.toUpperCase(field.charAt(0)))
+			    .toString() + field.substring(1);
+			logger.log(BasicLevel.DEBUG, "Searching for method name "
+				   + methodName);
 		    
-		    Method m = (Method)methods.get(methodName);
-		    if(m == null) {
-			r = new ResponseBean(); // don't do anything
-			// just log an warning
-			logger.log(BasicLevel.WARN, "Method " + methodName
-				   + " not found when trying to update field "
-				   + field);
-		    } else {
-			Class[] paramsTypes = m.getParameterTypes();
-			logger.log(BasicLevel.DEBUG,
-				   "Method "  + methodName + " has " +
-				   paramsTypes.length + " parameters");
+			Method m = (Method)methods.get(methodName);
+			if(m == null) {
+			    r = new ResponseBean(); // don't do anything
+			    // just log an warning
+			    logger.log(BasicLevel.WARN, "Method " + methodName
+				       + " not found when trying to update field "
+				       + field);
+			} else {
+			    Class[] paramsTypes = m.getParameterTypes();
+			    logger.log(BasicLevel.DEBUG,
+				       "Method "  + methodName + " has " +
+				       paramsTypes.length + " parameters");
 
-			logger.log(BasicLevel.DEBUG, "Converting " + value +
-				   " to type " + paramsTypes[0].getName());
+			    logger.log(BasicLevel.DEBUG, "Converting " + value +
+				       " to type " + paramsTypes[0].getName());
 
-			Object params[] = new Object[1];
-			params[0] = ConvertUtils.convert(value, 
-							 paramsTypes[0]);
+			    Object params[] = new Object[1];
+			    params[0] = ConvertUtils.convert(value, 
+							     paramsTypes[0]);
 
-			logger.log(BasicLevel.DEBUG,
-				   "Invoking " + methodName + 
-				   " with one parameter: " + value
-				   + "(" + params[0] + " - "
-				   + params[0].getClass().getName()
-				   + ")");
-			r = (ResponseBean)m.invoke(bean, params);
+			    logger.log(BasicLevel.DEBUG,
+				       "Invoking " + methodName + 
+				       " with one parameter: " + value
+				       + "(" + params[0] + " - "
+				       + params[0].getClass().getName()
+				       + ")");
+			    r = (ResponseBean)m.invoke(bean, params);
+			}
+		    } catch (Exception e) {
+			r = new ResponseBean();
+			r.setCode(1);
+			r.setMessage("Valoarea <<" + value +
+				     ">> nu a putut fi salvata.");
+			logger.log(BasicLevel.ERROR, "Value <<" + value + 
+				   ">> can not be saved for field: " + field, e);
 		    }
-		} catch (Exception e) {
-		    r = new ResponseBean();
-		    r.setCode(1);
-		    r.setMessage("Valoarea <<" + value +
-				 ">> nu a putut fi salvata.");
-		    logger.log(BasicLevel.ERROR, "Value <<" + value + 
-			       ">> can not be saved for field: " + field, e);
 		}
-	    }
 	    
-	} else {
-	    // other commands
-	    Method m = (Method)methods.get(command);
-	    if(m == null) {
-		r = new ResponseBean();
-		logger.log(BasicLevel.WARN, "Command " + command + 
-			   " unknown.");
 	    } else {
-		logger.log(BasicLevel.DEBUG, "Method " + command + " found.");
-		Class paramTypes[] = m.getParameterTypes();
-		logger.log(BasicLevel.DEBUG, "Method " + command + 
-			   " requires " + paramTypes.length + " parameters.");
-		Object params[] = new Object[paramTypes.length];
-		for(int i=0; i<paramTypes.length; i++) {
-		    // i expect the parameters with the names
-		    // param1, param2, ... .
-		    String param = request.getParameter("param" + i);
-		    if(param == null) {
-			params[i] = null;
-			logger.log(BasicLevel.WARN, "param" + i + " does not exist. Setting it to null when calling method " + command);
-		    } else {
-			params[i] = ConvertUtils.convert(param, paramTypes[i]);
-			logger.log(BasicLevel.DEBUG, "param" + i + 
-				   " has value <<" + param +
-				   ">>  when calling method " + command);
-		    }
-		}
-		try {
-		    if(bean == null) {
-			bean = newSessionBean(request);
-		    }
-		    r = (ResponseBean)m.invoke(bean, params);
-		} catch (Exception e) {
+		// other commands
+		Method m = (Method)methods.get(command);
+		if(m == null) {
 		    r = new ResponseBean();
-		    r.setCode(1);
-		    r.setMessage("Eroare, operatia nu a putut fi efectuata");
-		    logger.log(BasicLevel.ERROR, "Error executing command " 
-			       + command, e);
+		    logger.log(BasicLevel.WARN, "Command " + command + 
+			       " unknown.");
+		} else {
+		    logger.log(BasicLevel.DEBUG, "Method " + command + " found.");
+		    Class paramTypes[] = m.getParameterTypes();
+		    logger.log(BasicLevel.DEBUG, "Method " + command + 
+			       " requires " + paramTypes.length + " parameters.");
+		    Object params[] = new Object[paramTypes.length];
+		    for(int i=0; i<paramTypes.length; i++) {
+			// i expect the parameters with the names
+			// param1, param2, ... .
+			String param = request.getParameter("param" + i);
+			if(param == null) {
+			    params[i] = null;
+			    logger.log(BasicLevel.WARN, "param" + i + " does not exist. Setting it to null when calling method " + command);
+			} else {
+			    params[i] = ConvertUtils.convert(param, paramTypes[i]);
+			    logger.log(BasicLevel.DEBUG, "param" + i + 
+				       " has value <<" + param +
+				       ">>  when calling method " + command);
+			}
+		    }
+		    try {
+			r = (ResponseBean)m.invoke(bean, params);
+		    } catch (Exception e) {
+			r = new ResponseBean();
+			r.setCode(1);
+			r.setMessage("Eroare, operatia nu a putut fi efectuata");
+			logger.log(BasicLevel.ERROR, "Error executing command " 
+				   + command, e);
+		    }
 		}
 	    }
+	} catch (Exception e) {
+	    logger.log(BasicLevel.ERROR, "Bean can not be initialized");
+	    logger.log(BasicLevel.DEBUG, e);
+	    r = ResponseBean.getErrUnexpected(e);
 	}
-
 	response.setContentType("text/xml");
 	PrintWriter out = response.getWriter();
 	String xml = r.toXML();
 	logger.log(BasicLevel.DEBUG, "Sending the response: \n" + xml);
 	out.print(xml);
+
+	if(operation != null && operation.equals("close-context")) {
+	    removeSessionBean(request);
+	}
     }
 
 
@@ -310,5 +349,19 @@ public class SimpleCallDispatcherServlet extends HttpServlet {
 	request.getSession().removeAttribute(SESSION_ATTR);
     }
 
+    /**
+     * Get the current session bean from the servlet's HTTP session.
+     */
+    private EJBObject getSessionBean(HttpServletRequest request)
+	throws NamingException, CreateException, RemoteException,
+	       NoSuchMethodException, IllegalAccessException,
+	       InvocationTargetException {
+
+	EJBObject bean = (EJBObject)request.getSession().getAttribute(SESSION_ATTR);
+	if(bean == null && !EXPLICIT_BEAN_CREATION) {
+	    bean = newSessionBean(request);
+	}
+	return bean;
+    }
 
 }
