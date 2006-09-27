@@ -68,12 +68,16 @@ function on_select_item() {
 
 
 function add_offer() {
+    document.getElementById("maintab.lineItemsDetails").setAttribute("hidden", "true");
+    document.getElementById("maintab.offerDetails").setAttribute("hidden", "false");
+
+
     var req = theForm.get_request();
     req.add("command", "newFormData");
     theForm.post_request(req);
     load_items();
+
     maintab.selectedIndex = 1;
-    document.getElementById("maintab.lineItemsDetails").setAttribute("hidden", "true");
 }
 
 function remove_item() {

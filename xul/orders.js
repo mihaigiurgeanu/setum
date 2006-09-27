@@ -22,6 +22,7 @@ var lineItems;
 var lineItemsListing = document.getElementById('lineItemsListing');
 function load_lineItems() {
     var req = theForm.get_request();
+    req.add("operation", "new-context");
     req.add("command", "loadLines");
     lineItems = load_records(req);
     lineItemsListing.view = make_treeview
@@ -39,6 +40,7 @@ function load_lineItems() {
 function on_select_order() {
     var selid = orders.get_cell_text(ordersListing.currentIndex, "orders.id");
     var req = theForm.get_request();
+    req.add("command", "new-context");
     req.add("command", "loadFormData");
     req.add("param0", selid);
     theForm.post_request(req);
@@ -67,6 +69,7 @@ function on_delete_order() {
 
 function on_save() {
     var req = theForm.get_request();
+    req.add("operation", "close-context");
     req.add("command", "saveFormData");
     theForm.post_save_request();
     maintab.selectedIndex = 0;

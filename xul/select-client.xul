@@ -3,7 +3,7 @@
 <?xml-stylesheet href="setum.css" type="text/css"?>
 
 <!-- 
-$Id: select-client.xul,v 1.1 2006/08/30 01:21:27 mihai Exp $
+$Id: select-client.xul,v 1.2 2006/09/27 15:58:38 mihai Exp $
 
 
 Dialog for selecting a client.
@@ -72,7 +72,9 @@ Arguments:
   clients_listing.view = make_treeview
   (clients,
    function(row,column) {
-       return clients[row][column];
+       var col;
+       if(column.id) col = column.id; else col = column;
+       return clients[row][col];
    });
   
   function doOk() {
