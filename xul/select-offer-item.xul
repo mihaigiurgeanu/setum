@@ -3,7 +3,7 @@
 <?xml-stylesheet href="setum.css" type="text/css"?>
 
 <!-- 
-$Id: select-offer-item.xul,v 1.1 2006/09/28 12:26:39 mihai Exp $
+$Id: select-offer-item.xul,v 1.2 2006/09/28 20:19:02 mihai Exp $
 
 
 Dialog for selecting a client.
@@ -78,13 +78,13 @@ Arguments:
 		function(row,column) {
 		    var col;
 		    if(column.id) col = column.id; else col = column;
-		    return clients[row][col];
+		    return items[row][col];
 		});
   
 	       function doOk() {
 		   for(var i=0; i<items.length; i++) {
 		       if(items_listing.view.selection.isSelected(i)) {
-			   window.arguments[0].select(items[i]['offerItems.id']);
+			   window.arguments[0].select(items[i]['offerLines.id']);
 		       }
 		   }
   
