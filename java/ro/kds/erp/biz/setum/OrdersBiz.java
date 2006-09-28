@@ -29,6 +29,7 @@ import java.util.Iterator;
 
 import java.util.ArrayList;
 import ro.kds.erp.biz.ResponseBean;
+import ro.kds.erp.biz.ResponseBean;
 
 /**
  * Describe class OrdersBiz here.
@@ -596,6 +597,19 @@ public class OrdersBiz extends OrdersBean {
 
 
 
+    //////////////////////////////////////////////////////////////////////////
+    // Value lists
+
+    /**
+     * Add the value lists needed in the form to the response.
+     *
+     * @param response is the <code>ResponseBean</code> to which the value lists
+     * should be added.
+     */
+    public final void loadValueLists(final ResponseBean response) {
+	response.addValueList("montaj", ValueLists.makeStdValueList(11200));
+	response.addValueList("localitate", ValueLists.makeStdValueList(12005));
+    }
 
 
 

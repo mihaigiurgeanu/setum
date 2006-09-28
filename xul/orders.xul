@@ -138,7 +138,7 @@ Lista comenzilor, creere/vizualizare/stergere
 	      <row>
 		<label control="localitate" value="Localitate:"/>
 		<menulist id="localitate">
-		  <menupopup id="localitatea-popup"/>
+		  <menupopup id="localitate-popup"/>
 		</menulist>
 	      </row>
 	      <row>

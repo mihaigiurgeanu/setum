@@ -8,13 +8,13 @@ var maintab = document.getElementById("maintab");
 var orders;
 var ordersListing = document.getElementById('ordersListing');
 function load_orders() {
-    orders = new RemoteDataView(theForm.do_link, "loadListing", "getOrdersCount");
+    orders = new RemoteDataView(theForm.do_link, "loadListing", "getOrdersCount", true);
     ordersListing.view = make_treeview
 	(orders,
 	 function(row, column) {
 	     var col;
 	     if(column.id) col = column.id; else col = column;
-	     return usi.get_cell_text(row, col);
+	     return orders.get_cell_text(row, col);
 	 });
 }
 
@@ -22,7 +22,6 @@ var lineItems;
 var lineItemsListing = document.getElementById('lineItemsListing');
 function load_lineItems() {
     var req = theForm.get_request();
-    req.add("operation", "new-context");
     req.add("command", "loadLines");
     lineItems = load_records(req);
     lineItemsListing.view = make_treeview
@@ -40,7 +39,7 @@ function load_lineItems() {
 function on_select_order() {
     var selid = orders.get_cell_text(ordersListing.currentIndex, "orders.id");
     var req = theForm.get_request();
-    req.add("command", "new-context");
+    req.add("operation", "new-context");
     req.add("command", "loadFormData");
     req.add("param0", selid);
     theForm.post_request(req);
@@ -57,6 +56,7 @@ function on_select_lineItem() {
 
 function on_new_order() {
     var req = theForm.get_request();
+    req.add("operation", "new-context");
     req.add("command", "newFormData");
     theForm.post_request(req);
     maintab.selectedIndex = 1;
@@ -71,7 +71,7 @@ function on_save() {
     var req = theForm.get_request();
     req.add("operation", "close-context");
     req.add("command", "saveFormData");
-    theForm.post_save_request();
+    theForm.post_save_request(req);
     maintab.selectedIndex = 0;
 }
 
