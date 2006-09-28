@@ -50,5 +50,6 @@ public interface ArbitraryOffer extends EJBObject {
     public ResponseBean addItem(Integer productId, String businessCategory) throws RemoteException;
     public ResponseBean removeItem() throws RemoteException;
     public ResponseBean saveSubForm() throws RemoteException;
+    public ResponseBean loadClientItems(Integer clientId) throws RemoteException;
 
 }

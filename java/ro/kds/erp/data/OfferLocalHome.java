@@ -22,4 +22,10 @@ public interface OfferLocalHome extends EJBLocalHome {
      * Find all offers that fall into a specific category.
      */
     public Collection findByCategory(Integer category) throws FinderException;
+
+    /**
+     * Find all offer items belonging to a certain client.
+     */
+    public Collection findByClientId(Integer clientId) throws FinderException;
+
 }

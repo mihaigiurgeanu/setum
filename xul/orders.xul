@@ -97,7 +97,7 @@ Lista comenzilor, creere/vizualizare/stergere
       <tabpanel id="maintab.order" orient="vertical"
 		style="border:thin outset white">
 	<hbox class="mytoolbar">
-	  <button label="Adauga produs" command="command-add_item"/>
+	  <button label="Adauga produs" command="command-add_orderItem"/>
 	  <button label="Salveaza" command="command-save_order"/>
 	</hbox>
 	<hbox class="title">

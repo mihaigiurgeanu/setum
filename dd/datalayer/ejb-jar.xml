@@ -253,6 +253,18 @@
 	</query-method>
 	<ejb-ql>SELECT OBJECT(o) FROM Offer AS o WHERE o.category=?1</ejb-ql>
       </query>
+      <query>
+	<description>Return all offers belonging to a client</description>
+	<query-method>
+	  <method-name>findByClientId</method-name>
+	  <method-params>
+	    <method-param>java.lang.Integer</method-param>
+	  </method-params>
+	</query-method>
+	<ejb-ql>
+	  SELECT OBJECT(o) FROM Offer o WHERE o.client.id = ?1
+	</ejb-ql>
+      </query>
     </entity>
 
 

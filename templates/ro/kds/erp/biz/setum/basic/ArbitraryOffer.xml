@@ -102,6 +102,7 @@
     <method>ResponseBean addItem(Integer productId, String businessCategory) throws RemoteException</method>
     <method>ResponseBean removeItem() throws RemoteException</method>
     <method>ResponseBean saveSubForm() throws RemoteException</method>
+    <method>ResponseBean loadClientItems(Integer clientId) throws RemoteException</method>
   </remote>
 
   <services>

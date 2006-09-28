@@ -283,6 +283,9 @@ public class ArbitraryOfferBizBean extends ArbitraryOfferBean {
 	}
     }
 
+
+
+
     /**
      * Makes the list of the lineItems of the current selected offer.
      */
@@ -329,6 +332,61 @@ public class ArbitraryOfferBizBean extends ArbitraryOfferBean {
 	}
 	return r;
     }
+
+
+
+    /**
+     * Makes the list of the lineItems ordered by a specific client.
+     */
+    public ResponseBean loadClientItems(Integer clientId) {
+	ResponseBean r;
+
+	try {
+	    if(id != null) {
+		InitialContext ic = new InitialContext();
+		Context env = (Context)ic.lookup("java:comp/env");
+		
+		OfferLocalHome oh = (OfferLocalHome)PortableRemoteObject.
+		    narrow(env.lookup("ejb/OfferHome"), OfferLocalHome.class);
+		
+		Collection offers = oh.findByClientId(clientId);
+		r = new ResponseBean();
+		for(Iterator j = offers.iterator(); j.hasNext();) {
+		    OfferLocal offer = (OfferLocal)j.next();
+		
+		    Collection offerItems = offer.getItems();
+		    for(Iterator i = offerItems.iterator(); i.hasNext();) {
+			OfferItemLocal item = (OfferItemLocal)i.next();
+			r.addRecord();
+			r.addField("offerLines.id", item.getId());
+			r.addField("offerLines.offer", offer.getDocument().getNumber());
+			r.addField("offerLines.date", offer.getDocument().getDate());
+			ProductLocal p = item.getProduct();
+			if(p != null) {
+			    r.addField("offerLines.category", p.getCategory().getName());
+			    r.addField("offerLines.name", p.getName());
+			    r.addField("productId", p.getId());
+			}
+		    
+			r.addField("offerLines.price", item.getPrice());
+			r.addField("businessCategory", item.getBusinessCategory());
+		    }
+		}
+	    } else {
+		r = ResponseBean.SUCCESS;
+	    }
+
+	} catch (Exception e) {
+	    logger.log(BasicLevel.WARN, "Current offer can not be selected", 
+		       e);
+	    r = new ResponseBean();
+	    r.setCode(4);
+	    r.setMessage("Nu se poate incarca lista de oferte. Ati selectat o oferta?");
+	}
+	return r;
+    }
+
+
 
     /**
      * Load data for the form fields bean corresponding to the line

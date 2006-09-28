@@ -1,4 +1,4 @@
-// standardoffer.js
+// arbitrary.js
 
 // cache a reference to the maintab
 var maintab = document.getElementById("maintab");
