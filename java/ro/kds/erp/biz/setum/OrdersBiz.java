@@ -262,9 +262,15 @@ public class OrdersBiz extends OrdersBean {
      * Save the data of the order line subform.
      */
     public ResponseBean saveOrderLineData() {
+	ResponseBean r;
 
 	logger.log(BasicLevel.DEBUG, "Saving OrderLine subform");
-	
+
+	// Current record should be saved, because it might be a new one
+	r = saveOrderLineData();
+	if (r.getCode() != ResponseBean.CODE_SUCCESS)
+	    return r;
+
 	// Preconditions
 	if(! isSelectedOrder()) {
 	    logger.log(BasicLevel.DEBUG, "No order is currently selected");
@@ -276,7 +282,6 @@ public class OrdersBiz extends OrdersBean {
 	    return ResponseBean.getErrDataMissing("offerItem");
 	}
 
-	ResponseBean r;
 
 
 	try {
@@ -335,15 +340,14 @@ public class OrdersBiz extends OrdersBean {
 	    try {
 		OfferItemLocal oi = getOfferItem();
 		form.setQuantity(oi.getQuantity());
+		form.setPrice(oi.getPrice());
 
 	    } catch (NamingException e) {
 		logger.log(BasicLevel.WARN, "Naming exception when getting the offer item. Continue execution of business logic.");
 		logger.log(BasicLevel.DEBUG, e);
 	    }	    
 	    computeCalculatedFields(null);
-	    r = new ResponseBean();
-	    r.addRecord();
-	    copyFieldsToResponse(r);
+	    r = saveOrderLineData();
 	} catch (FinderException e) {
 	    logger.log(BasicLevel.ERROR, "Finder exception " + e);
 	    logger.log(BasicLevel.DEBUG, e);
