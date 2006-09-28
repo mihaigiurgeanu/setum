@@ -45,11 +45,13 @@ function make_treeview(objects, getCellText) {
 // - the name of the load data request method
 // - the name of the method that returns the total number of the
 // records for this listing.
-function RemoteDataView(do_link, load_data_request, get_length_request) {
+function RemoteDataView(do_link, load_data_request, get_length_request, initOnClear) {
 
     this.do_link = do_link;
     this.load_data_request = load_data_request;
     this.get_length_request = get_length_request;
+
+    this.initOnClear = initOnClear;
 
     this.clear(); // initialization of the records
 }
@@ -87,6 +89,11 @@ RemoteDataView.prototype.get_row = function (row) {
 RemoteDataView.prototype.clear = function () {
     var req = new HTTPDataRequest(this.do_link);
     req.add("command", this.get_length_request);
+
+    if(this.initOnClear) {
+	req.add("operation", "new-context");
+    }
+
     var response = req.execute();
 
     this.length = 0;
