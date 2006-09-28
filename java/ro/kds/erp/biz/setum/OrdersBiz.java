@@ -267,7 +267,7 @@ public class OrdersBiz extends OrdersBean {
 	logger.log(BasicLevel.DEBUG, "Saving OrderLine subform");
 
 	// Current record should be saved, because it might be a new one
-	r = saveOrderLineData();
+	r = saveFormData();
 	if (r.getCode() != ResponseBean.CODE_SUCCESS)
 	    return r;
 
