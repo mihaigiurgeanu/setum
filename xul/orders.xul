@@ -259,7 +259,7 @@ Lista comenzilor, creere/vizualizare/stergere
 	    <treecol id="orderItems.quantity" label="Cantitatea" flex="1"
 		     persist="ordinal width hidden"/>
 	    <splitter class="tree-splitter"/>
-	    <treecol id="orderItems.value" label="Valoare" flex="1"
+	    <treecol id="orderItems.price" label="Pret" flex="1"
 		     persist="ordinal width hidden"/>
 	  </treecols>
 	  <treechildren/>

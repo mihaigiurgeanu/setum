@@ -320,7 +320,7 @@ public class ArbitraryOfferBizBean extends ArbitraryOfferBean {
 		    r.addField("businessCategory", item.getBusinessCategory());
 		}
 	    } else {
-		r = ResponseBean.SUCCESS;
+		r = new ResponseBean();
 	    }
 
 	} catch (Exception e) {
@@ -341,39 +341,38 @@ public class ArbitraryOfferBizBean extends ArbitraryOfferBean {
     public ResponseBean loadClientItems(Integer clientId) {
 	ResponseBean r;
 
+	logger.log(BasicLevel.DEBUG, "Loading the list of offerItems for client: " + clientId);
 	try {
-	    if(id != null) {
-		InitialContext ic = new InitialContext();
-		Context env = (Context)ic.lookup("java:comp/env");
+	    InitialContext ic = new InitialContext();
+	    Context env = (Context)ic.lookup("java:comp/env");
 		
-		OfferLocalHome oh = (OfferLocalHome)PortableRemoteObject.
-		    narrow(env.lookup("ejb/OfferHome"), OfferLocalHome.class);
+	    OfferLocalHome oh = (OfferLocalHome)PortableRemoteObject.
+		narrow(env.lookup("ejb/OfferHome"), OfferLocalHome.class);
 		
-		Collection offers = oh.findByClientId(clientId);
-		r = new ResponseBean();
-		for(Iterator j = offers.iterator(); j.hasNext();) {
-		    OfferLocal offer = (OfferLocal)j.next();
+	    Collection offers = oh.findByClientId(clientId);
+	    r = new ResponseBean();
+	    for(Iterator j = offers.iterator(); j.hasNext();) {
+		OfferLocal offer = (OfferLocal)j.next();
 		
-		    Collection offerItems = offer.getItems();
-		    for(Iterator i = offerItems.iterator(); i.hasNext();) {
-			OfferItemLocal item = (OfferItemLocal)i.next();
-			r.addRecord();
-			r.addField("offerLines.id", item.getId());
-			r.addField("offerLines.offer", offer.getDocument().getNumber());
-			r.addField("offerLines.date", offer.getDocument().getDate());
-			ProductLocal p = item.getProduct();
-			if(p != null) {
-			    r.addField("offerLines.category", p.getCategory().getName());
-			    r.addField("offerLines.name", p.getName());
-			    r.addField("productId", p.getId());
-			}
-		    
-			r.addField("offerLines.price", item.getPrice());
-			r.addField("businessCategory", item.getBusinessCategory());
+		logger.log(BasicLevel.DEBUG, "Loading items from offer: " + offer.getName());
+
+		Collection offerItems = offer.getItems();
+		for(Iterator i = offerItems.iterator(); i.hasNext();) {
+		    OfferItemLocal item = (OfferItemLocal)i.next();
+		    r.addRecord();
+		    r.addField("offerLines.id", item.getId());
+		    r.addField("offerLines.offer", offer.getDocument().getNumber());
+		    r.addField("offerLines.date", offer.getDocument().getDate());
+		    ProductLocal p = item.getProduct();
+		    if(p != null) {
+			r.addField("offerLines.category", p.getCategory().getName());
+			r.addField("offerLines.name", p.getName());
+			r.addField("productId", p.getId());
 		    }
+		    
+		    r.addField("offerLines.price", item.getPrice());
+		    r.addField("businessCategory", item.getBusinessCategory());
 		}
-	    } else {
-		r = ResponseBean.SUCCESS;
 	    }
 
 	} catch (Exception e) {
@@ -552,6 +551,8 @@ public class ArbitraryOfferBizBean extends ArbitraryOfferBean {
 	    oi = oih.create();
 	    oi.setProduct(p);
 	    oi.setPrice(p.getSellPrice()); // change it with the reference price
+	    oi.setQuantity(new BigDecimal(1));
+
 	    oi.setBusinessCategory(businessCategory);
 
 	    getCurrentOffer().getItems().add(oi);

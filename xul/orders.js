@@ -25,7 +25,7 @@ function load_lineItems() {
     req.add("command", "loadLines");
     lineItems = load_records(req);
     lineItemsListing.view = make_treeview
-	(line_items,
+	(lineItems,
 	 function(row, column) {
 	     var col;
 	     if(column.id) col = column.id; else col = column;
@@ -47,9 +47,9 @@ function on_select_order() {
 }
 
 function on_select_lineItem() {
-    var selid = lineItems[lineItemsListing.currentIndex]["lines.id"];
+    var selid = lineItems[lineItemsListing.currentIndex]["orderItems.id"];
     var req = theForm.get_request();
-    req.add("command", "loadLineItemData");
+    req.add("command", "loadOrderLineData");
     req.add("param0", selid);
     theForm.post_request(req);
 }
@@ -83,6 +83,7 @@ function on_select_offerItems() {
 	    req.add("command", "addItem");
 	    req.add("param0", offerItemId);
 	    this.theForm.post_request(req);
+	    load_lineItems();
 	}
     }
 
@@ -130,13 +131,17 @@ theForm.text_fields = new Array("number", "date", "clientName", "localitateAlta"
 				"discount", "totalFinal", "totalFinalTva",
 				"avans", "achitatCu", "valoareAvans", "diferenta",
 				"termenLivrare", "termenLivrare1", "adresaMontaj", 
-				"adresaReper", "telefon", "contact");
+				"adresaReper", "telefon", "contact",
+				
+				"productName", "productCode", "price",
+				"productPrice", "priceRatio", "quantity",
+				"value", "tax");
 
 theForm.combo_fields = new Array("montaj", "localitate");
 
 theForm.radio_fields = new Array();
 
-theForm.hidden_fields = new Array("clientId");
+theForm.hidden_fields = new Array("clientId", "offerItemId");
 
 
 theForm.setupEventListeners();

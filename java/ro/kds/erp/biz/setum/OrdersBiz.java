@@ -342,6 +342,12 @@ public class OrdersBiz extends OrdersBean {
 		form.setQuantity(oi.getQuantity());
 		form.setPrice(oi.getPrice());
 
+		logger.log(BasicLevel.DEBUG, "default quantity: " + oi.getQuantity());
+		logger.log(BasicLevel.DEBUG, "default price: " + oi.getPrice());
+
+		if(form.getQuantity() == null) form.setQuantity(new BigDecimal(0));
+		if(form.getPrice() == null) form.setPrice(new BigDecimal(0));
+
 	    } catch (NamingException e) {
 		logger.log(BasicLevel.WARN, "Naming exception when getting the offer item. Continue execution of business logic.");
 		logger.log(BasicLevel.DEBUG, e);
@@ -493,7 +499,7 @@ public class OrdersBiz extends OrdersBean {
      * <li>orderItems.productName
      * <li>orderItems.productCode
      * <li>orderItems.quantity
-     * <li>orderItems.value
+     * <li>orderItems.price
      * </ul>
      */
     public ResponseBean loadLines() {
@@ -514,8 +520,9 @@ public class OrdersBiz extends OrdersBean {
 		r.addField("orderItems.offerDate", ol.getOfferItem().getOffer().getDocument().getDate());
 		r.addField("orderItems.productName", ol.getOfferItem().getProduct().getName());
 		r.addField("orderItems.productCode", ol.getOfferItem().getProduct().getCode());
+
 		r.addField("orderItems.quantity", ol.getQuantity());
-		r.addField("orderItems.value", ol.getPrice().multiply(ol.getQuantity()));
+		r.addField("orderItems.price", ol.getPrice());
 	    }
 
 	} catch (NamingException e) {
