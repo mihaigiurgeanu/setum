@@ -53,7 +53,7 @@ public class ResponseBean implements Serializable {
         if (logger == null) {
             logger = Log.getLogger("ro.kds.erp.biz.basic.GenericProducts");
         }
-        logger.log(BasicLevel.DEBUG, "");
+        logger.log(BasicLevel.DEBUG, "Creating new response");
 
 	fields = null;
 	records = new LinkedList();
