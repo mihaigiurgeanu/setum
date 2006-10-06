@@ -47,6 +47,10 @@
     <type>java.math.BigDecimal</type>
   </field>
   <field>
+    <name>tvaPercent</name>
+    <type>Double</type>
+  </field>
+  <field>
     <name>totalTva</name>
     <type>java.math.BigDecimal</type>
   </field>

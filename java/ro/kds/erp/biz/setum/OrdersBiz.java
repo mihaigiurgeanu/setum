@@ -30,6 +30,11 @@ import java.util.Iterator;
 import java.util.ArrayList;
 import ro.kds.erp.biz.ResponseBean;
 import ro.kds.erp.biz.ResponseBean;
+import ro.kds.erp.biz.PreferencesBean;
+import ro.kds.erp.biz.SequenceHome;
+import java.util.Calendar;
+import ro.kds.erp.biz.Preferences;
+import ro.kds.erp.biz.Sequence;
 
 /**
  * Describe class OrdersBiz here.
@@ -59,6 +64,55 @@ public class OrdersBiz extends OrdersBean {
      */
     static final int LISTING_ROWS_PER_REQUEST = 30;
 
+    /**
+     * Initialization of fields. The default initialization is
+     * made by the parrent class.
+     *
+     */
+    public final void createNewFormBean() {
+	super.createNewFormBean();
+	
+
+
+	// find out what is the default delivery interval in days
+	int defaultDelivery; 
+	try {
+	    Preferences prefs = PreferencesBean.getPreferences();
+	    defaultDelivery = prefs.getInteger("orders.delivery.interval", 
+					    new Integer(30)).intValue();
+	} catch (Exception e) {
+	    logger.log(BasicLevel.ERROR, "Exception when geting preferences: ", e);
+	    defaultDelivery = 30;
+	}
+
+	// get a new order no
+	Integer orderNo;
+	try {
+	    InitialContext ic = new InitialContext();
+	    Context env = (Context) ic.lookup("java:comp/env");
+	    
+	    SequenceHome sh = (SequenceHome)PortableRemoteObject.narrow
+		(env.lookup("ejb/SequenceHome"), SequenceHome.class);
+	    Sequence s = sh.create();
+	    orderNo = s.getNext("ro.setumsa.sequnces.orders");
+	} catch (Exception e) {
+	    orderNo = null;
+	    logger.log(BasicLevel.WARN, "Can not get a number for order", e);
+	}
+
+
+	form.setNumber(orderNo.toString());
+	form.setDate(new Date());
+
+	Calendar dateDelivCal = Calendar.getInstance();
+	dateDelivCal.setTime(form.getDate());
+	dateDelivCal.add(Calendar.DATE, defaultDelivery);
+	form.setTermenLivrare(dateDelivCal.getTime());
+
+
+    }
+
+
 
     /**
      * Load the fields values from the database. The <code>id</code> variable
@@ -80,8 +134,11 @@ public class OrdersBiz extends OrdersBean {
 	    if(client != null) {
 		form.setClientId(client.getId());
 		form.setClientName(client.getName());
+	    } else {
+		form.setClientId(new Integer(0));
+		form.setClientName("");
 	    }
-	    
+
 	    form.setMontaj(o.getInstallation());
 	    form.setLocalitate(o.getDeliveryLocation());
 	    form.setLocalitateAlta(o.getDeliveryLocationOther());
@@ -433,7 +490,10 @@ public class OrdersBiz extends OrdersBean {
 	    r.addField("orders.id",		o.getId());
 	    r.addField("orders.no",		o.getDocument().getNumber());
 	    r.addField("orders.date",		o.getDocument().getDate());
-	    r.addField("orders.client",		o.getClient().getName());
+	    if(o.getClient() != null)
+		r.addField("orders.client",		o.getClient().getName());
+	    else
+		r.addField("orders.client", "");
 	    r.addField("orders.localitate",	o.getDeliveryLocation());
 	    r.addField("orders.distanta",	o.getDeliveryDistance());
 	    r.addField("orders.avans",		o.getAdvancePayment());
@@ -552,7 +612,7 @@ public class OrdersBiz extends OrdersBean {
      */
     public ResponseBean updateClientId(final Integer clientid) {
 	ResponseBean r = super.updateClientId(clientid);
-
+	
 	try {
 	    ClientLocal client = getFormClient();
 	    r.addField("clientName", client.getName());

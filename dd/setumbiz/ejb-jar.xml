@@ -962,7 +962,8 @@
         <env-entry-value>9972</env-entry-value>
       </env-entry>
       <env-entry>
-	<description>The prefix for building the scripts names.</description>
+	<description>The folder under script directory where the
+	scripts for this business logic are located.</description>
 	<env-entry-name>script.prefix</env-entry-name>
 	<env-entry-type>java.lang.String</env-entry-type>
 	<env-entry-value>Finisaje</env-entry-value>
@@ -1144,6 +1145,13 @@
       <ejb-class>ro.kds.erp.biz.setum.OrdersBiz</ejb-class>
       <session-type>Stateful</session-type>
       <transaction-type>Container</transaction-type>
+      <env-entry>
+	<description>The folder under script directory where the
+	scripts for this business logic are located.</description>
+	<env-entry-name>script.prefix</env-entry-name>
+	<env-entry-type>java.lang.String</env-entry-type>
+	<env-entry-value>Orders</env-entry-value>
+      </env-entry>
       <ejb-ref>
         <description>Required by the scripting engine.</description>
         <ejb-ref-name>ejb/PreferencesEJB</ejb-ref-name>
@@ -1207,103 +1215,6 @@
 
 
   <assembly-descriptor>
-
-    <!-- Required for save methods -->
-    <container-transaction>
-      <method>
-        <ejb-name>UsaMetalica1KEJB</ejb-name>
-        <method-name>saveFormData</method-name>
-      </method>
-      <method>
-        <ejb-name>UsiMetalice1KEJB</ejb-name>
-        <method-name>saveFormData</method-name>
-      </method>
-      <method>
-        <ejb-name>UsaMetalica2KEJB</ejb-name>
-        <method-name>saveFormData</method-name>
-      </method>
-      <method>
-        <description>All methods of StandardOfferEJB</description>
-        <ejb-name>StandardOfferEJB</ejb-name>
-        <method-name>saveFormData</method-name>
-      </method>
-      <method>
-        <description>All methods of SistemEJB</description>
-        <ejb-name>SistemEJB</ejb-name>
-        <method-name>saveFormData</method-name>
-      </method>
-      <method>
-        <description>All methods of OtherProducsEJB</description>
-        <ejb-name>OtherProductsEJB</ejb-name>
-        <method-name>saveFormData</method-name>
-      </method>
-      <method>
-        <description>All methods of UsaStdNeechipataBean</description>
-        <ejb-name>UsaStdNeechipataEJB</ejb-name>
-        <method-name>saveFormData</method-name>
-      </method>
-      <method>
-        <description>All methods of UsaStdNeechipataBean</description>
-        <ejb-name>UsaStandardEJB</ejb-name>
-        <method-name>saveFormData</method-name>
-      </method>
-      <method>
-        <description>All methods of OfrtaUsiStandard</description>
-        <ejb-name>OfertaUsiStandardEJB</ejb-name>
-        <method-name>saveFormData</method-name>
-      </method>
-      <method>
-        <ejb-name>ArbitraryOfferEJB</ejb-name>
-        <method-name>saveFormData</method-name>
-      </method>
-      <method>
-        <ejb-name>FereastraEJB</ejb-name>
-        <method-name>saveFormData</method-name>
-      </method>
-      <method>
-        <ejb-name>GrilaVentilatieEJB</ejb-name>
-        <method-name>saveFormData</method-name>
-      </method>
-      <method>
-        <ejb-name>SupraluminaEJB</ejb-name>
-        <method-name>saveFormData</method-name>
-      </method>
-      <method>
-        <ejb-name>PanouLateralEJB</ejb-name>
-        <method-name>saveFormData</method-name>
-      </method>
-      <method>
-        <ejb-name>GauriAerisireEJB</ejb-name>
-        <method-name>saveFormData</method-name>
-      </method>
-      <method>
-        <ejb-name>ClientsEJB</ejb-name>
-        <method-name>saveFormData</method-name>
-      </method>
-      <method>
-        <ejb-name>GenericProductsEJB</ejb-name>
-        <method-name>saveFormData</method-name>
-      </method>
-      <method>
-	<ejb-name>UsiStdSelectionsEJB</ejb-name>
-	<method-name>saveFormData</method-name>
-      </method>
-      <method>
-	<ejb-name>FinisajeEJB</ejb-name>
-	<method-name>saveFormData</method-name>
-      </method>
-      <method>
-	<ejb-name>OrdersEJB</ejb-name>
-	<method-name>saveFormData</method-name>
-      </method>
-      <method>
-	<ejb-name>OrdersEJB</ejb-name>
-	<method-name>saveOrderLineData</method-name>
-      </method>
-      <trans-attribute>Required</trans-attribute>
-    </container-transaction>
-
-
 
     <!-- Default Supports -->
     <container-transaction>
@@ -1399,6 +1310,105 @@
       </method>
       <trans-attribute>Supports</trans-attribute>
     </container-transaction>
+
+
+
+
+    <!-- Transaction is Required for save methods -->
+    <container-transaction>
+      <method>
+        <ejb-name>UsaMetalica1KEJB</ejb-name>
+        <method-name>saveFormData</method-name>
+      </method>
+      <method>
+        <ejb-name>UsiMetalice1KEJB</ejb-name>
+        <method-name>saveFormData</method-name>
+      </method>
+      <method>
+        <ejb-name>UsaMetalica2KEJB</ejb-name>
+        <method-name>saveFormData</method-name>
+      </method>
+      <method>
+        <description>All methods of StandardOfferEJB</description>
+        <ejb-name>StandardOfferEJB</ejb-name>
+        <method-name>saveFormData</method-name>
+      </method>
+      <method>
+        <description>All methods of SistemEJB</description>
+        <ejb-name>SistemEJB</ejb-name>
+        <method-name>saveFormData</method-name>
+      </method>
+      <method>
+        <description>All methods of OtherProducsEJB</description>
+        <ejb-name>OtherProductsEJB</ejb-name>
+        <method-name>saveFormData</method-name>
+      </method>
+      <method>
+        <description>All methods of UsaStdNeechipataBean</description>
+        <ejb-name>UsaStdNeechipataEJB</ejb-name>
+        <method-name>saveFormData</method-name>
+      </method>
+      <method>
+        <description>All methods of UsaStdNeechipataBean</description>
+        <ejb-name>UsaStandardEJB</ejb-name>
+        <method-name>saveFormData</method-name>
+      </method>
+      <method>
+        <description>All methods of OfrtaUsiStandard</description>
+        <ejb-name>OfertaUsiStandardEJB</ejb-name>
+        <method-name>saveFormData</method-name>
+      </method>
+      <method>
+        <ejb-name>ArbitraryOfferEJB</ejb-name>
+        <method-name>saveFormData</method-name>
+      </method>
+      <method>
+        <ejb-name>FereastraEJB</ejb-name>
+        <method-name>saveFormData</method-name>
+      </method>
+      <method>
+        <ejb-name>GrilaVentilatieEJB</ejb-name>
+        <method-name>saveFormData</method-name>
+      </method>
+      <method>
+        <ejb-name>SupraluminaEJB</ejb-name>
+        <method-name>saveFormData</method-name>
+      </method>
+      <method>
+        <ejb-name>PanouLateralEJB</ejb-name>
+        <method-name>saveFormData</method-name>
+      </method>
+      <method>
+        <ejb-name>GauriAerisireEJB</ejb-name>
+        <method-name>saveFormData</method-name>
+      </method>
+      <method>
+        <ejb-name>ClientsEJB</ejb-name>
+        <method-name>saveFormData</method-name>
+      </method>
+      <method>
+        <ejb-name>GenericProductsEJB</ejb-name>
+        <method-name>saveFormData</method-name>
+      </method>
+      <method>
+	<ejb-name>UsiStdSelectionsEJB</ejb-name>
+	<method-name>saveFormData</method-name>
+      </method>
+      <method>
+	<ejb-name>FinisajeEJB</ejb-name>
+	<method-name>saveFormData</method-name>
+      </method>
+      <method>
+	<ejb-name>OrdersEJB</ejb-name>
+	<method-name>saveFormData</method-name>
+      </method>
+      <method>
+	<ejb-name>OrdersEJB</ejb-name>
+	<method-name>saveOrderLineData</method-name>
+      </method>
+      <trans-attribute>Required</trans-attribute>
+    </container-transaction>
+
 
   </assembly-descriptor>
 </ejb-jar>

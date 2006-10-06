@@ -121,7 +121,7 @@ Lista comenzilor, creere/vizualizare/stergere
 	      </row>
 	      <row>
 		<label control="number" value="Numar:"/>
-		<textbox id="numar"/>
+		<textbox id="number"/>
 	      </row>
 	      <row>
 		<label control="date" value="din Data:"/>
