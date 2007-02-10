@@ -843,6 +843,7 @@
     </ejb-relation>
     
     <ejb-relation>
+      <description>One to one relation between product description and product composition if the product is a composite product.</description>
       <ejb-relation-name>Product-CompositeProduct</ejb-relation-name>
       <ejb-relationship-role>
 	<ejb-relationship-role-name>PlainProduct</ejb-relationship-role-name>
@@ -867,6 +868,7 @@
     </ejb-relation>
 
     <ejb-relation>
+      <description>The composition of a CompositeProduct.</description>
       <ejb-relation-name>CompositeProductComponents</ejb-relation-name>
       <ejb-relationship-role>
 	<ejb-relationship-role-name>CompositeProduct</ejb-relationship-role-name>
@@ -885,6 +887,11 @@
 	<relationship-role-source>
 	  <ejb-name>ProductEJB</ejb-name>
 	</relationship-role-source>
+	<cmr-field>
+	  <description>The list of the products that have as component this product</description>
+	  <cmr-field-name>parents</cmr-field-name>
+	  <cmr-field-type>java.util.Collection</cmr-field-type>
+	</cmr-field>
       </ejb-relationship-role>
     </ejb-relation>
     
