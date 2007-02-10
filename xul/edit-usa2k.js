@@ -11,6 +11,7 @@ theForm.text_fields = new Array("lg", "hg", "lcorrection", "hcorrection",
 				"cTreshold", "hTreshold", "h1Treshold",
 				"h2Treshold",
 				"broascaBuc", "cilindruBuc", "copiatCheieBuc",
+				"vizorBuc",
 				"sildTip", "sildCuloare", "sildBuc",
 				"rozetaTip", "rozetaCuloare", "rozetaBuc",
 				"manerTip", "manerCuloare", "manerBuc",
@@ -47,7 +48,8 @@ theForm.combo_fields = new Array("subclass", "version", "material",
 				 "intFoilSec", "extFoilSec", 
 				 "openingDir", "openingSide", "foilPosition",
 				 "decupareSistemId", "broascaId", "cilindruId",
-				 "copiatCheieId", "sildId", "rozetaId",
+				 "copiatCheieId", "vizorId", 
+				 "sildId", "rozetaId",
 				 "manerId", "yalla1Id", "yalla2Id",
 				 "baraAntipanicaId", "manerSemicilindruId",
 				 "selectorOrdineId", "amortizorId", 
@@ -131,7 +133,12 @@ function load_options() {
     req.add("command", "getOptionsListing");
     options = load_records(req);
     optionsListing.view = make_treeview
-	(options, function(row,col) { return options[row][col]; });
+	(options, 
+	 function(row,column) { 
+	     var col;
+	     if(column.id) col = column.id; else col = column;
+	     return options[row][col]; 
+	 });
 }
 
 
@@ -214,6 +221,17 @@ function edit_finisaj(fieldName, duplicate) {
 
 }
 
+
+
+// Primeste ca parametrii id-ul unui camp. Apeleaza change cu valoarea 0.
+function clear_sistem(fieldname) {
+	
+    var req = theForm.get_request();
+    req.add("command", "change");
+    req.add("field", fieldname);
+    req.add("value", "0");
+    theForm.post_request(req);
+}
 
 
 function doOk() {

@@ -116,4 +116,10 @@
     <ejb-ref-name>ejb/OrdersHome</ejb-ref-name>
     <jndi-name>OrdersHome</jndi-name>
   </jonas-ejb-ref>
+
+  <jonas-ejb-ref>
+    <ejb-ref-name>ejb/PreferencesHome</ejb-ref-name>
+    <jndi-name>PreferencesHome</jndi-name>
+  </jonas-ejb-ref>
+
 </jonas-web-app>

@@ -35,6 +35,16 @@ import ro.kds.erp.biz.SequenceHome;
 import java.util.Calendar;
 import ro.kds.erp.biz.Preferences;
 import ro.kds.erp.biz.Sequence;
+import ro.kds.erp.biz.ResponseBean;
+import javax.ejb.FinderException;
+import ro.kds.erp.biz.ResponseBean;
+import javax.ejb.FinderException;
+import ro.kds.erp.biz.ResponseBean;
+import ro.kds.erp.biz.ResponseBean;
+import ro.kds.erp.data.InvoiceLocal;
+import ro.kds.erp.data.InvoiceLocalHome;
+import ro.kds.erp.data.PaymentLocal;
+import ro.kds.erp.data.PaymentLocalHome;
 
 /**
  * Describe class OrdersBiz here.
@@ -57,6 +67,14 @@ public class OrdersBiz extends OrdersBean {
      * The name of the OrderLine entity.
      */
     public final String ENTITY_ORDER_LINE = "OrderLine";
+    /**
+     * The name of the Invoice entity.
+     */
+    public final String ENTITY_INVOICE = "Invoice";
+    /**
+     * The name of the Payment entity.
+     */
+    public final String ENTITY_PAYMENT = "Payment";
     
     /**
      * The maximum number of records to be returned in one request
@@ -69,20 +87,25 @@ public class OrdersBiz extends OrdersBean {
      * made by the parrent class.
      *
      */
-    public final void createNewFormBean() {
+    public void createNewFormBean() {
 	super.createNewFormBean();
 	
 
 
 	// find out what is the default delivery interval in days
 	int defaultDelivery; 
+	
 	try {
 	    Preferences prefs = PreferencesBean.getPreferences();
 	    defaultDelivery = prefs.getInteger("orders.delivery.interval", 
 					    new Integer(30)).intValue();
+
+	    form.setTvaPercent(prefs.getDouble("invoices.tax.percent",
+					       new Double(19.0)));
 	} catch (Exception e) {
 	    logger.log(BasicLevel.ERROR, "Exception when geting preferences: ", e);
 	    defaultDelivery = 30;
+	    form.setTvaPercent(new Double(19.0));
 	}
 
 	// get a new order no
@@ -108,6 +131,7 @@ public class OrdersBiz extends OrdersBean {
 	dateDelivCal.setTime(form.getDate());
 	dateDelivCal.add(Calendar.DATE, defaultDelivery);
 	form.setTermenLivrare(dateDelivCal.getTime());
+	form.setTermenLivrare1(dateDelivCal.getTime());
 
 
     }
@@ -156,6 +180,10 @@ public class OrdersBiz extends OrdersBean {
 	    form.setTelefon(o.getDeliveryPhone());
 	    form.setContact(o.getDeliveryContact());	    
 
+	    form.setTotal(getOrderedAmount());
+	    form.setPayedAmount(o.getPayedAmount());
+	    form.setInvoicedAmount(o.getInvoicedAmount());
+
 	    r = new ResponseBean();
 	} catch (NamingException e) {
 	    r = ResponseBean.getErrConfigNaming(e.getMessage());
@@ -163,7 +191,8 @@ public class OrdersBiz extends OrdersBean {
 	    logger.log(BasicLevel.ERROR, "Order data could not be loaded from database");
 	    logger.log(BasicLevel.DEBUG, e);
 	} catch (FinderException e) {
-	    logger.log(BasicLevel.DEBUG, "Finder exceptin occured");
+	    logger.log(BasicLevel.ERROR, "Finder exceptin occured");
+	    logger.log(BasicLevel.DEBUG, e);
 	    throw e;
 	} catch (Exception e) {
 	    r = ResponseBean.getErrUnexpected(e);
@@ -205,8 +234,8 @@ public class OrdersBiz extends OrdersBean {
 	    o.setDeliveryDistance(form.getDistanta());
 	    o.setDeliveryComments(form.getObservatii());
 	    
-	    o.setDiscount(form.getDiscount());
-	    o.setAdvancePayment(form.getAvans());
+	    o.setDiscount(form.getDiscount().setScale(2, BigDecimal.ROUND_HALF_UP));
+	    o.setAdvancePayment(form.getAvans().setScale(2, BigDecimal.ROUND_HALF_UP));
 	    o.setAdvanceDocument(form.getAchitatCu());
 
 	    o.setDeliveryTerm(form.getTermenLivrare());
@@ -241,6 +270,48 @@ public class OrdersBiz extends OrdersBean {
 
 	return r;
     }
+
+
+
+    /**
+     * Removes the order and its order lines.
+     */
+    public ResponseBean removeOrder() {
+	ResponseBean r;
+
+	if(! isSelectedOrder() ) {
+	    r = ResponseBean.getErrNotCurrent("Order");
+	} else {
+
+
+	    try {
+		OrderLocal o = getCurrentOrder();
+		o.remove();
+		r = new ResponseBean();
+
+	    } catch (RemoveException e) {
+		r = ResponseBean.getErrRemove("id = " + id);
+		logger.log(BasicLevel.INFO, "Remove failed due to reomve exception " + e.getMessage());
+		logger.log(BasicLevel.DEBUG, e);
+	    } catch (NamingException e) {
+		r = ResponseBean.getErrConfigNaming(e.getMessage());
+		logger.log(BasicLevel.INFO, "Remove failed due to naming exception " + e.getMessage());
+		logger.log(BasicLevel.DEBUG, e);
+	    } catch (FinderException e) {
+		r = ResponseBean.getErrNotFound("id = " + id);
+		logger.log(BasicLevel.INFO, "Remove failed due to finder exception " + e.getMessage());
+		logger.log(BasicLevel.DEBUG, e);
+	    } catch (Exception e) {
+		r = ResponseBean.getErrUnexpected(e);
+		logger.log(BasicLevel.INFO, "Unexpected exception " + e);
+		logger.log(BasicLevel.DEBUG, e);
+	    }
+
+
+	}
+	return r;
+    }
+
 
 
     /**
@@ -357,10 +428,19 @@ public class OrdersBiz extends OrdersBean {
 	    }
 
 	    ol.setOfferItem(getOfferItem());
-	    ol.setPrice(form.getPrice());
-	    ol.setQuantity(form.getQuantity());
+	    ol.setPrice(form.getPrice().setScale(2, BigDecimal.ROUND_HALF_UP));
+	    ol.setQuantity(form.getQuantity().setScale(2, BigDecimal.ROUND_HALF_UP));
 	    
-	    r = new ResponseBean();
+	    try {
+		form.setTotal(getOrderedAmount());
+	    } catch (Exception e) {
+		logger.log(BasicLevel.ERROR, "Can not get the ordered amount: " + e.getMessage());
+		logger.log(BasicLevel.DEBUG, e);
+		form.setTotal(new BigDecimal(0));
+	    }
+	    r = computeCalculatedFields(null);
+	    r.addField("total", form.getTotal());
+
 	} catch (NamingException e) {
 	    logger.log(BasicLevel.ERROR, "Naming service exception: " + e.getMessage());
 	    logger.log(BasicLevel.DEBUG, e);
@@ -398,6 +478,10 @@ public class OrdersBiz extends OrdersBean {
 		OfferItemLocal oi = getOfferItem();
 		form.setQuantity(oi.getQuantity());
 		form.setPrice(oi.getPrice());
+		form.setValue(new BigDecimal(form.getPrice().doubleValue() *
+					     form.getQuantity().doubleValue()));
+		form.setTax(new BigDecimal(form.getValue().doubleValue() *
+					   form.getTvaPercent().doubleValue()));
 
 		logger.log(BasicLevel.DEBUG, "default quantity: " + oi.getQuantity());
 		logger.log(BasicLevel.DEBUG, "default price: " + oi.getPrice());
@@ -434,6 +518,17 @@ public class OrdersBiz extends OrdersBean {
 	    ol.remove();
 
 	    r = new ResponseBean();
+	    try {
+		OrderLocal o = getCurrentOrder();
+		form.setTotal(getOrderedAmount());
+		r = computeCalculatedFields(null);
+		r.addField("total", form.getTotal());
+	    } catch (Exception e) {
+		logger.log(BasicLevel.ERROR, "Can not get the ordered amount: " + e.getMessage());
+		logger.log(BasicLevel.DEBUG, e);
+		form.setTotal(new BigDecimal(0));
+	    }
+	    
 	} catch (FinderException e) {
 	    r = ResponseBean.getErrNotFound(e.getMessage());
 	    logger.log(BasicLevel.ERROR, "Finder exception when trying to delete an order line");
@@ -491,10 +586,17 @@ public class OrdersBiz extends OrdersBean {
 	    r.addField("orders.no",		o.getDocument().getNumber());
 	    r.addField("orders.date",		o.getDocument().getDate());
 	    if(o.getClient() != null)
-		r.addField("orders.client",		o.getClient().getName());
+		r.addField("orders.client",	o.getClient().getName());
 	    else
-		r.addField("orders.client", "");
-	    r.addField("orders.localitate",	o.getDeliveryLocation());
+		r.addField("orders.client",	"");
+	    try {
+		r.addField("orders.localitate",	
+			   ValueLists.getValueByCode(12005, o.getDeliveryLocation().toString()).getName());
+	    } catch (Exception e) {
+		r.addField("orders.localitate", "-");
+		logger.log(BasicLevel.ERROR, "Can not read the value of orders.localitate for code " 
+			   + o.getDeliveryLocation());
+	    }
 	    r.addField("orders.distanta",	o.getDeliveryDistance());
 	    r.addField("orders.avans",		o.getAdvancePayment());
 	    r.addField("orders.termenLivrare",	o.getDeliveryTerm());
@@ -666,7 +768,497 @@ public class OrdersBiz extends OrdersBean {
 	return r;
     }
 
+    /**
+     * Initialization of the invoice form fields to the default values.
+     *
+     */
+    public void initInvoiceFields() {
+	logger.log(BasicLevel.DEBUG, ">");
+	
+	form.setInvoiceNumber("");
+	form.setInvoiceDate(new Date());
+	form.setInvoiceRole("");
+	form.setInvoiceAmount(new BigDecimal(0));
+	form.setInvoiceTax(new BigDecimal(0));
+	form.setInvoiceTotal(new BigDecimal(0));
+	form.setInvoicePayed(new BigDecimal(0));
+	form.setInvoiceUnpayed(new BigDecimal(0));
 
+
+	if(isSelectedOrder()) {
+	    form.setInvoiceAmount(new BigDecimal(form.getTotalFinal().doubleValue() - 
+						 form.getInvoicedAmount().doubleValue())
+				  .setScale(2, BigDecimal.ROUND_HALF_UP));
+	    form.setInvoiceTax(new BigDecimal(form.getInvoiceAmount().doubleValue() *
+					      form.getTvaPercent().doubleValue() / 100)
+			       .setScale(2, BigDecimal.ROUND_HALF_UP));
+	}
+
+
+	logger.log(BasicLevel.DEBUG, "<");
+    }
+
+    /**
+     * Copy the values of currently selected invoice entity into
+     * the form fields.
+     *
+     * @return a <code>ResponseBean</code> with the result code and,
+     * if an error occurs, the error info.
+     * @exception FinderException if no entity could be found for the
+     * id indicating the currently selected invoice.
+     */
+    public ResponseBean loadInvoiceFields() throws FinderException {
+	ResponseBean r;
+
+	logger.log(BasicLevel.DEBUG, ">");
+
+	try {
+	    InvoiceLocal inv = getCurrentInvoice();
+
+	    form.setInvoiceNumber(inv.getDocument().getNumber());
+	    form.setInvoiceDate(inv.getDocument().getDate());
+	    form.setInvoiceRole(inv.getRole());
+	    form.setInvoiceAmount(inv.getAmount());
+	    form.setInvoiceTax(inv.getTax());
+	    form.setInvoicePayed(inv.getSumOfPayments());
+	    
+	    r = new ResponseBean();
+	} catch (NamingException e) {
+	    logger.log(BasicLevel.INFO, "The invoice could not be loaded " +
+		       "due to a configuration error of the naming service: " +
+		       e.getMessage());
+	    logger.log(BasicLevel.DEBUG, e);
+	    r = ResponseBean.getErrConfigNaming(e.getMessage());
+	}
+
+
+	logger.log(BasicLevel.DEBUG, "<");
+	return r;
+    }
+  
+
+    /**
+     * Save the form fields into the persistent layer. If there is
+     * no currently selected invoice, a new invoice entity will be
+     * created for this order.
+     */
+    public ResponseBean saveInvoiceData() {
+
+	ResponseBean r;
+
+	// Current record should be saved, because it might be a new one
+	r = saveFormData();
+	if (r.getCode() != ResponseBean.CODE_SUCCESS)
+	    return r;
+
+	if(! isSelectedOrder()) {
+	    logger.log(BasicLevel.WARN, "saveInvoiceData called but no order is selected");
+	    return ResponseBean.getErrNotCurrent(ENTITY_ORDER);
+	}
+
+
+	logger.log(BasicLevel.DEBUG, ">");
+
+	try {
+	    InvoiceLocal inv;
+
+	    if(isSelectedInvoice()) {
+		inv = getCurrentInvoice();
+	    } else {
+		InvoiceLocalHome invh = getInvoiceHome();
+		inv = invh.create();
+		getCurrentOrder().getInvoices().add(inv);
+	    }
+
+	    inv.getDocument().setNumber(form.getInvoiceNumber());
+	    inv.getDocument().setDate(form.getInvoiceDate());
+	    inv.setRole(form.getInvoiceRole());
+	    inv.setAmount(form.getInvoiceAmount().setScale(2, BigDecimal.ROUND_HALF_UP));
+	    inv.setTax(form.getInvoiceTax().setScale(2, BigDecimal.ROUND_HALF_UP));
+
+	    r = new ResponseBean();
+	} catch (CreateException e) {
+	    logger.log(BasicLevel.ERROR, "Invoice entity could not be created: " + e.getMessage());
+	    logger.log(BasicLevel.INFO, "The order id at invoice create exception is: " + id);
+	    logger.log(BasicLevel.DEBUG, e);
+	    
+	    r = ResponseBean.getErrCreate(ENTITY_INVOICE);
+	} catch (DataLayerException e) {
+	    logger.log(BasicLevel.ERROR, "Invoice entity could not be created: " + e.getMessage());
+	    logger.log(BasicLevel.INFO, "The order id at invoice create exception is: " + id);
+	    logger.log(BasicLevel.DEBUG, e);
+	    
+	    r = ResponseBean.getErrCreate(ENTITY_INVOICE);
+	} catch (FinderException e) {
+	    logger.log(BasicLevel.ERROR, "Finder exception: " + e.getMessage());
+	    logger.log(BasicLevel.INFO, "The order id at finder exception is: " + id);
+	    logger.log(BasicLevel.INFO, "The invoice id at finder exception is: " + id);
+	    
+	    r = ResponseBean.getErrNotFound(e.getMessage());
+	} catch (NamingException e) {
+	    logger.log(BasicLevel.ERROR, "Naming service error: " + e.getMessage());
+	    logger.log(BasicLevel.DEBUG, e);
+	    
+	    r = ResponseBean.getErrConfigNaming(e.getMessage());
+	} catch (Exception e) {
+	    logger.log(BasicLevel.ERROR, "Unexpected exception" , e);
+	    r = ResponseBean.getErrUnexpected(e);
+	}
+
+
+	logger.log(BasicLevel.DEBUG, "<");
+	return r;
+    }
+
+
+    /**
+     * Remove the currently selected invoice from the database.
+     */
+    public ResponseBean removeInvoice() {
+	if(! isSelectedInvoice()) {
+	    logger.log(BasicLevel.WARN, "removeInvoice called but no invoice is selected");
+	    return ResponseBean.getErrNotCurrent(ENTITY_INVOICE);
+	}
+
+
+	logger.log(BasicLevel.DEBUG, ">");
+	ResponseBean r;
+
+	
+	try {
+	    InvoiceLocal inv = getCurrentInvoice();
+	    inv.remove();
+	    
+	    r = new ResponseBean();
+	} catch (NamingException e) {
+	    logger.log(BasicLevel.ERROR, "Naming service error: " + e.getMessage());
+	    logger.log(BasicLevel.DEBUG, e);
+	    
+	    r = ResponseBean.getErrConfigNaming(e.getMessage());
+	} catch (FinderException e) {
+	    logger.log(BasicLevel.ERROR, "Finder exception: " + e.getMessage());
+	    logger.log(BasicLevel.INFO, "When finder exception occured, the invoice id was " + invoiceId);
+	    logger.log(BasicLevel.DEBUG, e);
+
+	    r = ResponseBean.getErrNotFound(e.getMessage());
+	} catch (RemoveException e) {
+	    logger.log(BasicLevel.ERROR, "Remove exception: " + e.getMessage());
+	    logger.log(BasicLevel.INFO, "Failed to remove invoice with id " + invoiceId);
+	    logger.log(BasicLevel.DEBUG, e);
+
+	    r = ResponseBean.getErrRemove(ENTITY_INVOICE);
+	} catch (Exception e) {
+	    logger.log(BasicLevel.ERROR, "Unexpected eception", e);
+	    r = ResponseBean.getErrUnexpected(e);
+	}
+
+	return r;
+	    
+    }
+
+    /**
+     * Get the listing of invoices for the current order.
+     * The fields in the returned <code>ResponseBean</code> for
+     * each invoice are:
+     * <ul>
+     * <li>invoices.id
+     * <li>invoices.number
+     * <li>invoices.date
+     * <li>invoices.role
+     * <li>invoices.amount
+     * </ul>
+     *
+     * @return an <code>ResponseBean</code> object holding a list of records,
+     * one for each invoice for the current order.
+     */
+    public ResponseBean loadInvoices() {
+	if(! isSelectedOrder()) {
+	    logger.log(BasicLevel.WARN, "loadInvoices called but no order is selected.");
+	    return ResponseBean.getErrNotCurrent(ENTITY_ORDER);
+	}
+
+	logger.log(BasicLevel.DEBUG, ">");
+	ResponseBean r;
+	
+	try {
+	    Collection invoices = getCurrentOrder().getInvoices();
+
+	    r = new ResponseBean();
+	    for(Iterator i = invoices.iterator(); i.hasNext();) {
+		InvoiceLocal inv = (InvoiceLocal)i.next();
+		
+		r.addRecord();
+		r.addField("invoices.id", inv.getId());
+		r.addField("invoices.number", inv.getDocument().getNumber());
+		r.addField("invoices.date", inv.getDocument().getDate());
+		r.addField("invoices.role", inv.getRole());
+		r.addField("invoices.amount", inv.getAmount());
+	    }
+	} catch (NamingException e) {
+	    logger.log(BasicLevel.ERROR, "Naming exception " + e.getMessage());
+	    logger.log(BasicLevel.DEBUG, e);
+	    r = ResponseBean.getErrConfigNaming(e.getMessage());
+	} catch (FinderException e) {
+	    logger.log(BasicLevel.ERROR, "FinderException: " + e.getMessage());
+	    logger.log(BasicLevel.INFO, "Order id searched when FinderException occured is: " + id);
+	    logger.log(BasicLevel.DEBUG, e);
+	    r = ResponseBean.getErrNotFound(e.getMessage());
+	} catch (Exception e) {
+	    logger.log(BasicLevel.ERROR, "Unexpected exception", e);
+	    r = ResponseBean.getErrUnexpected(e);
+	}	    
+
+	logger.log(BasicLevel.DEBUG, "<");
+	return r;
+    }
+
+    /**
+     * Initialization of form fields with default values. After the
+     * initialization, the <code>computeCalculatedFields</code> will
+     * be called, so no business logic should be done here, only strict
+     * initialization with empty values -- 0 for numbers, empty strings and
+     * current dates.
+     *
+     */
+    public  void initPaymentFields() {
+
+	form.setPaymentNumber("");
+	form.setPaymentDate(new Date());
+	form.setPaymentAmount(new BigDecimal(0));
+
+	if(isSelectedInvoice()) {
+	    form.setPaymentAmount(form.getInvoiceTotal().subtract(form.getInvoicePayed()));
+	}
+
+    }
+
+    /**
+     * Copy the values from payment entity into the form fields. This method
+     * is called internally after a selection of a new payment entity was
+     * performed.
+     *
+     * @return a <code>ResponseBean</code> with the result code.
+     * @exception FinderException if the payment for the selected id
+     * could not be found in the database.
+     */
+    public ResponseBean loadPaymentFields() throws FinderException {
+	logger.log(BasicLevel.DEBUG, ">");
+
+	if(! isSelectedPayment()) {
+	    logger.log(BasicLevel.WARN, "< loadPaymentFields called but there is no current payment");
+	    return ResponseBean.getErrNotCurrent(ENTITY_PAYMENT);
+	}
+
+	ResponseBean r;
+
+	try {
+	    PaymentLocal payment = getCurrentPayment();
+	    
+	    form.setPaymentNumber(payment.getDocument().getNumber());
+	    form.setPaymentDate(payment.getDocument().getDate());
+	    form.setPaymentAmount(payment.getAmount());
+
+	    r = new ResponseBean();
+	} catch (NamingException e) {
+	    logger.log(BasicLevel.ERROR, "Naming service error: " + e.getMessage());
+	    logger.log(BasicLevel.DEBUG, e);
+	    r = ResponseBean.getErrConfigNaming(e.getMessage());
+	}
+
+	logger.log(BasicLevel.DEBUG, "<");
+	return r;
+    }
+
+    /**
+     * Save the values of the form fields into the current payment entity. If
+     * no payment entity is selected, a new payment entity is added to the
+     * currently selected invoice.
+     *
+     * @return a <code>ResponseBean</code> with the return code.
+     */
+    public ResponseBean savePaymentData() {
+	ResponseBean r;
+
+	// Current record should be saved, because it might be a new one
+	r = saveInvoiceData();
+	if (r.getCode() != ResponseBean.CODE_SUCCESS)
+	    return r;
+
+	if(! isSelectedInvoice()) {
+	    logger.log(BasicLevel.WARN, "savePaymentData called, but not invoice is currently selected.");
+	    return ResponseBean.getErrNotCurrent(ENTITY_INVOICE);
+	}
+	
+	logger.log(BasicLevel.DEBUG, ">");
+
+	try {
+	    PaymentLocal payment;
+	    if(isSelectedPayment()) {
+		payment = getCurrentPayment();
+	    } else {
+		PaymentLocalHome ph = getPaymentHome();
+		payment = ph.create();
+		payment.setInvoice(getCurrentInvoice());
+	    }
+
+	    payment.getDocument().setNumber(form.getPaymentNumber());
+	    payment.getDocument().setDate(form.getPaymentDate());
+	    payment.setAmount(form.getPaymentAmount().setScale(2, BigDecimal.ROUND_HALF_UP));
+
+	    r = new ResponseBean();
+	} catch(NamingException e) {
+	    logger.log(BasicLevel.ERROR, "Naming service exception: " + e.getMessage());
+	    logger.log(BasicLevel.DEBUG, e);
+	    r = ResponseBean.getErrConfigNaming(e.getMessage());
+	} catch(FinderException e) {
+	    logger.log(BasicLevel.ERROR, "Finder exception: " + e.getMessage());
+	    logger.log(BasicLevel.INFO, "The current payment id when finder exception occured is: " + paymentId);
+	    logger.log(BasicLevel.INFO, "The current invoice id when finder exception occured is: " + invoiceId);
+	    logger.log(BasicLevel.DEBUG, e);
+
+	    r = ResponseBean.getErrNotFound(e.getMessage());
+	} catch (CreateException e) {
+	    logger.log(BasicLevel.ERROR, "A new payment could not be created: " + e.getMessage());
+	    logger.log(BasicLevel.INFO, "The invoice id when create exception occured is: " + invoiceId);
+	    logger.log(BasicLevel.DEBUG, e);
+
+	    r = ResponseBean.getErrCreate(ENTITY_PAYMENT);
+	} catch (DataLayerException e) {
+	    logger.log(BasicLevel.ERROR, "A new payment could not be created: " + e.getMessage());
+	    logger.log(BasicLevel.INFO, "The invoice id when create exception occured is: " + invoiceId);
+	    logger.log(BasicLevel.DEBUG, e);
+
+	    r = ResponseBean.getErrCreate(ENTITY_PAYMENT);
+	}
+
+
+	logger.log(BasicLevel.DEBUG, "<");
+	return r;
+    }
+
+
+    /**
+     * Remove the currently selected invoice from the database.
+     */
+    public ResponseBean removePayment() {
+	if(! isSelectedPayment()) {
+	    logger.log(BasicLevel.WARN, "removePayment called but no payment is selected");
+	    return ResponseBean.getErrNotCurrent(ENTITY_PAYMENT);
+	}
+
+
+	logger.log(BasicLevel.DEBUG, ">");
+	ResponseBean r;
+
+	
+	try {
+	    PaymentLocal pay = getCurrentPayment();
+	    pay.remove();
+	    
+	    r = new ResponseBean();
+	} catch (NamingException e) {
+	    logger.log(BasicLevel.ERROR, "Naming service error: " + e.getMessage());
+	    logger.log(BasicLevel.DEBUG, e);
+	    
+	    r = ResponseBean.getErrConfigNaming(e.getMessage());
+	} catch (FinderException e) {
+	    logger.log(BasicLevel.ERROR, "Finder exception: " + e.getMessage());
+	    logger.log(BasicLevel.INFO, "When finder exception occured, the payment id was " + paymentId);
+	    logger.log(BasicLevel.DEBUG, e);
+
+	    r = ResponseBean.getErrNotFound(e.getMessage());
+	} catch (RemoveException e) {
+	    logger.log(BasicLevel.ERROR, "Remove exception: " + e.getMessage());
+	    logger.log(BasicLevel.INFO, "Failed to remove payment with id " + paymentId);
+	    logger.log(BasicLevel.DEBUG, e);
+
+	    r = ResponseBean.getErrRemove(ENTITY_INVOICE);
+	} catch (Exception e) {
+	    logger.log(BasicLevel.ERROR, "Unexpected eception", e);
+	    r = ResponseBean.getErrUnexpected(e);
+	}
+
+	return r;
+	    
+    }
+
+    /**
+     * Computes the list of payments for the currently selected invoice. The
+     * fields in the listing for each payment are:
+     *
+     * <ul>
+     * <li>payments.id
+     * <li>payments.number
+     * <li>payments.date
+     * <li>payments.amount
+     * </ul>
+     *
+     * @return a <code>ResponseBean</code> containing the list of payment records
+     * for the currently selected invoice.
+     */
+    public ResponseBean loadPayments() {
+	if(! isSelectedInvoice()) {
+	    logger.log(BasicLevel.WARN, "loadPayemnts called but no invoice is currentlye selected.");
+	    return ResponseBean.getErrNotCurrent(ENTITY_INVOICE);
+	}
+
+	ResponseBean r;
+	logger.log(BasicLevel.DEBUG, ">");
+	
+	try {
+	    Collection payments = getCurrentInvoice().getPayments();
+
+	    r = new ResponseBean();
+	    for(Iterator i = payments.iterator(); i.hasNext();) {
+		PaymentLocal payment = (PaymentLocal)i.next();
+
+		r.addRecord();
+		r.addField("payments.id", payment.getId());
+		r.addField("payments.number", payment.getDocument().getNumber());
+		r.addField("payments.date", payment.getDocument().getDate());
+		r.addField("payments.amount", payment.getAmount());
+
+	    }
+	} catch (NamingException e) {
+	    logger.log(BasicLevel.ERROR, "Naming service error: " + e.getMessage());
+	    logger.log(BasicLevel.DEBUG, e);
+	    
+	    r = ResponseBean.getErrConfigNaming(e.getMessage());
+	} catch (FinderException e) {
+	    logger.log(BasicLevel.ERROR, "Finder exception " + e.getMessage());
+	    logger.log(BasicLevel.INFO, "Invoice id at finder exception time was: " + invoiceId);
+	    logger.log(BasicLevel.DEBUG, e);
+
+	    r = ResponseBean.getErrNotFound(e.getMessage());
+	} catch (Exception e) {
+	    logger.log(BasicLevel.ERROR, "Unexpected exception", e);
+
+	    r = ResponseBean.getErrUnexpected(e);
+	}
+
+	logger.log(BasicLevel.DEBUG, "<");
+	return r;
+    }
+
+
+
+    /**
+     * Computes the ordered value by summing up the values of order lines.
+     */
+    public BigDecimal getOrderedAmount() throws NamingException, 
+						FinderException {
+	OrderLocal o = getCurrentOrder();
+	Collection lines = o.getLines();
+
+	BigDecimal amount = new BigDecimal(0);
+	for(Iterator i = lines.iterator(); i.hasNext();) {
+	    OrderLineLocal ol = (OrderLineLocal)i.next();
+	    
+	    amount = amount.add(ol.getQuantity().multiply(ol.getPrice()));
+	}
+
+	return amount;
+    }
 
     //////////////////////////////////////////////////////////////////////////
     // Value lists
@@ -677,9 +1269,10 @@ public class OrdersBiz extends OrdersBean {
      * @param response is the <code>ResponseBean</code> to which the value lists
      * should be added.
      */
-    public final void loadValueLists(final ResponseBean response) {
+    public void loadValueLists(final ResponseBean response) {
 	response.addValueList("montaj", ValueLists.makeStdValueList(11200));
 	response.addValueList("localitate", ValueLists.makeStdValueList(12005));
+	response.addValueList("invoiceRole", ValueLists.makeStdValueList(11250));
     }
 
 
@@ -706,7 +1299,14 @@ public class OrdersBiz extends OrdersBean {
      * Cache for a reference to <code>OfferItemLocalHome</code>.
      */
     OfferItemLocalHome cache_oih;
-
+    /**
+     * Cache for a reference to <code>InvoiceLocalHome</code>
+     */
+    InvoiceLocalHome cache_invh;
+    /**
+     * Cache for a reference to <code>PaymentLocalHome</code>
+     */
+    PaymentLocalHome cache_payh;
     
     /**
      * Utility method to get a <code>OrderLocalHome</code> reference.
@@ -855,6 +1455,88 @@ public class OrdersBiz extends OrdersBean {
 	}
     }
 
+
+    /**
+     * Utility method to get a reference to the invoice bean home interface.
+     */
+    protected InvoiceLocalHome getInvoiceHome() throws NamingException {
+	if(cache_invh == null) {
+	    InitialContext ic = new InitialContext();
+	    Context env = (Context)ic.lookup("java:comp/env");
+	    cache_invh = (InvoiceLocalHome)PortableRemoteObject.narrow
+		(env.lookup("ejb/InvoiceHome"), InvoiceLocalHome.class);
+	}
+	return cache_invh;
+    }
+
+    /**
+     * Checks if there is a currently selected invoice.
+     */
+    protected boolean isSelectedInvoice() {
+	return invoiceId != null;
+    }
+
+    /**
+     * Load the currently selected invoice.
+     *
+     * @throws FinderException if no invoice is currently selected.
+     */
+    protected InvoiceLocal getCurrentInvoice() throws NamingException, FinderException {
+	InvoiceLocalHome invh = getInvoiceHome();
+	try {
+	    InvoiceLocal invl = invh.findByPrimaryKey(invoiceId);
+	    return invl;
+	} catch (FinderException e) {
+	    logger.log(BasicLevel.DEBUG, "Invoice not found for id = " + 
+		       invoiceId + ". ", e);
+	    throw new FinderException(ENTITY_INVOICE);
+	}
+    }
+
+
+    /**
+     * Utility method to get a reference to the PaymentLocalHome.
+     */
+    protected PaymentLocalHome getPaymentHome() throws NamingException {
+	if(cache_payh == null) {
+	    InitialContext ic = new InitialContext();
+	    Context env = (Context)ic.lookup("java:comp/env");
+	    cache_payh = (PaymentLocalHome)PortableRemoteObject.narrow
+		(env.lookup("ejb/PaymentHome"), PaymentLocalHome.class);
+	}
+
+	return cache_payh;
+    }
+
+    /**
+     * Convenience method that checks if there is a currentlu selected payment.
+     */
+    protected boolean isSelectedPayment() {
+	return paymentId != null;
+    }
+
+    /**
+     * Utility method to get the currently selected payment.
+     * 
+     * @throws FinderException if there is no currently selected payment.
+     */
+    protected PaymentLocal getCurrentPayment() throws NamingException, FinderException {
+	PaymentLocalHome ph = getPaymentHome();
+	try {
+	    PaymentLocal p = ph.findByPrimaryKey(paymentId);
+	    return p;
+	} catch (FinderException e) {
+	    logger.log(BasicLevel.DEBUG, "Can not find Payment id " + id +
+		       ". ", e);
+	    FinderException finderE = new FinderException(ENTITY_PAYMENT);
+	    finderE.initCause(e);
+	    throw finderE;
+	}
+    }
+
+
+
+
     /**
      * Initialize the cache variables here.
      *
@@ -867,6 +1549,9 @@ public class OrdersBiz extends OrdersBean {
 	cache_ch = null;
 	cache_ollh = null;
 	cache_oih = null;
+	cache_invh = null;
+	cache_payh = null;
     }
+
 
 }

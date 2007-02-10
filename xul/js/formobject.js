@@ -31,6 +31,9 @@ function FormObject() {
     // internal methods
     this.update_fields = update_fields;
 
+    // yes/no dialog
+    // call it like this: theForm.ask("description of action to be performed", accept_function)
+    this.ask = ask_dlg;
 
     // DEPRECATED
     // use instead:
@@ -469,6 +472,24 @@ function open_service_dlg(idField, service, xulfile) {
     } else {
 	alert("Cod eroare: " + response.code);
     }
+}
+
+
+function ask_dlg(message, accept_method, cancel_method) {
+    if(!cancel_method) {
+	cancel_method = function default_cancel() { return true; }
+    }
+    var action_handler = {
+	theForm: this,
+	accept: accept_method,
+	cancel: cancel_method
+    };
+
+    window.openDialog("ask-dlg.xul", 
+		      "_blank", "chrome,resizable,modal",
+		      message,
+		      action_handler);
+
 }
 
 // DEPRECATED

@@ -3,6 +3,7 @@ package ro.kds.erp.utils;
 import org.apache.commons.beanutils.Converter;
 import java.text.DateFormat;
 import org.apache.commons.beanutils.ConversionException;
+import java.text.SimpleDateFormat;
 
 /**
  * Implements a DateConverter to be used with beanutils ConvertUtils class.
@@ -47,7 +48,8 @@ public class DateConverter implements Converter {
 	    throw new ConversionException("Can not convert to " + type.getName());
 	}
 	try {
-	    DateFormat format = DateFormat.getDateInstance();
+	    //DateFormat format = DateFormat.getDateInstance();
+	    DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 	    return format.parse((String)object);
 	} catch (Exception e) {
 	    throw new ConversionException(e);

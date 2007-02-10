@@ -3,20 +3,21 @@ package ro.kds.erp.biz.setum.basic;
 import javax.ejb.SessionBean;
 import javax.ejb.SessionSynchronization;
 import javax.ejb.SessionContext;
-import org.objectweb.util.monolog.Monolog;
-import org.objectweb.util.monolog.api.BasicLevel;
-import org.objectweb.util.monolog.api.Logger;
-//import org.objectweb.jonas.common.Log;
 import javax.ejb.CreateException;
-import ro.kds.erp.biz.ResponseBean;
-import javax.naming.InitialContext;
 import javax.ejb.FinderException;
 import java.util.Collection;
 import java.util.Iterator;
+import javax.naming.*;
+import javax.rmi.PortableRemoteObject;
+
+import org.objectweb.util.monolog.Monolog;
+import org.objectweb.util.monolog.api.BasicLevel;
+import org.objectweb.util.monolog.api.Logger;
+
 import ro.kds.erp.scripting.Script;
 import ro.kds.erp.scripting.TclFileScript;
 import ro.kds.erp.scripting.ScriptErrorException;
-import javax.naming.*;
+import ro.kds.erp.biz.*;
 
 /**
  * Standard implementation of the StandardOffer session bean.
@@ -29,11 +30,19 @@ public abstract class StandardOfferBean
     static protected Logger logger = null;
     protected SessionContext ejbContext;
 
+    /**
+     * Stores the reference to the <code>ServiceFactory</code>
+     * to be passed to script execution.
+     */
+    protected ServiceFactoryLocal factory;
+
     protected Integer id;
     final static String FORM_VARNAME = "form";
     final static String RESPONSE_VARNAME = "response";
     final static String LOGIC_VARNAME = "logic";
     final static String OLDVAL_VARNAME = "oldVal";
+    final static String SERVICE_FACTORY_VARNAME = "factory";
+    final static String LOGGER_VARNAME = "logger";
 
     /**
      * The name of the env parameter containing the script prefix.
@@ -60,6 +69,16 @@ public abstract class StandardOfferBean
         }
         logger.log(BasicLevel.DEBUG, "");
         ejbContext = ctx;
+
+	try {
+            InitialContext ic = new InitialContext();
+	    Context env = (Context)ic.lookup("java:comp/env");
+	    ServiceFactoryLocalHome fh = (ServiceFactoryLocalHome)PortableRemoteObject.
+		narrow(env.lookup("ejb/ServiceFactory"), ServiceFactoryLocalHome.class);
+            factory = fh.create();
+	} catch (Exception e) {
+	    logger.log(BasicLevel.ERROR, "ServiceFactory was not instantiated", e);
+	}
     }
 
 
@@ -201,6 +220,8 @@ public abstract class StandardOfferBean
 		script.setVar(FORM_VARNAME, form, 
 			      StandardOfferForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 
 		addFieldsToScript(script);
 		script.run();
@@ -243,6 +264,8 @@ public abstract class StandardOfferBean
 		script.setVar(FORM_VARNAME, form, 
 			      StandardOfferForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 
@@ -269,6 +292,8 @@ public abstract class StandardOfferBean
 		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
 		script.setVar(FORM_VARNAME, form, StandardOfferForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
@@ -293,6 +318,8 @@ public abstract class StandardOfferBean
 		script.setVar(OLDVAL_VARNAME, oldVal, java.util.Date.class);
 		script.setVar(FORM_VARNAME, form, StandardOfferForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
@@ -317,6 +344,8 @@ public abstract class StandardOfferBean
 		script.setVar(OLDVAL_VARNAME, oldVal, java.util.Date.class);
 		script.setVar(FORM_VARNAME, form, StandardOfferForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
@@ -341,6 +370,8 @@ public abstract class StandardOfferBean
 		script.setVar(OLDVAL_VARNAME, oldVal, java.util.Date.class);
 		script.setVar(FORM_VARNAME, form, StandardOfferForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
@@ -365,6 +396,8 @@ public abstract class StandardOfferBean
 		script.setVar(OLDVAL_VARNAME, oldVal, Boolean.class);
 		script.setVar(FORM_VARNAME, form, StandardOfferForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
@@ -389,6 +422,8 @@ public abstract class StandardOfferBean
 		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
 		script.setVar(FORM_VARNAME, form, StandardOfferForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
@@ -413,6 +448,8 @@ public abstract class StandardOfferBean
 		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
 		script.setVar(FORM_VARNAME, form, StandardOfferForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
@@ -437,6 +474,8 @@ public abstract class StandardOfferBean
 		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
 		script.setVar(FORM_VARNAME, form, StandardOfferForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
@@ -461,6 +500,8 @@ public abstract class StandardOfferBean
 		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
 		script.setVar(FORM_VARNAME, form, StandardOfferForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
@@ -485,6 +526,8 @@ public abstract class StandardOfferBean
 		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
 		script.setVar(FORM_VARNAME, form, StandardOfferForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
@@ -509,6 +552,8 @@ public abstract class StandardOfferBean
 		script.setVar(OLDVAL_VARNAME, oldVal, java.math.BigDecimal.class);
 		script.setVar(FORM_VARNAME, form, StandardOfferForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
@@ -533,12 +578,66 @@ public abstract class StandardOfferBean
 		script.setVar(OLDVAL_VARNAME, oldVal, java.math.BigDecimal.class);
 		script.setVar(FORM_VARNAME, form, StandardOfferForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
 						// fields to the response also
 	   } catch (ScriptErrorException e) {
 	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the vatPrice", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
+    public ResponseBean updatePrice1(java.math.BigDecimal price1) {
+        ResponseBean r = new ResponseBean();
+	java.math.BigDecimal oldVal = form.getPrice1();
+	form.setPrice1(price1);
+	r.addRecord();
+	r.addField("price1", price1); // for number format
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".price1");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(OLDVAL_VARNAME, oldVal, java.math.BigDecimal.class);
+		script.setVar(FORM_VARNAME, form, StandardOfferForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the price1", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
+    public ResponseBean updatePrice2(java.math.BigDecimal price2) {
+        ResponseBean r = new ResponseBean();
+	java.math.BigDecimal oldVal = form.getPrice2();
+	form.setPrice2(price2);
+	r.addRecord();
+	r.addField("price2", price2); // for number format
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".price2");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(OLDVAL_VARNAME, oldVal, java.math.BigDecimal.class);
+		script.setVar(FORM_VARNAME, form, StandardOfferForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the price2", e);
            }
         }
 	computeCalculatedFields(r);
@@ -557,6 +656,8 @@ public abstract class StandardOfferBean
 		script.setVar(OLDVAL_VARNAME, oldVal, Double.class);
 		script.setVar(FORM_VARNAME, form, StandardOfferForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
@@ -581,6 +682,8 @@ public abstract class StandardOfferBean
 		script.setVar(OLDVAL_VARNAME, oldVal, java.math.BigDecimal.class);
 		script.setVar(FORM_VARNAME, form, StandardOfferForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
@@ -605,6 +708,8 @@ public abstract class StandardOfferBean
 		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
 		script.setVar(FORM_VARNAME, form, StandardOfferForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
@@ -629,6 +734,8 @@ public abstract class StandardOfferBean
 		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
 		script.setVar(FORM_VARNAME, form, StandardOfferForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
@@ -653,6 +760,8 @@ public abstract class StandardOfferBean
 		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
 		script.setVar(FORM_VARNAME, form, StandardOfferForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
@@ -677,6 +786,8 @@ public abstract class StandardOfferBean
 		script.setVar(OLDVAL_VARNAME, oldVal, java.math.BigDecimal.class);
 		script.setVar(FORM_VARNAME, form, StandardOfferForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
@@ -701,6 +812,8 @@ public abstract class StandardOfferBean
 		script.setVar(OLDVAL_VARNAME, oldVal, java.math.BigDecimal.class);
 		script.setVar(FORM_VARNAME, form, StandardOfferForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
@@ -712,7 +825,70 @@ public abstract class StandardOfferBean
 	computeCalculatedFields(r);
 	return r;
     }
+    public ResponseBean updateLineComments(String lineComments) {
+        ResponseBean r = new ResponseBean();
+	String oldVal = form.getLineComments();
+	form.setLineComments(lineComments);
+	r.addRecord();
+	r.addField("lineComments", lineComments); // for number format
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".lineComments");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
+		script.setVar(FORM_VARNAME, form, StandardOfferForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the lineComments", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
 
+    /**
+     * Generated implementation of the adjustPrices service. It will call
+     * the script ro.kds.erp.biz.setum.basic.StandardOffer.adjustPrices
+     * to execute the request.
+     * 
+     * The <code>ResponseBean</code> to be returned will be automatically populated with the
+     * fields modified by the script and the changes will be automatically added to the
+     * form bean.
+     *
+     * @return a <code>ResponseBean</code> containing the field values that were changed by
+     * the script and any of the fields added to it by the script.
+     * 
+     */
+    public ResponseBean adjustPrices (
+        java.math.BigDecimal percent
+    ) {
+
+
+        ResponseBean r = new ResponseBean();
+        r.addRecord();
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".adjustPrices");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(FORM_VARNAME, form, StandardOfferForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
+		addFieldsToScript(script);
+		script.run();
+                getFieldsFromScript(script, r);
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for service adjustPrices", e);
+           }
+        }
+	return r;
+    }
 
     /**
      * Get the fields stored internaly and adds them to the response.
@@ -730,6 +906,8 @@ public abstract class StandardOfferBean
 	r.addField("productId", form.getProductId());
 	r.addField("price", form.getPrice());
 	r.addField("vatPrice", form.getVatPrice());
+	r.addField("price1", form.getPrice1());
+	r.addField("price2", form.getPrice2());
 	r.addField("relativeGain", form.getRelativeGain());
 	r.addField("absoluteGain", form.getAbsoluteGain());
 	r.addField("productCategory", form.getProductCategory());
@@ -737,6 +915,7 @@ public abstract class StandardOfferBean
 	r.addField("productName", form.getProductName());
 	r.addField("entryPrice", form.getEntryPrice());
 	r.addField("sellPrice", form.getSellPrice());
+	r.addField("lineComments", form.getLineComments());
 	loadValueLists(r);
     }
 
@@ -824,6 +1003,18 @@ public abstract class StandardOfferBean
             logger.log(BasicLevel.DEBUG, e);
         }
 	try {
+	    s.setVar("price1", form.getPrice1(), java.math.BigDecimal.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: price1 from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    s.setVar("price2", form.getPrice2(), java.math.BigDecimal.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: price2 from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
 	    s.setVar("relativeGain", form.getRelativeGain(), Double.class);
 	} catch (ScriptErrorException e) {
 	    logger.log(BasicLevel.WARN, "Can not set the value of field: relativeGain from the script");
@@ -863,6 +1054,12 @@ public abstract class StandardOfferBean
 	    s.setVar("sellPrice", form.getSellPrice(), java.math.BigDecimal.class);
 	} catch (ScriptErrorException e) {
 	    logger.log(BasicLevel.WARN, "Can not set the value of field: sellPrice from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    s.setVar("lineComments", form.getLineComments(), String.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: lineComments from the script");
             logger.log(BasicLevel.DEBUG, e);
         }
     }
@@ -1006,6 +1203,28 @@ public abstract class StandardOfferBean
             logger.log(BasicLevel.DEBUG, e);
         }
 	try {
+	    field = s.getVar("price1", java.math.BigDecimal.class);
+	    if(!field.equals(form.getPrice1())) {
+	        logger.log(BasicLevel.DEBUG, "Field price1 modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setPrice1((java.math.BigDecimal)field);
+	        r.addField("price1", (java.math.BigDecimal)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: price1 from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    field = s.getVar("price2", java.math.BigDecimal.class);
+	    if(!field.equals(form.getPrice2())) {
+	        logger.log(BasicLevel.DEBUG, "Field price2 modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setPrice2((java.math.BigDecimal)field);
+	        r.addField("price2", (java.math.BigDecimal)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: price2 from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
 	    field = s.getVar("relativeGain", Double.class);
 	    if(!field.equals(form.getRelativeGain())) {
 	        logger.log(BasicLevel.DEBUG, "Field relativeGain modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
@@ -1080,6 +1299,17 @@ public abstract class StandardOfferBean
 	    }
 	} catch (ScriptErrorException e) {
 	    logger.log(BasicLevel.WARN, "Can not get the value of field: sellPrice from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    field = s.getVar("lineComments", String.class);
+	    if(!field.equals(form.getLineComments())) {
+	        logger.log(BasicLevel.DEBUG, "Field lineComments modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setLineComments((String)field);
+	        r.addField("lineComments", (String)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: lineComments from the script");
             logger.log(BasicLevel.DEBUG, e);
         }
     }

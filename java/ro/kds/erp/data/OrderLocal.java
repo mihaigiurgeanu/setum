@@ -4,6 +4,7 @@ import javax.ejb.EJBLocalObject;
 import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.Date;
+import javax.ejb.FinderException;
 
 /**
  * The local interface for OrderBean.
@@ -203,5 +204,25 @@ public interface OrderLocal extends EJBLocalObject {
      */
     public void setLines(Collection lines);
 
+    /**
+     * The invoices issued for this invoice.
+     */
+    public Collection getInvoices();
+    /**
+     * The invoices issued for this invoice.
+     */
+    public void setInvoices(Collection invoices);
+
+    /**
+     * Computes the payed amount, adding up all payments made on
+     * all invoices issued for this order.
+     */
+    public BigDecimal getPayedAmount() throws FinderException;
+
+    /**
+     * Computes the invoiced amount, adding up all invoices issued
+     * on this order.
+     */
+    public BigDecimal getInvoicedAmount() throws FinderException;
 
 }

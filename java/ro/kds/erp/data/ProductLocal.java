@@ -49,6 +49,9 @@ public interface ProductLocal extends EJBLocalObject {
     public String getDescription1();
     public void setDescription1(String description);
 
+    public Boolean getDiscontinued();
+    public void setDiscontinued(Boolean discontinued);
+
     public Collection getAttributes();
     public void setAttributes(Collection attribs);    
 

@@ -73,7 +73,7 @@ windows.arguments[0].select(productId)
 
   </popupset>
 
-
+  <dialogheader title="Usa metalica" description="Definire detalii usa metalica"/>
 
   <tabbox>
     <tabs>
@@ -83,7 +83,7 @@ windows.arguments[0].select(productId)
       <tab label="Finisaje"/>
     </tabs>
     <tabpanels>
-      <tabpanel orient="vertical" style="overflow:auto" maxheight="600">
+      <tabpanel orient="vertical" style="overflow:auto" maxheight="550">
 	<hbox>
 	  <groupbox orient="vertical">
 	    <caption label="Definire usa" />
@@ -490,6 +490,7 @@ windows.arguments[0].select(productId)
 			    <menupopup id="broascaId-popup"/>
 			  </menulist>
 			  <textbox id="broascaBuc" length="4"/>
+			  <button label="Sterge" oncommand="clear_sistem('broascaId')"/>
 			</row>
 			<row>
 			  <label control="cilindruId" value="Cilindru:"/>
@@ -497,6 +498,7 @@ windows.arguments[0].select(productId)
 			    <menupopup id="cilindruId-popup"/>
 			  </menulist>
 			  <textbox id="cilindruBuc"/>
+			  <button label="Sterge" oncommand="clear_sistem('cilindruId')"/>
 			</row>
 			<row>
 			  <label control="copiatCheieId" value="Copiat chei:"/>
@@ -504,6 +506,15 @@ windows.arguments[0].select(productId)
 			    <menupopup id="copiatCheieId-popup"/>
 			  </menulist>
 			  <textbox id="copiatCheieBuc"/>
+			  <button label="Sterge" oncommand="clear_sistem('copiatCheieId')"/>
+			</row>
+			<row>
+			  <label control="vizorId" value="Vizor:"/>
+			  <menulist id="vizorId">
+			    <menupopup id="vizorId-popup"/>
+			  </menulist>
+			  <textbox id="vizorBuc"/>
+			  <button label="Sterge" oncommand="clear_sistem('vizorId')"/>
 			</row>
 		      </rows>
 		    </grid>
@@ -528,6 +539,7 @@ windows.arguments[0].select(productId)
 			  <textbox id="sildTip"/>
 			  <textbox id="sildCuloare"/>
 			  <textbox id="sildBuc"/>
+			  <button label="Sterge" oncommand="clear_sistem('sildId')"/>
 			</row>
 			<row>
 			  <label control="rozetaId" value="Rozete:"/>
@@ -537,6 +549,7 @@ windows.arguments[0].select(productId)
 			  <textbox id="rozetaTip"/>
 			  <textbox id="rozetaCuloare"/>
 			  <textbox id="rozetaBuc"/>
+			  <button label="Sterge" oncommand="clear_sistem('rozetaId')"/>
 			</row>
 			<row>
 			  <label control="manerId" value="Maner:"/>
@@ -546,6 +559,7 @@ windows.arguments[0].select(productId)
 			  <textbox id="manerTip"/>
 			  <textbox id="manerCuloare"/>
 			  <textbox id="manerBuc"/>
+			  <button label="Sterge" oncommand="clear_sistem('manerId')"/>
 			</row>
 		      </rows>
 		    </grid>
@@ -567,6 +581,7 @@ windows.arguments[0].select(productId)
 			    <menupopup id="yalla1Id-popup"/>
 			  </menulist>
 			  <textbox id="yalla1Buc"/>
+			  <button label="Sterge" oncommand="clear_sistem('yalla1Id')"/>
 			</row>
 			<row>
 			  <label control="yalla2Id" value="YALLA:"/>
@@ -574,6 +589,7 @@ windows.arguments[0].select(productId)
 			    <menupopup id="yalla2Id-popup"/>
 			  </menulist>
 			  <textbox id="yalla2Buc"/>
+			  <button label="Sterge" oncommand="clear_sistem('yalla2Id')"/>
 			</row>
 			<row>
 			  <label control="baraAntipanicaId" value="Bara antipanica:"/>
@@ -581,6 +597,7 @@ windows.arguments[0].select(productId)
 			    <menupopup id="baraAntipanicaId-popup"/>
 			  </menulist>
 			  <textbox id="baraAntipanicaBuc"/>
+			  <button label="Sterge" oncommand="clear_sistem('baraAntipanicaId')"/>
 			</row>
 			<row>
 			  <label control="manerSemicilindruId" 
@@ -589,6 +606,7 @@ windows.arguments[0].select(productId)
 			    <menupopup id="manerSemicilindruId-popup"/>
 			  </menulist>
 			  <textbox id="manerSemicilindruBuc"/>
+			  <button label="Sterge" oncommand="clear_sistem('manerSemicilindruId')"/>
 			</row>
 			<row>
 			  <label control="selectorOrdineId" 
@@ -597,6 +615,7 @@ windows.arguments[0].select(productId)
 			    <menupopup id="selectorOrdineId-popup"/>
 			  </menulist>
 			  <textbox id="selectorOrdineBuc"/>
+			  <button label="Sterge" oncommand="clear_sistem('selectorOrdineId')"/>
 			</row>
 
 			<row>
@@ -605,6 +624,7 @@ windows.arguments[0].select(productId)
 			    <menupopup id="amortizorId-popup"/>
 			  </menulist>
 			  <textbox id="amortizorBuc"/>
+			  <button label="Sterge" oncommand="clear_sistem('amortizorId')"/>
 			</row>
 
 			<row>
@@ -613,6 +633,7 @@ windows.arguments[0].select(productId)
 			    <menupopup id="alteSisteme1Id-popup"/>
 			  </menulist>
 			  <textbox id="alteSisteme1Buc"/>
+			  <button label="Sterge" oncommand="clear_sistem('alteSisteme1Id')"/>
 			</row>
 			<row>
 			  <hbox/>
@@ -620,6 +641,7 @@ windows.arguments[0].select(productId)
 			    <menupopup id="alteSisteme2Id-popup"/>
 			  </menulist>
 			  <textbox id="alteSisteme2Buc"/>
+			  <button label="Sterge" oncommand="clear_sistem('alteSisteme2Id')"/>
 			</row>
 		      </rows>
 		    </grid>
@@ -742,83 +764,91 @@ windows.arguments[0].select(productId)
 	  </columns>
 	  <rows>
 	    <row>
-	      <label controls="intFinisajBlat" value="Finisaj blat (interior): "/>
+	      <label controls="intFinisajBlat" value="BLAT (interior): "/>
 	      <textbox id="intFinisajBlat" readonly="true"/>
 	      <button command="editIntFinisajBlat_cmd" label="..."/>
 	    </row>
 
 	    <row>
-	      <label controls="intFinisajToc" value="Finisaj toc (interior): "/>
+	      <label controls="intFinisajToc" value="TOC (interior): "/>
 	      <textbox id="intFinisajToc" readonly="true"/>
 	      <button command="editIntFinisajToc_cmd" label="..."/>
 	      <checkbox id="finisajTocBlat" label="Ca la blat"/>
 	    </row>
 
 	    <row>
-	      <label controls="intFinisajGrilaj" value="Finisaj grilaj (interior): "/>
-	      <textbox id="intFinisajGrilaj" readonly="true"/>
-	      <button command="editIntFinisajGrilaj_cmd" label="..."/>
-	      <checkbox id="finisajGrilajBlat" label="Ca la blat"/>
-	    </row>
-
-	    <row>
-	      <label controls="intFinisajFereastra" value="Finisaj fereastra (interior): "/>
-	      <textbox id="intFinisajFereastra" readonly="true"/>
-	      <button command="editIntFinisajFereastra_cmd" label="..."/>
-	      <checkbox id="finisajFereastraBlat" label="Ca la blat"/>
-	    </row>
-
-	    <row>
-	      <label controls="intFinisajSupralumina" value="Finisaj supralumina (interior): "/>
-	      <textbox id="intFinisajSupralumina" readonly="true"/>
-	      <button command="editIntFinisajSupralumina_cmd" label="..."/>
-	      <checkbox id="finisajSupraluminaBlat" label="Ca la blat"/>
-	    </row>
-
-	    <row>
-	      <label controls="intFinisajPanouLateral" value="Finisaj panou (interior): "/>
-	      <textbox id="intFinisajPanouLateral" readonly="true"/>
-	      <button command="editIntFinisajPanou_cmd" label="..."/>
-	      <checkbox id="finisajPanouLateralBlat" label="Ca la blat"/>
-	    </row>
-
-	    <row>
-	      <label controls="extFinisajBlat" value="Finisaj blat (exterior): "/>
+	      <label controls="extFinisajBlat" value="BLAT (exterior): "/>
 	      <textbox id="extFinisajBlat" readonly="true"/>
 	      <button command="editExtFinisajBlat_cmd" label="..."/>
 	      <checkbox id="finisajBlatExtInt" label="Ca la interior"/>
 	    </row>
 
 	    <row>
-	      <label controls="extFinisajToc" value="Finisaj toc (exterior): "/>
+	      <label controls="extFinisajToc" value="TOC (exterior): "/>
 	      <textbox id="extFinisajToc" readonly="true"/>
 	      <button command="editExtFinisajToc_cmd" label="..."/>
 	      <checkbox id="finisajTocExtInt" label="Ca la interior"/>
 	    </row>
 
+	    <separator/>
+
 	    <row>
-	      <label controls="extFinisajGrilaj" value="Finisaj grilaj (exterior): "/>
+	      <label controls="intFinisajGrilaj" value="GRILAJ (interior): "/>
+	      <textbox id="intFinisajGrilaj" readonly="true"/>
+	      <button command="editIntFinisajGrilaj_cmd" label="..."/>
+	      <checkbox id="finisajGrilajBlat" label="Ca la blat"/>
+	    </row>
+
+	    <row>
+	      <label controls="extFinisajGrilaj" value="GRILAJ (exterior): "/>
 	      <textbox id="extFinisajGrilaj" readonly="true"/>
 	      <button command="editExtFinisajGrilaj_cmd" label="..."/>
 	      <checkbox id="finisajGrilajExtInt" label="Ca la interior"/>
 	    </row>
 
+	    <separator/>
+
 	    <row>
-	      <label controls="extFinisajFereastra" value="Finisaj fereastra (exterior): "/>
+	      <label controls="intFinisajFereastra" value="FEREASTRA (interior): "/>
+	      <textbox id="intFinisajFereastra" readonly="true"/>
+	      <button command="editIntFinisajFereastra_cmd" label="..."/>
+	      <checkbox id="finisajFereastraBlat" label="Ca la blat"/>
+	    </row>
+
+	    <row>
+	      <label controls="extFinisajFereastra" value="FEREASTRA (exterior): "/>
 	      <textbox id="extFinisajFereastra" readonly="true"/>
 	      <button command="editExtFinisajFereastra_cmd" label="..."/>
 	      <checkbox id="finisajFereastraExtInt" label="Ca la interior"/>
 	    </row>
 
+	    <separator/>
+
 	    <row>
-	      <label controls="extFinisajSupralumina" value="Finisaj supralumina (exterior): "/>
+	      <label controls="intFinisajSupralumina" value="SUPRALUMINA (interior): "/>
+	      <textbox id="intFinisajSupralumina" readonly="true"/>
+	      <button command="editIntFinisajSupralumina_cmd" label="..."/>
+	      <checkbox id="finisajSupraluminaBlat" label="Ca la blat"/>
+	    </row>
+
+	    <row>
+	      <label controls="extFinisajSupralumina" value="SUPRALUMINA (exterior): "/>
 	      <textbox id="extFinisajSupralumina" readonly="true"/>
 	      <button command="editExtFinisajSupralumina_cmd" label="..."/>
 	      <checkbox id="finisajSupraluminaExtInt" label="Ca la interior"/>
 	    </row>
 
+	    <separator/>
+
 	    <row>
-	      <label controls="extFinisajPanouLateral" value="Finisaj panou (exterior): "/>
+	      <label controls="intFinisajPanouLateral" value="PANOU (interior): "/>
+	      <textbox id="intFinisajPanouLateral" readonly="true"/>
+	      <button command="editIntFinisajPanou_cmd" label="..."/>
+	      <checkbox id="finisajPanouLateralBlat" label="Ca la blat"/>
+	    </row>
+
+	    <row>
+	      <label controls="extFinisajPanouLateral" value="PANOU (exterior): "/>
 	      <textbox id="extFinisajPanouLateral" readonly="true"/>
 	      <button command="editExtFinisajPanou_cmd" label="..."/>
 	      <checkbox id="finisajPanouLateralExtInt" label="Ca la interior"/>

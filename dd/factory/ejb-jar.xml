@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<ejb-jar xmlns="http://java.sun.com/xml/ns/j2ee" version="2.1">
+
+  <enterprise-beans>
+    <session>
+      <description>Provides standard instantiation of the services provided through the application.</description>
+      <description>Services are defined through the ejb-ref and ejb-local-ref declarations.</description>
+      <display-name>ServiceFactory</display-name>
+      <ejb-name>ServiceFactoryEJB</ejb-name>
+      <local-home>ro.kds.erp.biz.ServiceFactoryLocalHome</local-home>
+      <local>ro.kds.erp.biz.ServiceFactoryLocal</local>
+      <ejb-class>ro.kds.erp.biz.ServiceFactoryBean</ejb-class>
+      <session-type>Stateless</session-type>
+      <transaction-type>Container</transaction-type>
+
+
+
+
+      <ejb-ref>
+	<description>Business logic for editing one product</description>
+	<ejb-ref-name>ejb/UsaMetalica1K</ejb-ref-name>
+	<ejb-ref-type>Session</ejb-ref-type>
+	<home>ro.kds.erp.biz.setum.basic.UsaMetalica2KHome</home>
+	<remote>ro.kds.erp.biz.setum.basic.UsaMetalica2K</remote>
+      </ejb-ref>
+      <ejb-ref>
+	<description>Business logic for the entire group of products</description>
+	<ejb-ref-name>ejb/UsiMetalice1K</ejb-ref-name>
+	<ejb-ref-type>Session</ejb-ref-type>
+	<home>ro.kds.erp.biz.setum.ListMakerBean</home>
+	<remote>ro.kds.erp.biz.setum.ListMakerBeanHome</remote>
+      </ejb-ref>
+      <ejb-ref>
+	<description>Business logic for editing one product</description>
+	<ejb-ref-name>ejb/UsaMetalica2K</ejb-ref-name>
+	<ejb-ref-type>Session</ejb-ref-type>
+	<home>ro.kds.erp.biz.setum.basic.UsaMetalica2KHome</home>
+	<remote>ro.kds.erp.biz.setum.basic.UsaMetalica2K</remote>
+      </ejb-ref>
+      <ejb-ref>
+	<description>Business logic for the entire group of products</description>
+	<ejb-ref-name>ejb/UsiMetalice2K</ejb-ref-name>
+	<ejb-ref-type>Session</ejb-ref-type>
+	<home>ro.kds.erp.biz.setum.ListMakerBean</home>
+	<remote>ro.kds.erp.biz.setum.ListMakerBeanHome</remote>
+      </ejb-ref>
+      <ejb-ref>
+	<description>Business logic for the StandardOffer form</description>
+	<ejb-ref-name>ejb/StandardOfferHome</ejb-ref-name>
+	<ejb-ref-type>Session</ejb-ref-type>
+	<home>ro.kds.erp.biz.setum.basic.StandardOfferHome</home>
+	<remote>ro.kds.erp.biz.setum.basic.StandardOffer</remote>
+      </ejb-ref>
+      <ejb-ref>
+	<description>Business logic for the Sistem form</description>
+	<ejb-ref-name>ejb/SistemHome</ejb-ref-name>
+	<ejb-ref-type>Session</ejb-ref-type>
+	<home>ro.kds.erp.biz.setum.basic.SistemHome</home>
+	<remote>ro.kds.erp.biz.setum.basic.Sistem</remote>
+      </ejb-ref>
+      <ejb-ref>
+	<description>Business logic for the "Preturi interne" form</description>
+	<ejb-ref-name>ejb/OtherProductsHome</ejb-ref-name>
+	<ejb-ref-type>Session</ejb-ref-type>
+	<home>ro.kds.erp.biz.setum.basic.SistemHome</home>
+	<remote>ro.kds.erp.biz.setum.basic.Sistem</remote>
+      </ejb-ref>
+      <ejb-ref>
+	<description>Definire usi standard neechipate</description>
+	<ejb-ref-name>ejb/UsaStdNeechipataHome</ejb-ref-name>
+	<ejb-ref-type>Session</ejb-ref-type>
+	<home>ro.kds.erp.biz.setum.basic.UsaStdNeechipataHome</home>
+	<remote>ro.kds.erp.biz.setum.basic.UsaStdNeechipata</remote>
+      </ejb-ref>
+      <ejb-ref>
+	<description>Definire usi standard neechipate</description>
+	<ejb-ref-name>ejb/UsaStandardHome</ejb-ref-name>
+	<ejb-ref-type>Session</ejb-ref-type>
+	<home>ro.kds.erp.biz.setum.basic.UsaStandardHome</home>
+	<remote>ro.kds.erp.biz.setum.basic.UsaStandard</remote>
+      </ejb-ref>
+      <ejb-ref>
+	<ejb-ref-name>ejb/OfertaUsiStandardHome</ejb-ref-name>
+	<ejb-ref-type>Session</ejb-ref-type>
+	<home>ro.kds.erp.biz.setum.basic.OfertaUsiStandardHome</home>
+	<remote>ro.kds.erp.biz.setum.basic.OfertaUsiStandard</remote>
+      </ejb-ref>
+      <ejb-ref>
+	<ejb-ref-name>ejb/ArbitraryOfferHome</ejb-ref-name>
+	<ejb-ref-type>Session</ejb-ref-type>
+	<home>ro.kds.erp.biz.setum.basic.ArbitraryOfferHome</home>
+	<remote>ro.kds.erp.biz.setum.basic.ArbitraryOffer</remote>
+      </ejb-ref>
+      <ejb-ref>
+	<ejb-ref-name>ejb/FereastraHome</ejb-ref-name>
+	<ejb-ref-type>Session</ejb-ref-type>
+	<home>ro.kds.erp.biz.setum.basic.FereastraHome</home>
+	<remote>ro.kds.erp.biz.setum.basic.Fereastra</remote>
+      </ejb-ref>
+      <ejb-ref>
+	<ejb-ref-name>ejb/GauriAerisireHome</ejb-ref-name>
+	<ejb-ref-type>Session</ejb-ref-type>
+	<home>ro.kds.erp.biz.setum.basic.GauriAerisireHome</home>
+	<remote>ro.kds.erp.biz.setum.basic.GauriAerisire</remote>
+      </ejb-ref>
+      <ejb-ref>
+	<ejb-ref-name>ejb/GrilaVentilatieHome</ejb-ref-name>
+	<ejb-ref-type>Session</ejb-ref-type>
+	<home>ro.kds.erp.biz.setum.basic.GrilaVentilatieHome</home>
+	<remote>ro.kds.erp.biz.setum.basic.GrilaVentilatie</remote>
+      </ejb-ref>
+      <ejb-ref>
+	<ejb-ref-name>ejb/SupraluminaHome</ejb-ref-name>
+	<ejb-ref-type>Session</ejb-ref-type>
+	<home>ro.kds.erp.biz.setum.basic.SupraluminaHome</home>
+	<remote>ro.kds.erp.biz.setum.basic.Supralumina</remote>
+      </ejb-ref>
+      <ejb-ref>
+	<ejb-ref-name>ejb/PanouLateralHome</ejb-ref-name>
+	<ejb-ref-type>Session</ejb-ref-type>
+	<home>ro.kds.erp.biz.setum.basic.PanouLateralHome</home>
+	<remote>ro.kds.erp.biz.setum.basic.PanouLateral</remote>
+      </ejb-ref>
+      <ejb-ref>
+	<ejb-ref-name>ejb/ClientsHome</ejb-ref-name>
+	<ejb-ref-type>Session</ejb-ref-type>
+	<home>ro.kds.erp.biz.setum.basic.ClientsHome</home>
+	<remote>ro.kds.erp.biz.setum.basic.Clients</remote>
+      </ejb-ref>
+      <ejb-ref>
+	<ejb-ref-name>ejb/GenericProductsHome</ejb-ref-name>
+	<ejb-ref-type>Session</ejb-ref-type>
+	<home>ro.kds.erp.biz.basic.GenericProductsHome</home>
+	<remote>ro.kds.erp.biz.basic.GenericProducts</remote>
+      </ejb-ref>
+      <ejb-ref>
+	<ejb-ref-name>ejb/UsiStdSelectionsHome</ejb-ref-name>
+	<ejb-ref-type>Session</ejb-ref-type>
+	<home>ro.kds.erp.biz.setum.basic.OneLevelSelectionsHome</home>
+	<remote>ro.kds.erp.biz.setum.basic.OneLevelSelections</remote>
+      </ejb-ref>
+      <ejb-ref>
+	<ejb-ref-name>ejb/FinisajeHome</ejb-ref-name>
+	<ejb-ref-type>Session</ejb-ref-type>
+	<home>ro.kds.erp.biz.setum.basic.FinisajeHome</home>
+	<remote>ro.kds.erp.biz.setum.basic.Finisaje</remote>
+      </ejb-ref>
+      <ejb-ref>
+	<ejb-ref-name>ejb/OrdersHome</ejb-ref-name>
+	<ejb-ref-type>Session</ejb-ref-type>
+	<home>ro.kds.erp.biz.setum.basic.OrdersHome</home>
+	<remote>ro.kds.erp.biz.setum.basic.Orders</remote>
+      </ejb-ref>
+      <ejb-ref>
+	<description>Preferences manager</description>
+	<ejb-ref-name>ejb/PreferencesHome</ejb-ref-name>
+	<ejb-ref-type>Session</ejb-ref-type>
+	<home>ro.kds.erp.biz.PreferencesHome</home>
+	<remote>ro.kds.erp.biz.Preferences</remote>
+      </ejb-ref>
+
+
+
+      <ejb-local-ref>
+	<description>Transformer bean that uses freemarker templates</description>
+	<ejb-ref-name>ejb/FTLTransformerHome</ejb-ref-name>
+	<ejb-ref-type>Session</ejb-ref-type>
+	<local-home>ro.kds.erp.reports.TransformerLocalHome</local-home>
+	<local>ro.kds.erp.reports.TransformerLocal</local>
+	<ejb-link>reporting.jar#FTLTransformerEJB</ejb-link>
+      </ejb-local-ref>
+
+      <ejb-local-ref>
+	<description>Common generic services</description>
+	<ejb-ref-name>ejb/CommonServices</ejb-ref-name>
+	<ejb-ref-type>Session</ejb-ref-type>
+	<local-home>ro.kds.erp.biz.CommonServicesLocal</local-home>
+	<local>ro.kds.erp.biz.CommonServicesLocalHome</local>
+	<ejb-link>biz.jar#CommonServicesEJB</ejb-link>
+      </ejb-local-ref>
+
+    </session>
+  </enterprise-beans>
+
+
+  <assembly-descriptor>
+    <container-transaction>
+      <method>
+	<description>All methods</description>
+	<ejb-name>ServiceFactoryEJB</ejb-name>
+	<method-name>*</method-name>
+      </method>
+      <trans-attribute>Supports</trans-attribute>
+    </container-transaction>
+  </assembly-descriptor>
+</ejb-jar>

@@ -1,1 +1,1 @@
-java -jar %JONAS_ROOT%\lib\client.jar -jarClient prefsadm.jar apps\prefsadm.ear %1 %2 %3 %4 %5 %6 %7 %8 %9
+@java -jar %JONAS_ROOT%\lib\client.jar -jarClient prefsadm.jar apps\prefsadm.ear %1 %2 %3 %4 %5 %6 %7 %8 %9

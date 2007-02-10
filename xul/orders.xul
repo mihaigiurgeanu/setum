@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
 <?xml-stylesheet href="setum.css" type="text/css"?>
+<?xml-stylesheet href="bindings/dateselector.css" type="text/css"?>
 
 <!-- orders.xul
 
@@ -25,14 +26,22 @@ Lista comenzilor, creere/vizualizare/stergere
 
   <commandset>
     <command id="command-add_order"		oncommand="on_new_order()"/>
-    <command id="command-remove_order"		oncommand="on_delete_order()"/>
+    <command id="command-remove_order"		oncommand="theForm.ask(REMOVE_ORDER_MSG, on_delete_order)"/>
 
     <command id="command-save_order"		oncommand="on_save()"/>
     <command id="command-add_orderItem"		oncommand="on_select_offerItems()"/>
     <command id="command-remove_orderItem"	oncommand="on_delete_orderItem()"/>
     <command id="command-select_client"		oncommand="on_select_client();" />
 
-    <command id="command-save_orderItem"	oncommand="on_save_orderItem()"/>
+    <command id="command-save_item"		oncommand="on_save_orderItem()"/>
+
+    <command id="command-add_invoice"		oncommand="on_new_invoice()"/>
+    <command id="command-remove_invoice"	oncommand="theForm.ask(REMOVE_INVOICE_MSG, on_remove_invoice)"/>
+    <command id="command-save_invoice"		oncommand="on_save_invoice()"/>
+    
+    <command id="command-add_payment"		oncommand="on_new_payment();"/>
+    <command id="command-remove_payment"	oncommand="theForm.ask(REMOVE_PAYMENT_MSG, on_remove_payment)"/>
+    <command id="command-save_payment"		oncommand="on_save_payment()"/>
   </commandset>
 
 
@@ -40,7 +49,10 @@ Lista comenzilor, creere/vizualizare/stergere
     <tabs>      
       <tab label="Lista comenzi"/>
       <tab label="Comanda selectata"/>
-      <tab label="Linie de comanda"/>
+      <tab label="Linia selectata"/>
+      <tab label="Facturi"/>
+      <tab label="Factura selectata"/>
+      <tab label="Plata selectata"/>
     </tabs>
 
     <tabpanels flex="1">
@@ -98,6 +110,8 @@ Lista comenzilor, creere/vizualizare/stergere
 		style="border:thin outset white">
 	<hbox class="mytoolbar">
 	  <button label="Adauga produs" command="command-add_orderItem"/>
+	  <button label="Sterge produs" command="command-remove_item"/>
+	  <button label="Adauga factura" command="command-add_invoice"/>
 	  <button label="Salveaza" command="command-save_order"/>
 	</hbox>
 	<hbox class="title">
@@ -108,10 +122,10 @@ Lista comenzilor, creere/vizualizare/stergere
 	<hbox>
 
 	  <grid>
-	    <cols>
-	      <col/>
-	      <col flex="1"/>
-	    </cols>
+	    <columns>
+	      <column/>
+	      <column/>
+	    </columns>
 	    <rows>
 	      <row>
 		<button label="Client:" command="command-select_client"/>
@@ -119,13 +133,15 @@ Lista comenzilor, creere/vizualizare/stergere
 		  <textbox id="clientName" readonly="true"/>
 		</vbox>
 	      </row>
+
 	      <row>
 		<label control="number" value="Numar:"/>
 		<textbox id="number"/>
 	      </row>
+
 	      <row>
 		<label control="date" value="din Data:"/>
-		<textbox id="date"/>
+		<datebox yearstart="2001" yearend="2051" id="date"/>
 	      </row>
 
 	      <row>
@@ -141,10 +157,12 @@ Lista comenzilor, creere/vizualizare/stergere
 		  <menupopup id="localitate-popup"/>
 		</menulist>
 	      </row>
+
 	      <row>
 		<label control="localitateAlta" value="Alta:"/>
 		<textbox id="localitateAlta"/>
 	      </row>
+
 	      <row>
 		<label control="distanta" value="Distanta:"/>
 		<textbox id="distanta"/>
@@ -155,18 +173,18 @@ Lista comenzilor, creere/vizualizare/stergere
 
 
 	  <grid>
-	    <cols>
-	      <col/>
-	      <col flex="1"/>
-	    </cols>
+	    <columns>
+	      <column/>
+	      <column/>
+	    </columns>
 	    <rows>
 	      <row>
 		<label control="termenLivrare" value="Termen livrare:"/>
-		<textbox id="termenLivrare"/>
+		<datebox id="termenLivrare" yearstart="2001" yearend="2051"/>
 	      </row>
 	      <row>
 		<label control="termenLivrare1" value="Termen prod.:"/>
-		<textbox id="termenLivrare1" readonly="true"/>
+		<datebox id="termenLivrare1" readonly="true" yearstart="2001" yearend="2051"/>
 	      </row>
 	      <row>
 		<label control="adresaMontaj" value="Adresa montaj:"/>
@@ -190,17 +208,17 @@ Lista comenzilor, creere/vizualizare/stergere
 
 
 	  <grid>
-	    <cols>
-	      <col/>
-	      <col flex="1"/>
-	    </cols>
+	    <columns>
+	      <column/>
+	      <column/>
+	    </columns>
 	    <rows>
 	      <row>
 		<label control="total" value="Val. fara TVA:"/>
 		<textbox id="total" readonly="true"/>
 	      </row>
 	      <row>
-		<label control="totalTva" value="TVA:"/>
+		<label control="totalTva" value="Val. cu TVA:"/>
 		<textbox id="totalTva" readonly="true"/>
 	      </row>
 	      <row>
@@ -208,11 +226,15 @@ Lista comenzilor, creere/vizualizare/stergere
 		<textbox id="discount"/>
 	      </row>
 	      <row>
-		<label control="totalFinal" value="Total:"/>
-		<textbox id="total"/>
+		<label control="totalFinal" value="Total fara TVA:"/>
+		<textbox id="totalFinal"/>
 	      </row>
 	      <row>
-		<label control="totalFinalTva" value="Total TVA"/>
+		<label control="invoicedAmount" value="Facturat:"/>
+		<textbox id="invoicedAmount" readonly="true"/>
+	      </row>
+	      <row>
+		<label control="totalFinalTva" value="Total cu TVA"/>
 		<textbox id="totalFinalTva" readonly="true"/>
 	      </row>
 	      <row>
@@ -220,8 +242,14 @@ Lista comenzilor, creere/vizualizare/stergere
 		<textbox id="avans"/>
 	      </row>
 	      <row>
+		<!--
 		<label control="achitatCu" value="Achitat cu:"/>
 		<textbox id="achitatCu"/>
+		-->
+	      </row>
+	      <row>
+		<label control="payedAmount" value="Platit:"/>
+		<textbox id="payedAmount" readonly="true"/>
 	      </row>
 	      <row>
 		<label control="diferenta" value="Ramas de achitat:"/>
@@ -272,9 +300,8 @@ Lista comenzilor, creere/vizualizare/stergere
 
 
       <tabpanel id="maintab.orderLine" orient="vertical"
-		style="border:thin outset white">
+		style="border:thin outset white" flex="1">
 	<hbox class="mytoolbar">
-	  <button label="Sterge" command="command-remove_item"/>
 	  <button label="Salveaza" command="command-save_item"/>
 	</hbox>
 	<hbox class="title">
@@ -283,6 +310,10 @@ Lista comenzilor, creere/vizualizare/stergere
 	<spacer class="header"/>
 	
 	<grid>
+	  <columns>
+	    <column/>
+	    <column/>
+	  </columns>
 	  <rows>
 	    <row>
 	      <label control="productCode" value="Cod produs:"/>
@@ -298,11 +329,11 @@ Lista comenzilor, creere/vizualizare/stergere
 	    </row>
 	    <row>
 	      <label control="productPrice" value="Pret ofertat:"/>
-	      <textbox id="productPrice"/>
+	      <textbox id="productPrice" readonly="true"/>
 	    </row>
 	    <row>
 	      <label control="priceRatio" value="Corectie pret(%):"/>
-	      <textbox id="priceRatio" readonly="true"/>
+	      <textbox id="priceRatio" />
 	    </row>
 	    <row>
 	      <label control="quantity" value="Cantiate:"/>
@@ -314,13 +345,178 @@ Lista comenzilor, creere/vizualizare/stergere
 	    </row>
 	    <row>
 	      <label control="tax" value="TVA:"/>
-	      <textbox id="tax"/>
+	      <textbox id="tax" readonly="true"/>
 	    </row>
 	  </rows>
 	</grid>
 	
 	
 
+      </tabpanel>
+
+
+      <tabpanel id="maintab.invoices" orient="vertical"
+		style="border:thin outset white">
+
+	<hbox class="mytoolbar">
+	  <button label="Adauga factura" command="command-add_invoice"/>
+	  <button label="Sterge factura" command="command-remove_invoice"/>
+	</hbox>
+
+
+	<hbox class="title">
+	  <label>Facturi</label>
+	</hbox>
+	<spacer class="header"/>
+
+
+	<tree id="invoicesListing"
+	      flex="1"
+	      enableColumnDrag="true"
+	      seltype="single"
+	      onselect="on_select_invoice()"
+	      ondblclick="maintab.selectedIndex=4">
+	  <treecols>
+	    <treecol id="invoices.number" label="Numar" flex="1"
+		     persist="ordinal width hidden"/>
+
+	    <splitter class="tree-splitter"/>
+	    <treecol id="invoices.date" label="Data" flex="1"
+		     persist="ordinal width hidden"/>
+
+	    <splitter class="tree-splitter"/>
+	    <treecol id="invoices.role" label="Tip" flex="1"
+		     persist="ordinal width hidden"/>
+
+	    <splitter class="tree-splitter"/>
+	    <treecol id="invoices.amount" label="Suma" flex="1"
+		     persist="ordinal width hidden"/>
+	  </treecols>
+
+	  <treechildren/>
+
+	</tree>
+      </tabpanel> <!-- maintab.invoices -->
+
+      <tabpanel id="maintab.invoiceDetails" orient="vertical"
+		style="border:thin outset white">
+
+	<hbox class="mytoolbar">
+	  <button label="Adauga plata" command="command-add_payment"/>
+	  <button label="Sterge plata" command="command-remove_payment"/>
+	  <button label="Salveaza" command="command-save_invoice"/>
+	</hbox>
+
+	<hbox class="title">
+	  <label>Factura</label>
+	</hbox>
+	
+	<grid>
+	  <columns>
+	    <column/>
+	    <column/>
+	  </columns>
+
+	  <rows>
+	    <row>
+	      <label control="invoiceNumber" value="Numar factura:"/>
+	      <textbox id="invoiceNumber"/>
+	    </row>
+	    <row>
+	      <label control="invoiceDate" value="Data facutra:"/>
+	      <datebox id="invoiceDate" yearstart="2001" yearend="2051"/>
+	    </row>
+	    <row>
+	      <label control="invoiceRole" value="Tip factura:"/>
+	      <menulist id="invoiceRole">
+		<menupopup id="invoiceRole-popup"/>
+	      </menulist>
+	    </row>
+	    <row>
+	      <label control="invoiceAmount" value="Suma fara TVA:"/>
+	      <textbox id="invoiceAmount"/>
+	    </row>
+	    <row>
+	      <label control="invoiceTax" value="TVA:"/>
+	      <textbox id="invoiceTax"/>
+	    </row>
+	    <row>
+	      <label control="invoiceTotal" value="Total:"/>
+	      <textbox id="invoiceTotal"/>
+	    </row>
+	    <row>
+	      <label control="invoicePayed" value="Suma achitata:"/>
+	      <textbox id="invoicePayed" readonly="true"/>
+	    </row>
+	    <row>
+	      <label control="invoiceUnpayed" value="Suma restanta:"/>
+	      <textbox id="invoiceUnpayed" readonly="true"/>
+	    </row>
+	    
+	  </rows>
+	</grid>
+
+
+	<tree id="paymentsListing"
+	      flex="1"
+	      enableColumnDrag="1"
+	      seltype="single"
+	      onselect="on_select_payment()"
+	      ondblclick="maintab.selectedIndex=5">
+	  
+	  <treecols>
+	    <treecol id="payments.number" label="Numar" flex="1"
+		     persist="ordinal width hidden"/>
+
+	    <splitter class="tree-splitter"/>
+	    <treecol id="payments.date" label="Data" flex="1"
+		     persist="ordinal width hidden"/>
+
+	    <splitter class="tree-splitter"/>
+	    <treecol id="payments.amount" label="Suma" flex="1"
+		     persist="ordinal width hidden"/>
+
+	  </treecols>
+
+	  <treechildren/>
+
+
+	</tree>
+      </tabpanel> <!-- maintab.invoiceDetails -->
+
+      <tabpanel id="maintab.paymentDetails" orient="vertical"
+		style="border:thin outset white">
+	
+
+	<hbox class="mytoolbar">
+	  <button label="Salveaza" command="command-save_payment"/>
+	</hbox>
+
+	<hbox class="title">
+	  <label>Detalii plata</label>
+	</hbox>
+
+	<grid>
+	  <columns>
+	    <column/>
+	    <column/>
+	  </columns>
+
+	  <rows>
+	    <row>
+	      <label control="paymentNumber" value="Numar document:"/>
+	      <textbox id="paymentNumber"/>
+	    </row>
+	    <row>
+	      <label control="paymentDate" value="Data document:"/>
+	      <datebox id="paymentDate" yearstart="2001" yearend="2051"/>
+	    </row>
+	    <row>
+	      <label control="paymentAmount" value="Suma:"/>
+	      <textbox id="paymentAmount"/>
+	    </row>
+	  </rows>
+	</grid>
       </tabpanel>
     </tabpanels>
   </tabbox>

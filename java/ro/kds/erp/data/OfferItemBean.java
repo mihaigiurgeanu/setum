@@ -78,6 +78,8 @@ public abstract class OfferItemBean implements EntityBean {
     public abstract String getBusinessCategory();
     public abstract void setBusinessCategory(String bc);
 
+    public abstract String getComments();
+    public abstract void setComments(String comments);
 
     // Implementation of javax.ejb.EntityBean
 

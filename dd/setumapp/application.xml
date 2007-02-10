@@ -36,4 +36,16 @@
     <ejb>updatePrices.jar</ejb>
   </module>
 
+  <module>
+    <ejb>reporting.jar</ejb>
+  </module>
+
+  <module>
+    <ejb>factory.jar</ejb>
+  </module>
+
+  <module>
+    <ejb>biz.jar</ejb>
+  </module>
+
 </application>

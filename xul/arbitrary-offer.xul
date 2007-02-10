@@ -1,6 +1,11 @@
 <?xml version="1.0"?>
 <?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
 <?xml-stylesheet href="setum.css" type="text/css"?>
+<?xml-stylesheet href="bindings/dateselector.css" type="text/css"?>
+
+
+
+
 
 <!--
 arbitrary-offer.xul
@@ -31,6 +36,8 @@ Data-entry form for general purpose offers.
     <command id="edit-product" oncommand="edit_product()" />
     <command id="remove-line" oncommand="remove_item();" />
     <command id="select-client-command" oncommand="select_client();" />
+    <command id="command-pdf-report" oncommand="open_report('pdf')" />
+    <command id="command-rtf-report" oncommand="open_report('rtf')" />
   </commandset>
 
   <popupset>
@@ -92,6 +99,8 @@ Data-entry form for general purpose offers.
 	  <button label="Adauga produse" popup="addnew-menu" />
 	  <button label="Sterge produs selectat" command="remove-line"/>
 	  <button label="Salvare" command="command-save"/>
+	  <button label="PDF" command="command-pdf-report"/>
+	  <button label="Word" command="command-rtf-report"/>
 	</hbox>
 	<hbox class="title">
 	  <label value="Detalii oferta" />
@@ -110,7 +119,7 @@ Data-entry form for general purpose offers.
 	    </row>
 	    <row>
 	      <label control="docDate" value="Data:"/>
-	      <textbox id="docDate"/>
+	      <datebox id="docDate" yearstart="2001" yearend="2051"/>
 	    </row>
 	    <row>
 	      <label value="Valabila " />
@@ -124,9 +133,9 @@ Data-entry form for general purpose offers.
 		<rows>
 		  <row>
 		    <label control="dateFrom" value="de la:"/>
-		    <textbox id="dateFrom"/>
+		    <datebox id="dateFrom" yearstart="2001" yearend="2051"/>
 		    <label control="dateTo" value="pana la:"/>
-		    <textbox id="dateTo"/>
+		    <datebox id="dateTo" yearstart="2001" yearend="2051"/>
 		  </row>
 		  <row>
 		    <label control="period" value="nr zile:"/>

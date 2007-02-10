@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+
+
+<ejb-jar xmlns="http://java.sun.com/xml/ns/j2ee" version="2.1">
+  <description>EJBs implementing general business logic functions, likely to be used
+  in most projects.</description>
+
+  <enterprise-beans>
+    <session>
+      <description>Collection of common services.</description>
+      <display-name>CommonServices</display-name>
+      <ejb-name>CommonServicesEJB</ejb-name>
+      <local-home>ro.kds.erp.biz.CommonServicesLocalHome</local-home>
+      <local>ro.kds.erp.biz.CommonServicesLocal</local>
+      <ejb-class>ro.kds.erp.biz.CommonServicesBean</ejb-class>
+
+      <session-type>Stateless</session-type>
+      <transaction-type>Container</transaction-type>
+
+      <ejb-local-ref>
+	<description>Products category reference</description>
+	<ejb-ref-name>ejb/CategoryHome</ejb-ref-name>
+	<ejb-ref-type>Entity</ejb-ref-type>
+	<local-home>ro.kds.erp.data.CategoryLocalHome</local-home>
+	<local>ro.kds.erp.data.CategoryLocal</local>
+	<ejb-link>datalayer.jar#CategoryEJB</ejb-link>
+      </ejb-local-ref>
+
+      <ejb-local-ref>
+	<description>Product entity reference</description>
+	<ejb-ref-name>ejb/ProductHome</ejb-ref-name>
+	<ejb-ref-type>Entity</ejb-ref-type>
+	<local-home>ro.kds.erp.data.ProductLocalHome</local-home>
+	<local>ro.kds.erp.data.ProductLocal</local>
+	<ejb-link>datalayer.jar#ProductEJB</ejb-link>
+      </ejb-local-ref>
+
+
+    </session>
+  </enterprise-beans>
+
+  <assembly-descriptor>
+    <container-transaction>
+      <method>
+	<ejb-name>CommonServicesEJB</ejb-name>
+	<method-name>*</method-name>
+      </method>
+      <trans-attribute>Supports</trans-attribute>
+    </container-transaction>
+  </assembly-descriptor>
+
+
+</ejb-jar>

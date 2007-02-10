@@ -28,6 +28,8 @@ public  abstract class ProductEC2L implements javax.ejb.EntityBean {
         logger.log(BasicLevel.DEBUG, "");
 
         // Init here the bean fields
+	setDiscontinued(new Boolean(false));
+
 
         return null;
     }
@@ -79,6 +81,8 @@ public  abstract class ProductEC2L implements javax.ejb.EntityBean {
     public abstract String getDescription1();
     public abstract void setDescription1(String description);
 
+    public abstract Boolean getDiscontinued();
+    public abstract void setDiscontinued(Boolean discontinued);
 
     // ------------------------------------------------------------------
     // CMR fields

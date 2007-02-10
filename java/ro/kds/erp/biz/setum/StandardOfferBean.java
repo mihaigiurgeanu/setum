@@ -234,13 +234,13 @@ public class StandardOfferBean extends ro.kds.erp.biz.setum.basic.StandardOfferB
 		    public int compare(Object o1, Object o2) {
 			OfferLocal offer1 = (OfferLocal) o1;
 			OfferLocal offer2 = (OfferLocal) o2;
-			return - offer1.getDateFrom().
-			    compareTo(offer2.getDateFrom());
+			return (-offer1.getDateFrom().
+			    compareTo(offer2.getDateFrom()));
 		    }
 		});
 
 	    ResponseBean r = new ResponseBean();
-	    for(Iterator i = offers.iterator(); i.hasNext(); ) {
+	    for(Iterator i = sortedOffers.iterator(); i.hasNext(); ) {
 		OfferLocal offer = (OfferLocal) i.next();
 		r.addRecord();
 		r.addField("id", offer.getId());
@@ -404,6 +404,8 @@ public class StandardOfferBean extends ro.kds.erp.biz.setum.basic.StandardOfferB
 	    }
 
 	    form.setPrice(offerItem.getPrice());
+	    form.setPrice1(offerItem.getPrice1());
+	    form.setPrice2(offerItem.getPrice2());
 	    computeCalculatedFields(null);
 	    
 	    r = new ResponseBean();
@@ -456,6 +458,7 @@ public class StandardOfferBean extends ro.kds.erp.biz.setum.basic.StandardOfferB
 	form.setProductId(productId);
 	computeCalculatedFields(null);
 	form.setPrice(form.getSellPrice());
+	form.setPrice1(form.getSellPrice());
 	offerItem = null;
 	return saveSubForm();
     }
@@ -507,6 +510,8 @@ public class StandardOfferBean extends ro.kds.erp.biz.setum.basic.StandardOfferB
 		    (env.lookup("ejb/ProductHome"), ProductLocalHome.class);
 		offerItem.setProduct(ph.findByPrimaryKey(form.getProductId()));
 		offerItem.setPrice(form.getPrice());
+		offerItem.setPrice1(form.getPrice1());
+		offerItem.setPrice2(form.getPrice2());
 		r = validate();
 	    } catch (Exception e) {
 		r = ResponseBean.ERR_UNEXPECTED;
@@ -661,6 +666,8 @@ public class StandardOfferBean extends ro.kds.erp.biz.setum.basic.StandardOfferB
 	for(Iterator i = items.iterator(); i.hasNext();) {
 	    OfferItemLocal item = (OfferItemLocal)i.next();
 	    item.getProduct().setSellPrice(item.getPrice());
+	    item.getProduct().setPrice1(item.getPrice1());
+	    item.getProduct().setPrice2(item.getPrice2());
 	}
 
 	try {
@@ -692,6 +699,7 @@ public class StandardOfferBean extends ro.kds.erp.biz.setum.basic.StandardOfferB
 	offer.setDiscontinued(new Boolean(true));
 	offer.getDocument().setIsDraft(new Boolean(false));
 
+	/*
 	Collection items = offer.getItems();
 	for(Iterator i = items.iterator(); i.hasNext();) {
 	    OfferItemLocal item = (OfferItemLocal)i.next();
@@ -707,7 +715,7 @@ public class StandardOfferBean extends ro.kds.erp.biz.setum.basic.StandardOfferB
 	    r.setMessage("Eroare aplicatie. Preturile nu au putut fi actualizate. Oferta aceasta NU a fost retrasa.");
 	    ejbContext.setRollbackOnly();
 	}
-
+	*/
 	return new ResponseBean();
     }
 
@@ -717,5 +725,52 @@ public class StandardOfferBean extends ro.kds.erp.biz.setum.basic.StandardOfferB
      */
     public ResponseBean loadListing() {
 	return offersListing();
+    }
+
+
+    /**
+     * Update prices on the offer with a given percent.
+     *
+     * @param percent is the percentage that would be added to the price.
+     * It can be a negative number also. To add 10 percents to the price,
+     * the value of percent must be 10.
+     */
+    public ResponseBean adjustPrices(BigDecimal percent) {
+	
+	ResponseBean r;
+
+	// To add 10% you would multply with 1.1 (10 + 100)/100
+	BigDecimal multiplier = percent.add(new BigDecimal(100)).
+	    divide(new BigDecimal(100), 8, BigDecimal.ROUND_HALF_UP);
+
+	if (id == null) {
+	    r = ResponseBean.ERR_NOTCURRENT;
+	} else {
+	    try {
+		InitialContext ic = new InitialContext();
+		Context env = (Context)ic.lookup("java:comp/env");
+	    
+		OfferLocalHome oh = (OfferLocalHome)PortableRemoteObject.
+		    narrow(env.lookup("ejb/OfferHome"), OfferLocalHome.class);
+
+		OfferLocal offer = oh.findByPrimaryKey(id);
+
+		Collection offerItems = offer.getItems();
+
+		for(Iterator i = offerItems.iterator(); i.hasNext();) {
+		    OfferItemLocal item = (OfferItemLocal)i.next();
+		    item.setPrice(item.getPrice().multiply(multiplier));
+		    item.setPrice1(item.getPrice1().multiply(multiplier));
+		    item.setPrice2(item.getPrice2().multiply(multiplier));
+		}
+
+		r = new ResponseBean();
+	    } catch (Exception e) {
+		logger.log(BasicLevel.WARN, "Percentage could not be applied", 
+			   e);
+		r = ResponseBean.ERR_UNEXPECTED;
+	    }
+	}
+	return r;
     }
 }

@@ -31,6 +31,9 @@ import ro.kds.erp.biz.Sequence;
 import ro.kds.erp.biz.ResponseBean;
 import ro.kds.erp.data.ClientLocalHome;
 import ro.kds.erp.data.ClientLocal;
+import ro.kds.erp.data.CategoryLocal;
+import ro.kds.erp.biz.CategoryManagerLocalHome;
+import ro.kds.erp.biz.CategoryManagerLocal;
 
 /**
  * Specific implemetation of business rules for ArbitraryOfferEJB.
@@ -633,6 +636,158 @@ public class ArbitraryOfferBizBean extends ArbitraryOfferBean {
 	}
 	return r;
     }
+
+
+
+    /**
+     * Builds a <code>ResponseBean</code> containing the data for the offer report. It will contain a 
+     * single record having describing the offer (roughly the fields of <code>OfferEJB</code>). The record
+     * will have the field <code>lines</code> that will be a <code>ResponseBean</code> with a record for
+     * each item. Each of the records of the <code>offer_items</code> fields will contain a <code>product</code>
+     * of type <code>ResponseBean</code> describing the product. Products may contain as well other 
+     * <code>ResponseBean</code> objects and so on.
+     *
+     * An offer should be selected before calling this method.
+     *
+     * @return a rather complex <code>ResponseBean</code> describing the offer, the items of the offer and the products.
+     * If an error occurs, the returned <code>ResponseBean</code> will contain the error code and description.
+     */
+    public ResponseBean offerReport() {
+
+	ResponseBean r;
+
+	if (id == null) {
+	    logger.log(BasicLevel.DEBUG, "offerReport: No current offer");
+	    r = ResponseBean.ERR_NOTCURRENT;
+	}
+	else {
+	    r = new ResponseBean();
+	    r.addRecord();
+
+	    r.addField("no", form.getNo());
+	    r.addField("docDate", form.getDocDate());
+	    r.addField("dateFrom", form.getDateFrom());
+	    r.addField("dateTo", form.getDateTo());
+	    r.addField("discontinued", form.getDiscontinued());
+	    r.addField("period", form.getPeriod());
+	    r.addField("clientId", form.getClientId());
+	    r.addField("clientName", form.getClientName());
+	    r.addField("name", form.getName());
+	    r.addField("description", form.getDescription());
+	    r.addField("comment", form.getComment());
+
+	    
+
+
+	    r.addField("lines", linesReport());
+	}
+
+	return r;
+    }
+
+
+    /**
+     * Builds a <code>ResponseBean</code> that has all the
+     * line items of the current offer and for each line item
+     * the description of the product as <code>ResponseBean</code>
+     * field.
+     */
+    private ResponseBean linesReport() {
+
+	ResponseBean r;
+	OfferLocal offer = getCurrentOffer();
+
+	if(offer != null) {
+		
+	    Collection offerItems = offer.getItems();
+	    r = new ResponseBean();
+	    for(Iterator i = offerItems.iterator(); i.hasNext();) {
+		OfferItemLocal item = (OfferItemLocal)i.next();
+
+		loadSubForm(item.getId());
+		r.addRecord();
+		r.addField("productId", form.getProductId());
+		r.addField("price", form.getPrice());
+		r.addField("vatPrice", form.getVatPrice());
+		r.addField("relativeGain", form.getRelativeGain());
+		r.addField("absoluteGain", form.getAbsoluteGain());
+		r.addField("productCategory", form.getProductCategory());
+		r.addField("productCode", form.getProductCode());
+		r.addField("productName", form.getProductName());
+		r.addField("entryPrice", form.getEntryPrice());
+		r.addField("sellPrice", form.getSellPrice());
+		r.addField("businessCategory", form.getBusinessCategory());
+
+
+		r.addField("product", productReport());
+		    
+	    }
+	} else {
+	    r = ResponseBean.ERR_NOTCURRENT;
+	}
+
+	return r;
+
+
+    }
+
+
+    /**
+     * Build a <code>ResponseBean</code> with the fields of the product in the current offer line. 
+     * The response
+     * may contain other <code>ResponseBean</code> objects for other products that are
+     * contained by the main product.
+     */
+    private ResponseBean productReport() {
+	ResponseBean r;
+
+	try {
+	    InitialContext ic = new InitialContext();
+	    Context env = (Context)ic.lookup("java:comp/env");
+	    ProductLocalHome ph = (ProductLocalHome)PortableRemoteObject.
+		narrow(env.lookup("ejb/ProductHome"), ProductLocalHome.class);
+
+	    ProductLocal p = ph.findByPrimaryKey(form.getProductId());	    
+	    CategoryLocal c = p.getCategory();
+	    
+
+	    CategoryManagerLocalHome cmh;
+	    try {
+		cmh = (CategoryManagerLocalHome)PortableRemoteObject.
+		    narrow(env.lookup("ejb/CategoryManagerHome/" + c.getId()), 
+			   CategoryManagerLocalHome.class);
+	    } catch (NamingException e) {
+		// it seems that no category manager is registered for the
+		// given id ... try to get the default category manager
+		cmh = (CategoryManagerLocalHome)PortableRemoteObject.
+		    narrow(env.lookup("ejb/CategoryManagerHome/default"),
+			   CategoryManagerLocalHome.class);
+	    }
+	    CategoryManagerLocal cm = cmh.create();
+
+	    r = cm.getProductReport(form.getProductId());
+	} catch (NamingException e) {
+	    r = ResponseBean.getErrConfigNaming(e.getMessage());
+	    logger.log(BasicLevel.ERROR, "Name configuration error: " + e.getMessage()
+		       + " for product id " + form.getProductId());
+	    logger.log(BasicLevel.DEBUG, e);
+	} catch (FinderException e) {
+	    r = ResponseBean.getErrNotFound(e.getMessage());
+	    logger.log(BasicLevel.WARN, 
+		       "FinderException (" + e.getMessage() +") while processing product with id "
+		       + form.getProductId());
+	    logger.log(BasicLevel.DEBUG, e);
+	} catch (CreateException e) {
+	    r = ResponseBean.getErrCreate(e.getMessage());
+	    logger.log(BasicLevel.WARN,
+		       "CreateException: CategoryManager could not be instantiated: " + e.getMessage()
+		       + " for product id " + form.getProductId());
+	    logger.log(BasicLevel.DEBUG, e);
+	}
+
+	return r;
+    }
+
 
     /**
      * Retrieves the offer object corresponding to the id instance variable.

@@ -3,20 +3,21 @@ package ro.kds.erp.biz.basic;
 import javax.ejb.SessionBean;
 import javax.ejb.SessionSynchronization;
 import javax.ejb.SessionContext;
-import org.objectweb.util.monolog.Monolog;
-import org.objectweb.util.monolog.api.BasicLevel;
-import org.objectweb.util.monolog.api.Logger;
-//import org.objectweb.jonas.common.Log;
 import javax.ejb.CreateException;
-import ro.kds.erp.biz.ResponseBean;
-import javax.naming.InitialContext;
 import javax.ejb.FinderException;
 import java.util.Collection;
 import java.util.Iterator;
+import javax.naming.*;
+import javax.rmi.PortableRemoteObject;
+
+import org.objectweb.util.monolog.Monolog;
+import org.objectweb.util.monolog.api.BasicLevel;
+import org.objectweb.util.monolog.api.Logger;
+
 import ro.kds.erp.scripting.Script;
 import ro.kds.erp.scripting.TclFileScript;
 import ro.kds.erp.scripting.ScriptErrorException;
-import javax.naming.*;
+import ro.kds.erp.biz.*;
 
 /**
  * Standard implementation of the GenericProducts session bean.
@@ -29,6 +30,12 @@ public abstract class GenericProductsBean
     static protected Logger logger = null;
     protected SessionContext ejbContext;
 
+    /**
+     * Stores the reference to the <code>ServiceFactory</code>
+     * to be passed to script execution.
+     */
+    protected ServiceFactoryLocal factory;
+
     protected Integer id;
     protected Integer productId;
     protected Integer attributeId;
@@ -36,6 +43,8 @@ public abstract class GenericProductsBean
     final static String RESPONSE_VARNAME = "response";
     final static String LOGIC_VARNAME = "logic";
     final static String OLDVAL_VARNAME = "oldVal";
+    final static String SERVICE_FACTORY_VARNAME = "factory";
+    final static String LOGGER_VARNAME = "logger";
 
     /**
      * The name of the env parameter containing the script prefix.
@@ -62,6 +71,16 @@ public abstract class GenericProductsBean
         }
         logger.log(BasicLevel.DEBUG, "");
         ejbContext = ctx;
+
+	try {
+            InitialContext ic = new InitialContext();
+	    Context env = (Context)ic.lookup("java:comp/env");
+	    ServiceFactoryLocalHome fh = (ServiceFactoryLocalHome)PortableRemoteObject.
+		narrow(env.lookup("ejb/ServiceFactory"), ServiceFactoryLocalHome.class);
+            factory = fh.create();
+	} catch (Exception e) {
+	    logger.log(BasicLevel.ERROR, "ServiceFactory was not instantiated", e);
+	}
     }
 
 
@@ -285,6 +304,8 @@ public abstract class GenericProductsBean
 		script.setVar(FORM_VARNAME, form, 
 			      GenericProductsForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 
 		addFieldsToScript(script);
 		script.run();
@@ -327,6 +348,8 @@ public abstract class GenericProductsBean
 		script.setVar(FORM_VARNAME, form, 
 			      GenericProductsForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 
@@ -353,6 +376,8 @@ public abstract class GenericProductsBean
 		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
 		script.setVar(FORM_VARNAME, form, GenericProductsForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
@@ -377,6 +402,8 @@ public abstract class GenericProductsBean
 		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
 		script.setVar(FORM_VARNAME, form, GenericProductsForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
@@ -401,6 +428,8 @@ public abstract class GenericProductsBean
 		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
 		script.setVar(FORM_VARNAME, form, GenericProductsForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
@@ -425,6 +454,8 @@ public abstract class GenericProductsBean
 		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
 		script.setVar(FORM_VARNAME, form, GenericProductsForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
@@ -449,6 +480,8 @@ public abstract class GenericProductsBean
 		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
 		script.setVar(FORM_VARNAME, form, GenericProductsForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
@@ -473,6 +506,8 @@ public abstract class GenericProductsBean
 		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
 		script.setVar(FORM_VARNAME, form, GenericProductsForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
@@ -497,6 +532,8 @@ public abstract class GenericProductsBean
 		script.setVar(OLDVAL_VARNAME, oldVal, java.math.BigDecimal.class);
 		script.setVar(FORM_VARNAME, form, GenericProductsForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
@@ -521,6 +558,8 @@ public abstract class GenericProductsBean
 		script.setVar(OLDVAL_VARNAME, oldVal, java.math.BigDecimal.class);
 		script.setVar(FORM_VARNAME, form, GenericProductsForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
@@ -545,6 +584,8 @@ public abstract class GenericProductsBean
 		script.setVar(OLDVAL_VARNAME, oldVal, java.math.BigDecimal.class);
 		script.setVar(FORM_VARNAME, form, GenericProductsForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
@@ -569,6 +610,8 @@ public abstract class GenericProductsBean
 		script.setVar(OLDVAL_VARNAME, oldVal, java.math.BigDecimal.class);
 		script.setVar(FORM_VARNAME, form, GenericProductsForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
@@ -593,6 +636,8 @@ public abstract class GenericProductsBean
 		script.setVar(OLDVAL_VARNAME, oldVal, java.math.BigDecimal.class);
 		script.setVar(FORM_VARNAME, form, GenericProductsForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
@@ -617,6 +662,8 @@ public abstract class GenericProductsBean
 		script.setVar(OLDVAL_VARNAME, oldVal, java.math.BigDecimal.class);
 		script.setVar(FORM_VARNAME, form, GenericProductsForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
@@ -641,6 +688,8 @@ public abstract class GenericProductsBean
 		script.setVar(OLDVAL_VARNAME, oldVal, java.math.BigDecimal.class);
 		script.setVar(FORM_VARNAME, form, GenericProductsForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
@@ -665,6 +714,8 @@ public abstract class GenericProductsBean
 		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
 		script.setVar(FORM_VARNAME, form, GenericProductsForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
@@ -689,6 +740,8 @@ public abstract class GenericProductsBean
 		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
 		script.setVar(FORM_VARNAME, form, GenericProductsForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
@@ -713,6 +766,8 @@ public abstract class GenericProductsBean
 		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
 		script.setVar(FORM_VARNAME, form, GenericProductsForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
@@ -737,6 +792,8 @@ public abstract class GenericProductsBean
 		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
 		script.setVar(FORM_VARNAME, form, GenericProductsForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
@@ -761,6 +818,8 @@ public abstract class GenericProductsBean
 		script.setVar(OLDVAL_VARNAME, oldVal, java.math.BigDecimal.class);
 		script.setVar(FORM_VARNAME, form, GenericProductsForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
@@ -785,6 +844,8 @@ public abstract class GenericProductsBean
 		script.setVar(OLDVAL_VARNAME, oldVal, Double.class);
 		script.setVar(FORM_VARNAME, form, GenericProductsForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed

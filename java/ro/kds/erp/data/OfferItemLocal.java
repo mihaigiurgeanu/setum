@@ -137,6 +137,16 @@ public interface OfferItemLocal extends EJBLocalObject {
     public void setBusinessCategory(String bc);
 
     /**
+     * Comments refering to this specific line item
+     */
+    public String getComments();
+
+    /**
+     * Comments refering to this specific line item
+     */
+    public void setComments(String comments);
+
+    /**
      * The offer containing this offer item.
      */
     public OfferLocal getOffer();

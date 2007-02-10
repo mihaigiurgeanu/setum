@@ -73,6 +73,8 @@ public interface UsaMetalica2K extends EJBObject {
     public ResponseBean updateCilindruBuc(Integer newCilindruBuc) throws RemoteException;
     public ResponseBean updateCopiatCheieId(Integer newCopiatCheieId) throws RemoteException;
     public ResponseBean updateCopiatCheieBuc(Integer newCopiatCheieBuc) throws RemoteException;
+    public ResponseBean updateVizorId(Integer newVizorId) throws RemoteException;
+    public ResponseBean updateVizorBuc(Integer newVizorBuc) throws RemoteException;
     public ResponseBean updateSildId(Integer newSildId) throws RemoteException;
     public ResponseBean updateSildTip(String newSildTip) throws RemoteException;
     public ResponseBean updateSildCuloare(String newSildCuloare) throws RemoteException;

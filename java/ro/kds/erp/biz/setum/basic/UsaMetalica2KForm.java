@@ -67,6 +67,8 @@ public class UsaMetalica2KForm implements Serializable {
     Integer cilindruBuc;
     Integer copiatCheieId;
     Integer copiatCheieBuc;
+    Integer vizorId;
+    Integer vizorBuc;
     Integer sildId;
     String sildTip;
     String sildCuloare;
@@ -365,6 +367,14 @@ public class UsaMetalica2KForm implements Serializable {
 
 
        this.copiatCheieBuc = new Integer(0);
+
+
+
+       this.vizorId = new Integer(0);
+
+
+
+       this.vizorBuc = new Integer(0);
 
 
 
@@ -1503,6 +1513,36 @@ public class UsaMetalica2KForm implements Serializable {
 	AttributeLocal a = (AttributeLocal)attributes.get("copiatCheieBuc");
 	if(a != null) {
 	    this.setCopiatCheieBuc(a.getIntValue());
+	}
+    }
+
+    public void setVizorId(Integer newVizorId) {
+        this.vizorId = newVizorId;
+    }
+
+    public Integer getVizorId() {
+        return vizorId;
+    }
+
+    public void readVizorId(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("vizorId");
+	if(a != null) {
+	    this.setVizorId(a.getIntValue());
+	}
+    }
+
+    public void setVizorBuc(Integer newVizorBuc) {
+        this.vizorBuc = newVizorBuc;
+    }
+
+    public Integer getVizorBuc() {
+        return vizorBuc;
+    }
+
+    public void readVizorBuc(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("vizorBuc");
+	if(a != null) {
+	    this.setVizorBuc(a.getIntValue());
 	}
     }
 

@@ -14,6 +14,7 @@ import java.text.NumberFormat;
 import org.objectweb.util.monolog.api.BasicLevel;
 import org.objectweb.util.monolog.api.Logger;
 import org.objectweb.jonas.common.Log;
+import java.text.SimpleDateFormat;
 
 /**
  * The <code>ResponseBean</code> is a data transporter between the
@@ -103,7 +104,7 @@ public class ResponseBean implements Serializable {
     public void addField(String name, String value) {
 	logger.log(BasicLevel.DEBUG, "add field to response: <<" + 
 		   name + ">> -> <<" + value + ">>"); 
-	fields.put(name,value);
+	fields.put(name,"<![CDATA[" + value + "]]>");
     }
 
     /**
@@ -114,11 +115,15 @@ public class ResponseBean implements Serializable {
      * by the business logic and by the UI.
      * @param value - the value associated with the field (that, usually,
      * the UI engine should display).
+     * @throws NullPointerException if <code>addRecord</code> was never called.
      */
     public void addField(String name, int value) {
 	logger.log(BasicLevel.DEBUG, "add field to response: <<" + 
 		   name + ">> -> <<" + value + ">>"); 
-	fields.put(name, String.valueOf(value));
+
+	NumberFormat nf = NumberFormat.getIntegerInstance();
+	nf.setGroupingUsed(false);
+	fields.put(name, nf.format(value));
     }
 
     /**
@@ -129,11 +134,14 @@ public class ResponseBean implements Serializable {
      * by the business logic and by the UI.
      * @param value - the value associated with the field (that, usually,
      * the UI engine should display).
+     * @throws NullPointerException if <code>addRecord</code> was never called.
      */
     public void addField(String name, double value) {
 	logger.log(BasicLevel.DEBUG, "add field to response: <<" + 
 		   name + ">> -> <<" + value + ">>"); 
-	fields.put(name, String.valueOf(value));
+	NumberFormat nf = NumberFormat.getInstance();
+	nf.setGroupingUsed(false);
+	fields.put(name, nf.format(value));
     }
 
     /**
@@ -144,12 +152,16 @@ public class ResponseBean implements Serializable {
      * by the business logic and by the UI.
      * @param value - the value associated with the field (that, usually,
      * the UI engine should display).
+     * @throws NullPointerException if <code>addRecord</code> was never called.
      */
     public void addField(String name, Double value) {
 	logger.log(BasicLevel.DEBUG, "add field to response: <<" + 
 		   name + ">> -> <<" + value + ">>"); 
-	if(value != null)
-	    fields.put(name, NumberFormat.getInstance().format(value));
+	if(value != null) {
+	    NumberFormat nf = NumberFormat.getInstance();
+	    nf.setGroupingUsed(false);
+	    fields.put(name, nf.format(value));
+	}
 	else 
 	    fields.put(name, "");
     }
@@ -162,12 +174,16 @@ public class ResponseBean implements Serializable {
      * by the business logic and by the UI.
      * @param value - the value associated with the field (that, usually,
      * the UI engine should display).
+     * @throws NullPointerException if <code>addRecord</code> was never called.
      */
     public void addField(String name, Integer value) {
 	logger.log(BasicLevel.DEBUG, "add field to response: <<" + 
 		   name + ">> -> <<" + value + ">>"); 
-	if(value != null)
-	    fields.put(name, value.toString());
+	if(value != null) {
+	    NumberFormat nf = NumberFormat.getInstance();
+	    nf.setGroupingUsed(false);
+	    fields.put(name, nf.format(value));
+	}
 	else 
 	    fields.put(name, "");
     }
@@ -180,12 +196,15 @@ public class ResponseBean implements Serializable {
      * by the business logic and by the UI.
      * @param value - the value associated with the field (that, usually,
      * the UI engine should display).
+     * @throws NullPointerException if <code>addRecord</code> was never called.
      */
     public void addField(String name, BigDecimal value) {
 	logger.log(BasicLevel.DEBUG, "add field to response: <<" + 
 		   name + ">> -> <<" + value + ">>"); 
 	if(value != null) {
-	    fields.put(name, NumberFormat.getInstance().format(value));
+	    NumberFormat nf = NumberFormat.getInstance();
+	    nf.setGroupingUsed(false);
+	    fields.put(name, nf.format(value));
 	}
 	else 
 	    fields.put(name, "");
@@ -199,12 +218,15 @@ public class ResponseBean implements Serializable {
      * by the business logic and by the UI.
      * @param value - the value associated with the field (that, usually,
      * the UI engine should display).
+     * @throws NullPointerException if <code>addRecord</code> was never called.
      */
     public void addField(String name, Date value) {
 	logger.log(BasicLevel.DEBUG, "add field to response: <<" + 
 		   name + ">> -> <<" + value + ">>"); 
 	if(value != null) {
-	    fields.put(name, DateFormat.getDateInstance().format(value));
+	    //fields.put(name, DateFormat.getDateInstance(DateFormat.FULL).format(value));
+	    fields.put(name, (new SimpleDateFormat("yyyy-MM-dd")).format(value));
+	    //fields.put(name, value);
 	}
 	else 
 	    fields.put(name, "");
@@ -218,6 +240,7 @@ public class ResponseBean implements Serializable {
      * by the business logic and by the UI.
      * @param value - the value associated with the field (that, usually,
      * the UI engine should display).
+     * @throws NullPointerException if <code>addRecord</code> was never called.
      */
     public void addField(String name, Boolean value) {
 	logger.log(BasicLevel.DEBUG, "add field to response: <<" + 
@@ -228,6 +251,32 @@ public class ResponseBean implements Serializable {
 	    fields.put(name, "");
     }
 
+
+     /**
+     * Add a new field to the response. The field is a pair name - value
+     * usually used by the session bean to communicate to the UI form different
+     * values that should be displayed.
+     * @param name - is the name of the field, some kind of control id known
+     * by the business logic and by the UI.
+     * @param value - the value associated with the field (that, usually,
+     * the UI engine should display).
+     * @throws NullPointerException if <code>addRecord</code> was never called.
+     */
+    public void addField(String name, ResponseBean value) {
+
+	String xmlField;
+	if(value != null)
+	    xmlField = value.xmlContent();
+	else 
+	    xmlField = "";
+
+	logger.log(BasicLevel.DEBUG, "add field to response: <<" + 
+		   name + ">> -> <<" + xmlField + ">>"); 
+	fields.put(name, xmlField);
+    }
+
+
+
     /**
      * Add a new value list to the response. Value lists will be usualy used
      * by the UI in order to give the user options for differeng combo-box
@@ -236,6 +285,7 @@ public class ResponseBean implements Serializable {
      * by the bussines logic and by the UI.
      * @param vl - is the actual value list, a <code>Map</code> containing
      * name - value pairs.
+     * @throws NullPointerException if <code>addRecord</code> was never called.
      */
     public void addValueList(String name, Map vl) {
 	valueLists.put(name, vl);
@@ -251,6 +301,19 @@ public class ResponseBean implements Serializable {
 	String xml = "";
 	xml += "<?xml version=\"1.0\"?>";
 	xml += "<response>";
+	xml += xmlContent();
+	xml += "</response>";
+	
+	return xml;
+    }
+
+
+    /**
+     * Build the content of the xml document (that is without response tag).
+     */
+    protected String xmlContent() {
+	String xml = "";
+
 	for(Iterator j=records.iterator(); j.hasNext(); ) {
 	    Map myFields = (Map)j.next();
 	    xml += "<record>";
@@ -282,8 +345,7 @@ public class ResponseBean implements Serializable {
 	if(getMessage() != null)
 	    xml += "<![CDATA[" + getMessage() + "]]>";
 	xml += "</return>";
-	xml += "</response>";
-	
+
 	return xml;
     }
 

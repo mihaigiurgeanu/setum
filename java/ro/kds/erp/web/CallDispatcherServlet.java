@@ -142,6 +142,25 @@ public class CallDispatcherServlet extends HttpServlet {
 	}
     }
 
+
+
+    /**
+     * GET HTTP method redirects to POST processing method.
+     *
+     * @param request a <code>HttpServletRequest</code> value
+     * @param response a <code>HttpServletResponse</code> value
+     * @exception ServletException if an error occurs
+     * @exception IOException if an error occurs
+     */
+    public void doGet(HttpServletRequest request, 
+		      HttpServletResponse response) 
+	throws ServletException, IOException {
+	
+	doPost(request, response);
+    }
+
+
+
     /**
      * Servlet's entry point.
      *

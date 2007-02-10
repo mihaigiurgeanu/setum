@@ -28,7 +28,7 @@
     <type>Integer</type>
   </field>
   <field>
-    <name>k</name>
+    <name>k</name> <!-- Numar de canate -->
     <type>Integer</type>
   </field>
   <field>
@@ -124,15 +124,15 @@
     <type>Integer</type>
   </field>
   <field>
-    <name>lFrame</name>
+    <name>lFrame</name> <!-- ltoc -->
     <type>Double</type>
   </field>
   <field>
-    <name>bFrame</name>
+    <name>bFrame</name> <!-- btoc -->
     <type>Double</type>
   </field>
   <field>
-    <name>cFrame</name>
+    <name>cFrame</name> <!-- ctoc -->
     <type>Double</type>
   </field>
   <field>
@@ -209,6 +209,14 @@
   </field>
   <field>
     <name>copiatCheieBuc</name>
+    <type>Integer</type>
+  </field>
+  <field>
+    <name>vizorId</name>
+    <type>Integer</type>
+  </field>
+  <field>
+    <name>vizorBuc</name>
     <type>Integer</type>
   </field>
   <field>
@@ -621,6 +629,8 @@
 	</param>
       </params>
     </method>
+
+
   </services>
 
 

@@ -22,8 +22,8 @@ function load_items() {
 	(line_items,
 	 function(row,column) {
 	     var col;
-	     if(column.id) col = column.id; else col = col;
-	     return line_items.get_cell_text(row, column);
+	     if(column.id) col = column.id; else col = column;
+	     return line_items.get_cell_text(row, col);
 	 });
 }
 

@@ -118,7 +118,7 @@ function BusinessCategory(category, theForm) {
 				  module_res, this.xulfile_predicate),
 		      get_literal(modules_ds, 
 				  module_res, this.xulfile_predicate),
-		      "chrome, resizable, scrollbars", select_handler);
+		      "chrome, resizable, scrollbars, modal", select_handler);
   };
 
 
@@ -169,7 +169,7 @@ function BusinessCategory(category, theForm) {
 				  module_res, this.xulfile_predicate),
 		      get_literal(modules_ds, 
 				  module_res, this.xulfile_predicate),
-		      "chrome, resizable, scrollbars", select_handler);
+		      "chrome, resizable, scrollbars, modal", select_handler);
   };
 
 

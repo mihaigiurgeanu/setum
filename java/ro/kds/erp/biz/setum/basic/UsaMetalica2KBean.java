@@ -3,20 +3,21 @@ package ro.kds.erp.biz.setum.basic;
 import javax.ejb.SessionBean;
 import javax.ejb.SessionSynchronization;
 import javax.ejb.SessionContext;
-import org.objectweb.util.monolog.Monolog;
-import org.objectweb.util.monolog.api.BasicLevel;
-import org.objectweb.util.monolog.api.Logger;
-//import org.objectweb.jonas.common.Log;
 import javax.ejb.CreateException;
-import ro.kds.erp.biz.ResponseBean;
-import javax.naming.InitialContext;
 import javax.ejb.FinderException;
 import java.util.Collection;
 import java.util.Iterator;
+import javax.naming.*;
+import javax.rmi.PortableRemoteObject;
+
+import org.objectweb.util.monolog.Monolog;
+import org.objectweb.util.monolog.api.BasicLevel;
+import org.objectweb.util.monolog.api.Logger;
+
 import ro.kds.erp.scripting.Script;
 import ro.kds.erp.scripting.TclFileScript;
 import ro.kds.erp.scripting.ScriptErrorException;
-import javax.naming.*;
+import ro.kds.erp.biz.*;
 
 /**
  * Standard implementation of the UsaMetalica2K session bean.
@@ -29,11 +30,19 @@ public abstract class UsaMetalica2KBean
     static protected Logger logger = null;
     protected SessionContext ejbContext;
 
+    /**
+     * Stores the reference to the <code>ServiceFactory</code>
+     * to be passed to script execution.
+     */
+    protected ServiceFactoryLocal factory;
+
     protected Integer id;
     final static String FORM_VARNAME = "form";
     final static String RESPONSE_VARNAME = "response";
     final static String LOGIC_VARNAME = "logic";
     final static String OLDVAL_VARNAME = "oldVal";
+    final static String SERVICE_FACTORY_VARNAME = "factory";
+    final static String LOGGER_VARNAME = "logger";
 
     /**
      * The name of the env parameter containing the script prefix.
@@ -60,6 +69,16 @@ public abstract class UsaMetalica2KBean
         }
         logger.log(BasicLevel.DEBUG, "");
         ejbContext = ctx;
+
+	try {
+            InitialContext ic = new InitialContext();
+	    Context env = (Context)ic.lookup("java:comp/env");
+	    ServiceFactoryLocalHome fh = (ServiceFactoryLocalHome)PortableRemoteObject.
+		narrow(env.lookup("ejb/ServiceFactory"), ServiceFactoryLocalHome.class);
+            factory = fh.create();
+	} catch (Exception e) {
+	    logger.log(BasicLevel.ERROR, "ServiceFactory was not instantiated", e);
+	}
     }
 
 
@@ -201,6 +220,8 @@ public abstract class UsaMetalica2KBean
 		script.setVar(FORM_VARNAME, form, 
 			      UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 
 		addFieldsToScript(script);
 		script.run();
@@ -243,6 +264,8 @@ public abstract class UsaMetalica2KBean
 		script.setVar(FORM_VARNAME, form, 
 			      UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 
@@ -269,6 +292,8 @@ public abstract class UsaMetalica2KBean
 		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
@@ -293,6 +318,8 @@ public abstract class UsaMetalica2KBean
 		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
@@ -317,6 +344,8 @@ public abstract class UsaMetalica2KBean
 		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
@@ -341,6 +370,8 @@ public abstract class UsaMetalica2KBean
 		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
@@ -365,6 +396,8 @@ public abstract class UsaMetalica2KBean
 		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
@@ -389,6 +422,8 @@ public abstract class UsaMetalica2KBean
 		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
@@ -413,6 +448,8 @@ public abstract class UsaMetalica2KBean
 		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
@@ -437,6 +474,8 @@ public abstract class UsaMetalica2KBean
 		script.setVar(OLDVAL_VARNAME, oldVal, Double.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
@@ -461,6 +500,8 @@ public abstract class UsaMetalica2KBean
 		script.setVar(OLDVAL_VARNAME, oldVal, Double.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
@@ -485,6 +526,8 @@ public abstract class UsaMetalica2KBean
 		script.setVar(OLDVAL_VARNAME, oldVal, Double.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
@@ -509,6 +552,8 @@ public abstract class UsaMetalica2KBean
 		script.setVar(OLDVAL_VARNAME, oldVal, Double.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
@@ -533,6 +578,8 @@ public abstract class UsaMetalica2KBean
 		script.setVar(OLDVAL_VARNAME, oldVal, Double.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
@@ -557,6 +604,8 @@ public abstract class UsaMetalica2KBean
 		script.setVar(OLDVAL_VARNAME, oldVal, Double.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
@@ -581,6 +630,8 @@ public abstract class UsaMetalica2KBean
 		script.setVar(OLDVAL_VARNAME, oldVal, Double.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
@@ -605,6 +656,8 @@ public abstract class UsaMetalica2KBean
 		script.setVar(OLDVAL_VARNAME, oldVal, Double.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
@@ -629,6 +682,8 @@ public abstract class UsaMetalica2KBean
 		script.setVar(OLDVAL_VARNAME, oldVal, Double.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
@@ -653,6 +708,8 @@ public abstract class UsaMetalica2KBean
 		script.setVar(OLDVAL_VARNAME, oldVal, Double.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
@@ -677,6 +734,8 @@ public abstract class UsaMetalica2KBean
 		script.setVar(OLDVAL_VARNAME, oldVal, Double.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
@@ -701,6 +760,8 @@ public abstract class UsaMetalica2KBean
 		script.setVar(OLDVAL_VARNAME, oldVal, Double.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
@@ -725,6 +786,8 @@ public abstract class UsaMetalica2KBean
 		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
@@ -749,6 +812,8 @@ public abstract class UsaMetalica2KBean
 		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
@@ -773,6 +838,8 @@ public abstract class UsaMetalica2KBean
 		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
@@ -797,6 +864,8 @@ public abstract class UsaMetalica2KBean
 		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
@@ -821,6 +890,8 @@ public abstract class UsaMetalica2KBean
 		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
@@ -845,6 +916,8 @@ public abstract class UsaMetalica2KBean
 		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
@@ -869,6 +942,8 @@ public abstract class UsaMetalica2KBean
 		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
@@ -893,6 +968,8 @@ public abstract class UsaMetalica2KBean
 		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
@@ -917,6 +994,8 @@ public abstract class UsaMetalica2KBean
 		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
@@ -941,6 +1020,8 @@ public abstract class UsaMetalica2KBean
 		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
@@ -965,6 +1046,8 @@ public abstract class UsaMetalica2KBean
 		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
@@ -989,6 +1072,8 @@ public abstract class UsaMetalica2KBean
 		script.setVar(OLDVAL_VARNAME, oldVal, Double.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
@@ -1013,6 +1098,8 @@ public abstract class UsaMetalica2KBean
 		script.setVar(OLDVAL_VARNAME, oldVal, Double.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
@@ -1037,6 +1124,8 @@ public abstract class UsaMetalica2KBean
 		script.setVar(OLDVAL_VARNAME, oldVal, Double.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
@@ -1061,6 +1150,8 @@ public abstract class UsaMetalica2KBean
 		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
@@ -1085,6 +1176,8 @@ public abstract class UsaMetalica2KBean
 		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
@@ -1109,6 +1202,8 @@ public abstract class UsaMetalica2KBean
 		script.setVar(OLDVAL_VARNAME, oldVal, Double.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
@@ -1133,6 +1228,8 @@ public abstract class UsaMetalica2KBean
 		script.setVar(OLDVAL_VARNAME, oldVal, Double.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
@@ -1157,6 +1254,8 @@ public abstract class UsaMetalica2KBean
 		script.setVar(OLDVAL_VARNAME, oldVal, Double.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
@@ -1181,6 +1280,8 @@ public abstract class UsaMetalica2KBean
 		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
@@ -1205,6 +1306,8 @@ public abstract class UsaMetalica2KBean
 		script.setVar(OLDVAL_VARNAME, oldVal, Double.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
@@ -1229,6 +1332,8 @@ public abstract class UsaMetalica2KBean
 		script.setVar(OLDVAL_VARNAME, oldVal, Double.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
@@ -1253,6 +1358,8 @@ public abstract class UsaMetalica2KBean
 		script.setVar(OLDVAL_VARNAME, oldVal, java.math.BigDecimal.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
@@ -1277,6 +1384,8 @@ public abstract class UsaMetalica2KBean
 		script.setVar(OLDVAL_VARNAME, oldVal, java.math.BigDecimal.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
@@ -1301,6 +1410,8 @@ public abstract class UsaMetalica2KBean
 		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
@@ -1325,6 +1436,8 @@ public abstract class UsaMetalica2KBean
 		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
@@ -1349,6 +1462,8 @@ public abstract class UsaMetalica2KBean
 		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
@@ -1373,6 +1488,8 @@ public abstract class UsaMetalica2KBean
 		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
@@ -1397,6 +1514,8 @@ public abstract class UsaMetalica2KBean
 		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
@@ -1421,6 +1540,8 @@ public abstract class UsaMetalica2KBean
 		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
@@ -1445,6 +1566,8 @@ public abstract class UsaMetalica2KBean
 		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
@@ -1469,6 +1592,8 @@ public abstract class UsaMetalica2KBean
 		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
@@ -1493,12 +1618,66 @@ public abstract class UsaMetalica2KBean
 		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
 						// fields to the response also
 	   } catch (ScriptErrorException e) {
 	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the copiatCheieBuc", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
+    public ResponseBean updateVizorId(Integer vizorId) {
+        ResponseBean r = new ResponseBean();
+	Integer oldVal = form.getVizorId();
+	form.setVizorId(vizorId);
+	r.addRecord();
+	r.addField("vizorId", vizorId); // for number format
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".vizorId");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
+		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the vizorId", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
+    public ResponseBean updateVizorBuc(Integer vizorBuc) {
+        ResponseBean r = new ResponseBean();
+	Integer oldVal = form.getVizorBuc();
+	form.setVizorBuc(vizorBuc);
+	r.addRecord();
+	r.addField("vizorBuc", vizorBuc); // for number format
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".vizorBuc");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
+		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the vizorBuc", e);
            }
         }
 	computeCalculatedFields(r);
@@ -1517,6 +1696,8 @@ public abstract class UsaMetalica2KBean
 		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
@@ -1541,6 +1722,8 @@ public abstract class UsaMetalica2KBean
 		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
@@ -1565,6 +1748,8 @@ public abstract class UsaMetalica2KBean
 		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
@@ -1589,6 +1774,8 @@ public abstract class UsaMetalica2KBean
 		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
@@ -1613,6 +1800,8 @@ public abstract class UsaMetalica2KBean
 		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
@@ -1637,6 +1826,8 @@ public abstract class UsaMetalica2KBean
 		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
@@ -1661,6 +1852,8 @@ public abstract class UsaMetalica2KBean
 		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
@@ -1685,6 +1878,8 @@ public abstract class UsaMetalica2KBean
 		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
@@ -1709,6 +1904,8 @@ public abstract class UsaMetalica2KBean
 		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
@@ -1733,6 +1930,8 @@ public abstract class UsaMetalica2KBean
 		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
@@ -1757,6 +1956,8 @@ public abstract class UsaMetalica2KBean
 		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
@@ -1781,6 +1982,8 @@ public abstract class UsaMetalica2KBean
 		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
@@ -1805,6 +2008,8 @@ public abstract class UsaMetalica2KBean
 		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
@@ -1829,6 +2034,8 @@ public abstract class UsaMetalica2KBean
 		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
@@ -1853,6 +2060,8 @@ public abstract class UsaMetalica2KBean
 		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
@@ -1877,6 +2086,8 @@ public abstract class UsaMetalica2KBean
 		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
@@ -1901,6 +2112,8 @@ public abstract class UsaMetalica2KBean
 		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
@@ -1925,6 +2138,8 @@ public abstract class UsaMetalica2KBean
 		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
@@ -1949,6 +2164,8 @@ public abstract class UsaMetalica2KBean
 		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
@@ -1973,6 +2190,8 @@ public abstract class UsaMetalica2KBean
 		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
@@ -1997,6 +2216,8 @@ public abstract class UsaMetalica2KBean
 		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
@@ -2021,6 +2242,8 @@ public abstract class UsaMetalica2KBean
 		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
@@ -2045,6 +2268,8 @@ public abstract class UsaMetalica2KBean
 		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
@@ -2069,6 +2294,8 @@ public abstract class UsaMetalica2KBean
 		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
@@ -2093,6 +2320,8 @@ public abstract class UsaMetalica2KBean
 		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
@@ -2117,6 +2346,8 @@ public abstract class UsaMetalica2KBean
 		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
@@ -2141,6 +2372,8 @@ public abstract class UsaMetalica2KBean
 		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
@@ -2165,6 +2398,8 @@ public abstract class UsaMetalica2KBean
 		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
@@ -2189,6 +2424,8 @@ public abstract class UsaMetalica2KBean
 		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
@@ -2213,6 +2450,8 @@ public abstract class UsaMetalica2KBean
 		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
@@ -2237,6 +2476,8 @@ public abstract class UsaMetalica2KBean
 		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
@@ -2261,6 +2502,8 @@ public abstract class UsaMetalica2KBean
 		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
@@ -2285,6 +2528,8 @@ public abstract class UsaMetalica2KBean
 		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
@@ -2309,6 +2554,8 @@ public abstract class UsaMetalica2KBean
 		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
@@ -2333,6 +2580,8 @@ public abstract class UsaMetalica2KBean
 		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
@@ -2357,6 +2606,8 @@ public abstract class UsaMetalica2KBean
 		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
@@ -2381,6 +2632,8 @@ public abstract class UsaMetalica2KBean
 		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
@@ -2405,6 +2658,8 @@ public abstract class UsaMetalica2KBean
 		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
@@ -2429,6 +2684,8 @@ public abstract class UsaMetalica2KBean
 		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
@@ -2453,6 +2710,8 @@ public abstract class UsaMetalica2KBean
 		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
@@ -2477,6 +2736,8 @@ public abstract class UsaMetalica2KBean
 		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
@@ -2501,6 +2762,8 @@ public abstract class UsaMetalica2KBean
 		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
@@ -2525,6 +2788,8 @@ public abstract class UsaMetalica2KBean
 		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
@@ -2549,6 +2814,8 @@ public abstract class UsaMetalica2KBean
 		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
@@ -2573,6 +2840,8 @@ public abstract class UsaMetalica2KBean
 		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
@@ -2597,6 +2866,8 @@ public abstract class UsaMetalica2KBean
 		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
@@ -2621,6 +2892,8 @@ public abstract class UsaMetalica2KBean
 		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
@@ -2645,6 +2918,8 @@ public abstract class UsaMetalica2KBean
 		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
@@ -2669,6 +2944,8 @@ public abstract class UsaMetalica2KBean
 		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
@@ -2693,6 +2970,8 @@ public abstract class UsaMetalica2KBean
 		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
@@ -2717,6 +2996,8 @@ public abstract class UsaMetalica2KBean
 		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
@@ -2741,6 +3022,8 @@ public abstract class UsaMetalica2KBean
 		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
@@ -2765,6 +3048,8 @@ public abstract class UsaMetalica2KBean
 		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
@@ -2789,6 +3074,8 @@ public abstract class UsaMetalica2KBean
 		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
@@ -2813,6 +3100,8 @@ public abstract class UsaMetalica2KBean
 		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
@@ -2837,6 +3126,8 @@ public abstract class UsaMetalica2KBean
 		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
@@ -2861,6 +3152,8 @@ public abstract class UsaMetalica2KBean
 		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
@@ -2885,6 +3178,8 @@ public abstract class UsaMetalica2KBean
 		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
@@ -2909,6 +3204,8 @@ public abstract class UsaMetalica2KBean
 		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
@@ -2933,6 +3230,8 @@ public abstract class UsaMetalica2KBean
 		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
@@ -2957,6 +3256,8 @@ public abstract class UsaMetalica2KBean
 		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
@@ -2981,6 +3282,8 @@ public abstract class UsaMetalica2KBean
 		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
@@ -3005,6 +3308,8 @@ public abstract class UsaMetalica2KBean
 		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
@@ -3029,6 +3334,8 @@ public abstract class UsaMetalica2KBean
 		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
@@ -3053,6 +3360,8 @@ public abstract class UsaMetalica2KBean
 		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
@@ -3077,6 +3386,8 @@ public abstract class UsaMetalica2KBean
 		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
@@ -3101,6 +3412,8 @@ public abstract class UsaMetalica2KBean
 		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
@@ -3125,6 +3438,8 @@ public abstract class UsaMetalica2KBean
 		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
@@ -3149,6 +3464,8 @@ public abstract class UsaMetalica2KBean
 		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
@@ -3173,6 +3490,8 @@ public abstract class UsaMetalica2KBean
 		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
@@ -3197,6 +3516,8 @@ public abstract class UsaMetalica2KBean
 		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
@@ -3221,6 +3542,8 @@ public abstract class UsaMetalica2KBean
 		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
@@ -3245,6 +3568,8 @@ public abstract class UsaMetalica2KBean
 		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
@@ -3269,6 +3594,8 @@ public abstract class UsaMetalica2KBean
 		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
@@ -3293,6 +3620,8 @@ public abstract class UsaMetalica2KBean
 		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
@@ -3317,6 +3646,8 @@ public abstract class UsaMetalica2KBean
 		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
@@ -3341,6 +3672,8 @@ public abstract class UsaMetalica2KBean
 		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
@@ -3365,6 +3698,8 @@ public abstract class UsaMetalica2KBean
 		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
@@ -3389,6 +3724,8 @@ public abstract class UsaMetalica2KBean
 		script.setVar(OLDVAL_VARNAME, oldVal, Boolean.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
@@ -3413,6 +3750,8 @@ public abstract class UsaMetalica2KBean
 		script.setVar(OLDVAL_VARNAME, oldVal, Boolean.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
@@ -3437,6 +3776,8 @@ public abstract class UsaMetalica2KBean
 		script.setVar(OLDVAL_VARNAME, oldVal, Boolean.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
@@ -3461,6 +3802,8 @@ public abstract class UsaMetalica2KBean
 		script.setVar(OLDVAL_VARNAME, oldVal, Boolean.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
@@ -3485,6 +3828,8 @@ public abstract class UsaMetalica2KBean
 		script.setVar(OLDVAL_VARNAME, oldVal, Boolean.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
@@ -3509,6 +3854,8 @@ public abstract class UsaMetalica2KBean
 		script.setVar(OLDVAL_VARNAME, oldVal, Boolean.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
@@ -3533,6 +3880,8 @@ public abstract class UsaMetalica2KBean
 		script.setVar(OLDVAL_VARNAME, oldVal, Boolean.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
@@ -3557,6 +3906,8 @@ public abstract class UsaMetalica2KBean
 		script.setVar(OLDVAL_VARNAME, oldVal, Boolean.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
@@ -3581,6 +3932,8 @@ public abstract class UsaMetalica2KBean
 		script.setVar(OLDVAL_VARNAME, oldVal, Boolean.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
@@ -3605,6 +3958,8 @@ public abstract class UsaMetalica2KBean
 		script.setVar(OLDVAL_VARNAME, oldVal, Boolean.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
@@ -3629,6 +3984,8 @@ public abstract class UsaMetalica2KBean
 		script.setVar(OLDVAL_VARNAME, oldVal, Boolean.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
@@ -3669,6 +4026,8 @@ public abstract class UsaMetalica2KBean
 		script.setVar(LOGIC_VARNAME, this);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 	   } catch (ScriptErrorException e) {
@@ -3703,6 +4062,8 @@ public abstract class UsaMetalica2KBean
 		script.setVar(LOGIC_VARNAME, this);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 	   } catch (ScriptErrorException e) {
@@ -3738,6 +4099,8 @@ public abstract class UsaMetalica2KBean
 		script.setVar(LOGIC_VARNAME, this);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 	   } catch (ScriptErrorException e) {
@@ -3803,6 +4166,8 @@ public abstract class UsaMetalica2KBean
 	r.addField("cilindruBuc", form.getCilindruBuc());
 	r.addField("copiatCheieId", form.getCopiatCheieId());
 	r.addField("copiatCheieBuc", form.getCopiatCheieBuc());
+	r.addField("vizorId", form.getVizorId());
+	r.addField("vizorBuc", form.getVizorBuc());
 	r.addField("sildId", form.getSildId());
 	r.addField("sildTip", form.getSildTip());
 	r.addField("sildCuloare", form.getSildCuloare());
@@ -4216,6 +4581,18 @@ public abstract class UsaMetalica2KBean
 	    s.setVar("copiatCheieBuc", form.getCopiatCheieBuc(), Integer.class);
 	} catch (ScriptErrorException e) {
 	    logger.log(BasicLevel.WARN, "Can not set the value of field: copiatCheieBuc from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    s.setVar("vizorId", form.getVizorId(), Integer.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: vizorId from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    s.setVar("vizorBuc", form.getVizorBuc(), Integer.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: vizorBuc from the script");
             logger.log(BasicLevel.DEBUG, e);
         }
 	try {
@@ -5330,6 +5707,28 @@ public abstract class UsaMetalica2KBean
 	    }
 	} catch (ScriptErrorException e) {
 	    logger.log(BasicLevel.WARN, "Can not get the value of field: copiatCheieBuc from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    field = s.getVar("vizorId", Integer.class);
+	    if(!field.equals(form.getVizorId())) {
+	        logger.log(BasicLevel.DEBUG, "Field vizorId modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setVizorId((Integer)field);
+	        r.addField("vizorId", (Integer)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: vizorId from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    field = s.getVar("vizorBuc", Integer.class);
+	    if(!field.equals(form.getVizorBuc())) {
+	        logger.log(BasicLevel.DEBUG, "Field vizorBuc modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setVizorBuc((Integer)field);
+	        r.addField("vizorBuc", (Integer)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: vizorBuc from the script");
             logger.log(BasicLevel.DEBUG, e);
         }
 	try {

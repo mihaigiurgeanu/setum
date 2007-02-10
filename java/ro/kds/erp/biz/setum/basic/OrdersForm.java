@@ -25,6 +25,7 @@ public class OrdersForm implements Serializable {
     java.math.BigDecimal distanta;
     String observatii;
     java.math.BigDecimal total;
+    Double tvaPercent;
     java.math.BigDecimal totalTva;
     java.math.BigDecimal discount;
     java.math.BigDecimal totalFinal;
@@ -32,6 +33,8 @@ public class OrdersForm implements Serializable {
     java.math.BigDecimal avans;
     String achitatCu;
     java.math.BigDecimal valoareAvans;
+    java.math.BigDecimal payedAmount;
+    java.math.BigDecimal invoicedAmount;
     java.math.BigDecimal diferenta;
     java.util.Date termenLivrare;
     java.util.Date termenLivrare1;
@@ -48,6 +51,17 @@ public class OrdersForm implements Serializable {
     java.math.BigDecimal quantity;
     java.math.BigDecimal value;
     java.math.BigDecimal tax;
+    String invoiceNumber;
+    java.util.Date invoiceDate;
+    String invoiceRole;
+    java.math.BigDecimal invoiceAmount;
+    java.math.BigDecimal invoiceTax;
+    java.math.BigDecimal invoiceTotal;
+    java.math.BigDecimal invoicePayed;
+    java.math.BigDecimal invoiceUnpayed;
+    String paymentNumber;
+    java.util.Date paymentDate;
+    java.math.BigDecimal paymentAmount;
 
     public OrdersForm() {
 
@@ -93,6 +107,10 @@ public class OrdersForm implements Serializable {
 
 
 
+       this.tvaPercent = new Double(0);
+   
+
+
        this.totalTva = new java.math.BigDecimal(0);
 
 
@@ -118,6 +136,14 @@ public class OrdersForm implements Serializable {
 
 
        this.valoareAvans = new java.math.BigDecimal(0);
+
+
+
+       this.payedAmount = new java.math.BigDecimal(0);
+
+
+
+       this.invoicedAmount = new java.math.BigDecimal(0);
 
 
 
@@ -184,6 +210,52 @@ public class OrdersForm implements Serializable {
 
 
        this.tax = new java.math.BigDecimal(0);
+
+
+
+       this.invoiceNumber = "";
+
+
+
+
+       // No rule to initialize this.invoiceDate
+
+
+
+       this.invoiceRole = "";
+
+
+
+       this.invoiceAmount = new java.math.BigDecimal(0);
+
+
+
+       this.invoiceTax = new java.math.BigDecimal(0);
+
+
+
+       this.invoiceTotal = new java.math.BigDecimal(0);
+
+
+
+       this.invoicePayed = new java.math.BigDecimal(0);
+
+
+
+       this.invoiceUnpayed = new java.math.BigDecimal(0);
+
+
+
+       this.paymentNumber = "";
+
+
+
+
+       // No rule to initialize this.paymentDate
+
+
+
+       this.paymentAmount = new java.math.BigDecimal(0);
 
 
 
@@ -333,6 +405,21 @@ public class OrdersForm implements Serializable {
 	}
     }
 
+    public void setTvaPercent(Double newTvaPercent) {
+        this.tvaPercent = newTvaPercent;
+    }
+
+    public Double getTvaPercent() {
+        return tvaPercent;
+    }
+
+    public void readTvaPercent(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("tvaPercent");
+	if(a != null) {
+	    this.setTvaPercent(a.getDoubleValue());
+	}
+    }
+
     public void setTotalTva(java.math.BigDecimal newTotalTva) {
         this.totalTva = newTotalTva;
     }
@@ -435,6 +522,36 @@ public class OrdersForm implements Serializable {
 	AttributeLocal a = (AttributeLocal)attributes.get("valoareAvans");
 	if(a != null) {
 	    this.setValoareAvans(a.getDecimalValue());
+	}
+    }
+
+    public void setPayedAmount(java.math.BigDecimal newPayedAmount) {
+        this.payedAmount = newPayedAmount;
+    }
+
+    public java.math.BigDecimal getPayedAmount() {
+        return payedAmount;
+    }
+
+    public void readPayedAmount(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("payedAmount");
+	if(a != null) {
+	    this.setPayedAmount(a.getDecimalValue());
+	}
+    }
+
+    public void setInvoicedAmount(java.math.BigDecimal newInvoicedAmount) {
+        this.invoicedAmount = newInvoicedAmount;
+    }
+
+    public java.math.BigDecimal getInvoicedAmount() {
+        return invoicedAmount;
+    }
+
+    public void readInvoicedAmount(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("invoicedAmount");
+	if(a != null) {
+	    this.setInvoicedAmount(a.getDecimalValue());
 	}
     }
 
@@ -663,6 +780,159 @@ public class OrdersForm implements Serializable {
 	AttributeLocal a = (AttributeLocal)attributes.get("tax");
 	if(a != null) {
 	    this.setTax(a.getDecimalValue());
+	}
+    }
+
+    public void setInvoiceNumber(String newInvoiceNumber) {
+        this.invoiceNumber = newInvoiceNumber;
+    }
+
+    public String getInvoiceNumber() {
+        return invoiceNumber;
+    }
+
+    public void readInvoiceNumber(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("invoiceNumber");
+	if(a != null) {
+	    this.setInvoiceNumber(a.getStringValue());
+	}
+    }
+
+    public void setInvoiceDate(java.util.Date newInvoiceDate) {
+        this.invoiceDate = newInvoiceDate;
+    }
+
+    public java.util.Date getInvoiceDate() {
+        return invoiceDate;
+    }
+
+
+    public void setInvoiceRole(String newInvoiceRole) {
+        this.invoiceRole = newInvoiceRole;
+    }
+
+    public String getInvoiceRole() {
+        return invoiceRole;
+    }
+
+    public void readInvoiceRole(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("invoiceRole");
+	if(a != null) {
+	    this.setInvoiceRole(a.getStringValue());
+	}
+    }
+
+    public void setInvoiceAmount(java.math.BigDecimal newInvoiceAmount) {
+        this.invoiceAmount = newInvoiceAmount;
+    }
+
+    public java.math.BigDecimal getInvoiceAmount() {
+        return invoiceAmount;
+    }
+
+    public void readInvoiceAmount(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("invoiceAmount");
+	if(a != null) {
+	    this.setInvoiceAmount(a.getDecimalValue());
+	}
+    }
+
+    public void setInvoiceTax(java.math.BigDecimal newInvoiceTax) {
+        this.invoiceTax = newInvoiceTax;
+    }
+
+    public java.math.BigDecimal getInvoiceTax() {
+        return invoiceTax;
+    }
+
+    public void readInvoiceTax(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("invoiceTax");
+	if(a != null) {
+	    this.setInvoiceTax(a.getDecimalValue());
+	}
+    }
+
+    public void setInvoiceTotal(java.math.BigDecimal newInvoiceTotal) {
+        this.invoiceTotal = newInvoiceTotal;
+    }
+
+    public java.math.BigDecimal getInvoiceTotal() {
+        return invoiceTotal;
+    }
+
+    public void readInvoiceTotal(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("invoiceTotal");
+	if(a != null) {
+	    this.setInvoiceTotal(a.getDecimalValue());
+	}
+    }
+
+    public void setInvoicePayed(java.math.BigDecimal newInvoicePayed) {
+        this.invoicePayed = newInvoicePayed;
+    }
+
+    public java.math.BigDecimal getInvoicePayed() {
+        return invoicePayed;
+    }
+
+    public void readInvoicePayed(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("invoicePayed");
+	if(a != null) {
+	    this.setInvoicePayed(a.getDecimalValue());
+	}
+    }
+
+    public void setInvoiceUnpayed(java.math.BigDecimal newInvoiceUnpayed) {
+        this.invoiceUnpayed = newInvoiceUnpayed;
+    }
+
+    public java.math.BigDecimal getInvoiceUnpayed() {
+        return invoiceUnpayed;
+    }
+
+    public void readInvoiceUnpayed(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("invoiceUnpayed");
+	if(a != null) {
+	    this.setInvoiceUnpayed(a.getDecimalValue());
+	}
+    }
+
+    public void setPaymentNumber(String newPaymentNumber) {
+        this.paymentNumber = newPaymentNumber;
+    }
+
+    public String getPaymentNumber() {
+        return paymentNumber;
+    }
+
+    public void readPaymentNumber(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("paymentNumber");
+	if(a != null) {
+	    this.setPaymentNumber(a.getStringValue());
+	}
+    }
+
+    public void setPaymentDate(java.util.Date newPaymentDate) {
+        this.paymentDate = newPaymentDate;
+    }
+
+    public java.util.Date getPaymentDate() {
+        return paymentDate;
+    }
+
+
+    public void setPaymentAmount(java.math.BigDecimal newPaymentAmount) {
+        this.paymentAmount = newPaymentAmount;
+    }
+
+    public java.math.BigDecimal getPaymentAmount() {
+        return paymentAmount;
+    }
+
+    public void readPaymentAmount(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("paymentAmount");
+	if(a != null) {
+	    this.setPaymentAmount(a.getDecimalValue());
 	}
     }
 

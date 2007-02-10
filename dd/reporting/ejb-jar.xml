@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ejb-jar version="2.1" 
+	 xmlns="http://java.sun.com/xml/ns/j2ee"
+	 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+
+  <description>
+    Transformer beans used to transform a ResponseBean into XSLFO
+  </description>
+
+  <display-name>Reporting</display-name>
+
+  <enterprise-beans>
+    <session>
+      <description>Transformer using freemarker templates</description>
+      <display-name>FTLTransformer</display-name>
+      <ejb-name>FTLTransformerEJB</ejb-name>
+      <local-home>ro.kds.erp.reports.TransformerLocalHome</local-home>
+      <local>ro.kds.erp.reports.TransformerLocal</local>
+      <ejb-class>ro.kds.erp.reports.FTLTransformerBean</ejb-class>
+      
+      <session-type>Stateless</session-type>
+      <transaction-type>Container</transaction-type>
+      <env-entry>
+	<description>The name of the preference holding the path to the templates files</description>
+	<env-entry-name>TemplatesLocation</env-entry-name>
+	<env-entry-type>java.lang.String</env-entry-type>
+	<env-entry-value>setum.reports</env-entry-value>
+      </env-entry>
+      <ejb-ref>
+	<description>Preferences reference for getting the path to the templates file</description>
+	<ejb-ref-name>ejb/PreferencesHome</ejb-ref-name>
+	<ejb-ref-type>Session</ejb-ref-type>
+	<home>ro.kds.erp.biz.PreferencesHome</home>
+	<remote>ro.kds.erp.biz.Preferences</remote>
+      </ejb-ref>
+    </session>
+  </enterprise-beans>
+
+
+  <assembly-descriptor>
+    <container-transaction>
+      <description>Default behaviour is to support the transaction but not to require one.</description>
+      <method>
+	<ejb-name>FTLTransformerEJB</ejb-name>
+	<method-name>*</method-name>
+      </method>
+      <trans-attribute>Supports</trans-attribute>
+    </container-transaction>
+  </assembly-descriptor>
+</ejb-jar>

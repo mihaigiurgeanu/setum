@@ -12,6 +12,8 @@ import org.objectweb.util.monolog.api.Logger;
 import org.objectweb.util.monolog.api.BasicLevel;
 import org.objectweb.jonas.common.Log;
 import java.util.Map;
+import javax.naming.NamingException;
+import javax.ejb.FinderException;
 
 /**
  * Collection of static methods for building value lists used in the
@@ -162,6 +164,49 @@ public class ValueLists {
 	}
 
 	return vl;
+    }
+
+    /**
+     * Get the product that is the target of a value list.
+     * @param categoryId is the id of the category holding the value list.
+     * @param code is the searched code.
+     * @return the product in the given category with the searched code.
+     * @exception NamingException if ejb/CategroyHome is not configured
+     * or other service naming error.
+     * @exception FinderException if either product or category could
+     * not be found.
+     */
+    public static ProductLocal getValueByCode(int categoryId, String code) 
+	throws NamingException, FinderException {
+
+	CategoryLocal category;
+	try {	    
+	    InitialContext ic = new InitialContext();
+	    CategoryLocalHome ch = (CategoryLocalHome)PortableRemoteObject.
+		narrow(ic.lookup("java:comp/env/ejb/CategoryHome"),
+		       CategoryLocalHome.class);
+	    category = ch.findByPrimaryKey(new Integer(categoryId));
+	} catch (FinderException e) {
+	    logger.log(BasicLevel.WARN, "Category id can not be found: " + categoryId);
+	    logger.log(BasicLevel.DEBUG, e);
+	    throw e;
+	} catch (NamingException e) {
+	    logger.log(BasicLevel.ERROR, 
+		       "Naming service error when trying to locate category home: "
+		       + e.getMessage());
+	    logger.log(BasicLevel.DEBUG, e);
+	    throw e;
+	}
+
+	try {
+	    ProductLocal p = category.getProductByCode(code);
+	    return p;
+	} catch (FinderException e) {
+	    logger.log(BasicLevel.WARN, "Searched product code does not exist: " +
+		       code + ", for category id " + categoryId);
+	    logger.log(BasicLevel.DEBUG, e);
+	    throw e;
+	}
     }
 
     /**

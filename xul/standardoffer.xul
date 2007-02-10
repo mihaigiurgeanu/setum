@@ -1,6 +1,8 @@
 <?xml version="1.0"?>
 <?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
 <?xml-stylesheet href="setum.css" type="text/css"?>
+<?xml-stylesheet href="bindings/dateselector.css" type="text/css"?>
+
 
 <window
     id="standardoffer-win"
@@ -31,6 +33,8 @@
 
     <command id="onlaunch" oncommand="launch_offer()"/>
     <command id="ondiscontinue" oncommand="discontinue_offer()"/>
+
+    <command id="adjustprices" oncommand="adjust_prices_dialog()"/>
   </commandset>
 
   <tabbox flex="1" id="maintab">
@@ -43,6 +47,8 @@
     <tabpanels flex="1">
       <tabpanel id="maintab.offersListing" orient="vertical">
 	<hbox class="mytoolbar">
+	  <button label="Ajustare preturi" command="adjustprices"/>
+
 	  <button label="Tiparire oferta" command="onprint" icon="print"/>
 	  <button label="Lanseaza oferta" command="onlaunch" icon="accept"/>
 	  <button label="Retrage oferta" command="ondiscontinue" icon="cancel"/>
@@ -100,7 +106,7 @@
 	    </row>
 	    <row>
 	      <label control="docDate" value="Data:"/>
-	      <textbox id="docDate"/>
+	      <datebox id="docDate" yearstart="2001" yearend="2051"/>
 	    </row>
 	    <row>
 	      <label value="Valabila " />
@@ -114,9 +120,9 @@
 		<rows>
 		  <row>
 		    <label control="dateFrom" value="de la:"/>
-		    <textbox id="dateFrom"/>
+		    <datebox id="dateFrom" yearstart="2001" yearend="2051"/>
 		    <label control="dateTo" value="pana la:"/>
-		    <textbox id="dateTo"/>
+		    <datebox id="dateTo" yearstart="2001" yearend="2051"/>
 		  </row>
 		  <row>
 		    <label control="period" value="nr zile:"/>
@@ -195,6 +201,14 @@
 		<label control="absoluteGain" value="Adaos (Lei):"/>
 		<textbox id="absoluteGain"/>
 	      </row>
+	      <row>
+		<label control="price1" value="Pret cu usa:"/>
+		<textbox id="price1"/>
+	      </row>
+	      <row>
+		<label control="price2" value="Manopera montaj:"/>
+		<textbox id="price2"/>
+	      </row>
 	    </rows>
 	  </grid>
 	  <grid>
@@ -219,9 +233,13 @@
 		<label control="sellPrice" value="Pret magazin:"/>
 		<textbox id="sellPrice" readonly="true"/>
 	      </row>
+	      <row>
+	      </row>
 	    </rows>
 	  </grid>
 	</hbox>
+	<label control="lineComments" value="Observatii:"/>
+	<textbox id="lineComments"/>
       </tabpanel>
     </tabpanels>
 

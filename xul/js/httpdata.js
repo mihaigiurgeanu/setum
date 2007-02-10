@@ -35,11 +35,6 @@ function httpRequestExecute() {
 	return false;
     }
   
-    var waitCursor = document.documentElement.hasAttribute("wait-cursor");
-    log("Saving current cursor wait status: " + waitCursor);
-    log("Setting cursor wait status to true");
-    document.documentElement.setAttribute("wait-cursor", 0);
-
     //Make the connection and send our data
     try {
 	var txt = "";
@@ -67,11 +62,6 @@ function httpRequestExecute() {
     }catch (e){
 	alert('An error has occured calling the external site: '+e);
 	return false;
-    } finally {
-	log("Restoring cursor wait status: " + waitCursor);
-	if(! waitCursor) {
-	    document.documentElement.removeAttribute("wait-cursor");
-	}
     }
 
     //Make sure we received a valid response

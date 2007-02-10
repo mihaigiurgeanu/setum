@@ -69,7 +69,7 @@ import javax.servlet.http.HttpServlet;
  * Created: Tue Mar 14 17:09:40 2006
  *
  * @author <a href="mailto:Mihai Giurgeanu@CRIMIRA"></a>
- * @version $Id: SimpleCallDispatcherServlet.java,v 1.4 2006/09/27 14:43:12 mihai Exp $
+ * @version $Id: SimpleCallDispatcherServlet.java,v 1.5 2007/02/10 17:45:12 mihai Exp $
  */
 public class SimpleCallDispatcherServlet extends HttpServlet {
 
@@ -141,6 +141,10 @@ public class SimpleCallDispatcherServlet extends HttpServlet {
 	    // Converter initialization
 	    ConvertUtils.register(new ro.kds.erp.utils.DateConverter(),
 				  java.util.Date.class);
+	    ConvertUtils.register(new ro.kds.erp.utils.DoubleConverter(),
+				  java.lang.Double.class);
+	    ConvertUtils.register(new ro.kds.erp.utils.DoubleConverter(),
+				  java.math.BigDecimal.class);
 	    
 	} catch (Exception e) {
 	    logger.log(BasicLevel.ERROR, "Servlet can not be initialized", e);
@@ -149,6 +153,20 @@ public class SimpleCallDispatcherServlet extends HttpServlet {
     }
 
 
+    /**
+     * GET HTTP method redirects to POST processing method.
+     *
+     * @param request a <code>HttpServletRequest</code> value
+     * @param response a <code>HttpServletResponse</code> value
+     * @exception ServletException if an error occurs
+     * @exception IOException if an error occurs
+     */
+    public void doGet(HttpServletRequest request, 
+		      HttpServletResponse response) 
+	throws ServletException, IOException {
+	
+	doPost(request, response);
+    }
 
     /**
      * Servlet's entry point.
@@ -165,7 +183,28 @@ public class SimpleCallDispatcherServlet extends HttpServlet {
 	logger.log(BasicLevel.DEBUG, "Component's path: " + 
 		   request.getRequestURI());
 	ResponseBean r;
+
 	String operation = request.getParameter("operation");
+	String command = request.getParameter("command");
+
+	logger.log(BasicLevel.INFO, "Command: " + command);
+	logger.log(BasicLevel.INFO, "Operation: " + operation);
+	{
+	    String params = "";
+	    for(Iterator i = request.getParameterMap().entrySet().iterator(); 
+		i.hasNext();) {
+		
+		Map.Entry entry = (Map.Entry)i.next();
+		params += "<<" + entry.getKey() + ">> = ";
+		Object[] value = (Object []) entry.getValue();
+		for(int j=0; j<value.length; j++)
+		    params += "<<" + value[j] + ">> ";
+		params += "\n";
+	    }
+
+	    logger.log(BasicLevel.INFO, "Parameters: \n" + params);
+	}
+
 
 	try {
 	    EJBObject bean;
@@ -177,25 +216,6 @@ public class SimpleCallDispatcherServlet extends HttpServlet {
 		bean = getSessionBean(request);
 	    }
 	
-	    String command = request.getParameter("command");
-
-	    logger.log(BasicLevel.DEBUG, "Command: " + command);
-	    {
-		String params = "";
-		for(Iterator i = request.getParameterMap().entrySet().iterator(); 
-		    i.hasNext();) {
-		
-		    Map.Entry entry = (Map.Entry)i.next();
-		    params += "<<" + entry.getKey() + ">> = ";
-		    Object[] value = (Object []) entry.getValue();
-		    for(int j=0; j<value.length; j++)
-			params += "<<" + value[j] + ">> ";
-		    params += "\n";
-		}
-
-		logger.log(BasicLevel.DEBUG, "Parameters: \n" + params);
-	    }
-
 	    if(command.equals("change")) {
 		String field = request.getParameter("field");
 		String value = request.getParameter("value");

@@ -42,6 +42,54 @@ log "he: $he"
 set se [expr ($le * $he)/1000000]
 log "se: $se"
 
+set luft 5
+set lFoaie [expr $le - (2 * $bFrame + 2 * $luft)]
+
+
+if {$ieFoil == 1} {
+    set extFoil $intFoil
+}
+
+if { $k == 2 } {
+    set lFoaie $lCurrent
+    set lFoaieSec [expr $le - (2*$bFrame + $lFoaie + 3*$luft)]
+}
+
+if { $frameType == 1 } {
+    set lFrame 90
+    set bFrame 35
+    set cFrame 25
+}
+
+if { $tresholdType == 1 } {
+    set h2Treshold 0
+    set h1Treshold 0
+
+    set lTreshold 90
+    set hTreshold 15
+    set cTreshold 25
+}
+
+
+if { $tresholdType == 2 } {
+    set h2Treshold 0
+    set h1Treshold 0
+}
+if { $tresholdType == 3 } {
+    if { $hTresholdSpace == 1} {
+	set h2Treshold 0
+    }
+    if { $tresholdSpace == 2} {
+	set h1Treshold 0
+    }
+}
+
+set hFoaie [expr $he - ($bFrame + $hTreshold + $h1Treshold + $h2Treshold + 2*$luft)]
+
+
+set lUtil [expr $le - 2 * ($bFrame + $cFrame)]
+set hUtil [expr $he - ($bFrame + $cFrame + $hTreshold + $cTreshold + $h1Treshold + $h2Treshold)]
+
 
 read_prop pret_subcod subclassObj price1
 read_prop pret_versiune versionObj price1

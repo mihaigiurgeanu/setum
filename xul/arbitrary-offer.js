@@ -171,6 +171,14 @@ function show_lineItem_details() {
 }
 
 
+function open_report(type) {
+//     var req = theForm.get_request();
+//     req.add("command", "offerReport");
+//     var response = req.execute();
+//    window.open(SERVER_URL + theForm.do_link + "?command=offerReport");
+    window.open(SERVER_URL + "/reports/offer." + type);
+}
+
 // Global variable theForm that will be used by event handlers
 var theForm = new FormObject();
 theForm.text_fields = new Array("no", "docDate", "dateFrom", "dateTo", 

@@ -63,6 +63,9 @@
       <cmp-field>
 	<field-name>description1</field-name>
       </cmp-field>
+      <cmp-field>
+	<field-name>discontinued</field-name>
+      </cmp-field>
       <primkey-field>id</primkey-field>
       <env-entry>
 	<env-entry-name>name1</env-entry-name>
@@ -327,6 +330,9 @@
       <cmp-field>
 	<description>RDF resource identifier used by UI module to know how to edit the corresponding product.</description>
 	<field-name>businessCategory</field-name>
+      </cmp-field>
+      <cmp-field>
+	<field-name>comments</field-name>
       </cmp-field>
       <primkey-field>id</primkey-field>
     </entity>
@@ -634,6 +640,7 @@
 	<local>ro.kds.erp.data.AttributeLocal</local>
 	<ejb-link>AttributeEJB</ejb-link>
       </ejb-local-ref>
+
       <query>
 	<query-method>
 	  <method-name>findAll</method-name>
@@ -641,6 +648,39 @@
 	</query-method>
 	<ejb-ql>SELECT OBJECT(o) FROM Order AS o</ejb-ql>
       </query>
+
+
+      <query>
+	<description>Computes the amount invoiced on this order</description>
+	<query-method>
+	  <method-name>ejbSelectInvoicedAmount</method-name>
+	  <method-params>
+	    <method-param>java.lang.Integer</method-param>
+	  </method-params>
+	</query-method>
+	<ejb-ql>
+	  SELECT SUM(i.amount) FROM Order o, IN(o.invoices) i WHERE o.id = ?1
+	</ejb-ql>
+      </query>
+
+
+
+      <query>
+	<description>Retrieves the amount payed already</description>
+	<query-method>
+	  <method-name>ejbSelectSumOfPayments</method-name>
+	  <method-params>
+	    <method-param>java.lang.Integer</method-param>
+	  </method-params>
+	</query-method>
+	<ejb-ql>
+	  SELECT SUM(p.amount) FROM Order o, IN(o.invoices) i, IN(i.payments) p
+	  WHERE o.id = ?1
+	</ejb-ql>
+      </query>
+
+
+
     </entity>
 
 
@@ -668,10 +708,113 @@
 	<field-name>quantity</field-name>
       </cmp-field>
       <primkey-field>id</primkey-field>
+
+    </entity>
+
+
+    <!-- Invoice entity -->
+    <entity>
+      <description>Records information about the invoice 
+      on a partial payment to the Order.</description>
+
+      <ejb-name>InvoiceEJB</ejb-name>
+      <local-home>ro.kds.erp.data.InvoiceLocalHome</local-home>
+      <local>ro.kds.erp.data.InvoiceLocal</local>
+      <ejb-class>ro.kds.erp.data.InvoiceBean</ejb-class>
+
+
+      <persistence-type>Container</persistence-type>
+      <prim-key-class>java.lang.Integer</prim-key-class>
+      <reentrant>true</reentrant>
+
+      <abstract-schema-name>Invoice</abstract-schema-name>
+      
+      <cmp-field>
+	<field-name>id</field-name>
+      </cmp-field>
+      <cmp-field>
+	<description>Can be "PAYMENT" or "ADVANCE" to mark 
+	a normal payment or an advance payment.</description>
+	<field-name>role</field-name>
+      </cmp-field>
+      <cmp-field>
+	<field-name>amount</field-name>
+      </cmp-field>
+      <cmp-field>
+	<field-name>tax</field-name>
+      </cmp-field>
+      
+      <primkey-field>id</primkey-field>
+
+      <ejb-local-ref>
+	<ejb-ref-name>ejb/DocumentHome</ejb-ref-name>
+	<ejb-ref-type>Entity</ejb-ref-type>
+	<local-home>ro.kds.erp.data.DocumentLocalHome</local-home>
+	<local>ro.kds.erp.data.DocumentLocal</local>
+	<ejb-link>DocumentEJB</ejb-link>
+      </ejb-local-ref>
+
+      <query>
+	<description>Retrieves the amount payed already</description>
+	<query-method>
+	  <method-name>ejbSelectSumOfPayments</method-name>
+	  <method-params>
+	    <method-param>java.lang.Integer</method-param>
+	  </method-params>
+	</query-method>
+	<ejb-ql>
+	  SELECT SUM(p.amount) FROM Invoice i, IN(i.payments) p
+	  WHERE i.id = ?1
+	</ejb-ql>
+      </query>
+    </entity>
+
+
+
+
+    <!-- Payment entity -->
+    <entity>
+      <description>Records a payment to an invoice.</description>
+      
+      <ejb-name>PaymentEJB</ejb-name>
+      <local-home>ro.kds.erp.data.PaymentLocalHome</local-home>
+      <local>ro.kds.erp.data.PaymentLocal</local>
+      <ejb-class>ro.kds.erp.data.PaymentBean</ejb-class>
+
+
+      <persistence-type>Container</persistence-type>
+      <prim-key-class>java.lang.Integer</prim-key-class>
+      <reentrant>true</reentrant>
+
+      
+      <abstract-schema-name>Payment</abstract-schema-name>
+
+
+      <cmp-field>
+	<field-name>id</field-name>
+      </cmp-field>
+
+      <cmp-field>
+	<field-name>amount</field-name>
+      </cmp-field>
+
+
+      <primkey-field>id</primkey-field>
+
+
+      <ejb-local-ref>
+	<ejb-ref-name>ejb/DocumentHome</ejb-ref-name>
+	<ejb-ref-type>Entity</ejb-ref-type>
+	<local-home>ro.kds.erp.data.DocumentLocalHome</local-home>
+	<local>ro.kds.erp.data.DocumentLocal</local>
+	<ejb-link>DocumentEJB</ejb-link>
+      </ejb-local-ref>
+
     </entity>
 
 
   </enterprise-beans>
+
 
 
 
@@ -988,7 +1131,7 @@
 
 
     <ejb-relation>
-      <ejb-realtion-name>Order-Document</ejb-realtion-name>
+      <ejb-relation-name>Order-Document</ejb-relation-name>
       <ejb-relationship-role>
 	<ejb-relationship-role-name>OrderSpecificDocumentData</ejb-relationship-role-name>
 	<multiplicity>One</multiplicity>
@@ -1034,9 +1177,9 @@
 
     <ejb-relation>
       <description>Order-OrderLines</description>
-      <ejb-relationship-name>OrderOfOrderLines</ejb-relationship-name>
+      <ejb-relation-name>OrderOfOrderLines</ejb-relation-name>
       <ejb-relationship-role>
-	<ejb-realtionship-role-name>OrderHavingOrderLines</ejb-realtionship-role-name>
+	<ejb-relationship-role-name>OrderHavingOrderLines</ejb-relationship-role-name>
 	<multiplicity>One</multiplicity>
 	<relationship-role-source>
 	  <ejb-name>OrderEJB</ejb-name>
@@ -1049,6 +1192,7 @@
       <ejb-relationship-role>
 	<ejb-relationship-role-name>OrderLinesBelongingToOrder</ejb-relationship-role-name>
 	<multiplicity>Many</multiplicity>
+	<cascade-delete/>
 	<relationship-role-source>
 	  <ejb-name>OrderLineEJB</ejb-name>
 	</relationship-role-source>
@@ -1057,7 +1201,7 @@
 
     <ejb-relation>
       <description>Each order line is attached to some offer line. Only offered products can be ordered.</description>
-      <ejb-relationship-name>OrderLine-OfferItem</ejb-relationship-name>
+      <ejb-relation-name>OrderLine-OfferItem</ejb-relation-name>
       <ejb-relationship-role>
 	<ejb-relationship-role-name>OrderLinesForOfferItem</ejb-relationship-role-name>
 	<multiplicity>Many</multiplicity>
@@ -1077,12 +1221,122 @@
       </ejb-relationship-role>
     </ejb-relation>
 
+    <ejb-relation>
+      <description>The invoice is a document. The document functionality
+      is captured by the document entity. There is a one-one relation between
+      the document and invoice entities.</description>
 
+      <ejb-relation-name>Invoice-Document</ejb-relation-name>
+      <ejb-relationship-role>
+	<ejb-relationship-role-name>InvoiceSpecificDataOfDocument</ejb-relationship-role-name>
+	<multiplicity>One</multiplicity>
+	<relationship-role-source>
+	  <ejb-name>InvoiceEJB</ejb-name>
+	</relationship-role-source>
+	<cmr-field>
+	  <cmr-field-name>document</cmr-field-name>
+	</cmr-field>
+      </ejb-relationship-role>
+      <ejb-relationship-role>
+	<ejb-relationship-role-name>GenericDocumentDataOfInvoice</ejb-relationship-role-name>
+	<multiplicity>One</multiplicity>
+	<cascade-delete/>
+	<relationship-role-source>
+	  <ejb-name>DocumentEJB</ejb-name>
+	</relationship-role-source>
+      </ejb-relationship-role>
+    </ejb-relation>
+
+
+    <ejb-relation>
+      <description>The payment is a document as well. Generic document data
+      is holded by one Document entity. There is exactly one Document entity
+      for each Payment entity.</description>
+
+      <ejb-relation-name>Payment-Document</ejb-relation-name>
+      <ejb-relationship-role>
+	<ejb-relationship-role-name>PaymentSpecificDataOfDocument</ejb-relationship-role-name>
+	<multiplicity>One</multiplicity>
+	<relationship-role-source>
+	  <ejb-name>PaymentEJB</ejb-name>
+	</relationship-role-source>
+	<cmr-field>
+	  <cmr-field-name>document</cmr-field-name>
+	</cmr-field>
+      </ejb-relationship-role>
+      <ejb-relationship-role>
+	<ejb-relationship-role-name>GenericDocumentDataOfPayment</ejb-relationship-role-name>
+	<multiplicity>One</multiplicity>
+	<cascade-delete/>
+	<relationship-role-source>
+	  <ejb-name>DocumentEJB</ejb-name>
+	</relationship-role-source>
+      </ejb-relationship-role>
+    </ejb-relation>
+
+
+    <ejb-relation>
+      <description>Each order is payed through one or more invoices.</description>
+      <ejb-relation-name>Order-Invoice</ejb-relation-name>
+      <ejb-relationship-role>
+	<ejb-relationship-role-name>TheOrderPayedByInvoice</ejb-relationship-role-name>
+	<multiplicity>One</multiplicity>
+	<relationship-role-source>
+	  <ejb-name>OrderEJB</ejb-name>
+	</relationship-role-source>
+	<cmr-field>
+	  <cmr-field-name>invoices</cmr-field-name>
+	  <cmr-field-type>java.util.Collection</cmr-field-type>
+	</cmr-field>
+      </ejb-relationship-role>
+      <ejb-relationship-role>
+	<ejb-relationship-role-name>InvoicesIssuedForOrder</ejb-relationship-role-name>
+	<multiplicity>Many</multiplicity>
+	<cascade-delete/>
+	<relationship-role-source>
+	  <ejb-name>InvoiceEJB</ejb-name>
+	</relationship-role-source>
+	<cmr-field>
+	  <cmr-field-name>order</cmr-field-name>
+	</cmr-field>
+      </ejb-relationship-role>
+    </ejb-relation>
+
+
+
+    <ejb-relation>
+      <description>Each invoice is payed through multiple payments.</description>
+      <ejb-relation-name>Invoice-Payments</ejb-relation-name>
+      <ejb-relationship-role>
+	<ejb-relationship-role-name>TheInvoicePayedByPayments</ejb-relationship-role-name>
+	<multiplicity>One</multiplicity>
+	<relationship-role-source>
+	  <ejb-name>InvoiceEJB</ejb-name>
+	</relationship-role-source>
+	<cmr-field>
+	  <cmr-field-name>payments</cmr-field-name>
+	  <cmr-field-type>java.util.Collection</cmr-field-type>
+	</cmr-field>
+      </ejb-relationship-role>
+      <ejb-relationship-role>
+	<ejb-relationship-role-name>PaymentsOfTheInvoice</ejb-relationship-role-name>
+	<multiplicity>Many</multiplicity>
+	<cascade-delete/>
+	<relationship-role-source>
+	  <ejb-name>PaymentEJB</ejb-name>
+	</relationship-role-source>
+	<cmr-field>
+	  <cmr-field-name>invoice</cmr-field-name>
+	</cmr-field>
+      </ejb-relationship-role>
+    </ejb-relation>
   </relationships>
 
 
-  <assembly-descriptor>
 
+
+
+  <assembly-descriptor>
     <container-transaction>
       <method>
 	<ejb-name>ProductEJB</ejb-name>
@@ -1143,6 +1397,18 @@
 	<ejb-name>OrderLineEJB</ejb-name>
 	<method-name>*</method-name>
       </method>
+
+      <method>
+	<ejb-name>InvoiceEJB</ejb-name>
+	<method-name>*</method-name>
+      </method>
+
+      <method>
+	<ejb-name>PaymentEJB</ejb-name>
+	<method-name>*</method-name>
+      </method>
+
+
 
       <trans-attribute>Supports</trans-attribute>
 

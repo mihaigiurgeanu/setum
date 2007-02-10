@@ -23,6 +23,8 @@ import java.util.Map;
 import java.util.ArrayList;
 import ro.kds.erp.data.CategoryLocal;
 import ro.kds.erp.biz.ResponseBean;
+import ro.kds.erp.scripting.Script;
+import ro.kds.erp.scripting.ScriptErrorException;
 
 /**
  * Specific business rules implementation of the FerastraEJB session bean.
@@ -364,5 +366,6 @@ public class FereastraBizBean extends FereastraBean {
 
 	return r;
     }
-  
+
+
 }

@@ -15,7 +15,7 @@
   <script src="js/formobject.js"/>
 
   <commandset>
-    <command id="command-save" oncommand="theForm.save(); load_usi();"/>
+    <command id="command-save" oncommand="theForm.save(); load_usi(); document.getElementById('maintab').selectedIndex=0;"/>
     <command id="command-add" oncommand="theForm.addnew(); document.getElementById('maintab').selectedIndex=1;"/>
   </commandset>
 

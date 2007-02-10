@@ -103,6 +103,7 @@
     <method>ResponseBean removeItem() throws RemoteException</method>
     <method>ResponseBean saveSubForm() throws RemoteException</method>
     <method>ResponseBean loadClientItems(Integer clientId) throws RemoteException</method>
+    <method>ResponseBean offerReport() throws RemoteException</method>
   </remote>
 
   <services>

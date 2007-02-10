@@ -4,20 +4,21 @@ package ${.node.class.package};
 import javax.ejb.SessionBean;
 import javax.ejb.SessionSynchronization;
 import javax.ejb.SessionContext;
-import org.objectweb.util.monolog.Monolog;
-import org.objectweb.util.monolog.api.BasicLevel;
-import org.objectweb.util.monolog.api.Logger;
-//import org.objectweb.jonas.common.Log;
 import javax.ejb.CreateException;
-import ro.kds.erp.biz.ResponseBean;
-import javax.naming.InitialContext;
 import javax.ejb.FinderException;
 import java.util.Collection;
 import java.util.Iterator;
+import javax.naming.*;
+import javax.rmi.PortableRemoteObject;
+
+import org.objectweb.util.monolog.Monolog;
+import org.objectweb.util.monolog.api.BasicLevel;
+import org.objectweb.util.monolog.api.Logger;
+
 import ro.kds.erp.scripting.Script;
 import ro.kds.erp.scripting.TclFileScript;
 import ro.kds.erp.scripting.ScriptErrorException;
-import javax.naming.*;
+import ro.kds.erp.biz.*;
 
 /**
  * Standard implementation of the ${.node.class.name} session bean.
@@ -30,6 +31,12 @@ public abstract class ${.node.class.name}Bean
     static protected Logger logger = null;
     protected SessionContext ejbContext;
 
+    /**
+     * Stores the reference to the <code>ServiceFactory</code>
+     * to be passed to script execution.
+     */
+    protected ServiceFactoryLocal factory;
+
     protected Integer id;
     [#list .node.class.subforms.subform as subform]
     protected Integer ${subform.@name}Id;
@@ -38,6 +45,8 @@ public abstract class ${.node.class.name}Bean
     final static String RESPONSE_VARNAME = "response";
     final static String LOGIC_VARNAME = "logic";
     final static String OLDVAL_VARNAME = "oldVal";
+    final static String SERVICE_FACTORY_VARNAME = "factory";
+    final static String LOGGER_VARNAME = "logger";
 
     /**
      * The name of the env parameter containing the script prefix.
@@ -64,6 +73,16 @@ public abstract class ${.node.class.name}Bean
         }
         logger.log(BasicLevel.DEBUG, "");
         ejbContext = ctx;
+
+	try {
+            InitialContext ic = new InitialContext();
+	    Context env = (Context)ic.lookup("java:comp/env");
+	    ServiceFactoryLocalHome fh = (ServiceFactoryLocalHome)PortableRemoteObject.
+		narrow(env.lookup("ejb/ServiceFactory"), ServiceFactoryLocalHome.class);
+            factory = fh.create();
+	} catch (Exception e) {
+	    logger.log(BasicLevel.ERROR, "ServiceFactory was not instantiated", e);
+	}
     }
 
 
@@ -250,6 +269,8 @@ public abstract class ${.node.class.name}Bean
 		script.setVar(FORM_VARNAME, form, 
 			      ${.node.class.name}Form.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 
 		addFieldsToScript(script);
 		script.run();
@@ -292,6 +313,8 @@ public abstract class ${.node.class.name}Bean
 		script.setVar(FORM_VARNAME, form, 
 			      ${.node.class.name}Form.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 
@@ -319,6 +342,8 @@ public abstract class ${.node.class.name}Bean
 		script.setVar(OLDVAL_VARNAME, oldVal, ${field.type}.class);
 		script.setVar(FORM_VARNAME, form, ${.node.class.name}Form.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
 		getFieldsFromScript(script, r); // add all the changed
@@ -372,6 +397,8 @@ public abstract class ${.node.class.name}Bean
 		script.setVar(LOGIC_VARNAME, this);
 		script.setVar(FORM_VARNAME, form, ${.node.class.name}Form.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 		addFieldsToScript(script);
 		script.run();
                 [#if method.@returnType = "standard"]

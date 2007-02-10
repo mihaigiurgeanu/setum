@@ -42,7 +42,7 @@ import ro.kds.erp.biz.Products;
  * Created: Fri Nov 18 15:34:24 2005
  *
  * @author <a href="mailto:Mihai Giurgeanu@CRIMIRA"></a>
- * @version $Id: UsaMetalica2KBeanImplementation.java,v 1.17 2006/08/14 19:42:50 mihai Exp $
+ * @version $Id: UsaMetalica2KBeanImplementation.java,v 1.18 2007/02/10 17:45:11 mihai Exp $
  */
 public class UsaMetalica2KBeanImplementation 
     extends ro.kds.erp.biz.setum.basic.UsaMetalica2KBean {
@@ -133,6 +133,8 @@ public class UsaMetalica2KBeanImplementation
 	    attribs.add(ah.create("cilindruBuc", form.getCilindruBuc()));
 	    attribs.add(ah.create("copiatCheieId", form.getCopiatCheieId()));
 	    attribs.add(ah.create("copiatCheieBuc", form.getCopiatCheieBuc()));
+	    attribs.add(ah.create("vizorId", form.getVizorId()));
+	    attribs.add(ah.create("vizorBuc", form.getVizorBuc()));
 	    attribs.add(ah.create("sildId", form.getSildId()));
 	    attribs.add(ah.create("sildTip", form.getSildTip()));
 	    attribs.add(ah.create("sildCuloare", form.getSildCuloare()));
@@ -239,7 +241,6 @@ public class UsaMetalica2KBeanImplementation
 	ResponseBean r;
 	try {
 	    r = new ResponseBean();
-	    r.addRecord();
 
 	    InitialContext it = new InitialContext();
 	    Context env = (Context)it.lookup("java:comp/env");
@@ -298,6 +299,8 @@ public class UsaMetalica2KBeanImplementation
 	    form.readCilindruBuc(amap);
 	    form.readCopiatCheieId(amap);
 	    form.readCopiatCheieBuc(amap);
+	    form.readVizorId(amap);
+	    form.readVizorBuc(amap);
 	    form.readSildId(amap);
 	    form.readSildTip(amap);
 	    form.readSildCuloare(amap);
@@ -534,7 +537,10 @@ public class UsaMetalica2KBeanImplementation
 	r.addValueList("isolation", ValueLists.makeStdValueList(11010));
 	r.addValueList("openingDir", ValueLists.makeStdValueList(11004));
 	r.addValueList("openingSide", ValueLists.makeStdValueList(11005));
+	r.addValueList("frameType", ValueLists.makeStdValueList(11007));
 	r.addValueList("foilPosition", ValueLists.makeStdValueList(11008));
+	r.addValueList("tresholdType", ValueLists.makeStdValueList(11009));
+
 
 	r.addValueList("benefBroascaTip", ValueLists.makeStdValueList(11020));
 	r.addValueList("benefCilindruTip", ValueLists.makeStdValueList(11021));
@@ -548,6 +554,8 @@ public class UsaMetalica2KBeanImplementation
 		       ValueLists.makeVLForCategoryRef("cilindruId"));
 	r.addValueList("copiatCheieId",
 		       ValueLists.makeVLForCategoryRef("copiatCheieId"));
+	r.addValueList("vizorId",
+		       ValueLists.makeVLForCategoryRef("vizorId"));
 	r.addValueList("sildId",
 		       ValueLists.makeVLForCategoryRef("sildId"));
 	r.addValueList("rozetaId",

@@ -160,9 +160,31 @@ public abstract class OrderBean implements EntityBean {
     public abstract Collection getLines();
     public abstract void setLines(Collection lines);
 
+    public abstract Collection getInvoices();
+    public abstract void setInvoices(Collection invoices);
 
 
+    public abstract BigDecimal ejbSelectSumOfPayments(Integer id) throws FinderException;
+    public abstract BigDecimal ejbSelectInvoicedAmount(Integer id) throws FinderException;
 
+
+    public BigDecimal getInvoicedAmount() throws FinderException {
+	BigDecimal amount = ejbSelectInvoicedAmount(getId());
+	if(amount == null) {
+	    return new BigDecimal(0);
+	} else {
+	    return amount;
+	}
+    }
+    
+    public BigDecimal getPayedAmount() throws FinderException {
+	BigDecimal amount = ejbSelectSumOfPayments(getId());
+	if(amount == null) {
+	    return new BigDecimal(0);
+	} else {
+	    return amount;
+	}
+    }
 
     // Implementation of javax.ejb.EntityBean
 

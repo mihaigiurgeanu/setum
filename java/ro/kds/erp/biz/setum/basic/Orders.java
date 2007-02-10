@@ -20,6 +20,12 @@ public interface Orders extends EJBObject {
     public ResponseBean newOrderLineData() throws RemoteException;
     public ResponseBean saveOrderLineData() throws RemoteException;
     public ResponseBean loadOrderLineData(Integer id) throws RemoteException, FinderException;
+    public ResponseBean newInvoiceData() throws RemoteException;
+    public ResponseBean saveInvoiceData() throws RemoteException;
+    public ResponseBean loadInvoiceData(Integer id) throws RemoteException, FinderException;
+    public ResponseBean newPaymentData() throws RemoteException;
+    public ResponseBean savePaymentData() throws RemoteException;
+    public ResponseBean loadPaymentData(Integer id) throws RemoteException, FinderException;
 
     public ResponseBean getCurrentFormData() throws RemoteException;
     public ResponseBean getLoadedPrimaryKey() throws RemoteException;
@@ -34,6 +40,7 @@ public interface Orders extends EJBObject {
     public ResponseBean updateDistanta(java.math.BigDecimal newDistanta) throws RemoteException;
     public ResponseBean updateObservatii(String newObservatii) throws RemoteException;
     public ResponseBean updateTotal(java.math.BigDecimal newTotal) throws RemoteException;
+    public ResponseBean updateTvaPercent(Double newTvaPercent) throws RemoteException;
     public ResponseBean updateTotalTva(java.math.BigDecimal newTotalTva) throws RemoteException;
     public ResponseBean updateDiscount(java.math.BigDecimal newDiscount) throws RemoteException;
     public ResponseBean updateTotalFinal(java.math.BigDecimal newTotalFinal) throws RemoteException;
@@ -41,6 +48,8 @@ public interface Orders extends EJBObject {
     public ResponseBean updateAvans(java.math.BigDecimal newAvans) throws RemoteException;
     public ResponseBean updateAchitatCu(String newAchitatCu) throws RemoteException;
     public ResponseBean updateValoareAvans(java.math.BigDecimal newValoareAvans) throws RemoteException;
+    public ResponseBean updatePayedAmount(java.math.BigDecimal newPayedAmount) throws RemoteException;
+    public ResponseBean updateInvoicedAmount(java.math.BigDecimal newInvoicedAmount) throws RemoteException;
     public ResponseBean updateDiferenta(java.math.BigDecimal newDiferenta) throws RemoteException;
     public ResponseBean updateTermenLivrare(java.util.Date newTermenLivrare) throws RemoteException;
     public ResponseBean updateTermenLivrare1(java.util.Date newTermenLivrare1) throws RemoteException;
@@ -57,10 +66,26 @@ public interface Orders extends EJBObject {
     public ResponseBean updateQuantity(java.math.BigDecimal newQuantity) throws RemoteException;
     public ResponseBean updateValue(java.math.BigDecimal newValue) throws RemoteException;
     public ResponseBean updateTax(java.math.BigDecimal newTax) throws RemoteException;
+    public ResponseBean updateInvoiceNumber(String newInvoiceNumber) throws RemoteException;
+    public ResponseBean updateInvoiceDate(java.util.Date newInvoiceDate) throws RemoteException;
+    public ResponseBean updateInvoiceRole(String newInvoiceRole) throws RemoteException;
+    public ResponseBean updateInvoiceAmount(java.math.BigDecimal newInvoiceAmount) throws RemoteException;
+    public ResponseBean updateInvoiceTax(java.math.BigDecimal newInvoiceTax) throws RemoteException;
+    public ResponseBean updateInvoiceTotal(java.math.BigDecimal newInvoiceTotal) throws RemoteException;
+    public ResponseBean updateInvoicePayed(java.math.BigDecimal newInvoicePayed) throws RemoteException;
+    public ResponseBean updateInvoiceUnpayed(java.math.BigDecimal newInvoiceUnpayed) throws RemoteException;
+    public ResponseBean updatePaymentNumber(String newPaymentNumber) throws RemoteException;
+    public ResponseBean updatePaymentDate(java.util.Date newPaymentDate) throws RemoteException;
+    public ResponseBean updatePaymentAmount(java.math.BigDecimal newPaymentAmount) throws RemoteException;
 
     public ResponseBean getOrdersCount() throws RemoteException;
     public ResponseBean loadListing(Integer startRow) throws RemoteException;
+    public ResponseBean removeOrder() throws RemoteException;
     public ResponseBean loadLines() throws RemoteException;
+    public ResponseBean removeInvoice() throws RemoteException;
+    public ResponseBean loadInvoices() throws RemoteException;
+    public ResponseBean removePayment() throws RemoteException;
+    public ResponseBean loadPayments() throws RemoteException;
 
     public ResponseBean addItem (
         Integer offerIntemId

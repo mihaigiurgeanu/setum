@@ -33,6 +33,8 @@ public interface StandardOffer extends EJBObject {
     public ResponseBean updateProductId(Integer newProductId) throws RemoteException;
     public ResponseBean updatePrice(java.math.BigDecimal newPrice) throws RemoteException;
     public ResponseBean updateVatPrice(java.math.BigDecimal newVatPrice) throws RemoteException;
+    public ResponseBean updatePrice1(java.math.BigDecimal newPrice1) throws RemoteException;
+    public ResponseBean updatePrice2(java.math.BigDecimal newPrice2) throws RemoteException;
     public ResponseBean updateRelativeGain(Double newRelativeGain) throws RemoteException;
     public ResponseBean updateAbsoluteGain(java.math.BigDecimal newAbsoluteGain) throws RemoteException;
     public ResponseBean updateProductCategory(String newProductCategory) throws RemoteException;
@@ -40,6 +42,7 @@ public interface StandardOffer extends EJBObject {
     public ResponseBean updateProductName(String newProductName) throws RemoteException;
     public ResponseBean updateEntryPrice(java.math.BigDecimal newEntryPrice) throws RemoteException;
     public ResponseBean updateSellPrice(java.math.BigDecimal newSellPrice) throws RemoteException;
+    public ResponseBean updateLineComments(String newLineComments) throws RemoteException;
 
     public ResponseBean offersListing() throws RemoteException;
     public ResponseBean loadListing() throws RemoteException;
@@ -54,4 +57,7 @@ public interface StandardOffer extends EJBObject {
     public ResponseBean discontinue() throws RemoteException;
     public java.util.Map getOfferFieldsMap() throws RemoteException;
 
+    public ResponseBean adjustPrices (
+        java.math.BigDecimal percent
+    ) throws RemoteException;
 }

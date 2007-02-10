@@ -47,6 +47,7 @@
   WHERE categoryId in (SELECT id FROM category WHERE parentId = 9999)]]></queryString>
 	<field name="code" class="java.lang.String"/>
 	<field name="name" class="java.lang.String"/>
+	<field name="lineComments" class="java.lang.String"/>
 	<field name="sellPrice" class="java.math.BigDecimal"/>
 	<variable name="nrcrt" class="java.lang.Integer" resetType="Report" calculation="Nothing">
 		<variableExpression><![CDATA[new java.lang.Integer($V{nrcrt}.intValue()+1)]]></variableExpression>

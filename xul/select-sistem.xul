@@ -54,7 +54,9 @@ sisteme = theForm.load_listing();
 document.getElementById('sistemeListing').view = make_treeview
 (sisteme,
  function(row,column) {
-     return sisteme[row][column];
+     var col;
+     if(column.id) col = column.id; else col = column;
+     return sisteme[row][col];
  });
 
 function doOk() {

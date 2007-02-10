@@ -79,6 +79,14 @@
     <type>java.math.BigDecimal</type>
   </field>
   <field>
+    <name>payedAmount</name>
+    <type>java.math.BigDecimal</type>
+  </field>
+  <field>
+    <name>invoicedAmount</name>
+    <type>java.math.BigDecimal</type>
+  </field>
+  <field>
     <name>diferenta</name>
     <type>java.math.BigDecimal</type>
   </field>
@@ -107,7 +115,7 @@
     <type>String</type>
   </field>
 
-  <!-- Subform offerItem -->
+  <!-- Subform orderLine -->
 
   <field>
     <name>offerItemId</name>
@@ -146,8 +154,66 @@
     <type>java.math.BigDecimal</type>
   </field>
 
+
+  <!-- Subform invoice -->
+  <field>
+    <name>invoiceNumber</name>
+    <type>String</type>
+  </field>
+  <field>
+    <name>invoiceDate</name>
+    <type>java.util.Date</type>
+  </field>
+  <field>
+    <name>invoiceRole</name>
+    <type>String</type>
+  </field>
+  <field>
+    <name>invoiceAmount</name>
+    <type>java.math.BigDecimal</type>
+  </field>
+  <field>
+    <name>invoiceTax</name>
+    <type>java.math.BigDecimal</type>
+  </field>
+  <field>
+    <name>invoiceTotal</name>
+    <type>java.math.BigDecimal</type>
+  </field>
+  <field>
+    <name>invoicePayed</name>
+    <type>java.math.BigDecimal</type>
+  </field>
+  <field>
+    <name>invoiceUnpayed</name>
+    <type>java.math.BigDecimal</type>
+  </field>
+  
+
+  <!-- Subform payment -->
+  <field>
+    <name>paymentNumber</name>
+    <type>String</type>
+  </field>
+  <field>
+    <name>paymentDate</name>
+    <type>java.util.Date</type>
+  </field>
+  <field>
+    <name>paymentAmount</name>
+    <type>java.math.BigDecimal</type>
+  </field>
+
+
+
+
+  <!-- Subform payment -->
+
+
   <subforms>
     <subform name="orderLine"/>
+    <subform name="invoice"/>
+    <subform name="payment"/>
   </subforms>
 
 
@@ -157,8 +223,24 @@
     <method>ResponseBean getOrdersCount() throws RemoteException</method>
     <method>ResponseBean loadListing(Integer startRow) throws RemoteException</method>
 
+    <!-- Remove current order -->
+    <method>ResponseBean removeOrder() throws RemoteException</method>
+
     <!-- Order items listing -->
     <method>ResponseBean loadLines() throws RemoteException</method>
+
+    <!-- Remove current invoice -->
+    <method>ResponseBean removeInvoice() throws RemoteException</method>
+
+    <!-- Listing of invoices -->
+    <method>ResponseBean loadInvoices() throws RemoteException</method>
+
+    <!-- Remove current payment -->
+    <method>ResponseBean removePayment() throws RemoteException</method>
+
+    <!-- Listing of payments -->
+    <method>ResponseBean loadPayments() throws RemoteException</method>
+
   </remote>
 
   <!-- Services that may have scripts associated with -->

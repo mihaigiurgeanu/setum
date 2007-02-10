@@ -50,7 +50,18 @@
     <type>java.math.BigDecimal</type>
   </field>
   <field>
+    <!-- camp calculat, nu este salvat in baza de date -->
     <name>vatPrice</name>
+    <type>java.math.BigDecimal</type>
+  </field>
+  <field>
+    <!-- pret cu usa -->
+    <name>price1</name>
+    <type>java.math.BigDecimal</type>
+  </field>
+  <field>
+    <!-- pret manopera montare item -->
+    <name>price2</name>
     <type>java.math.BigDecimal</type>
   </field>
   <field>
@@ -81,7 +92,10 @@
     <name>sellPrice</name>
     <type>java.math.BigDecimal</type>
   </field>
-
+  <field>
+    <name>lineComments</name>
+    <type>String</type>
+  </field>
 
   <!-- additional methods for the remote interface -->
   <remote>
@@ -100,6 +114,15 @@
   </remote>
 
   <services>
-    
+    <!-- adjustPrices(percent) // adds the percent to all prices in this offer -->
+    <method returnType="standard">
+      <name>adjustPrices</name>
+      <params>
+	<param>
+	  <name>percent</name>
+	  <type>java.math.BigDecimal</type>
+	</param>
+      </params>
+    </method>
   </services>
 </class>

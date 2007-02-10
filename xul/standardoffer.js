@@ -32,8 +32,9 @@ var theForm = new FormObject();
 theForm.text_fields = new Array("no", "docDate", "dateFrom", "dateTo", 
 				"period", "name", "description", "comment",
 				"price", "relativeGain", "absoluteGain",
+				"price1", "price2",
 				"productCategory", "productCode",
-				"productName", "entryPrice", "sellPrice");
+				"productName", "entryPrice", "sellPrice", "lineComments");
 
 theForm.combo_fields = new Array();
 theForm.radio_fields = new Array();
@@ -81,4 +82,21 @@ function addItems() {
 
     window.openDialog("select-sistem.xul", "selectsistem", "chrome,resizable", select_handler);
 
+}
+
+
+
+function adjust_prices_dialog() {
+
+    var adjust_prices_handler = {
+	theForm: theForm,
+	adjust_prices: function(percent) {
+	    var req = new HTTPDataRequest(theForm.do_link);
+	    req.add("command", "adjustPrices");
+	    req.add("param0", percent);
+
+	    return this.theForm.post_request(req);
+	}
+    }
+    window.openDialog("adjust-std-offer.xul", "adjust-std-offer", "chrome,resizable", adjust_prices_handler);
 }

@@ -27,6 +27,8 @@ public class StandardOfferForm implements Serializable {
     Integer productId;
     java.math.BigDecimal price;
     java.math.BigDecimal vatPrice;
+    java.math.BigDecimal price1;
+    java.math.BigDecimal price2;
     Double relativeGain;
     java.math.BigDecimal absoluteGain;
     String productCategory;
@@ -34,6 +36,7 @@ public class StandardOfferForm implements Serializable {
     String productName;
     java.math.BigDecimal entryPrice;
     java.math.BigDecimal sellPrice;
+    String lineComments;
 
     public StandardOfferForm() {
 
@@ -89,6 +92,14 @@ public class StandardOfferForm implements Serializable {
 
 
 
+       this.price1 = new java.math.BigDecimal(0);
+
+
+
+       this.price2 = new java.math.BigDecimal(0);
+
+
+
        this.relativeGain = new Double(0);
    
 
@@ -114,6 +125,10 @@ public class StandardOfferForm implements Serializable {
 
 
        this.sellPrice = new java.math.BigDecimal(0);
+
+
+
+       this.lineComments = "";
 
 
 
@@ -281,6 +296,36 @@ public class StandardOfferForm implements Serializable {
 	}
     }
 
+    public void setPrice1(java.math.BigDecimal newPrice1) {
+        this.price1 = newPrice1;
+    }
+
+    public java.math.BigDecimal getPrice1() {
+        return price1;
+    }
+
+    public void readPrice1(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("price1");
+	if(a != null) {
+	    this.setPrice1(a.getDecimalValue());
+	}
+    }
+
+    public void setPrice2(java.math.BigDecimal newPrice2) {
+        this.price2 = newPrice2;
+    }
+
+    public java.math.BigDecimal getPrice2() {
+        return price2;
+    }
+
+    public void readPrice2(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("price2");
+	if(a != null) {
+	    this.setPrice2(a.getDecimalValue());
+	}
+    }
+
     public void setRelativeGain(Double newRelativeGain) {
         this.relativeGain = newRelativeGain;
     }
@@ -383,6 +428,21 @@ public class StandardOfferForm implements Serializable {
 	AttributeLocal a = (AttributeLocal)attributes.get("sellPrice");
 	if(a != null) {
 	    this.setSellPrice(a.getDecimalValue());
+	}
+    }
+
+    public void setLineComments(String newLineComments) {
+        this.lineComments = newLineComments;
+    }
+
+    public String getLineComments() {
+        return lineComments;
+    }
+
+    public void readLineComments(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("lineComments");
+	if(a != null) {
+	    this.setLineComments(a.getStringValue());
 	}
     }
 
