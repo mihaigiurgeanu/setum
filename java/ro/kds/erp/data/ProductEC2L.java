@@ -97,6 +97,10 @@ public  abstract class ProductEC2L implements javax.ejb.EntityBean {
     public abstract CategoryLocal getCategory();
     public abstract void setCategory(CategoryLocal category);
 
+    public abstract Collection getParents();
+    public abstract void setParents(Collection composites);
+
+
 
     // ------------------------------------------------------------------
     // Business methods

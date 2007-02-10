@@ -58,6 +58,17 @@ public interface ProductLocal extends EJBLocalObject {
     public CompositeProductLocal getCompositeProduct();
     public void setCompositeProduct(CompositeProductLocal p);
 
+    /**
+     * The list of CompositeProducts that this product is part of.
+     */
+    public Collection getParents();
+    /**
+     * Make this product a part of some CompositeProducts.
+     *
+     * @param composites is a <code>Collection</code> of <code>CompositeProduct</code> objects.
+     */
+    public void setParents(Collection composites);
+
     public CategoryLocal getCategory();
     public void setCategory(CategoryLocal category);
 
