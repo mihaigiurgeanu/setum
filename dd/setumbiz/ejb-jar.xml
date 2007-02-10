@@ -246,6 +246,13 @@
         <env-entry-type>java.lang.Integer</env-entry-type>
         <env-entry-value>9999</env-entry-value>
       </env-entry>
+      <env-entry>
+	<description>The folder under script directory where the
+	scripts for this business logic are located.</description>
+	<env-entry-name>script.prefix</env-entry-name>
+	<env-entry-type>java.lang.String</env-entry-type>
+	<env-entry-value>StandardOffer</env-entry-value>
+      </env-entry>
       <ejb-ref>
         <description>The preferences bean</description>
         <ejb-ref-name>ejb/PreferencesEJB</ejb-ref-name>
@@ -734,6 +741,13 @@
       <ejb-class>ro.kds.erp.biz.setum.ArbitraryOfferBizBean</ejb-class>
       <session-type>Stateful</session-type>
       <transaction-type>Container</transaction-type>
+      <env-entry>
+	<description>The folder under script directory where the
+	scripts for this business logic are located.</description>
+	<env-entry-name>script.prefix</env-entry-name>
+	<env-entry-type>java.lang.String</env-entry-type>
+	<env-entry-value>ArbitraryOffer</env-entry-value>
+      </env-entry>
       <ejb-ref>
         <description>Preferences access</description>
         <ejb-ref-name>ejb/PreferencesEJB</ejb-ref-name>
