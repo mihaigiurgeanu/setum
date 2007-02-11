@@ -144,7 +144,6 @@ function load_options() {
 
 // add a new option
 function popup_new_item(categoryURI) {
-    theForm.save();
     var select_handler = {
 	theForm: theForm,
 	category: categoryURI,

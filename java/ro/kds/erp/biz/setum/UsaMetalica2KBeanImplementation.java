@@ -42,7 +42,7 @@ import ro.kds.erp.biz.Products;
  * Created: Fri Nov 18 15:34:24 2005
  *
  * @author <a href="mailto:Mihai Giurgeanu@CRIMIRA"></a>
- * @version $Id: UsaMetalica2KBeanImplementation.java,v 1.18 2007/02/10 17:45:11 mihai Exp $
+ * @version $Id: UsaMetalica2KBeanImplementation.java,v 1.19 2007/02/11 09:59:03 mihai Exp $
  */
 public class UsaMetalica2KBeanImplementation 
     extends ro.kds.erp.biz.setum.basic.UsaMetalica2KBean {
@@ -661,6 +661,11 @@ public class UsaMetalica2KBeanImplementation
 	ResponseBean r;
 	try {
 
+	    if(id == null) {
+		saveFormData();
+	    }
+
+
 	    InitialContext ic = new InitialContext();
 	    Context env = (Context) ic.lookup("java:comp/env");
 	    ProductLocalHome ph = (ProductLocalHome)PortableRemoteObject.narrow
@@ -679,7 +684,9 @@ public class UsaMetalica2KBeanImplementation
 
 	    cp.getComponents().add(ph.findByPrimaryKey(optionId));
 
-	    r = ResponseBean.SUCCESS;
+	    // Call the script that should validate the added window.
+	    r = super.addOption(optionId, businessCategory);
+
 	} catch (CreateException e) {
 	    r = ResponseBean.ERR_CREATE;
 	    logger.log(BasicLevel.ERROR, "Can not create related composite product: " 
