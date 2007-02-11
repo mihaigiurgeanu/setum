@@ -372,9 +372,13 @@ public abstract class ${.node.class.name}Bean
      * [#else]
      * The method does not automatically add the changed values to the <code>ResponseBean</code>
      * and does not add the values of changed variables to the form. The script is responsible
-     * to build the <code>ResponseBean</code> by using the <code>response</code> variable in the
+     * for building the <code>ResponseBean</code> by using the <code>response</code> variable in the
      * script and to make the changes in the form bean by using <code>form</code> variable in
      * the script.
+     *
+[#list method.params.param as param]
+     * @param ${param.name} is accessible to script in the script variable <code>param_${param.name}</code>.
+[/#list]
      *
      * @return the <code>ResponseBean</code> that the script can access through the <code>response</code>
      * variable.
@@ -399,6 +403,12 @@ public abstract class ${.node.class.name}Bean
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
 		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
 		script.setVar(LOGGER_VARNAME, logger, Logger.class);
+
+		[#list method.params.param as param]
+		script.setVar("param_${param.name}", ${param.type}.class);
+		[/#list]
+
+		
 		addFieldsToScript(script);
 		script.run();
                 [#if method.@returnType = "standard"]
