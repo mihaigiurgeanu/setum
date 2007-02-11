@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- messages.xml - RDF definition of UI messages -->
+
+
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+	 xmlns:msg="http://www.kds.ro/readybeans/rdf/vocabulary#">
+
+  <!-- Subiecte ale validarii, nume de campuri -->
+  <rdf:Description rdf:About="http://www.kds.ro/readybeans/rdf/validation/subject/empty"/>
+
+  <!-- UsaMetalica2K -->
+  <rdf:Description rdf:About="http://www.kds.ro/readybeans/rdf/forms/UsaMetalica2K#lFrame">
+    <msg:Message>lToc</msg:Message>
+  </rdf:Description>
+  <rdf:Description rdf:About="http://www.kds.ro/readybeans/rdf/forms/UsaMetalica2K#bFrame">
+    <msg:Message>bToc</msg:Message>
+  </rdf:Description>
+  <rdf:Description rdf:About="http://www.kds.ro/readybeans/rdf/forms/UsaMetalica2K#cFrame">
+    <msg:Message>cToc</msg:Message>
+  </rdf:Description>
+  <rdf:Description rdf:About="http://www.kds.ro/readybeans/rdf/forms/UsaMetalica2K#lTreshold">
+    <msg:Message>lPrag</msg:Message>
+  </rdf:Description>
+  <rdf:Description rdf:About="http://www.kds.ro/readybeans/rdf/forms/UsaMetalica2K#bTreshold">
+    <msg:Message>bPrag</msg:Message>
+  </rdf:Description>
+  <rdf:Description rdf:About="http://www.kds.ro/readybeans/rdf/forms/UsaMetalica2K#cTreshold">
+    <msg:Message>cPrag</msg:Message>
+  </rdf:Description>
+  <rdf:Description rdf:About="http://www.kds.ro/readybeans/rdf/forms/UsaMetalica2K#lFoaie">
+    <msg:Message>lFoaie canat principal</msg:Message>
+  </rdf:Description>
+  <rdf:Description rdf:About="http://www.kds.ro/readybeans/rdf/forms/UsaMetalica2K#hFoaie">
+    <msg:Message>hFoaie canat principal</msg:Message>
+  </rdf:Description>
+  <rdf:Description rdf:About="http://www.kds.ro/readybeans/rdf/forms/UsaMetalica2K#lFoaieSec">
+    <msg:Message>lFoaie canat secundar</msg:Message>
+  </rdf:Description>
+  <rdf:Description rdf:About="http://www.kds.ro/readybeans/rdf/forms/UsaMetalica2K#hFoaieSec">
+    <msg:Message>hFoaie canat secundar</msg:Message>
+  </rdf:Description>
+
+  <!-- Mesaje de validare -->
+  <rdf:Description rdf:About="http://www.kds.ro/readybeans/rdf/validation/message#min">
+    <msg:Message>Valoarea campului este mai mica decat valoarea minima admisa</msg:Message>
+  </rdf:Description>
+
+  <rdf:Description rdf:About="http://www.kds.ro/readybeans/rdf/validation/message#max">
+    <msg:Message>Valoarea campului este mai mare decat valoarea maxima admisa</msg:Message>
+  </rdf:Description>
+
+
+</rdf:RDF>
