@@ -101,6 +101,8 @@ function HTTPDataResponse(xmldoc, prefix) {
     this.length = 0;
     this.vlCount = 0;
     this.valueLists = new Array();
+    this.viCount = 0;
+    this.vi = new Array();
     this.message = "";
 
     log("Parsing xml response");
@@ -151,6 +153,14 @@ function HTTPDataResponse(xmldoc, prefix) {
 		log("Value list no " + this.vlCount +
 		    " named <<" + vlc.name + ">> added to the parsed response.");
 		this.vlCount ++;
+	    } else if(node.tagName == 'validation-info') {
+		var vi  = new ValidationInfo();
+		vi.subject = node.getAttribute("subject");
+		vi.message = node.getAttribute("message");
+		if(node.firstChild)
+		    vi.data = node.firstChild.textContent;
+
+		this.vi[this.viCount ++] = vi;
 	    }
 	    break;
 
@@ -170,6 +180,12 @@ function ValueListContainer(name) {
 function ValueListItem(value, label) {
     this.value = value;
     this.label = label;
+}
+
+function ValidationInfo() {
+    this.subject = "";
+    this.message = "";
+    this.data = "";
 }
 
 function post_data(request) {

@@ -14,7 +14,19 @@ import ro.kds.erp.data.AttributeLocal;
  *
  */
 public class SupraluminaForm implements Serializable {
-        
+
+    /**
+     * Builds an RDF URI for the field. This RDF is used by the UI to display
+     * a localized and friendly name for the field in validation messages.
+     *
+     * @param fieldName - the name of the field
+     * @return an RDF URI by concatenating the string <code>http://www.kds.ro/readybeans/rdf/forms/Supralumina#</code>
+     * with the name of the field.
+     */
+     public static String uri(String fieldName) {
+	return "http://www.kds.ro/readybeans/rdf/forms/Supralumina#" + fieldName;
+     }
+
     Integer tip;
     Double ls;
     Double hs;

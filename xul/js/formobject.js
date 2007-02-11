@@ -15,6 +15,7 @@ function FormObject() {
     this.update_form = update_form;
     this.post_request = post_request;
     this.post_save_request = post_save_request;
+    this.process_validation = process_validation;
 
     // afterpost method will be called after a post request
     // finishes; the default method does nothing
@@ -221,8 +222,15 @@ function post_request(req) {
 
     if(response) {
 	this.update_fields(response);
+	this.process_validation(response);
 	this.afterpost();
-	result = (response.code == 0);
+	if(response.code == 0) {
+	    log("Positive response.code: " + response.code);
+	    result = true;
+	} else {
+	    log("Negative response.code: " + response.code);
+	    result = false;
+	}
     } else {
 	log("No response received");
 	result = false;
@@ -367,7 +375,18 @@ function load_current() {
 }
 
 
-
+/**
+ * DEPRECATED
+ *
+ * Executes the request and displays the validation errors returned in the response.
+ * The response should have the response.code field set to the number of validation errors.
+ * The response.records should have a record for each validation error, each record containing
+ * to fields: the id of the validated field, the message for the validation error.
+ *
+ * This is deprecated. The new response format has validation-info elements that contain the
+ * validation error messages. The post_request method is now able to display the validation
+ * errors.
+ */
 function post_save_request(req) {
     // executes the request.
     // The response should have code 0 on success and number of 
@@ -409,6 +428,24 @@ function post_save_request(req) {
     log("No response for save operation");
     return false;
 }
+
+function process_validation(response) {
+
+    if(response.viCount > 0) {
+	var msg = "";
+	for(var i = 0; i<response.viCount; i++) {
+	    msg += message(response.vi[0].subject);
+	    msg += ": ";
+	    msg += message(response.vi[0].message);
+	    msg += ": ";
+	    msg += response.vi[0].data;
+	    msg += "\n\n";
+	}
+	alert(msg);
+    }
+
+}
+
 
 // post the request and return an array of records.
 // used for loading listings.

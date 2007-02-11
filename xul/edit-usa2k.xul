@@ -27,6 +27,7 @@ windows.arguments[0].select(productId)
   <script src="js/httpdata.js"/>
   <script src="js/formobject.js"/>
   <script src="js/businessCategory.js"/>
+  <script src="js/messages.js"/>
 
   <broadcasterset>
     <broadcaster id="usa2Kstatus" />

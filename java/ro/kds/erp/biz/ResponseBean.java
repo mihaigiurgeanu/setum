@@ -35,17 +35,37 @@ public class ResponseBean implements Serializable {
     static protected Logger logger = null;
 
     /**
-     * Describe code here.
+     * The empty validation subject, when only the message is enough for the user.
+     */
+    public static final String EMPTY_VALIDATION_SUBJECT = "http://www.kds.ro/readybeans/rdf/validation/subject/empty";
+
+    /**
+     * Validation message for not complying to a minimum rule.
+     */
+    public static final String MINRULE_VALIDATION_MESSAGE = "http://www.kds.ro/readybeans/rdf/validation/message#min";
+
+    /**
+     * Validation message for not complying to a maximum rule.
+     */
+    public static final String MAXRULE_VALIDATION_MESSAGE = "http://www.kds.ro/readybeans/rdf/validation/message#max";
+
+
+    /**
+     * The error code of the operation that returned this response.
      */
     private int code;
 
     /**
-     * Describe message here.
+     * A message attached to the response.
      */
     private String message;
+
+
+
     LinkedList records;
     LinkedHashMap fields;
     LinkedHashMap valueLists;
+    LinkedList validationInfo;
 
     /**
      * Field intialization
@@ -58,6 +78,7 @@ public class ResponseBean implements Serializable {
 
 	fields = null;
 	records = new LinkedList();
+	validationInfo = new LinkedList();
 	setCode(0);
 	setMessage(null);
 	valueLists = new LinkedHashMap();
@@ -339,6 +360,13 @@ public class ResponseBean implements Serializable {
 	    }
 	    xml += "</value-list>";
 	}
+	for(Iterator i = validationInfo.iterator(); i.hasNext(); ) {
+	    ValidationInfo vi = (ValidationInfo)i.next();
+	    xml += "<validation-info subject=\"" + vi.getSubject() + 
+		"\" message=\"" + vi.getMessage() + 
+		"\"><![CDATA[" + vi.getData() + "]]></validation-info>";
+	}
+
 	xml += "<return code=\"";
 	xml += code;
 	xml += "\">";
@@ -387,6 +415,30 @@ public class ResponseBean implements Serializable {
 
 
 
+
+
+    /**
+     * Add a validation info.
+     */
+    public void addValidationInfo(final String subject, final String message, final String data) {
+	validationInfo.add(new ValidationInfo(subject, message, data));
+    }
+
+    /**
+     * Add a validation info with no subject.
+     */
+    public void addValidationInfo(final String message, final String data) {
+	validationInfo.add(new ValidationInfo(EMPTY_VALIDATION_SUBJECT, message, data));
+    }
+
+    /**
+     * Add a validation info with no subject and no data (message only).
+     */
+    public void addValidationInfo(final String message) {
+	validationInfo.add(new ValidationInfo(EMPTY_VALIDATION_SUBJECT, message, ""));
+    }
+
+
     // Response codes and messages
 
 
@@ -402,6 +454,7 @@ public class ResponseBean implements Serializable {
     public static final int CODE_ERR_REMOVE		= 9;
     public static final int CODE_ERR_OUT_OF_ORDERE_OPERATION = 10;
     public static final int CODE_ERR_DATAMISSING	= 11;
+    public static final int CODE_ERR_VALIDATION		= 12;
 
 
     public static final ResponseBean SUCCESS = new ResponseBean();
@@ -574,4 +627,90 @@ public class ResponseBean implements Serializable {
 	return new ResponseBean(CODE_ERR_DATAMISSING, missingData);
     }
     
+}
+
+/**
+ * The information resulted from applying a validation rule.
+ * It is a pair of subject and message. The subject is an identifier
+ * that must be understood by the UI. It is the id of a field if the
+ * validation message referes to the value of a field. In a more general
+ * way, the subject may be a compex subject that is represented, for example,
+ * as a unique URI for use with a RDF datasource.
+ *
+ * Message, also, should be an identifier of the message to be displayed. For example
+ * it can be the URI of a subject in a RDF datasource.
+ *
+ * Besides message and subject, a third field is a <code>String</code> that contains
+ * some more specific data to explain the error message. This data is intended to 
+ * be displayed to the user as it is, and should be language independent.
+ */
+class ValidationInfo implements Serializable {
+    private String subject;
+    private String message;
+    private String data;
+
+
+    /**
+     * Create a new <code>ValidationInfo</code> object.
+     */
+    public ValidationInfo(final String subject, final String message, final String data) {
+	this.subject = subject;
+	this.message = message;
+	this.data = data;
+    }
+    
+    /**
+     * Gets the value of subject
+     *
+     * @return the value of subject
+     */
+    public final String getSubject() {
+	return this.subject;
+    }
+
+    /**
+     * Sets the value of subject
+     *
+     * @param argSubject Value to assign to this.subject
+     */
+    public final void setSubject(final String argSubject) {
+	this.subject = argSubject;
+    }
+
+    /**
+     * Gets the value of message
+     *
+     * @return the value of message
+     */
+    public final String getMessage() {
+	return this.message;
+    }
+
+    /**
+     * Sets the value of message
+     *
+     * @param argMessage Value to assign to this.message
+     */
+    public final void setMessage(final String argMessage) {
+	this.message = argMessage;
+    }
+
+    /**
+     * Gets the value of data
+     *
+     * @return the value of data
+     */
+    public final String getData() {
+	return this.data;
+    }
+
+    /**
+     * Sets the value of data
+     *
+     * @param argData Value to assign to this.data
+     */
+    public final void setData(final String argData) {
+	this.data = argData;
+    }
+
 }

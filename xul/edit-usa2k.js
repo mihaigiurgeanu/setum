@@ -66,18 +66,19 @@ theForm.radio_fields = new Array("k", "kType", "ieFoil", "ieFoilSec",
 
 
 theForm.hidden_fields = new Array(
-				 "intFinisajBlatId",
-				 "intFinisajTocId",
-				 "intFinisajGrilajId",
-				 "intFinisajFereastraId",
-				 "intFinisajSupraluminaId",
-				 "intFinisajPanouLateralId",
-				 "extFinisajBlatId",
-				 "extFinisajTocId",
-				 "extFinisajGrilajId",
-				 "extFinisajFereastraId",
-				 "extFinisajSupraluminaId",
-				 "extFinisajPanouLateralId");
+				  "id",
+				  "intFinisajBlatId",
+				  "intFinisajTocId",
+				  "intFinisajGrilajId",
+				  "intFinisajFereastraId",
+				  "intFinisajSupraluminaId",
+				  "intFinisajPanouLateralId",
+				  "extFinisajBlatId",
+				  "extFinisajTocId",
+				  "extFinisajGrilajId",
+				  "extFinisajFereastraId",
+				  "extFinisajSupraluminaId",
+				  "extFinisajPanouLateralId");
 
 theForm.cb_fields = new Array(
 			      "finisajTocBlat",
@@ -234,8 +235,12 @@ function clear_sistem(fieldname) {
 
 
 function doOk() {
-    if(theForm.save()) {
-	window.arguments[0].select(theForm.get_loaded_id());
+    var req = theForm.get_request();
+    req.add("command", "saveFormData");
+    
+    if(theForm.post_request(req)) {
+	window.arguments[0].select(theForm.values["id"]);
+	//window.arguments[0].select(theForm.get_loaded_id());
 	return true;
     }
     return false;

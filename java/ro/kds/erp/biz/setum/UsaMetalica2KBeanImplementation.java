@@ -42,7 +42,7 @@ import ro.kds.erp.biz.Products;
  * Created: Fri Nov 18 15:34:24 2005
  *
  * @author <a href="mailto:Mihai Giurgeanu@CRIMIRA"></a>
- * @version $Id: UsaMetalica2KBeanImplementation.java,v 1.19 2007/02/11 09:59:03 mihai Exp $
+ * @version $Id: UsaMetalica2KBeanImplementation.java,v 1.20 2007/02/11 23:16:06 mihai Exp $
  */
 public class UsaMetalica2KBeanImplementation 
     extends ro.kds.erp.biz.setum.basic.UsaMetalica2KBean {
@@ -219,6 +219,8 @@ public class UsaMetalica2KBeanImplementation
     
 
 	    r = validate();
+	    r.addRecord();
+	    r.addField("id", id);
 	} catch (Exception e) {
 	    r = new ResponseBean();
 	    r.setCode(1);
