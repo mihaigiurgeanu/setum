@@ -880,6 +880,10 @@ public abstract class StandardOfferBean
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
 		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
 		script.setVar(LOGGER_VARNAME, logger, Logger.class);
+
+		script.setVar("param_percent", java.math.BigDecimal.class);
+
+		
 		addFieldsToScript(script);
 		script.run();
                 getFieldsFromScript(script, r);
