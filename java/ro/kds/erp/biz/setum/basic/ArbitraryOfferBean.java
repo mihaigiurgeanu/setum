@@ -105,6 +105,14 @@ public abstract class ArbitraryOfferBean
     // ArbitraryOffer implementation
     // ------------------------------------------------------------------
     protected ArbitraryOfferForm form;
+
+    /**
+     * Access to the form data.
+     */
+     public ArbitraryOfferForm getForm() {
+	return form;
+     }
+
     
     /**
      * Initialization of a new object. On calling saveFormData method, the

@@ -105,6 +105,14 @@ public abstract class SistemBean
     // Sistem implementation
     // ------------------------------------------------------------------
     protected SistemForm form;
+
+    /**
+     * Access to the form data.
+     */
+     public SistemForm getForm() {
+	return form;
+     }
+
     
     /**
      * Initialization of a new object. On calling saveFormData method, the

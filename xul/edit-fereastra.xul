@@ -194,9 +194,8 @@ Argumentele primite la deschiderea dialogului:
              theForm.post_request(req);
 	     
 	     function doOk() {
-		 if(theForm.save()) {
-		     window.arguments[0].select(theForm.get_loaded_id());
-		     return true;
+		 if(theForm.save()) {		     
+		     return window.arguments[0].select(theForm.get_loaded_id());
 		 }
 		 return false;
 	     }

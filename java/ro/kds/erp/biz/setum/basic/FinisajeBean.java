@@ -105,6 +105,14 @@ public abstract class FinisajeBean
     // Finisaje implementation
     // ------------------------------------------------------------------
     protected FinisajeForm form;
+
+    /**
+     * Access to the form data.
+     */
+     public FinisajeForm getForm() {
+	return form;
+     }
+
     
     /**
      * Initialization of a new object. On calling saveFormData method, the

@@ -17,6 +17,11 @@ public interface ArbitraryOffer extends EJBObject {
     public ResponseBean saveFormData() throws RemoteException;
     public ResponseBean loadFormData(Integer id) throws RemoteException, FinderException;
 
+    /**
+     * Access to the form data.
+     */
+     public ArbitraryOfferForm getForm() throws RemoteException;
+
 
     public ResponseBean getCurrentFormData() throws RemoteException;
     public ResponseBean getLoadedPrimaryKey() throws RemoteException;

@@ -42,7 +42,7 @@ import ro.kds.erp.biz.Products;
  * Created: Fri Nov 18 15:34:24 2005
  *
  * @author <a href="mailto:Mihai Giurgeanu@CRIMIRA"></a>
- * @version $Id: UsaMetalica2KBeanImplementation.java,v 1.20 2007/02/11 23:16:06 mihai Exp $
+ * @version $Id: UsaMetalica2KBeanImplementation.java,v 1.21 2007/02/12 21:07:54 mihai Exp $
  */
 public class UsaMetalica2KBeanImplementation 
     extends ro.kds.erp.biz.setum.basic.UsaMetalica2KBean {
@@ -657,7 +657,10 @@ public class UsaMetalica2KBeanImplementation
     }
 
     /**
-     * Add a new option.
+     * Add a new option. It adds the option to the listing if it is not already there
+     * and then invokes the <code>super.addOption(...)</code> that calls the script
+     * associated to the option. The script is responsible for validating the option
+     * within the entire product and to build the response to be returned to the server.
      */
     public ResponseBean addOption(Integer optionId, String businessCategory) {
 	ResponseBean r;
@@ -684,6 +687,7 @@ public class UsaMetalica2KBeanImplementation
 		usa.setCompositeProduct(cp);
 	    }
 
+	    // the option will only be added if it is not already there
 	    cp.getComponents().add(ph.findByPrimaryKey(optionId));
 
 	    // Call the script that should validate the added window.

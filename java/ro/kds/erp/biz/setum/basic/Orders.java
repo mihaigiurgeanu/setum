@@ -17,6 +17,11 @@ public interface Orders extends EJBObject {
     public ResponseBean saveFormData() throws RemoteException;
     public ResponseBean loadFormData(Integer id) throws RemoteException, FinderException;
 
+    /**
+     * Access to the form data.
+     */
+     public OrdersForm getForm() throws RemoteException;
+
     public ResponseBean newOrderLineData() throws RemoteException;
     public ResponseBean saveOrderLineData() throws RemoteException;
     public ResponseBean loadOrderLineData(Integer id) throws RemoteException, FinderException;

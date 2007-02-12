@@ -105,6 +105,14 @@ public abstract class UsaStandardBean
     // UsaStandard implementation
     // ------------------------------------------------------------------
     protected UsaStandardForm form;
+
+    /**
+     * Access to the form data.
+     */
+     public UsaStandardForm getForm() {
+	return form;
+     }
+
     
     /**
      * Initialization of a new object. On calling saveFormData method, the

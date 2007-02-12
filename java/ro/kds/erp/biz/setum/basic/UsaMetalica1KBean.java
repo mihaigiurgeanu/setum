@@ -105,6 +105,14 @@ public abstract class UsaMetalica1KBean
     // UsaMetalica1K implementation
     // ------------------------------------------------------------------
     protected UsaMetalica1KForm form;
+
+    /**
+     * Access to the form data.
+     */
+     public UsaMetalica1KForm getForm() {
+	return form;
+     }
+
     
     /**
      * Initialization of a new object. On calling saveFormData method, the

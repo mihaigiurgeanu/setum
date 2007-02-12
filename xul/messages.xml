@@ -7,47 +7,68 @@
 	 xmlns:msg="http://www.kds.ro/readybeans/rdf/vocabulary#">
 
   <!-- Subiecte ale validarii, nume de campuri -->
-  <rdf:Description rdf:About="http://www.kds.ro/readybeans/rdf/validation/subject/empty"/>
+  <!--
+  <rdf:Description rdf:about="http://www.kds.ro/readybeans/rdf/validation/subject/empty"/>
+  -->
 
   <!-- UsaMetalica2K -->
-  <rdf:Description rdf:About="http://www.kds.ro/readybeans/rdf/forms/UsaMetalica2K#lFrame">
+  <rdf:Description rdf:about="http://www.kds.ro/readybeans/rdf/forms/UsaMetalica2K#lFrame">
     <msg:Message>lToc</msg:Message>
   </rdf:Description>
-  <rdf:Description rdf:About="http://www.kds.ro/readybeans/rdf/forms/UsaMetalica2K#bFrame">
+  <rdf:Description rdf:about="http://www.kds.ro/readybeans/rdf/forms/UsaMetalica2K#bFrame">
     <msg:Message>bToc</msg:Message>
   </rdf:Description>
-  <rdf:Description rdf:About="http://www.kds.ro/readybeans/rdf/forms/UsaMetalica2K#cFrame">
+  <rdf:Description rdf:about="http://www.kds.ro/readybeans/rdf/forms/UsaMetalica2K#cFrame">
     <msg:Message>cToc</msg:Message>
   </rdf:Description>
-  <rdf:Description rdf:About="http://www.kds.ro/readybeans/rdf/forms/UsaMetalica2K#lTreshold">
+  <rdf:Description rdf:about="http://www.kds.ro/readybeans/rdf/forms/UsaMetalica2K#lTreshold">
     <msg:Message>lPrag</msg:Message>
   </rdf:Description>
-  <rdf:Description rdf:About="http://www.kds.ro/readybeans/rdf/forms/UsaMetalica2K#bTreshold">
+  <rdf:Description rdf:about="http://www.kds.ro/readybeans/rdf/forms/UsaMetalica2K#bTreshold">
     <msg:Message>bPrag</msg:Message>
   </rdf:Description>
-  <rdf:Description rdf:About="http://www.kds.ro/readybeans/rdf/forms/UsaMetalica2K#cTreshold">
+  <rdf:Description rdf:about="http://www.kds.ro/readybeans/rdf/forms/UsaMetalica2K#cTreshold">
     <msg:Message>cPrag</msg:Message>
   </rdf:Description>
-  <rdf:Description rdf:About="http://www.kds.ro/readybeans/rdf/forms/UsaMetalica2K#lFoaie">
+  <rdf:Description rdf:about="http://www.kds.ro/readybeans/rdf/forms/UsaMetalica2K#lFoaie">
     <msg:Message>lFoaie canat principal</msg:Message>
   </rdf:Description>
-  <rdf:Description rdf:About="http://www.kds.ro/readybeans/rdf/forms/UsaMetalica2K#hFoaie">
+  <rdf:Description rdf:about="http://www.kds.ro/readybeans/rdf/forms/UsaMetalica2K#hFoaie">
     <msg:Message>hFoaie canat principal</msg:Message>
   </rdf:Description>
-  <rdf:Description rdf:About="http://www.kds.ro/readybeans/rdf/forms/UsaMetalica2K#lFoaieSec">
+  <rdf:Description rdf:about="http://www.kds.ro/readybeans/rdf/forms/UsaMetalica2K#lFoaieSec">
     <msg:Message>lFoaie canat secundar</msg:Message>
   </rdf:Description>
-  <rdf:Description rdf:About="http://www.kds.ro/readybeans/rdf/forms/UsaMetalica2K#hFoaieSec">
+  <rdf:Description rdf:about="http://www.kds.ro/readybeans/rdf/forms/UsaMetalica2K#hFoaieSec">
     <msg:Message>hFoaie canat secundar</msg:Message>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.kds.ro/readybeans/rdf/forms/Fereastra#lf">
+    <msg:Message>L fereastra</msg:Message>
   </rdf:Description>
 
   <!-- Mesaje de validare -->
-  <rdf:Description rdf:About="http://www.kds.ro/readybeans/rdf/validation/message#min">
+  <rdf:Description rdf:about="http://www.kds.ro/readybeans/rdf/validation/message#min">
     <msg:Message>Valoarea campului este mai mica decat valoarea minima admisa</msg:Message>
   </rdf:Description>
 
-  <rdf:Description rdf:About="http://www.kds.ro/readybeans/rdf/validation/message#max">
+  <rdf:Description rdf:about="http://www.kds.ro/readybeans/rdf/validation/message#max">
     <msg:Message>Valoarea campului este mai mare decat valoarea maxima admisa</msg:Message>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="http://www.kds.ro/readybeans/rdf/validation/message/Fereastra#exceptie_silduri">
+    <msg:Message>Pentru acest L al ferestrei se pot folosi toate sildurile cu exceptia celor mentionate</msg:Message>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="http://www.kds.ro/readybeans/rdf/validation/message/Fereastra#restrictie_silduri">
+    <msg:Message>Pentru acest L al ferestrei se pot folosi doar sildurile mentionate</msg:Message>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="http://www.kds.ro/readybeans/rdf/validation/message/Fereastra#doar_un_canat">
+    <msg:Message>Usa are un singur canat, dar ati setat ca fereastra sa fie pe canatul 2</msg:Message>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="http://www.kds.ro/readybeans/rdf/validation/message/Fereastra#canat_necunoscut">
+    <msg:Message>Fereastra nu poate fi pusa pe aces canat</msg:Message>
   </rdf:Description>
 
 

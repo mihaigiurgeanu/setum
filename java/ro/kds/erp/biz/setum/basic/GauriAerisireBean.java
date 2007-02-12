@@ -105,6 +105,14 @@ public abstract class GauriAerisireBean
     // GauriAerisire implementation
     // ------------------------------------------------------------------
     protected GauriAerisireForm form;
+
+    /**
+     * Access to the form data.
+     */
+     public GauriAerisireForm getForm() {
+	return form;
+     }
+
     
     /**
      * Initialization of a new object. On calling saveFormData method, the

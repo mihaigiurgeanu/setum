@@ -105,6 +105,14 @@ public abstract class FereastraBean
     // Fereastra implementation
     // ------------------------------------------------------------------
     protected FereastraForm form;
+
+    /**
+     * Access to the form data.
+     */
+     public FereastraForm getForm() {
+	return form;
+     }
+
     
     /**
      * Initialization of a new object. On calling saveFormData method, the

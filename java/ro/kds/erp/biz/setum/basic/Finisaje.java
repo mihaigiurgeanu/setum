@@ -17,6 +17,11 @@ public interface Finisaje extends EJBObject {
     public ResponseBean saveFormData() throws RemoteException;
     public ResponseBean loadFormData(Integer id) throws RemoteException, FinderException;
 
+    /**
+     * Access to the form data.
+     */
+     public FinisajeForm getForm() throws RemoteException;
+
 
     public ResponseBean getCurrentFormData() throws RemoteException;
     public ResponseBean getLoadedPrimaryKey() throws RemoteException;

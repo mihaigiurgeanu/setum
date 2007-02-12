@@ -105,6 +105,14 @@ public abstract class OfertaUsiStandardBean
     // OfertaUsiStandard implementation
     // ------------------------------------------------------------------
     protected OfertaUsiStandardForm form;
+
+    /**
+     * Access to the form data.
+     */
+     public OfertaUsiStandardForm getForm() {
+	return form;
+     }
+
     
     /**
      * Initialization of a new object. On calling saveFormData method, the

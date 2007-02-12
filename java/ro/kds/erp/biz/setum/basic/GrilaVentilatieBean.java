@@ -105,6 +105,14 @@ public abstract class GrilaVentilatieBean
     // GrilaVentilatie implementation
     // ------------------------------------------------------------------
     protected GrilaVentilatieForm form;
+
+    /**
+     * Access to the form data.
+     */
+     public GrilaVentilatieForm getForm() {
+	return form;
+     }
+
     
     /**
      * Initialization of a new object. On calling saveFormData method, the

@@ -105,6 +105,14 @@ public abstract class OneLevelSelectionsBean
     // OneLevelSelections implementation
     // ------------------------------------------------------------------
     protected OneLevelSelectionsForm form;
+
+    /**
+     * Access to the form data.
+     */
+     public OneLevelSelectionsForm getForm() {
+	return form;
+     }
+
     
     /**
      * Initialization of a new object. On calling saveFormData method, the

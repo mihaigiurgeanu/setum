@@ -153,8 +153,9 @@ function popup_new_item(categoryURI) {
 	    req.add("command", "addOption");
 	    req.add("param0", productId);
 	    req.add("param1", this.category);
-	    this.theForm.post_request(req);
+	    var result = this.theForm.post_request(req);
 	    load_options();
+	    return result;
 	}
     };
 
@@ -166,8 +167,17 @@ function edit_option() {
 
     var select_handler = {
 	theForm: theForm,
+	category: options[optionsListing.currentIndex]['options.businessCategory'],
 	select: function update_option(productId) {
+	    // inform the server about editing the option
+	    // addOption service will not actually add the option again
+	    var req = this.theForm.get_request();
+	    req.add("command", "addOption");
+	    req.add("param0", productId);
+	    req.add("param1", this.category);
+	    var result = this.theForm.post_request(req);
 	    load_options();
+	    return result;
 	}
     };
 

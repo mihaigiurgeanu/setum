@@ -17,6 +17,11 @@ public interface GenericProducts extends EJBObject {
     public ResponseBean saveFormData() throws RemoteException;
     public ResponseBean loadFormData(Integer id) throws RemoteException, FinderException;
 
+    /**
+     * Access to the form data.
+     */
+     public GenericProductsForm getForm() throws RemoteException;
+
     public ResponseBean newProductData() throws RemoteException;
     public ResponseBean saveProductData() throws RemoteException;
     public ResponseBean loadProductData(Integer id) throws RemoteException, FinderException;

@@ -1,36 +1,6 @@
 # Reguli de validare pentru usa metalica
 
 
-
-# Nume variabile
-
-# nume variabila		- explicatie variabila
-
-# response			- obiectul care contine raspunsul catre client
-
-# lframe			- ltoc
-# cframe			- ctoc
-# bframe			- btoc
-
-
-# proc report_err {field msg} {
-#     global response
-#     global errors
-
-#     incr errors;
-#     $response addRecord
-#     $response addField message $msg
-#     $response addField fieldId $field
-# }
-
-
-# proc rule_minmax { field field_name min max } {
-#     upvar $field fieldVar
-#     if { $fieldVar < $min } { report_err $field "$field_name trebuie sa fie cel putin $min. Valoarea curenta este $fieldVar." }
-#     if { $fieldVar > $max } { report_err $field "$field_name trebuie sa fie cel mult $max. Valoarea curenta este $fieldVar." }
-# }
-
-
 package require java
 java::import -package ro.kds.erp.biz ResponseBean
 java::import -package ro.kds.erp.biz.setum.basic UsaMetalica2KForm
@@ -39,11 +9,11 @@ proc rule_minmax { field min max } {
     upvar $field fieldVar
     global response
     if { $fieldVar < $min } { 
-	$response addValidationInfo [java::call UsaMetalica2KForm uri $field] [java::field ResponseBean MINRULE_VALIDATION_MESSAGE] $min
+	$response addValidationInfo [java::call UsaMetalica2KForm uri $field] [java::field ResponseBean MINRULE_VALIDATION_MESSAGE] "$min mm"
 	$response setCode [java::field ResponseBean CODE_ERR_VALIDATION]
     }
     if { $fieldVar > $max } { 
-	$response addValidationInfo [java::call UsaMetalica2KForm uri $field] [java::field ResponseBean MAXRULE_VALIDATION_MESSAGE] $max
+	$response addValidationInfo [java::call UsaMetalica2KForm uri $field] [java::field ResponseBean MAXRULE_VALIDATION_MESSAGE] "$max mm"
 	$response setCode [java::field ResponseBean CODE_ERR_VALIDATION]
     }
 }

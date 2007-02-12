@@ -105,6 +105,14 @@ public abstract class StandardOfferBean
     // StandardOffer implementation
     // ------------------------------------------------------------------
     protected StandardOfferForm form;
+
+    /**
+     * Access to the form data.
+     */
+     public StandardOfferForm getForm() {
+	return form;
+     }
+
     
     /**
      * Initialization of a new object. On calling saveFormData method, the
@@ -881,7 +889,7 @@ public abstract class StandardOfferBean
 		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
 		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 
-		script.setVar("param_percent", java.math.BigDecimal.class);
+		script.setVar("param_percent", percent, java.math.BigDecimal.class);
 
 		
 		addFieldsToScript(script);

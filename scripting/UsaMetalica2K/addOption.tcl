@@ -6,17 +6,98 @@
 
 
 package require java
-java::import -package ro.kds.erp.biz CommonServicesLocalHome CommonServicesLocal ProductNotAvailable
-java:: import -package ro.kds.erp.biz.setum.basic Fereastra
+java::import -package ro.kds.erp.biz.setum.basic Fereastra FereastraHome FereastraForm
+java::import -package ro.kds.erp.biz ResponseBean
 
 
-set srv [java::cast CommonServicesLocal [$factory local "ejb/CommonServices" [java::field CommonServicesLocalHome class]]]
+
+
+proc validate_fereastra {option_id} {
+    global factory lFoaie hFoaie k lFoaieSec hFoaieSec
+    global response
+
+    puts "Validare fereastra $option_id"
+
+
+    set fereastraBean [java::cast Fereastra [$factory remote "ejb/FereastraHome" [java::field FereastraHome class]]]
+    $fereastraBean loadFormData $option_id
+    set fereastra [$fereastraBean getForm]
+
+    # Lfmax
+    set lfereastra [$fereastra getLf]
+    switch [$fereastra getCanat] {
+	1 {
+	    puts "1 canat"
+	    if {$lfereastra <= ($lFoaie - 380)} {
+		// este bine
+	    } elseif {$lfereastra <= ($lFoaie - 340)} {
+		$response addValidationInfo \
+		    [java::call FereastraForm uri lf] \
+		    "http://www.kds.ro/readybeans/rdf/validation/message/Fereastra\#exceptie_silduri" \
+		    {KZS M/M, 6000 M/M, rozeta/maner CISA M/M}
+	    } elseif {$lfereastra <= ($lFoaie - 310)} {
+		$response addValidationInfo \
+		    [java::call FereastraForm uri lf] \
+		    "http://www.kds.ro/readybeans/rdf/validation/message/Fereastra\#restrictie_silduri" \
+		    {URBIS NFP M/M, NP M/M}
+	    } else {
+		$response addValidationInfo \
+		    [java::call FereastraForm uri lf] \
+		    "http://www.kds.ro/readybeans/rdf/validation/message\#max" \
+		    "[expr $lFoaie - 310] mm"
+
+		$response setCode [java::field ResponseBean CODE_ERR_VALIDATION]
+	    }
+	}
+
+	2 {
+	    puts "2 canate"
+
+	    if {k == 1} {
+		$response addValidationInfo "http://www.kds.ro/readybeans/rdf/validation/message/Fereastra\#doar_un_canat"
+		$response setCode [java::field ResponseBean CODE_ERR_VALIDATION]
+	    } elseif {$lfereastra > lFoaieSec - 120} {
+		$response addValidationInfo \
+		    [java::call FereastraForm uri lf] \
+		    "http://www.kds.ro/readybeans/rdf/validation/message\#max" \
+		    "[expr $lFoaieSec - 120] mm"
+
+		$response setCode [java::field ResponseBean CODE_ERR_VALIDATION]
+	    }
+	}
+	default {
+	    puts "numar necunoscut de canate: [[$fereastra getCanat] intValue]"
+	    $response addValidationInfo "http://www.kds.ro/readybeans/rdf/validation/message/Fereastra\#canat_necunoscut" \
+		[[$fereastra getCanat] intValue]
+	    $response setCode [java::field ResponseBean CODE_ERR_VALIDATION]
+	}
+
+    }    
+}
+
+proc validate_gv {option_id} {
+}
+
+proc validate_ga {option_id} {
+}
+
+proc validate_supralumina {option_id} {
+}
+
+proc validate_panouLateral {option_id} {
+}
+
+
+
+
+
 
 # # Gasesc produsul dupa id (care este param_optionId) pentru a lua categoria lui.
 # # In functi de categorie, stiu ce fel de optiune este (fereastra, panaou lateral, etc)
 # set categoryId [[[[srv findProductById $param_optionId] getCategory] getId] intValue]
 
 
+puts "Validare optiune: $param_businessCategory"
 switch $param_businessCategory {
 
 
@@ -40,50 +121,9 @@ switch $param_businessCategory {
 	validate_panouLateral	$param_optionId
     }
     
+    default {
+	puts "Categorie de business necunoscuta a produsului"
+    }
 }
 
-
-proc validate_fereastra {option_id} {
-    global factory lFoaie hFoaie k lFoaieSec hFoaieSec
-
-    set fereastra [$factory remote "ejb/Fereastra" [java::field Fereastra class]]
-    # Lfmax
-    set msg ""
-
-    set lfereastra [[$fereastra getLf] doubleValue]
-    switch [[$fereastra getCanat] intValue] {
-	1 {
-	    if {$lfereastra < ($lFoaie - 380)} {
-		// este bine
-	    } elseif {$lfereastra < ($lFoaie - 340)} {
-		set msg "Pentru acest L al ferestrei puteti folosi toate sildurile, mai putin KZS M/M, 6000 M/M, rozeta/maner CISA M/M!\n\n$msg"
-	    } elseif {$lfereastra < ($lFoaie - 310)} {
-		set msg "Pentru acest L al ferestrei puteti folosi numai pentru silduri URBIS NFP M/M, NP M/M\n\n$msg" 
-	    } else {
-		set msg "L-ul ferestrei este prea mare. Dimensiunea maxima adminsibila este [expr $lFoaie - 310] mm.\n\n$msg"
-	    }
-	}
-
-	2 {
-	    if {k == 1} {
-		set msg "Usa are un singur canat. Nu puteti pune fereastra pe canatul 2!!\n\n$msg"
-	    } elseif {$lfereastra > lFoaieSec - 120} {
-		set msg "L-ul ferestrei este prea mare. Dimensiunea maxim admisa este [expr lFoaieSec - 120] mm.\n\n$msg"
-	    }
-	}
-
-    
-}
-
-proc validate_gv {option_id} {
-}
-
-proc validate_ga {option_id} {
-}
-
-proc validate_supralumina {option_id} {
-}
-
-proc validate_panouLateral {option_id} {
-}
 

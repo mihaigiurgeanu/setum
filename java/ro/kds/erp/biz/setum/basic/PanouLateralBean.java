@@ -105,6 +105,14 @@ public abstract class PanouLateralBean
     // PanouLateral implementation
     // ------------------------------------------------------------------
     protected PanouLateralForm form;
+
+    /**
+     * Access to the form data.
+     */
+     public PanouLateralForm getForm() {
+	return form;
+     }
+
     
     /**
      * Initialization of a new object. On calling saveFormData method, the

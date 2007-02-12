@@ -109,6 +109,14 @@ public abstract class ${.node.class.name}Bean
     // ${.node.class.name} implementation
     // ------------------------------------------------------------------
     protected ${.node.class.name}Form form;
+
+    /**
+     * Access to the form data.
+     */
+     public ${.node.class.name}Form getForm() {
+	return form;
+     }
+
     
     /**
      * Initialization of a new object. On calling saveFormData method, the
@@ -405,7 +413,7 @@ public abstract class ${.node.class.name}Bean
 		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 
 		[#list method.params.param as param]
-		script.setVar("param_${param.name}", ${param.type}.class);
+		script.setVar("param_${param.name}", ${param.name}, ${param.type}.class);
 		[/#list]
 
 		

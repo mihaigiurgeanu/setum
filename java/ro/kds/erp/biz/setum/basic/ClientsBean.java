@@ -105,6 +105,14 @@ public abstract class ClientsBean
     // Clients implementation
     // ------------------------------------------------------------------
     protected ClientsForm form;
+
+    /**
+     * Access to the form data.
+     */
+     public ClientsForm getForm() {
+	return form;
+     }
+
     
     /**
      * Initialization of a new object. On calling saveFormData method, the

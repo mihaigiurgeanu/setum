@@ -105,6 +105,14 @@ public abstract class UsaStdNeechipataBean
     // UsaStdNeechipata implementation
     // ------------------------------------------------------------------
     protected UsaStdNeechipataForm form;
+
+    /**
+     * Access to the form data.
+     */
+     public UsaStdNeechipataForm getForm() {
+	return form;
+     }
+
     
     /**
      * Initialization of a new object. On calling saveFormData method, the

@@ -105,6 +105,14 @@ public abstract class UsaMetalica2KBean
     // UsaMetalica2K implementation
     // ------------------------------------------------------------------
     protected UsaMetalica2KForm form;
+
+    /**
+     * Access to the form data.
+     */
+     public UsaMetalica2KForm getForm() {
+	return form;
+     }
+
     
     /**
      * Initialization of a new object. On calling saveFormData method, the
@@ -4032,8 +4040,8 @@ public abstract class UsaMetalica2KBean
 		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
 		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 
-		script.setVar("param_optionId", Integer.class);
-		script.setVar("param_businessCategory", String.class);
+		script.setVar("param_optionId", optionId, Integer.class);
+		script.setVar("param_businessCategory", businessCategory, String.class);
 
 		
 		addFieldsToScript(script);
@@ -4116,7 +4124,7 @@ public abstract class UsaMetalica2KBean
 		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
 		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 
-		script.setVar("param_optionId", Integer.class);
+		script.setVar("param_optionId", optionId, Integer.class);
 
 		
 		addFieldsToScript(script);

@@ -108,6 +108,14 @@ public abstract class OrdersBean
     // Orders implementation
     // ------------------------------------------------------------------
     protected OrdersForm form;
+
+    /**
+     * Access to the form data.
+     */
+     public OrdersForm getForm() {
+	return form;
+     }
+
     
     /**
      * Initialization of a new object. On calling saveFormData method, the
@@ -1657,7 +1665,7 @@ public abstract class OrdersBean
 		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
 		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 
-		script.setVar("param_offerIntemId", Integer.class);
+		script.setVar("param_offerIntemId", offerIntemId, Integer.class);
 
 		
 		addFieldsToScript(script);
@@ -1698,7 +1706,7 @@ public abstract class OrdersBean
 		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
 		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 
-		script.setVar("param_itemId", Integer.class);
+		script.setVar("param_itemId", itemId, Integer.class);
 
 		
 		addFieldsToScript(script);
