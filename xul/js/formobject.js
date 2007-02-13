@@ -434,11 +434,11 @@ function process_validation(response) {
     if(response.viCount > 0) {
 	var msg = "";
 	for(var i = 0; i<response.viCount; i++) {
-	    msg += message(response.vi[0].subject);
+	    msg += message(response.vi[i].subject);
 	    msg += ": ";
-	    msg += message(response.vi[0].message);
+	    msg += message(response.vi[i].message);
 	    msg += ": ";
-	    msg += response.vi[0].data;
+	    msg += response.vi[i].data;
 	    msg += "\n\n";
 	}
 	alert(msg);
