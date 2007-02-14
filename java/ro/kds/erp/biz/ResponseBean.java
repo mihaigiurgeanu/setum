@@ -392,6 +392,7 @@ public class ResponseBean implements Serializable {
      * @param newCode The new Code value.
      */
     public final void setCode(final int newCode) {
+	logger.log(BasicLevel.DEBUG, "New return code: " + newCode);
 	this.code = newCode;
     }
 
@@ -421,6 +422,8 @@ public class ResponseBean implements Serializable {
      * Add a validation info.
      */
     public void addValidationInfo(final String subject, final String message, final String data) {
+	logger.log(BasicLevel.DEBUG, "Adding ValidationInfo: " + subject
+		   + ": " + message + ": " + data);
 	validationInfo.add(new ValidationInfo(subject, message, data));
     }
 
@@ -428,14 +431,14 @@ public class ResponseBean implements Serializable {
      * Add a validation info with no subject.
      */
     public void addValidationInfo(final String message, final String data) {
-	validationInfo.add(new ValidationInfo(EMPTY_VALIDATION_SUBJECT, message, data));
+	addValidationInfo(EMPTY_VALIDATION_SUBJECT, message, data);
     }
 
     /**
      * Add a validation info with no subject and no data (message only).
      */
     public void addValidationInfo(final String message) {
-	validationInfo.add(new ValidationInfo(EMPTY_VALIDATION_SUBJECT, message, ""));
+	addValidationInfo(EMPTY_VALIDATION_SUBJECT, message, "");
     }
 
 

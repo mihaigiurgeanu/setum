@@ -45,6 +45,12 @@
   <rdf:Description rdf:about="http://www.kds.ro/readybeans/rdf/forms/Fereastra#lf">
     <msg:Message>L fereastra</msg:Message>
   </rdf:Description>
+  <rdf:Description rdf:about="http://www.kds.ro/readybeans/rdf/forms/Fereastra#hf">
+    <msg:Message>H fereastra</msg:Message>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.kds.ro/readybeans/rdf/forms/Fereastra#deschidere">
+    <msg:Message>Fixa sau mobila</msg:Message>
+  </rdf:Description>
 
   <!-- Mesaje de validare -->
   <rdf:Description rdf:about="http://www.kds.ro/readybeans/rdf/validation/message#min">
@@ -53,6 +59,10 @@
 
   <rdf:Description rdf:about="http://www.kds.ro/readybeans/rdf/validation/message#max">
     <msg:Message>Valoarea campului este mai mare decat valoarea maxima admisa</msg:Message>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="http://www.kds.ro/readybeans/rdf/validation/message#exact">
+    <msg:Message>Valoarea campului nu este permisa. Singura valoare permisa este cea specificata</msg:Message>
   </rdf:Description>
 
   <rdf:Description rdf:about="http://www.kds.ro/readybeans/rdf/validation/message/Fereastra#exceptie_silduri">
@@ -71,5 +81,16 @@
     <msg:Message>Fereastra nu poate fi pusa pe aces canat</msg:Message>
   </rdf:Description>
 
+  <rdf:Description rdf:about="http://www.kds.ro/readybeans/rdf/validation/messsage/Fereastra#atentionare_amprente">
+    <msg:Message>ATENTIONARE de pozitionare fereastra NUMAI intre amprente - mai putin canat secundar cu 1 rand amprenta</msg:Message>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="http://www.kds.ro/readybeans/rdf/validation/messsage/Fereastra#atentionare_zona_2">
+    <msg:Message>Fereastra se va pozitiona in zona a DOUA amprente</msg:Message>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="http://www.kds.ro/readybeans/rdf/validation/message/Fereastra#nu_se_executa">
+    <msg:Message>Acest tip de fereastra nu se executa pentru usa selectata</msg:Message>
+  </rdf:Description>
 
 </rdf:RDF>
