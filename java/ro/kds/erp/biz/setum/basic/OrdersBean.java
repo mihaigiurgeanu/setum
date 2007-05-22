@@ -673,6 +673,7 @@ public abstract class OrdersBean
 	computeCalculatedFields(r);
 	return r;
     }
+
     public ResponseBean updateTvaPercent(Double tvaPercent) {
         ResponseBean r = new ResponseBean();
 	Double oldVal = form.getTvaPercent();
@@ -699,6 +700,7 @@ public abstract class OrdersBean
 	computeCalculatedFields(r);
 	return r;
     }
+
     public ResponseBean updateTotalTva(java.math.BigDecimal totalTva) {
         ResponseBean r = new ResponseBean();
 	java.math.BigDecimal oldVal = form.getTotalTva();
