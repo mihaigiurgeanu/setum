@@ -7,6 +7,8 @@
 
 package require java
 java::import -package ro.kds.erp.biz.setum.basic Fereastra FereastraHome FereastraForm
+java::import -package ro.kds.erp.biz.setum.basic PanouLateral PanouLateralHome PanouLateralForm
+
 java::import -package ro.kds.erp.biz ResponseBean
 java::import -package org.objectweb.util.monolog.api Level BasicLevel
 
@@ -592,6 +594,75 @@ proc validate_supralumina {option_id} {
 }
 
 proc validate_panouLateral {option_id} {
+
+    global logger
+    $logger {log int Object} [java::field BasicLevel DEBUG] "Validare PanouLateral $option_id"
+
+
+
+
+
+    global factory lFoaie hFoaie k lFoaieSec hFoaieSec
+    global intFoil extFoil
+    global bToc cToc
+
+    global response
+
+
+
+
+    set plBean [java::cast PanouLateral [$factory remote "ejb/PanouLateralHome" [java::field PanouLateralHome class]]]
+    $plBean loadFormData $option_id
+    set pl [$plBean getForm]
+
+
+    set hpl [$pl getHpl]
+    set lpl [$pl getLpl]
+    set cells [$pl getCells]
+    set deschidere [$pl getDeschidere]
+    set sensDeschidere [$pl getSensDeschidere]
+    set pozitionareBalamale [$pl getPozitionareBalamale]
+    set componenta [$pl getComponenta]
+    set tipComponenta [$pl getTipComponenta]
+    set tipGeam [$pl getTipGeam]
+    set geamSimpluId [$pl getGeamSimpluId]
+    set geamTermopanId [$pl getGeamTermopanId]
+    set tipGrilaj [$pl getTipGrilaj]
+    set grilajStasId [$pl getGrilajStasId]
+    set valoareGrilajAtipic [$pl getValoareGrilajAtipic]
+    set tipTabla [$pl getTipTabla]
+    set tablaId [$pl getTablaId]
+    set sellPrice [$pl getSellPrice]
+    set entryPrice [$pl getEntryPrice]
+    set price1 [$pl getPrice1]
+    set businessCategory [$pl getBusinessCategory]
+    set quantity [$pl getQuantity]
+    
+
+
+
+    rule PL1
+    # TODO implementare regula PL1
+
+    rule PL2
+    # TODO implementare regula PL2
+
+    rule PL4
+    if {
+	$deschidere == 1 &&
+	$tipGeam != 0 &&
+	$tipGrilaj == 0 &&
+	$lpl < (100 + 2 * ($bToc + $cToc))
+    } {
+
+	$response addValidationInfo \
+	    [java::call PanouLateralForm uri lpl] \
+	    "http://www.kds.ro/readybeans/rdf/validation/message\#min" \
+	    "[expr 100 + 2 * ($bToc + $cToc)] mm"
+	
+	$response setCode [java::field ResponseBean CODE_ERR_VALIDATION]
+    }
+	
 }
 
 
