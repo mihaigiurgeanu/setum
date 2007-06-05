@@ -298,12 +298,13 @@ public class TclFileScript implements Script {
 	    Preferences prefs = PreferencesBean.getPreferences();
 	    String scriptsFolder = prefs.get(SCRIPTING_FOLDER_OPTION, 
 					     File.separator);
+	    logger.log(BasicLevel.DEBUG, "read " + SCRIPTING_FOLDER_OPTION +
+		       " option from preferences: " + scriptsFolder);
+
 	    String scriptName = scriptsFolder + File.separator +
 		className.replace('.', File.separatorChar) + ".tcl";
-	    logger.log(BasicLevel.DEBUG, "read " + SCRIPTING_FOLDER_OPTION +
-		       " option from preferences: " + scriptName);
-
 	    logger.log(BasicLevel.DEBUG, "full path to script: " + scriptName);
+
 	    return new TclFileScript(scriptName);
 	} catch (Exception e) {
 	    logger.log(BasicLevel.WARN, "option " + SCRIPTING_FOLDER_OPTION
