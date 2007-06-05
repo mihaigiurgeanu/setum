@@ -2,6 +2,8 @@ package ro.kds.erp.biz;
 
 import javax.ejb.EJBObject;
 import java.rmi.RemoteException;
+import java.util.prefs.BackingStoreException;
+import java.util.Collection;
 
 /**
  * Remote stateless session bean interface used to access application
@@ -104,4 +106,11 @@ public interface Preferences extends EJBObject {
 						      IllegalArgumentException,
 						      IllegalStateException;
 
+
+    /**
+     * List the names of the preferences keys.
+     *
+     * @returns a <code>Collection</code> of strings.
+     */
+    public Collection list() throws RemoteException, IllegalStateException, BackingStoreException;
 }

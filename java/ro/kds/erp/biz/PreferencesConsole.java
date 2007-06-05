@@ -7,6 +7,9 @@ import javax.naming.InitialContext;
 import javax.naming.Context;
 import org.apache.commons.cli.*;
 import javax.rmi.PortableRemoteObject;
+import java.util.prefs.BackingStoreException;
+import java.util.Iterator;
+import java.util.Collection;
 
 /**
  * Console client for administrating preferences settings.
@@ -52,15 +55,17 @@ public final class PreferencesConsole {
 	Option show = OptionBuilder.withDescription("Display the setting's value")
 	    .create('s');
 
+	Option list = OptionBuilder.withDescription("List the set preferences")
+            .create('l');
+
 	OptionGroup commandOptions = new OptionGroup()
 	    .addOption(putString)
 	    .addOption(putDouble)
 	    .addOption(putInt)
-	    .addOption(show);
+	    .addOption(show)
+            .addOption(list);
 
 	options = new Options()
-	    .addOption("?", false, "Display usage instructions")
-	    .addOption("h", "help", false, "Display usage instructions")
 	    .addOption("u", "usage", false, "Display usage instructions")
 	    .addOption(property)
 	    .addOptionGroup(commandOptions);
@@ -75,11 +80,16 @@ public final class PreferencesConsole {
 		printHelp();
 	    } else {
 		try {
-		    if(!parsedArguments.hasOption('p'))
+		    PreferencesConsole application = new PreferencesConsole();
+
+		    if(parsedArguments.hasOption('l')) {
+			application.list();
+		    } 
+		    else if(!parsedArguments.hasOption('p')) {
 			throw new MissingOptionException("-p");
+		    }
 		    String propName = parsedArguments
 			.getOptionValue('p', null);
-		    PreferencesConsole application = new PreferencesConsole();
 
 		    if(parsedArguments.hasOption('s')) {
 			application.show(propName);
@@ -106,6 +116,9 @@ public final class PreferencesConsole {
 		    System.err.println("System error occured:");
 		    e.printStackTrace();
 		    // return ERR_SYSTEM_ERROR;
+		} catch (BackingStoreException e) {
+		    System.err.println("Can not access the preferences backingstore (database):");
+		    e.printStackTrace();
 		}
 	    }
 	} catch (AlreadySelectedException e) {
@@ -173,6 +186,17 @@ public final class PreferencesConsole {
 	IllegalStateException {
 
 	prefs.put(key, value);
+    }
+
+    /**
+     * List the current preferences.
+     */
+    void list() throws RemoteException, BackingStoreException, IllegalStateException {
+	Collection _keys = prefs.list();
+	for(Iterator i = _keys.iterator(); i.hasNext(); ) {
+	    String _key = (String)i.next();
+	    System.out.println(_key);
+	}
     }
 
     /**

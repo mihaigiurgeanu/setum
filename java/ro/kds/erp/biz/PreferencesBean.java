@@ -9,6 +9,9 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.naming.Context;
 import javax.rmi.PortableRemoteObject;
+import java.util.Collection;
+import java.util.ArrayList;
+import java.util.prefs.BackingStoreException;
 
 /**
  * Provides access to system preferences.
@@ -186,6 +189,23 @@ public class PreferencesBean implements SessionBean {
 	    prefsNode.putInt(key, value.intValue());
 	}
     }
+
+
+    /**
+     * Preferences list for the application.
+     *
+     * @returns an <code>Collection</code> of strings  with
+     * the names of the preferences keys contained in the top preference.
+     */
+    public Collection list() throws BackingStoreException, IllegalStateException {
+	String[] _prefsNames = prefsNode.childrenNames();
+	ArrayList _prefsNamesList = new ArrayList(_prefsNames.length);
+	for (int i = 0; i < _prefsNames.length; i++) {
+	    _prefsNamesList.add(_prefsNames[i]);
+	}
+	return _prefsNamesList;
+    }
+
 
     /**
      * Convenience method for getting a Preferences instance. It will

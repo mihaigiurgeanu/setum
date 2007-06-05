@@ -300,6 +300,8 @@ public class TclFileScript implements Script {
 					     File.separator);
 	    String scriptName = scriptsFolder + File.separator +
 		className.replace('.', File.separatorChar) + ".tcl";
+	    logger.log(BasicLevel.DEBUG, "read " + SCRIPTING_FOLDER_OPTION +
+		       " option from preferences: " + scriptName);
 
 	    logger.log(BasicLevel.DEBUG, "full path to script: " + scriptName);
 	    return new TclFileScript(scriptName);
