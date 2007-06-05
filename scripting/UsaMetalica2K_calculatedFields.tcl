@@ -76,7 +76,7 @@ if { $tresholdType == 2 } {
     set h1Treshold 0
 }
 if { $tresholdType == 3 } {
-    if { $hTresholdSpace == 1} {
+    if { $tresholdSpace == 1} {
 	set h2Treshold 0
     }
     if { $tresholdSpace == 2} {
