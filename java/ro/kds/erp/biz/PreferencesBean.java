@@ -198,7 +198,7 @@ public class PreferencesBean implements SessionBean {
      * the names of the preferences keys contained in the top preference.
      */
     public Collection list() throws BackingStoreException, IllegalStateException {
-	String[] _prefsNames = prefsNode.childrenNames();
+	String[] _prefsNames = prefsNode.keys();
 	ArrayList _prefsNamesList = new ArrayList(_prefsNames.length);
 	for (int i = 0; i < _prefsNames.length; i++) {
 	    _prefsNamesList.add(_prefsNames[i]);

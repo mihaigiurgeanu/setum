@@ -155,7 +155,7 @@ public final class PreferencesConsole {
      */
     private static void printHelp() {
 	System.out.println("");
-	new HelpFormatter().printHelp(prgName + " {-? | -h | --help | -u | --usage} | -p <property> {-d <value> | -i <value> | -v <value> | -s}", options);
+	new HelpFormatter().printHelp(prgName + " { -u | --usage | -l} | -p <property> {-d <value> | -i <value> | -v <value> | -s}", options);
     }
     
     /**
