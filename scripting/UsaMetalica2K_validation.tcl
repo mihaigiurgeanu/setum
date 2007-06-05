@@ -37,13 +37,13 @@ rule_minmax cTreshold 25 25
 if { $k == 1 } {
 
     # Foaie Lisa
-    if { intFoil == 1 } {
+    if { $intFoil == 1 } {
 	rule_minmax lFoaie 420 1100
 	rule_minmax hFoaie 420 2400
     }
 
     # Foaie amprentata
-    if { intFoil == 2 } {
+    if { $intFoil == 2 } {
 	rule_minmax lFoaie 690 1000
 	rule_minmax hFoaie 1660 2090
     }
