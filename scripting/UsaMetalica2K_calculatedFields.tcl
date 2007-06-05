@@ -111,6 +111,7 @@ read_prop pret_broasca broasca price1
 read_prop pret_cilindru cilindru price1
 read_prop pret_copiatCheie copiatCheie price1
 read_prop pret_sild sild price1
+read_prop pret_vizor vizor price1
 read_prop pret_rozeta rozeta price1
 read_prop pret_maner maner price1
 read_prop pret_yalla1 yalla1 price1
@@ -133,6 +134,7 @@ if {$montareSistem == 2} {
     set val_broasca [expr $pret_broasca * $broascaBuc]
     set val_cilindru [expr $pret_cilindru * $cilindruBuc]
     set val_copiatCheie [expr $pret_copiatCheie * $copiatCheieBuc]
+    set val_sild [expr $pret_sild * $sildBuc]
     set val_rozeta [expr $pret_rozeta * $rozetaBuc]
     set val_maner [expr $pret_maner * $manerBuc]
     set val_yalla1 [expr $pret_yalla1 * $yalla1Buc]
@@ -141,15 +143,17 @@ if {$montareSistem == 2} {
     set val_selectorOrdine [expr $pret_selectorOrdine * $selectorOrdineBuc]
     set val_amortizor [expr $pret_amortizor * $amortizorBuc]
     set val_manerSemicilindru [expr $pret_manerSemicilindru * $manerSemicilindruBuc]
+    set val_vizor [expr $pret_vizor * $vizorBuc]
     set val_alteSisteme1 [expr $pret_alteSisteme1 * $alteSisteme1Buc]
     set val_alteSisteme2 [expr $pret_alteSisteme2 * $alteSisteme2Buc]
+    
     set val_tipBroascaBeneficiar [expr $pret_tipBroascaBeneficiar * $benefBroascaBuc]
     set val_tipCilindruBeneficiar [expr $pret_tipCilindruBeneficiar * $benefCilindruBuc]
     set val_tipSildBeneficiar [expr $pret_tipSildBeneficiar * $benefSildBuc]
     set val_tipYallaBeneficiar [expr $pret_tipYallaBeneficiar * $benefYallaBuc]
     set val_tipBaraAntipanicaBeneficiar [expr $pret_tipBaraAntipanicaBeneficiar * $benefBaraAntipanicaBuc]
 
-    set sellPrice [expr $sellPrice + $val_tipBroascaBeneficiar + $val_tipCilindruBeneficiar + $val_tipSildBeneficiar + $val_tipYallaBeneficiar + $val_tipBaraAntipanicaBeneficiar + $val_broasca + $val_cilindru + $val_copiatCheie + $val_rozeta + $val_maner + $val_yalla1 + $val_yalla2 + $val_baraAntipanica + $val_selectorOrdine + $val_amortizor + $val_manerSemicilindru + $val_alteSisteme1 + $val_alteSisteme2]
+    set sellPrice [expr $sellPrice + $val_tipBroascaBeneficiar + $val_tipCilindruBeneficiar + $val_tipSildBeneficiar + $val_tipYallaBeneficiar + $val_tipBaraAntipanicaBeneficiar + $val_broasca + $val_cilindru + $val_copiatCheie + $val_sild + $val_rozeta + $val_maner + $val_yalla1 + $val_yalla2 + $val_baraAntipanica + $val_selectorOrdine + $val_amortizor + $val_manerSemicilindru + $val_vizor + $val_alteSisteme1 + $val_alteSisteme2]
 }
 
 

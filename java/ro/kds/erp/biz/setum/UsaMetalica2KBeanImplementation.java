@@ -42,7 +42,7 @@ import ro.kds.erp.biz.Products;
  * Created: Fri Nov 18 15:34:24 2005
  *
  * @author <a href="mailto:Mihai Giurgeanu@CRIMIRA"></a>
- * @version $Id: UsaMetalica2KBeanImplementation.java,v 1.21 2007/02/12 21:07:54 mihai Exp $
+ * @version $Id: UsaMetalica2KBeanImplementation.java,v 1.22 2007/06/05 04:06:05 mihai Exp $
  */
 public class UsaMetalica2KBeanImplementation 
     extends ro.kds.erp.biz.setum.basic.UsaMetalica2KBean {
@@ -1240,6 +1240,17 @@ public class UsaMetalica2KBeanImplementation
 	    try {
 		ProductLocal p = ph.findByPrimaryKey(form.getManerSemicilindruId());
 		s.setVar("manerSemicilindru", p, ProductLocal.class);
+	    } catch (ScriptErrorException e) {
+		logger.log(BasicLevel.ERROR, "ScriptErrorException " + e.getMessage());
+		logger.log(BasicLevel.DEBUG, e);
+	    } catch (FinderException e) {
+		logger.log(BasicLevel.ERROR, "Product not found");
+		logger.log(BasicLevel.DEBUG, e);
+	    }
+	    // vizorId
+	    try {
+		ProductLocal p = ph.findByPrimaryKey(form.getVizorId());
+		s.setVar("vizor", p, ProductLocal.class);
 	    } catch (ScriptErrorException e) {
 		logger.log(BasicLevel.ERROR, "ScriptErrorException " + e.getMessage());
 		logger.log(BasicLevel.DEBUG, e);

@@ -75,11 +75,22 @@ if { $k == 2 } {
 
     # Foaie amprentata, k secundar
     if { $intFoil == 2 } {
-	rule_minmax lFoaieSec 260 1000
+	rule_minmax lFoaieSec 365 1000
+	if {$lFoaieSec < 600} {
+	    $response addValidationInfo "http://www.kds.ro/readybeans/rdf/validation/message/Usa2K#amprenta_necentrata"
+	} else {
+	    $response addValidationInfo "http://www.kds.ro/readybeans/rdf/validation/message/Usa2K#amprenta_necentrata"
+	}
 	rule_minmax hFoaie 1660 2020
     }
     
 
+    # Sisteme
+    if { $lFoaie <= 750 && $lFoaie > 710 } {
+	$response addValidationInfo "http://www.kds.ro/readybeans/rdf/validation/message/Usa2K#sistem_incompatibil" "CISA"
+    } elseif { $lFoaie <= 710 $$ $lFoaie >= 700 } {
+	$response addValidationInfo "http://www.kds.ro/readybeans/rdf/validation/message/Usa2K#sistem_incompatibil" "CISA, ABUS"
+    }
 }
 
 

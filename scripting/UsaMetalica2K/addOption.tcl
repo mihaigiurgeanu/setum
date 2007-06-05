@@ -240,12 +240,12 @@ proc validate_fereastra {option_id} {
 	$deschidere == 1 &&	
 	$tip_grilaj == 0 &&	
 	$intFoil == 2 && $extFoil == 2 &&	
-	$lfereastra < 290
+	$lfereastra != 290
     } {
 
 	$response addValidationInfo \
 	    [java::call FereastraForm uri lf] \
-	    "http://www.kds.ro/readybeans/rdf/validation/message\#min" \
+	    "http://www.kds.ro/readybeans/rdf/validation/message\#exact" \
 	    "290 mm"
 	$response setCode [java::field ResponseBean CODE_ERR_VALIDATION]
     }
@@ -255,12 +255,12 @@ proc validate_fereastra {option_id} {
 	$deschidere == 1 &&	
 	$tip_grilaj == 0 &&	
 	$intFoil == 2 && $extFoil == 2 &&	
-	$hfereastra < 430
+	$hfereastra != 430
     } {
 
 	$response addValidationInfo \
 	    [java::call FereastraForm uri hf] \
-	    "http://www.kds.ro/readybeans/rdf/validation/message\#min" \
+	    "http://www.kds.ro/readybeans/rdf/validation/message\#exact" \
 	    "430 mm"
 	$response setCode [java::field ResponseBean CODE_ERR_VALIDATION]
     }

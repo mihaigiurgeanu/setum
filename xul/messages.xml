@@ -65,6 +65,18 @@
     <msg:Message>Valoarea campului nu este permisa. Singura valoare permisa este cea specificata</msg:Message>
   </rdf:Description>
 
+  <rdf:Description rdf:about="http://www.kds.ro/readybeans/rdf/validation/message/Usa2K#amprenta_centrata">
+    <msg:Message>Amprenta CENTRATA</msg:Message>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="http://www.kds.ro/readybeans/rdf/validation/message/Usa2K#amprenta_necentrata">
+    <msg:Message>1 rand amprenta NECENTRATA</msg:Message>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="http://www.kds.ro/readybeans/rdf/validation/message/Usa2K#sistem_incompatibil">
+    <msg:Message>Sistemul nu poate fi montat:</msg:Message>
+  </rdf:Description>
+
   <rdf:Description rdf:about="http://www.kds.ro/readybeans/rdf/validation/message/Fereastra#exceptie_silduri">
     <msg:Message>Pentru acest L al ferestrei se pot folosi toate sildurile cu exceptia celor mentionate</msg:Message>
   </rdf:Description>

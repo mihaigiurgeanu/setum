@@ -254,6 +254,7 @@ public class FereastraBizBean extends FereastraBean {
     public void createNewFormBean() {
 	super.createNewFormBean();
 
+	form.setCanat(new Integer(1));
 	form.setDeschidere(new Integer(1));
 	form.setTipComponenta(new Integer(1));
 	form.setComponenta(new Integer(1));
