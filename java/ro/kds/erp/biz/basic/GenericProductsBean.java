@@ -309,6 +309,7 @@ public abstract class GenericProductsBean
 		.loadScript(getScriptPrefix() + "_calculatedFields");
 	if(script.loaded()) {
 	    try {
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(FORM_VARNAME, form, 
 			      GenericProductsForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -353,6 +354,7 @@ public abstract class GenericProductsBean
 		.loadScript(getScriptPrefix() + "_validation");
 	if(script.loaded()) {
 	    try {
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(FORM_VARNAME, form, 
 			      GenericProductsForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -380,7 +382,7 @@ public abstract class GenericProductsBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".categoryId");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
 		script.setVar(FORM_VARNAME, form, GenericProductsForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -406,7 +408,7 @@ public abstract class GenericProductsBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".categoryName");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
 		script.setVar(FORM_VARNAME, form, GenericProductsForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -432,7 +434,7 @@ public abstract class GenericProductsBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".productId");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
 		script.setVar(FORM_VARNAME, form, GenericProductsForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -458,7 +460,7 @@ public abstract class GenericProductsBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".productName");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
 		script.setVar(FORM_VARNAME, form, GenericProductsForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -484,7 +486,7 @@ public abstract class GenericProductsBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".productDescription");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
 		script.setVar(FORM_VARNAME, form, GenericProductsForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -510,7 +512,7 @@ public abstract class GenericProductsBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".productCode");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
 		script.setVar(FORM_VARNAME, form, GenericProductsForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -536,7 +538,7 @@ public abstract class GenericProductsBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".productEntryPrice");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, java.math.BigDecimal.class);
 		script.setVar(FORM_VARNAME, form, GenericProductsForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -562,7 +564,7 @@ public abstract class GenericProductsBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".productSellPrice");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, java.math.BigDecimal.class);
 		script.setVar(FORM_VARNAME, form, GenericProductsForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -588,7 +590,7 @@ public abstract class GenericProductsBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".productPrice1");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, java.math.BigDecimal.class);
 		script.setVar(FORM_VARNAME, form, GenericProductsForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -614,7 +616,7 @@ public abstract class GenericProductsBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".productPrice2");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, java.math.BigDecimal.class);
 		script.setVar(FORM_VARNAME, form, GenericProductsForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -640,7 +642,7 @@ public abstract class GenericProductsBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".productPrice3");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, java.math.BigDecimal.class);
 		script.setVar(FORM_VARNAME, form, GenericProductsForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -666,7 +668,7 @@ public abstract class GenericProductsBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".productPrice4");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, java.math.BigDecimal.class);
 		script.setVar(FORM_VARNAME, form, GenericProductsForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -692,7 +694,7 @@ public abstract class GenericProductsBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".productPrice5");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, java.math.BigDecimal.class);
 		script.setVar(FORM_VARNAME, form, GenericProductsForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -718,7 +720,7 @@ public abstract class GenericProductsBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".attrId");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
 		script.setVar(FORM_VARNAME, form, GenericProductsForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -744,7 +746,7 @@ public abstract class GenericProductsBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".attrName");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
 		script.setVar(FORM_VARNAME, form, GenericProductsForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -770,7 +772,7 @@ public abstract class GenericProductsBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".attrString");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
 		script.setVar(FORM_VARNAME, form, GenericProductsForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -796,7 +798,7 @@ public abstract class GenericProductsBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".attrInt");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
 		script.setVar(FORM_VARNAME, form, GenericProductsForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -822,7 +824,7 @@ public abstract class GenericProductsBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".attrDecimal");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, java.math.BigDecimal.class);
 		script.setVar(FORM_VARNAME, form, GenericProductsForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -848,7 +850,7 @@ public abstract class GenericProductsBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".attrDouble");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, Double.class);
 		script.setVar(FORM_VARNAME, form, GenericProductsForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
