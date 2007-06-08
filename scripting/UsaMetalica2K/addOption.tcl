@@ -388,7 +388,7 @@ proc validate_fereastra {option_id} {
 	$tip_grilaj == 0 &&	
 	$intFoil == 2 &&	 
 	$extFoil == 2 &&	
-	$lfereastra <> 262
+	$lfereastra != 262
     } {
 	[java::call FereastraForm uri lf] \
 	    "http://www.kds.ro/readybeans/rdf/validation/message\#exact" \
@@ -402,7 +402,7 @@ proc validate_fereastra {option_id} {
 	$tip_grilaj == 0 &&	
 	$intFoil == 2 &&	 
 	$extFoil == 2 &&	
-	$hfereastra <> 362
+	$hfereastra != 362
     } {
 	[java::call FereastraForm uri hf] \
 	    "http://www.kds.ro/readybeans/rdf/validation/message\#exact" \
