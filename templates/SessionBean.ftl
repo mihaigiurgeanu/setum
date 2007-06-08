@@ -274,6 +274,7 @@ public abstract class ${.node.class.name}Bean
 		.loadScript(getScriptPrefix() + "_calculatedFields");
 	if(script.loaded()) {
 	    try {
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(FORM_VARNAME, form, 
 			      ${.node.class.name}Form.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -318,6 +319,7 @@ public abstract class ${.node.class.name}Bean
 		.loadScript(getScriptPrefix() + "_validation");
 	if(script.loaded()) {
 	    try {
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(FORM_VARNAME, form, 
 			      ${.node.class.name}Form.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -346,7 +348,7 @@ public abstract class ${.node.class.name}Bean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".${field.name}");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, ${field.type}.class);
 		script.setVar(FORM_VARNAME, form, ${.node.class.name}Form.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -406,7 +408,7 @@ public abstract class ${.node.class.name}Bean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".${method.name}");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(FORM_VARNAME, form, ${.node.class.name}Form.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
 		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
