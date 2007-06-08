@@ -305,7 +305,10 @@ public class TclFileScript implements Script {
 		className.replace('.', File.separatorChar) + ".tcl";
 	    logger.log(BasicLevel.DEBUG, "full path to script: " + scriptName);
 
-	    return new TclFileScript(scriptName);
+	    TclFileScript theScript = new TclFileScript(scriptName);
+	    theScript.setVar("scripting_root", scriptsFolder);
+
+	    return theScript;
 	} catch (Exception e) {
 	    logger.log(BasicLevel.WARN, "option " + SCRIPTING_FOLDER_OPTION
 		       + " was not read. The following exception was caught: ",
