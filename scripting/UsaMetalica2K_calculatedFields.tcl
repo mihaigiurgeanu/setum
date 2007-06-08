@@ -3,6 +3,7 @@
 package require java;
 
 java::import org.objectweb.util.monolog.api.BasicLevel
+java::import -package ro.kds.erp.data ProductLocal
 
 
 
@@ -157,6 +158,21 @@ if {$montareSistem == 2} {
 }
 
 
+
+
+
+# adaug pretul optiunilor
+set optiuni [$logic getOptions]
+for {set i [$optiuni iterator]} {[$i hasNext]} {} {
+    set optiune [java::cast ProductLocal [$i next]]
+    set o_price [[$optiune getSellPrice] doubleValue]
+    set sellPrice [expr $sellPrice + $o_price]
+}
+
+
+
+
+# finisaje
 if { $finisajTocBlat } {
     set intFinisajTocId $intFinisajBlatId
     set intFinisajToc $intFinisajBlat
