@@ -225,6 +225,7 @@ public abstract class ClientsBean
 		.loadScript(getScriptPrefix() + "_calculatedFields");
 	if(script.loaded()) {
 	    try {
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(FORM_VARNAME, form, 
 			      ClientsForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -269,6 +270,7 @@ public abstract class ClientsBean
 		.loadScript(getScriptPrefix() + "_validation");
 	if(script.loaded()) {
 	    try {
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(FORM_VARNAME, form, 
 			      ClientsForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -296,7 +298,7 @@ public abstract class ClientsBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".isCompany");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
 		script.setVar(FORM_VARNAME, form, ClientsForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -322,7 +324,7 @@ public abstract class ClientsBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".firstName");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
 		script.setVar(FORM_VARNAME, form, ClientsForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -348,7 +350,7 @@ public abstract class ClientsBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".lastName");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
 		script.setVar(FORM_VARNAME, form, ClientsForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -374,7 +376,7 @@ public abstract class ClientsBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".companyName");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
 		script.setVar(FORM_VARNAME, form, ClientsForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -400,7 +402,7 @@ public abstract class ClientsBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".address");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
 		script.setVar(FORM_VARNAME, form, ClientsForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -426,7 +428,7 @@ public abstract class ClientsBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".postalCode");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
 		script.setVar(FORM_VARNAME, form, ClientsForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -452,7 +454,7 @@ public abstract class ClientsBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".city");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
 		script.setVar(FORM_VARNAME, form, ClientsForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -478,7 +480,7 @@ public abstract class ClientsBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".countryCode");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
 		script.setVar(FORM_VARNAME, form, ClientsForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -504,7 +506,7 @@ public abstract class ClientsBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".companyCode");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
 		script.setVar(FORM_VARNAME, form, ClientsForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -530,7 +532,7 @@ public abstract class ClientsBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".phone");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
 		script.setVar(FORM_VARNAME, form, ClientsForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -556,7 +558,7 @@ public abstract class ClientsBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".iban");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
 		script.setVar(FORM_VARNAME, form, ClientsForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -582,7 +584,7 @@ public abstract class ClientsBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".bank");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
 		script.setVar(FORM_VARNAME, form, ClientsForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -608,7 +610,7 @@ public abstract class ClientsBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".comment");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
 		script.setVar(FORM_VARNAME, form, ClientsForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -634,7 +636,7 @@ public abstract class ClientsBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".contactFirstName");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
 		script.setVar(FORM_VARNAME, form, ClientsForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -660,7 +662,7 @@ public abstract class ClientsBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".contactLastName");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
 		script.setVar(FORM_VARNAME, form, ClientsForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -686,7 +688,7 @@ public abstract class ClientsBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".contactDepartment");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
 		script.setVar(FORM_VARNAME, form, ClientsForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -712,7 +714,7 @@ public abstract class ClientsBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".contactPhone");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
 		script.setVar(FORM_VARNAME, form, ClientsForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -738,7 +740,7 @@ public abstract class ClientsBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".contactMobile");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
 		script.setVar(FORM_VARNAME, form, ClientsForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -764,7 +766,7 @@ public abstract class ClientsBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".contactFax");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
 		script.setVar(FORM_VARNAME, form, ClientsForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -790,7 +792,7 @@ public abstract class ClientsBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".contactEmail");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
 		script.setVar(FORM_VARNAME, form, ClientsForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -816,7 +818,7 @@ public abstract class ClientsBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".contactTitle");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
 		script.setVar(FORM_VARNAME, form, ClientsForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -842,7 +844,7 @@ public abstract class ClientsBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".contactComment");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
 		script.setVar(FORM_VARNAME, form, ClientsForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);

@@ -225,6 +225,7 @@ public abstract class ArbitraryOfferBean
 		.loadScript(getScriptPrefix() + "_calculatedFields");
 	if(script.loaded()) {
 	    try {
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(FORM_VARNAME, form, 
 			      ArbitraryOfferForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -269,6 +270,7 @@ public abstract class ArbitraryOfferBean
 		.loadScript(getScriptPrefix() + "_validation");
 	if(script.loaded()) {
 	    try {
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(FORM_VARNAME, form, 
 			      ArbitraryOfferForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -296,7 +298,7 @@ public abstract class ArbitraryOfferBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".no");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
 		script.setVar(FORM_VARNAME, form, ArbitraryOfferForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -322,7 +324,7 @@ public abstract class ArbitraryOfferBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".docDate");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, java.util.Date.class);
 		script.setVar(FORM_VARNAME, form, ArbitraryOfferForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -348,7 +350,7 @@ public abstract class ArbitraryOfferBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".dateFrom");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, java.util.Date.class);
 		script.setVar(FORM_VARNAME, form, ArbitraryOfferForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -374,7 +376,7 @@ public abstract class ArbitraryOfferBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".dateTo");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, java.util.Date.class);
 		script.setVar(FORM_VARNAME, form, ArbitraryOfferForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -400,7 +402,7 @@ public abstract class ArbitraryOfferBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".discontinued");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, Boolean.class);
 		script.setVar(FORM_VARNAME, form, ArbitraryOfferForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -426,7 +428,7 @@ public abstract class ArbitraryOfferBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".period");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
 		script.setVar(FORM_VARNAME, form, ArbitraryOfferForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -452,7 +454,7 @@ public abstract class ArbitraryOfferBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".clientId");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
 		script.setVar(FORM_VARNAME, form, ArbitraryOfferForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -478,7 +480,7 @@ public abstract class ArbitraryOfferBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".clientName");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
 		script.setVar(FORM_VARNAME, form, ArbitraryOfferForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -504,7 +506,7 @@ public abstract class ArbitraryOfferBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".name");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
 		script.setVar(FORM_VARNAME, form, ArbitraryOfferForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -530,7 +532,7 @@ public abstract class ArbitraryOfferBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".description");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
 		script.setVar(FORM_VARNAME, form, ArbitraryOfferForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -556,7 +558,7 @@ public abstract class ArbitraryOfferBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".comment");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
 		script.setVar(FORM_VARNAME, form, ArbitraryOfferForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -582,7 +584,7 @@ public abstract class ArbitraryOfferBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".productId");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
 		script.setVar(FORM_VARNAME, form, ArbitraryOfferForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -608,7 +610,7 @@ public abstract class ArbitraryOfferBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".price");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, java.math.BigDecimal.class);
 		script.setVar(FORM_VARNAME, form, ArbitraryOfferForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -634,7 +636,7 @@ public abstract class ArbitraryOfferBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".vatPrice");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, java.math.BigDecimal.class);
 		script.setVar(FORM_VARNAME, form, ArbitraryOfferForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -660,7 +662,7 @@ public abstract class ArbitraryOfferBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".relativeGain");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, Double.class);
 		script.setVar(FORM_VARNAME, form, ArbitraryOfferForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -686,7 +688,7 @@ public abstract class ArbitraryOfferBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".absoluteGain");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, java.math.BigDecimal.class);
 		script.setVar(FORM_VARNAME, form, ArbitraryOfferForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -712,7 +714,7 @@ public abstract class ArbitraryOfferBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".productCategory");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
 		script.setVar(FORM_VARNAME, form, ArbitraryOfferForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -738,7 +740,7 @@ public abstract class ArbitraryOfferBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".productCode");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
 		script.setVar(FORM_VARNAME, form, ArbitraryOfferForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -764,7 +766,7 @@ public abstract class ArbitraryOfferBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".productName");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
 		script.setVar(FORM_VARNAME, form, ArbitraryOfferForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -790,7 +792,7 @@ public abstract class ArbitraryOfferBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".entryPrice");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, java.math.BigDecimal.class);
 		script.setVar(FORM_VARNAME, form, ArbitraryOfferForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -816,7 +818,7 @@ public abstract class ArbitraryOfferBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".sellPrice");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, java.math.BigDecimal.class);
 		script.setVar(FORM_VARNAME, form, ArbitraryOfferForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -842,7 +844,7 @@ public abstract class ArbitraryOfferBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".businessCategory");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
 		script.setVar(FORM_VARNAME, form, ArbitraryOfferForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);

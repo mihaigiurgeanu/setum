@@ -225,6 +225,7 @@ public abstract class UsaStandardBean
 		.loadScript(getScriptPrefix() + "_calculatedFields");
 	if(script.loaded()) {
 	    try {
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(FORM_VARNAME, form, 
 			      UsaStandardForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -269,6 +270,7 @@ public abstract class UsaStandardBean
 		.loadScript(getScriptPrefix() + "_validation");
 	if(script.loaded()) {
 	    try {
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(FORM_VARNAME, form, 
 			      UsaStandardForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -296,7 +298,7 @@ public abstract class UsaStandardBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".name");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
 		script.setVar(FORM_VARNAME, form, UsaStandardForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -322,7 +324,7 @@ public abstract class UsaStandardBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".code");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
 		script.setVar(FORM_VARNAME, form, UsaStandardForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -348,7 +350,7 @@ public abstract class UsaStandardBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".usaId");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
 		script.setVar(FORM_VARNAME, form, UsaStandardForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -374,7 +376,7 @@ public abstract class UsaStandardBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".broascaId");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
 		script.setVar(FORM_VARNAME, form, UsaStandardForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -400,7 +402,7 @@ public abstract class UsaStandardBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".cilindruId");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
 		script.setVar(FORM_VARNAME, form, UsaStandardForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -426,7 +428,7 @@ public abstract class UsaStandardBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".sildId");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
 		script.setVar(FORM_VARNAME, form, UsaStandardForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -452,7 +454,7 @@ public abstract class UsaStandardBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".yallaId");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
 		script.setVar(FORM_VARNAME, form, UsaStandardForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -478,7 +480,7 @@ public abstract class UsaStandardBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".vizorId");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
 		script.setVar(FORM_VARNAME, form, UsaStandardForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);

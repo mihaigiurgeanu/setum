@@ -225,6 +225,7 @@ public abstract class SistemBean
 		.loadScript(getScriptPrefix() + "_calculatedFields");
 	if(script.loaded()) {
 	    try {
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(FORM_VARNAME, form, 
 			      SistemForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -269,6 +270,7 @@ public abstract class SistemBean
 		.loadScript(getScriptPrefix() + "_validation");
 	if(script.loaded()) {
 	    try {
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(FORM_VARNAME, form, 
 			      SistemForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -296,7 +298,7 @@ public abstract class SistemBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".name");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
 		script.setVar(FORM_VARNAME, form, SistemForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -322,7 +324,7 @@ public abstract class SistemBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".code");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
 		script.setVar(FORM_VARNAME, form, SistemForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -348,7 +350,7 @@ public abstract class SistemBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".categoryId");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
 		script.setVar(FORM_VARNAME, form, SistemForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -374,7 +376,7 @@ public abstract class SistemBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".entryPrice");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, java.math.BigDecimal.class);
 		script.setVar(FORM_VARNAME, form, SistemForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -400,7 +402,7 @@ public abstract class SistemBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".sellPrice");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, java.math.BigDecimal.class);
 		script.setVar(FORM_VARNAME, form, SistemForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -426,7 +428,7 @@ public abstract class SistemBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".partPrice");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, java.math.BigDecimal.class);
 		script.setVar(FORM_VARNAME, form, SistemForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -452,7 +454,7 @@ public abstract class SistemBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".laborPrice");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, java.math.BigDecimal.class);
 		script.setVar(FORM_VARNAME, form, SistemForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -478,7 +480,7 @@ public abstract class SistemBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".relativeGainSP");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, Double.class);
 		script.setVar(FORM_VARNAME, form, SistemForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -504,7 +506,7 @@ public abstract class SistemBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".absoluteGainSP");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, java.math.BigDecimal.class);
 		script.setVar(FORM_VARNAME, form, SistemForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -530,7 +532,7 @@ public abstract class SistemBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".relativeGainPP");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, Double.class);
 		script.setVar(FORM_VARNAME, form, SistemForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -556,7 +558,7 @@ public abstract class SistemBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".absoluteGainPP");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, java.math.BigDecimal.class);
 		script.setVar(FORM_VARNAME, form, SistemForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -582,7 +584,7 @@ public abstract class SistemBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".l");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, Double.class);
 		script.setVar(FORM_VARNAME, form, SistemForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -608,7 +610,7 @@ public abstract class SistemBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".h");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, Double.class);
 		script.setVar(FORM_VARNAME, form, SistemForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);

@@ -225,6 +225,7 @@ public abstract class OfertaUsiStandardBean
 		.loadScript(getScriptPrefix() + "_calculatedFields");
 	if(script.loaded()) {
 	    try {
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(FORM_VARNAME, form, 
 			      OfertaUsiStandardForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -269,6 +270,7 @@ public abstract class OfertaUsiStandardBean
 		.loadScript(getScriptPrefix() + "_validation");
 	if(script.loaded()) {
 	    try {
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(FORM_VARNAME, form, 
 			      OfertaUsiStandardForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -296,7 +298,7 @@ public abstract class OfertaUsiStandardBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".no");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
 		script.setVar(FORM_VARNAME, form, OfertaUsiStandardForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -322,7 +324,7 @@ public abstract class OfertaUsiStandardBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".docDate");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, java.util.Date.class);
 		script.setVar(FORM_VARNAME, form, OfertaUsiStandardForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -348,7 +350,7 @@ public abstract class OfertaUsiStandardBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".dateFrom");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, java.util.Date.class);
 		script.setVar(FORM_VARNAME, form, OfertaUsiStandardForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -374,7 +376,7 @@ public abstract class OfertaUsiStandardBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".dateTo");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, java.util.Date.class);
 		script.setVar(FORM_VARNAME, form, OfertaUsiStandardForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -400,7 +402,7 @@ public abstract class OfertaUsiStandardBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".discontinued");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, Boolean.class);
 		script.setVar(FORM_VARNAME, form, OfertaUsiStandardForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -426,7 +428,7 @@ public abstract class OfertaUsiStandardBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".period");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
 		script.setVar(FORM_VARNAME, form, OfertaUsiStandardForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -452,7 +454,7 @@ public abstract class OfertaUsiStandardBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".name");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
 		script.setVar(FORM_VARNAME, form, OfertaUsiStandardForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -478,7 +480,7 @@ public abstract class OfertaUsiStandardBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".description");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
 		script.setVar(FORM_VARNAME, form, OfertaUsiStandardForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -504,7 +506,7 @@ public abstract class OfertaUsiStandardBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".comment");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
 		script.setVar(FORM_VARNAME, form, OfertaUsiStandardForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -530,7 +532,7 @@ public abstract class OfertaUsiStandardBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".vat");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, java.math.BigDecimal.class);
 		script.setVar(FORM_VARNAME, form, OfertaUsiStandardForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -556,7 +558,7 @@ public abstract class OfertaUsiStandardBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".price");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, java.math.BigDecimal.class);
 		script.setVar(FORM_VARNAME, form, OfertaUsiStandardForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -582,7 +584,7 @@ public abstract class OfertaUsiStandardBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".vatPrice");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, java.math.BigDecimal.class);
 		script.setVar(FORM_VARNAME, form, OfertaUsiStandardForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -608,7 +610,7 @@ public abstract class OfertaUsiStandardBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".relativeGain");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, Double.class);
 		script.setVar(FORM_VARNAME, form, OfertaUsiStandardForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -634,7 +636,7 @@ public abstract class OfertaUsiStandardBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".absoluteGain");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, java.math.BigDecimal.class);
 		script.setVar(FORM_VARNAME, form, OfertaUsiStandardForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -660,7 +662,7 @@ public abstract class OfertaUsiStandardBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".productCategory");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
 		script.setVar(FORM_VARNAME, form, OfertaUsiStandardForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -686,7 +688,7 @@ public abstract class OfertaUsiStandardBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".productCode");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
 		script.setVar(FORM_VARNAME, form, OfertaUsiStandardForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -712,7 +714,7 @@ public abstract class OfertaUsiStandardBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".productName");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
 		script.setVar(FORM_VARNAME, form, OfertaUsiStandardForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -738,7 +740,7 @@ public abstract class OfertaUsiStandardBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".usa");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
 		script.setVar(FORM_VARNAME, form, OfertaUsiStandardForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -764,7 +766,7 @@ public abstract class OfertaUsiStandardBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".usaCode");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
 		script.setVar(FORM_VARNAME, form, OfertaUsiStandardForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -790,7 +792,7 @@ public abstract class OfertaUsiStandardBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".usaId");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
 		script.setVar(FORM_VARNAME, form, OfertaUsiStandardForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -816,7 +818,7 @@ public abstract class OfertaUsiStandardBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".usaDescription");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
 		script.setVar(FORM_VARNAME, form, OfertaUsiStandardForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -842,7 +844,7 @@ public abstract class OfertaUsiStandardBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".broasca");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
 		script.setVar(FORM_VARNAME, form, OfertaUsiStandardForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -868,7 +870,7 @@ public abstract class OfertaUsiStandardBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".cilindru");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
 		script.setVar(FORM_VARNAME, form, OfertaUsiStandardForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -894,7 +896,7 @@ public abstract class OfertaUsiStandardBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".sild");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
 		script.setVar(FORM_VARNAME, form, OfertaUsiStandardForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -920,7 +922,7 @@ public abstract class OfertaUsiStandardBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".yalla");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
 		script.setVar(FORM_VARNAME, form, OfertaUsiStandardForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -946,7 +948,7 @@ public abstract class OfertaUsiStandardBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".vizor");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
 		script.setVar(FORM_VARNAME, form, OfertaUsiStandardForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -972,7 +974,7 @@ public abstract class OfertaUsiStandardBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".entryPrice");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, java.math.BigDecimal.class);
 		script.setVar(FORM_VARNAME, form, OfertaUsiStandardForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -998,7 +1000,7 @@ public abstract class OfertaUsiStandardBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".sellPrice");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, java.math.BigDecimal.class);
 		script.setVar(FORM_VARNAME, form, OfertaUsiStandardForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -1024,7 +1026,7 @@ public abstract class OfertaUsiStandardBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".selectionCode");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
 		script.setVar(FORM_VARNAME, form, OfertaUsiStandardForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -1050,7 +1052,7 @@ public abstract class OfertaUsiStandardBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".FilterUsa");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
 		script.setVar(FORM_VARNAME, form, OfertaUsiStandardForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -1076,7 +1078,7 @@ public abstract class OfertaUsiStandardBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".FilterBroasca");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
 		script.setVar(FORM_VARNAME, form, OfertaUsiStandardForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -1102,7 +1104,7 @@ public abstract class OfertaUsiStandardBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".FilterCilindru");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
 		script.setVar(FORM_VARNAME, form, OfertaUsiStandardForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -1128,7 +1130,7 @@ public abstract class OfertaUsiStandardBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".FilterSild");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
 		script.setVar(FORM_VARNAME, form, OfertaUsiStandardForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -1154,7 +1156,7 @@ public abstract class OfertaUsiStandardBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".FilterYalla");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
 		script.setVar(FORM_VARNAME, form, OfertaUsiStandardForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -1180,7 +1182,7 @@ public abstract class OfertaUsiStandardBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".FilterVizor");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
 		script.setVar(FORM_VARNAME, form, OfertaUsiStandardForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);

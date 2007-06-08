@@ -225,6 +225,7 @@ public abstract class UsaMetalica2KBean
 		.loadScript(getScriptPrefix() + "_calculatedFields");
 	if(script.loaded()) {
 	    try {
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(FORM_VARNAME, form, 
 			      UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -269,6 +270,7 @@ public abstract class UsaMetalica2KBean
 		.loadScript(getScriptPrefix() + "_validation");
 	if(script.loaded()) {
 	    try {
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(FORM_VARNAME, form, 
 			      UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -296,7 +298,7 @@ public abstract class UsaMetalica2KBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".code");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -322,7 +324,7 @@ public abstract class UsaMetalica2KBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".name");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -348,7 +350,7 @@ public abstract class UsaMetalica2KBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".description");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -374,7 +376,7 @@ public abstract class UsaMetalica2KBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".subclass");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -400,7 +402,7 @@ public abstract class UsaMetalica2KBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".version");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -426,7 +428,7 @@ public abstract class UsaMetalica2KBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".material");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -452,7 +454,7 @@ public abstract class UsaMetalica2KBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".k");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -478,7 +480,7 @@ public abstract class UsaMetalica2KBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".lg");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, Double.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -504,7 +506,7 @@ public abstract class UsaMetalica2KBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".hg");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, Double.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -530,7 +532,7 @@ public abstract class UsaMetalica2KBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".le");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, Double.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -556,7 +558,7 @@ public abstract class UsaMetalica2KBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".he");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, Double.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -582,7 +584,7 @@ public abstract class UsaMetalica2KBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".lcorrection");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, Double.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -608,7 +610,7 @@ public abstract class UsaMetalica2KBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".hcorrection");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, Double.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -634,7 +636,7 @@ public abstract class UsaMetalica2KBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".lCurrent");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, Double.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -660,7 +662,7 @@ public abstract class UsaMetalica2KBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".lUtil");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, Double.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -686,7 +688,7 @@ public abstract class UsaMetalica2KBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".hUtil");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, Double.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -712,7 +714,7 @@ public abstract class UsaMetalica2KBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".lFoaie");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, Double.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -738,7 +740,7 @@ public abstract class UsaMetalica2KBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".hFoaie");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, Double.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -764,7 +766,7 @@ public abstract class UsaMetalica2KBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".lFoaieSec");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, Double.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -790,7 +792,7 @@ public abstract class UsaMetalica2KBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".kType");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -816,7 +818,7 @@ public abstract class UsaMetalica2KBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".intFoil");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -842,7 +844,7 @@ public abstract class UsaMetalica2KBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".ieFoil");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -868,7 +870,7 @@ public abstract class UsaMetalica2KBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".extFoil");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -894,7 +896,7 @@ public abstract class UsaMetalica2KBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".intFoilSec");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -920,7 +922,7 @@ public abstract class UsaMetalica2KBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".ieFoilSec");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -946,7 +948,7 @@ public abstract class UsaMetalica2KBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".extFoilSec");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -972,7 +974,7 @@ public abstract class UsaMetalica2KBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".isolation");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -998,7 +1000,7 @@ public abstract class UsaMetalica2KBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".openingDir");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -1024,7 +1026,7 @@ public abstract class UsaMetalica2KBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".openingSide");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -1050,7 +1052,7 @@ public abstract class UsaMetalica2KBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".frameType");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -1076,7 +1078,7 @@ public abstract class UsaMetalica2KBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".lFrame");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, Double.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -1102,7 +1104,7 @@ public abstract class UsaMetalica2KBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".bFrame");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, Double.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -1128,7 +1130,7 @@ public abstract class UsaMetalica2KBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".cFrame");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, Double.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -1154,7 +1156,7 @@ public abstract class UsaMetalica2KBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".foilPosition");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -1180,7 +1182,7 @@ public abstract class UsaMetalica2KBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".tresholdType");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -1206,7 +1208,7 @@ public abstract class UsaMetalica2KBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".lTreshold");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, Double.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -1232,7 +1234,7 @@ public abstract class UsaMetalica2KBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".hTreshold");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, Double.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -1258,7 +1260,7 @@ public abstract class UsaMetalica2KBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".cTreshold");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, Double.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -1284,7 +1286,7 @@ public abstract class UsaMetalica2KBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".tresholdSpace");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -1310,7 +1312,7 @@ public abstract class UsaMetalica2KBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".h1Treshold");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, Double.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -1336,7 +1338,7 @@ public abstract class UsaMetalica2KBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".h2Treshold");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, Double.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -1362,7 +1364,7 @@ public abstract class UsaMetalica2KBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".entryPrice");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, java.math.BigDecimal.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -1388,7 +1390,7 @@ public abstract class UsaMetalica2KBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".sellPrice");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, java.math.BigDecimal.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -1414,7 +1416,7 @@ public abstract class UsaMetalica2KBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".montareSistem");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -1440,7 +1442,7 @@ public abstract class UsaMetalica2KBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".decupareSistemId");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -1466,7 +1468,7 @@ public abstract class UsaMetalica2KBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".sistemSetumSauBeneficiar");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -1492,7 +1494,7 @@ public abstract class UsaMetalica2KBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".broascaId");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -1518,7 +1520,7 @@ public abstract class UsaMetalica2KBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".broascaBuc");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -1544,7 +1546,7 @@ public abstract class UsaMetalica2KBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".cilindruId");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -1570,7 +1572,7 @@ public abstract class UsaMetalica2KBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".cilindruBuc");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -1596,7 +1598,7 @@ public abstract class UsaMetalica2KBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".copiatCheieId");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -1622,7 +1624,7 @@ public abstract class UsaMetalica2KBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".copiatCheieBuc");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -1648,7 +1650,7 @@ public abstract class UsaMetalica2KBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".vizorId");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -1674,7 +1676,7 @@ public abstract class UsaMetalica2KBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".vizorBuc");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -1700,7 +1702,7 @@ public abstract class UsaMetalica2KBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".sildId");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -1726,7 +1728,7 @@ public abstract class UsaMetalica2KBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".sildTip");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -1752,7 +1754,7 @@ public abstract class UsaMetalica2KBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".sildCuloare");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -1778,7 +1780,7 @@ public abstract class UsaMetalica2KBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".sildBuc");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -1804,7 +1806,7 @@ public abstract class UsaMetalica2KBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".rozetaId");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -1830,7 +1832,7 @@ public abstract class UsaMetalica2KBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".rozetaTip");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -1856,7 +1858,7 @@ public abstract class UsaMetalica2KBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".rozetaCuloare");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -1882,7 +1884,7 @@ public abstract class UsaMetalica2KBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".rozetaBuc");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -1908,7 +1910,7 @@ public abstract class UsaMetalica2KBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".manerId");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -1934,7 +1936,7 @@ public abstract class UsaMetalica2KBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".manerTip");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -1960,7 +1962,7 @@ public abstract class UsaMetalica2KBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".manerCuloare");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -1986,7 +1988,7 @@ public abstract class UsaMetalica2KBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".manerBuc");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -2012,7 +2014,7 @@ public abstract class UsaMetalica2KBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".yalla1Id");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -2038,7 +2040,7 @@ public abstract class UsaMetalica2KBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".yalla1Buc");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -2064,7 +2066,7 @@ public abstract class UsaMetalica2KBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".yalla2Id");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -2090,7 +2092,7 @@ public abstract class UsaMetalica2KBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".yalla2Buc");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -2116,7 +2118,7 @@ public abstract class UsaMetalica2KBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".baraAntipanicaId");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -2142,7 +2144,7 @@ public abstract class UsaMetalica2KBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".baraAntipanicaBuc");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -2168,7 +2170,7 @@ public abstract class UsaMetalica2KBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".manerSemicilindruId");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -2194,7 +2196,7 @@ public abstract class UsaMetalica2KBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".manerSemicilindruBuc");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -2220,7 +2222,7 @@ public abstract class UsaMetalica2KBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".selectorOrdineId");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -2246,7 +2248,7 @@ public abstract class UsaMetalica2KBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".selectorOrdineBuc");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -2272,7 +2274,7 @@ public abstract class UsaMetalica2KBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".amortizorId");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -2298,7 +2300,7 @@ public abstract class UsaMetalica2KBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".amortizorBuc");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -2324,7 +2326,7 @@ public abstract class UsaMetalica2KBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".alteSisteme1Id");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -2350,7 +2352,7 @@ public abstract class UsaMetalica2KBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".alteSisteme1Buc");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -2376,7 +2378,7 @@ public abstract class UsaMetalica2KBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".alteSisteme2Id");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -2402,7 +2404,7 @@ public abstract class UsaMetalica2KBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".alteSisteme2Buc");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -2428,7 +2430,7 @@ public abstract class UsaMetalica2KBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".benefBroasca");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -2454,7 +2456,7 @@ public abstract class UsaMetalica2KBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".benefBroascaBuc");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -2480,7 +2482,7 @@ public abstract class UsaMetalica2KBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".benefBroascaTip");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -2506,7 +2508,7 @@ public abstract class UsaMetalica2KBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".benefCilindru");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -2532,7 +2534,7 @@ public abstract class UsaMetalica2KBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".benefCilindruBuc");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -2558,7 +2560,7 @@ public abstract class UsaMetalica2KBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".benefCilindruTip");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -2584,7 +2586,7 @@ public abstract class UsaMetalica2KBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".benefSild");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -2610,7 +2612,7 @@ public abstract class UsaMetalica2KBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".benefSildBuc");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -2636,7 +2638,7 @@ public abstract class UsaMetalica2KBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".benefSildTip");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -2662,7 +2664,7 @@ public abstract class UsaMetalica2KBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".benefYalla");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -2688,7 +2690,7 @@ public abstract class UsaMetalica2KBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".benefYallaBuc");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -2714,7 +2716,7 @@ public abstract class UsaMetalica2KBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".benefYallaTip");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -2740,7 +2742,7 @@ public abstract class UsaMetalica2KBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".benefBaraAntipanica");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -2766,7 +2768,7 @@ public abstract class UsaMetalica2KBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".benefBaraAntipanicaBuc");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -2792,7 +2794,7 @@ public abstract class UsaMetalica2KBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".benefBaraAntipanicaTip");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -2818,7 +2820,7 @@ public abstract class UsaMetalica2KBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".benefManer");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -2844,7 +2846,7 @@ public abstract class UsaMetalica2KBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".benefManerBuc");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -2870,7 +2872,7 @@ public abstract class UsaMetalica2KBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".benefSelectorOrdine");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -2896,7 +2898,7 @@ public abstract class UsaMetalica2KBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".benefSelectorOrdineBuc");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -2922,7 +2924,7 @@ public abstract class UsaMetalica2KBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".benefAmortizor");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -2948,7 +2950,7 @@ public abstract class UsaMetalica2KBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".benefAmortizorBuc");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -2974,7 +2976,7 @@ public abstract class UsaMetalica2KBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".benefAlteSisteme1");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -3000,7 +3002,7 @@ public abstract class UsaMetalica2KBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".benefAlteSisteme1Buc");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -3026,7 +3028,7 @@ public abstract class UsaMetalica2KBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".benefAlteSisteme2");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -3052,7 +3054,7 @@ public abstract class UsaMetalica2KBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".benefAlteSisteme2Buc");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -3078,7 +3080,7 @@ public abstract class UsaMetalica2KBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".sistemeComment");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -3104,7 +3106,7 @@ public abstract class UsaMetalica2KBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".intFinisajBlat");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -3130,7 +3132,7 @@ public abstract class UsaMetalica2KBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".intFinisajBlatId");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -3156,7 +3158,7 @@ public abstract class UsaMetalica2KBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".intFinisajToc");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -3182,7 +3184,7 @@ public abstract class UsaMetalica2KBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".intFinisajTocId");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -3208,7 +3210,7 @@ public abstract class UsaMetalica2KBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".intFinisajGrilaj");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -3234,7 +3236,7 @@ public abstract class UsaMetalica2KBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".intFinisajGrilajId");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -3260,7 +3262,7 @@ public abstract class UsaMetalica2KBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".intFinisajFereastra");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -3286,7 +3288,7 @@ public abstract class UsaMetalica2KBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".intFinisajFereastraId");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -3312,7 +3314,7 @@ public abstract class UsaMetalica2KBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".intFinisajSupralumina");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -3338,7 +3340,7 @@ public abstract class UsaMetalica2KBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".intFinisajSupraluminaId");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -3364,7 +3366,7 @@ public abstract class UsaMetalica2KBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".intFinisajPanouLateral");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -3390,7 +3392,7 @@ public abstract class UsaMetalica2KBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".intFinisajPanouLateralId");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -3416,7 +3418,7 @@ public abstract class UsaMetalica2KBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".extFinisajBlat");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -3442,7 +3444,7 @@ public abstract class UsaMetalica2KBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".extFinisajBlatId");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -3468,7 +3470,7 @@ public abstract class UsaMetalica2KBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".extFinisajToc");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -3494,7 +3496,7 @@ public abstract class UsaMetalica2KBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".extFinisajTocId");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -3520,7 +3522,7 @@ public abstract class UsaMetalica2KBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".extFinisajGrilaj");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -3546,7 +3548,7 @@ public abstract class UsaMetalica2KBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".extFinisajGrilajId");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -3572,7 +3574,7 @@ public abstract class UsaMetalica2KBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".extFinisajFereastra");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -3598,7 +3600,7 @@ public abstract class UsaMetalica2KBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".extFinisajFereastraId");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -3624,7 +3626,7 @@ public abstract class UsaMetalica2KBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".extFinisajSupralumina");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -3650,7 +3652,7 @@ public abstract class UsaMetalica2KBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".extFinisajSupraluminaId");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -3676,7 +3678,7 @@ public abstract class UsaMetalica2KBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".extFinisajPanouLateral");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -3702,7 +3704,7 @@ public abstract class UsaMetalica2KBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".extFinisajPanouLateralId");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -3728,7 +3730,7 @@ public abstract class UsaMetalica2KBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".finisajTocBlat");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, Boolean.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -3754,7 +3756,7 @@ public abstract class UsaMetalica2KBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".finisajGrilajBlat");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, Boolean.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -3780,7 +3782,7 @@ public abstract class UsaMetalica2KBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".finisajFereastraBlat");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, Boolean.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -3806,7 +3808,7 @@ public abstract class UsaMetalica2KBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".finisajSupraluminaBlat");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, Boolean.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -3832,7 +3834,7 @@ public abstract class UsaMetalica2KBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".finisajPanouLateralBlat");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, Boolean.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -3858,7 +3860,7 @@ public abstract class UsaMetalica2KBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".finisajBlatExtInt");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, Boolean.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -3884,7 +3886,7 @@ public abstract class UsaMetalica2KBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".finisajTocExtInt");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, Boolean.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -3910,7 +3912,7 @@ public abstract class UsaMetalica2KBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".finisajGrilajExtInt");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, Boolean.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -3936,7 +3938,7 @@ public abstract class UsaMetalica2KBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".finisajFereastraExtInt");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, Boolean.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -3962,7 +3964,7 @@ public abstract class UsaMetalica2KBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".finisajSupraluminaExtInt");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, Boolean.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -3988,7 +3990,7 @@ public abstract class UsaMetalica2KBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".finisajPanouLateralExtInt");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(OLDVAL_VARNAME, oldVal, Boolean.class);
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
@@ -4034,7 +4036,7 @@ public abstract class UsaMetalica2KBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".addOption");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
 		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
@@ -4076,7 +4078,7 @@ public abstract class UsaMetalica2KBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".getOptionsListing");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
 		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
@@ -4118,7 +4120,7 @@ public abstract class UsaMetalica2KBean
 	Script script = TclFileScript.loadScript(getScriptPrefix() + ".removeOption");
 	if(script.loaded()) {
 	   try {
-		script.setVar(LOGIC_VARNAME, this);
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
 		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
 		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
 		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
