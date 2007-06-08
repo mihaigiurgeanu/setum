@@ -32,6 +32,7 @@ import javax.jms.MessageListener;
 import ro.kds.erp.scripting.Script;
 import ro.kds.erp.scripting.ScriptErrorException;
 import ro.kds.erp.biz.Products;
+import java.util.ArrayList;
 
 /**
  * Business logic for definition of UsaMetalica product. It obsoletes old implementation
@@ -42,7 +43,7 @@ import ro.kds.erp.biz.Products;
  * Created: Fri Nov 18 15:34:24 2005
  *
  * @author <a href="mailto:Mihai Giurgeanu@CRIMIRA"></a>
- * @version $Id: UsaMetalica2KBeanImplementation.java,v 1.22 2007/06/05 04:06:05 mihai Exp $
+ * @version $Id: UsaMetalica2KBeanImplementation.java,v 1.23 2007/06/08 04:15:43 mihai Exp $
  */
 public class UsaMetalica2KBeanImplementation 
     extends ro.kds.erp.biz.setum.basic.UsaMetalica2KBean {
@@ -594,6 +595,32 @@ public class UsaMetalica2KBeanImplementation
 
 
     /**
+     * Retrieves the product's optional components.
+     */
+    public Collection getOptions() throws NamingException, FinderException {
+	Collection options;
+	if(id != null) {
+	    InitialContext ic = new InitialContext();
+	    Context env = (Context) ic.lookup("java:comp/env");
+	    ProductLocalHome ph = (ProductLocalHome)PortableRemoteObject.narrow
+		    (env.lookup("ejb/ProductHome"), ProductLocalHome.class);
+	    
+	    ProductLocal usa = ph.findByPrimaryKey(id);
+	    CompositeProductLocal cp = usa.getCompositeProduct();
+	    if(cp == null) {
+		logger.log(BasicLevel.DEBUG, "No composite product found ....");
+		options = new ArrayList();
+	    } else {
+		options = new ArrayList(cp.getComponents());
+	    }
+	} else {
+	    options = new ArrayList();
+	}
+	
+	return options;
+    }
+
+    /**
      * Retrieves the listing of options. The options are different
      * kind of products that can be added to a door.
      */
@@ -603,38 +630,25 @@ public class UsaMetalica2KBeanImplementation
 	    
 	    r = new ResponseBean();
 
-	    if(id != null) {
-		InitialContext ic = new InitialContext();
-		Context env = (Context) ic.lookup("java:comp/env");
-		ProductLocalHome ph = (ProductLocalHome)PortableRemoteObject.narrow
-		    (env.lookup("ejb/ProductHome"), ProductLocalHome.class);
-		
-		ProductLocal usa = ph.findByPrimaryKey(id);
-		CompositeProductLocal cp = usa.getCompositeProduct();
-		if(cp == null) {
-		    logger.log(BasicLevel.DEBUG, "No composite product found ....");
-		} else {
-		    for(Iterator i = cp.getComponents().iterator();
-			i.hasNext(); ) {
-			ProductLocal p = (ProductLocal)i.next();
-			r.addRecord();
-			r.addField("options.id", p.getId());
-			r.addField("options.code", p.getCode());
-			r.addField("options.name", p.getName());
-			r.addField("options.description", p.getDescription());
-			r.addField("options.entryPrice", p.getEntryPrice());
-			r.addField("options.sellPrice", p.getSellPrice());
-			r.addField("options.categoryId", p.getCategory().getId());
-			r.addField("options.categoryName", p.getCategory().getName());
-			// Attributes
-			Map amap = p.getAttributesMap();
-			AttributeLocal a = (AttributeLocal)amap.get("businessCategory");
-			if(a != null)
-			    r.addField("options.businessCategory", a.getStringValue());
-			else
-			    r.addField("options.businessCategory", "");
-		    }
-		}
+	    Collection options = getOptions();
+	    for(Iterator i = options.iterator(); i.hasNext(); ) {
+		ProductLocal p = (ProductLocal)i.next();
+		r.addRecord();
+		r.addField("options.id", p.getId());
+		r.addField("options.code", p.getCode());
+		r.addField("options.name", p.getName());
+		r.addField("options.description", p.getDescription());
+		r.addField("options.entryPrice", p.getEntryPrice());
+		r.addField("options.sellPrice", p.getSellPrice());
+		r.addField("options.categoryId", p.getCategory().getId());
+		r.addField("options.categoryName", p.getCategory().getName());
+		// Attributes
+		Map amap = p.getAttributesMap();
+		AttributeLocal a = (AttributeLocal)amap.get("businessCategory");
+		if(a != null)
+		    r.addField("options.businessCategory", a.getStringValue());
+		else
+		    r.addField("options.businessCategory", "");
 	    }
 		
 	} catch (FinderException e) {
@@ -655,6 +669,7 @@ public class UsaMetalica2KBeanImplementation
 	}
 	return r;
     }
+
 
     /**
      * Add a new option. It adds the option to the listing if it is not already there
