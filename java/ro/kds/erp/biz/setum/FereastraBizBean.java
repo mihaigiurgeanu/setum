@@ -260,6 +260,7 @@ public class FereastraBizBean extends FereastraBean {
 	form.setComponenta(new Integer(1));
 	form.setTipGeam(new Integer(1));
 	form.setTipGrilaj(new Integer(1));
+	form.setQuantity(new Integer(1));
     }
 
     /**

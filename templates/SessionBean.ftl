@@ -424,6 +424,11 @@ public abstract class ${.node.class.name}Bean
                 [#if method.@returnType = "standard"]
                 getFieldsFromScript(script, r);
                 [/#if]
+		[#if method.@calculate?is_node]
+		[#if method.@calculate = "true"]
+		computeCalculatedFields(r);
+		[/#if]
+		[/#if]
 	   } catch (ScriptErrorException e) {
 	       logger.log(BasicLevel.ERROR, "Can not run the script for service ${method.name}", e);
            }

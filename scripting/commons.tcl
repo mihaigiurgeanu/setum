@@ -44,5 +44,21 @@ proc product_by_id {pid valmethod} {
     return $val
 }
 
+proc attribute_str {pid attr} {
+    global srv
+    if {[catch {set val [[$srv getAttributeByProductId $pid $attr] getStringValue]} err]} {
+	puts "Nu pot citi atributul $attr pentru produsul $pid: $err"
+	set val {}
+    }
+    return $val
+}
 
+proc attribute_dbl {pid attr} {
+    global srv
+    if {[catch {set val [[$srv getAttributeByProductId $pid $attr] getDoubleValue]} err]} {
+	puts "Nu pot citi atributul $attr pentru produsul $pid: $err"
+	set val 0
+    }
+    return $val
+}
 

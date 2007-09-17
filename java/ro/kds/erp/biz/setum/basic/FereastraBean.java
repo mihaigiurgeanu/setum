@@ -921,6 +921,7 @@ public abstract class FereastraBean
 		addFieldsToScript(script);
 		script.run();
                 getFieldsFromScript(script, r);
+		computeCalculatedFields(r);
 	   } catch (ScriptErrorException e) {
 	       logger.log(BasicLevel.ERROR, "Can not run the script for service faraGeam", e);
            }
@@ -960,6 +961,7 @@ public abstract class FereastraBean
 		addFieldsToScript(script);
 		script.run();
                 getFieldsFromScript(script, r);
+		computeCalculatedFields(r);
 	   } catch (ScriptErrorException e) {
 	       logger.log(BasicLevel.ERROR, "Can not run the script for service faraGrilaj", e);
            }

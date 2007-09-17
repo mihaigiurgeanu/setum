@@ -22,17 +22,18 @@ element class {
 
    element services {
       element method {
-        attribute returnType { "standard" | "script" },
-        element name { text },
-	element params {
-           element param {
-              element name { text },
-              element type { text }
-           } *
-        },
-        element throws {
+         attribute returnType { "standard" | "script" },
+         attribute calculate { "true" | "false" }?,
+         element name { text },
+         element params {
+            element param {
+               element name { text },
+               element type { text }
+            } *
+         },
+         element throws {
 	    element throw { text }+
-        }?
+         }?
       }*
    }
 }

@@ -43,7 +43,7 @@ import java.util.ArrayList;
  * Created: Fri Nov 18 15:34:24 2005
  *
  * @author <a href="mailto:Mihai Giurgeanu@CRIMIRA"></a>
- * @version $Id: UsaMetalica2KBeanImplementation.java,v 1.23 2007/06/08 04:15:43 mihai Exp $
+ * @version $Id: UsaMetalica2KBeanImplementation.java,v 1.24 2007/09/17 05:19:21 mihai Exp $
  */
 public class UsaMetalica2KBeanImplementation 
     extends ro.kds.erp.biz.setum.basic.UsaMetalica2KBean {
@@ -707,6 +707,7 @@ public class UsaMetalica2KBeanImplementation
 
 	    // Call the script that should validate the added window.
 	    r = super.addOption(optionId, businessCategory);
+	    computeCalculatedFields(null);
 
 	} catch (CreateException e) {
 	    r = ResponseBean.ERR_CREATE;

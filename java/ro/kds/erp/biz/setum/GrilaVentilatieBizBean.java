@@ -156,6 +156,7 @@ public class GrilaVentilatieBizBean extends GrilaVentilatieBean {
     public void createNewFormBean() {
 	super.createNewFormBean();
 
+	form.setQuantity(new Integer(1));
     }
 
 }

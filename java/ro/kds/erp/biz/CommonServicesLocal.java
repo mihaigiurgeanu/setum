@@ -2,6 +2,7 @@ package ro.kds.erp.biz;
 
 import javax.ejb.EJBLocalObject;
 import ro.kds.erp.data.ProductLocal;
+import ro.kds.erp.data.AttributeLocal;
 
 /**
  * Collection of common business logic services.
@@ -38,4 +39,8 @@ public interface CommonServicesLocal extends EJBLocalObject {
      * or a configuration or system eror occurs.
      */
     ProductLocal findProductById(Integer id) throws ProductNotAvailable;
+
+
+    AttributeLocal getAttributeByProductId(Integer pid, String attrName) throws ProductNotAvailable;
+
 }

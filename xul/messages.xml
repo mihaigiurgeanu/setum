@@ -105,4 +105,23 @@
     <msg:Message>Acest tip de fereastra nu se executa pentru usa selectata</msg:Message>
   </rdf:Description>
 
+
+
+  <!-- PanouLateral -->
+  <rdf:Description rdf:about="http://www.kds.ro/readybeans/rdf/forms/PanouLateral#lpl">
+    <msg:Message>Lpl</msg:Message>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.kds.ro/readybeans/rdf/forms/PanouLateral#hpl">
+    <msg:Message>Hpl</msg:Message>
+  </rdf:Description>
+
+
+  <rdf:Description rdf:about="http://www.kds.ro/readybeans/rdf/validation/message/PanouLateral#min">
+    <msg:Message>Valoare mai mica decat limita admisa</msg:Message>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.kds.ro/readybeans/rdf/validation/message/PanouLateral#max">
+    <msg:Message>Valoare mai mare decat limita admisa</msg:Message>
+  </rdf:Description>
+
+
 </rdf:RDF>

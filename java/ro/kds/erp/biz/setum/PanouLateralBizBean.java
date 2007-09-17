@@ -245,8 +245,8 @@ public class PanouLateralBizBean extends PanouLateralBean {
 	form.setDeschidere(new Integer(1));
 	form.setTipComponenta(new Integer(1));
 	form.setComponenta(new Integer(1));
-	form.setTipGeam(new Integer(1));
-	form.setTipGrilaj(new Integer(1));
+	//form.setTipGeam(new Integer(1));
+	//form.setTipGrilaj(new Integer(1));
 	form.setCells(new Integer(1));
 	form.setQuantity(new Integer(1));
     }

@@ -58,7 +58,9 @@ if { $k == 2 } {
 
 if { $frameType == 1 } {
     set lFrame 90
-    set bFrame 35
+    
+    if {$k == 1 } {set bFrame 35} else {set bFrame 45}
+
     set cFrame 25
 }
 

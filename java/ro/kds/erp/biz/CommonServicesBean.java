@@ -17,6 +17,8 @@ import org.objectweb.util.monolog.Monolog;
 import org.objectweb.util.monolog.api.Logger;
 import ro.kds.erp.data.ProductLocalHome;
 import javax.naming.Context;
+import ro.kds.erp.data.AttributeLocal;
+import java.util.Map;
 
 /**
  * Implementation for common services offered by the business logic.
@@ -98,6 +100,15 @@ public class CommonServicesBean implements SessionBean {
 	    logger.log(BasicLevel.ERROR, e);
 	    throw new ProductNotAvailable(id.toString(), e);
 	}
+    }
+
+
+
+    public AttributeLocal getAttributeByProductId(Integer pid, String attrName) throws ProductNotAvailable {
+
+	ProductLocal p = findProductById(pid);
+	Map attribs = p.getAttributesMap();
+	return (AttributeLocal)attribs.get(attrName);
     }
 
     // Implementation of javax.ejb.SessionBean
