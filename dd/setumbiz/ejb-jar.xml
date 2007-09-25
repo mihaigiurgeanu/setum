@@ -1015,6 +1015,13 @@
       <session-type>Stateful</session-type>
       <transaction-type>Container</transaction-type>
       <env-entry>
+	<description>The folder under script directory where the
+	scripts for this business logic are located.</description>
+	<env-entry-name>script.prefix</env-entry-name>
+	<env-entry-type>java.lang.String</env-entry-type>
+	<env-entry-value>Supralumina</env-entry-value>
+      </env-entry>
+      <env-entry>
         <description>Categoria din care face parte acest producs</description>
         <env-entry-name>categoryId</env-entry-name>
         <env-entry-type>java.lang.Integer</env-entry-type>

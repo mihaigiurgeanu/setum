@@ -24,11 +24,15 @@ proc rule_minmax { field min max } {
 
 # Conditii pentru toc
 rule_minmax lFrame 60 500
-rule_minmax bFrame 35 100
 rule_minmax cFrame 25 25
 
 rule_minmax lTreshold 60 500
-rule_minmax hTreshold 15 100
+if {$tresholdType != 3} {
+    rule_minmax hTreshold 15 100
+    rule_minmax bFrame 35 100
+} else {
+    rule_minmax bFrame 0 100
+}
 rule_minmax cTreshold 25 25
 
 

@@ -31,31 +31,6 @@ proc read_prop {varname objname propname} {
 
 set name "$version$subclass$code"
 
-log "lg: $lg"
-log "hg: $hg"
-
-set le [expr $lg - $lcorrection - 20]
-log "le: $le"
-
-set he [expr $hg - $hcorrection - 10]
-log "he: $he"
-
-set se [expr ($le * $he)/1000000]
-log "se: $se"
-
-set luft 5
-set lFoaie [expr $le - (2 * $bFrame + 2 * $luft)]
-
-
-if {$ieFoil == 1} {
-    set extFoil $intFoil
-}
-
-if { $k == 2 } {
-    set lFoaie $lCurrent
-    set lFoaieSec [expr $le - (2*$bFrame + $lFoaie + 3*$luft)]
-}
-
 if { $frameType == 1 } {
     set lFrame 90
     
@@ -79,12 +54,42 @@ if { $tresholdType == 2 } {
     set h1Treshold 0
 }
 if { $tresholdType == 3 } {
-    if { $tresholdSpace == 1} {
-	set h2Treshold 0
-    }
     if { $tresholdSpace == 2} {
 	set h1Treshold 0
+	set h2Treshold 5
+	set bFrame 0
+	set h1Treshold 0
+	set hTreshold 0
+    } elseif { $tresholdSpace == 1} {
+	set h2Treshold 0
+	set bFrame 0
+	set hTreshold 0
     }
+}
+
+log "lg: $lg"
+log "hg: $hg"
+
+set le [expr $lg - $lcorrection - 20]
+log "le: $le"
+
+set he [expr $hg - $hcorrection - 10 + $h1Treshold]
+log "he: $he"
+
+set se [expr ($le * $he)/1000000]
+log "se: $se"
+
+set luft 5
+set lFoaie [expr $le - (2 * $bFrame + 2 * $luft)]
+
+
+if {$ieFoil == 1} {
+    set extFoil $intFoil
+}
+
+if { $k == 2 } {
+    set lFoaie $lCurrent
+    set lFoaieSec [expr $le - (2*$bFrame + $lFoaie + 3*$luft)]
 }
 
 set hFoaie [expr $he - ($bFrame + $hTreshold + $h1Treshold + $h2Treshold + 2*$luft)]
