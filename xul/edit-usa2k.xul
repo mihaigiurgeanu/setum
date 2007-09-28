@@ -14,7 +14,7 @@ windows.arguments[0].select(productId)
 
 <dialog
     id="edit-usa2k-form"
-    title="Usa metalica cu 2 canate"
+    title="Usa metalica"
     xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
     persist="screenX screenY width height"
     orient="vertical"

@@ -202,8 +202,7 @@ Argumentele primite la deschiderea dialogului:
 	     
 	     function doOk() {
 		 if(theForm.save()) {
-		     window.arguments[0].select(theForm.get_loaded_id());
-		     return true;
+		     return window.arguments[0].select(theForm.get_loaded_id());
 		 }
 		 return false;
 	     }
