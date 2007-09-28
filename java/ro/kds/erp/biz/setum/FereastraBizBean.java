@@ -355,7 +355,7 @@ public class FereastraBizBean extends FereastraBean {
 		    form.setLf(lAttr.getDoubleValue());
 		    r.addField("lf", lAttr.getDoubleValue());
 
-		    form.setHf(lAttr.getDoubleValue());
+		    form.setHf(hAttr.getDoubleValue());
 		    r.addField("hf", hAttr.getDoubleValue());
 		} else {
 		    logger.log(BasicLevel.DEBUG, "Grilajul STAS nu are atributele L sau H");
