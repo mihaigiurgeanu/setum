@@ -379,12 +379,12 @@ proc validate_fereastra {option_id} {
 	$intFoil == 1 &&	 
 	$extFoil == 1 &&	
 	$canat_fereastra == 1 && 
-	$lfereastra > 462
+	$lfereastra > 442
     } {
 	$response addValidationInfo \
 	    [java::call FereastraForm uri lf] \
 	    "http://www.kds.ro/readybeans/rdf/validation/message\#max" \
-	    "462 mm"
+	    "442 mm"
 	$response setCode [java::field ResponseBean CODE_ERR_VALIDATION]
     }
 
@@ -395,12 +395,12 @@ proc validate_fereastra {option_id} {
 	$intFoil == 1 &&	 
 	$extFoil == 1 &&	
 	$canat_fereastra == 2 && 
-	$lfereastra > 462
+	$lfereastra > 442
     } {
 	$response addValidationInfo \
 	    [java::call FereastraForm uri lf] \
 	    "http://www.kds.ro/readybeans/rdf/validation/message\#max" \
-	    "462 mm"
+	    "442 mm"
 	$response setCode [java::field ResponseBean CODE_ERR_VALIDATION]
     }
 
@@ -545,12 +545,12 @@ proc validate_fereastra {option_id} {
 	$tip_grilaj != 0 &&	
 	$intFoil == 1 &&	 
 	$extFoil == 1 &&	
-	$lfereastra < 462
+	$lfereastra < 442
     } {
 	$response addValidationInfo \
 	    [java::call FereastraForm uri lf] \
 	    "http://www.kds.ro/readybeans/rdf/validation/message\#min" \
-	    "462 mm"
+	    "442 mm"
 	$response setCode [java::field ResponseBean CODE_ERR_VALIDATION]
     }
 
@@ -575,12 +575,12 @@ proc validate_fereastra {option_id} {
 	$tip_grilaj != 0 &&	
 	$intFoil == 1 &&	 
 	$extFoil == 1 &&	
-	$lfereastra > 462
+	$lfereastra > 442
     } {
 	$response addValidationInfo \
 	    [java::call FereastraForm uri lf] \
 	    "http://www.kds.ro/readybeans/rdf/validation/message\#max" \
-	    "462 mm"
+	    "442 mm"
 	$response setCode [java::field ResponseBean CODE_ERR_VALIDATION]
     }
 
