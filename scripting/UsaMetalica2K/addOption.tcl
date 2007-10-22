@@ -695,10 +695,6 @@ proc validate_supralumina {option_id} {
 
 
     rule S1
-
-    rule S2
-
-    rule S4
     if {
 	$deschidere == 1 &&
 	$tipGeam != 0 &&
@@ -710,7 +706,7 @@ proc validate_supralumina {option_id} {
     }
 
 
-    rule S5
+    rule S2
     
     if {
 	$deschidere == 1 &&
@@ -723,27 +719,27 @@ proc validate_supralumina {option_id} {
     }
 
 
-    rule S6
+    rule S3
     if {
 	$deschidere == 1 &&
 	$tipGeam != 0 &&
 	$tipGrilaj == 0 &&
-	$ls > (1100 + 2 * ($bToc + $cToc))
+	$ls > ($le)
     } {
 
-	verr ls max "[expr 1100 + 2 * ($bToc + $cToc)] mm"
+	verr ls max "$le mm"
     }
 
 
-    rule S7
+    rule S4
     if {
 	$deschidere == 1 &&
 	$tipGeam != 0 &&
 	$tipGrilaj == 0 &&
-	$hs > $he
+	$hs > (1100 + 2*($bToc + $cToc))
     } {
 
-	verr hs max "$he mm"
+	verr hs max "[expr (1100 + 2*($bToc + $cToc))] mm"
     }
 
 
@@ -751,7 +747,7 @@ proc validate_supralumina {option_id} {
     # tabla Lisa
     set tablaLisa 408624195
 
-    rule S8
+    rule S5
     if {
 	$deschidere == 1 &&
 	$tablaId == $tablaLisa &&
@@ -761,7 +757,7 @@ proc validate_supralumina {option_id} {
 	verr ls min "[expr 100 + 2 * ($bToc + $cToc)] mm"
     }
     
-    rule S9
+    rule S6
     if {
 	$deschidere == 1 &&
 	$tablaId == $tablaLisa &&
@@ -771,24 +767,24 @@ proc validate_supralumina {option_id} {
 	verr hs min "[expr 100 + 2 * ($bToc + $cToc)] mm"
     }
     
-    rule S10
+    rule S7
     if {
 	$deschidere == 1 &&
 	$tablaId == $tablaLisa &&
 	$tipGrilaj == 0 &&
-	$ls > (1100 + 2 * ($bToc + $cToc))
+	$ls > $le
     } {
-	verr ls max "[expr 1100 + 2 * ($bToc + $cToc)] mm"
+	verr ls max "$le mm"
     }
     
-    rule S11
+    rule S8
     if {
 	$deschidere == 1 &&
 	$tablaId == $tablaLisa &&
 	$tipGrilaj == 0 &&
-	$hs > $he
+	$hs > (1100 + 2 * ($bToc + $cToc))
     } {
-	verr hs min "$he mm"
+	verr hs min "[expr (1100 + 2 * ($bToc + $cToc))] mm"
     }
 
     
@@ -806,23 +802,23 @@ proc validate_supralumina {option_id} {
 	set lg_max  [attribute_dbl $grilajStasId Lg_max]
 	set hg_max  [attribute_dbl $grilajStasId Hg_max]
 		    
-	rule S12
+	rule S9
 	if { $ls < ($lg_min + 2 * $bToc) } {
 	    verr ls min "[expr $lg_min + 2 * $bToc] mm"
 	}
 
-	rule S13
+	rule S10
 	if { $hs < ($hs_min + 2 * $bToc)} {
 	    verr hs min "[expr $hs_min + 2 * $bToc] mm"
 	}
 		    
-	rule S14
+	rule S11
 	if { $ls > ($lg_max + 2 * $bToc) } {
 	    verr ls max "[expr $lg_max + 2 * $bToc] mm"
 	}
 	
 	
-	rule S15
+	rule S12
 	if { $hs > ($hg_max * 8 + 2 * $bToc) } {
 	    verr hs max "[expr $hg_max * 8 + 2 * $bToc] mm"
 	}
