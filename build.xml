@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<!-- $Id: build.xml,v 1.9 2007/02/10 17:45:11 mihai Exp $ -->
+<!-- $Id: build.xml,v 1.10 2007/11/05 23:11:36 mihai Exp $ -->
 <project name="setumerp" default="application">
   <description>
     Targets for building and deploying the setumerp application.
@@ -238,6 +238,7 @@
       <fileset dir="${dist}" includes="reporting.jar"/>
       <fileset dir="${dist}" includes="factory.jar"/>
       <fileset dir="${dist}" includes="biz.jar"/>
+      <fileset dir="${dist}" includes="rules.jar"/>
       <fileset dir="${library}">
 	<include name="jacl.jar"/>
 	<include name="tcljava.jar"/>

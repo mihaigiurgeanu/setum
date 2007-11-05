@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="iso-8859-2"?>
+
+<ejb-jar>
+  <description>
+    The data represantation of validation rules to be run by
+    script engines.
+  </description>
+  <display-name>Rules</display-name>
+
+  <enterprise-beans>
+    <entity>
+      <description>The description of a group of rules.</description>
+      <ejb-name>RulesSetEJB</ejb-name>
+      <local-home>ro.kds.erp.rules.RulesSetLocalHome</local-home>
+      <local>ro.kds.erp.rules.RulesSetLocal</local>
+      <ejb-class>ro.kds.erp.rules.RulesBean</ejb-class>
+      <persistence-type>Container</persistence-type>
+      <prim-key-class>java.lang.Integer</prim-key-class>
+      <reentrant>false</reentrant>
+      <cmp-version>2.x</cmp-version>
+      <abstract-schema-name>RulesSet</abstract-schema-name>
+      <cmp-field>
+	<field-name>id</field-name>
+      </cmp-field>
+
+
+    </entity>
+  </enterprise-beans>
+</ejb-jar>

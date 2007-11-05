@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="iso-8859-2"?>
+<!--
+
+The rules server component manages sets of rules to be accessed by
+different rules validation engines.
+
+The rules have a processor that defines the kind of processor to use
+for evaluating the rule, a condition, a message, a message param, 
+a rule name and a rule set (for example, we have the rules set for
+validating data for a certain business object).
+
+-->
+
+<class>
+  
+  <package>ro.kds.erp.biz.basic</package>
+  <name>RulesServer</name>
+
+  <field>
+    <name>ruleId</name>
+    <type>Integer</type>
+  </field>
+
+  <field>
+    <name>processor</name>
+    <type>String</type>
+    <!-- the processor to process this rule -->
+  </field>
+
+  <field>
+    <name>condition</name>
+    <type>String</type>
+  </field>
+
+  <field>
+    <name>message</name>
+    <type>String</type>
+    <!-- the message to be displayed if the condition is true -->
+    <!-- is usually a message resource for locating a localized text -->
+  </field>
+
+  <field>
+    <name>messageParam</name>
+    <type>String</type>
+    <!-- unlocalized message to be displayed in completion of the localized message -->
+  </field>
+
+  <field>
+    <name>isError</name>
+    <type>Boolean</type>
+  </field>
+
+  <subforms>
+    <subform name="set"/>
+    <subform name="rule"/>
+  </subforms>
+
+  <services> 
+    <method returnType="standard">
+      <name>loadSets</name>
+      <params/>
+    </method>
+    <method returnType="standard">
+	<name>loadRules</name>
+	<params/>
+    </method>
+  </services>
+</class>
