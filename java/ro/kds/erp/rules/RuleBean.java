@@ -5,6 +5,10 @@ import javax.ejb.EntityContext;
 import javax.ejb.EntityBean;
 import javax.ejb.RemoveException;
 import java.rmi.RemoteException;
+import javax.ejb.CreateException;
+import org.objectweb.util.monolog.api.BasicLevel;
+import org.objectweb.util.monolog.api.Logger;
+import org.objectweb.jonas.common.Log;
 
 /**
  * <code>Rule</code> bean implementation.

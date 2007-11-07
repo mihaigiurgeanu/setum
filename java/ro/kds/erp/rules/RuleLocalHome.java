@@ -1,6 +1,8 @@
 package ro.kds.erp.rules;
 
 import javax.ejb.EJBLocalHome;
+import javax.ejb.CreateException;
+import javax.ejb.FinderException;
 
 /**
  * Describe interface RuleLocalHome here.

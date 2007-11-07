@@ -29,7 +29,7 @@ public abstract class RulesSetBean implements EntityBean {
 
 
     public Integer ejbCreate() throws CreateException {
-	logger.log(BasiclLevel.DEBUG, "");
+	logger.log(BasicLevel.DEBUG, "");
 	return null;
     }
 
