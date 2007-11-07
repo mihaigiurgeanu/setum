@@ -40,6 +40,7 @@
   <!-- Settings submenus -->
   <rdf:Seq rdf:about="http://www.kds.ro/erp/modules/settings">
     <rdf:li rdf:resource="http://www.kds.ro/erp/modules/settings/valuelists"/>
+    <rdf:li rdf:resource="http://www.kds.ro/erp/modules/settings/rules"/>
   </rdf:Seq>
 
   <!-- Products toplevel menu -->
@@ -185,7 +186,11 @@
     <modules:xulfile>value_lists.xul</modules:xulfile>
   </rdf:Description>
 
-
+  <rdf:Description rdf:about="http://www.kds.ro/erp/modules/settings/rules">
+    <modules:displayName>Reguli</modules:displayName>
+    <modules:description>Administrare reguli validare</modules:description>
+    <modules:xulfile>rules.xul</modules:xulfile>
+  </rdf:Description>
 
 
   <!-- edit-fereastra -->

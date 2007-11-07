@@ -26,3 +26,4 @@ public interface RuleLocal extends EJBLocalObject {
     public Boolean getErrorFlag();
     public void setErrorFlag(Boolean error);
 }
+

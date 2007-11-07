@@ -17,14 +17,14 @@ validating data for a certain business object).
   <name>RulesServer</name>
 
   <field>
-    <name>ruleId</name>
-    <type>Integer</type>
+    <name>setName</name>
+    <type>String</type>
   </field>
 
+
   <field>
-    <name>processor</name>
+    <name>ruleName</name>
     <type>String</type>
-    <!-- the processor to process this rule -->
   </field>
 
   <field>
@@ -51,7 +51,6 @@ validating data for a certain business object).
   </field>
 
   <subforms>
-    <subform name="set"/>
     <subform name="rule"/>
   </subforms>
 
@@ -61,8 +60,8 @@ validating data for a certain business object).
       <params/>
     </method>
     <method returnType="standard">
-	<name>loadRules</name>
-	<params/>
+      <name>loadRules</name>
+      <params/>
     </method>
   </services>
 </class>

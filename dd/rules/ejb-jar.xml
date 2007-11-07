@@ -13,7 +13,7 @@
       <ejb-name>RulesSetEJB</ejb-name>
       <local-home>ro.kds.erp.rules.RulesSetLocalHome</local-home>
       <local>ro.kds.erp.rules.RulesSetLocal</local>
-      <ejb-class>ro.kds.erp.rules.RulesBean</ejb-class>
+      <ejb-class>ro.kds.erp.rules.RulesSetBean</ejb-class>
       <persistence-type>Container</persistence-type>
       <prim-key-class>java.lang.Integer</prim-key-class>
       <reentrant>false</reentrant>
@@ -22,8 +22,68 @@
       <cmp-field>
 	<field-name>id</field-name>
       </cmp-field>
+      <cmp-field>
+	<field-name>name</field-name>
+      </cmp-field>
+      <primkey-field>id</primkey-field>
+    </entity>
 
 
+    <entity>
+      <description>A rule contains the condition to be
+      executed for a business validation, the rule
+      message (if the condition is true) and a flag
+      specifying if the condition evaluates to true represents
+      an error or not.</description>
+
+      <ejb-name>RuleEJB</ejb-name>
+      <local-home>ro.kds.erp.rules.RuleLocalHome</local-home>
+      <local>ro.kds.erp.rules.RuleLocal</local>
+      <ejb-class>ro.kds.erp.rules.RuleBean</ejb-class>
+      <persistence-type>Container</persistence-type>
+      <prim-key-class>java.lang.Integer</prim-key-class>
+      <reentrant>false</reentrant>
+      <abstract-schema-name>Rule</abstract-schema-name>
+      <cmp-field>
+	<field-name>id</field-name>
+      </cmp-field>
+      <cmp-field>
+	<field-name>name</field-name>
+      </cmp-field>
+      <cmp-field>
+	<field-name>condition</field-name>
+      </cmp-field>
+      <cmp-field>
+	<field-name>message</field-name>
+      </cmp-field>
+      <cmp-field>
+	<field-name>errorFlag</field-name>
+      </cmp-field>
     </entity>
   </enterprise-beans>
+
+
+  <relationships>
+    <ejb-relation>
+      <description>The rules set includes 0 to many rules.</description>
+      <ejb-relation-name>RulesSet_Rules</ejb-relation-name>
+      <ejb-relationship-role>
+	<ejb-relationship-role-name>RulesSetOfRules</ejb-relationship-role-name>
+	<multiplicity>One</multiplicity>
+	<relationship-role-source><ejb-name>RulesSetEJB</ejb-name></relationship-role-source>
+	<cmr-field>
+	  <cmr-field-name>rules</cmr-field-name>
+	  <cmr-field-type>java.util.Collection</cmr-field-type>
+	</cmr-field>
+      </ejb-relationship-role>
+
+      <ejb-relationship-role>
+	<ejb-relationship-role-name>RuleInTheRulesSet</ejb-relationship-role-name>
+	<multiplicity>Many</multiplicity>
+	<relationship-role-source>
+	  <ejb-name>RuleEJB</ejb-name>
+	</relationship-role-source>
+      </ejb-relationship-role>
+    </ejb-relation>
+  </relationships>
 </ejb-jar>
