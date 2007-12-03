@@ -1,5 +1,6 @@
 <?xml version="1.0"?>
 <locatingRules xmlns="http://thaiopensource.com/ns/locating-rules/1.0">
+  <uri resource="jonas-ejb-jar.xml" uri="../../../../schemas/jonas-ejb-jar_4_3.rnc"/>
   <uri resource="ejb-jar.xml" uri="../../../../schemas/ejb-jar_2_1.rnc"/>
   <uri resource="ejb-jar.xml" uri="../../../../schemas/ejb-jar_2_1.rnc"/>
 </locatingRules>

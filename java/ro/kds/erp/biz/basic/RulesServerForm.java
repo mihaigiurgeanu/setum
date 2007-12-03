@@ -32,7 +32,7 @@ public class RulesServerForm implements Serializable {
     String condition;
     String message;
     String messageParam;
-    Boolean isError;
+    Boolean errorFlag;
 
     public RulesServerForm() {
 
@@ -57,7 +57,7 @@ public class RulesServerForm implements Serializable {
 
 
 
-       this.isError = new Boolean(false);
+       this.errorFlag = new Boolean(false);
 
 
 
@@ -138,18 +138,18 @@ public class RulesServerForm implements Serializable {
 	}
     }
 
-    public void setIsError(Boolean newIsError) {
-        this.isError = newIsError;
+    public void setErrorFlag(Boolean newErrorFlag) {
+        this.errorFlag = newErrorFlag;
     }
 
-    public Boolean getIsError() {
-        return isError;
+    public Boolean getErrorFlag() {
+        return errorFlag;
     }
 
-    public void readIsError(Map attributes) {
-	AttributeLocal a = (AttributeLocal)attributes.get("isError");
+    public void readErrorFlag(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("errorFlag");
 	if(a != null) {
-	    this.setIsError(a.getBoolValue());
+	    this.setErrorFlag(a.getBoolValue());
 	}
     }
 

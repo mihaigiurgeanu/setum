@@ -48,4 +48,7 @@
     <ejb>biz.jar</ejb>
   </module>
 
+  <module>
+    <ejb>rules.jar</ejb>
+  </module>
 </application>

@@ -19,6 +19,7 @@ import java.util.Collection;
 public interface RulesSetLocal extends EJBLocalObject {
 
     public Integer getId();
+    public void setId(Integer id);
 
     public String getName();
     public void setName(String name);

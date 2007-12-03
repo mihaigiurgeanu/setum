@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="iso-8859-2"?>
 
-<ejb-jar>
+<ejb-jar xmlns="http://java.sun.com/xml/ns/j2ee" version="2.1">
   <description>
     The data represantation of validation rules to be run by
     script engines.

@@ -34,7 +34,7 @@ public interface RulesServer extends EJBObject {
     public ResponseBean updateCondition(String newCondition) throws RemoteException;
     public ResponseBean updateMessage(String newMessage) throws RemoteException;
     public ResponseBean updateMessageParam(String newMessageParam) throws RemoteException;
-    public ResponseBean updateIsError(Boolean newIsError) throws RemoteException;
+    public ResponseBean updateErrorFlag(Boolean newErrorFlag) throws RemoteException;
 
 
     public ResponseBean loadSets (

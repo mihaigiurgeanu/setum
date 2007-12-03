@@ -40,7 +40,8 @@ public abstract class RulesSetBean implements EntityBean {
 
 
     abstract public Integer getId();
-    
+    abstract public void setId(Integer id);
+
     abstract public String getName();
     abstract public void setName(String name);
 

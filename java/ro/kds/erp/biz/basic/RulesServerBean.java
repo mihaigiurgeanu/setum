@@ -461,13 +461,13 @@ public abstract class RulesServerBean
 	computeCalculatedFields(r);
 	return r;
     }
-    public ResponseBean updateIsError(Boolean isError) {
+    public ResponseBean updateErrorFlag(Boolean errorFlag) {
         ResponseBean r = new ResponseBean();
-	Boolean oldVal = form.getIsError();
-	form.setIsError(isError);
+	Boolean oldVal = form.getErrorFlag();
+	form.setErrorFlag(errorFlag);
 	r.addRecord();
-	r.addField("isError", isError); // for number format
-	Script script = TclFileScript.loadScript(getScriptPrefix() + ".isError");
+	r.addField("errorFlag", errorFlag); // for number format
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".errorFlag");
 	if(script.loaded()) {
 	   try {
 		script.setVar(LOGIC_VARNAME, this, this.getClass());
@@ -481,7 +481,7 @@ public abstract class RulesServerBean
 		getFieldsFromScript(script, r); // add all the changed
 						// fields to the response also
 	   } catch (ScriptErrorException e) {
-	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the isError", e);
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the errorFlag", e);
            }
         }
 	computeCalculatedFields(r);
@@ -576,7 +576,7 @@ public abstract class RulesServerBean
 	r.addField("condition", form.getCondition());
 	r.addField("message", form.getMessage());
 	r.addField("messageParam", form.getMessageParam());
-	r.addField("isError", form.getIsError());
+	r.addField("errorFlag", form.getErrorFlag());
 	loadValueLists(r);
     }
 
@@ -622,9 +622,9 @@ public abstract class RulesServerBean
             logger.log(BasicLevel.DEBUG, e);
         }
 	try {
-	    s.setVar("isError", form.getIsError(), Boolean.class);
+	    s.setVar("errorFlag", form.getErrorFlag(), Boolean.class);
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not set the value of field: isError from the script");
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: errorFlag from the script");
             logger.log(BasicLevel.DEBUG, e);
         }
     }
@@ -691,14 +691,14 @@ public abstract class RulesServerBean
             logger.log(BasicLevel.DEBUG, e);
         }
 	try {
-	    field = s.getVar("isError", Boolean.class);
-	    if(!field.equals(form.getIsError())) {
-	        logger.log(BasicLevel.DEBUG, "Field isError modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
-	        form.setIsError((Boolean)field);
-	        r.addField("isError", (Boolean)field);
+	    field = s.getVar("errorFlag", Boolean.class);
+	    if(!field.equals(form.getErrorFlag())) {
+	        logger.log(BasicLevel.DEBUG, "Field errorFlag modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setErrorFlag((Boolean)field);
+	        r.addField("errorFlag", (Boolean)field);
 	    }
 	} catch (ScriptErrorException e) {
-	    logger.log(BasicLevel.WARN, "Can not get the value of field: isError from the script");
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: errorFlag from the script");
             logger.log(BasicLevel.DEBUG, e);
         }
     }
