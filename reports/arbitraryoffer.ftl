@@ -189,173 +189,63 @@
 		</fo:block>
 		<fo:table>
 
-		<fo:table-column column-number="1" column-width="40%"/><!-- nume camp -->
-		<fo:table-column column-number="2" column-width="60%"/><!-- continutul campului -->
+		<fo:table-column column-number="1" column-width="25%"/>
+		<fo:table-column column-number="2" column-width="25%"/>
+		<fo:table-column column-number="3" column-width="25%"/>
+		<fo:table-column column-number="4" column-width="25%"/>
 
 		<fo:table-body>
 
 		<fo:table-row>
-		<fo:table-cell column-number="1"><fo:block>Material:</fo:block></fo:table-cell>
-		<fo:table-cell column-number="2">
-		<fo:block>
-			${search(.node?parent, "material", .node["child::field[attribute::name='material']"])?cap_first}
-		</fo:block>
-		</fo:table-cell>
+
+		<fo:table-cell column-number="1"><fo:block>Material: ${search(.node?parent, "material", .node["child::field[attribute::name='material']"])?cap_first}</fo:block></fo:table-cell>
+		<fo:table-cell column-number="2"><fo:block>Nr canate:${.node["child::field[attribute::name='k']"]}</fo:block></fo:table-cell>
+		<fo:table-cell column-number="3"><fo:block>Lg = ${.node["child::field[attribute::name='lg']"]}</fo:block></fo:table-cell>
+		<fo:table-cell column-number="4"><fo:block>Hg = ${.node["child::field[attribute::name='hg']"]}</fo:block></fo:table-cell>
+
 		</fo:table-row>
 
 		<fo:table-row>
-		<fo:table-cell column-number="1"><fo:block>Nr canate:</fo:block></fo:table-cell>
-		<fo:table-cell column-number="2"><fo:block>${.node["child::field[attribute::name='k']"]}</fo:block></fo:table-cell>
+		<fo:table-cell column-number="1"><fo:block>Le = ${.node["child::field[attribute::name='le']"]}</fo:block></fo:table-cell>
+		<fo:table-cell column-number="2"><fo:block>He = ${.node["child::field[attribute::name='he']"]}</fo:block></fo:table-cell>
+		<fo:table-cell column-number="3"><fo:block>L curent = ${.node["child::field[attribute::name='lCurrent']"]}</fo:block></fo:table-cell>
 		</fo:table-row>
 
 		<fo:table-row>
-		<fo:table-cell column-number="1"><fo:block>Lg:</fo:block></fo:table-cell>
-		<fo:table-cell column-number="2"><fo:block>${.node["child::field[attribute::name='lg']"]}</fo:block></fo:table-cell>
+		<fo:table-cell column-number="1"><fo:block>L util = ${.node["child::field[attribute::name='lUtil']"]}</fo:block></fo:table-cell>
+		<fo:table-cell column-number="2"><fo:block>H util = ${.node["child::field[attribute::name='hUtil']"]}</fo:block></fo:table-cell>
+		<fo:table-cell column-number="3"><fo:block>L foaie = ${.node["child::field[attribute::name='lFoaie']"]}</fo:block></fo:table-cell>
+		<fo:table-cell column-number="4"><fo:block>H foaie = ${.node["child::field[attribute::name='hFoaie']"]}</fo:block></fo:table-cell>
+
 		</fo:table-row>
 
 		<fo:table-row>
-		<fo:table-cell column-number="1"><fo:block>Hg:</fo:block></fo:table-cell>
-		<fo:table-cell column-number="2"><fo:block>${.node["child::field[attribute::name='hg']"]}</fo:block></fo:table-cell>
+		<fo:table-cell column-number="1"><fo:block>Foaie interior: ${search(.node?parent, "intFoil", .node["child::field[attribute::name='intFoil']"])?cap_first}</fo:block></fo:table-cell>
+		<fo:table-cell column-number="2"><fo:block>Foaie exterior: ${search(.node?parent, "extFoil", .node["child::field[attribute::name='extFoil']"])?cap_first}</fo:block></fo:table-cell>
+		<fo:table-cell column-number="3"><fo:block>Izolatie: ${search(.node?parent, "isolation", .node["child::field[attribute::name='isolation']"])?cap_first}</fo:block></fo:table-cell>
+
 		</fo:table-row>
 
 		<fo:table-row>
-		<fo:table-cell column-number="1"><fo:block>Le:</fo:block></fo:table-cell>
-		<fo:table-cell column-number="2"><fo:block>${.node["child::field[attribute::name='le']"]}</fo:block></fo:table-cell>
+		<fo:table-cell column-number="1"><fo:block></fo:block>Deschidere spre: ${search(.node?parent, "openingDir", .node["child::field[attribute::name='openingDir']"])?cap_first}</fo:table-cell>
+		<fo:table-cell column-number="2"><fo:block>Deschiderea in: ${search(.node?parent, "openingSide", .node["child::field[attribute::name='openingSide']"])?cap_first}</fo:block></fo:table-cell>
+		<fo:table-cell column-number="3"><fo:block>Pozitionare foaie: ${search(.node?parent, "foilPosition", .node["child::field[attribute::name='foilPosition']"])?cap_first}</fo:block></fo:table-cell>
 		</fo:table-row>
 
 		<fo:table-row>
-		<fo:table-cell column-number="1"><fo:block>He:</fo:block></fo:table-cell>
-		<fo:table-cell column-number="2"><fo:block>${.node["child::field[attribute::name='he']"]}</fo:block></fo:table-cell>
+		<fo:table-cell column-number="1"><fo:block>Tip toc: ${search(.node?parent, "frameType", .node["child::field[attribute::name='frameType']"])?cap_first}</fo:block></fo:table-cell>
+		<fo:table-cell column-number="2"><fo:block>L toc = ${.node["child::field[attribute::name='lFrame']"]}</fo:block></fo:table-cell>
+		<fo:table-cell column-number="3"><fo:block>b toc = ${.node["child::field[attribute::name='bFrame']"]}</fo:block></fo:table-cell>
+		<fo:table-cell column-number="4"><fo:block>c toc = ${.node["child::field[attribute::name='cFrame']"]}</fo:block></fo:table-cell>
 		</fo:table-row>
 
 		<fo:table-row>
-		<fo:table-cell column-number="1"><fo:block>L curent:</fo:block></fo:table-cell>
-		<fo:table-cell column-number="2"><fo:block>${.node["child::field[attribute::name='lCurrent']"]}</fo:block></fo:table-cell>
+		<fo:table-cell column-number="1"><fo:block>Tip prag: ${search(.node?parent, "tresholdType", .node["child::field[attribute::name='tresholdType']"])?cap_first}</fo:block></fo:table-cell>
+		<fo:table-cell column-number="2"><fo:block>L prag = ${.node["child::field[attribute::name='lTreshold']"]}</fo:block></fo:table-cell>
+		<fo:table-cell column-number="3"><fo:block>H prag = ${.node["child::field[attribute::name='hTreshold']"]}</fo:block></fo:table-cell>
+		<fo:table-cell column-number="4"><fo:block>C prag = ${.node["child::field[attribute::name='cTreshold']"]}</fo:block></fo:table-cell>
+
 		</fo:table-row>
-
-		<fo:table-row>
-		<fo:table-cell column-number="1"><fo:block>L util:</fo:block></fo:table-cell>
-		<fo:table-cell column-number="2"><fo:block>${.node["child::field[attribute::name='lUtil']"]}</fo:block></fo:table-cell>
-		</fo:table-row>
-
-		<fo:table-row>
-		<fo:table-cell column-number="1"><fo:block>H util:</fo:block></fo:table-cell>
-		<fo:table-cell column-number="2"><fo:block>${.node["child::field[attribute::name='hUtil']"]}</fo:block></fo:table-cell>
-		</fo:table-row>
-
-		<fo:table-row>
-		<fo:table-cell column-number="1"><fo:block>L foaie:</fo:block></fo:table-cell>
-		<fo:table-cell column-number="2"><fo:block>${.node["child::field[attribute::name='lFoaie']"]}</fo:block></fo:table-cell>
-		</fo:table-row>
-
-		<fo:table-row>
-		<fo:table-cell column-number="1"><fo:block>Hfoaie:</fo:block></fo:table-cell>
-		<fo:table-cell column-number="2"><fo:block>${.node["child::field[attribute::name='hFoaie']"]}</fo:block></fo:table-cell>
-		</fo:table-row>
-
-		<fo:table-row>
-		<fo:table-cell column-number="1"><fo:block>Foaie interior:</fo:block></fo:table-cell>
-		<fo:table-cell column-number="2">
-		<fo:block>
-			${search(.node?parent, "intFoil", .node["child::field[attribute::name='intFoil']"])?cap_first}
-		</fo:block>
-		</fo:table-cell>
-		</fo:table-row>
-
-		<fo:table-row>
-		<fo:table-cell column-number="1"><fo:block>Foaie exterior:</fo:block></fo:table-cell>
-		<fo:table-cell column-number="2">
-		<fo:block>
-			${search(.node?parent, "extFoil", .node["child::field[attribute::name='extFoil']"])?cap_first}
-		</fo:block>
-		</fo:table-cell>
-		</fo:table-row>
-
-		<fo:table-row>
-		<fo:table-cell column-number="1"><fo:block>Izolatie:</fo:block></fo:table-cell>
-		<fo:table-cell column-number="2">
-		<fo:block>
-			${search(.node?parent, "isolation", .node["child::field[attribute::name='isolation']"])?cap_first}
-		</fo:block>
-		</fo:table-cell>
-		</fo:table-row>
-
-		<fo:table-row>
-		<fo:table-cell column-number="1"><fo:block>Deschidere spre:</fo:block></fo:table-cell>
-		<fo:table-cell column-number="2">
-		<fo:block>
-			${search(.node?parent, "openingDir", .node["child::field[attribute::name='openingDir']"])?cap_first}
-		</fo:block>
-		</fo:table-cell>
-		</fo:table-row>
-
-		<fo:table-row>
-		<fo:table-cell column-number="1"><fo:block>Deschiderea in:</fo:block></fo:table-cell>
-		<fo:table-cell column-number="2">
-		<fo:block>
-			${search(.node?parent, "openingSide", .node["child::field[attribute::name='openingSide']"])?cap_first}
-		</fo:block>
-		</fo:table-cell>
-		</fo:table-row>
-
-		<fo:table-row>
-		<fo:table-cell column-number="1"><fo:block>Tip toc:</fo:block></fo:table-cell>
-		<fo:table-cell column-number="2">
-		<fo:block>
-			${search(.node?parent, "frameType", .node["child::field[attribute::name='frameType']"])?cap_first}
-		</fo:block>
-		</fo:table-cell>
-		</fo:table-row>
-
-
-		<fo:table-row>
-		<fo:table-cell column-number="1"><fo:block>L toc:</fo:block></fo:table-cell>
-		<fo:table-cell column-number="2"><fo:block>${.node["child::field[attribute::name='lFrame']"]}</fo:block></fo:table-cell>
-		</fo:table-row>
-
-		<fo:table-row>
-		<fo:table-cell column-number="1"><fo:block>b toc:</fo:block></fo:table-cell>
-		<fo:table-cell column-number="2"><fo:block>${.node["child::field[attribute::name='bFrame']"]}</fo:block></fo:table-cell>
-		</fo:table-row>
-
-		<fo:table-row>
-		<fo:table-cell column-number="1"><fo:block>c toc:</fo:block></fo:table-cell>
-		<fo:table-cell column-number="2"><fo:block>${.node["child::field[attribute::name='cFrame']"]}</fo:block></fo:table-cell>
-		</fo:table-row>
-
-		<fo:table-row>
-		<fo:table-cell column-number="1"><fo:block>Pozitionare foaie:</fo:block></fo:table-cell>
-		<fo:table-cell column-number="2">
-		<fo:block>
-			${search(.node?parent, "foilPosition", .node["child::field[attribute::name='foilPosition']"])?cap_first}
-		</fo:block>
-		</fo:table-cell>
-		</fo:table-row>
-
-		<fo:table-row>
-		<fo:table-cell column-number="1"><fo:block>Tip prag:</fo:block></fo:table-cell>
-		<fo:table-cell column-number="2">
-		<fo:block>
-			${search(.node?parent, "tresholdType", .node["child::field[attribute::name='tresholdType']"])?cap_first}
-		</fo:block>
-		</fo:table-cell>
-		</fo:table-row>
-
-		<fo:table-row>
-		<fo:table-cell column-number="1"><fo:block>L prag:</fo:block></fo:table-cell>
-		<fo:table-cell column-number="2"><fo:block>${.node["child::field[attribute::name='lTreshold']"]}</fo:block></fo:table-cell>
-		</fo:table-row>
-
-		<fo:table-row>
-		<fo:table-cell column-number="1"><fo:block>H prag:</fo:block></fo:table-cell>
-		<fo:table-cell column-number="2"><fo:block>${.node["child::field[attribute::name='hTreshold']"]}</fo:block></fo:table-cell>
-		</fo:table-row>
-
-		<fo:table-row>
-		<fo:table-cell column-number="1"><fo:block>C prag:</fo:block></fo:table-cell>
-		<fo:table-cell column-number="2"><fo:block>${.node["child::field[attribute::name='cTreshold']"]}</fo:block></fo:table-cell>
-		</fo:table-row>
-
 
 		</fo:table-body>
 		</fo:table>
