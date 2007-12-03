@@ -46,7 +46,7 @@ validating data for a certain business object).
   </field>
 
   <field>
-    <name>isError</name>
+    <name>errorFlag</name>
     <type>Boolean</type>
   </field>
 
@@ -65,3 +65,4 @@ validating data for a certain business object).
     </method>
   </services>
 </class>
+
