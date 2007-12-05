@@ -1038,6 +1038,44 @@
   </servlet-mapping>
 
 
+
+
+  <servlet>
+    <description>Adaugare/editare comenzi</description>
+    <servlet-name>RulesServer</servlet-name>
+    <servlet-class>ro.kds.erp.web.SimpleCallDispatcherServlet</servlet-class>
+    <init-param>
+      <description>The name of the session attribute holding the session bean.</description>
+      <param-name>sessionName</param-name>
+      <param-value>forms.Rules</param-value>
+    </init-param>
+    <init-param>
+      <description>The jndi name to refer to the session bean EJB</description>
+      <param-name>sessionBean</param-name>
+      <param-value>ejb/RulesServerHome</param-value>
+    </init-param>
+    <init-param>
+      <description>The class name of the remote interface</description>
+      <param-name>sessionClass</param-name>
+      <param-value>ro.kds.erp.biz.basic.RulesServer</param-value>
+    </init-param>
+    <init-param>
+      <description>The class name of the home interface</description>
+      <param-name>sessionHome</param-name>
+      <param-value>ro.kds.erp.biz.basic.RulesServerHome</param-value>
+    </init-param>
+    
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>RulesServer</servlet-name>
+    <url-pattern>/rules.do</url-pattern>    
+  </servlet-mapping>
+
+
+
+
+
+
   <servlet>
     <description>Report in the XSLFO for the arbitrary offer</description>
     <display-name>XSLOfferReport</display-name>
@@ -1379,6 +1417,14 @@
     <home>ro.kds.erp.biz.PreferencesHome</home>
     <remote>ro.kds.erp.biz.Preferences</remote>
   </ejb-ref>
+  <ejb-ref>
+    <description>Used in the RulesServer servlet</description>
+    <ejb-ref-name>ejb/RulesServerHome</ejb-ref-name>
+    <ejb-ref-type>Session</ejb-ref-type>
+    <home>ro.kds.erp.biz.basic.RulesServerHome</home>
+    <remote>ro.kds.erp.biz.basic.RulesServer</remote>
+  </ejb-ref>
+
   <session-config>
     <session-timeout>30</session-timeout>
   </session-config>

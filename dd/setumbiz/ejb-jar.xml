@@ -1545,6 +1545,55 @@
     </session>
 
 
+
+
+    <session>
+      <description>Implements the rules management logic</description>
+      <ejb-name>RulesServerEJB</ejb-name>
+      <home>ro.kds.erp.biz.basic.RulesServerHome</home>
+      <remote>ro.kds.erp.biz.basic.RulesServer</remote>
+      <ejb-class>ro.kds.erp.biz.RulesServerImplementation</ejb-class>
+      <session-type>Stateful</session-type>
+      <transaction-type>Container</transaction-type>
+      <env-entry>
+	<description>The folder under script directory where the
+	scripts for this business logic are located.</description>
+	<env-entry-name>script.prefix</env-entry-name>
+	<env-entry-type>java.lang.String</env-entry-type>
+	<env-entry-value>Rules</env-entry-value>
+      </env-entry>
+      <ejb-ref>
+        <description>Required by the scripting engine.</description>
+        <ejb-ref-name>ejb/PreferencesEJB</ejb-ref-name>
+        <ejb-ref-type>Session</ejb-ref-type>
+        <home>ro.kds.erp.biz.PreferencesHome</home>
+        <remote>ro.kds.erp.biz.Preferences</remote>
+      </ejb-ref>
+      <ejb-local-ref>
+	<ejb-ref-name>ejb/RulesSetHome</ejb-ref-name>
+	<ejb-ref-type>Entity</ejb-ref-type>
+	<local-home>ro.kds.erp.rules.RulesSetLocalHome</local-home>
+	<local>ro.kds.erp.rules.RulesSetLocal</local>
+	<ejb-link>rules.jar#RulesSetEJB</ejb-link>
+      </ejb-local-ref>
+      <ejb-local-ref>
+	<ejb-ref-name>ejb/RuleHome</ejb-ref-name>
+	<ejb-ref-type>Entity</ejb-ref-type>
+	<local-home>ro.kds.erp.rules.RuleLocalHome</local-home>
+	<local>ro.kds.erp.rules.RuleLocal</local>
+	<ejb-link>rules.jar#RuleEJB</ejb-link>
+      </ejb-local-ref>
+      <ejb-local-ref>
+	<ejb-ref-name>ejb/ServiceFactory</ejb-ref-name>
+	<ejb-ref-type>Session</ejb-ref-type>
+	<local-home>ro.kds.erp.biz.ServiceFactoryLocalHome</local-home>
+	<local>ro.kds.erp.biz.ServiceFactoryLocal</local>
+	<ejb-link>factory.jar#ServiceFactoryEJB</ejb-link>
+      </ejb-local-ref>
+    </session>
+
+
+
   </enterprise-beans>
 
 
@@ -1680,7 +1729,23 @@
 	<ejb-name>OrdersEJB</ejb-name>
 	<method-name>removeItem</method-name>
       </method>
-
+      <method>
+	<ejb-name>RulesServerEJB</ejb-name>
+	<method-name>saveFormData</method-name>
+      </method>
+      <method>
+	<ejb-name>RulesServerEJB</ejb-name>
+	<method-name>saveRuleData</method-name>
+      </method>
+      <method>
+	<ejb-name>RulesServerEJB</ejb-name>
+	<method-name>removeSet</method-name>
+      </method>
+      <method>
+	<ejb-name>RulesServerEJB</ejb-name>
+	<method-name>removeRule</method-name>
+      </method>
+      
       <trans-attribute>Required</trans-attribute>
     </container-transaction>
 
@@ -1789,6 +1854,10 @@
       </method>
       <method>
 	<ejb-name>UsaMetalicaCategoryManagerEJB</ejb-name>
+	<method-name>*</method-name>
+      </method>
+      <method>
+	<ejb-name>RulesServerEJB</ejb-name>
 	<method-name>*</method-name>
       </method>
       <trans-attribute>Supports</trans-attribute>

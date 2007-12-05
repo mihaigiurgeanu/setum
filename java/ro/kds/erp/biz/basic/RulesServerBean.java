@@ -566,6 +566,84 @@ public abstract class RulesServerBean
         }
 	return r;
     }
+    /**
+     * Generated implementation of the removeSet service. It will call
+     * the script ro.kds.erp.biz.basic.RulesServer.removeSet
+     * to execute the request.
+     * 
+     * The <code>ResponseBean</code> to be returned will be automatically populated with the
+     * fields modified by the script and the changes will be automatically added to the
+     * form bean.
+     *
+     * @return a <code>ResponseBean</code> containing the field values that were changed by
+     * the script and any of the fields added to it by the script.
+     * 
+     */
+    public ResponseBean removeSet (
+    ) {
+
+
+        ResponseBean r = new ResponseBean();
+        r.addRecord();
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".removeSet");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
+		script.setVar(FORM_VARNAME, form, RulesServerForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
+
+
+		
+		addFieldsToScript(script);
+		script.run();
+                getFieldsFromScript(script, r);
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for service removeSet", e);
+           }
+        }
+	return r;
+    }
+    /**
+     * Generated implementation of the removeRule service. It will call
+     * the script ro.kds.erp.biz.basic.RulesServer.removeRule
+     * to execute the request.
+     * 
+     * The <code>ResponseBean</code> to be returned will be automatically populated with the
+     * fields modified by the script and the changes will be automatically added to the
+     * form bean.
+     *
+     * @return a <code>ResponseBean</code> containing the field values that were changed by
+     * the script and any of the fields added to it by the script.
+     * 
+     */
+    public ResponseBean removeRule (
+    ) {
+
+
+        ResponseBean r = new ResponseBean();
+        r.addRecord();
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".removeRule");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
+		script.setVar(FORM_VARNAME, form, RulesServerForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
+
+
+		
+		addFieldsToScript(script);
+		script.run();
+                getFieldsFromScript(script, r);
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for service removeRule", e);
+           }
+        }
+	return r;
+    }
 
     /**
      * Get the fields stored internaly and adds them to the response.

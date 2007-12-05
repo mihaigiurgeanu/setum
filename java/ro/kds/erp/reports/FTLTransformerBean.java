@@ -62,7 +62,7 @@ public class FTLTransformerBean implements SessionBean {
      * Create a new session bean
      */
     public void ejbCreate() throws CreateException {
-	logger.log(BasicLevel.DEBUG, "");
+	//logger.log(BasicLevel.DEBUG, "");
     }
 
 

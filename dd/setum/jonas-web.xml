@@ -122,4 +122,8 @@
     <jndi-name>PreferencesHome</jndi-name>
   </jonas-ejb-ref>
 
+  <jonas-ejb-ref>
+    <ejb-ref-name>ejb/RulesServerHome</ejb-ref-name>
+    <jndi-name>RulesServerHome</jndi-name>
+  </jonas-ejb-ref>
 </jonas-web-app>

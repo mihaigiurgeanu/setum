@@ -63,6 +63,14 @@ validating data for a certain business object).
       <name>loadRules</name>
       <params/>
     </method>
+    <method returnType="standard">
+      <name>removeSet</name>
+      <params/>
+    </method>
+    <method returnType="standard">
+      <name>removeRule</name>
+      <params/>
+    </method>
   </services>
 </class>
 

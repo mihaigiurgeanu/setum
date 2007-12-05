@@ -277,4 +277,17 @@
       <jndi-name>SequenceHome</jndi-name>
     </jonas-ejb-ref>
   </jonas-session>
+
+
+
+  <jonas-session>
+    <ejb-name>RulesServerEJB</ejb-name>
+    <jndi-name>RulesServerHome</jndi-name>
+    <session-timeout>28800</session-timeout>
+    <jonas-ejb-ref>
+      <ejb-ref-name>ejb/PreferencesEJB</ejb-ref-name>
+      <jndi-name>PreferencesHome</jndi-name>
+    </jonas-ejb-ref>
+  </jonas-session>
+
 </jonas-ejb-jar>

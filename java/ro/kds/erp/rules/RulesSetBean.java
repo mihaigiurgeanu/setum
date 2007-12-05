@@ -48,8 +48,8 @@ public abstract class RulesSetBean implements EntityBean {
     abstract public Collection getRules();
     abstract public void setRules(Collection rules);
 
-    abstract public RulesSetLocal findByName(String name) throws FinderException;
-    
+    abstract public Collection ejbFindByName(String name) throws FinderException;
+    abstract public Collection ejbFindAll() throws FinderException;
 
     // Implementation of javax.ejb.EntityBean
 

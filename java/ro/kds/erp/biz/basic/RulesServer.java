@@ -41,4 +41,8 @@ public interface RulesServer extends EJBObject {
     ) throws RemoteException;
     public ResponseBean loadRules (
     ) throws RemoteException;
+    public ResponseBean removeSet (
+    ) throws RemoteException;
+    public ResponseBean removeRule (
+    ) throws RemoteException;
 }

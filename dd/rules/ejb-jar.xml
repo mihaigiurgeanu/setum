@@ -26,6 +26,24 @@
 	<field-name>name</field-name>
       </cmp-field>
       <primkey-field>id</primkey-field>
+      <query>
+	<description>Finds the rules set with a given name</description>
+	<query-method>
+	  <method-name>findByName</method-name>
+	  <method-params>
+	    <method-param>java.lang.String</method-param>
+	  </method-params>
+	</query-method>
+	<ejb-ql>SELECT OBJECT(s) FROM RulesSet s WHERE s.name LIKE ?1 ORDER BY s.name</ejb-ql>
+      </query>
+      <query>
+	<description>Retrieves all the sets from the database</description>
+	<query-method>
+	  <method-name>findAll</method-name>
+	  <method-params></method-params>
+	</query-method>
+	<ejb-ql>SELECT OBJECT(s) FROM RulesSet s ORDER BY s.name</ejb-ql>
+      </query>
     </entity>
 
 
@@ -59,7 +77,18 @@
       <cmp-field>
 	<field-name>errorFlag</field-name>
       </cmp-field>
+      <primkey-field>id</primkey-field>
+      <query>
+	<query-method>
+	  <method-name>findByName</method-name>
+	  <method-params>
+	    <method-param>java.lang.String</method-param>
+	  </method-params>
+	</query-method>
+	<ejb-ql>SELECT OBJECT(r) FROM Rule r WHERE r.name LIKE ?1 ORDER BY r.name</ejb-ql>
+      </query>
     </entity>
+
   </enterprise-beans>
 
 
@@ -86,4 +115,20 @@
       </ejb-relationship-role>
     </ejb-relation>
   </relationships>
+
+
+  <assembly-descriptor>
+    <container-transaction>
+      <description>Default behaviour is to support transactions</description>
+      <method>
+	<ejb-name>RulesSetEJB</ejb-name>
+	<method-name>*</method-name>
+      </method>
+      <method>
+	<ejb-name>RuleEJB</ejb-name>
+	<method-name>*</method-name>
+      </method>
+      <trans-attribute>Supports</trans-attribute>
+    </container-transaction>
+  </assembly-descriptor>
 </ejb-jar>

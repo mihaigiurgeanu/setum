@@ -100,7 +100,7 @@ Data-entry form for general purpose offers.
 	  <button label="Sterge produs selectat" command="remove-line"/>
 	  <button label="Salvare" command="command-save"/>
 	  <button label="PDF" command="command-pdf-report"/>
-	  <button label="Word" command="command-rtf-report"/>
+	  <!-- <button label="Word" command="command-rtf-report"/> -->
 	</hbox>
 	<hbox class="title">
 	  <label value="Detalii oferta" />

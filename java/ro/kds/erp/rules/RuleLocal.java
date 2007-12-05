@@ -13,7 +13,7 @@ import javax.ejb.EJBLocalObject;
  */
 public interface RuleLocal extends EJBLocalObject {
     public Integer getId();
-    public Integer setId();
+    public void setId(Integer id);
     
     public String getName();
     public void setName(String name);

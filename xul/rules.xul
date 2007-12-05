@@ -15,7 +15,6 @@
   <script src="js/treeutils.js"/>
   <script src="js/httpdata.js"/>
   <script src="js/formobject.js"/>
-  <script src="rules.js"/>
 
 
   <commandset>
@@ -47,7 +46,7 @@
 		style="border:thin outset white">
 	<hbox id="mainlisting.actions" class="mytoolbar">
 	  <button label="Adauga set" command="command-add_set"/>
-	  <button label="Sterge set" command="comand-remove_set"/>
+	  <button label="Sterge set" command="command-remove_set"/>
 	</hbox>
 	<hbox class="title">
 	  <label>Seturi de reguli</label>
@@ -111,7 +110,8 @@
 	  <treecols>
 	    <treecol id="rule.id" label="Id" flex="1" persist="ordinal width hidden"/>
 	    <treecol id="rule.name" label="Nume" flex="1" persist="ordinal width hidden"/>
-	    <treecol id="rule.condition" label="Nume" flex="1" persist="ordinal width hidden"/>
+	    <treecol id="rule.condition" label="Conditie" flex="1" persist="ordinal width hidden"/>
+	    <treecol id="rule.message" label="Mesaj" flex="1" persist="ordinal width hidden"/>
 	    <treecol id="rule.errorFlag" label="Eroare?" flex="1" persist="ordinal width hidden"/>
 	  </treecols>
 
@@ -125,14 +125,18 @@
       <tabpanel id="maintab.rule" orient="vertical"
 		style="border:thin outset white">
 	<hbox id="rule.actions" class="mytoolbar">
-	  <button label="Salveaza"/>
+	  <button label="Salveaza" command="command-save_rule"/>
 	</hbox>
 
 	<grid>
+	  <columns>
+	    <column/>
+	    <column flex="1"/>
+	  </columns>
 	  <rows>
 	    <row>
-	      <label control="name" value="Nume:"/>
-	      <textbox id="name"/>
+	      <label control="ruleName" value="Nume:"/>
+	      <textbox id="ruleName"/>
 	    </row>
 	    <row>
 	      <label control="condition" value="Conditie:"/>
@@ -140,9 +144,14 @@
 		       rows="4"/>
 	    </row>
 	    <row>
+	      <label control="message" value="Mesaj:"/>
+	      <textbox id="message" multiline="true" maxlength="4096"
+		       rows="4"/>
+	    </row>
+	    <row>
 	      <radiogroup id="errorFlag">
-		<radio id="errorFlag.0" value="0" label="Nu este eroare"/>
-		<radio id="errorFlag.1" value="1" label="Este eroare"/>
+		<radio id="errorFlag.false" value="false" label="Nu este eroare"/>
+		<radio id="errorFlag.true" value="true" label="Este eroare"/>
 	      </radiogroup>
 	    </row>
 	  </rows>
@@ -152,5 +161,7 @@
 
 
   </tabbox>
+
+  <script src="rules.js"/>
 
 </window>

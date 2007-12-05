@@ -9,6 +9,8 @@ import javax.ejb.CreateException;
 import org.objectweb.util.monolog.api.BasicLevel;
 import org.objectweb.util.monolog.api.Logger;
 import org.objectweb.jonas.common.Log;
+import javax.ejb.FinderException;
+import java.util.Collection;
 
 /**
  * <code>Rule</code> bean implementation.
@@ -47,6 +49,8 @@ public abstract class RuleBean implements EntityBean {
 
     public abstract Boolean getErrorFlag();
     public abstract void setErrorFlag(Boolean error);
+
+    abstract public Collection ejbFindByName(String name) throws FinderException;
 
     /**
      * Creates a new <code>RuleBean</code> instance.

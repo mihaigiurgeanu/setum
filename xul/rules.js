@@ -3,6 +3,7 @@
 // cache a reference to the maintab
 var maintab = document.getElementById("maintab");
 
+
 // The main tree
 var sets;
 var setsListing = document.getElementById('setsListing');
@@ -26,6 +27,7 @@ function load_rules() {
   var req = theForm.get_request();
   req.add("command", "loadRules");
   rules = load_records(req);
+
   rulesListing.view = make_treeview
     (rules,
      function(row, column) {
@@ -37,7 +39,7 @@ function load_rules() {
 
 
 function load_selected_set() {
-  var selid = sets.get_cell_text(setsListing.currentIndex, "sets.id");
+  var selid = sets[setsListing.currentIndex]["set.id"];
   var req = theForm.get_request();
   req.add("operation", "new-context");
   req.add("command", "loadFormData");
@@ -46,7 +48,7 @@ function load_selected_set() {
 }
 
 function load_selected_rule() {
-  var selid = sets.get_cell_text(rulesListing.currentIndex, "rules.id");
+  var selid = rules[rulesListing.currentIndex]["rule.id"];
   var req = theForm.get_request();
   req.add("command", "loadRuleData");
   req.add("param0", selid);
@@ -75,7 +77,7 @@ function on_add_rule() {
   var req = theForm.get_request();
   req.add("command", "newRuleData");
   theForm.post_request(req);
-  maintab.seletedIndex = 2;
+  maintab.selectedIndex = 2;
 }
 
 
@@ -85,6 +87,17 @@ function on_remove_set() {
   req.add("command", "removeSet");
   theForm.post_request(req);
   load_sets();
+
+  // clear the set details
+  rules = new Array();
+
+  rulesListing.view = make_treeview
+    (rules,
+     function(row, column) {
+      var col;
+      if(column.id) col = column.id; else col = column;
+      return rules[row][col];
+    });
 
   return true;
 }
@@ -111,6 +124,7 @@ function on_save_rule() {
   req.add("command", "saveRuleData");
   theForm.post_request(req);
   load_rules();
+  load_sets(); // the sets collection might be changed as well
   maintab.selectedIndex = 1;
 }
 
@@ -121,7 +135,7 @@ function on_save_rule() {
 var theForm = new FormObject();
 theForm.do_link = "/rules.do";
 
-theForm.text_fields = new Array("setName", "name", "condition");
+theForm.text_fields = new Array("setName", "ruleName", "condition", "message");
 theForm.combo_fields = new Array();
 theForm.radio_fields = new Array("errorFlag");
 theForm.hidden_fields = new Array();

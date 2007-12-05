@@ -3,6 +3,7 @@ package ro.kds.erp.rules;
 import javax.ejb.EJBLocalHome;
 import javax.ejb.CreateException;
 import javax.ejb.FinderException;
+import java.util.Collection;
 
 /**
  * The <code>LocalHome</code> interface of the <code>RulesSet</code>
@@ -17,5 +18,6 @@ import javax.ejb.FinderException;
 public interface RulesSetLocalHome extends EJBLocalHome {
     public RulesSetLocal create() throws CreateException;
     public RulesSetLocal findByPrimaryKey(Integer id) throws FinderException;
-    public RulesSetLocal findByName(String name) throws FinderException;
+    public Collection findByName(String name) throws FinderException;
+    public Collection findAll() throws FinderException;
 }
