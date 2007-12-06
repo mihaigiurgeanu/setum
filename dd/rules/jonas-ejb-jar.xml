@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="ISO-8859-15"?>
+
+<jonas-ejb-jar xmlns="http://www.objectweb.org/jonas/ns"
+	           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+<!--
+    xsi:schemaLocation="http://www.objectweb.org/jonas/ns
+	http://www.objectweb.org/jonas/ns/jonas-ejb-jar_4_0.xsd" 
+-->
+
+
+
+<jonas-entity>
+  <ejb-name>RulesSetEJB</ejb-name>
+  <jndi-name>RulesSetHome</jndi-name>
+  <jdbc-mapping>
+    <jndi-name>erpsetumdb</jndi-name>
+    <automatic-pk>true</automatic-pk>
+  </jdbc-mapping>
+</jonas-entity>
+
+<jonas-entity>
+  <ejb-name>RuleEJB</ejb-name>
+  <jndi-name>RuleHome</jndi-name>
+  <jdbc-mapping>
+    <jndi-name>erpsetumdb</jndi-name>
+    <automatic-pk>true</automatic-pk>
+  </jdbc-mapping>
+</jonas-entity>
+
+
+</jonas-ejb-jar>
