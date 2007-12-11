@@ -434,11 +434,18 @@ function process_validation(response) {
     if(response.viCount > 0) {
 	var msg = "";
 	for(var i = 0; i<response.viCount; i++) {
-	    msg += message(response.vi[i].subject);
-	    msg += ": ";
-	    msg += message(response.vi[i].message);
-	    msg += ": ";
-	    msg += response.vi[i].data;
+	    var msg_subject = message(response.vi[i].subject);
+	    var msg_text = message(response.vi[i].message);
+	    var msg_data = response.vi[i].data;
+	    if(msg_subject) {
+		msg += msg_subject;
+		msg += ": ";
+	    }
+	    if(msg_text) {
+		msg += msg_text;
+		msg += ": ";
+	    }
+	    msg += msg_data;
 	    msg += "\n\n";
 	}
 	alert(msg);

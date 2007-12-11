@@ -3,6 +3,7 @@ package ro.kds.erp.biz;
 import javax.ejb.EJBLocalObject;
 import ro.kds.erp.data.ProductLocal;
 import ro.kds.erp.data.AttributeLocal;
+import java.util.Collection;
 
 /**
  * Collection of common business logic services.
@@ -41,6 +42,16 @@ public interface CommonServicesLocal extends EJBLocalObject {
     ProductLocal findProductById(Integer id) throws ProductNotAvailable;
 
 
+    /**
+     * Retrieves a specific attribute of an product.
+     */
     AttributeLocal getAttributeByProductId(Integer pid, String attrName) throws ProductNotAvailable;
 
+    /**
+     * Gets the list of the rules in a given rules set.
+     *
+     * @param rulesSet is the name of the rules set.
+     * @returns the list of <code>RuleLocal</code> objects.
+     */
+    Collection getRules(String rulesSet);
 }

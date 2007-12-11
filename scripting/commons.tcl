@@ -1,5 +1,7 @@
 # commons.tcl
 # Contine definitii comune pentru divers scripturi
+# SYNOPSYS
+#   source "$scripting_root/commons.tcl" ;# includ definitii comune
 
 
 package require java
@@ -62,3 +64,34 @@ proc attribute_dbl {pid attr} {
     return $val
 }
 
+;# Obtine lista de reguli pentru un anumit set
+proc get_rules {rulesSetName} {
+    global srv
+    return [$srv getRules $rulesSetName]
+}
+
+;# Evaluare reguli intr-un set
+proc eval_rules {rulesSetName} {
+    global logger
+
+    set rules [get_rules $rulesSetName]
+    set iterator [$rules iterator]
+    while {[$iterator hasNext]} {
+	set rule [java::cast ro.kds.erp.rules.RuleLocal [$iterator next]]
+	set ruleName [$rule getName]
+	set condition [$rule getCondition]
+	set message [$rule getMessage]
+	if {[$rule getErrorFlag]} {set errorScript {$response setCode [java::field ResponseBean CODE_ERR_VALIDATION]}} else {set errorScript {}}
+	
+	set response_obj {$response}
+
+	set script "if {$condition} {$response_obj addValidationInfo {http://www.kds.ro/readybeans/rdf/validation/message/empty} \"$ruleName: $message\" \n\t$errorScript}"
+
+	$logger {log int Object} [java::field BasicLevel DEBUG] "Regula: $rulesSetName -- $ruleName"
+	$logger {log int Object} [java::field BasicLevel DEBUG] "Script regula:\n$script"
+
+	if {[catch {set result [uplevel 1 $script]} err]} {
+	    $logger {log int Object} [java::field BasicLevel ERROR] "\tRule $ruleName could not be executed due to an error: $err"
+	} 
+    }
+}

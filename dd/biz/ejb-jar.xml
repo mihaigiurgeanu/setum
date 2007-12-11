@@ -37,6 +37,14 @@
 	<ejb-link>datalayer.jar#ProductEJB</ejb-link>
       </ejb-local-ref>
 
+      <ejb-local-ref>
+	<description>Reference to RulesSetEJB used by getRules service</description>
+	<ejb-ref-name>ejb/RulesSetHome</ejb-ref-name>
+	<ejb-ref-type>Entity</ejb-ref-type>
+	<local-home>ro.kds.erp.rules.RulesSetLocalHome</local-home>
+	<local>ro.kds.erp.rules.RulesLocal</local>
+	<ejb-link>rules.jar#RulesSetEJB</ejb-link>
+      </ejb-local-ref>
 
     </session>
 

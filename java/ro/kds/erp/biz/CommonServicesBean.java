@@ -19,6 +19,14 @@ import ro.kds.erp.data.ProductLocalHome;
 import javax.naming.Context;
 import ro.kds.erp.data.AttributeLocal;
 import java.util.Map;
+import ro.kds.erp.rules.RulesSetLocalHome;
+import java.util.Collection;
+
+import java.util.Collection;
+
+import java.util.Collection;
+import ro.kds.erp.rules.RulesSetLocal;
+import java.util.ArrayList;
 
 /**
  * Implementation for common services offered by the business logic.
@@ -109,6 +117,38 @@ public class CommonServicesBean implements SessionBean {
 	ProductLocal p = findProductById(pid);
 	Map attribs = p.getAttributesMap();
 	return (AttributeLocal)attribs.get(attrName);
+    }
+
+
+    /**
+     * Gets the list of rules in a given rules set
+     */
+    public Collection getRules(String rulesSet) {
+	Collection rules;
+	try {
+	    InitialContext ic = new InitialContext();
+	    Context env = (Context)ic.lookup("java:comp/env");
+	    RulesSetLocalHome home = (RulesSetLocalHome)PortableRemoteObject.
+              narrow(env.lookup("ejb/RulesSetHome"), RulesSetLocalHome.class);
+	    Collection sets = home.findByName(rulesSet);
+	    if(sets.size() == 0) {
+		logger.log(BasicLevel.WARN, "No rules set defined with name " + rulesSet);
+		rules = new ArrayList();
+	    } else {
+		RulesSetLocal set = (RulesSetLocal)sets.iterator().next();
+		if(sets.size() > 1) {
+		    logger.log(BasicLevel.WARN, "There are more rules set with name " + rulesSet 
+			       + ". It will be selected the one with id " + set.getId() + ".");
+		}
+		rules = set.getRules();
+	    }
+	} catch (Exception e) {
+	    logger.log(BasicLevel.ERROR, "The rules set with name " + rulesSet +
+		       " can not be retrieved due to an exception " + e);
+	    logger.log(BasicLevel.DEBUG, e);
+	    rules = new ArrayList();
+	}
+	return rules;
     }
 
     // Implementation of javax.ejb.SessionBean

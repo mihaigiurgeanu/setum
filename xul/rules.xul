@@ -63,7 +63,7 @@
 	  <treecols>
 	    <treecol id="set.id" label="Id" flex="1"
 		     persist="ordinal width hidden"/>
-	    <splitter class="tree-splitter"/>
+ 	    <splitter class="tree-splitter"/>
 	    <treecol id="set.name" label="Set" flex="1"
 		     persist="ordinal width hidden"/>
 	  </treecols>
@@ -109,9 +109,13 @@
 	      ondblclick="maintab.selectedIndex=2">
 	  <treecols>
 	    <treecol id="rule.id" label="Id" flex="1" persist="ordinal width hidden"/>
+ 	    <splitter class="tree-splitter"/>
 	    <treecol id="rule.name" label="Nume" flex="1" persist="ordinal width hidden"/>
+ 	    <splitter class="tree-splitter"/>
 	    <treecol id="rule.condition" label="Conditie" flex="1" persist="ordinal width hidden"/>
+ 	    <splitter class="tree-splitter"/>
 	    <treecol id="rule.message" label="Mesaj" flex="1" persist="ordinal width hidden"/>
+ 	    <splitter class="tree-splitter"/>
 	    <treecol id="rule.errorFlag" label="Eroare?" flex="1" persist="ordinal width hidden"/>
 	  </treecols>
 

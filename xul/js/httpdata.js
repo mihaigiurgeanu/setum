@@ -43,7 +43,7 @@ function httpRequestExecute() {
 	    if(i > 0)
 		txt += '&';
 
-	    txt += this.parms[i].name+'='+this.parms[i].value;
+	    txt += this.parms[i].name+'='+encodeURIComponent(this.parms[i].value);
 	}
 	//     alert("Request body: " + txt);
 
