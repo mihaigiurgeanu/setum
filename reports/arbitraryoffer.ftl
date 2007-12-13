@@ -139,7 +139,7 @@
 
 	<fo:table-row>
 	  <fo:table-cell column-number="1"><fo:block>${lineno}. ${record["child::field[attribute::name='productCategory']"]}</fo:block></fo:table-cell>
-	  <fo:table-cell column-number="2"><fo:block>${record["child::field[attribute::name='productCode']"]}</fo:block></fo:table-cell>
+	  <fo:table-cell column-number="2"><fo:block>${record["child::field[attribute::name='productName']"]}</fo:block></fo:table-cell>
 	  <fo:table-cell column-number="3" text-align="end"><fo:block>${record["child::field[attribute::name='vatPrice']"]}</fo:block></fo:table-cell>		    
 	</fo:table-row>
 
