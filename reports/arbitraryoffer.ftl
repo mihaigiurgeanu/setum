@@ -64,6 +64,7 @@
 
     <fo:flow flow-name="xsl-region-body">
 
+      <!-- date generale despre oferta (numar, data, nume client, etc.) -->
       <fo:block>
 	<fo:table width="90%">
 	  <fo:table-column column-number="1" column-width="30%"/>
@@ -121,45 +122,24 @@
 
 
 
-    <fo:table space-before="2em" space-after="2em">
-      <fo:table-column column-number="1" column-width="30%"/> <!-- produs -->
-      <fo:table-column column-number="2" column-width="50%"/> <!-- cod -->
-      <fo:table-column column-number="3" column-width="20%"/> <!-- valoare -->
-
-      <fo:table-body>
-	<fo:table-row>
-	  <fo:table-cell column-number="1" border-before-style="solid" border-after-style="solid"><fo:block>Denumire</fo:block></fo:table-cell>
-	  <fo:table-cell column-number="2" border-before-style="solid" border-after-style="solid"><fo:block>Cod</fo:block></fo:table-cell>
-	  <fo:table-cell column-number="3" border-before-style="solid" border-after-style="solid"><fo:block text-align="end">Pret</fo:block></fo:table-cell>		    
-	</fo:table-row>
-
-
 	<#assign lineno=1>
 	<#list doc["child::response/child::record/child::field[attribute::name='lines']/child::record"] as record>
-
-	<fo:table-row>
-	  <fo:table-cell column-number="1"><fo:block>${lineno}. ${record["child::field[attribute::name='productCategory']"]}</fo:block></fo:table-cell>
-	  <fo:table-cell column-number="2"><fo:block>${record["child::field[attribute::name='productName']"]}</fo:block></fo:table-cell>
-	  <fo:table-cell column-number="3" text-align="end"><fo:block>${record["child::field[attribute::name='vatPrice']"]}</fo:block></fo:table-cell>		    
-	</fo:table-row>
+	<fo:block text-align="justified">
+	${lineno}. ${record["child::field[attribute::name='productCategory']"]} - ${record["child::field[attribute::name='productCode']"]} 
+	<fo:leader leader-pattern="dots" leader-length.optimum="100%"/>${record["child::field[attribute::name='vatPrice']"]}
+	</fo:block>
+      	<#switch record["child::field[attribute::name='product']/child::record/child::field[attribute::name='category.id']"]?number>
+      	<#case 9990>
+      	<#case 9993>
+      	<fo:block>
+      	<#visit record["child::field[attribute::name='product']/child::record"]>
+      	</fo:block>
+      	</#switch>
 
 	<#assign lineno = lineno + 1>
 	</#list>
 
-      </fo:table-body>
-    </fo:table>
 
-
-
-    <#list doc["child::response/child::record/child::field[attribute::name='lines']/child::record"] as record>
-      <#switch record["child::field[attribute::name='product']/child::record/child::field[attribute::name='category.id']"]?number>
-      <#case 9990>
-      <#case 9993>
-      <fo:block border-before-style="solid">
-      <#visit record["child::field[attribute::name='product']/child::record"]>
-      </fo:block>
-      </#switch>
-    </#list>
 
 
     </fo:flow>
@@ -183,25 +163,12 @@
 	<#switch .node["child::field[attribute::name='category.id']/child::text()"]?number>
 	<#case 9990>
 		<!-- Usa metalica customizata -->
-		<fo:block space-after="2em">
-		<fo:block>
 		Usa metalica ${.node["child::field[attribute::name='name']"]}:
-		</fo:block>
-		<fo:table>
 
-		<fo:table-column column-number="1" column-width="25%"/>
-		<fo:table-column column-number="2" column-width="25%"/>
-		<fo:table-column column-number="3" column-width="25%"/>
-		<fo:table-column column-number="4" column-width="25%"/>
-
-		<fo:table-body>
-
-		<fo:table-row>
-
-		<fo:table-cell column-number="1"><fo:block>Material: ${search(.node?parent, "material", .node["child::field[attribute::name='material']"])?cap_first}</fo:block></fo:table-cell>
-		<fo:table-cell column-number="2"><fo:block>Nr canate:${.node["child::field[attribute::name='k']"]}</fo:block></fo:table-cell>
-		<fo:table-cell column-number="3"><fo:block>Lg = ${.node["child::field[attribute::name='lg']"]}</fo:block></fo:table-cell>
-		<fo:table-cell column-number="4"><fo:block>Hg = ${.node["child::field[attribute::name='hg']"]}</fo:block></fo:table-cell>
+		Material: ${search(.node?parent, "material", .node["child::field[attribute::name='material']"])?cap_first},
+		Nr canate:${.node["child::field[attribute::name='k']"]},
+		Lg = ${.node["child::field[attribute::name='lg']"]},
+		Hg = ${.node["child::field[attribute::name='hg']"]},
 
 		</fo:table-row>
 
