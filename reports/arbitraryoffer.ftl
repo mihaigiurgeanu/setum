@@ -178,54 +178,6 @@
 		L prag = ${.node["child::field[attribute::name='lTreshold']"]},
 		H prag = ${.node["child::field[attribute::name='hTreshold']"]},
 		C prag = ${.node["child::field[attribute::name='cTreshold']"]},
-		Sisteme:
-		<#if .node["child::field[attribute::name='broascaBuc']"] &gt; 0>
-		Broasca ${search(.node?parent,"broascaId",.node["child::field[attribute::name='broascaId']"])} - ${.node["child::field[attribute::name='broascaBuc']"]} buc.
-		</#if>
-		<#if .node["child::field[attribute::name='cilindruBuc']"] &gt; 0>
-		Cilindru ${search(.node?parent,"cilindruId",.node["child::field[attribute::name='cilindruId']"])} - ${.node["child::field[attribute::name='cilindruBuc']"]} buc.
-		</#if>
-		<#if .node["child::field[attribute::name='copiatCheieBuc']"] &gt; 0>
-		Copiat chei ${search(.node?parent,"copiatCheieId",.node["child::field[attribute::name='copiatCheieId']"])} - ${.node["child::field[attribute::name='copiatCheieBuc']"]} buc.
-		</#if>
-		<#if .node["child::field[attribute::name='vizorBuc']"] &gt; 0>
-		Vizor ${search(.node?parent,"vizorId",.node["child::field[attribute::name='vizorId']"])} - ${.node["child::field[attribute::name='vizorBuc']"]} buc.
-		</#if>
-		<#if .node["child::field[attribute::name='vizorBuc']"] &gt; 0>
-		Vizor ${search(.node?parent,"vizorId",.node["child::field[attribute::name='vizorId']"])} - ${.node["child::field[attribute::name='vizorBuc']"]} buc.
-		</#if>
-		<#if .node["child::field[attribute::name='sildBuc']"] &gt; 0>
-		Sild ${search(.node?parent,"sildId",.node["child::field[attribute::name='sildId']"])} - ${.node["child::field[attribute::name='sildBuc']"]} buc.
-		</#if>
-		<#if .node["child::field[attribute::name='rozetaBuc']"] &gt; 0>
-		Rozeta ${search(.node?parent,"rozetaId",.node["child::field[attribute::name='rozetaId']"])} - ${.node["child::field[attribute::name='rozetaBuc']"]} buc.
-		</#if>
-		<#if .node["child::field[attribute::name='manerBuc']"] &gt; 0>
-		Maner ${search(.node?parent,"manerId",.node["child::field[attribute::name='manerId']"])} - ${.node["child::field[attribute::name='manerBuc']"]} buc.
-		</#if>
-		<#if .node["child::field[attribute::name='yalla1Buc']"] &gt; 0>
-		Yalla ${search(.node?parent,"yalla1Id",.node["child::field[attribute::name='yalla1Id']"])} - ${.node["child::field[attribute::name='yalla1Buc']"]} buc.
-		</#if>
-		<#if .node["child::field[attribute::name='yalla2Buc']"] &gt; 0>
-		Yalla ${search(.node?parent,"yalla2Id",.node["child::field[attribute::name='yalla2Id']"])} - ${.node["child::field[attribute::name='yalla2Buc']"]} buc.
-		</#if>
-		<#if .node["child::field[attribute::name='baraAntipanicaBuc']"] &gt; 0>
-		Bara antipanica ${search(.node?parent,"baraAntipanicaId",.node["child::field[attribute::name='baraAntipanicaId']"])} - ${.node["child::field[attribute::name='baraAntipanicaBuc']"]} buc.
-		</#if>
-		<#if .node["child::field[attribute::name='manerSemicilindruBuc']"] &gt; 0>
-		Maner semicilindru ${search(.node?parent,"manerSemicilindruId",.node["child::field[attribute::name='manerSemicilindruId']"])} - ${.node["child::field[attribute::name='manerSemicilindruBuc']"]} buc.
-		</#if>
-		<#if .node["child::field[attribute::name='selectorOrdineBuc']"] &gt; 0>
-		Selector ordine ${search(.node?parent,"selectorOrdineId",.node["child::field[attribute::name='selectorOrdineId']"])} - ${.node["child::field[attribute::name='selectorOrdineBuc']"]} buc.
-		</#if>
-		<#if .node["child::field[attribute::name='amortizorBuc']"] &gt; 0>
-		Amortizor ${search(.node?parent,"amortizorId",.node["child::field[attribute::name='amortizorId']"])} - ${.node["child::field[attribute::name='amortizorBuc']"]} buc.
-		<#if .node["child::field[attribute::name='alteSisteme1Buc']"] &gt; 0>
-		${search(.node?parent,"alteSisteme1Id",.node["child::field[attribute::name='alteSisteme1Id']"])} - ${.node["child::field[attribute::name='alteSisteme1Buc']"]} buc.
-		</#if>
-		<#if .node["child::field[attribute::name='alteSisteme2Buc']"] &gt; 0>
-		${search(.node?parent,"alteSisteme2Id",.node["child::field[attribute::name='alteSisteme2Id']"])} - ${.node["child::field[attribute::name='alteSisteme2Buc']"]} buc.
-		</#if>
 
 
   <#break>
