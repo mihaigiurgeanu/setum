@@ -229,6 +229,32 @@ ${record["child::field[attribute::name='category.name']"]}
 ${record["child::field[attribute::name='code']"]};
 </#if>
 </#macro>
+
+
+
+<#function search node vl_name vl_key>
+
+
+<#-- 
+Searches the node for a child value-list with the given name, and in the
+value list searches a child with the give key (value) and returns the associated label
+-->
+
+
+<#list node["value-list"] as vl>
+	<#if vl["@name"] = vl_name>
+		<#list vl["vl-item"] as vl_item>
+			<#if vl_item.value = vl_key>
+				<#return vl_item.label>
+			</#if>
+		</#list>
+	</#if>
+</#list>
+
+<#return "N/A">
+
+</#function>
+
 -->
 
 
