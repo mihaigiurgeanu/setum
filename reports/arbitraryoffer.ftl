@@ -197,10 +197,10 @@
 		<#if .node["child::field[attribute::name='sildBuc']"] &gt; 0>
 		Sild ${search(.node?parent,"sildId",.node["child::field[attribute::name='sildId']"])} - ${.node["child::field[attribute::name='sildBuc']"]} buc.
 		</#if>
-		<#if ${.node["child::field[attribute::name='rozetaBuc']"]} &gt; 0>
+		<#if .node["child::field[attribute::name='rozetaBuc']"] &gt; 0>
 		Rozeta ${search(.node?parent,"rozetaId",.node["child::field[attribute::name='rozetaId']"])} - ${.node["child::field[attribute::name='rozetaBuc']"]} buc.
 		</#if>
-		<#if ${.node["child::field[attribute::name='manerBuc']"]} &gt; 0>
+		<#if .node["child::field[attribute::name='manerBuc']"] &gt; 0>
 		Maner ${search(.node?parent,"manerId",.node["child::field[attribute::name='manerId']"])} - ${.node["child::field[attribute::name='manerBuc']"]} buc.
 		</#if>
 		<#if .node["child::field[attribute::name='yalla1Buc']"] &gt; 0>
