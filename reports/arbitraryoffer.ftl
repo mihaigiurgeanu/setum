@@ -184,13 +184,22 @@
 		Cilindru ${search(.node?parent,"cilindruId",.node["child::field[attribute::name='cilindruId']"])} - ${.node["child::field[attribute::name='cilindruBuc']"]} buc.
 		</#if>
 		<#if .node["child::field[attribute::name='copiatCheieBuc']"]?number &gt; 0>
-		Copiat chei ${search(.node?parent,"copiatCheieId",.node["child::field[attribute::name='copiatCheieId']"])} - ${.node["child::field[attribute::name='copiatCheieBuc']"]} buc.
+		${search(.node?parent,"copiatCheieId",.node["child::field[attribute::name='copiatCheieId']"])} - ${.node["child::field[attribute::name='copiatCheieBuc']"]} buc.
 		</#if>
 		<#if .node["child::field[attribute::name='vizorBuc']"]?number &gt; 0>
 		Vizor ${search(.node?parent,"vizorId",.node["child::field[attribute::name='vizorId']"])} - ${.node["child::field[attribute::name='vizorBuc']"]} buc.
 		</#if>
-		<#if .node["child::field[attribute::name='vizorBuc']"]?number &gt; 0>
-		Vizor ${search(.node?parent,"vizorId",.node["child::field[attribute::name='vizorId']"])} - ${.node["child::field[attribute::name='vizorBuc']"]} buc.
+		<#if .node["child::field[attribute::name='sildBuc']"]?number &gt; 0>
+		Sild ${search(.node?parent,"sildId",.node["child::field[attribute::name='sildId']"])} - ${.node["child::field[attribute::name='sildBuc']"]} buc.
+		</#if>
+		<#if .node["child::field[attribute::name='rozetaBuc']"]?number &gt; 0>
+		Rozeta ${search(.node?parent,"rozetaId",.node["child::field[attribute::name='rozetaId']"])} - ${.node["child::field[attribute::name='rozetaBuc']"]} buc.
+		</#if>
+		<#if .node["child::field[attribute::name='manerBuc']"]?number &gt; 0>
+		Maner ${search(.node?parent,"manerId",.node["child::field[attribute::name='manerId']"])} - ${.node["child::field[attribute::name='manerBuc']"]} buc.
+		</#if>
+		<#if .node["child::field[attribute::name='yalla1Buc']"]?number &gt; 0>
+		Yalla ${search(.node?parent,"yalla1Id",.node["child::field[attribute::name='yalla1Id']"])} - ${.node["child::field[attribute::name='yalla1Buc']"]} buc.
 		</#if>
 
 
