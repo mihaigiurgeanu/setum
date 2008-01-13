@@ -177,19 +177,19 @@
 		H prag = ${.node["child::field[attribute::name='hTreshold']"]},
 		C prag = ${.node["child::field[attribute::name='cTreshold']"]},
 
-		<#if .node["child::field[attribute::name='broascaBuc']"] &gt; 0>
+		<#if .node["child::field[attribute::name='broascaBuc']"]?number &gt; 0>
 		Broasca ${search(.node?parent,"broascaId",.node["child::field[attribute::name='broascaId']"])} - ${.node["child::field[attribute::name='broascaBuc']"]} buc.
 		</#if>
-		<#if .node["child::field[attribute::name='cilindruBuc']"] &gt; 0>
+		<#if .node["child::field[attribute::name='cilindruBuc']"]?number &gt; 0>
 		Cilindru ${search(.node?parent,"cilindruId",.node["child::field[attribute::name='cilindruId']"])} - ${.node["child::field[attribute::name='cilindruBuc']"]} buc.
 		</#if>
-		<#if .node["child::field[attribute::name='copiatCheieBuc']"] &gt; 0>
+		<#if .node["child::field[attribute::name='copiatCheieBuc']"]?number &gt; 0>
 		Copiat chei ${search(.node?parent,"copiatCheieId",.node["child::field[attribute::name='copiatCheieId']"])} - ${.node["child::field[attribute::name='copiatCheieBuc']"]} buc.
 		</#if>
-		<#if .node["child::field[attribute::name='vizorBuc']"] &gt; 0>
+		<#if .node["child::field[attribute::name='vizorBuc']"]?number &gt; 0>
 		Vizor ${search(.node?parent,"vizorId",.node["child::field[attribute::name='vizorId']"])} - ${.node["child::field[attribute::name='vizorBuc']"]} buc.
 		</#if>
-		<#if .node["child::field[attribute::name='vizorBuc']"] &gt; 0>
+		<#if .node["child::field[attribute::name='vizorBuc']"]?number &gt; 0>
 		Vizor ${search(.node?parent,"vizorId",.node["child::field[attribute::name='vizorId']"])} - ${.node["child::field[attribute::name='vizorBuc']"]} buc.
 		</#if>
 
