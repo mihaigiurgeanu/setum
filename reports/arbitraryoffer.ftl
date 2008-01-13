@@ -217,8 +217,8 @@
 
 		<#if .node["child::field[attribute::name='amortizorBuc']"]?number &gt; 0>
 		Amortizor ${search(.node?parent,"amortizorId",.node["child::field[attribute::name='amortizorId']"])} - ${.node["child::field[attribute::name='amortizorBuc']"]} buc.
-		<#if .node["child::field[attribute::name='alteSisteme1Buc']"]?number &gt; 0>
-		${search(.node?parent,"alteSisteme1Id",.node["child::field[attribute::name='alteSisteme1Id']"])} - ${.node["child::field[attribute::name='alteSisteme1Buc']"]} buc.
+		<#if .node["child::field[attribute::name='alteSisteme2Buc']"]?number &gt; 0>
+		${search(.node?parent,"alteSisteme2Id",.node["child::field[attribute::name='alteSisteme2Id']"])} - ${.node["child::field[attribute::name='alteSisteme2Buc']"]} buc.
 		</#if>
 
 
