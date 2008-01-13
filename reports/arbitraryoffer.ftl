@@ -215,6 +215,12 @@
 		Selector ordine ${search(.node?parent,"selectorOrdineId",.node["child::field[attribute::name='selectorOrdineId']"])} - ${.node["child::field[attribute::name='selectorOrdineBuc']"]} buc.
 		</#if>
 
+		<#if .node["child::field[attribute::name='amortizorBuc']"]?number &gt; 0>
+		Amortizor ${search(.node?parent,"amortizorId",.node["child::field[attribute::name='amortizorId']"])} - ${.node["child::field[attribute::name='amortizorBuc']"]} buc.
+		<#if .node["child::field[attribute::name='alteSisteme1Buc']"]?number &gt; 0>
+		${search(.node?parent,"alteSisteme1Id",.node["child::field[attribute::name='alteSisteme1Id']"])} - ${.node["child::field[attribute::name='alteSisteme1Buc']"]} buc.
+		</#if>
+
 
     <#list .node["child::field[attribute::name='parts']/child::record/child::field[attribute::name='part']/child::record"] as record>
     <fo:block>
