@@ -185,7 +185,7 @@
 		<#if .node["child::field[attribute::name='cilindruBuc']"] &gt; 0>
 		Cilindru ${search(.node?parent,"cilindruId",.node["child::field[attribute::name='cilindruId']"])} - ${.node["child::field[attribute::name='cilindruBuc']"]} buc.
 		</#if>
-		<#if ${.node["child::field[attribute::name='copiatCheieBuc']"]} &gt; 0>
+		<#if .node["child::field[attribute::name='copiatCheieBuc']"] &gt; 0>
 		Copiat chei ${search(.node?parent,"copiatCheieId",.node["child::field[attribute::name='copiatCheieId']"])} - ${.node["child::field[attribute::name='copiatCheieBuc']"]} buc.
 		</#if>
 		<#if .node["child::field[attribute::name='vizorBuc']"] &gt; 0>
