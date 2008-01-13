@@ -208,6 +208,12 @@
 		<#if .node["child::field[attribute::name='baraAntipanicaBuc']"]?number &gt; 0>
 		Bara antipanica ${search(.node?parent,"baraAntipanicaId",.node["child::field[attribute::name='baraAntipanicaId']"])} - ${.node["child::field[attribute::name='baraAntipanicaBuc']"]} buc.
 		</#if>
+		<#if .node["child::field[attribute::name='manerSemicilindruBuc']"]?number &gt; 0>
+		Maner semicilindru ${search(.node?parent,"manerSemicilindruId",.node["child::field[attribute::name='manerSemicilindruId']"])} - ${.node["child::field[attribute::name='manerSemicilindruBuc']"]} buc.
+		</#if>
+		<#if .node["child::field[attribute::name='selectorOrdineBuc']"]?number &gt; 0>
+		Selector ordine ${search(.node?parent,"selectorOrdineId",.node["child::field[attribute::name='selectorOrdineId']"])} - ${.node["child::field[attribute::name='selectorOrdineBuc']"]} buc.
+		</#if>
 
 
     <#list .node["child::field[attribute::name='parts']/child::record/child::field[attribute::name='part']/child::record"] as record>
