@@ -227,11 +227,6 @@
 		${search(.node?parent,"alteSisteme2Id",.node["child::field[attribute::name='alteSisteme2Id']"])} - ${.node["child::field[attribute::name='alteSisteme2Buc']"]} buc.
 		</#if>
 
-    <#list .node["child::field[attribute::name='parts']/child::record/child::field[attribute::name='part']/child::record"] as record>
-    <fo:block>
-    <#visit record>
-    </fo:block>
-    </#list>
 
   <#break>
 
