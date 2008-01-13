@@ -208,20 +208,6 @@
 		<#if .node["child::field[attribute::name='baraAntipanicaBuc']"]?number &gt; 0>
 		Bara antipanica ${search(.node?parent,"baraAntipanicaId",.node["child::field[attribute::name='baraAntipanicaId']"])} - ${.node["child::field[attribute::name='baraAntipanicaBuc']"]} buc.
 		</#if>
-		<#if .node["child::field[attribute::name='manerSemicilindruBuc']"]?number &gt; 0>
-		Maner semicilindru ${search(.node?parent,"manerSemicilindruId",.node["child::field[attribute::name='manerSemicilindruId']"])} - ${.node["child::field[attribute::name='manerSemicilindruBuc']"]} buc.
-		</#if>
-		<#if .node["child::field[attribute::name='selectorOrdineBuc']"]?number &gt; 0>
-		Selector ordine ${search(.node?parent,"selectorOrdineId",.node["child::field[attribute::name='selectorOrdineId']"])} - ${.node["child::field[attribute::name='selectorOrdineBuc']"]} buc.
-		</#if>
-		<#if .node["child::field[attribute::name='amortizorBuc']"]?number &gt; 0>
-		Amortizor ${search(.node?parent,"amortizorId",.node["child::field[attribute::name='amortizorId']"])} - ${.node["child::field[attribute::name='amortizorBuc']"]} buc.
-		<#if .node["child::field[attribute::name='alteSisteme1Buc']"]?number &gt; 0>
-		${search(.node?parent,"alteSisteme1Id",.node["child::field[attribute::name='alteSisteme1Id']"])} - ${.node["child::field[attribute::name='alteSisteme1Buc']"]} buc.
-		</#if>
-		<#if .node["child::field[attribute::name='alteSisteme2Buc']"]?number &gt; 0>
-		${search(.node?parent,"alteSisteme2Id",.node["child::field[attribute::name='alteSisteme2Id']"])} - ${.node["child::field[attribute::name='alteSisteme2Buc']"]} buc.
-		</#if>
 
 
     <#list .node["child::field[attribute::name='parts']/child::record/child::field[attribute::name='part']/child::record"] as record>
