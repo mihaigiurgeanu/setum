@@ -148,10 +148,8 @@
   </fo:page-sequence>
 
 
-</fo:root>
 
 
-<!--
 <#macro "record">
    <#switch .node["child::field[attribute::name='category.id']/child::text()"]?number>
    <#case 9990>
@@ -179,6 +177,11 @@
 		H prag = ${.node["child::field[attribute::name='hTreshold']"]},
 		C prag = ${.node["child::field[attribute::name='cTreshold']"]},
 
+    <#list .node["child::field[attribute::name='parts']/child::record/child::field[attribute::name='part']/child::record"] as record>
+    <fo:block>
+    <#visit record>
+    </fo:block>
+    </#list>
 
   <#break>
 
@@ -255,7 +258,7 @@ value list searches a child with the give key (value) and returns the associated
 
 </#function>
 
--->
 
 
 
+</fo:root>
