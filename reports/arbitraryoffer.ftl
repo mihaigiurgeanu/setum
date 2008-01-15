@@ -125,8 +125,7 @@
       <#assign lineno=1>
       <#list doc["child::response/child::record/child::field[attribute::name='lines']/child::record"] as record>
       <fo:block text-align="justified">
-	${lineno}. ${record["child::field[attribute::name='productCategory']"]} - ${record["child::field[attribute::name='productCode']"]} 
-	<fo:leader leader-pattern="dots" leader-length.optimum="100%"/>${record["child::field[attribute::name='vatPrice']"]}
+	${lineno}. ${record["child::field[attribute::name='productCategory']"]} - ${record["child::field[attribute::name='productCode']"]}<fo:leader leader-pattern="dots" leader-length.optimum="100%"/>RON ${record["child::field[attribute::name='vatPrice']"]}
       </fo:block>
       <#switch record["child::field[attribute::name='product']/child::record/child::field[attribute::name='category.id']"]?number>
       <#case 9990>
@@ -224,6 +223,44 @@
 		<#if .node["child::field[attribute::name='alteSisteme2Buc']"]?number &gt; 0>
 		${search(.node?parent,"alteSisteme2Id",.node["child::field[attribute::name='alteSisteme2Id']"])} - ${.node["child::field[attribute::name='alteSisteme2Buc']"]} buc.
 		</#if>
+
+    <#if .node["child::field[attribute::name='intFinisajBlatId']"]?number != 0>
+    Finisaj int. blat: ${node["child::field[attribute::name='intFinisajBlat']"]}.
+    </#if>
+    <#if .node["child::field[attribute::name='intFinisajTocId']"]?number != 0>
+    Finisaj int. toc: ${node["child::field[attribute::name='intFinisajToc']"]}.
+    </#if>
+    <#if .node["child::field[attribute::name='intFinisajGrilajId']"]?number != 0>
+    Finisaj int. grilaj: ${node["child::field[attribute::name='intFinisajGrilaj']"]}.
+    </#if>
+    <#if .node["child::field[attribute::name='intFinisajBlatId']"]?number != 0>
+    Finisaj int. fereastra: ${node["child::field[attribute::name='intFinisajBlat']"]}.
+    </#if>
+    <#if .node["child::field[attribute::name='intFinisajSupraluminaId']"]?number != 0>
+    Finisaj int. supralumina: ${node["child::field[attribute::name='intFinisajSupralumina']"]}.
+    </#if>
+    <#if .node["child::field[attribute::name='intFinisajPanouLateralId']"]?number != 0>
+    Finisaj int. panou: ${node["child::field[attribute::name='intFinisajPanou']"]}.
+    </#if>
+
+    <#if .node["child::field[attribute::name='intFinisajBlatId']"]?number != 0>
+    Finisaj int. blat: ${node["child::field[attribute::name='intFinisajBlat']"]}.
+    </#if>
+    <#if .node["child::field[attribute::name='extFinisajTocId']"]?number != 0>
+    Finisaj ext. toc: ${node["child::field[attribute::name='extFinisajToc']"]}.
+    </#if>
+    <#if .node["child::field[attribute::name='extFinisajGrilajId']"]?number != 0>
+    Finisaj ext. grilaj: ${node["child::field[attribute::name='extFinisajGrilaj']"]}.
+    </#if>
+    <#if .node["child::field[attribute::name='extFinisajBlatId']"]?number != 0>
+    Finisaj ext. fereastra: ${node["child::field[attribute::name='extFinisajBlat']"]}.
+    </#if>
+    <#if .node["child::field[attribute::name='extFinisajSupraluminaId']"]?number != 0>
+    Finisaj ext. supralumina: ${node["child::field[attribute::name='extFinisajSupralumina']"]}.
+    </#if>
+    <#if .node["child::field[attribute::name='extFinisajPanouLateralId']"]?number != 0>
+    Finisaj ext. panou: ${node["child::field[attribute::name='extFinisajPanouLateral']"]}.
+    </#if>
 
 
     <#list .node["child::field[attribute::name='parts']/child::record/child::field[attribute::name='part']/child::record"] as record>
