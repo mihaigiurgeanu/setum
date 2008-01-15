@@ -42,6 +42,7 @@ Lista comenzilor, creere/vizualizare/stergere
     <command id="command-add_payment"		oncommand="on_new_payment();"/>
     <command id="command-remove_payment"	oncommand="theForm.ask(REMOVE_PAYMENT_MSG, on_remove_payment)"/>
     <command id="command-save_payment"		oncommand="on_save_payment()"/>
+    <command id="command-pdf-report"		oncommand="open_report('pdf')"/>
   </commandset>
 
 
@@ -113,6 +114,7 @@ Lista comenzilor, creere/vizualizare/stergere
 	  <button label="Sterge produs" command="command-remove_item"/>
 	  <button label="Adauga factura" command="command-add_invoice"/>
 	  <button label="Salveaza" command="command-save_order"/>
+	  <button label="PDF" command="command-pdf-report"/>
 	</hbox>
 	<hbox class="title">
 	  <label>Detalii comanda</label>

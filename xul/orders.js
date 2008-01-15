@@ -253,6 +253,12 @@ function on_remove_payment() {
     return true;
 }
 
+
+function open_report(type) {
+    window.open(SERVER_URL + "/reports/orders." + type);
+}
+
+
 var theForm = new FormObject();
 theForm.do_link = "/orders.do";
 
