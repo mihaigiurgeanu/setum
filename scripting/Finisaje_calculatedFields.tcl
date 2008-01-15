@@ -1,6 +1,6 @@
 # Finisaje_calculatedFields.tcl
 
-set description "Finisaje:"
+set description ""
 
 if { $zincare == 1 } {
     set description "$description Zincare"
