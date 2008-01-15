@@ -240,7 +240,7 @@
     Finisaj int. supralumina: ${.node["child::field[attribute::name='intFinisajSupralumina']"]}.
     </#if>
     <#if .node["child::field[attribute::name='intFinisajPanouLateralId']"]?number != 0>
-    Finisaj int. panou: ${.node["child::field[attribute::name='intFinisajPanou']"]}.
+    Finisaj int. panou: ${.node["child::field[attribute::name='intFinisajPanouLateral']"]}.
     </#if>
 
     <#if .node["child::field[attribute::name='intFinisajBlatId']"]?number != 0>
