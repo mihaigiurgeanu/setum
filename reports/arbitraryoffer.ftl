@@ -125,7 +125,7 @@
       <#assign lineno=1>
       <#list doc["child::response/child::record/child::field[attribute::name='lines']/child::record"] as record>
       <fo:block text-align="justified">
-	${lineno}. ${record["child::field[attribute::name='productCategory']"]} - ${record["child::field[attribute::name='productCode']"]}<fo:leader leader-pattern="dots" leader-length.optimum="100%"/>RON ${record["child::field[attribute::name='vatPrice']"]}
+	${lineno}. ${record["child::field[attribute::name='productCategory']"]} - ${record["child::field[attribute::name='productCode']"]}: RON ${record["child::field[attribute::name='vatPrice']"]}
       </fo:block>
       <#switch record["child::field[attribute::name='product']/child::record/child::field[attribute::name='category.id']"]?number>
       <#case 9990>
