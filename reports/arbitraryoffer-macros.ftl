@@ -3,6 +3,34 @@
 
 
 
+<#-- parcurge oferta si grupeaza liniile dupa caracteristici -->
+<#function group_line_offers doc>
+  <#-- incep cu usile metalice -->
+  <#assign lines = sel_product(doc, 9990)>
+
+  <#-- sisteme -->
+  <#assign lines = lines + sel_product(doc, 9998)>
+  <#assign lines = lines + sel_product(doc, 9997)>
+  <#assign lines = lines + sel_product(doc, 9996)>
+  <#assign lines = lines + sel_product(doc, 9995)>
+  <#assign lines = lines + sel_product(doc, 9994)>
+  <#assign lines = lines + sel_product(doc, 10000)>
+  <#assign lines = lines + sel_product(doc, 10001)>
+  <#assign lines = lines + sel_product(doc, 10002)>
+  <#assign lines = lines + sel_product(doc, 10003)>
+  <#assign lines = lines + sel_product(doc, 10004)>
+  <#assign lines = lines + sel_product(doc, 10005)>
+  <#assign lines = lines + sel_product(doc, 10006)>
+  
+</#function>
+
+<#-- select the list of products with a given product category -->
+<#-- returneaza liniile de oferta -->
+<#function sel_product doc categId>
+  <#assign records=doc["response/record/field[attribute::name='lines']/record[field[attribute::name='product']/record[field[attribute::name='category.id']=${categId}]]"]>
+  <#return records>
+</#function>
+
 <#macro "record">
    <#switch .node["child::field[attribute::name='category.id']/child::text()"]?number>
    <#case 9990>
