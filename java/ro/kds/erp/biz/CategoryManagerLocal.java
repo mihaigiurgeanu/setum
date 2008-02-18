@@ -24,4 +24,5 @@ public interface CategoryManagerLocal extends EJBLocalObject {
      * Its intended use is for building reports.
      */
     public ResponseBean getProductReport(Integer productId);
+
 }

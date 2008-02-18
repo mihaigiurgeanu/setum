@@ -177,7 +177,5 @@ public class DefaultCategoryManagerBean implements SessionBean {
 
 	return r;
     }
-
-    
 }
 

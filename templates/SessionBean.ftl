@@ -520,5 +520,6 @@ public abstract class ${.node.class.name}Bean
          }
          
      }
+
 }
 

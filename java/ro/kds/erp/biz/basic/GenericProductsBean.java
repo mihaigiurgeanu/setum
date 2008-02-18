@@ -1270,5 +1270,6 @@ public abstract class GenericProductsBean
          }
          
      }
+
 }
 
