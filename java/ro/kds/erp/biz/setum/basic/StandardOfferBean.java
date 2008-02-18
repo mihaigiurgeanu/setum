@@ -1359,5 +1359,6 @@ public abstract class StandardOfferBean
          }
          
      }
+
 }
 

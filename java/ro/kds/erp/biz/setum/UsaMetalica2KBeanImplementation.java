@@ -33,6 +33,11 @@ import ro.kds.erp.scripting.Script;
 import ro.kds.erp.scripting.ScriptErrorException;
 import ro.kds.erp.biz.Products;
 import java.util.ArrayList;
+import ro.kds.erp.biz.setum.basic.FinisajeHome;
+import ro.kds.erp.biz.setum.basic.FinisajeForm;
+import java.util.Collections;
+import ro.kds.erp.biz.setum.basic.Finisaje;
+import java.util.Comparator;
 
 /**
  * Business logic for definition of UsaMetalica product. It obsoletes old implementation
@@ -43,7 +48,7 @@ import java.util.ArrayList;
  * Created: Fri Nov 18 15:34:24 2005
  *
  * @author <a href="mailto:Mihai Giurgeanu@CRIMIRA"></a>
- * @version $Id: UsaMetalica2KBeanImplementation.java,v 1.24 2007/09/17 05:19:21 mihai Exp $
+ * @version $Id: UsaMetalica2KBeanImplementation.java,v 1.25 2008/02/18 04:35:35 mihai Exp $
  */
 public class UsaMetalica2KBeanImplementation 
     extends ro.kds.erp.biz.setum.basic.UsaMetalica2KBean {
@@ -780,7 +785,86 @@ public class UsaMetalica2KBeanImplementation
 	r = super.computeCalculatedFields(r);
 	load_finisaje(r);
 
+	// compute the value of groupingCode
+	// the groupingCode is a String used internally for reporting purposes
+	// to group together similar products
+
+	GroupingCode gcode = new GroupingCode();
+	gcode.add("UM").add(form.getSubclass()).add(form.getVersion()).add(form.getMaterial()).add(form.getK()).add(form.getIntFoil()).add(form.getExtFoil()).add(form.getIntFoilSec()).add(form.getIsolation()).add(form.getOpeningDir()).add(form.getOpeningSide()).add(form.getFrameType()).add(form.getTresholdType()).add(form.getMontareSistem()).add(form.getDecupareSistemId()).add(form.getSistemSetumSauBeneficiar()).add(form.getBroascaId()).add(form.getCilindruId()).add(form.getCopiatCheieId()).add(form.getVizorId()).add(form.getSildId()).add(form.getSildTip()).add(form.getSildCuloare()).add(form.getRozetaId()).add(form.getRozetaTip()).add(form.getRozetaCuloare()).add(form.getManerId()).add(form.getManerCuloare()).add(form.getYalla1Id()).add(form.getYalla2Id()).add(form.getBaraAntipanicaId()).add(form.getManerSemicilindruId()).add(form.getSelectorOrdineId()).add(form.getAmortizorId()).add(form.getAlteSisteme1Id()).add(form.getAlteSisteme2Id());
+	gcode.add(finisajGroupingCode(form.getIntFinisajBlatId()));
+	gcode.add(finisajGroupingCode(form.getIntFinisajTocId()));
+	gcode.add(finisajGroupingCode(form.getIntFinisajGrilajId()));
+	gcode.add(finisajGroupingCode(form.getIntFinisajFereastraId()));
+	gcode.add(finisajGroupingCode(form.getIntFinisajSupraluminaId()));
+	gcode.add(finisajGroupingCode(form.getIntFinisajPanouLateralId()));
+
+	gcode.add(finisajGroupingCode(form.getExtFinisajBlatId()));
+	gcode.add(finisajGroupingCode(form.getExtFinisajTocId()));
+	gcode.add(finisajGroupingCode(form.getExtFinisajGrilajId()));
+	gcode.add(finisajGroupingCode(form.getExtFinisajFereastraId()));
+	gcode.add(finisajGroupingCode(form.getExtFinisajSupraluminaId()));
+	gcode.add(finisajGroupingCode(form.getExtFinisajPanouLateralId()));
+
+	try {
+	    ArrayList options = new ArrayList(getOptions());
+	    Collections.sort(options, new Comparator() {
+		    public int compare(Object o1, Object o2) {
+			int c1 = ((ProductLocal)o1).getCategory().getId().compareTo(((ProductLocal)o2).getCategory().getId());
+			if(c1 == 0) {
+			    c1 = ((ProductLocal)o1).getDescription().compareTo(((ProductLocal)o2).getDescription());
+			}
+			return c1;
+		    }
+		});
+	    for(Iterator i=options.iterator(); i.hasNext(); ) {
+		ProductLocal option = (ProductLocal)i.next();
+		gcode.add(optionGroupingCode(option));
+	    }
+	} catch (Exception e) {
+	    logger.log(BasicLevel.ERROR, "Error while trying to evaluate options grouping code:", e);
+	}
+
 	return r;
+    }
+
+
+    private String optionGroupingCode(ProductLocal option) {
+	Map amap = option.getAttributesMap();
+	GroupingCode gc = new GroupingCode();
+	gc.add("Option");
+	gc.add(option.getCategory().getId());
+	Utils.addAttrToGC("standard", amap, gc);
+	Utils.addAttrToGC("canat", amap, gc);
+	Utils.addAttrToGC("lf", amap, gc);
+	Utils.addAttrToGC("hf", amap, gc);
+	Utils.addAttrToGC("lpl", amap, gc);
+	Utils.addAttrToGC("hpl", amap, gc);
+	Utils.addAttrToGC("cells", amap, gc);
+	Utils.addAttrToGC("diametru", amap, gc);
+	Utils.addAttrToGC("pas", amap, gc);
+	Utils.addAttrToGC("nrRanduri", amap, gc);
+	Utils.addAttrToGC("lgv", amap, gc);
+	Utils.addAttrToGC("hgv", amap, gc);
+
+	return gc.toString();
+    }
+
+    private String finisajGroupingCode(Integer finisajId) {
+
+	try {
+	    InitialContext ic = new InitialContext();
+	    Context env = (Context)ic.lookup("java:comp/env");
+	    FinisajeHome fh = (FinisajeHome)PortableRemoteObject.narrow(env.lookup("ejb/FinisajeHome"), FinisajeHome.class);
+	    Finisaje finisaje = fh.create();
+
+	    finisaje.loadFormData(finisajId);
+	    FinisajeForm form = finisaje.getForm();
+	    return form.getGroupingCode();
+	} catch (Exception e) {
+	    logger.log(BasicLevel.ERROR, "Can not get the grouping code for finisaj " + finisajId, e);
+	}
+	return new GroupingCode().add("Finisaj").toString();
+
     }
 
 

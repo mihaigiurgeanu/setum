@@ -169,6 +169,7 @@ public interface UsaMetalica2K extends EJBObject {
     public ResponseBean updateFinisajFereastraExtInt(Boolean newFinisajFereastraExtInt) throws RemoteException;
     public ResponseBean updateFinisajSupraluminaExtInt(Boolean newFinisajSupraluminaExtInt) throws RemoteException;
     public ResponseBean updateFinisajPanouLateralExtInt(Boolean newFinisajPanouLateralExtInt) throws RemoteException;
+    public ResponseBean updateGroupingCode(String newGroupingCode) throws RemoteException;
 
 
     public ResponseBean addOption (

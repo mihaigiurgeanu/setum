@@ -1435,5 +1435,6 @@ public abstract class SupraluminaBean
          }
          
      }
+
 }
 

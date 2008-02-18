@@ -702,5 +702,6 @@ public abstract class UsaStandardBean
          }
          
      }
+
 }
 

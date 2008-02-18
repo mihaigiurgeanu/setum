@@ -41,6 +41,7 @@ public class FinisajeForm implements Serializable {
     java.math.BigDecimal sellPrice;
     java.math.BigDecimal entryPrice;
     java.math.BigDecimal price1;
+    String groupingCode;
 
     public FinisajeForm() {
 
@@ -98,6 +99,10 @@ public class FinisajeForm implements Serializable {
 
 
        this.price1 = new java.math.BigDecimal(0);
+
+
+
+       this.groupingCode = "";
 
 
 
@@ -310,6 +315,21 @@ public class FinisajeForm implements Serializable {
 	AttributeLocal a = (AttributeLocal)attributes.get("price1");
 	if(a != null) {
 	    this.setPrice1(a.getDecimalValue());
+	}
+    }
+
+    public void setGroupingCode(String newGroupingCode) {
+        this.groupingCode = newGroupingCode;
+    }
+
+    public String getGroupingCode() {
+        return groupingCode;
+    }
+
+    public void readGroupingCode(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("groupingCode");
+	if(a != null) {
+	    this.setGroupingCode(a.getStringValue());
 	}
     }
 

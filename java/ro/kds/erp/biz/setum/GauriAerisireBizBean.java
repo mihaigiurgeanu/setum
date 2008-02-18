@@ -154,5 +154,34 @@ public class GauriAerisireBizBean extends GauriAerisireBean {
 	super.createNewFormBean();
 
     }
+
+
+
+    /**
+     * Overwrite the base class implementation to add <code>groupingCode</code>
+     * field.
+     *
+     * @param responseBean a <code>ResponseBean</code> value
+     * @return a <code>ResponseBean</code> value
+     */
+    public ResponseBean computeCalculatedFields(ResponseBean r) {
+	r = super.computeCalculatedFields(r);
+
+	GroupingCode gcode = new GroupingCode();
+	gcode.add("GA");
+	gcode.add(form.getDiametru())
+             .add(form.getPas())
+             .add(form.getNrRanduri());
+	
+
+	String gcodestr = gcode.toString();
+	if(gcodestr.compareTo(form.getGroupingCode()) != 0) {
+	    form.setGroupingCode(gcodestr);
+	    r.addField("groupingCode", gcodestr);
+	}
+
+	return r;
+    }
   
+
 }

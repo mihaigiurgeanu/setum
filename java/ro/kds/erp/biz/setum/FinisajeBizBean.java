@@ -21,6 +21,7 @@ import java.util.ArrayList;
 
 import java.util.Collection;
 import ro.kds.erp.scripting.Script;
+import ro.kds.erp.biz.ResponseBean;
 
 /**
  * Describe class FinisajeBizBean here.
@@ -158,6 +159,34 @@ public class FinisajeBizBean extends FinisajeBean {
 	    logger.log(BasicLevel.WARN, "Can not add categoryHome var to the script");
 	    logger.log(BasicLevel.DEBUG, e);
 	}
+    }
+
+    /**
+     * Describe <code>computeCalculatedFields</code> method here.
+     *
+     * @param responseBean a <code>ResponseBean</code> value
+     * @return a <code>ResponseBean</code> value
+     */
+    public ResponseBean computeCalculatedFields(ResponseBean r) {
+	r = super.computeCalculatedFields(r);
+
+	GroupingCode gcode = new GroupingCode();
+	gcode.add("Finisaj");
+	gcode.add(form.getZincare());
+	gcode.add(form.getFurnir());
+	gcode.add(form.getPlacare());
+	gcode.add(form.getGrundId());
+	gcode.add(form.getVopsireTip());
+	gcode.add(form.getRalStasId());
+	gcode.add(form.getRalOrder());
+
+	String gcodestr = gcode.toString();
+	if(gcodestr.compareTo(form.getGroupingCode()) != 0) {
+	    form.setGroupingCode(gcodestr);
+	    r.addField("groupingCode", gcodestr);
+	}
+
+	return r;
     }
 
 

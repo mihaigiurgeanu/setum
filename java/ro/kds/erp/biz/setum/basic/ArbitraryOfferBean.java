@@ -1318,5 +1318,6 @@ public abstract class ArbitraryOfferBean
          }
          
      }
+
 }
 

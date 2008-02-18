@@ -1846,5 +1846,6 @@ public abstract class UsaMetalica1KBean
          }
          
      }
+
 }
 

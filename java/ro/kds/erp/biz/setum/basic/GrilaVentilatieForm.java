@@ -37,6 +37,7 @@ public class GrilaVentilatieForm implements Serializable {
     java.math.BigDecimal price1;
     String businessCategory;
     Integer quantity;
+    String groupingCode;
 
     public GrilaVentilatieForm() {
 
@@ -78,6 +79,10 @@ public class GrilaVentilatieForm implements Serializable {
 
 
        this.quantity = new Integer(0);
+
+
+
+       this.groupingCode = "";
 
 
 
@@ -230,6 +235,21 @@ public class GrilaVentilatieForm implements Serializable {
 	AttributeLocal a = (AttributeLocal)attributes.get("quantity");
 	if(a != null) {
 	    this.setQuantity(a.getIntValue());
+	}
+    }
+
+    public void setGroupingCode(String newGroupingCode) {
+        this.groupingCode = newGroupingCode;
+    }
+
+    public String getGroupingCode() {
+        return groupingCode;
+    }
+
+    public void readGroupingCode(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("groupingCode");
+	if(a != null) {
+	    this.setGroupingCode(a.getStringValue());
 	}
     }
 

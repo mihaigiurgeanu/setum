@@ -1,5 +1,7 @@
 package ro.kds.erp.biz.setum;
 
+import java.util.Map;
+
 
 
 
@@ -13,5 +15,17 @@ package ro.kds.erp.biz.setum;
  * @version 1.0
  */
 public class Utils {
+
+
+
+    /**
+     * Add an attribute value to a grouping code if the attribute
+     * exists in the given attributes map.
+     */
+    public static void addAttrToGC(String attr, Map amap, GroupingCode gc) {
+	if(amap.containsKey(attr)) {
+	    gc.add(amap.get(attr));
+	}
+    }
     
 } // Utils

@@ -25,6 +25,7 @@ import ro.kds.erp.data.CategoryLocal;
 import ro.kds.erp.biz.ResponseBean;
 import ro.kds.erp.scripting.Script;
 import ro.kds.erp.scripting.ScriptErrorException;
+import ro.kds.erp.biz.ResponseBean;
 
 /**
  * Specific business rules implementation of the FerastraEJB session bean.
@@ -369,5 +370,32 @@ public class FereastraBizBean extends FereastraBean {
 	return r;
     }
 
+    /**
+     * Overwrite the base class implementation to add <code>groupingCode</code>
+     * field.
+     *
+     * @param responseBean a <code>ResponseBean</code> value
+     * @return a <code>ResponseBean</code> value
+     */
+    public ResponseBean computeCalculatedFields(ResponseBean r) {
+	r = super.computeCalculatedFields(r);
+
+	GroupingCode gcode = new GroupingCode();
+	gcode.add("Fereastra");
+	gcode.add(form.getStandard())
+             .add(form.getCanat())
+             .add(form.getLf())
+             .add(form.getHf());
+	
+
+	String gcodestr = gcode.toString();
+	if(gcodestr.compareTo(form.getGroupingCode()) != 0) {
+	    form.setGroupingCode(gcodestr);
+	    r.addField("groupingCode", gcodestr);
+	}
+
+	return r;
+    }
+  
 
 }

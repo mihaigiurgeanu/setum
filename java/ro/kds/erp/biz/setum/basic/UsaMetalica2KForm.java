@@ -170,6 +170,7 @@ public class UsaMetalica2KForm implements Serializable {
     Boolean finisajFereastraExtInt;
     Boolean finisajSupraluminaExtInt;
     Boolean finisajPanouLateralExtInt;
+    String groupingCode;
 
     public UsaMetalica2KForm() {
 
@@ -743,6 +744,10 @@ public class UsaMetalica2KForm implements Serializable {
 
 
        this.finisajPanouLateralExtInt = new Boolean(false);
+
+
+
+       this.groupingCode = "";
 
 
 
@@ -2890,6 +2895,21 @@ public class UsaMetalica2KForm implements Serializable {
 	AttributeLocal a = (AttributeLocal)attributes.get("finisajPanouLateralExtInt");
 	if(a != null) {
 	    this.setFinisajPanouLateralExtInt(a.getBoolValue());
+	}
+    }
+
+    public void setGroupingCode(String newGroupingCode) {
+        this.groupingCode = newGroupingCode;
+    }
+
+    public String getGroupingCode() {
+        return groupingCode;
+    }
+
+    public void readGroupingCode(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("groupingCode");
+	if(a != null) {
+	    this.setGroupingCode(a.getStringValue());
 	}
     }
 

@@ -49,6 +49,7 @@ public interface Fereastra extends EJBObject {
     public ResponseBean updatePrice1(java.math.BigDecimal newPrice1) throws RemoteException;
     public ResponseBean updateBusinessCategory(String newBusinessCategory) throws RemoteException;
     public ResponseBean updateQuantity(Integer newQuantity) throws RemoteException;
+    public ResponseBean updateGroupingCode(String newGroupingCode) throws RemoteException;
 
 
     public ResponseBean faraGeam (

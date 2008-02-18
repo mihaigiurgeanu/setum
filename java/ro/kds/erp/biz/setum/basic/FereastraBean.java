@@ -887,6 +887,32 @@ public abstract class FereastraBean
 	computeCalculatedFields(r);
 	return r;
     }
+    public ResponseBean updateGroupingCode(String groupingCode) {
+        ResponseBean r = new ResponseBean();
+	String oldVal = form.getGroupingCode();
+	form.setGroupingCode(groupingCode);
+	r.addRecord();
+	r.addField("groupingCode", groupingCode); // for number format
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".groupingCode");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
+		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
+		script.setVar(FORM_VARNAME, form, FereastraForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the groupingCode", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
 
     /**
      * Generated implementation of the faraGeam service. It will call
@@ -996,6 +1022,7 @@ public abstract class FereastraBean
 	r.addField("price1", form.getPrice1());
 	r.addField("businessCategory", form.getBusinessCategory());
 	r.addField("quantity", form.getQuantity());
+	r.addField("groupingCode", form.getGroupingCode());
 	loadValueLists(r);
     }
 
@@ -1146,6 +1173,12 @@ public abstract class FereastraBean
 	    s.setVar("quantity", form.getQuantity(), Integer.class);
 	} catch (ScriptErrorException e) {
 	    logger.log(BasicLevel.WARN, "Can not set the value of field: quantity from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    s.setVar("groupingCode", form.getGroupingCode(), String.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: groupingCode from the script");
             logger.log(BasicLevel.DEBUG, e);
         }
     }
@@ -1409,6 +1442,17 @@ public abstract class FereastraBean
 	    logger.log(BasicLevel.WARN, "Can not get the value of field: quantity from the script");
             logger.log(BasicLevel.DEBUG, e);
         }
+	try {
+	    field = s.getVar("groupingCode", String.class);
+	    if(!field.equals(form.getGroupingCode())) {
+	        logger.log(BasicLevel.DEBUG, "Field groupingCode modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setGroupingCode((String)field);
+	        r.addField("groupingCode", (String)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: groupingCode from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
     }
 
     /**
@@ -1442,5 +1486,6 @@ public abstract class FereastraBean
          }
          
      }
+
 }
 
