@@ -589,6 +589,13 @@
     <type>Boolean</type>
   </field>
 
+
+  <field>
+    <!-- A code used in reports to group similar products together -->
+    <name>groupingCode</name>
+    <type>String</type>
+  </field>
+
   <!--
   <remote>
     <method>ResponseBean addOption(Integer optionId, String businessCategory) throws RemoteException</method>

@@ -47,6 +47,10 @@
     <name>quantity</name>
     <type>Integer</type>
   </field>
+  <field>
+    <name>groupingCode</name>
+    <type>String</type>
+  </field>
 
   <services>
     

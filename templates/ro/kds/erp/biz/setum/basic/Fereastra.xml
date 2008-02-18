@@ -105,7 +105,10 @@
     <name>quantity</name>
     <type>Integer</type>
   </field>
-
+  <field>
+    <name>groupingCode</name>
+    <type>String</type>
+  </field>
   <services>
     <method returnType="standard" calculate="true">
       <name>faraGeam</name>
