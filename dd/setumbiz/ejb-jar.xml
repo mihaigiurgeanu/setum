@@ -128,6 +128,14 @@
         <home>ro.kds.erp.biz.SequenceHome</home>
         <remote>ro.kds.erp.biz.Sequence</remote>
       </ejb-ref>
+      <ejb-ref>
+	<description>Referinta catre business-logic pentru finisaje.</description>
+	<ejb-ref-name>ejb/FinisajeHome</ejb-ref-name>
+	<ejb-ref-type>Session</ejb-ref-type>
+	<home>ro.kds.erp.setum.FinisajeHome</home>
+	<remote>ro.kds.erp.setum.Finisaje</remote>
+	<ejb-link>FinisajeEJB</ejb-link>
+      </ejb-ref>
       <ejb-local-ref>
         <ejb-ref-name>ejb/ProductLocalHome</ejb-ref-name>
         <ejb-ref-type>Entity</ejb-ref-type>

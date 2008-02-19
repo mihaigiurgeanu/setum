@@ -48,7 +48,7 @@ import java.util.Comparator;
  * Created: Fri Nov 18 15:34:24 2005
  *
  * @author <a href="mailto:Mihai Giurgeanu@CRIMIRA"></a>
- * @version $Id: UsaMetalica2KBeanImplementation.java,v 1.25 2008/02/18 04:35:35 mihai Exp $
+ * @version $Id: UsaMetalica2KBeanImplementation.java,v 1.26 2008/02/19 08:47:45 mihai Exp $
  */
 public class UsaMetalica2KBeanImplementation 
     extends ro.kds.erp.biz.setum.basic.UsaMetalica2KBean {
@@ -824,6 +824,11 @@ public class UsaMetalica2KBeanImplementation
 	    logger.log(BasicLevel.ERROR, "Error while trying to evaluate options grouping code:", e);
 	}
 
+	String groupingCode = gcode.toString();
+	if(groupingCode.compareTo(form.getGroupingCode()) != 0) {
+	    form.setGroupingCode(groupingCode);
+	    r.addField("groupingCode", groupingCode);
+	}
 	return r;
     }
 
@@ -851,19 +856,23 @@ public class UsaMetalica2KBeanImplementation
 
     private String finisajGroupingCode(Integer finisajId) {
 
-	try {
-	    InitialContext ic = new InitialContext();
-	    Context env = (Context)ic.lookup("java:comp/env");
-	    FinisajeHome fh = (FinisajeHome)PortableRemoteObject.narrow(env.lookup("ejb/FinisajeHome"), FinisajeHome.class);
-	    Finisaje finisaje = fh.create();
+	if(finisajId != null && finisajId.intValue() != 0) {
+	    try {
+		InitialContext ic = new InitialContext();
+		Context env = (Context)ic.lookup("java:comp/env");
+		FinisajeHome fh = (FinisajeHome)PortableRemoteObject.narrow(env.lookup("ejb/FinisajeHome"), FinisajeHome.class);
+		Finisaje finisaje = fh.create();
 
-	    finisaje.loadFormData(finisajId);
-	    FinisajeForm form = finisaje.getForm();
-	    return form.getGroupingCode();
-	} catch (Exception e) {
-	    logger.log(BasicLevel.ERROR, "Can not get the grouping code for finisaj " + finisajId, e);
+		finisaje.loadFormData(finisajId);
+		FinisajeForm form = finisaje.getForm();
+		return form.getGroupingCode();
+	    } catch (Exception e) {
+		logger.log(BasicLevel.ERROR, "Can not get the grouping code for finisajId " + finisajId, e);
+	    }
+	    return new GroupingCode().add("Finisaj").toString();
+	} else {
+	    return "";
 	}
-	return new GroupingCode().add("Finisaj").toString();
 
     }
 
