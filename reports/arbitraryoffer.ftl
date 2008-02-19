@@ -17,7 +17,6 @@
     </fo:simple-page-master>
   </fo:layout-master-set>
 
-
   <fo:page-sequence master-reference="page">
     <fo:static-content flow-name="xsl-region-before">
 
@@ -56,11 +55,11 @@
     </fo:static-content>
 
     <fo:static-content flow-name="xsl-region-after">
-      <!--FOOTER-->
       <fo:block text-align="end" font-size="6pt"
 		border-before-style="solid">Pagina <fo:page-number/></fo:block>
-      <!--/FOOTER-->
     </fo:static-content>
+
+
 
 
     <fo:flow flow-name="xsl-region-body">
