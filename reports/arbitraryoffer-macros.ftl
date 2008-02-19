@@ -6,22 +6,31 @@
 <#-- parcurge oferta si grupeaza liniile dupa caracteristici -->
 <#function group_line_offers doc>
   <#-- incep cu usile metalice -->
-  <#assign lines = sel_product(doc, 9990)>
+  <#assign usilines = sel_product(doc, 9990)>
+  <#assign usi = {} >
+  <#list usilines as usa>
+    <#local groupingCode>
+    <#assign groupingCode = usa["field[attribute::name='product']/record/field[attribute::name='groupingCode']"] >
+    <#assign usi[groupingCode] = (usi[groupingCode]!) + [usa] >
+  </#list>
+
 
   <#-- sisteme -->
-  <#assign lines = lines + sel_product(doc, 9998)>
-  <#assign lines = lines + sel_product(doc, 9997)>
-  <#assign lines = lines + sel_product(doc, 9996)>
-  <#assign lines = lines + sel_product(doc, 9995)>
-  <#assign lines = lines + sel_product(doc, 9994)>
-  <#assign lines = lines + sel_product(doc, 10000)>
-  <#assign lines = lines + sel_product(doc, 10001)>
-  <#assign lines = lines + sel_product(doc, 10002)>
-  <#assign lines = lines + sel_product(doc, 10003)>
-  <#assign lines = lines + sel_product(doc, 10004)>
-  <#assign lines = lines + sel_product(doc, 10005)>
-  <#assign lines = lines + sel_product(doc, 10006)>
+  <#assign sisteme = []>
+  <#assign sisteme = sisteme + sel_product(doc, 9998)>
+  <#assign sisteme = sisteme + sel_product(doc, 9997)>
+  <#assign sisteme = sisteme + sel_product(doc, 9996)>
+  <#assign sisteme = sisteme + sel_product(doc, 9995)>
+  <#assign sisteme = sisteme + sel_product(doc, 9994)>
+  <#assign sisteme = sisteme + sel_product(doc, 10000)>
+  <#assign sisteme = sisteme + sel_product(doc, 10001)>
+  <#assign sisteme = sisteme + sel_product(doc, 10002)>
+  <#assign sisteme = sisteme + sel_product(doc, 10003)>
+  <#assign sisteme = sisteme + sel_product(doc, 10004)>
+  <#assign sisteme = sisteme + sel_product(doc, 10005)>
+  <#assign sisteme = sisteme + sel_product(doc, 10006)>
   
+  <#return {"usi":usi, "sisteme":sisteme} >
 </#function>
 
 <#-- select the list of products with a given product category -->
