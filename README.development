@@ -12,3 +12,6 @@ user_pref( "browser.dom.window.dump.enabled", true ) ;
 user_pref( "javascript.options.strict", true ) ; 
 
 
+
+Copy bcel.jar in ${ant.home}/lib folder. It is used by ejbjar task to determine class dependencies.
+
