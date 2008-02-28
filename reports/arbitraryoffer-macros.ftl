@@ -6,39 +6,63 @@
 <#-- parcurge oferta si grupeaza liniile dupa caracteristici -->
 <#function group_line_offers doc>
   <#-- incep cu usile metalice -->
-  <#assign usilines = sel_product(doc, 9990)>
-  <#assign usi = {} >
+  <#local usi={} >
+  <#local sisteme = []>
+
+  <#local usilines = sel_product(doc, 9990)>
   <#list usilines as usa>
-    <#local groupingCode>
-    <#assign groupingCode = usa["field[attribute::name='product']/record/field[attribute::name='groupingCode']"] >
-    <#assign usi[groupingCode] = (usi[groupingCode]!) + [usa] >
+    <#local groupingCode = usa["field[attribute::name='product']/record/field[attribute::name='groupingCode']"] >
+    <#local usi = usi + { "groupingCode":((usi[groupingCode]!) + [usa]) } >
   </#list>
 
 
   <#-- sisteme -->
-  <#assign sisteme = []>
-  <#assign sisteme = sisteme + sel_product(doc, 9998)>
-  <#assign sisteme = sisteme + sel_product(doc, 9997)>
-  <#assign sisteme = sisteme + sel_product(doc, 9996)>
-  <#assign sisteme = sisteme + sel_product(doc, 9995)>
-  <#assign sisteme = sisteme + sel_product(doc, 9994)>
-  <#assign sisteme = sisteme + sel_product(doc, 10000)>
-  <#assign sisteme = sisteme + sel_product(doc, 10001)>
-  <#assign sisteme = sisteme + sel_product(doc, 10002)>
-  <#assign sisteme = sisteme + sel_product(doc, 10003)>
-  <#assign sisteme = sisteme + sel_product(doc, 10004)>
-  <#assign sisteme = sisteme + sel_product(doc, 10005)>
-  <#assign sisteme = sisteme + sel_product(doc, 10006)>
+  <#local sisteme = sisteme + sel_product(doc, 9998)>
+  <#local sisteme = sisteme + sel_product(doc, 9997)>
+  <#local sisteme = sisteme + sel_product(doc, 9996)>
+  <#local sisteme = sisteme + sel_product(doc, 9995)>
+  <#local sisteme = sisteme + sel_product(doc, 9994)>
+  <#local sisteme = sisteme + sel_product(doc, 10000)>
+  <#local sisteme = sisteme + sel_product(doc, 10001)>
+  <#local sisteme = sisteme + sel_product(doc, 10002)>
+  <#local sisteme = sisteme + sel_product(doc, 10003)>
+  <#local sisteme = sisteme + sel_product(doc, 10004)>
+  <#local sisteme = sisteme + sel_product(doc, 10005)>
+  <#local sisteme = sisteme + sel_product(doc, 10006)>
   
-  <#return {"usi":usi, "sisteme":sisteme} >
+  <#return ({"usi":usi, "sisteme":sisteme}) >
 </#function>
 
 <#-- select the list of products with a given product category -->
 <#-- returneaza liniile de oferta -->
-<#function sel_product doc categId>
-  <#assign records=doc["response/record/field[attribute::name='lines']/record[field[attribute::name='product']/record[field[attribute::name='category.id']=${categId}]]"]>
+<#function sel_product document categId>
+  <#local records=doc["response/record/field[attribute::name='lines']/record[field[attribute::name='product']/record/field[attribute::name='category.id']='${categId}']"] >
   <#return records>
 </#function>
+
+
+<#macro display_usi lineno usi>
+<!-- display_usi START (${lineno}) -->
+<#-- Afiseaza o linie de oferta care grupeaza una sau mai multe usi cu caracteristici similare -->
+<#-- lineno este numarul liniei curente (va trebui afisat) -->
+<#-- usi este lista de noduri xml de tip record corespunzatoare liniei de oferta (response/record/field[name=lines]/record) -->
+<#local usa=usi[0].record["field[attribute::name='product']"].record >
+<fo:block>
+${lineno}. Usa metalica &#x00AB;Subcod- usa["field[attribute::name='subclass']"]#x00BB;
+</fo:block>
+
+<!-- display_usi END (${lineno}) -->
+</#macro>
+
+
+<#macro display_sisteme lineno sisteme>
+<!-- diplay_sisteme START (${lineno}) -->
+<#-- Afiseaza o linie de oferta care grupeaza toate sistemele -->
+<#-- lineno este numarul liniei curente (va trebui afisat) -->
+<#-- usi este lista de noduri xml de tip record corespunzatoare liniei de oferta (response/record/field[name=lines]/record) -->
+
+<!-- display_sisteme END (${lineno}) -->
+</#macro>
 
 <#macro "record">
    <#switch .node["child::field[attribute::name='category.id']/child::text()"]?number>
