@@ -1099,7 +1099,7 @@
     <init-param>
       <description>The name of the stylesheet to be used by the Transformer</description>
       <param-name>stylesheet</param-name>
-      <param-value>arbitraryoffer.ftl</param-value>
+      <param-value>arbitraryoffer-grouped.ftl</param-value>
     </init-param>
   </servlet>
 
