@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<!-- $Id: build.xml,v 1.10 2007/11/05 23:11:36 mihai Exp $ -->
+<!-- $Id: build.xml,v 1.11 2008/02/28 11:27:32 mihai Exp $ -->
 <project name="setumerp" default="application">
   <description>
     Targets for building and deploying the setumerp application.
@@ -155,6 +155,7 @@
     <property name="mappernames" value="rdb.mysql"/>
     <ejbjar naming="directory"
 	    srcdir="${build}"
+            classpath="${build}"
 	    descriptordir="${descriptors}"
 	    cmpversion="2.0"
 	    flatdestdir="true"
@@ -209,6 +210,10 @@
     </exec>
     <exec os="Linux" executable="${jonas.root}/bin/unix/jonas"
 	  dir="${jonas.root}/apps">
+      <arg line="admin -a setum.ear"/>
+    </exec>
+    <exec os="Mac OS X" executable="${jonas.root}/bin/unix/jonas"
+          dir="${jonas.root}/apps">
       <arg line="admin -a setum.ear"/>
     </exec>
   </target>
