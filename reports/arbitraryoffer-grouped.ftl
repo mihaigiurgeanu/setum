@@ -1,4 +1,4 @@
-<xml version="1.0" encoding="iso-8859-2"?>
+<?xml version="1.0" encoding="iso-8859-2"?>
 <fo:root xmlns:fo="http://www.w3.org/1999/XSL/Format">
 <!-- <#include "arbitraryoffer-macros.ftl"> -->
   <fo:layout-master-set>
@@ -129,15 +129,18 @@
 
 
       <!-- liniile ofertei -->
-      <fo:block font-size="8pt">
+      <fo:block font-size="10pt">
 
       <#assign lineno=1>
       <#assign lineoffers=group_line_offers(doc) >
+      <!-- lineoffers.usilines are ${lineoffers.usilines?size} elemente -->
+      <!-- lineoffers.usi are ${lineoffers.usi?size} elemente -->
       <#assign gcodes=lineoffers.usi?keys>
       <#list gcodes as code>
         <@display_usi lineno=lineno usi=lineoffers.usi[code]/>
 	<#assign lineno = lineno+1 >
       </#list>
+
       <@display_sisteme lineno=lineno sisteme=lineoffers.sisteme/>
 
 
@@ -145,7 +148,9 @@
       <!-- /liniile ofertei -->
  
 
-      <!-- Empty block, for lata page number citation -->
+      <!-- Empty block, for page number citation -->
       <fo:block id="last-page-block"></fo:block>
     </fo:flow>
-    <!-- BODY -->
+    <!-- /BODY -->
+  </fo:page-sequence>
+</fo:root>

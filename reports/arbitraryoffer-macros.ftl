@@ -6,13 +6,13 @@
 <#-- parcurge oferta si grupeaza liniile dupa caracteristici -->
 <#function group_line_offers doc>
   <#-- incep cu usile metalice -->
-  <#local usi={} >
-  <#local sisteme = []>
+  <#local usi={} />
+  <#local sisteme = [] />
 
-  <#local usilines = sel_product(doc, 9990)>
+  <#local usilines = sel_product(doc, 9990) />
   <#list usilines as usa>
     <#local groupingCode = usa["field[attribute::name='product']/record/field[attribute::name='groupingCode']"] >
-    <#local usi = usi + { "groupingCode":((usi[groupingCode]!) + [usa]) } >
+    <#local usi = usi + { "groupingCode":((usi[groupingCode]!) + [usa]) } />
   </#list>
 
 
@@ -30,13 +30,13 @@
   <#local sisteme = sisteme + sel_product(doc, 10005)>
   <#local sisteme = sisteme + sel_product(doc, 10006)>
   
-  <#return ({"usi":usi, "sisteme":sisteme}) >
+  <#return ({"usi":usi, "sisteme":sisteme, "usilines":usilines}) >
 </#function>
 
 <#-- select the list of products with a given product category -->
 <#-- returneaza liniile de oferta -->
-<#function sel_product document categId>
-  <#local records=doc["response/record/field[attribute::name='lines']/record[field[attribute::name='product']/record/field[attribute::name='category.id']='${categId}']"] >
+<#function sel_product doc categId>
+  <#local records=doc["response/record/field[attribute::name='lines']/record[field[attribute::name='product']/record/field[attribute::name='category.id']=${categId?c}]"] />
   <#return records>
 </#function>
 
@@ -46,9 +46,30 @@
 <#-- Afiseaza o linie de oferta care grupeaza una sau mai multe usi cu caracteristici similare -->
 <#-- lineno este numarul liniei curente (va trebui afisat) -->
 <#-- usi este lista de noduri xml de tip record corespunzatoare liniei de oferta (response/record/field[name=lines]/record) -->
-<#local usa=usi[0].record["field[attribute::name='product']"].record >
-<fo:block>
-${lineno}. Usa metalica &#x00AB;Subcod- usa["field[attribute::name='subclass']"]#x00BB;
+
+<#-- atributele comune le voi lua din prima usa din lista -->
+<#assign usa=usi[0]["field[attribute::name='product']/record"] />
+<fo:block space-before="10pt">
+<fo:inline font-weight="bold">${lineno}. </fo:inline>
+Usa metalica &#x00AB;Subcod- ${usa["field[attribute::name='subclass']"]}&#x00BB;,
+    &#x00AB;varianta ${usa["field[attribute::name='version']"]}&#x00BB;,
+    echipata cu 
+    	     &#x00AB;<@system name="broasca">broasca</@system>
+	     <@system name="cilindru">cilindru</@system>
+	     <@system name="copiatCheie">copiat chei</@system>
+	     <@system name="vizor">vizor</@system>
+	     <@system name="sild">sild</@system>
+	     <@system name="rozeta">rozeta</@system>
+	     <@system name="maner">maner</@system>
+	     <@system name="yalla1">yalla</@system>
+	     <@system name="yalla2">yalla2</@system>
+	     <@system name="baraAntipanica">bara antipanica</@system>
+	     <@system name="manerSemicilindru">maner semicilindru</@system>
+	     <@system name="selectorOrdine">selector ordine</@system>
+	     <@system name="amortizor">amortizor</@system>
+	     <@system name="alteSisteme1"></@system>
+	     <@system name="alteSisteme2"></@system>&#x00BB;
+
 </fo:block>
 
 <!-- display_usi END (${lineno}) -->
@@ -63,6 +84,12 @@ ${lineno}. Usa metalica &#x00AB;Subcod- usa["field[attribute::name='subclass']"]
 
 <!-- display_sisteme END (${lineno}) -->
 </#macro>
+
+
+
+
+
+
 
 <#macro "record">
    <#switch .node["child::field[attribute::name='category.id']/child::text()"]?number>
@@ -273,8 +300,8 @@ value list searches a child with the give key (value) and returns the associated
 
 <#-- afiseaza un sistem dintr-o usa -->
 <#macro system name>
-  <#if .node["child::field[attribute::name='${name}Id']"]?number &gt; 0>
-  <#nested> ${search(.node?parent, "${name}Id", .node["child::field[attribute::name='${name}Id']"])} - ${.node["child::field[attribute::name='${name}Buc']"]} buc.
+  <#if usa["child::field[attribute::name='${name}Id']"]?number &gt; 0>
+  <#nested> ${search(usa?parent, "${name}Id", usa["child::field[attribute::name='${name}Id']"])} - ${usa["child::field[attribute::name='${name}Buc']"]} buc.
   </#if>
 </#macro>
 

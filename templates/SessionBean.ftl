@@ -451,6 +451,7 @@ public abstract class ${.node.class.name}Bean
      * Add all the fields of the form as variables for the script
      */
     protected void addFieldsToScript(Script s) {
+        logger.log(BasicLevel.DEBUG, "start");
 	try {
             s.setVar("logger", logger, Logger.class);
         } catch (ScriptErrorException e) {
@@ -466,6 +467,7 @@ public abstract class ${.node.class.name}Bean
             logger.log(BasicLevel.DEBUG, e);
         }
 	[/#list]
+        logger.log(BasicLevel.DEBUG, "end");
     }
 
     /**

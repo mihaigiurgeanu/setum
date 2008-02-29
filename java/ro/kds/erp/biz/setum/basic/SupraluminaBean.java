@@ -1013,6 +1013,7 @@ public abstract class SupraluminaBean
      * Add all the fields of the form as variables for the script
      */
     protected void addFieldsToScript(Script s) {
+        logger.log(BasicLevel.DEBUG, "start");
 	try {
             s.setVar("logger", logger, Logger.class);
         } catch (ScriptErrorException e) {
@@ -1152,6 +1153,7 @@ public abstract class SupraluminaBean
 	    logger.log(BasicLevel.WARN, "Can not set the value of field: quantity from the script");
             logger.log(BasicLevel.DEBUG, e);
         }
+        logger.log(BasicLevel.DEBUG, "end");
     }
 
     /**

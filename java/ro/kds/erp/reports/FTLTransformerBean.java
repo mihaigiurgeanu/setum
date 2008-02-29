@@ -30,6 +30,7 @@ import freemarker.template.TemplateException;
 import ro.kds.erp.biz.PreferencesHome;
 import ro.kds.erp.biz.Preferences;
 import javax.rmi.PortableRemoteObject;
+import java.io.FileWriter;
 
 
 /**
@@ -152,6 +153,20 @@ public class FTLTransformerBean implements SessionBean {
 	    Writer out = new StringWriter();
 	    template.process(root, out);
 	    out.flush();
+	    try {
+		File fileFrom = File.createTempFile("offerData", ".xml");
+		logger.log(BasicLevel.INFO, "Logging offer data to " + fileFrom.toString());
+		File fileTo = File.createTempFile("offerFO", ".xml");
+		logger.log(BasicLevel.INFO, "Logging offer FO to " + fileTo.toString());
+		FileWriter wFrom = new FileWriter(fileFrom);
+		FileWriter wTo = new FileWriter(fileTo);
+		wFrom.write(r.toXML());
+		wTo.write(out.toString());
+		wFrom.close();
+		wTo.close();
+	    } catch (Exception e) {
+		logger.log(BasicLevel.DEBUG, "Exception logging the input and output xml-s of the transformation.", e);
+	    }
 	    return out.toString();
 	}
 	catch (IOException e) {
