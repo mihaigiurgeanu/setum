@@ -70,10 +70,92 @@ Usa metalica &#x00AB;Subcod- ${usa["field[attribute::name='subclass']"]}&#x00BB;
 	     <@system name="alteSisteme1"></@system>
 	     <@system name="alteSisteme2"></@system>&#x00BB;
 
+
+&#x00AB;finisata
+	<@finisaj name="intFinisajBlat">blat interior:</@finisaj>
+	<@finisaj name="intFinisajToc">toc interior:</@finisaj>
+	<@finisaj name="intFinisajGrilaj">grilaj interior:</@finisaj>
+	<@finisaj name="intFinisajFereastra">fereastra interior:</@finisaj>
+	<@finisaj name="intFinisajSupralumina">supralumina interior:</@finisaj>
+	<@finisaj name="intFinisajPanouLateral">panou lateral interior:</@finisaj>
+	<@finisaj name="extFinisajBlat">blat exterior:</@finisaj>
+	<@finisaj name="extFinisajToc">toc exterior:</@finisaj>
+	<@finisaj name="extFinisajGrilaj">grilaj exterior:</@finisaj>
+	<@finisaj name="extFinisajFereastra">fereastra exterior:</@finisaj>
+	<@finisaj name="extFinisajSupralumina">supralumina exterior:</@finisaj>
+	<@finisaj name="extFinisajPanouLateral">panou lateral exterior:</@finisaj>
+&#x00BB;
+agrement tehnic nr. 
 </fo:block>
+
+<fo:table border-collapse="collapse">
+  <fo:table-column column-number="1" column-width="1.75cm"/>
+  <fo:table-column column-number="2" column-width="1.75cm"/>
+  <fo:table-column column-number="3" column-width="1.55cm"/>
+  <fo:table-column column-number="4" column-width="1.55cm"/>
+  <fo:table-column column-number="5" column-width="4.55cm"/>
+  <fo:table-column column-number="6" column-width="1.05cm"/>
+  <fo:table-column column-number="7" column-width="1.95cm"/>
+  <fo:table-column column-number="8" column-width="1.95cm"/>
+  <fo:table-body>
+    <fo:table-row>
+	<fo:table-cell column-number="1" border-style="solid" font-size="10pt" font-weight="bold" number-rows-spanned="2"><fo:block>COD SETUM</fo:block></fo:table-cell>
+	<fo:table-cell column-number="2" border-style="solid" font-size="10pt" font-weight="bold" number-rows-spanned="2"><fo:block>COD BENEF</fo:block></fo:table-cell>
+	<fo:table-cell column-number="3" border-style="solid" font-size="10pt" font-weight="bold" number-columns-spanned="2"><fo:block>DIMENSIUNI [mm]</fo:block></fo:table-cell>
+	<fo:table-cell column-number="5" border-style="solid" font-size="10pt" font-weight="bold" number-rows-spanned="2"><fo:block>DESCRIERE</fo:block></fo:table-cell>
+	<fo:table-cell column-number="6" border-style="solid" font-size="10pt" font-weight="bold" number-rows-spanned="2" text-align="right"><fo:block>BUC</fo:block></fo:table-cell>
+	<fo:table-cell column-number="7" border-style="solid" font-size="10pt" font-weight="bold" number-rows-spanned="2" text-align="right"><fo:block>Pret/Buc fara TVA [RON]</fo:block></fo:table-cell>
+	<fo:table-cell column-number="8" border-style="solid" font-size="10pt" font-weight="bold" number-rows-spanned="2" text-align="right"><fo:block>Pret/total fara TVA [RON]</fo:block></fo:table-cell>
+    </fo:table-row>
+    <fo:table-row>
+	<fo:table-cell column-number="3" border-style="solid" font-size="10pt" font-weight="bold"><fo:block>Le</fo:block></fo:table-cell>
+	<fo:table-cell column-number="4" border-style="solid" font-size="10pt" font-weight="bold"><fo:block>He</fo:block></fo:table-cell>
+    </fo:table-row>
+
+    <#list usi as item_usa>
+    <#local prod_usa = item_usa["field[attribute::name='product']/record"] />
+    <#local lepl = 0 /> <#-- largime totala panouri laterale -->
+    <#local hesl = 0 /> <#-- inaltime totala supralumini -->
+      <#list item_usa["field[name='parts']"] as part>
+      <#local part_node = part["record/field[name='part']/record"] />
+        <#switch part_node["field[name='category.id']"]?number>
+	<#case 9980> <#-- panou lateral -->
+	<#local lepl = lepl + part_node["field[name='lpl']"]?number />
+	<#break/>
+	<#case 9981> <#-- supralumina -->
+	<#local hesl = hesl + part_node["field[name='hs']"]?number />
+	<#break/>
+	</#switch>
+      </#list>
+    <#local lexex = item_usa["field[name='le']"]?number + lepl />
+    <#local hexec = item_usa["field[name='he']"]?number + hesl />
+    <fo:table-row>
+      <fo:table-cell column-number="1" border-style="solid" font-size="10pt"><fo:block>prod_usa["code"]</fo:block></fo:table-cell>
+      <fo:table-cell column-number="2" border-style="solid" font-size="10pt"><fo:block>prod_usa["name"]</fo:block></fo:table-cell>
+      <fo:table-cell column-number="3" border-style="solid" font-size="10pt"><fo:block>${lexec}</fo:block></fo:table-cell>
+      <fo:table-cell column-number="4" border-style="solid" font-size="10pt"><fo:block>${hexec}</fo:block></fo:table-cell>
+      <fo:table-cell column-number="5" border-style="solid" font-size="10pt"><fo:block>
+          ${item_usa["field[name='k']"]} canat(e),
+	  <#if item_usa["field[name='k']"]?number > 1>
+	  Lcurent = ${item_usa["field[name='lCurrent']"]?number},
+	  </#if>
+      </fo:block></fo:table-cell>
+      <fo:table-cell column-number="6" border-style="solid" font-size="10pt" text-align="right"><fo:block>2</fo:block></fo:table-cell>
+      <fo:table-cell column-number="7" border-style="solid" font-size="10pt" text-align="right"><fo:block>551.6</fo:block></fo:table-cell>
+      <fo:table-cell column-number="8" border-style="solid" font-size="10pt" text-align="right"><fo:block>551.6</fo:block></fo:table-cell>
+    </fo:table-row>
+    </#list>
+  </fo:table-body>
+</fo:table>
+
+
 
 <!-- display_usi END (${lineno}) -->
 </#macro>
+
+
+
+
 
 
 <#macro display_sisteme lineno sisteme>
@@ -89,8 +171,26 @@ Usa metalica &#x00AB;Subcod- ${usa["field[attribute::name='subclass']"]}&#x00BB;
 
 
 
+<#-- afiseaza un sistem dintr-o usa -->
+<#macro system name>
+  <#if usa["child::field[attribute::name='${name}Id']"]?number &gt; 0>
+  <#nested> ${search(usa?parent, "${name}Id", usa["child::field[attribute::name='${name}Id']"])}<#if usa["field[attribute::name='${name}Buc']"]?number &gt; 1 >
+	- ${usa["child::field[attribute::name='${name}Buc']"]} buc.</#if>,
+  </#if>
+</#macro>
+
+<#-- afiseaza finisajul -->
+<#macro finisaj name>
+  <#if usa["child::field[attribute::name='${name}Id']"]?number != 0>
+  <#nested/> ${usa["child::field[attribute::name='${name}']"]};
+  </#if> 
+</#macro>
 
 
+
+
+
+<#-- obsolete -->
 <#macro "record">
    <#switch .node["child::field[attribute::name='category.id']/child::text()"]?number>
    <#case 9990>
@@ -179,8 +279,8 @@ Usa metalica &#x00AB;Subcod- ${usa["field[attribute::name='subclass']"]}&#x00BB;
     <#if .node["child::field[attribute::name='intFinisajGrilajId']"]?number != 0>
     Finisaj int. grilaj: ${.node["child::field[attribute::name='intFinisajGrilaj']"]}.
     </#if>
-    <#if .node["child::field[attribute::name='intFinisajBlatId']"]?number != 0>
-    Finisaj int. fereastra: ${.node["child::field[attribute::name='intFinisajBlat']"]}.
+    <#if .node["child::field[attribute::name='intFinisajFereastraId']"]?number != 0>
+    Finisaj int. fereastra: ${.node["child::field[attribute::name='intFinisajFereastra']"]}.
     </#if>
     <#if .node["child::field[attribute::name='intFinisajSupraluminaId']"]?number != 0>
     Finisaj int. supralumina: ${.node["child::field[attribute::name='intFinisajSupralumina']"]}.
@@ -293,17 +393,6 @@ value list searches a child with the give key (value) and returns the associated
 
 </#function>
 
-
-
-
-
-
-<#-- afiseaza un sistem dintr-o usa -->
-<#macro system name>
-  <#if usa["child::field[attribute::name='${name}Id']"]?number &gt; 0>
-  <#nested> ${search(usa?parent, "${name}Id", usa["child::field[attribute::name='${name}Id']"])} - ${usa["child::field[attribute::name='${name}Buc']"]} buc.
-  </#if>
-</#macro>
 
 <#-- selecteaza un atribut al nodului dat -->
 <#function prop node name>
