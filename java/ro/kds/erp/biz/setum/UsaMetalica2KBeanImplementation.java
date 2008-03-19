@@ -48,7 +48,7 @@ import java.util.Comparator;
  * Created: Fri Nov 18 15:34:24 2005
  *
  * @author <a href="mailto:Mihai Giurgeanu@CRIMIRA"></a>
- * @version $Id: UsaMetalica2KBeanImplementation.java,v 1.26 2008/02/19 08:47:45 mihai Exp $
+ * @version $Id: UsaMetalica2KBeanImplementation.java,v 1.27 2008/03/19 21:28:08 mihai Exp $
  */
 public class UsaMetalica2KBeanImplementation 
     extends ro.kds.erp.biz.setum.basic.UsaMetalica2KBean {
@@ -790,7 +790,13 @@ public class UsaMetalica2KBeanImplementation
 	// to group together similar products
 
 	GroupingCode gcode = new GroupingCode();
-	gcode.add("UM").add(form.getSubclass()).add(form.getVersion()).add(form.getMaterial()).add(form.getK()).add(form.getIntFoil()).add(form.getExtFoil()).add(form.getIntFoilSec()).add(form.getIsolation()).add(form.getOpeningDir()).add(form.getOpeningSide()).add(form.getFrameType()).add(form.getTresholdType()).add(form.getMontareSistem()).add(form.getDecupareSistemId()).add(form.getSistemSetumSauBeneficiar()).add(form.getBroascaId()).add(form.getCilindruId()).add(form.getCopiatCheieId()).add(form.getVizorId()).add(form.getSildId()).add(form.getSildTip()).add(form.getSildCuloare()).add(form.getRozetaId()).add(form.getRozetaTip()).add(form.getRozetaCuloare()).add(form.getManerId()).add(form.getManerCuloare()).add(form.getYalla1Id()).add(form.getYalla2Id()).add(form.getBaraAntipanicaId()).add(form.getManerSemicilindruId()).add(form.getSelectorOrdineId()).add(form.getAmortizorId()).add(form.getAlteSisteme1Id()).add(form.getAlteSisteme2Id());
+	gcode.add("UM")
+	    .add(form.getSubclass())
+	    .add(form.getVersion())
+	    .add(form.getFrameType()).add(form.getLFrame())
+	    .add(form.getTresholdType()).add(form.getLTreshold())
+	    .add(form.getBroascaId()).add(form.getCilindruId()).add(form.getCopiatCheieId()).add(form.getVizorId()).add(form.getSildId()).add(form.getSildTip()).add(form.getSildCuloare()).add(form.getRozetaId()).add(form.getRozetaTip()).add(form.getRozetaCuloare()).add(form.getManerId()).add(form.getManerCuloare()).add(form.getYalla1Id()).add(form.getYalla2Id()).add(form.getBaraAntipanicaId()).add(form.getManerSemicilindruId()).add(form.getSelectorOrdineId()).add(form.getAmortizorId()).add(form.getAlteSisteme1Id()).add(form.getAlteSisteme2Id());
+	//gcode.add("UM").add(form.getSubclass()).add(form.getVersion()).add(form.getMaterial()).add(form.getK()).add(form.getIntFoil()).add(form.getExtFoil()).add(form.getIntFoilSec()).add(form.getIsolation()).add(form.getOpeningDir()).add(form.getOpeningSide()).add(form.getFrameType()).add(form.getTresholdType()).add(form.getMontareSistem()).add(form.getDecupareSistemId()).add(form.getSistemSetumSauBeneficiar()).add(form.getBroascaId()).add(form.getCilindruId()).add(form.getCopiatCheieId()).add(form.getVizorId()).add(form.getSildId()).add(form.getSildTip()).add(form.getSildCuloare()).add(form.getRozetaId()).add(form.getRozetaTip()).add(form.getRozetaCuloare()).add(form.getManerId()).add(form.getManerCuloare()).add(form.getYalla1Id()).add(form.getYalla2Id()).add(form.getBaraAntipanicaId()).add(form.getManerSemicilindruId()).add(form.getSelectorOrdineId()).add(form.getAmortizorId()).add(form.getAlteSisteme1Id()).add(form.getAlteSisteme2Id());
 	gcode.add(finisajGroupingCode(form.getIntFinisajBlatId()));
 	gcode.add(finisajGroupingCode(form.getIntFinisajTocId()));
 	gcode.add(finisajGroupingCode(form.getIntFinisajGrilajId()));
@@ -805,6 +811,8 @@ public class UsaMetalica2KBeanImplementation
 	gcode.add(finisajGroupingCode(form.getExtFinisajSupraluminaId()));
 	gcode.add(finisajGroupingCode(form.getExtFinisajPanouLateralId()));
 
+	// don't need the grouping on options
+	/*
 	try {
 	    ArrayList options = new ArrayList(getOptions());
 	    Collections.sort(options, new Comparator() {
@@ -823,7 +831,7 @@ public class UsaMetalica2KBeanImplementation
 	} catch (Exception e) {
 	    logger.log(BasicLevel.ERROR, "Error while trying to evaluate options grouping code:", e);
 	}
-
+	*/
 	String groupingCode = gcode.toString();
 	if(groupingCode.compareTo(form.getGroupingCode()) != 0) {
 	    form.setGroupingCode(groupingCode);

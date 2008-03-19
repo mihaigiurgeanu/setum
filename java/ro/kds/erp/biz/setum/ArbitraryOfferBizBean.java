@@ -124,6 +124,7 @@ public class ArbitraryOfferBizBean extends ArbitraryOfferBean {
 	form.setPrice(new BigDecimal(0));
 	form.setRelativeGain(new Double(0));
 	form.setAbsoluteGain(new BigDecimal(0));
+	form.setQuantity(new BigDecimal(1));
 
 	// read only fields on subform
 	form.setProductCategory("");

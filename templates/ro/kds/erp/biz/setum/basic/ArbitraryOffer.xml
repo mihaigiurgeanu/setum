@@ -58,7 +58,19 @@
     <type>java.math.BigDecimal</type>
   </field>
   <field>
+    <name>quantity</name>
+    <type>java.math.BigDecimal</type>
+  </field>
+  <field>
+    <name>value</name>
+    <type>java.math.BigDecimal</type>
+  </field>
+  <field>
     <name>vatPrice</name>
+    <type>java.math.BigDecimal</type>
+  </field>
+  <field>
+    <name>vatValue</name>
     <type>java.math.BigDecimal</type>
   </field>
   <field>
