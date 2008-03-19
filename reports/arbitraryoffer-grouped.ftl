@@ -105,7 +105,7 @@
                  <fo:block>Fax:</fo:block>
               </fo:table-cell>
               <fo:table-cell column-number="3" border-style="solid" font-size="6pt">
-                 <fo:block>Nr. pagini: <page-number-citation ref-id="last-page-block"/></fo:block>
+                 <fo:block>Nr. pagini: <fo:page-number-citation ref-id="last-page-block"/></fo:block>
               </fo:table-cell>
             </fo:table-row>
             <fo:table-row>
@@ -120,7 +120,7 @@
               <fo:table-cell column-number="1" border-style="solid" font-size="6pt" number-columns-spanned="3">
                  <fo:block>Prin prezenta va facem cunoscuta oferta noastra de pret pentru:</fo:block>
                  <fo:block>Obiectiv:</fo:block>
-                 <fo:block>${doc["child::response/child::record/child::field[attribute::name='description']"]}</fo:block>
+                 <fo:block>${doc["child::response/child::record/child::field[attribute::name='description']"]?html}</fo:block>
               </fo:table-cell>
             </fo:table-row>
 	  </fo:table-body>
@@ -147,6 +147,23 @@
       </fo:block>
       <!-- /liniile ofertei -->
  
+
+      <fo:block font-weight="bold" text-decoration="underline" text-align="right" space-before="1cm">TOTAL OFERTA NR  ${doc["response/record/field[attribute::name='no']"]}/Data ${doc["response/record/field[attribute::name='dateFrom']"]}</fo:block>
+      <fo:block font-weight="bold" text-align="right">TOTAL fara TVA: ${offer_value!0}</fo:block>
+      <fo:block font-weight="bold" text-align="right">TOTAL cu TVA: ${(offer_value!0) * 1.19}</fo:block>
+
+      <fo:block>
+	<fo:inline font-weight="bold">OBSERVATII:</fo:inline>
+	${doc["response/record/field[attribute::name='comment']"]?html}
+      </fo:block>
+
+      <fo:block font-weight="bold">
+	<fo:block>Valabilitatea ofertei: ${doc["response/record/field[attribute::name='dateTo']"]}</fo:block>
+	<fo:block>Termen de livrare:<fo:inline white-space-collapse="false">___</fo:inline>zile lucratoare</fo:block>
+	<fo:block>Garantie: 12 luni de la data livarii produsului.</fo:block>
+	<fo:block>Termeni contractuali: avans 50% la data semnarii contractului, diferenta de 50% la data livararii produsului, in lei la cursul BNR din ziua facturarii.</fo:block>
+      </fo:block>
+
 
       <!-- Empty block, for page number citation -->
       <fo:block id="last-page-block"></fo:block>

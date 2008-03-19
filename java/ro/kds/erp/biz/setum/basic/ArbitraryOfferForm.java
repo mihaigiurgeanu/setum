@@ -40,7 +40,10 @@ public class ArbitraryOfferForm implements Serializable {
     String comment;
     Integer productId;
     java.math.BigDecimal price;
+    java.math.BigDecimal quantity;
+    java.math.BigDecimal value;
     java.math.BigDecimal vatPrice;
+    java.math.BigDecimal vatValue;
     Double relativeGain;
     java.math.BigDecimal absoluteGain;
     String productCategory;
@@ -108,7 +111,19 @@ public class ArbitraryOfferForm implements Serializable {
 
 
 
+       this.quantity = new java.math.BigDecimal(0);
+
+
+
+       this.value = new java.math.BigDecimal(0);
+
+
+
        this.vatPrice = new java.math.BigDecimal(0);
+
+
+
+       this.vatValue = new java.math.BigDecimal(0);
 
 
 
@@ -323,6 +338,36 @@ public class ArbitraryOfferForm implements Serializable {
 	}
     }
 
+    public void setQuantity(java.math.BigDecimal newQuantity) {
+        this.quantity = newQuantity;
+    }
+
+    public java.math.BigDecimal getQuantity() {
+        return quantity;
+    }
+
+    public void readQuantity(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("quantity");
+	if(a != null) {
+	    this.setQuantity(a.getDecimalValue());
+	}
+    }
+
+    public void setValue(java.math.BigDecimal newValue) {
+        this.value = newValue;
+    }
+
+    public java.math.BigDecimal getValue() {
+        return value;
+    }
+
+    public void readValue(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("value");
+	if(a != null) {
+	    this.setValue(a.getDecimalValue());
+	}
+    }
+
     public void setVatPrice(java.math.BigDecimal newVatPrice) {
         this.vatPrice = newVatPrice;
     }
@@ -335,6 +380,21 @@ public class ArbitraryOfferForm implements Serializable {
 	AttributeLocal a = (AttributeLocal)attributes.get("vatPrice");
 	if(a != null) {
 	    this.setVatPrice(a.getDecimalValue());
+	}
+    }
+
+    public void setVatValue(java.math.BigDecimal newVatValue) {
+        this.vatValue = newVatValue;
+    }
+
+    public java.math.BigDecimal getVatValue() {
+        return vatValue;
+    }
+
+    public void readVatValue(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("vatValue");
+	if(a != null) {
+	    this.setVatValue(a.getDecimalValue());
 	}
     }
 

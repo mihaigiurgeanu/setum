@@ -113,39 +113,44 @@ agrement tehnic nr.
     </fo:table-row>
 
     <#list usi as item_usa>
-    <#local prod_usa = item_usa["field[attribute::name='product']"] />
+    <#local prod_usa = item_usa["field[attribute::name='product']/record"] />
     <#local lepl = 0 /> <#-- largime totala panouri laterale -->
     <#local hesl = 0 /> <#-- inaltime totala supralumini -->
-      <#list prod_usa["record/field[name='parts']"] as part>
-      <#local part_node = part["record/field[name='part']/record"] />
-        <#switch part_node["field[name='category.id']"]?number>
+      <#list prod_usa["field[attribute::name='parts']/record/field[name='part']/record"] as part>
+        <#switch part["field[attribute::name='category.id']"]?number>
 	<#case 9980> <#-- panou lateral -->
-	<#local lepl = lepl + part_node["field[name='lpl']"]?number />
+	<#local lepl = lepl + part["field[attribute::name='lpl']"]?number />
 	<#break/>
 	<#case 9981> <#-- supralumina -->
-	<#local hesl = hesl + part_node["field[name='hs']"]?number />
+	<#local hesl = hesl + part["field[attribute::name='hs']"]?number />
 	<#break/>
 	</#switch>
       </#list>
-    <#local lexex = prod_usa["record/field[name='le']"]?number + lepl />
-    <#local hexec = prod_usa["record/field[name='he']"]?number + hesl />
+    <#local lexec = prod_usa["field[attribute::name='le']"]?number + lepl />
+    <#local hexec = prod_usa["field[attribute::name='he']"]?number + hesl />
     <fo:table-row>
-      <fo:table-cell column-number="1" border-style="solid" font-size="10pt"><fo:block>${prod_usa["record/field[name='code']"]}</fo:block></fo:table-cell>
-      <fo:table-cell column-number="2" border-style="solid" font-size="10pt"><fo:block>${prod_usa["record/field[name='name']"]}</fo:block></fo:table-cell>
+      <fo:table-cell column-number="1" border-style="solid" font-size="10pt"><fo:block>${prod_usa["field[attribute::name='code']"]}</fo:block></fo:table-cell>
+      <fo:table-cell column-number="2" border-style="solid" font-size="10pt"><fo:block>${prod_usa["field[attribute::name='name']"]}</fo:block></fo:table-cell>
       <fo:table-cell column-number="3" border-style="solid" font-size="10pt"><fo:block>${lexec}</fo:block></fo:table-cell>
       <fo:table-cell column-number="4" border-style="solid" font-size="10pt"><fo:block>${hexec}</fo:block></fo:table-cell>
       <fo:table-cell column-number="5" border-style="solid" font-size="10pt"><fo:block>
-          ${prod_usa["record/field[name='k']"]} canat(e),
-	  foaie ${search(prod_usa, "intFoil", prod_usa["record/field[name='intFoil']"])} int./${search(prod_usa, "extFoil", prod_usa["record/field[name='extFoil']"])} ext., 
-	  <#if prod_usa["record/field[name='k']"]?number > 1>
-	  Lcurent = ${prod_usa["record/field[name='lCurrent']"]?number},
+          ${prod_usa["field[attribute::name='k']"]} canat(e),
+	  foaie ${search(prod_usa?parent, "intFoil", prod_usa["field[attribute::name='intFoil']"])} int./${search(prod_usa?parent, "extFoil", prod_usa["field[attribute::name='extFoil']"])} ext., 
+	  <#if prod_usa["field[attribute::name='k']"]?number &gt; 1>
+	  Lcurent = ${prod_usa["field[attribute::name='lCurrent']"]?number},
 	  </#if>
       </fo:block></fo:table-cell>
-      <fo:table-cell column-number="6" border-style="solid" font-size="10pt" text-align="right"><fo:block>${item_usa["record/field[name='quantity']"]}</fo:block></fo:table-cell>
-      <fo:table-cell column-number="7" border-style="solid" font-size="10pt" text-align="right"><fo:block>${item_usa["record/field[name='price']"]}</fo:block></fo:table-cell>
-      <fo:table-cell column-number="8" border-style="solid" font-size="10pt" text-align="right"><fo:block>${item_usa["record/field[name='value']"]}</fo:block></fo:table-cell>
+      <fo:table-cell column-number="6" border-style="solid" font-size="10pt" text-align="right"><fo:block><#--${item_usa["field[attribute::name='quantity']"]}-->1</fo:block></fo:table-cell>
+      <fo:table-cell column-number="7" border-style="solid" font-size="10pt" text-align="right"><fo:block>${item_usa["field[attribute::name='price']"]}</fo:block></fo:table-cell>
+      <fo:table-cell column-number="8" border-style="solid" font-size="10pt" text-align="right"><fo:block>${item_usa["field[attribute::name='price']"]}</fo:block></fo:table-cell>
     </fo:table-row>
+    <#local total_value = total_value!0 + item_usa["field[attribute::name='price']"]?number />
     </#list>
+    <#assign offer_value = offer_value!0 + total_value!0 />
+    <fo:table-row>
+      <fo:table-cell column-number="1" border-style="solid" font-size="10pt" font-weight="bold" number-columns-spanned="7"><fo:block text-align="right">TOTAL fara TVA</fo:block></fo:table-cell>
+      <fo:table-cell column-number="8" border-style="solid" font-size="10pt"><fo:block text-align="right">${total_value}</fo:block></fo:table-cell>
+    </fo:table-row>
   </fo:table-body>
 </fo:table>
 

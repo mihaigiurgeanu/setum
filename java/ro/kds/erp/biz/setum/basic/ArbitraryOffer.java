@@ -39,7 +39,10 @@ public interface ArbitraryOffer extends EJBObject {
     public ResponseBean updateComment(String newComment) throws RemoteException;
     public ResponseBean updateProductId(Integer newProductId) throws RemoteException;
     public ResponseBean updatePrice(java.math.BigDecimal newPrice) throws RemoteException;
+    public ResponseBean updateQuantity(java.math.BigDecimal newQuantity) throws RemoteException;
+    public ResponseBean updateValue(java.math.BigDecimal newValue) throws RemoteException;
     public ResponseBean updateVatPrice(java.math.BigDecimal newVatPrice) throws RemoteException;
+    public ResponseBean updateVatValue(java.math.BigDecimal newVatValue) throws RemoteException;
     public ResponseBean updateRelativeGain(Double newRelativeGain) throws RemoteException;
     public ResponseBean updateAbsoluteGain(java.math.BigDecimal newAbsoluteGain) throws RemoteException;
     public ResponseBean updateProductCategory(String newProductCategory) throws RemoteException;

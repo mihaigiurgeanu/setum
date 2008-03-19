@@ -627,6 +627,58 @@ public abstract class ArbitraryOfferBean
 	computeCalculatedFields(r);
 	return r;
     }
+    public ResponseBean updateQuantity(java.math.BigDecimal quantity) {
+        ResponseBean r = new ResponseBean();
+	java.math.BigDecimal oldVal = form.getQuantity();
+	form.setQuantity(quantity);
+	r.addRecord();
+	r.addField("quantity", quantity); // for number format
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".quantity");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
+		script.setVar(OLDVAL_VARNAME, oldVal, java.math.BigDecimal.class);
+		script.setVar(FORM_VARNAME, form, ArbitraryOfferForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the quantity", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
+    public ResponseBean updateValue(java.math.BigDecimal value) {
+        ResponseBean r = new ResponseBean();
+	java.math.BigDecimal oldVal = form.getValue();
+	form.setValue(value);
+	r.addRecord();
+	r.addField("value", value); // for number format
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".value");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
+		script.setVar(OLDVAL_VARNAME, oldVal, java.math.BigDecimal.class);
+		script.setVar(FORM_VARNAME, form, ArbitraryOfferForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the value", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
     public ResponseBean updateVatPrice(java.math.BigDecimal vatPrice) {
         ResponseBean r = new ResponseBean();
 	java.math.BigDecimal oldVal = form.getVatPrice();
@@ -648,6 +700,32 @@ public abstract class ArbitraryOfferBean
 						// fields to the response also
 	   } catch (ScriptErrorException e) {
 	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the vatPrice", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
+    public ResponseBean updateVatValue(java.math.BigDecimal vatValue) {
+        ResponseBean r = new ResponseBean();
+	java.math.BigDecimal oldVal = form.getVatValue();
+	form.setVatValue(vatValue);
+	r.addRecord();
+	r.addField("vatValue", vatValue); // for number format
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".vatValue");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
+		script.setVar(OLDVAL_VARNAME, oldVal, java.math.BigDecimal.class);
+		script.setVar(FORM_VARNAME, form, ArbitraryOfferForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the vatValue", e);
            }
         }
 	computeCalculatedFields(r);
@@ -880,7 +958,10 @@ public abstract class ArbitraryOfferBean
 	r.addField("comment", form.getComment());
 	r.addField("productId", form.getProductId());
 	r.addField("price", form.getPrice());
+	r.addField("quantity", form.getQuantity());
+	r.addField("value", form.getValue());
 	r.addField("vatPrice", form.getVatPrice());
+	r.addField("vatValue", form.getVatValue());
 	r.addField("relativeGain", form.getRelativeGain());
 	r.addField("absoluteGain", form.getAbsoluteGain());
 	r.addField("productCategory", form.getProductCategory());
@@ -983,9 +1064,27 @@ public abstract class ArbitraryOfferBean
             logger.log(BasicLevel.DEBUG, e);
         }
 	try {
+	    s.setVar("quantity", form.getQuantity(), java.math.BigDecimal.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: quantity from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    s.setVar("value", form.getValue(), java.math.BigDecimal.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: value from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
 	    s.setVar("vatPrice", form.getVatPrice(), java.math.BigDecimal.class);
 	} catch (ScriptErrorException e) {
 	    logger.log(BasicLevel.WARN, "Can not set the value of field: vatPrice from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    s.setVar("vatValue", form.getVatValue(), java.math.BigDecimal.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: vatValue from the script");
             logger.log(BasicLevel.DEBUG, e);
         }
 	try {
@@ -1189,6 +1288,28 @@ public abstract class ArbitraryOfferBean
             logger.log(BasicLevel.DEBUG, e);
         }
 	try {
+	    field = s.getVar("quantity", java.math.BigDecimal.class);
+	    if(!field.equals(form.getQuantity())) {
+	        logger.log(BasicLevel.DEBUG, "Field quantity modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setQuantity((java.math.BigDecimal)field);
+	        r.addField("quantity", (java.math.BigDecimal)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: quantity from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    field = s.getVar("value", java.math.BigDecimal.class);
+	    if(!field.equals(form.getValue())) {
+	        logger.log(BasicLevel.DEBUG, "Field value modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setValue((java.math.BigDecimal)field);
+	        r.addField("value", (java.math.BigDecimal)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: value from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
 	    field = s.getVar("vatPrice", java.math.BigDecimal.class);
 	    if(!field.equals(form.getVatPrice())) {
 	        logger.log(BasicLevel.DEBUG, "Field vatPrice modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
@@ -1197,6 +1318,17 @@ public abstract class ArbitraryOfferBean
 	    }
 	} catch (ScriptErrorException e) {
 	    logger.log(BasicLevel.WARN, "Can not get the value of field: vatPrice from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    field = s.getVar("vatValue", java.math.BigDecimal.class);
+	    if(!field.equals(form.getVatValue())) {
+	        logger.log(BasicLevel.DEBUG, "Field vatValue modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setVatValue((java.math.BigDecimal)field);
+	        r.addField("vatValue", (java.math.BigDecimal)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: vatValue from the script");
             logger.log(BasicLevel.DEBUG, e);
         }
 	try {
