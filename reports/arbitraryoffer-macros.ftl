@@ -144,7 +144,7 @@ agrement tehnic nr.
       <fo:table-cell column-number="7" border-style="solid" font-size="10pt" text-align="right"><fo:block>${item_usa["field[attribute::name='price']"]}</fo:block></fo:table-cell>
       <fo:table-cell column-number="8" border-style="solid" font-size="10pt" text-align="right"><fo:block>${item_usa["field[attribute::name='price']"]}</fo:block></fo:table-cell>
     </fo:table-row>
-    <#local total_value = total_value!0 + item_usa["field[attribute::name='price']"]?number />
+    <#local total_value = total_value!0 + cvnumber(item_usa["field[attribute::name='price']"]) />
     </#list>
     <#assign offer_value = offer_value!0 + total_value!0 />
     <fo:table-row>
@@ -168,7 +168,34 @@ agrement tehnic nr.
 <!-- diplay_sisteme START (${lineno}) -->
 <#-- Afiseaza o linie de oferta care grupeaza toate sistemele -->
 <#-- lineno este numarul liniei curente (va trebui afisat) -->
-<#-- usi este lista de noduri xml de tip record corespunzatoare liniei de oferta (response/record/field[name=lines]/record) -->
+<#-- usi este liesta de noduri xml de tip record corespunzatoare liniei de oferta (response/record/field[name=lines]/record) -->
+     <#if sisteme?length &gt; 0>
+<fo:block space-before="10pt">
+<fo:inline font-weight="bold">${lineno}. </fo:inline>Sisteme de inchidere
+
+
+<fo:table border-collapse="collapse">
+  <fo:table-column column-number="1" column-width="1.75cm"/>
+  <fo:table-column column-number="2" column-width="1.75cm"/>
+  <fo:table-column column-number="3" column-width="7.65cm"/>
+  <fo:table-column column-number="4" column-width="1.05cm"/>
+  <fo:table-column column-number="5" column-width="1.95cm"/>
+  <fo:table-column column-number="6" column-width="1.95cm"/>
+  <fo:table-body>
+    <fo:table-row>
+	<fo:table-cell column-number="1" border-style="solid" font-size="10pt" font-weight="bold" ><fo:block>COD SETUM</fo:block></fo:table-cell>
+	<fo:table-cell column-number="2" border-style="solid" font-size="10pt" font-weight="bold" ><fo:block>COD BENEF</fo:block></fo:table-cell>
+	<fo:table-cell column-number="3" border-style="solid" font-size="10pt" font-weight="bold" ><fo:block>DESCRIERE</fo:block></fo:table-cell>
+	<fo:table-cell column-number="4" border-style="solid" font-size="10pt" font-weight="bold" text-align="right"><fo:block>BUC</fo:block></fo:table-cell>
+	<fo:table-cell column-number="5" border-style="solid" font-size="10pt" font-weight="bold" text-align="right"><fo:block>Pret/Buc fara TVA [RON]</fo:block></fo:table-cell>
+	<fo:table-cell column-number="6" border-style="solid" font-size="10pt" font-weight="bold" text-align="right"><fo:block>Pret/total fara TVA [RON]</fo:block></fo:table-cell>
+    </fo:table-row>
+
+  </for:table-body>
+</fo:table>
+
+</fo:block>     
+     </#if>
 
 <!-- display_sisteme END (${lineno}) -->
 </#macro>
@@ -404,3 +431,8 @@ value list searches a child with the give key (value) and returns the associated
 <#function prop node name>
   <#return node["child::field[attribute::name='${name}']"]>
 </#function>
+
+<#function cvnumber text_number>
+<#-- make the conversion to number -->
+     <#return text_number?replace(",", ".")?number />
+</#function> 
