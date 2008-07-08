@@ -4,7 +4,8 @@
 // Global variable theForm that will be used by event handlers
 var theForm = new FormObject();
 
-theForm.text_fields = new Array("lg", "hg", "lcorrection", "hcorrection",
+theForm.text_fields = new Array("name", 
+				"lg", "hg", "lcorrection", "hcorrection",
 				"le", "he", "lCurrent",
 				"lUtil", "hUtil", "lFoaie", "hFoaie", "lFoaieSec",
 				"lFrame", "bFrame", "cFrame", "lTreshold",

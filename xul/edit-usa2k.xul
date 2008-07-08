@@ -92,6 +92,10 @@ windows.arguments[0].select(productId)
 	    <grid>
 	      <rows>
 		<row>
+		  <label control="name" value="Cod utilizator:"/>
+		  <textbox id="name"/>
+		</row>
+		<row>
 		  <label control="" value="Nr canate:"/>
 		  <hbox>
 		    <radiogroup id="k">

@@ -35,7 +35,7 @@
 		  <fo:external-graphic src="images/sigla.png" content-height="20mm"/>
 		</fo:block>
 	      </fo:table-cell>
-	      <fo:table-cell font-size="6pt" display-align="center">
+	      <fo:table-cell font-size="10pt" display-align="center">
 		<fo:block text-align="end">BUCURESTI B-dul PRECIZIEI nr. 32, Sector 6</fo:block>
 		<fo:block text-align="end">Contractari: Tel/Fax: 316.05.90 Tel: 316.18.56; 316.05.88</fo:block>
 		<fo:block text-align="end">Secretariat: Tel/Fax: 316.05.88; Tel: 316.39.57</fo:block>
@@ -64,7 +64,7 @@
 
     <fo:flow flow-name="xsl-region-body">
       <!-- date generale despre oferta (numar, data, nume client, etc.) -->
-      <fo:block font-size="8pt">
+      <fo:block font-family="Times New Roman" font-size="11pt">
 	<fo:table width="90%">
 	  <fo:table-column column-number="1" column-width="30%"/>
 	  <fo:table-column column-number="2" column-width="70%"/>
@@ -124,7 +124,7 @@
       <!-- liniile ofertei -->
       <#assign lineno=1>
       <#list doc["child::response/child::record/child::field[attribute::name='lines']/child::record"] as record>
-      <fo:block text-align="justified" font-size="8pt">
+      <fo:block text-align="justified" font-size="11pt" font-family="Times New Roman">
 	${lineno}. ${record["child::field[attribute::name='productCategory']"]} - ${record["child::field[attribute::name='productCode']"]}: RON ${record["child::field[attribute::name='vatPrice']"]}
       </fo:block>
       <#switch record["child::field[attribute::name='product']/child::record/child::field[attribute::name='category.id']"]?number>

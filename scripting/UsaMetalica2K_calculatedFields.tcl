@@ -29,7 +29,7 @@ proc read_prop {varname objname propname} {
 }
 
 
-set name "$version$subclass$code"
+# set name "$version$subclass$code"
 
 if { $frameType == 1 } {
     set lFrame 90

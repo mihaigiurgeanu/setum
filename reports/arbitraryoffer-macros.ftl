@@ -169,7 +169,7 @@ agrement tehnic nr.
 <#-- Afiseaza o linie de oferta care grupeaza toate sistemele -->
 <#-- lineno este numarul liniei curente (va trebui afisat) -->
 <#-- usi este liesta de noduri xml de tip record corespunzatoare liniei de oferta (response/record/field[name=lines]/record) -->
-     <#if sisteme?length &gt; 0>
+     <#if sisteme?size &gt; 0>
 <fo:block space-before="10pt">
 <fo:inline font-weight="bold">${lineno}. </fo:inline>Sisteme de inchidere
 

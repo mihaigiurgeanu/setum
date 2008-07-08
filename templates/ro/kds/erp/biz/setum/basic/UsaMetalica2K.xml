@@ -4,11 +4,11 @@
   <package>ro.kds.erp.biz.setum.basic</package>
   <name>UsaMetalica2K</name>
   <field>
-    <name>code</name>
+    <name>code</name><!-- codul setum -->
     <type>String</type>
   </field>
   <field>
-    <name>name</name>
+    <name>name</name><!-- codul beneficiarului -->
     <type>String</type>
   </field>
   <field>
