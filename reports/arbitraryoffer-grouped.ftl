@@ -73,7 +73,7 @@
     <fo:flow flow-name="xsl-region-body">
 
       <!-- date generale despre oferta (numar, data, nume client, etc.) -->
-      <fo:block font-size="8pt">
+      <fo:block font-size="10pt" font-family="Times">
 	<fo:table width="90%">
 	  <fo:table-column column-number="1" column-width="25%"/>
 	  <fo:table-column column-number="2" column-width="25%"/>
@@ -82,42 +82,42 @@
 
 	  <fo:table-body>
             <fo:table-row>
-              <fo:table-cell column-number="1" border-style="solid" font-size="6pt" number-columns-spanned="2">
+              <fo:table-cell column-number="1" border-style="solid" font-size="10pt" number-columns-spanned="2">
                  <fo:block>Catre: ${doc["child::response/child::record/child::field[attribute::name='clientName']"]}</fo:block>
               </fo:table-cell>
-              <fo:table-cell column-number="3" border-style="solid" font-size="6pt">
+              <fo:table-cell column-number="3" border-style="solid" font-size="10pt">
                  <fo:block>De la: SC SETUM SA</fo:block>
               </fo:table-cell>
             </fo:table-row>
             <fo:table-row>
-              <fo:table-cell column-number="1" border-style="solid" font-size="6pt" number-columns-spanned="2">
+              <fo:table-cell column-number="1" border-style="solid" font-size="10pt" number-columns-spanned="2">
                  <fo:block>In atentia: </fo:block>
               </fo:table-cell>
-              <fo:table-cell column-number="3" border-style="solid" font-size="6pt">
+              <fo:table-cell column-number="3" border-style="solid" font-size="10pt">
                  <fo:block>Nr oferta: ${doc["child::response/child::record/child::field[attribute::name='no']"]}/Data: ${doc["child::response/child::record/child::field[attribute::name='dateFrom']"]}</fo:block>
               </fo:table-cell>
             </fo:table-row>
             <fo:table-row>
-              <fo:table-cell column-number="1" border-style="solid" font-size="6pt" number-columns-spanned="1">
+              <fo:table-cell column-number="1" border-style="solid" font-size="10pt" number-columns-spanned="1">
                  <fo:block>Tel:</fo:block>
               </fo:table-cell>
-              <fo:table-cell column-number="2" border-style="solid" font-size="6pt" number-columns-spanned="1">
+              <fo:table-cell column-number="2" border-style="solid" font-size="10pt" number-columns-spanned="1">
                  <fo:block>Fax:</fo:block>
               </fo:table-cell>
-              <fo:table-cell column-number="3" border-style="solid" font-size="6pt">
+              <fo:table-cell column-number="3" border-style="solid" font-size="10pt">
                  <fo:block>Nr. pagini: <fo:page-number-citation ref-id="last-page-block"/></fo:block>
               </fo:table-cell>
             </fo:table-row>
             <fo:table-row>
-              <fo:table-cell column-number="1" border-style="solid" font-size="6pt" number-columns-spanned="2">
+              <fo:table-cell column-number="1" border-style="solid" font-size="10pt" number-columns-spanned="2">
                  <fo:block>E-mail: </fo:block>
               </fo:table-cell>
-              <fo:table-cell column-number="3" border-style="solid" font-size="6pt">
+              <fo:table-cell column-number="3" border-style="solid" font-size="10pt">
                  <fo:block>Referitor la cererea Dvs. de oferta nr: </fo:block>
               </fo:table-cell>
             </fo:table-row>
             <fo:table-row>
-              <fo:table-cell column-number="1" border-style="solid" font-size="6pt" number-columns-spanned="3">
+              <fo:table-cell column-number="1" border-style="solid" font-size="10pt" number-columns-spanned="3">
                  <fo:block>Prin prezenta va facem cunoscuta oferta noastra de pret pentru:</fo:block>
                  <fo:block>Obiectiv:</fo:block>
                  <fo:block>${doc["child::response/child::record/child::field[attribute::name='description']"]?html}</fo:block>
@@ -129,7 +129,7 @@
 
 
       <!-- liniile ofertei -->
-      <fo:block font-size="10pt">
+      <fo:block font-size="10pt" font-family="Times">
 
       <#assign lineno=1>
       <#assign lineoffers=group_line_offers(doc) >
@@ -148,16 +148,16 @@
       <!-- /liniile ofertei -->
  
 
-      <fo:block font-weight="bold" text-decoration="underline" text-align="right" space-before="1cm">TOTAL OFERTA NR  ${doc["response/record/field[attribute::name='no']"]}/Data ${doc["response/record/field[attribute::name='dateFrom']"]}</fo:block>
-      <fo:block font-weight="bold" text-align="right">TOTAL fara TVA: ${offer_value!0}</fo:block>
-      <fo:block font-weight="bold" text-align="right">TOTAL cu TVA: ${(offer_value!0) * 1.19}</fo:block>
+      <fo:block font-family="Times" font-size="10pt" font-weight="bold" text-decoration="underline" text-align="right" space-before="1cm">TOTAL OFERTA NR  ${doc["response/record/field[attribute::name='no']"]}/Data ${doc["response/record/field[attribute::name='dateFrom']"]}</fo:block>
+      <fo:block font-family="Times" font-size="10pt" font-weight="bold" text-align="right">TOTAL fara TVA: ${offer_value!0}</fo:block>
+      <fo:block font-family="Times" font-size="10pt" font-weight="bold" text-align="right">TOTAL cu TVA: ${(offer_value!0) * 1.19}</fo:block>
 
-      <fo:block>
+      <fo:block font-family="Times" font-size="10pt">
 	<fo:inline font-weight="bold">OBSERVATII:</fo:inline>
 	${doc["response/record/field[attribute::name='comment']"]?html}
       </fo:block>
 
-      <fo:block font-weight="bold">
+      <fo:block font-family="Times" font-size="10pt" font-weight="bold">
 	<fo:block>Valabilitatea ofertei: ${doc["response/record/field[attribute::name='dateTo']"]}</fo:block>
 	<fo:block>Termen de livrare:<fo:inline white-space-collapse="false">___</fo:inline>zile lucratoare</fo:block>
 	<fo:block>Garantie: 12 luni de la data livarii produsului.</fo:block>

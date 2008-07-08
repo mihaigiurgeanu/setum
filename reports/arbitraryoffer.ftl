@@ -64,7 +64,7 @@
 
     <fo:flow flow-name="xsl-region-body">
       <!-- date generale despre oferta (numar, data, nume client, etc.) -->
-      <fo:block font-family="Times New Roman">
+      <fo:block>
 	<fo:table width="90%">
 	  <fo:table-column column-number="1" column-width="30%"/>
 	  <fo:table-column column-number="2" column-width="70%"/>
@@ -72,46 +72,46 @@
 	  <fo:table-body>
 	    <fo:table-row>
 	      <fo:table-cell column-number="1" border-style="solid" font-weight="bold">
-		<fo:block>Oferta Nr:</fo:block>
+		<fo:block font-family="Times" font-size="11pt">Oferta Nr:</fo:block>
 	      </fo:table-cell>
 	      <fo:table-cell column-number="2" border-style="solid">
-		<fo:block>${doc["child::response/child::record/child::field[attribute::name='no']"]}</fo:block>
+		<fo:block font-family="Times" font-size="11pt">${doc["child::response/child::record/child::field[attribute::name='no']"]}</fo:block>
 	      </fo:table-cell>
 	    </fo:table-row>
 
 	    <fo:table-row>
 	      <fo:table-cell column-number="1" border-style="solid" font-weight="bold">
-		<fo:block>Catre:</fo:block>
+		<fo:block font-family="Times" font-size="11pt">Catre:</fo:block>
 	      </fo:table-cell>
 	      <fo:table-cell column-number="2" border-style="solid">
-		<fo:block>${doc["child::response/child::record/child::field[attribute::name='clientName']"]}</fo:block>
+		<fo:block font-family="Times" font-size="11pt">${doc["child::response/child::record/child::field[attribute::name='clientName']"]}</fo:block>
 	      </fo:table-cell>
 	    </fo:table-row>
 
 	    <fo:table-row>
 	      <fo:table-cell column-number="1" border-style="solid" font-weight="bold">
-		<fo:block>Din data:</fo:block>
+		<fo:block font-family="Times" font-size="11pt">Din data:</fo:block>
 	      </fo:table-cell>
 	      <fo:table-cell column-number="2" border-style="solid">
-		<fo:block>${doc["child::response/child::record/child::field[attribute::name='dateFrom']"]} (an-luna-zi)</fo:block>
+		<fo:block font-family="Times" font-size="11pt">${doc["child::response/child::record/child::field[attribute::name='dateFrom']"]} (an-luna-zi)</fo:block>
 	      </fo:table-cell>
 	    </fo:table-row>
 
 	    <fo:table-row>
 	      <fo:table-cell column-number="1" border-style="solid" font-weight="bold">
-		<fo:block>Valabilitate pana:</fo:block>
+		<fo:block font-family="Times" font-size="11pt">Valabilitate pana:</fo:block>
 	      </fo:table-cell>
 	      <fo:table-cell column-number="2" border-style="solid">
-		<fo:block>${doc["child::response/child::record/child::field[attribute::name='dateTo']"]} (an-luna-zi)</fo:block>
+		<fo:block font-family="Times" font-size="11pt">${doc["child::response/child::record/child::field[attribute::name='dateTo']"]} (an-luna-zi)</fo:block>
 	      </fo:table-cell>
 	    </fo:table-row>
 
 	    <fo:table-row>
 	      <fo:table-cell column-number="1" border-style="solid" font-weight="bold">
-		<fo:block>Observatii:</fo:block>
+		<fo:block font-family="Times" font-size="11pt">Observatii:</fo:block>
 	      </fo:table-cell>
 	      <fo:table-cell column-number="2" border-style="solid">
-		<fo:block>${doc["child::response/child::record/child::field[attribute::name='description']"]}</fo:block>
+		<fo:block font-family="Times" font-size="11pt">${doc["child::response/child::record/child::field[attribute::name='description']"]}</fo:block>
 	      </fo:table-cell>
 	    </fo:table-row>
 
@@ -124,7 +124,7 @@
       <!-- liniile ofertei -->
       <#assign lineno=1>
       <#list doc["child::response/child::record/child::field[attribute::name='lines']/child::record"] as record>
-      <fo:block text-align="justified" font-size="11pt" font-family="Times New Roman">
+      <fo:block text-align="justified" font-size="11pt" font-family="Times">
 	${lineno}. ${record["child::field[attribute::name='productCategory']"]} - ${record["child::field[attribute::name='productCode']"]}: RON ${record["child::field[attribute::name='vatPrice']"]}
       </fo:block>
       <#switch record["child::field[attribute::name='product']/child::record/child::field[attribute::name='category.id']"]?number>
