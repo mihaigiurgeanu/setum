@@ -64,7 +64,7 @@
 
     <fo:flow flow-name="xsl-region-body">
       <!-- date generale despre oferta (numar, data, nume client, etc.) -->
-      <fo:block font-family="Times New Roman" font-size="11pt">
+      <fo:block font-family="Times New Roman">
 	<fo:table width="90%">
 	  <fo:table-column column-number="1" column-width="30%"/>
 	  <fo:table-column column-number="2" column-width="70%"/>
