@@ -71,6 +71,9 @@ public interface Orders extends EJBObject {
     public ResponseBean updateQuantity(java.math.BigDecimal newQuantity) throws RemoteException;
     public ResponseBean updateValue(java.math.BigDecimal newValue) throws RemoteException;
     public ResponseBean updateTax(java.math.BigDecimal newTax) throws RemoteException;
+    public ResponseBean updateCodMontaj(Integer newCodMontaj) throws RemoteException;
+    public ResponseBean updateMontajProcent(Double newMontajProcent) throws RemoteException;
+    public ResponseBean updateMontajSeparat(Boolean newMontajSeparat) throws RemoteException;
     public ResponseBean updateInvoiceNumber(String newInvoiceNumber) throws RemoteException;
     public ResponseBean updateInvoiceDate(java.util.Date newInvoiceDate) throws RemoteException;
     public ResponseBean updateInvoiceRole(String newInvoiceRole) throws RemoteException;

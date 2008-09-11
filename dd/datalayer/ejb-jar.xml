@@ -334,6 +334,24 @@
       <cmp-field>
 	<field-name>comments</field-name>
       </cmp-field>
+      <cmp-field>
+	<field-name>montajId</field-name>
+      </cmp-field>
+      <cmp-field>
+	<field-name>montajProcent</field-name>
+      </cmp-field>
+      <cmp-field>
+	<field-name>montajSeparat</field-name>
+      </cmp-field>
+      <cmp-field>
+	<field-name>locationId</field-name>
+      </cmp-field>
+      <cmp-field>
+	<field-name>distance</field-name>
+      </cmp-field>
+      <cmp-field>
+	<field-name>deliveries</field-name>
+      </cmp-field>
       <primkey-field>id</primkey-field>
     </entity>
 

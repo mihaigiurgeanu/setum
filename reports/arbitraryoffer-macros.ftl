@@ -8,11 +8,15 @@
   <#-- incep cu usile metalice -->
   <#local usi={} />
   <#local sisteme = [] />
+  <#local sep = '$' >
 
   <#local usilines = sel_product(doc, 9990) />
   <#list usilines as usa>
     <#local groupingCode = usa["field[attribute::name='product']/record/field[attribute::name='groupingCode']"] >
-    <#local usi = usi + { "groupingCode":((usi[groupingCode]!) + [usa]) } />
+    <#local location_id = usa["field[attribute::name='locationId']"] >
+    <#local montaj_separat = usa["field[attribute::name='montajSeparat']"] >
+    <#local groupingCode = "${groupingCode}${sep}locid=${location_id}${sep}${montaj_separat}" >
+    <#local usi = usi + { groupingCode : ((usi[groupingCode]!) + [usa]) } />
   </#list>
 
 
@@ -49,6 +53,20 @@
 
 <#-- atributele comune le voi lua din prima usa din lista -->
 <#assign usa=usi[0]["field[attribute::name='product']/record"] />
+<#local montaj_separat = usi[0]["field[attribute::name='montajSeparat']"] >
+<#local localitate_id = usi[0]["field[attribute::name='locationId']"] >
+<#local localitate = usi[0]["field[attribute::name='location']"] >
+<#local montaj_id = usi[0]["field[attribute::name='montajId']"] >
+<#local tip_montaj = usi[0]["field[attribute::name='tipMontaj']"] >
+<#local val_montaj = 0 >
+<#local val_transport = 0 >
+<!--
+montaj_separat: ${montaj_separat}
+localitate_id : ${localitate_id}
+localitate: ${localitate}
+montaj_id: ${montaj_id}
+tip_montaj: ${tip_montaj}
+-->
 <fo:block space-before="10pt">
 <fo:inline font-weight="bold">${lineno}. </fo:inline>
 Usa metalica &#x00AB;Subcod- ${usa["field[attribute::name='subclass']"]}&#x00BB;,
@@ -113,7 +131,10 @@ agrement tehnic nr.
     </fo:table-row>
 
     <#list usi as item_usa>
-    <#local prod_usa = item_usa["field[attribute::name='product']/record"] />
+    <#local prod_usa = item_usa["field[attribute::name='product']/record"] >
+    <#local val_montaj = val_montaj + cvnumber(item_usa["field[attribute::name='valMontaj']"]) >
+    <#local val_transport = val_transport + cvnumber(item_usa["field[attribute::name='valTransport']"]) >
+
     <#local lepl = 0 /> <#-- largime totala panouri laterale -->
     <#local hesl = 0 /> <#-- inaltime totala supralumini -->
       <#list prod_usa["field[attribute::name='parts']/record/field[name='part']/record"] as part>
@@ -146,6 +167,22 @@ agrement tehnic nr.
     </fo:table-row>
     <#local total_value = total_value!0 + cvnumber(item_usa["field[attribute::name='price']"]) />
     </#list>
+    <#if montaj_separat == "true">
+    <fo:table-row>
+      <fo:table-cell column-number="1" border-style="solid" font-size="10pt" font-weight="bold" number-columns-spanned="7"><fo:block text-align="right">TOTAL fara TVA</fo:block></fo:table-cell>
+      <fo:table-cell column-number="8" border-style="solid" font-size="10pt"><fo:block text-align="right">${total_value}</fo:block></fo:table-cell>
+    </fo:table-row>
+    <fo:table-row>
+      <fo:table-cell column-number="1" border-style="solid" font-size="10pt" font-weight="bold" number-columns-spanned="7"><fo:block text-align="right">Valoare montaj ${tip_montaj}<#if val_transport &gt; 0 >+ transport ${localitate}</#if></fo:block></fo:table-cell>
+      <fo:table-cell column-number="8" border-style="solid" font-size="10pt"><fo:block text-align="right">${val_transport + val_montaj}</fo:block></fo:table-cell>
+    </fo:table-row>
+    <#else>
+    <fo:table-row>
+      <fo:table-cell column-number="1" border-style="solid" font-size="10pt" font-weight="bold" number-columns-spanned="7"><fo:block text-align="right">Valoare montaj ${tip_montaj}<#if val_transport &gt; 0 >+ transport ${localitate}</#if></fo:block></fo:table-cell>
+      <fo:table-cell column-number="8" border-style="solid" font-size="10pt"><fo:block text-align="right">Inclus in pret</fo:block></fo:table-cell>
+    </fo:table-row>
+    </#if>
+    <#local total_value = total_value + val_transport + val_montaj >
     <#assign offer_value = offer_value!0 + total_value!0 />
     <fo:table-row>
       <fo:table-cell column-number="1" border-style="solid" font-size="10pt" font-weight="bold" number-columns-spanned="7"><fo:block text-align="right">TOTAL fara TVA</fo:block></fo:table-cell>

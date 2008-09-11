@@ -150,4 +150,23 @@ public interface OfferItemLocal extends EJBLocalObject {
      * The offer containing this offer item.
      */
     public OfferLocal getOffer();
+
+    public Integer getMontajId();
+    public void setMontajId(Integer montaj);
+
+    public Double getMontajProcent();
+    public void setMontajProcent(Double value);
+
+    public Boolean getMontajSeparat();
+    public void setMontajSeparat(Boolean value);
+
+    public Integer getLocationId();
+    public void setLocationId(Integer locationId);
+
+    public BigDecimal getDistance();
+    public void setDistance(BigDecimal value);
+
+    public Integer getDeliveries();
+    public void setDeliveries(Integer count);
+
 }

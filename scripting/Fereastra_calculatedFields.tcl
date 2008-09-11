@@ -9,7 +9,7 @@ source "$scripting_root/commons.tcl" ;# includ definitii comune
 
 
 # valoarea pe metrul patrat (X)
-set X [product_by_code 11055 $deschidere getPrice1]
+set X [[product_by_code 11055 $deschidere getPrice1] doubleValue]
 
 
 # suprafata ferestrei (lf si hf sunt in mm)
@@ -42,7 +42,7 @@ if { $tipGeam == 1 } {
 
 
 if { $geamId != 0 } {
-    set Y [product_by_id $geamId getPrice1]
+    set Y [[product_by_id $geamId getPrice1] doubleValue]
 } else {
     set Y 0
 }
@@ -50,9 +50,9 @@ if { $geamId != 0 } {
 
 
 # valoare grilaj
-if { $tipGrilaj == 1 } {
+if { $grilajStasId != 0 && $tipGrilaj == 1 } {
     # grilaj STAS
-    set Z [product_by_id $grilajStasId getPrice1]
+    set Z [[product_by_id $grilajStasId getPrice1] doubleValue]
 } elseif { $tipGrilaj == 2 } {
     set Z $valoareGrilajAtipic
 } else {

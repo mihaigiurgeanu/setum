@@ -34,6 +34,9 @@ import ro.kds.erp.data.ClientLocal;
 import ro.kds.erp.data.CategoryLocal;
 import ro.kds.erp.biz.CategoryManagerLocalHome;
 import ro.kds.erp.biz.CategoryManagerLocal;
+import ro.kds.erp.biz.CommonServicesLocal;
+import ro.kds.erp.biz.CommonServicesLocalHome;
+import ro.kds.erp.biz.ServiceNotAvailable;
 
 /**
  * Specific implemetation of business rules for ArbitraryOfferEJB.
@@ -430,6 +433,13 @@ public class ArbitraryOfferBizBean extends ArbitraryOfferBean {
 
 	    form.setPrice(offerItem.getPrice());
 	    form.setBusinessCategory(offerItem.getBusinessCategory());
+	    form.setMontajId(offerItem.getMontajId());
+	    form.setMontajProcent(offerItem.getMontajProcent());
+	    form.setMontajSeparat(offerItem.getMontajSeparat());
+	    form.setLocationId(offerItem.getLocationId());
+	    form.setDistance(offerItem.getDistance());
+	    form.setDeliveries(offerItem.getDeliveries());
+
 	    computeCalculatedFields(null);
 	    
 	    r = new ResponseBean();
@@ -627,6 +637,13 @@ public class ArbitraryOfferBizBean extends ArbitraryOfferBean {
 		offerItem.setProduct(ph.findByPrimaryKey(form.getProductId()));
 		offerItem.setPrice(form.getPrice());
 		offerItem.setBusinessCategory(form.getBusinessCategory());
+		offerItem.setMontajId(form.getMontajId());
+		offerItem.setMontajProcent(form.getMontajProcent());
+		offerItem.setMontajSeparat(form.getMontajSeparat());
+		offerItem.setLocationId(form.getLocationId());
+		offerItem.setDistance(form.getDistance());
+		offerItem.setDeliveries(form.getDeliveries());
+
 		r = new ResponseBean();
 	    } catch (Exception e) {
 		r = new ResponseBean();
@@ -677,8 +694,6 @@ public class ArbitraryOfferBizBean extends ArbitraryOfferBean {
 	    r.addField("description", form.getDescription());
 	    r.addField("comment", form.getComment());
 
-	    
-
 
 	    r.addField("lines", linesReport());
 	}
@@ -718,10 +733,41 @@ public class ArbitraryOfferBizBean extends ArbitraryOfferBean {
 		r.addField("entryPrice", form.getEntryPrice());
 		r.addField("sellPrice", form.getSellPrice());
 		r.addField("businessCategory", form.getBusinessCategory());
+		r.addField("montajId", form.getMontajId());
+		r.addField("montajProcent", form.getMontajProcent());
+		r.addField("montajSeparat", form.getMontajSeparat());
+		r.addField("locationId", form.getLocationId());
+		r.addField("distance", form.getDistance());
+		r.addField("deliveries", form.getDeliveries());
+		r.addField("valMontaj", form.getValMontaj());
+		r.addField("valTransport", form.getValTransport());
 
+		try {
+		    CommonServicesLocal srv = (CommonServicesLocal)factory.local("ejb/CommonServices", CommonServicesLocalHome.class);
+
+		    try {
+			ProductLocal p = srv.findProductById(form.getMontajId());
+			r.addField("tipMontaj", p.getName());
+		    } catch (Exception e) {
+			logger.log(BasicLevel.WARN, "Numele pentru tipul de montaj nu a putut fi gasit");
+			logger.log(BasicLevel.DEBUG, e);
+			r.addField("tipMontaj", "-");
+		    }
+		    try {
+			ProductLocal p = srv.findProductById(form.getLocationId());
+			r.addField("location", p.getName());
+		    } catch (Exception e) {
+			logger.log(BasicLevel.WARN, "Numele pentru localitatea de transport nu a putut fi gasit");
+			logger.log(BasicLevel.DEBUG, e);
+			r.addField("location", "-");
+		    }
+
+		} catch (ServiceNotAvailable e) {
+		    logger.log(BasicLevel.ERROR, "Service ejb/CommonServices not available. Application setup error. Please check if the ejb/CommonServices local bean has been configured with ServiceFactory bean");
+		    logger.log(BasicLevel.DEBUG, e);
+		}
 
 		r.addField("product", productReport());
-		    
 	    }
 	} else {
 	    r = ResponseBean.ERR_NOTCURRENT;
@@ -824,5 +870,15 @@ public class ArbitraryOfferBizBean extends ArbitraryOfferBean {
 	form.setEntryPrice(new BigDecimal(0));
 	form.setSellPrice(new BigDecimal(0));
     }
+
+
+    /**
+     * Default value lists
+     */
+    public void loadValueLists(ResponseBean r) {
+	r.addValueList("montajId", ValueLists.makeVLForCategoryId(11200));
+	r.addValueList("locationId", ValueLists.makeVLForCategoryId(12005));
+    }
+
 
 }

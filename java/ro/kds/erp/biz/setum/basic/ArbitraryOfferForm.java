@@ -52,6 +52,14 @@ public class ArbitraryOfferForm implements Serializable {
     java.math.BigDecimal entryPrice;
     java.math.BigDecimal sellPrice;
     String businessCategory;
+    Integer montajId;
+    Double montajProcent;
+    Boolean montajSeparat;
+    Integer locationId;
+    java.math.BigDecimal distance;
+    Integer deliveries;
+    java.math.BigDecimal valMontaj;
+    java.math.BigDecimal valTransport;
 
     public ArbitraryOfferForm() {
 
@@ -156,6 +164,38 @@ public class ArbitraryOfferForm implements Serializable {
 
 
        this.businessCategory = "";
+
+
+
+       this.montajId = new Integer(0);
+
+
+
+       this.montajProcent = new Double(0);
+   
+
+
+       this.montajSeparat = new Boolean(false);
+
+
+
+       this.locationId = new Integer(0);
+
+
+
+       this.distance = new java.math.BigDecimal(0);
+
+
+
+       this.deliveries = new Integer(0);
+
+
+
+       this.valMontaj = new java.math.BigDecimal(0);
+
+
+
+       this.valTransport = new java.math.BigDecimal(0);
 
 
 
@@ -515,6 +555,126 @@ public class ArbitraryOfferForm implements Serializable {
 	AttributeLocal a = (AttributeLocal)attributes.get("businessCategory");
 	if(a != null) {
 	    this.setBusinessCategory(a.getStringValue());
+	}
+    }
+
+    public void setMontajId(Integer newMontajId) {
+        this.montajId = newMontajId;
+    }
+
+    public Integer getMontajId() {
+        return montajId;
+    }
+
+    public void readMontajId(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("montajId");
+	if(a != null) {
+	    this.setMontajId(a.getIntValue());
+	}
+    }
+
+    public void setMontajProcent(Double newMontajProcent) {
+        this.montajProcent = newMontajProcent;
+    }
+
+    public Double getMontajProcent() {
+        return montajProcent;
+    }
+
+    public void readMontajProcent(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("montajProcent");
+	if(a != null) {
+	    this.setMontajProcent(a.getDoubleValue());
+	}
+    }
+
+    public void setMontajSeparat(Boolean newMontajSeparat) {
+        this.montajSeparat = newMontajSeparat;
+    }
+
+    public Boolean getMontajSeparat() {
+        return montajSeparat;
+    }
+
+    public void readMontajSeparat(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("montajSeparat");
+	if(a != null) {
+	    this.setMontajSeparat(a.getBoolValue());
+	}
+    }
+
+    public void setLocationId(Integer newLocationId) {
+        this.locationId = newLocationId;
+    }
+
+    public Integer getLocationId() {
+        return locationId;
+    }
+
+    public void readLocationId(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("locationId");
+	if(a != null) {
+	    this.setLocationId(a.getIntValue());
+	}
+    }
+
+    public void setDistance(java.math.BigDecimal newDistance) {
+        this.distance = newDistance;
+    }
+
+    public java.math.BigDecimal getDistance() {
+        return distance;
+    }
+
+    public void readDistance(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("distance");
+	if(a != null) {
+	    this.setDistance(a.getDecimalValue());
+	}
+    }
+
+    public void setDeliveries(Integer newDeliveries) {
+        this.deliveries = newDeliveries;
+    }
+
+    public Integer getDeliveries() {
+        return deliveries;
+    }
+
+    public void readDeliveries(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("deliveries");
+	if(a != null) {
+	    this.setDeliveries(a.getIntValue());
+	}
+    }
+
+    public void setValMontaj(java.math.BigDecimal newValMontaj) {
+        this.valMontaj = newValMontaj;
+    }
+
+    public java.math.BigDecimal getValMontaj() {
+        return valMontaj;
+    }
+
+    public void readValMontaj(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("valMontaj");
+	if(a != null) {
+	    this.setValMontaj(a.getDecimalValue());
+	}
+    }
+
+    public void setValTransport(java.math.BigDecimal newValTransport) {
+        this.valTransport = newValTransport;
+    }
+
+    public java.math.BigDecimal getValTransport() {
+        return valTransport;
+    }
+
+    public void readValTransport(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("valTransport");
+	if(a != null) {
+	    this.setValTransport(a.getDecimalValue());
 	}
     }
 

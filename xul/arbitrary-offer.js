@@ -186,10 +186,13 @@ theForm.text_fields = new Array("no", "docDate", "dateFrom", "dateTo",
 				"description", "comment",
 				"price", "relativeGain", "absoluteGain",
 				"productCategory", "productCode",
-				"productName", "sellPrice", "entryPrice");
+				"productName", "sellPrice", "entryPrice",
+				"montajProcent", "distance", "deliveries",
+				"valMontaj", "valTransport");
 
-theForm.combo_fields = new Array();
+theForm.combo_fields = new Array("montajId", "locationId");
 theForm.radio_fields = new Array();
+theForm.cb_fields = new Array("montajSeparat");
 theForm.do_link = "/arbitrary-offer.do";
 
 theForm.setupEventListeners();

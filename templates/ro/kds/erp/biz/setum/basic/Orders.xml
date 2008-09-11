@@ -115,6 +115,7 @@
     <type>String</type>
   </field>
 
+
   <!-- Subform orderLine -->
 
   <field>
@@ -152,6 +153,18 @@
   <field>
     <name>tax</name>
     <type>java.math.BigDecimal</type>
+  </field>
+  <field>
+    <name>codMontaj</name>
+    <type>Integer</type>
+  </field>
+  <field>
+    <name>montajProcent</name>
+    <type>Double</type>
+  </field>
+  <field>
+    <name>montajSeparat</name>
+    <type>Boolean</type>
   </field>
 
 

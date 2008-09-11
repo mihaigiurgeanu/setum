@@ -1351,6 +1351,84 @@ public abstract class OrdersBean
 	computeCalculatedFields(r);
 	return r;
     }
+    public ResponseBean updateCodMontaj(Integer codMontaj) {
+        ResponseBean r = new ResponseBean();
+	Integer oldVal = form.getCodMontaj();
+	form.setCodMontaj(codMontaj);
+	r.addRecord();
+	r.addField("codMontaj", codMontaj); // for number format
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".codMontaj");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
+		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
+		script.setVar(FORM_VARNAME, form, OrdersForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the codMontaj", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
+    public ResponseBean updateMontajProcent(Double montajProcent) {
+        ResponseBean r = new ResponseBean();
+	Double oldVal = form.getMontajProcent();
+	form.setMontajProcent(montajProcent);
+	r.addRecord();
+	r.addField("montajProcent", montajProcent); // for number format
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".montajProcent");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
+		script.setVar(OLDVAL_VARNAME, oldVal, Double.class);
+		script.setVar(FORM_VARNAME, form, OrdersForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the montajProcent", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
+    public ResponseBean updateMontajSeparat(Boolean montajSeparat) {
+        ResponseBean r = new ResponseBean();
+	Boolean oldVal = form.getMontajSeparat();
+	form.setMontajSeparat(montajSeparat);
+	r.addRecord();
+	r.addField("montajSeparat", montajSeparat); // for number format
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".montajSeparat");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
+		script.setVar(OLDVAL_VARNAME, oldVal, Boolean.class);
+		script.setVar(FORM_VARNAME, form, OrdersForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the montajSeparat", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
     public ResponseBean updateInvoiceNumber(String invoiceNumber) {
         ResponseBean r = new ResponseBean();
 	String oldVal = form.getInvoiceNumber();
@@ -1761,6 +1839,9 @@ public abstract class OrdersBean
 	r.addField("quantity", form.getQuantity());
 	r.addField("value", form.getValue());
 	r.addField("tax", form.getTax());
+	r.addField("codMontaj", form.getCodMontaj());
+	r.addField("montajProcent", form.getMontajProcent());
+	r.addField("montajSeparat", form.getMontajSeparat());
 	r.addField("invoiceNumber", form.getInvoiceNumber());
 	r.addField("invoiceDate", form.getInvoiceDate());
 	r.addField("invoiceRole", form.getInvoiceRole());
@@ -2001,6 +2082,24 @@ public abstract class OrdersBean
 	    s.setVar("tax", form.getTax(), java.math.BigDecimal.class);
 	} catch (ScriptErrorException e) {
 	    logger.log(BasicLevel.WARN, "Can not set the value of field: tax from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    s.setVar("codMontaj", form.getCodMontaj(), Integer.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: codMontaj from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    s.setVar("montajProcent", form.getMontajProcent(), Double.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: montajProcent from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    s.setVar("montajSeparat", form.getMontajSeparat(), Boolean.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: montajSeparat from the script");
             logger.log(BasicLevel.DEBUG, e);
         }
 	try {
@@ -2472,6 +2571,39 @@ public abstract class OrdersBean
 	    }
 	} catch (ScriptErrorException e) {
 	    logger.log(BasicLevel.WARN, "Can not get the value of field: tax from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    field = s.getVar("codMontaj", Integer.class);
+	    if(!field.equals(form.getCodMontaj())) {
+	        logger.log(BasicLevel.DEBUG, "Field codMontaj modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setCodMontaj((Integer)field);
+	        r.addField("codMontaj", (Integer)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: codMontaj from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    field = s.getVar("montajProcent", Double.class);
+	    if(!field.equals(form.getMontajProcent())) {
+	        logger.log(BasicLevel.DEBUG, "Field montajProcent modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setMontajProcent((Double)field);
+	        r.addField("montajProcent", (Double)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: montajProcent from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    field = s.getVar("montajSeparat", Boolean.class);
+	    if(!field.equals(form.getMontajSeparat())) {
+	        logger.log(BasicLevel.DEBUG, "Field montajSeparat modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setMontajSeparat((Boolean)field);
+	        r.addField("montajSeparat", (Boolean)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: montajSeparat from the script");
             logger.log(BasicLevel.DEBUG, e);
         }
 	try {

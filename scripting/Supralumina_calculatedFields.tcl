@@ -9,7 +9,7 @@ source "$scripting_root/commons.tcl" ;# includ definitii comune
 set suprafata [expr $ls * $hs / 1000 / 1000]
 
 
-set pretRama [product_by_code 11055 $deschidere getPrice1]
+set pretRama [[product_by_code 11055 $deschidere getPrice1] doubleValue]
 
 # in functie de deschidere, ajustez pretul pe mentru patrat 
 # pentru fereastra mobila; pretul pentru fereastra fixa nu se ajusteaza
@@ -38,7 +38,7 @@ if { $tipGeam == 1 } {
 
 
 if { $geamId != 0 } {
-    set pretGeam [product_by_id $geamId getPrice1]
+    set pretGeam [[product_by_id $geamId getPrice1] doubleValue]
 } else {
     set pretGeam 0
 }
@@ -47,7 +47,7 @@ if { $geamId != 0 } {
 # valoare grilaj
 if { $tipGrilaj == 1 } {
     # grilaj STAS
-    set pretGrilaj [product_by_id $grilajStasId getPrice1]
+    set pretGrilaj [[product_by_id $grilajStasId getPrice1] doubleValue]
 } elseif { $tipGrilaj == 2 } {
     set pretGrilaj $valoareGrilajAtipic
 } else {

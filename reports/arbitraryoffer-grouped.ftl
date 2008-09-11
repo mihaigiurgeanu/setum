@@ -137,6 +137,7 @@
       <!-- lineoffers.usi are ${lineoffers.usi?size} elemente -->
       <#assign gcodes=lineoffers.usi?keys>
       <#list gcodes as code>
+        <!-- usile cu gcode: ${code} -->
         <@display_usi lineno=lineno usi=lineoffers.usi[code]/>
 	<#assign lineno = lineno+1 >
       </#list>

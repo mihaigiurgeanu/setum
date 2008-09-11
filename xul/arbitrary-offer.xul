@@ -216,6 +216,42 @@ Data-entry form for general purpose offers.
 		<label control="absoluteGain" value="Adaos (Lei):"/>
 		<textbox id="absoluteGain"/>
 	      </row>
+	      <row>
+		<label control="montajId" value="Montaj"/>
+		<menulist id="montajId">
+		  <menupopup id="montajId-popup"/>
+		</menulist>
+	      </row>
+	      <row>
+		<label control="montajProcent" value="+ % din val:"/>
+		<textbox id="montajProcent"/>
+	      </row>
+	      <row>
+		<label control="valMontaj" value="Valoare Montaj"/>
+		<textbox id="valMontaj"/>
+	      </row>
+	      <row>
+		<hbox/>
+		<checkbox id="montajSeparat" label="Pret montaj separat de pret usa."/>
+	      </row>
+	      <row>
+		<label control="locationId" value="Localitate"/>
+		<menulist id="locationId">
+		  <menupopup id="locationId-popup"/>
+		</menulist>
+	      </row>
+	      <row>
+		<label control="distance" value="Distanta"/>
+		<textbox id="distance"/>
+	      </row>
+	      <row>
+		<label control="deliveries" value="Nr. ture"/>
+		<textbox id="deliveries"/>
+	      </row>
+	      <row>
+		<label control="valTransport" value="Valoare Transport"/>
+		<textbox id="valTransport"/>
+	      </row>
 	    </rows>
 	  </grid>
 	  <grid>

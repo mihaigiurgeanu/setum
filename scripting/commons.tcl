@@ -2,6 +2,9 @@
 # Contine definitii comune pentru divers scripturi
 # SYNOPSYS
 #   source "$scripting_root/commons.tcl" ;# includ definitii comune
+#   set price [[product_by_id geamId getPrice1] doubleValue]
+#   set price [[product_by_code $categId $productCode getPrice1] doubleValue]
+#   set distance [attribute_int $locationId distance]
 
 
 package require java
@@ -23,11 +26,11 @@ proc product_by_code {catid code valmethod} {
     if {
 	[catch {
 	    set product [$srv findProductByCode $catid $code]
-	    set val [[[$srv findProductByCode $catid $code] $valmethod] doubleValue]
+	    set val [[$srv findProductByCode $catid $code] $valmethod]
 	} err]
     } {
 	puts "Eroare la obtinere $valmethod pentru codul de produs $code din categoria $catid: $err"
-	set val 0
+	set val {}
     }
     return $val
 }
@@ -39,9 +42,9 @@ proc product_by_code {catid code valmethod} {
 ;# getPrice1 sau getSellPrice, etc.
 proc product_by_id {pid valmethod} {
     global srv
-    if {[catch {set val [[[$srv findProductById $pid] $valmethod] doubleValue]} err]} {
+    if {[catch {set val [[$srv findProductById $pid] $valmethod]} err]} {
 	puts "Eroare la obtinere $valmethod pentru produsul $pid: $err"
-	set val 0
+	set val {}
     }
     return $val
 }
@@ -56,6 +59,15 @@ proc attribute_str {pid attr} {
 }
 
 proc attribute_dbl {pid attr} {
+    global srv
+    if {[catch {set val [[$srv getAttributeByProductId $pid $attr] getIntValue]} err]} {
+	puts "Nu pot citi atributul $attr pentru produsul $pid: $err"
+	set val 0
+    }
+    return $val
+}
+
+proc attribute_int {pid attr} {
     global srv
     if {[catch {set val [[$srv getAttributeByProductId $pid $attr] getDoubleValue]} err]} {
 	puts "Nu pot citi atributul $attr pentru produsul $pid: $err"

@@ -81,6 +81,25 @@ public abstract class OfferItemBean implements EntityBean {
     public abstract String getComments();
     public abstract void setComments(String comments);
 
+    public abstract Integer getMontajId();
+    public abstract void setMontajId(Integer montaj);
+
+    public abstract Double getMontajProcent();
+    public abstract void setMontajProcent(Double value);
+
+    public abstract Boolean getMontajSeparat();
+    public abstract void setMontajSeparat(Boolean value);
+
+    public abstract Integer getLocationId();
+    public abstract void setLocationId(Integer code);
+
+    public abstract BigDecimal getDistance();
+    public abstract void setDistance(BigDecimal value);
+
+    public abstract Integer getDeliveries();
+    public abstract void setDeliveries(Integer count);
+
+
     // Implementation of javax.ejb.EntityBean
 
     public void setEntityContext(EntityContext entityContext) throws EJBException, RemoteException {

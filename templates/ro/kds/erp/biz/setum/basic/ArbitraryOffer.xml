@@ -106,6 +106,45 @@
     <type>String</type>
   </field>
 
+  <field>
+    <name>montajId</name>
+    <type>Integer</type>
+  </field>
+  <field>
+    <name>montajProcent</name>
+    <type>Double</type>
+  </field>
+  <field>
+    <name>montajSeparat</name>
+    <type>Boolean</type>
+  </field>
+
+  <field>
+    <name>locationId</name>
+    <type>Integer</type>
+  </field>
+  <field>
+    <!-- distanta in km -->
+    <name>distance</name>
+    <type>java.math.BigDecimal</type>
+  </field>
+  <field>
+    <!-- numarul de ture -->
+    <name>deliveries</name>
+    <type>Integer</type>
+  </field>
+
+  <field>
+    <name>valMontaj</name>
+    <type>java.math.BigDecimal</type>
+  </field>
+  <field>
+    <name>valTransport</name>
+    <type>java.math.BigDecimal</type>
+  </field>
+
+
+
   <!-- additional methods for the remote interface -->
   <remote>
     <method>ResponseBean loadListing() throws RemoteException</method>

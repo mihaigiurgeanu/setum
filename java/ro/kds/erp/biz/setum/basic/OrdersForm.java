@@ -63,6 +63,9 @@ public class OrdersForm implements Serializable {
     java.math.BigDecimal quantity;
     java.math.BigDecimal value;
     java.math.BigDecimal tax;
+    Integer codMontaj;
+    Double montajProcent;
+    Boolean montajSeparat;
     String invoiceNumber;
     java.util.Date invoiceDate;
     String invoiceRole;
@@ -222,6 +225,18 @@ public class OrdersForm implements Serializable {
 
 
        this.tax = new java.math.BigDecimal(0);
+
+
+
+       this.codMontaj = new Integer(0);
+
+
+
+       this.montajProcent = new Double(0);
+   
+
+
+       this.montajSeparat = new Boolean(false);
 
 
 
@@ -792,6 +807,51 @@ public class OrdersForm implements Serializable {
 	AttributeLocal a = (AttributeLocal)attributes.get("tax");
 	if(a != null) {
 	    this.setTax(a.getDecimalValue());
+	}
+    }
+
+    public void setCodMontaj(Integer newCodMontaj) {
+        this.codMontaj = newCodMontaj;
+    }
+
+    public Integer getCodMontaj() {
+        return codMontaj;
+    }
+
+    public void readCodMontaj(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("codMontaj");
+	if(a != null) {
+	    this.setCodMontaj(a.getIntValue());
+	}
+    }
+
+    public void setMontajProcent(Double newMontajProcent) {
+        this.montajProcent = newMontajProcent;
+    }
+
+    public Double getMontajProcent() {
+        return montajProcent;
+    }
+
+    public void readMontajProcent(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("montajProcent");
+	if(a != null) {
+	    this.setMontajProcent(a.getDoubleValue());
+	}
+    }
+
+    public void setMontajSeparat(Boolean newMontajSeparat) {
+        this.montajSeparat = newMontajSeparat;
+    }
+
+    public Boolean getMontajSeparat() {
+        return montajSeparat;
+    }
+
+    public void readMontajSeparat(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("montajSeparat");
+	if(a != null) {
+	    this.setMontajSeparat(a.getBoolValue());
 	}
     }
 
