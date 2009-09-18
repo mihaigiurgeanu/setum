@@ -1,5 +1,9 @@
 <?xml version="1.0"?>
 <locatingRules xmlns="http://thaiopensource.com/ns/locating-rules/1.0">
+  <uri resource="arbitraryoffer-grouped.ftl" uri="../../../schemas/xsl-fo/main.rnc"/>
+  <uri resource="order.ftl" uri="../../../schemas/xsl-fo/main.rnc"/>
+  <uri resource="order.ftl" uri="../../../schemas/xsl-fo/main.rnc"/>
+  <uri resource="order.ftl" typeId="XSLT"/>
   <uri resource="arbitraryoffer.ftl" uri="../../../schemas/xsl-fo/main.rnc"/>
   <uri resource="arbitraryoffer.ftl" uri="../../../schemas/xsl-fo/main.rnc"/>
 </locatingRules>

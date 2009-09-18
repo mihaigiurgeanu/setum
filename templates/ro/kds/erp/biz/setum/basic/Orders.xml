@@ -43,6 +43,18 @@
     <type>String</type>
   </field>
   <field>
+    <name>valoareMontaj</name>
+    <type>java.math.BigDecimal</type>
+  </field>
+  <field>
+    <name>valoareTransport</name>
+    <type>java.math.BigDecimal</type>
+  </field>
+  <field>
+    <name>valoareProduse</name> <!-- suma fara montaj si transport -->
+    <type>java.math.BigDecimal</type>
+  </field>
+  <field>
     <name>total</name>
     <type>java.math.BigDecimal</type>
   </field>
@@ -91,6 +103,14 @@
     <type>java.math.BigDecimal</type>
   </field>
   <field>
+    <name>currencyCode</name> <!-- moneda in care se vor tipari sumele -->
+    <type>String</type>
+  </field>
+  <field>
+    <name>exchangeRate</name> <!-- rata de schimb folosita fata de moneda in care sunt tinute preturile in baza de date -->
+    <type>java.math.BigDecimal</type>
+  </field>
+  <field>
     <name>termenLivrare</name>
     <type>java.util.Date</type>
   </field>
@@ -114,7 +134,49 @@
     <name>contact</name>
     <type>String</type>
   </field>
+  <field>
+    <name>deliveryHour</name>
+    <type>String</type>
+  </field>
+  <field>
+    <name>tipDemontare</name><!-- cod tip deomntare, categorie 11205 -->
+    <type>String</type>
+  </field>
+  <field>
+    <name>attribute1</name>
+    <type>String</type>
+  </field>
+  <field>
+    <name>attribute2</name>
+    <type>String</type>
+  </field>
+  <field>
+    <name>attribute3</name>
+    <type>String</type>
+  </field>
+  <field>
+    <name>attribute4</name>
+    <type>String</type>
+  </field>
+  <field>
+    <name>attribute5</name>
+    <type>String</type>
+  </field>
 
+  <!-- campuri pentru raportul de livrari -->
+  <field>
+    <name>livrariRStart</name>
+    <type>java.util.Date</type>
+  </field>
+  <field>
+    <name>livrariREnd</name>
+    <type>java.util.Date</type>
+  </field>
+  <field>
+    <name>livrariCuMontaj</name>
+    <type>String</type>
+  </field>
+  <!-- end raport livrari -->
 
   <!-- Subform orderLine -->
 
@@ -235,6 +297,8 @@
     <!-- Orders listing -->
     <method>ResponseBean getOrdersCount() throws RemoteException</method>
     <method>ResponseBean loadListing(Integer startRow) throws RemoteException</method>
+    <!-- full orders listing -->
+    <method>ResponseBean loadFullListing() throws RemoteException</method>
 
     <!-- Remove current order -->
     <method>ResponseBean removeOrder() throws RemoteException</method>
@@ -254,6 +318,10 @@
     <!-- Listing of payments -->
     <method>ResponseBean loadPayments() throws RemoteException</method>
 
+    <method>ResponseBean orderReport() throws RemoteException</method>
+
+    <method>ResponseBean initLivrariReport(String cuMontaj) throws RemoteException</method>
+    <method>ResponseBean livrariReport() throws RemoteException</method>
   </remote>
 
   <!-- Services that may have scripts associated with -->
@@ -275,10 +343,6 @@
     <method returnType="standard">
       <name>removeItem</name>
       <params>
-	<param>
-	  <name>itemId</name>
-	  <type>Integer</type>
-	</param>
       </params>
     </method>
   </services>

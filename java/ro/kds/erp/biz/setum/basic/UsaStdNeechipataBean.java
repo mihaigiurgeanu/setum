@@ -367,6 +367,32 @@ public abstract class UsaStdNeechipataBean
 	computeCalculatedFields(r);
 	return r;
     }
+    public ResponseBean updateDiscontinued(Integer discontinued) {
+        ResponseBean r = new ResponseBean();
+	Integer oldVal = form.getDiscontinued();
+	form.setDiscontinued(discontinued);
+	r.addRecord();
+	r.addField("discontinued", discontinued); // for number format
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".discontinued");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
+		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
+		script.setVar(FORM_VARNAME, form, UsaStdNeechipataForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the discontinued", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
     public ResponseBean updateEntryPrice(java.math.BigDecimal entryPrice) {
         ResponseBean r = new ResponseBean();
 	java.math.BigDecimal oldVal = form.getEntryPrice();
@@ -480,6 +506,7 @@ public abstract class UsaStdNeechipataBean
 	r.addField("name", form.getName());
 	r.addField("code", form.getCode());
 	r.addField("description", form.getDescription());
+	r.addField("discontinued", form.getDiscontinued());
 	r.addField("entryPrice", form.getEntryPrice());
 	r.addField("sellPrice", form.getSellPrice());
 	r.addField("relativeGain", form.getRelativeGain());
@@ -515,6 +542,12 @@ public abstract class UsaStdNeechipataBean
 	    s.setVar("description", form.getDescription(), String.class);
 	} catch (ScriptErrorException e) {
 	    logger.log(BasicLevel.WARN, "Can not set the value of field: description from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    s.setVar("discontinued", form.getDiscontinued(), Integer.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: discontinued from the script");
             logger.log(BasicLevel.DEBUG, e);
         }
 	try {
@@ -581,6 +614,17 @@ public abstract class UsaStdNeechipataBean
 	    }
 	} catch (ScriptErrorException e) {
 	    logger.log(BasicLevel.WARN, "Can not get the value of field: description from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    field = s.getVar("discontinued", Integer.class);
+	    if(!field.equals(form.getDiscontinued())) {
+	        logger.log(BasicLevel.DEBUG, "Field discontinued modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setDiscontinued((Integer)field);
+	        r.addField("discontinued", (Integer)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: discontinued from the script");
             logger.log(BasicLevel.DEBUG, e);
         }
 	try {

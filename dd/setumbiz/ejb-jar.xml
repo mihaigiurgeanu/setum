@@ -819,6 +819,13 @@
 	<local>ro.kds.erp.data.ClientLocal</local>
 	<ejb-link>datalayer.jar#ClientEJB</ejb-link>
       </ejb-local-ref>
+      <ejb-local-ref>
+	<ejb-ref-name>ejb/ContactHome</ejb-ref-name>
+	<ejb-ref-type>Entity</ejb-ref-type>
+	<local-home>ro.kds.erp.data.ContactLoclHome</local-home>
+	<local>ro.kds.erp.data.ClientLocal</local>
+	<ejb-link>datalayer.jar#ContactEJB</ejb-link>
+      </ejb-local-ref>
 
       <ejb-local-ref>
 	<description>CategoryManager reference for managing products that are in the offer</description>
@@ -921,6 +928,14 @@
         <env-entry-type>java.lang.Integer</env-entry-type>
         <env-entry-value>9983</env-entry-value>
       </env-entry>
+      <env-entry>
+	<description>The prefix used by the scripting engine to determine the location of the scripts.</description>
+	<description>The location is relative to the scripting directory that is read from configuration.</description>
+	<description>If this param is missing, the default prefix is the full class name of the basic class.</description>
+	<env-entry-name>script.prefix</env-entry-name>
+	<env-entry-type>java.lang.String</env-entry-type>
+	<env-entry-value>GrilaVentilatie</env-entry-value>
+      </env-entry>
       <ejb-ref>
         <ejb-ref-name>ejb/PreferencesEJB</ejb-ref-name>
         <ejb-ref-type>Session</ejb-ref-type>
@@ -972,6 +987,14 @@
         <env-entry-name>categoryId</env-entry-name>
         <env-entry-type>java.lang.Integer</env-entry-type>
         <env-entry-value>9982</env-entry-value>
+      </env-entry>
+      <env-entry>
+	<description>The prefix used by the scripting engine to determine the location of the scripts.</description>
+	<description>The location is relative to the scripting directory that is read from configuration.</description>
+	<description>If this param is missing, the default prefix is the full class name of the basic class.</description>
+	<env-entry-name>script.prefix</env-entry-name>
+	<env-entry-type>java.lang.String</env-entry-type>
+	<env-entry-value>GauriAerisire</env-entry-value>
       </env-entry>
       <ejb-ref>
         <ejb-ref-name>ejb/PreferencesEJB</ejb-ref-name>
@@ -1387,6 +1410,14 @@
         <home>ro.kds.erp.biz.SequenceHome</home>
         <remote>ro.kds.erp.biz.Sequence</remote>
       </ejb-ref>
+      <ejb-ref>
+	<description>Referinta recursiva catre business logic-ul de comanda.</description>
+	<ejb-ref-name>ejb/OrderSessionHome</ejb-ref-name>
+	<ejb-ref-type>Session</ejb-ref-type>
+	<home>ro.kds.erp.biz.setum.basic.OrdersHome</home>
+	<remote>ro.kds.erp.biz.setum.basic.Orders</remote>
+	<ejb-link>OrdersEJB</ejb-link>
+      </ejb-ref>
       <ejb-local-ref>
 	<description>Required for building value lists</description>
 	<ejb-ref-name>ejb/CategoryHome</ejb-ref-name>
@@ -1450,6 +1481,31 @@
 	<local-home>ro.kds.erp.biz.ServiceFactoryLocalHome</local-home>
 	<local>ro.kds.erp.biz.ServiceFactoryLocal</local>
 	<ejb-link>factory.jar#ServiceFactoryEJB</ejb-link>
+      </ejb-local-ref>
+      <ejb-local-ref>
+	<description>CategoryManager reference for managing products that are
+	in the composition of the main product.</description>
+	<ejb-ref-name>ejb/CategoryManagerHome/default</ejb-ref-name>
+	<ejb-ref-type>Session</ejb-ref-type>
+	<local-home>ro.kds.erp.biz.CagegoryManagerLocalHome</local-home>
+	<local>ro.kds.erp.biz.CategoryManagerLocal</local>
+	<ejb-link>DefaultCategoryManagerEJB</ejb-link>
+      </ejb-local-ref>
+      <ejb-local-ref>
+	<description>CategoryManager for products in UsaMetalica category</description>
+	<ejb-ref-name>ejb/CategoryManagerHome/9990</ejb-ref-name>
+	<ejb-ref-type>Session</ejb-ref-type>
+	<local-home>ro.kds.erp.biz.CagegoryManagerLocalHome</local-home>
+	<local>ro.kds.erp.biz.CategoryManagerLocal</local>
+	<ejb-link>UsaMetalicaCategoryManagerEJB</ejb-link>
+      </ejb-local-ref>
+      <ejb-local-ref>
+	<description>CategoryManager for products in UsaMetalica category</description>
+	<ejb-ref-name>ejb/CategoryManagerHome/9989</ejb-ref-name>
+	<ejb-ref-type>Session</ejb-ref-type>
+	<local-home>ro.kds.erp.biz.CagegoryManagerLocalHome</local-home>
+	<local>ro.kds.erp.biz.CategoryManagerLocal</local>
+	<ejb-link>UsaMetalicaCategoryManagerEJB</ejb-link>
       </ejb-local-ref>
     </session>
 
@@ -1526,6 +1582,7 @@
 	<remote>ro.kds.erp.biz.setum.basic.UsaMetalica2K</remote>
 	<ejb-link>UsaMetalica2KEJB</ejb-link>
       </ejb-ref>
+
       <ejb-local-ref>
 	<description>CategoryManager reference for managing products that are
 	in the composition of the main product.</description>
@@ -1535,6 +1592,37 @@
 	<local>ro.kds.erp.biz.CategoryManagerLocal</local>
 	<ejb-link>DefaultCategoryManagerEJB</ejb-link>
       </ejb-local-ref>
+
+      <ejb-local-ref>
+	<description>CategoryManager reference for managing products that are
+	in the composition of the main product.</description>
+	<ejb-ref-name>ejb/CategoryManagerHome/9989</ejb-ref-name>
+	<ejb-ref-type>Session</ejb-ref-type>
+	<local-home>ro.kds.erp.biz.CagegoryManagerLocalHome</local-home>
+	<local>ro.kds.erp.biz.CategoryManagerLocal</local>
+	<ejb-link>FereastraCategoryManagerEJB</ejb-link>
+      </ejb-local-ref>
+
+      <ejb-local-ref>
+	<description>CategoryManager reference for managing products that are
+	in the composition of the main product.</description>
+	<ejb-ref-name>ejb/CategoryManagerHome/9981</ejb-ref-name>
+	<ejb-ref-type>Session</ejb-ref-type>
+	<local-home>ro.kds.erp.biz.CagegoryManagerLocalHome</local-home>
+	<local>ro.kds.erp.biz.CategoryManagerLocal</local>
+	<ejb-link>SupraluminaCategoryManagerEJB</ejb-link>
+      </ejb-local-ref>
+
+      <ejb-local-ref>
+	<description>CategoryManager reference for managing products that are
+	in the composition of the main product.</description>
+	<ejb-ref-name>ejb/CategoryManagerHome/9980</ejb-ref-name>
+	<ejb-ref-type>Session</ejb-ref-type>
+	<local-home>ro.kds.erp.biz.CagegoryManagerLocalHome</local-home>
+	<local>ro.kds.erp.biz.CategoryManagerLocal</local>
+	<ejb-link>PanouLateralCategoryManagerEJB</ejb-link>
+      </ejb-local-ref>
+
       <ejb-local-ref>
 	<description>Product reference</description>
 	<ejb-ref-name>ejb/ProductHome</ejb-ref-name>
@@ -1551,6 +1639,204 @@
 	<ejb-link>factory.jar#ServiceFactoryEJB</ejb-link>
       </ejb-local-ref>
     </session>
+
+
+    <session>
+      <description>Implementare CategoryManager pentru fereastra.</description>
+      <ejb-name>FereastraCategoryManagerEJB</ejb-name>
+      <local-home>ro.kds.erp.biz.CategoryManagerLocalHome</local-home>
+      <local>ro.kds.erp.biz.CategoryManagerLocal</local>
+      
+      <ejb-class>ro.kds.erp.biz.setum.FereastraBizBean</ejb-class>
+      <session-type>Stateless</session-type>
+      <transaction-type>Container</transaction-type>
+
+      <env-entry>
+	<description>The prefix used by the scripting engine to determine the location of the scripts.</description>
+	<description>The location is relative to the scripting directory that is read from configuration.</description>
+	<description>If this param is missing, the default prefix is the full class name of the basic class.</description>
+	<env-entry-name>script.prefix</env-entry-name>
+	<env-entry-type>java.lang.String</env-entry-type>
+	<env-entry-value>Fereastra</env-entry-value>
+      </env-entry>
+      <env-entry>
+        <description>Categoria din care face parte acest producs</description>
+        <env-entry-name>categoryId</env-entry-name>
+        <env-entry-type>java.lang.Integer</env-entry-type>
+        <env-entry-value>9989</env-entry-value>
+      </env-entry>
+      <ejb-ref>
+        <ejb-ref-name>ejb/PreferencesEJB</ejb-ref-name>
+        <ejb-ref-type>Session</ejb-ref-type>
+        <home>ro.kds.erp.biz.PreferencesHome</home>
+        <remote>ro.kds.erp.biz.Preferences</remote>
+      </ejb-ref>
+
+      <ejb-local-ref>
+        <ejb-ref-name>ejb/ProductHome</ejb-ref-name>
+        <ejb-ref-type>Entity</ejb-ref-type>
+        <local-home>ro.kds.erp.data.ProductLocalHome</local-home>
+        <local>ro.kds.erp.data.ProductLocal</local>
+        <ejb-link>datalayer.jar#ProductEJB</ejb-link>
+      </ejb-local-ref>
+      <ejb-local-ref>
+        <ejb-ref-name>ejb/CategoryHome</ejb-ref-name>
+        <ejb-ref-type>Entity</ejb-ref-type>
+        <local-home>ro.kds.erp.data.CategoryLocalHome</local-home>
+        <local>ro.kds.erp.data.CategoryLocal</local>
+        <ejb-link>datalayer.jar#CategoryEJB</ejb-link>
+      </ejb-local-ref>
+      <ejb-local-ref>
+        <ejb-ref-name>ejb/AttributeHome</ejb-ref-name>
+        <ejb-ref-type>Entity</ejb-ref-type>
+        <local-home>ro.kds.erp.data.AttributeLocalHome</local-home>
+        <local>ro.kds.erp.data.AttributeLocal</local>
+        <ejb-link>datalayer.jar#AttributeEJB</ejb-link>
+      </ejb-local-ref>
+      <ejb-local-ref>
+	<ejb-ref-name>ejb/ServiceFactory</ejb-ref-name>
+	<ejb-ref-type>Session</ejb-ref-type>
+	<local-home>ro.kds.erp.biz.ServiceFactoryLocalHome</local-home>
+	<local>ro.kds.erp.biz.ServiceFactoryLocal</local>
+	<ejb-link>factory.jar#ServiceFactoryEJB</ejb-link>
+      </ejb-local-ref>
+      
+    </session>
+
+
+
+    
+    <session>
+      <description>Implementare category manager pentru supralumina</description>
+      <display-name>SupraluminaCategoryManager</display-name>
+      <ejb-name>SupraluminaCategoryManagerEJB</ejb-name>
+      <local-home>ro.kds.erp.biz.CategoryManagerLocalHome</local-home>
+      <local>ro.kds.erp.biz.CategoryManagerLocal</local>
+
+      <ejb-class>ro.kds.erp.biz.setum.SupraluminaBizBean</ejb-class>
+      <session-type>Stateless</session-type>
+      <transaction-type>Container</transaction-type>
+
+      <env-entry>
+	<description>The folder under script directory where the
+	scripts for this business logic are located.</description>
+	<env-entry-name>script.prefix</env-entry-name>
+	<env-entry-type>java.lang.String</env-entry-type>
+	<env-entry-value>Supralumina</env-entry-value>
+      </env-entry>
+      <env-entry>
+        <description>Categoria din care face parte acest producs</description>
+        <env-entry-name>categoryId</env-entry-name>
+        <env-entry-type>java.lang.Integer</env-entry-type>
+        <env-entry-value>9981</env-entry-value>
+      </env-entry>
+      <ejb-ref>
+        <ejb-ref-name>ejb/PreferencesEJB</ejb-ref-name>
+        <ejb-ref-type>Session</ejb-ref-type>
+        <home>ro.kds.erp.biz.PreferencesHome</home>
+        <remote>ro.kds.erp.biz.Preferences</remote>
+      </ejb-ref>
+
+      <ejb-local-ref>
+        <ejb-ref-name>ejb/ProductHome</ejb-ref-name>
+        <ejb-ref-type>Entity</ejb-ref-type>
+        <local-home>ro.kds.erp.data.ProductLocalHome</local-home>
+        <local>ro.kds.erp.data.ProductLocal</local>
+        <ejb-link>datalayer.jar#ProductEJB</ejb-link>
+      </ejb-local-ref>
+      <ejb-local-ref>
+        <ejb-ref-name>ejb/CategoryHome</ejb-ref-name>
+        <ejb-ref-type>Entity</ejb-ref-type>
+        <local-home>ro.kds.erp.data.CategoryLocalHome</local-home>
+        <local>ro.kds.erp.data.CategoryLocal</local>
+        <ejb-link>datalayer.jar#CategoryEJB</ejb-link>
+      </ejb-local-ref>
+      <ejb-local-ref>
+        <ejb-ref-name>ejb/AttributeHome</ejb-ref-name>
+        <ejb-ref-type>Entity</ejb-ref-type>
+        <local-home>ro.kds.erp.data.AttributeLocalHome</local-home>
+        <local>ro.kds.erp.data.AttributeLocal</local>
+        <ejb-link>datalayer.jar#AttributeEJB</ejb-link>
+      </ejb-local-ref>
+      <ejb-local-ref>
+	<ejb-ref-name>ejb/ServiceFactory</ejb-ref-name>
+	<ejb-ref-type>Session</ejb-ref-type>
+	<local-home>ro.kds.erp.biz.ServiceFactoryLocalHome</local-home>
+	<local>ro.kds.erp.biz.ServiceFactoryLocal</local>
+	<ejb-link>factory.jar#ServiceFactoryEJB</ejb-link>
+      </ejb-local-ref>
+    </session>
+
+
+
+
+    <session>
+      <description>Implementare CategoryManager pentru panou lateral</description>
+      <display-name>PanouLateralCategoryManager</display-name>
+      <ejb-name>PanouLateralCategoryManagerEJB</ejb-name>
+      <local-home>ro.kds.erp.biz.CategoryManagerLocalHome</local-home>
+      <local>ro.kds.erp.biz.CategoryManagerLocal</local>
+
+      <ejb-class>ro.kds.erp.biz.setum.PanouLateralBizBean</ejb-class>
+      <session-type>Stateless</session-type>
+      <transaction-type>Container</transaction-type>
+      <env-entry>
+	<description>The folder under script directory where the
+	scripts for this business logic are located.</description>
+	<env-entry-name>script.prefix</env-entry-name>
+	<env-entry-type>java.lang.String</env-entry-type>
+	<env-entry-value>PanouLateral</env-entry-value>
+      </env-entry>
+      <env-entry>
+        <description>Categoria din care face parte acest producs</description>
+        <env-entry-name>categoryId</env-entry-name>
+        <env-entry-type>java.lang.Integer</env-entry-type>
+        <env-entry-value>9980</env-entry-value>
+      </env-entry>
+      <ejb-ref>
+        <ejb-ref-name>ejb/PreferencesEJB</ejb-ref-name>
+        <ejb-ref-type>Session</ejb-ref-type>
+        <home>ro.kds.erp.biz.PreferencesHome</home>
+        <remote>ro.kds.erp.biz.Preferences</remote>
+      </ejb-ref>
+
+      <ejb-local-ref>
+        <ejb-ref-name>ejb/ProductHome</ejb-ref-name>
+        <ejb-ref-type>Entity</ejb-ref-type>
+        <local-home>ro.kds.erp.data.ProductLocalHome</local-home>
+        <local>ro.kds.erp.data.ProductLocal</local>
+        <ejb-link>datalayer.jar#ProductEJB</ejb-link>
+      </ejb-local-ref>
+      <ejb-local-ref>
+        <ejb-ref-name>ejb/CategoryHome</ejb-ref-name>
+        <ejb-ref-type>Entity</ejb-ref-type>
+        <local-home>ro.kds.erp.data.CategoryLocalHome</local-home>
+        <local>ro.kds.erp.data.CategoryLocal</local>
+        <ejb-link>datalayer.jar#CategoryEJB</ejb-link>
+      </ejb-local-ref>
+      <ejb-local-ref>
+        <ejb-ref-name>ejb/AttributeHome</ejb-ref-name>
+        <ejb-ref-type>Entity</ejb-ref-type>
+        <local-home>ro.kds.erp.data.AttributeLocalHome</local-home>
+        <local>ro.kds.erp.data.AttributeLocal</local>
+        <ejb-link>datalayer.jar#AttributeEJB</ejb-link>
+      </ejb-local-ref>
+      <ejb-local-ref>
+	<ejb-ref-name>ejb/ServiceFactory</ejb-ref-name>
+	<ejb-ref-type>Session</ejb-ref-type>
+	<local-home>ro.kds.erp.biz.ServiceFactoryLocalHome</local-home>
+	<local>ro.kds.erp.biz.ServiceFactoryLocal</local>
+	<ejb-link>factory.jar#ServiceFactoryEJB</ejb-link>
+      </ejb-local-ref>
+    </session>
+
+
+
+
+
+
+
+
 
 
 
@@ -1613,7 +1899,112 @@
 
   <assembly-descriptor>
 
+    <security-role>
+      <description>Acces la setarile aplicatiei</description>
+      <role-name>setari</role-name>
+    </security-role>
+    <security-role>
+      <description>Modificarea ofertei standard (sisteme, usi standard)</description>
+      <role-name>administrare_sisteme</role-name>
+    </security-role>
+    <security-role>
+      <description>Creare/modificare comenzi</description>
+      <role-name>comandare</role-name>
+    </security-role>
+    <security-role>
+      <description>Creare/modificare oferte</description>
+      <role-name>ofertare</role-name>
+    </security-role>
+    <security-role>
+      <role-name>vizualizare_oferte</role-name>
+    </security-role>
+    <security-role>
+      <role-name>vizualizare_comenzi</role-name>
+    </security-role>
 
+
+    <method-permission>
+      <description>Acces la setarile aplicatiei</description>
+      <role-name>setari</role-name>
+      <method>
+	<ejb-name>GenericProductsEJB</ejb-name>
+	<method-name>loadFormData</method-name>
+      </method>
+      <method>
+	<ejb-name>GenericProductsEJB</ejb-name>
+	<method-name>saveFormData</method-name>
+      </method>
+      <method>
+	<ejb-name>GenericProductsEJB</ejb-name>
+	<method-name>getForm</method-name>
+      </method>
+      <method>
+	<ejb-name>GenericProductsEJB</ejb-name>
+	<method-name>saveProductData</method-name>
+      </method>
+      <method>
+	<ejb-name>GenericProductsEJB</ejb-name>
+	<method-name>loadProductData</method-name>
+      </method>
+      <method>
+	<ejb-name>GenericProductsEJB</ejb-name>
+	<method-name>saveAttributeData</method-name>
+      </method>
+      <method>
+	<ejb-name>GenericProductsEJB</ejb-name>
+	<method-name>loadAttributeData</method-name>
+      </method>
+      <method>
+	<ejb-name>GenericProductsEJB</ejb-name>
+	<method-name>getCurrentFormData</method-name>
+      </method>
+    </method-permission>
+
+    <method-permission>
+      <description>Acces vizualizare oferta</description>
+      <role-name>vizualizare_oferte</role-name>
+      <method>
+	<ejb-name>ArbitraryOfferEJB</ejb-name>
+	<method-name>loadListing</method-name>
+      </method>
+      <method>
+	<ejb-name>ArbitraryOfferEJB</ejb-name>
+	<method-name>loadFormData</method-name>
+      </method>
+      <method>
+	<ejb-name>ArbitraryOfferEJB</ejb-name>
+	<method-name>lineItemsListing</method-name>
+      </method>
+      <method>
+	<ejb-name>ArbitraryOfferEJB</ejb-name>
+	<method-name>loadSubForm</method-name>
+      </method>
+    </method-permission>
+    
+    <method-permission>
+      <description>Salvare modificari oferta</description>
+      <role-name>ofertare</role-name>
+      <method>
+	<ejb-name>ArbitraryOfferEJB</ejb-name>
+	<method-name>newFormData</method-name>
+      </method>
+      <method>
+	<ejb-name>ArbitraryOfferEJB</ejb-name>
+	<method-name>saveFormData</method-name>
+      </method>
+      <method>
+	<ejb-name>ArbitraryOfferEJB</ejb-name>
+	<method-name>addItem</method-name>
+      </method>
+      <method>
+	<ejb-name>ArbitraryOfferEJB</ejb-name>
+	<method-name>removeItem</method-name>
+      </method>
+      <method>
+	<ejb-name>ArbitraryOfferEJB</ejb-name>
+	<method-name>saveSubForm</method-name>
+      </method>
+    </method-permission>
 
     <!-- Transaction is Required for save methods -->
     <container-transaction>
@@ -1857,7 +2248,7 @@
 	<method-name>*</method-name>
       </method>
       <method>
-	<ejb-name>DefaultCategoryMangerEJB</ejb-name>
+	<ejb-name>DefaultCategoryManagerEJB</ejb-name>
 	<method-name>*</method-name>
       </method>
       <method>
@@ -1870,7 +2261,6 @@
       </method>
       <trans-attribute>Supports</trans-attribute>
     </container-transaction>
-
 
 
   </assembly-descriptor>

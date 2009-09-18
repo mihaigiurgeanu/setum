@@ -88,6 +88,7 @@ public class SistemBean extends ro.kds.erp.biz.setum.basic.SistemBean {
 	    form.setSellPrice(p.getSellPrice());
 	    form.setPartPrice(p.getPrice1());
 	    form.setLaborPrice(p.getPrice2());
+	    form.setDiscontinued(new Integer(p.getDiscontinued()?1:0));
 
 	    Map attributes = p.getAttributesMap();
 	    AttributeLocal a;
@@ -138,6 +139,7 @@ public class SistemBean extends ro.kds.erp.biz.setum.basic.SistemBean {
 	    p.setCategory(ch.findByPrimaryKey(form.getCategoryId()));
 	    p.setCode(form.getCode());
 	    p.setName(form.getName());
+	    p.setDiscontinued(form.getDiscontinued().intValue()==0?false:true);
 	    p.setEntryPrice(form.getEntryPrice());
 	    p.setSellPrice(form.getSellPrice());
 	    p.setPrice1(form.getPartPrice());

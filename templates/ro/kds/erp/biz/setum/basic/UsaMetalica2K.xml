@@ -168,6 +168,22 @@
     <type>Double</type>
   </field>
   <field>
+    <name>masca</name>
+    <type>Integer</type>
+  </field>
+  <field>
+    <name>lacrimar</name>
+    <type>Integer</type>
+  </field>
+  <field>
+    <name>bolturi</name>
+    <type>Integer</type>
+  </field>
+  <field>
+    <name>platbanda</name>
+    <type>Integer</type>
+  </field>
+  <field>
     <name>entryPrice</name>
     <type>java.math.BigDecimal</type>
   </field>
@@ -588,7 +604,52 @@
     <name>finisajPanouLateralExtInt</name>
     <type>Boolean</type>
   </field>
+  <field>
+    <!-- suprafata pentru finisaje -->
+    <name>suprafataBlat</name>
+    <type>Double</type>
+  </field>
+  <field>
+    <!-- suprafata pentru finisaje -->
+    <name>suprafataToc</name>
+    <type>Double</type>
+  </field>
+  <field>
+    <!-- suprafata pentru finisaje -->
+    <name>suprafataGrilaj</name>
+    <type>Double</type>
+  </field>
+  <field>
+    <!-- suprafata pentru finisaje -->
+    <name>suprafataFereastra</name>
+    <type>Double</type>
+  </field>
+  <field>
+    <!-- suprafata pentru finisaje -->
+    <name>suprafataSupralumina</name>
+    <type>Double</type>
+  </field>
+  <field>
+    <!-- suprafata pentru finisaje -->
+    <name>suprafataPanouLateral</name>
+    <type>Double</type>
+  </field>
+  <field>
+    <!-- suprafata pentru finisaje -->
+    <name>suprafataGrilaVentilatie</name>
+    <type>Double</type>
+  </field>
 
+  <!-- L executie, calculated field -->
+  <field>
+    <name>lexec</name>
+    <type>Double</type>
+  </field>
+  <!-- H executie, calculated field -->
+  <field>
+    <name>hexec</name>
+    <type>Double</type>
+  </field>
 
   <field>
     <!-- A code used in reports to group similar products together -->
@@ -637,7 +698,12 @@
       </params>
     </method>
 
-
+    <!-- Calculeaza campurile de pret. Valorile variabilelor schimbate
+    sunt adaugate automat la form si la response bean.-->
+    <method returnType="standard">
+      <name>computePrice</name>
+      <params></params>
+    </method>
   </services>
 
 

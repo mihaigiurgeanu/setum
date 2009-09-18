@@ -4,21 +4,27 @@
 // returning the data for the given row and column
 function make_treeview(objects, getCellText) {
 
-    var treeView = {
-	rowCount : objects.length,
-	getCellText : getCellText,
-	setTree: function(treebox){ this.treebox = treebox; },
-	isContainer: function(row){ return false; },
-	isSeparator: function(row){ return false; },
-	isSorted: function(row){ return false; }, 
-	getLevel: function(row){ return 0; },
-	getImageSrc: function(row,col){ return null; },
-	getRowProperties: function(row,props){},
-	getCellProperties: function(row,col,props){},
-	getColumnProperties: function(colid,col,props){}
-    };
-
-    return treeView;
+  var treeView = {
+  treebox : null,
+  selection : null,
+  rowCount : objects.length,
+  getCellText : getCellText,
+  setTree: function(treebox){ this.treebox = treebox; },
+  isContainer: function(row){ return false; },
+  isSeparator: function(row){ return false; },
+  isSorted: function(row){ return false; }, 
+  canDrop: function(index, orientation){ return false; },
+  getLevel: function(row){ return 0; },
+  getImageSrc: function(row,col){ return ""; },
+  getRowProperties: function(row,props){},
+  getCellProperties: function(row,col,props){},
+  getColumnProperties: function(colid,col,props){},
+  selectionChanged: function() {},
+  isEditable: function(row, col) { return false; },
+  isSelectable: function(row, col) { return true; }
+  };
+  
+  return treeView;
 }
 
 
@@ -58,7 +64,14 @@ function RemoteDataView(do_link, load_data_request, get_length_request, initOnCl
 
 
 RemoteDataView.prototype.get_cell_text = function (row, col) {
+  var theRow;
+  theRow = this.get_row(row);
+  if(theRow) {
     return this.get_row(row)[col];
+  }
+  else {
+    return undefined;
+  }
 }
 
 RemoteDataView.prototype.get_row = function (row) {
@@ -67,6 +80,7 @@ RemoteDataView.prototype.get_row = function (row) {
 	return undefined;
     }
     if(this.rows[row] == undefined) {
+      
 	var req = new HTTPDataRequest(this.do_link);
 	req.add("command", this.load_data_request);
 	req.add("param0", row);
@@ -76,9 +90,9 @@ RemoteDataView.prototype.get_row = function (row) {
 		alert(response.message + "\n\nCod: " + response.code);
 	    }
 	    if(response.code == 0) {
-		for(var i = 0; i < response.records.length; i++) {
-		    this.rows[row + i] = response.records[i];
-		}
+ 	      for(var i = 0; i < response.records.length; i++) {
+ 		this.rows[row + i] = response.records[i];
+ 	      }
 	    }
 	}
     }

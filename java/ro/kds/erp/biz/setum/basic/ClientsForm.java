@@ -36,6 +36,7 @@ public class ClientsForm implements Serializable {
     String city;
     String countryCode;
     String companyCode;
+    String regCom;
     String phone;
     String iban;
     String bank;
@@ -86,6 +87,10 @@ public class ClientsForm implements Serializable {
 
 
        this.companyCode = "";
+
+
+
+       this.regCom = "";
 
 
 
@@ -275,6 +280,21 @@ public class ClientsForm implements Serializable {
 	AttributeLocal a = (AttributeLocal)attributes.get("companyCode");
 	if(a != null) {
 	    this.setCompanyCode(a.getStringValue());
+	}
+    }
+
+    public void setRegCom(String newRegCom) {
+        this.regCom = newRegCom;
+    }
+
+    public String getRegCom() {
+        return regCom;
+    }
+
+    public void readRegCom(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("regCom");
+	if(a != null) {
+	    this.setRegCom(a.getStringValue());
 	}
     }
 

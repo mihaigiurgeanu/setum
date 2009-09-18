@@ -37,6 +37,19 @@ public interface ArbitraryOffer extends EJBObject {
     public ResponseBean updateName(String newName) throws RemoteException;
     public ResponseBean updateDescription(String newDescription) throws RemoteException;
     public ResponseBean updateComment(String newComment) throws RemoteException;
+    public ResponseBean updateContract(String newContract) throws RemoteException;
+    public ResponseBean updateAnexa(String newAnexa) throws RemoteException;
+    public ResponseBean updateTerms(String newTerms) throws RemoteException;
+    public ResponseBean updateAttribute1(String newAttribute1) throws RemoteException;
+    public ResponseBean updateAttribute2(String newAttribute2) throws RemoteException;
+    public ResponseBean updateAttribute3(String newAttribute3) throws RemoteException;
+    public ResponseBean updateAttribute4(String newAttribute4) throws RemoteException;
+    public ResponseBean updateAttribute5(String newAttribute5) throws RemoteException;
+    public ResponseBean updateAttribute6(String newAttribute6) throws RemoteException;
+    public ResponseBean updateAttribute7(String newAttribute7) throws RemoteException;
+    public ResponseBean updateAttribute8(String newAttribute8) throws RemoteException;
+    public ResponseBean updateAttribute9(String newAttribute9) throws RemoteException;
+    public ResponseBean updateAttribute10(String newAttribute10) throws RemoteException;
     public ResponseBean updateProductId(Integer newProductId) throws RemoteException;
     public ResponseBean updatePrice(java.math.BigDecimal newPrice) throws RemoteException;
     public ResponseBean updateQuantity(java.math.BigDecimal newQuantity) throws RemoteException;
@@ -55,10 +68,18 @@ public interface ArbitraryOffer extends EJBObject {
     public ResponseBean updateMontajProcent(Double newMontajProcent) throws RemoteException;
     public ResponseBean updateMontajSeparat(Boolean newMontajSeparat) throws RemoteException;
     public ResponseBean updateLocationId(Integer newLocationId) throws RemoteException;
+    public ResponseBean updateOtherLocation(String newOtherLocation) throws RemoteException;
     public ResponseBean updateDistance(java.math.BigDecimal newDistance) throws RemoteException;
     public ResponseBean updateDeliveries(Integer newDeliveries) throws RemoteException;
     public ResponseBean updateValMontaj(java.math.BigDecimal newValMontaj) throws RemoteException;
     public ResponseBean updateValTransport(java.math.BigDecimal newValTransport) throws RemoteException;
+    public ResponseBean updateClientContactId(Integer newClientContactId) throws RemoteException;
+    public ResponseBean updateContact(String newContact) throws RemoteException;
+    public ResponseBean updateClientContactName(String newClientContactName) throws RemoteException;
+    public ResponseBean updateClientContactPhone(String newClientContactPhone) throws RemoteException;
+    public ResponseBean updateClientContactFax(String newClientContactFax) throws RemoteException;
+    public ResponseBean updateClientContactMobile(String newClientContactMobile) throws RemoteException;
+    public ResponseBean updateClientContactEmail(String newClientContactEmail) throws RemoteException;
 
     public ResponseBean loadListing() throws RemoteException;
     public ResponseBean lineItemsListing() throws RemoteException;

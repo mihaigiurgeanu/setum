@@ -105,6 +105,9 @@
     <msg:Message>Acest tip de fereastra nu se executa pentru usa selectata</msg:Message>
   </rdf:Description>
 
+  <rdf:Description rdf:about="http://www.kds.ro/readybeans/rdf/validation/message/discontinued">
+    <msg:Message>Produsul nu mai este disponibil pentru vanzare</msg:Message>
+  </rdf:Description>
 
 
   <!-- PanouLateral -->

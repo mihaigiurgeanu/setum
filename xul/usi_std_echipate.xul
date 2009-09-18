@@ -134,7 +134,10 @@
 	    </row>
 	  </rows>
 	</grid>
-
+	<radiogroup id="discontinued" orient="horizontal">
+	  <radio id="discontinued.0" value="0" label="Produsul disponibil"/>
+	  <radio id="discontinued.1" value="1" label="NU este disponibil"/>
+	</radiogroup>
 
       </tabpanel>
 

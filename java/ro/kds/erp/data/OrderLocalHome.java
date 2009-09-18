@@ -4,6 +4,7 @@ import javax.ejb.EJBLocalHome;
 import javax.ejb.CreateException;
 import javax.ejb.FinderException;
 import java.util.Collection;
+import java.util.Date;
 
 
 
@@ -20,4 +21,5 @@ public interface OrderLocalHome extends EJBLocalHome {
     public OrderLocal create() throws CreateException, DataLayerException;
     public OrderLocal findByPrimaryKey(Integer id) throws FinderException;
     public Collection findAll() throws FinderException;
+    public Collection findLivrari(Date start, Date end) throws FinderException;
 }

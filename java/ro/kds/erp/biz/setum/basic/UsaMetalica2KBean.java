@@ -1355,6 +1355,110 @@ public abstract class UsaMetalica2KBean
 	computeCalculatedFields(r);
 	return r;
     }
+    public ResponseBean updateMasca(Integer masca) {
+        ResponseBean r = new ResponseBean();
+	Integer oldVal = form.getMasca();
+	form.setMasca(masca);
+	r.addRecord();
+	r.addField("masca", masca); // for number format
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".masca");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
+		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
+		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the masca", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
+    public ResponseBean updateLacrimar(Integer lacrimar) {
+        ResponseBean r = new ResponseBean();
+	Integer oldVal = form.getLacrimar();
+	form.setLacrimar(lacrimar);
+	r.addRecord();
+	r.addField("lacrimar", lacrimar); // for number format
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".lacrimar");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
+		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
+		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the lacrimar", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
+    public ResponseBean updateBolturi(Integer bolturi) {
+        ResponseBean r = new ResponseBean();
+	Integer oldVal = form.getBolturi();
+	form.setBolturi(bolturi);
+	r.addRecord();
+	r.addField("bolturi", bolturi); // for number format
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".bolturi");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
+		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
+		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the bolturi", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
+    public ResponseBean updatePlatbanda(Integer platbanda) {
+        ResponseBean r = new ResponseBean();
+	Integer oldVal = form.getPlatbanda();
+	form.setPlatbanda(platbanda);
+	r.addRecord();
+	r.addField("platbanda", platbanda); // for number format
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".platbanda");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
+		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
+		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the platbanda", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
     public ResponseBean updateEntryPrice(java.math.BigDecimal entryPrice) {
         ResponseBean r = new ResponseBean();
 	java.math.BigDecimal oldVal = form.getEntryPrice();
@@ -4007,6 +4111,240 @@ public abstract class UsaMetalica2KBean
 	computeCalculatedFields(r);
 	return r;
     }
+    public ResponseBean updateSuprafataBlat(Double suprafataBlat) {
+        ResponseBean r = new ResponseBean();
+	Double oldVal = form.getSuprafataBlat();
+	form.setSuprafataBlat(suprafataBlat);
+	r.addRecord();
+	r.addField("suprafataBlat", suprafataBlat); // for number format
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".suprafataBlat");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
+		script.setVar(OLDVAL_VARNAME, oldVal, Double.class);
+		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the suprafataBlat", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
+    public ResponseBean updateSuprafataToc(Double suprafataToc) {
+        ResponseBean r = new ResponseBean();
+	Double oldVal = form.getSuprafataToc();
+	form.setSuprafataToc(suprafataToc);
+	r.addRecord();
+	r.addField("suprafataToc", suprafataToc); // for number format
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".suprafataToc");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
+		script.setVar(OLDVAL_VARNAME, oldVal, Double.class);
+		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the suprafataToc", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
+    public ResponseBean updateSuprafataGrilaj(Double suprafataGrilaj) {
+        ResponseBean r = new ResponseBean();
+	Double oldVal = form.getSuprafataGrilaj();
+	form.setSuprafataGrilaj(suprafataGrilaj);
+	r.addRecord();
+	r.addField("suprafataGrilaj", suprafataGrilaj); // for number format
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".suprafataGrilaj");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
+		script.setVar(OLDVAL_VARNAME, oldVal, Double.class);
+		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the suprafataGrilaj", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
+    public ResponseBean updateSuprafataFereastra(Double suprafataFereastra) {
+        ResponseBean r = new ResponseBean();
+	Double oldVal = form.getSuprafataFereastra();
+	form.setSuprafataFereastra(suprafataFereastra);
+	r.addRecord();
+	r.addField("suprafataFereastra", suprafataFereastra); // for number format
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".suprafataFereastra");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
+		script.setVar(OLDVAL_VARNAME, oldVal, Double.class);
+		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the suprafataFereastra", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
+    public ResponseBean updateSuprafataSupralumina(Double suprafataSupralumina) {
+        ResponseBean r = new ResponseBean();
+	Double oldVal = form.getSuprafataSupralumina();
+	form.setSuprafataSupralumina(suprafataSupralumina);
+	r.addRecord();
+	r.addField("suprafataSupralumina", suprafataSupralumina); // for number format
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".suprafataSupralumina");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
+		script.setVar(OLDVAL_VARNAME, oldVal, Double.class);
+		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the suprafataSupralumina", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
+    public ResponseBean updateSuprafataPanouLateral(Double suprafataPanouLateral) {
+        ResponseBean r = new ResponseBean();
+	Double oldVal = form.getSuprafataPanouLateral();
+	form.setSuprafataPanouLateral(suprafataPanouLateral);
+	r.addRecord();
+	r.addField("suprafataPanouLateral", suprafataPanouLateral); // for number format
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".suprafataPanouLateral");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
+		script.setVar(OLDVAL_VARNAME, oldVal, Double.class);
+		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the suprafataPanouLateral", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
+    public ResponseBean updateSuprafataGrilaVentilatie(Double suprafataGrilaVentilatie) {
+        ResponseBean r = new ResponseBean();
+	Double oldVal = form.getSuprafataGrilaVentilatie();
+	form.setSuprafataGrilaVentilatie(suprafataGrilaVentilatie);
+	r.addRecord();
+	r.addField("suprafataGrilaVentilatie", suprafataGrilaVentilatie); // for number format
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".suprafataGrilaVentilatie");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
+		script.setVar(OLDVAL_VARNAME, oldVal, Double.class);
+		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the suprafataGrilaVentilatie", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
+    public ResponseBean updateLexec(Double lexec) {
+        ResponseBean r = new ResponseBean();
+	Double oldVal = form.getLexec();
+	form.setLexec(lexec);
+	r.addRecord();
+	r.addField("lexec", lexec); // for number format
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".lexec");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
+		script.setVar(OLDVAL_VARNAME, oldVal, Double.class);
+		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the lexec", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
+    public ResponseBean updateHexec(Double hexec) {
+        ResponseBean r = new ResponseBean();
+	Double oldVal = form.getHexec();
+	form.setHexec(hexec);
+	r.addRecord();
+	r.addField("hexec", hexec); // for number format
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".hexec");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
+		script.setVar(OLDVAL_VARNAME, oldVal, Double.class);
+		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the hexec", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
     public ResponseBean updateGroupingCode(String groupingCode) {
         ResponseBean r = new ResponseBean();
 	String oldVal = form.getGroupingCode();
@@ -4163,6 +4501,45 @@ public abstract class UsaMetalica2KBean
         }
 	return r;
     }
+    /**
+     * Generated implementation of the computePrice service. It will call
+     * the script ro.kds.erp.biz.setum.basic.UsaMetalica2K.computePrice
+     * to execute the request.
+     * 
+     * The <code>ResponseBean</code> to be returned will be automatically populated with the
+     * fields modified by the script and the changes will be automatically added to the
+     * form bean.
+     *
+     * @return a <code>ResponseBean</code> containing the field values that were changed by
+     * the script and any of the fields added to it by the script.
+     * 
+     */
+    public ResponseBean computePrice (
+    ) {
+
+
+        ResponseBean r = new ResponseBean();
+        r.addRecord();
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".computePrice");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
+		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
+
+
+		
+		addFieldsToScript(script);
+		script.run();
+                getFieldsFromScript(script, r);
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for service computePrice", e);
+           }
+        }
+	return r;
+    }
 
     /**
      * Get the fields stored internaly and adds them to the response.
@@ -4209,6 +4586,10 @@ public abstract class UsaMetalica2KBean
 	r.addField("tresholdSpace", form.getTresholdSpace());
 	r.addField("h1Treshold", form.getH1Treshold());
 	r.addField("h2Treshold", form.getH2Treshold());
+	r.addField("masca", form.getMasca());
+	r.addField("lacrimar", form.getLacrimar());
+	r.addField("bolturi", form.getBolturi());
+	r.addField("platbanda", form.getPlatbanda());
 	r.addField("entryPrice", form.getEntryPrice());
 	r.addField("sellPrice", form.getSellPrice());
 	r.addField("montareSistem", form.getMontareSistem());
@@ -4311,6 +4692,15 @@ public abstract class UsaMetalica2KBean
 	r.addField("finisajFereastraExtInt", form.getFinisajFereastraExtInt());
 	r.addField("finisajSupraluminaExtInt", form.getFinisajSupraluminaExtInt());
 	r.addField("finisajPanouLateralExtInt", form.getFinisajPanouLateralExtInt());
+	r.addField("suprafataBlat", form.getSuprafataBlat());
+	r.addField("suprafataToc", form.getSuprafataToc());
+	r.addField("suprafataGrilaj", form.getSuprafataGrilaj());
+	r.addField("suprafataFereastra", form.getSuprafataFereastra());
+	r.addField("suprafataSupralumina", form.getSuprafataSupralumina());
+	r.addField("suprafataPanouLateral", form.getSuprafataPanouLateral());
+	r.addField("suprafataGrilaVentilatie", form.getSuprafataGrilaVentilatie());
+	r.addField("lexec", form.getLexec());
+	r.addField("hexec", form.getHexec());
 	r.addField("groupingCode", form.getGroupingCode());
 	loadValueLists(r);
     }
@@ -4571,6 +4961,30 @@ public abstract class UsaMetalica2KBean
 	    s.setVar("h2Treshold", form.getH2Treshold(), Double.class);
 	} catch (ScriptErrorException e) {
 	    logger.log(BasicLevel.WARN, "Can not set the value of field: h2Treshold from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    s.setVar("masca", form.getMasca(), Integer.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: masca from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    s.setVar("lacrimar", form.getLacrimar(), Integer.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: lacrimar from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    s.setVar("bolturi", form.getBolturi(), Integer.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: bolturi from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    s.setVar("platbanda", form.getPlatbanda(), Integer.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: platbanda from the script");
             logger.log(BasicLevel.DEBUG, e);
         }
 	try {
@@ -5186,6 +5600,60 @@ public abstract class UsaMetalica2KBean
             logger.log(BasicLevel.DEBUG, e);
         }
 	try {
+	    s.setVar("suprafataBlat", form.getSuprafataBlat(), Double.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: suprafataBlat from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    s.setVar("suprafataToc", form.getSuprafataToc(), Double.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: suprafataToc from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    s.setVar("suprafataGrilaj", form.getSuprafataGrilaj(), Double.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: suprafataGrilaj from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    s.setVar("suprafataFereastra", form.getSuprafataFereastra(), Double.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: suprafataFereastra from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    s.setVar("suprafataSupralumina", form.getSuprafataSupralumina(), Double.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: suprafataSupralumina from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    s.setVar("suprafataPanouLateral", form.getSuprafataPanouLateral(), Double.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: suprafataPanouLateral from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    s.setVar("suprafataGrilaVentilatie", form.getSuprafataGrilaVentilatie(), Double.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: suprafataGrilaVentilatie from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    s.setVar("lexec", form.getLexec(), Double.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: lexec from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    s.setVar("hexec", form.getHexec(), Double.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: hexec from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
 	    s.setVar("groupingCode", form.getGroupingCode(), String.class);
 	} catch (ScriptErrorException e) {
 	    logger.log(BasicLevel.WARN, "Can not set the value of field: groupingCode from the script");
@@ -5649,6 +6117,50 @@ public abstract class UsaMetalica2KBean
 	    }
 	} catch (ScriptErrorException e) {
 	    logger.log(BasicLevel.WARN, "Can not get the value of field: h2Treshold from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    field = s.getVar("masca", Integer.class);
+	    if(!field.equals(form.getMasca())) {
+	        logger.log(BasicLevel.DEBUG, "Field masca modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setMasca((Integer)field);
+	        r.addField("masca", (Integer)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: masca from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    field = s.getVar("lacrimar", Integer.class);
+	    if(!field.equals(form.getLacrimar())) {
+	        logger.log(BasicLevel.DEBUG, "Field lacrimar modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setLacrimar((Integer)field);
+	        r.addField("lacrimar", (Integer)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: lacrimar from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    field = s.getVar("bolturi", Integer.class);
+	    if(!field.equals(form.getBolturi())) {
+	        logger.log(BasicLevel.DEBUG, "Field bolturi modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setBolturi((Integer)field);
+	        r.addField("bolturi", (Integer)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: bolturi from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    field = s.getVar("platbanda", Integer.class);
+	    if(!field.equals(form.getPlatbanda())) {
+	        logger.log(BasicLevel.DEBUG, "Field platbanda modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setPlatbanda((Integer)field);
+	        r.addField("platbanda", (Integer)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: platbanda from the script");
             logger.log(BasicLevel.DEBUG, e);
         }
 	try {
@@ -6771,6 +7283,105 @@ public abstract class UsaMetalica2KBean
 	    }
 	} catch (ScriptErrorException e) {
 	    logger.log(BasicLevel.WARN, "Can not get the value of field: finisajPanouLateralExtInt from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    field = s.getVar("suprafataBlat", Double.class);
+	    if(!field.equals(form.getSuprafataBlat())) {
+	        logger.log(BasicLevel.DEBUG, "Field suprafataBlat modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setSuprafataBlat((Double)field);
+	        r.addField("suprafataBlat", (Double)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: suprafataBlat from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    field = s.getVar("suprafataToc", Double.class);
+	    if(!field.equals(form.getSuprafataToc())) {
+	        logger.log(BasicLevel.DEBUG, "Field suprafataToc modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setSuprafataToc((Double)field);
+	        r.addField("suprafataToc", (Double)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: suprafataToc from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    field = s.getVar("suprafataGrilaj", Double.class);
+	    if(!field.equals(form.getSuprafataGrilaj())) {
+	        logger.log(BasicLevel.DEBUG, "Field suprafataGrilaj modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setSuprafataGrilaj((Double)field);
+	        r.addField("suprafataGrilaj", (Double)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: suprafataGrilaj from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    field = s.getVar("suprafataFereastra", Double.class);
+	    if(!field.equals(form.getSuprafataFereastra())) {
+	        logger.log(BasicLevel.DEBUG, "Field suprafataFereastra modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setSuprafataFereastra((Double)field);
+	        r.addField("suprafataFereastra", (Double)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: suprafataFereastra from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    field = s.getVar("suprafataSupralumina", Double.class);
+	    if(!field.equals(form.getSuprafataSupralumina())) {
+	        logger.log(BasicLevel.DEBUG, "Field suprafataSupralumina modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setSuprafataSupralumina((Double)field);
+	        r.addField("suprafataSupralumina", (Double)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: suprafataSupralumina from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    field = s.getVar("suprafataPanouLateral", Double.class);
+	    if(!field.equals(form.getSuprafataPanouLateral())) {
+	        logger.log(BasicLevel.DEBUG, "Field suprafataPanouLateral modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setSuprafataPanouLateral((Double)field);
+	        r.addField("suprafataPanouLateral", (Double)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: suprafataPanouLateral from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    field = s.getVar("suprafataGrilaVentilatie", Double.class);
+	    if(!field.equals(form.getSuprafataGrilaVentilatie())) {
+	        logger.log(BasicLevel.DEBUG, "Field suprafataGrilaVentilatie modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setSuprafataGrilaVentilatie((Double)field);
+	        r.addField("suprafataGrilaVentilatie", (Double)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: suprafataGrilaVentilatie from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    field = s.getVar("lexec", Double.class);
+	    if(!field.equals(form.getLexec())) {
+	        logger.log(BasicLevel.DEBUG, "Field lexec modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setLexec((Double)field);
+	        r.addField("lexec", (Double)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: lexec from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    field = s.getVar("hexec", Double.class);
+	    if(!field.equals(form.getHexec())) {
+	        logger.log(BasicLevel.DEBUG, "Field hexec modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setHexec((Double)field);
+	        r.addField("hexec", (Double)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: hexec from the script");
             logger.log(BasicLevel.DEBUG, e);
         }
 	try {

@@ -18,6 +18,8 @@ import javax.naming.Context;
 import java.util.Map;
 import java.util.ArrayList;
 import ro.kds.erp.data.CategoryLocal;
+import java.util.Collection;
+import java.util.Iterator;
 
 /**
  * Describe class GrilaVentilatieBizBean here.
@@ -61,7 +63,10 @@ public class GrilaVentilatieBizBean extends GrilaVentilatieBean {
 		p = ph.findByPrimaryKey(id);
 	    }
 
-	    p.setDescription("Grila ventilatie " + form.getLgv() + "x" + form.getHgv());
+	    p.setDescription(String.format("Grila ventilatie %.0f x %.0f", form.getLgv(), form.getHgv()));
+	    p.setEntryPrice(form.getEntryPrice());
+	    p.setSellPrice(form.getSellPrice());
+	    p.setPrice1(form.getPrice1());
 
 	    AttributeLocalHome ah = (AttributeLocalHome)PortableRemoteObject.
 		narrow(env.lookup("ejb/AttributeHome"), 
@@ -182,8 +187,62 @@ public class GrilaVentilatieBizBean extends GrilaVentilatieBean {
 	    r.addField("groupingCode", gcodestr);
 	}
 
+
+	try {
+		InitialContext ic = new InitialContext();
+		Context env = (Context)ic.lookup("java:comp/env");
+		CategoryLocalHome ch = (CategoryLocalHome)PortableRemoteObject.narrow
+		    (env.lookup("ejb/CategoryHome"), CategoryLocalHome.class);
+		CategoryLocal c = ch.findByPrimaryKey(new Integer(11099));
+		Collection grileStd = c.getProducts();
+		for(Iterator i = grileStd.iterator(); i.hasNext();) {
+		    ProductLocal p = (ProductLocal)i.next();
+		    Map attributes = p.getAttributesMap();
+		    
+		    AttributeLocal l = (AttributeLocal)attributes.get("L");
+		    AttributeLocal h = (AttributeLocal)attributes.get("H");
+		    if(l != null
+		       && l.getDoubleValue().equals(form.getLgv())
+		       && h!= null
+		       && h.getDoubleValue().equals(form.getHgv())
+		       ) {
+			form.setPrice1(new BigDecimal(p.getPrice1().doubleValue() * form.getQuantity().intValue()));
+			form.setSellPrice(form.getPrice1());
+			form.setEntryPrice(new BigDecimal(p.getEntryPrice().doubleValue() * form.getQuantity().intValue()));
+		    }
+		}
+	    } catch (Exception e) {
+		logger.log(BasicLevel.WARN, 
+			   "Error while updating lf and hf fields based on standard field",
+			   e);
+	    }
+
 	return r;
     }
-  
+
+    public ResponseBean getProductReport(Integer productId) {
+	ResponseBean r;
+	try {
+	    r = loadFormData(productId);
+	    InitialContext ic = new InitialContext();
+	    Context env = (Context)ic.lookup("java:comp/env");
+	    ProductLocalHome ph = (ProductLocalHome)PortableRemoteObject.
+		narrow(env.lookup("ejb/ProductHome"), ProductLocalHome.class);
+	    ProductLocal p = ph.findByPrimaryKey(productId);
+
+	    r.addField("category.name", p.getCategory().getName());
+	    r.addField("category.id", p.getCategory().getId());
+	} catch (FinderException e) {
+	    logger.log(BasicLevel.ERROR, "FinderException in FereastraBizBean.getProductReport for productId " + productId);
+	    logger.log(BasicLevel.DEBUG, e);
+	    r = ResponseBean.getErrNotFound(e.getMessage());
+	}
+	catch (NamingException e) {
+	    logger.log(BasicLevel.ERROR, "NamingException when preparing to get the report for the product id " + productId + ": " + e.getMessage());
+	    logger.log(BasicLevel.DEBUG, e);
+	    r = ResponseBean.getErrConfigNaming(e.getMessage());
+	}
+	return r;
+    }
 
 }

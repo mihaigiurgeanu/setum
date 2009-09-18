@@ -575,6 +575,344 @@ public abstract class ArbitraryOfferBean
 	computeCalculatedFields(r);
 	return r;
     }
+    public ResponseBean updateContract(String contract) {
+        ResponseBean r = new ResponseBean();
+	String oldVal = form.getContract();
+	form.setContract(contract);
+	r.addRecord();
+	r.addField("contract", contract); // for number format
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".contract");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
+		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
+		script.setVar(FORM_VARNAME, form, ArbitraryOfferForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the contract", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
+    public ResponseBean updateAnexa(String anexa) {
+        ResponseBean r = new ResponseBean();
+	String oldVal = form.getAnexa();
+	form.setAnexa(anexa);
+	r.addRecord();
+	r.addField("anexa", anexa); // for number format
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".anexa");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
+		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
+		script.setVar(FORM_VARNAME, form, ArbitraryOfferForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the anexa", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
+    public ResponseBean updateTerms(String terms) {
+        ResponseBean r = new ResponseBean();
+	String oldVal = form.getTerms();
+	form.setTerms(terms);
+	r.addRecord();
+	r.addField("terms", terms); // for number format
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".terms");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
+		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
+		script.setVar(FORM_VARNAME, form, ArbitraryOfferForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the terms", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
+    public ResponseBean updateAttribute1(String attribute1) {
+        ResponseBean r = new ResponseBean();
+	String oldVal = form.getAttribute1();
+	form.setAttribute1(attribute1);
+	r.addRecord();
+	r.addField("attribute1", attribute1); // for number format
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".attribute1");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
+		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
+		script.setVar(FORM_VARNAME, form, ArbitraryOfferForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the attribute1", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
+    public ResponseBean updateAttribute2(String attribute2) {
+        ResponseBean r = new ResponseBean();
+	String oldVal = form.getAttribute2();
+	form.setAttribute2(attribute2);
+	r.addRecord();
+	r.addField("attribute2", attribute2); // for number format
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".attribute2");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
+		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
+		script.setVar(FORM_VARNAME, form, ArbitraryOfferForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the attribute2", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
+    public ResponseBean updateAttribute3(String attribute3) {
+        ResponseBean r = new ResponseBean();
+	String oldVal = form.getAttribute3();
+	form.setAttribute3(attribute3);
+	r.addRecord();
+	r.addField("attribute3", attribute3); // for number format
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".attribute3");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
+		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
+		script.setVar(FORM_VARNAME, form, ArbitraryOfferForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the attribute3", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
+    public ResponseBean updateAttribute4(String attribute4) {
+        ResponseBean r = new ResponseBean();
+	String oldVal = form.getAttribute4();
+	form.setAttribute4(attribute4);
+	r.addRecord();
+	r.addField("attribute4", attribute4); // for number format
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".attribute4");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
+		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
+		script.setVar(FORM_VARNAME, form, ArbitraryOfferForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the attribute4", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
+    public ResponseBean updateAttribute5(String attribute5) {
+        ResponseBean r = new ResponseBean();
+	String oldVal = form.getAttribute5();
+	form.setAttribute5(attribute5);
+	r.addRecord();
+	r.addField("attribute5", attribute5); // for number format
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".attribute5");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
+		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
+		script.setVar(FORM_VARNAME, form, ArbitraryOfferForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the attribute5", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
+    public ResponseBean updateAttribute6(String attribute6) {
+        ResponseBean r = new ResponseBean();
+	String oldVal = form.getAttribute6();
+	form.setAttribute6(attribute6);
+	r.addRecord();
+	r.addField("attribute6", attribute6); // for number format
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".attribute6");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
+		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
+		script.setVar(FORM_VARNAME, form, ArbitraryOfferForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the attribute6", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
+    public ResponseBean updateAttribute7(String attribute7) {
+        ResponseBean r = new ResponseBean();
+	String oldVal = form.getAttribute7();
+	form.setAttribute7(attribute7);
+	r.addRecord();
+	r.addField("attribute7", attribute7); // for number format
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".attribute7");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
+		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
+		script.setVar(FORM_VARNAME, form, ArbitraryOfferForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the attribute7", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
+    public ResponseBean updateAttribute8(String attribute8) {
+        ResponseBean r = new ResponseBean();
+	String oldVal = form.getAttribute8();
+	form.setAttribute8(attribute8);
+	r.addRecord();
+	r.addField("attribute8", attribute8); // for number format
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".attribute8");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
+		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
+		script.setVar(FORM_VARNAME, form, ArbitraryOfferForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the attribute8", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
+    public ResponseBean updateAttribute9(String attribute9) {
+        ResponseBean r = new ResponseBean();
+	String oldVal = form.getAttribute9();
+	form.setAttribute9(attribute9);
+	r.addRecord();
+	r.addField("attribute9", attribute9); // for number format
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".attribute9");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
+		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
+		script.setVar(FORM_VARNAME, form, ArbitraryOfferForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the attribute9", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
+    public ResponseBean updateAttribute10(String attribute10) {
+        ResponseBean r = new ResponseBean();
+	String oldVal = form.getAttribute10();
+	form.setAttribute10(attribute10);
+	r.addRecord();
+	r.addField("attribute10", attribute10); // for number format
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".attribute10");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
+		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
+		script.setVar(FORM_VARNAME, form, ArbitraryOfferForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the attribute10", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
     public ResponseBean updateProductId(Integer productId) {
         ResponseBean r = new ResponseBean();
 	Integer oldVal = form.getProductId();
@@ -1043,6 +1381,32 @@ public abstract class ArbitraryOfferBean
 	computeCalculatedFields(r);
 	return r;
     }
+    public ResponseBean updateOtherLocation(String otherLocation) {
+        ResponseBean r = new ResponseBean();
+	String oldVal = form.getOtherLocation();
+	form.setOtherLocation(otherLocation);
+	r.addRecord();
+	r.addField("otherLocation", otherLocation); // for number format
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".otherLocation");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
+		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
+		script.setVar(FORM_VARNAME, form, ArbitraryOfferForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the otherLocation", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
     public ResponseBean updateDistance(java.math.BigDecimal distance) {
         ResponseBean r = new ResponseBean();
 	java.math.BigDecimal oldVal = form.getDistance();
@@ -1147,6 +1511,188 @@ public abstract class ArbitraryOfferBean
 	computeCalculatedFields(r);
 	return r;
     }
+    public ResponseBean updateClientContactId(Integer clientContactId) {
+        ResponseBean r = new ResponseBean();
+	Integer oldVal = form.getClientContactId();
+	form.setClientContactId(clientContactId);
+	r.addRecord();
+	r.addField("clientContactId", clientContactId); // for number format
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".clientContactId");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
+		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
+		script.setVar(FORM_VARNAME, form, ArbitraryOfferForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the clientContactId", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
+    public ResponseBean updateContact(String contact) {
+        ResponseBean r = new ResponseBean();
+	String oldVal = form.getContact();
+	form.setContact(contact);
+	r.addRecord();
+	r.addField("contact", contact); // for number format
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".contact");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
+		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
+		script.setVar(FORM_VARNAME, form, ArbitraryOfferForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the contact", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
+    public ResponseBean updateClientContactName(String clientContactName) {
+        ResponseBean r = new ResponseBean();
+	String oldVal = form.getClientContactName();
+	form.setClientContactName(clientContactName);
+	r.addRecord();
+	r.addField("clientContactName", clientContactName); // for number format
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".clientContactName");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
+		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
+		script.setVar(FORM_VARNAME, form, ArbitraryOfferForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the clientContactName", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
+    public ResponseBean updateClientContactPhone(String clientContactPhone) {
+        ResponseBean r = new ResponseBean();
+	String oldVal = form.getClientContactPhone();
+	form.setClientContactPhone(clientContactPhone);
+	r.addRecord();
+	r.addField("clientContactPhone", clientContactPhone); // for number format
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".clientContactPhone");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
+		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
+		script.setVar(FORM_VARNAME, form, ArbitraryOfferForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the clientContactPhone", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
+    public ResponseBean updateClientContactFax(String clientContactFax) {
+        ResponseBean r = new ResponseBean();
+	String oldVal = form.getClientContactFax();
+	form.setClientContactFax(clientContactFax);
+	r.addRecord();
+	r.addField("clientContactFax", clientContactFax); // for number format
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".clientContactFax");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
+		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
+		script.setVar(FORM_VARNAME, form, ArbitraryOfferForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the clientContactFax", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
+    public ResponseBean updateClientContactMobile(String clientContactMobile) {
+        ResponseBean r = new ResponseBean();
+	String oldVal = form.getClientContactMobile();
+	form.setClientContactMobile(clientContactMobile);
+	r.addRecord();
+	r.addField("clientContactMobile", clientContactMobile); // for number format
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".clientContactMobile");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
+		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
+		script.setVar(FORM_VARNAME, form, ArbitraryOfferForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the clientContactMobile", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
+    public ResponseBean updateClientContactEmail(String clientContactEmail) {
+        ResponseBean r = new ResponseBean();
+	String oldVal = form.getClientContactEmail();
+	form.setClientContactEmail(clientContactEmail);
+	r.addRecord();
+	r.addField("clientContactEmail", clientContactEmail); // for number format
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".clientContactEmail");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
+		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
+		script.setVar(FORM_VARNAME, form, ArbitraryOfferForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the clientContactEmail", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
 
 
     /**
@@ -1164,6 +1710,19 @@ public abstract class ArbitraryOfferBean
 	r.addField("name", form.getName());
 	r.addField("description", form.getDescription());
 	r.addField("comment", form.getComment());
+	r.addField("contract", form.getContract());
+	r.addField("anexa", form.getAnexa());
+	r.addField("terms", form.getTerms());
+	r.addField("attribute1", form.getAttribute1());
+	r.addField("attribute2", form.getAttribute2());
+	r.addField("attribute3", form.getAttribute3());
+	r.addField("attribute4", form.getAttribute4());
+	r.addField("attribute5", form.getAttribute5());
+	r.addField("attribute6", form.getAttribute6());
+	r.addField("attribute7", form.getAttribute7());
+	r.addField("attribute8", form.getAttribute8());
+	r.addField("attribute9", form.getAttribute9());
+	r.addField("attribute10", form.getAttribute10());
 	r.addField("productId", form.getProductId());
 	r.addField("price", form.getPrice());
 	r.addField("quantity", form.getQuantity());
@@ -1182,10 +1741,18 @@ public abstract class ArbitraryOfferBean
 	r.addField("montajProcent", form.getMontajProcent());
 	r.addField("montajSeparat", form.getMontajSeparat());
 	r.addField("locationId", form.getLocationId());
+	r.addField("otherLocation", form.getOtherLocation());
 	r.addField("distance", form.getDistance());
 	r.addField("deliveries", form.getDeliveries());
 	r.addField("valMontaj", form.getValMontaj());
 	r.addField("valTransport", form.getValTransport());
+	r.addField("clientContactId", form.getClientContactId());
+	r.addField("contact", form.getContact());
+	r.addField("clientContactName", form.getClientContactName());
+	r.addField("clientContactPhone", form.getClientContactPhone());
+	r.addField("clientContactFax", form.getClientContactFax());
+	r.addField("clientContactMobile", form.getClientContactMobile());
+	r.addField("clientContactEmail", form.getClientContactEmail());
 	loadValueLists(r);
     }
 
@@ -1265,6 +1832,84 @@ public abstract class ArbitraryOfferBean
 	    s.setVar("comment", form.getComment(), String.class);
 	} catch (ScriptErrorException e) {
 	    logger.log(BasicLevel.WARN, "Can not set the value of field: comment from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    s.setVar("contract", form.getContract(), String.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: contract from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    s.setVar("anexa", form.getAnexa(), String.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: anexa from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    s.setVar("terms", form.getTerms(), String.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: terms from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    s.setVar("attribute1", form.getAttribute1(), String.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: attribute1 from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    s.setVar("attribute2", form.getAttribute2(), String.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: attribute2 from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    s.setVar("attribute3", form.getAttribute3(), String.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: attribute3 from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    s.setVar("attribute4", form.getAttribute4(), String.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: attribute4 from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    s.setVar("attribute5", form.getAttribute5(), String.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: attribute5 from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    s.setVar("attribute6", form.getAttribute6(), String.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: attribute6 from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    s.setVar("attribute7", form.getAttribute7(), String.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: attribute7 from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    s.setVar("attribute8", form.getAttribute8(), String.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: attribute8 from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    s.setVar("attribute9", form.getAttribute9(), String.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: attribute9 from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    s.setVar("attribute10", form.getAttribute10(), String.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: attribute10 from the script");
             logger.log(BasicLevel.DEBUG, e);
         }
 	try {
@@ -1376,6 +2021,12 @@ public abstract class ArbitraryOfferBean
             logger.log(BasicLevel.DEBUG, e);
         }
 	try {
+	    s.setVar("otherLocation", form.getOtherLocation(), String.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: otherLocation from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
 	    s.setVar("distance", form.getDistance(), java.math.BigDecimal.class);
 	} catch (ScriptErrorException e) {
 	    logger.log(BasicLevel.WARN, "Can not set the value of field: distance from the script");
@@ -1397,6 +2048,48 @@ public abstract class ArbitraryOfferBean
 	    s.setVar("valTransport", form.getValTransport(), java.math.BigDecimal.class);
 	} catch (ScriptErrorException e) {
 	    logger.log(BasicLevel.WARN, "Can not set the value of field: valTransport from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    s.setVar("clientContactId", form.getClientContactId(), Integer.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: clientContactId from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    s.setVar("contact", form.getContact(), String.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: contact from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    s.setVar("clientContactName", form.getClientContactName(), String.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: clientContactName from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    s.setVar("clientContactPhone", form.getClientContactPhone(), String.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: clientContactPhone from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    s.setVar("clientContactFax", form.getClientContactFax(), String.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: clientContactFax from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    s.setVar("clientContactMobile", form.getClientContactMobile(), String.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: clientContactMobile from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    s.setVar("clientContactEmail", form.getClientContactEmail(), String.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: clientContactEmail from the script");
             logger.log(BasicLevel.DEBUG, e);
         }
         logger.log(BasicLevel.DEBUG, "end");
@@ -1527,6 +2220,149 @@ public abstract class ArbitraryOfferBean
 	    }
 	} catch (ScriptErrorException e) {
 	    logger.log(BasicLevel.WARN, "Can not get the value of field: comment from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    field = s.getVar("contract", String.class);
+	    if(!field.equals(form.getContract())) {
+	        logger.log(BasicLevel.DEBUG, "Field contract modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setContract((String)field);
+	        r.addField("contract", (String)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: contract from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    field = s.getVar("anexa", String.class);
+	    if(!field.equals(form.getAnexa())) {
+	        logger.log(BasicLevel.DEBUG, "Field anexa modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setAnexa((String)field);
+	        r.addField("anexa", (String)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: anexa from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    field = s.getVar("terms", String.class);
+	    if(!field.equals(form.getTerms())) {
+	        logger.log(BasicLevel.DEBUG, "Field terms modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setTerms((String)field);
+	        r.addField("terms", (String)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: terms from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    field = s.getVar("attribute1", String.class);
+	    if(!field.equals(form.getAttribute1())) {
+	        logger.log(BasicLevel.DEBUG, "Field attribute1 modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setAttribute1((String)field);
+	        r.addField("attribute1", (String)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: attribute1 from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    field = s.getVar("attribute2", String.class);
+	    if(!field.equals(form.getAttribute2())) {
+	        logger.log(BasicLevel.DEBUG, "Field attribute2 modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setAttribute2((String)field);
+	        r.addField("attribute2", (String)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: attribute2 from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    field = s.getVar("attribute3", String.class);
+	    if(!field.equals(form.getAttribute3())) {
+	        logger.log(BasicLevel.DEBUG, "Field attribute3 modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setAttribute3((String)field);
+	        r.addField("attribute3", (String)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: attribute3 from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    field = s.getVar("attribute4", String.class);
+	    if(!field.equals(form.getAttribute4())) {
+	        logger.log(BasicLevel.DEBUG, "Field attribute4 modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setAttribute4((String)field);
+	        r.addField("attribute4", (String)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: attribute4 from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    field = s.getVar("attribute5", String.class);
+	    if(!field.equals(form.getAttribute5())) {
+	        logger.log(BasicLevel.DEBUG, "Field attribute5 modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setAttribute5((String)field);
+	        r.addField("attribute5", (String)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: attribute5 from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    field = s.getVar("attribute6", String.class);
+	    if(!field.equals(form.getAttribute6())) {
+	        logger.log(BasicLevel.DEBUG, "Field attribute6 modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setAttribute6((String)field);
+	        r.addField("attribute6", (String)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: attribute6 from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    field = s.getVar("attribute7", String.class);
+	    if(!field.equals(form.getAttribute7())) {
+	        logger.log(BasicLevel.DEBUG, "Field attribute7 modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setAttribute7((String)field);
+	        r.addField("attribute7", (String)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: attribute7 from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    field = s.getVar("attribute8", String.class);
+	    if(!field.equals(form.getAttribute8())) {
+	        logger.log(BasicLevel.DEBUG, "Field attribute8 modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setAttribute8((String)field);
+	        r.addField("attribute8", (String)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: attribute8 from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    field = s.getVar("attribute9", String.class);
+	    if(!field.equals(form.getAttribute9())) {
+	        logger.log(BasicLevel.DEBUG, "Field attribute9 modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setAttribute9((String)field);
+	        r.addField("attribute9", (String)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: attribute9 from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    field = s.getVar("attribute10", String.class);
+	    if(!field.equals(form.getAttribute10())) {
+	        logger.log(BasicLevel.DEBUG, "Field attribute10 modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setAttribute10((String)field);
+	        r.addField("attribute10", (String)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: attribute10 from the script");
             logger.log(BasicLevel.DEBUG, e);
         }
 	try {
@@ -1728,6 +2564,17 @@ public abstract class ArbitraryOfferBean
             logger.log(BasicLevel.DEBUG, e);
         }
 	try {
+	    field = s.getVar("otherLocation", String.class);
+	    if(!field.equals(form.getOtherLocation())) {
+	        logger.log(BasicLevel.DEBUG, "Field otherLocation modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setOtherLocation((String)field);
+	        r.addField("otherLocation", (String)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: otherLocation from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
 	    field = s.getVar("distance", java.math.BigDecimal.class);
 	    if(!field.equals(form.getDistance())) {
 	        logger.log(BasicLevel.DEBUG, "Field distance modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
@@ -1769,6 +2616,83 @@ public abstract class ArbitraryOfferBean
 	    }
 	} catch (ScriptErrorException e) {
 	    logger.log(BasicLevel.WARN, "Can not get the value of field: valTransport from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    field = s.getVar("clientContactId", Integer.class);
+	    if(!field.equals(form.getClientContactId())) {
+	        logger.log(BasicLevel.DEBUG, "Field clientContactId modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setClientContactId((Integer)field);
+	        r.addField("clientContactId", (Integer)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: clientContactId from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    field = s.getVar("contact", String.class);
+	    if(!field.equals(form.getContact())) {
+	        logger.log(BasicLevel.DEBUG, "Field contact modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setContact((String)field);
+	        r.addField("contact", (String)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: contact from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    field = s.getVar("clientContactName", String.class);
+	    if(!field.equals(form.getClientContactName())) {
+	        logger.log(BasicLevel.DEBUG, "Field clientContactName modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setClientContactName((String)field);
+	        r.addField("clientContactName", (String)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: clientContactName from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    field = s.getVar("clientContactPhone", String.class);
+	    if(!field.equals(form.getClientContactPhone())) {
+	        logger.log(BasicLevel.DEBUG, "Field clientContactPhone modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setClientContactPhone((String)field);
+	        r.addField("clientContactPhone", (String)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: clientContactPhone from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    field = s.getVar("clientContactFax", String.class);
+	    if(!field.equals(form.getClientContactFax())) {
+	        logger.log(BasicLevel.DEBUG, "Field clientContactFax modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setClientContactFax((String)field);
+	        r.addField("clientContactFax", (String)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: clientContactFax from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    field = s.getVar("clientContactMobile", String.class);
+	    if(!field.equals(form.getClientContactMobile())) {
+	        logger.log(BasicLevel.DEBUG, "Field clientContactMobile modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setClientContactMobile((String)field);
+	        r.addField("clientContactMobile", (String)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: clientContactMobile from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    field = s.getVar("clientContactEmail", String.class);
+	    if(!field.equals(form.getClientContactEmail())) {
+	        logger.log(BasicLevel.DEBUG, "Field clientContactEmail modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setClientContactEmail((String)field);
+	        r.addField("clientContactEmail", (String)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: clientContactEmail from the script");
             logger.log(BasicLevel.DEBUG, e);
         }
     }

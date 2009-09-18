@@ -29,6 +29,7 @@ public class UsaStandardForm implements Serializable {
 
     String name;
     String code;
+    Integer discontinued;
     Integer usaId;
     Integer broascaId;
     Integer cilindruId;
@@ -44,6 +45,10 @@ public class UsaStandardForm implements Serializable {
 
 
        this.code = "";
+
+
+
+       this.discontinued = new Integer(0);
 
 
 
@@ -100,6 +105,21 @@ public class UsaStandardForm implements Serializable {
 	AttributeLocal a = (AttributeLocal)attributes.get("code");
 	if(a != null) {
 	    this.setCode(a.getStringValue());
+	}
+    }
+
+    public void setDiscontinued(Integer newDiscontinued) {
+        this.discontinued = newDiscontinued;
+    }
+
+    public Integer getDiscontinued() {
+        return discontinued;
+    }
+
+    public void readDiscontinued(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("discontinued");
+	if(a != null) {
+	    this.setDiscontinued(a.getIntValue());
 	}
     }
 

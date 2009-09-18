@@ -2,6 +2,7 @@ package ro.kds.erp.data;
 
 import javax.ejb.EJBLocalObject;
 import java.math.BigDecimal;
+import java.util.Collection;
 
 /**
  * Methods for accessing an item line on an offer.
@@ -163,10 +164,16 @@ public interface OfferItemLocal extends EJBLocalObject {
     public Integer getLocationId();
     public void setLocationId(Integer locationId);
 
+    public String getOtherLocation();
+    public void setOtherLocation(String location);
+    
+
     public BigDecimal getDistance();
     public void setDistance(BigDecimal value);
 
     public Integer getDeliveries();
     public void setDeliveries(Integer count);
 
+
+    public Collection getOrderLines();
 }

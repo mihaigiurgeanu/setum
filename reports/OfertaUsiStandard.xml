@@ -528,6 +528,7 @@
 						isPrintWhenDetailOverflows="false"/>
 					<graphicElement stretchType="NoStretch" pen="2Point" fill="Solid" />
 				</line>
+				<!--
 				<image  scaleImage="RetainShape" vAlign="Top" hAlign="Left" isUsingCache="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
 						mode="Opaque"
@@ -546,7 +547,7 @@
 						isPrintWhenDetailOverflows="false"/>
 					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
 					<graphicElement stretchType="NoStretch" pen="None" fill="Solid" />
-					<imageExpression class="java.lang.String"><![CDATA["http://localhost:9000/setum/images/sigla.png"]]></imageExpression>				</image>
+					<imageExpression class="java.lang.String"><![CDATA["http://setumserver:9000/setum/images/sigla.png"]]></imageExpression>				</image>-->
 				<staticText>
 					<reportElement
 						mode="Opaque"
@@ -568,10 +569,8 @@
 						<font reportFont="header" fontName="sansserif" size="8"/>
 					</textElement>
 				<text><![CDATA[BUCURESTI B-dul PRECIZIEI nr. 32, Sector 6
-Contractari: Tel/Fax: 316.05.90 Tel: 316.18.56; 316.05.88
-Secretariat: Tel/Fax: 316.05.88; Tel: 316.39.57
-Centrala: Tel: 316.05.78 Dep. Economic: Tel: 317.25.40
-Magazin OBOR: sos. Mihai Bravu 6, Tel/Fax: 252.49.67
+Tel.:  021.316.39.57, 021.316.05.78, 021.316.18.56
+Tel/Fax: 021.316.05.90
 Web: http://www.setumsa.ro; e-mail: desfacere@setum.ro
 contractari@setum.ro
 Capital social: 14,10 miliarde lei]]></text>

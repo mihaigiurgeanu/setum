@@ -38,12 +38,16 @@ function httpRequestExecute() {
     //Make the connection and send our data
     try {
 	var txt = "";
+	var command = "<<not-found>>"; // extract the command param for debug
 
 	for(var i in this.parms) {
 	    if(i > 0)
 		txt += '&';
 
 	    txt += this.parms[i].name+'='+encodeURIComponent(this.parms[i].value);
+	    if(this.parms[i].name == "command") {
+	      command = this.parms[i].value;
+	    }
 	}
 	//     alert("Request body: " + txt);
 
@@ -54,10 +58,11 @@ function httpRequestExecute() {
 	//POST REQUEST EXAMPLE
 	log("POST request to " + targetURL);
 	log("POST request " + txt);
+	log("command is " + command);
+
 	httpRequest.open("POST", targetURL, false, null, null);  
 	httpRequest.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
 	httpRequest.send(txt);
-
 
     }catch (e){
 	alert('An error has occured calling the external site: '+e);
@@ -77,7 +82,8 @@ function httpRequestExecute() {
 	    alert('The server respond with a bad status code: '+httpRequest.status);
 	    return false;
 	} else {
-	    return new HTTPDataResponse(httpRequest.responseXML);
+	  var parsedResponse = new HTTPDataResponse(httpRequest.responseXML);
+	  return parsedResponse;
 	}
 	break;
     default:

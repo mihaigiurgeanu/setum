@@ -861,6 +861,32 @@ public abstract class PanouLateralBean
 	computeCalculatedFields(r);
 	return r;
     }
+    public ResponseBean updateDescription(String description) {
+        ResponseBean r = new ResponseBean();
+	String oldVal = form.getDescription();
+	form.setDescription(description);
+	r.addRecord();
+	r.addField("description", description); // for number format
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".description");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
+		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
+		script.setVar(FORM_VARNAME, form, PanouLateralForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the description", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
 
     /**
      * Generated implementation of the faraGeam service. It will call
@@ -1006,6 +1032,7 @@ public abstract class PanouLateralBean
 	r.addField("businessCategory", form.getBusinessCategory());
 	r.addField("quantity", form.getQuantity());
 	r.addField("groupingCode", form.getGroupingCode());
+	r.addField("description", form.getDescription());
 	loadValueLists(r);
     }
 
@@ -1151,6 +1178,12 @@ public abstract class PanouLateralBean
 	    s.setVar("groupingCode", form.getGroupingCode(), String.class);
 	} catch (ScriptErrorException e) {
 	    logger.log(BasicLevel.WARN, "Can not set the value of field: groupingCode from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    s.setVar("description", form.getDescription(), String.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: description from the script");
             logger.log(BasicLevel.DEBUG, e);
         }
         logger.log(BasicLevel.DEBUG, "end");
@@ -1402,6 +1435,17 @@ public abstract class PanouLateralBean
 	    }
 	} catch (ScriptErrorException e) {
 	    logger.log(BasicLevel.WARN, "Can not get the value of field: groupingCode from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    field = s.getVar("description", String.class);
+	    if(!field.equals(form.getDescription())) {
+	        logger.log(BasicLevel.DEBUG, "Field description modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setDescription((String)field);
+	        r.addField("description", (String)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: description from the script");
             logger.log(BasicLevel.DEBUG, e);
         }
     }

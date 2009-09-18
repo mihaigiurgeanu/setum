@@ -43,6 +43,9 @@ Lista comenzilor, creere/vizualizare/stergere
     <command id="command-remove_payment"	oncommand="theForm.ask(REMOVE_PAYMENT_MSG, on_remove_payment)"/>
     <command id="command-save_payment"		oncommand="on_save_payment()"/>
     <command id="command-pdf-report"		oncommand="open_report('pdf')"/>
+    <command id="command-pv-report"		oncommand="open_pv('pdf')"/>
+    <comand id="command-livrari-montaje"         oncommand="open_livrari_montaje()"/>
+    <comand id="command-livrari-fmontaje"         oncommand="open_livrari_fmontaje()"/>
   </commandset>
 
 
@@ -63,6 +66,8 @@ Lista comenzilor, creere/vizualizare/stergere
 	<hbox class="mytoolbar">
 	  <button label="Adauga comanda" command="command-add_order"/>
 	  <button label="Sterge comanda" command="command-remove_order"/>
+	  <button label="Raport Livrari" command="command-livrari-montaje"/>
+	  <!--<button label="Livrari f/ montaje" command="command-livrari-fmontaje"/>-->
 	</hbox>
 	<hbox class="title">
 	  <label>Comenzi</label>
@@ -72,30 +77,24 @@ Lista comenzilor, creere/vizualizare/stergere
 	<tree id="ordersListing"
 	      flex="1"
 	      enableColumnDrag="true"
+	      persist="ordinal width height hidden" 
 	      seltype="single"
 	      onselect="on_select_order()"
 	      ondblclick="maintab.selectedIndex=1">
 	  <treecols>
-	    <treecol id="orders.no" label="Nr."
-		     persist="ordinal width hidden"/>
+	    <treecol id="orders.no" label="Nr." flex="1"/>
 	    <splitter class="tree-splitter"/>
-	    <treecol id="orders.date" label="Data"
-		     persist="ordinal width hidden"/>
+	    <treecol id="orders.date" label="Data" flex="1"/>
 	    <splitter class="tree-splitter"/>
-	    <treecol id="orders.client" label="Clientul" flex="1"
-		     persist="ordinal width hidden"/>
+	    <treecol id="orders.client" label="Clientul" flex="1"/>
 	    <splitter class="tree-splitter"/>
-	    <treecol id="orders.localitate" label="Localitate"
-		     persist="ordinal width hidden"/>
+	    <treecol id="orders.localitate" label="Localitate" flex="1"/>
 	    <splitter class="tree-splitter"/>
-	    <treecol id="orders.distanta" label="Distanta"
-		     persist="ordinal width hidden"/>
+	    <treecol id="orders.distanta" label="Distanta" flex="1"/>
 	    <splitter class="tree-splitter"/>
-	    <treecol id="orders.avans" label="Avans"
-		     persist="ordinal width hidden"/>
+	    <treecol id="orders.avans" label="Avans" flex="1"/>
 	    <splitter class="tree-splitter"/>
-	    <treecol id="orders.termenLivrare" label="Livrare"
-		     persist="ordinal width hidden"/>
+	    <treecol id="orders.termenLivrare" label="Livrare" flex="1"/>
 	  </treecols>
 	  <treechildren/>
 	</tree>
@@ -111,10 +110,11 @@ Lista comenzilor, creere/vizualizare/stergere
 		style="border:thin outset white">
 	<hbox class="mytoolbar">
 	  <button label="Adauga produs" command="command-add_orderItem"/>
-	  <button label="Sterge produs" command="command-remove_item"/>
+	  <button label="Sterge produs" command="command-remove_orderItem"/>
 	  <button label="Adauga factura" command="command-add_invoice"/>
 	  <button label="Salveaza" command="command-save_order"/>
 	  <button label="PDF" command="command-pdf-report"/>
+	  <button label="PV" command="command-pv-report"/>
 	</hbox>
 	<hbox class="title">
 	  <label>Detalii comanda</label>
@@ -159,15 +159,30 @@ Lista comenzilor, creere/vizualizare/stergere
 		  <menupopup id="localitate-popup"/>
 		</menulist>
 	      </row>
-
 	      <row>
 		<label control="localitateAlta" value="Alta:"/>
 		<textbox id="localitateAlta"/>
 	      </row>
 
 	      <row>
+		<label control="tipDemontare" value="La adresa se demonteaza"/>
+		<menulist id="tipDemontare">
+		  <menupopup id="tipDemontare-popup"/>
+		</menulist>
+	      </row>
+	      <!--
+	      <row>
 		<label control="distanta" value="Distanta:"/>
 		<textbox id="distanta"/>
+	      </row>
+	      -->
+	      <row>
+		<label control="deliveryHour" value="Programare ora:"/>
+		<textbox id="deliveryHour"/>
+	      </row>
+	      <row>
+		<label control="attribute1" value="Semneaza:"/>
+		<textbox id="attribute1"/>
 	      </row>
 	    </rows>
 	  </grid>
@@ -185,7 +200,7 @@ Lista comenzilor, creere/vizualizare/stergere
 		<datebox id="termenLivrare" yearstart="2001" yearend="2051"/>
 	      </row>
 	      <row>
-		<label control="termenLivrare1" value="Termen prod.:"/>
+		<label control="termenLivrare1" value="Data montaj:"/>
 		<datebox id="termenLivrare1" readonly="true" yearstart="2001" yearend="2051"/>
 	      </row>
 	      <row>
@@ -197,7 +212,7 @@ Lista comenzilor, creere/vizualizare/stergere
 		<textbox id="adresaReper"/>
 	      </row>
 	      <row>
-		<label control="telefon" value="Telefon:"/>
+		<label control="telefon" value="Mobil:"/>
 		<textbox id="telefon"/>
 	      </row>
 	      <row>
@@ -253,9 +268,23 @@ Lista comenzilor, creere/vizualizare/stergere
 		<label control="payedAmount" value="Platit:"/>
 		<textbox id="payedAmount" readonly="true"/>
 	      </row>
+	      <!--
 	      <row>
-		<label control="diferenta" value="Ramas de achitat:"/>
+		<label control="valoareAvans" value="Valoare avans:"/>
+		<textbox id="valoareAvans" readonly="true"/>
+	      </row>
+	      -->
+	      <row>
+		<label control="diferenta" value="Rest de plata:"/>
 		<textbox id="diferenta" readonly="true"/>
+	      </row>
+	      <row>
+		<label control="attribute5" value="Valuta:"/>
+		<textbox id="attribute5"/>
+	      </row>
+	      <row>
+		<label control="attribute4" value="Cursul:"/>
+		<textbox id="attribute4"/>
 	      </row>
 	    </rows>
 	  </grid>
@@ -290,6 +319,12 @@ Lista comenzilor, creere/vizualizare/stergere
 		     persist="ordinal width hidden"/>
 	    <splitter class="tree-splitter"/>
 	    <treecol id="orderItems.price" label="Pret" flex="1"
+		     persist="ordinal width hidden"/>
+	    <splitter class="tree-splitter"/>
+	    <treecol id="orderItems.valoareMontaj" label="Montaj" flex="1"
+		     persist="ordinal width hidden"/>
+	    <splitter class="tree-splitter"/>
+	    <treecol id="orderItems.valoareTransport" label="Transport" flex="1"
 		     persist="ordinal width hidden"/>
 	  </treecols>
 	  <treechildren/>

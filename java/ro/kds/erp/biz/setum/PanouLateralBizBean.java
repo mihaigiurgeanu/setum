@@ -65,7 +65,7 @@ public class PanouLateralBizBean extends PanouLateralBean {
 		p = ph.findByPrimaryKey(id);
 	    }
 
-	    p.setDescription("Panou lateral " + form.getLpl() + "x" + form.getHpl());
+	    p.setDescription(form.getDescription());
 
 	    AttributeLocalHome ah = (AttributeLocalHome)PortableRemoteObject.
 		narrow(env.lookup("ejb/AttributeHome"), 
@@ -303,5 +303,33 @@ public class PanouLateralBizBean extends PanouLateralBean {
 	return r;
     }
   
+
+    /**
+     * Implementation of <code>CategoryManagerBean</code> method.
+     */
+    public ResponseBean getProductReport(Integer productId) {
+	ResponseBean r;
+	try {
+	    r = loadFormData(productId);
+	    InitialContext ic = new InitialContext();
+	    Context env = (Context)ic.lookup("java:comp/env");
+	    ProductLocalHome ph = (ProductLocalHome)PortableRemoteObject.
+		narrow(env.lookup("ejb/ProductHome"), ProductLocalHome.class);
+	    ProductLocal p = ph.findByPrimaryKey(productId);
+
+	    r.addField("category.name", p.getCategory().getName());
+	    r.addField("category.id", p.getCategory().getId());
+	} catch (FinderException e) {
+	    logger.log(BasicLevel.ERROR, "FinderException in FereastraBizBean.getProductReport for productId " + productId);
+	    logger.log(BasicLevel.DEBUG, e);
+	    r = ResponseBean.getErrNotFound(e.getMessage());
+	}
+	catch (NamingException e) {
+	    logger.log(BasicLevel.ERROR, "NamingException when preparing to get the report for the product id " + productId + ": " + e.getMessage());
+	    logger.log(BasicLevel.DEBUG, e);
+	    r = ResponseBean.getErrConfigNaming(e.getMessage());
+	}
+	return r;
+    }
 
 }

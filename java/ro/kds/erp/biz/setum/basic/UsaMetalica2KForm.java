@@ -68,6 +68,10 @@ public class UsaMetalica2KForm implements Serializable {
     Integer tresholdSpace;
     Double h1Treshold;
     Double h2Treshold;
+    Integer masca;
+    Integer lacrimar;
+    Integer bolturi;
+    Integer platbanda;
     java.math.BigDecimal entryPrice;
     java.math.BigDecimal sellPrice;
     Integer montareSistem;
@@ -170,6 +174,15 @@ public class UsaMetalica2KForm implements Serializable {
     Boolean finisajFereastraExtInt;
     Boolean finisajSupraluminaExtInt;
     Boolean finisajPanouLateralExtInt;
+    Double suprafataBlat;
+    Double suprafataToc;
+    Double suprafataGrilaj;
+    Double suprafataFereastra;
+    Double suprafataSupralumina;
+    Double suprafataPanouLateral;
+    Double suprafataGrilaVentilatie;
+    Double lexec;
+    Double hexec;
     String groupingCode;
 
     public UsaMetalica2KForm() {
@@ -337,6 +350,22 @@ public class UsaMetalica2KForm implements Serializable {
 
        this.h2Treshold = new Double(0);
    
+
+
+       this.masca = new Integer(0);
+
+
+
+       this.lacrimar = new Integer(0);
+
+
+
+       this.bolturi = new Integer(0);
+
+
+
+       this.platbanda = new Integer(0);
+
 
 
        this.entryPrice = new java.math.BigDecimal(0);
@@ -745,6 +774,42 @@ public class UsaMetalica2KForm implements Serializable {
 
        this.finisajPanouLateralExtInt = new Boolean(false);
 
+
+
+       this.suprafataBlat = new Double(0);
+   
+
+
+       this.suprafataToc = new Double(0);
+   
+
+
+       this.suprafataGrilaj = new Double(0);
+   
+
+
+       this.suprafataFereastra = new Double(0);
+   
+
+
+       this.suprafataSupralumina = new Double(0);
+   
+
+
+       this.suprafataPanouLateral = new Double(0);
+   
+
+
+       this.suprafataGrilaVentilatie = new Double(0);
+   
+
+
+       this.lexec = new Double(0);
+   
+
+
+       this.hexec = new Double(0);
+   
 
 
        this.groupingCode = "";
@@ -1365,6 +1430,66 @@ public class UsaMetalica2KForm implements Serializable {
 	AttributeLocal a = (AttributeLocal)attributes.get("h2Treshold");
 	if(a != null) {
 	    this.setH2Treshold(a.getDoubleValue());
+	}
+    }
+
+    public void setMasca(Integer newMasca) {
+        this.masca = newMasca;
+    }
+
+    public Integer getMasca() {
+        return masca;
+    }
+
+    public void readMasca(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("masca");
+	if(a != null) {
+	    this.setMasca(a.getIntValue());
+	}
+    }
+
+    public void setLacrimar(Integer newLacrimar) {
+        this.lacrimar = newLacrimar;
+    }
+
+    public Integer getLacrimar() {
+        return lacrimar;
+    }
+
+    public void readLacrimar(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("lacrimar");
+	if(a != null) {
+	    this.setLacrimar(a.getIntValue());
+	}
+    }
+
+    public void setBolturi(Integer newBolturi) {
+        this.bolturi = newBolturi;
+    }
+
+    public Integer getBolturi() {
+        return bolturi;
+    }
+
+    public void readBolturi(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("bolturi");
+	if(a != null) {
+	    this.setBolturi(a.getIntValue());
+	}
+    }
+
+    public void setPlatbanda(Integer newPlatbanda) {
+        this.platbanda = newPlatbanda;
+    }
+
+    public Integer getPlatbanda() {
+        return platbanda;
+    }
+
+    public void readPlatbanda(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("platbanda");
+	if(a != null) {
+	    this.setPlatbanda(a.getIntValue());
 	}
     }
 
@@ -2895,6 +3020,141 @@ public class UsaMetalica2KForm implements Serializable {
 	AttributeLocal a = (AttributeLocal)attributes.get("finisajPanouLateralExtInt");
 	if(a != null) {
 	    this.setFinisajPanouLateralExtInt(a.getBoolValue());
+	}
+    }
+
+    public void setSuprafataBlat(Double newSuprafataBlat) {
+        this.suprafataBlat = newSuprafataBlat;
+    }
+
+    public Double getSuprafataBlat() {
+        return suprafataBlat;
+    }
+
+    public void readSuprafataBlat(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("suprafataBlat");
+	if(a != null) {
+	    this.setSuprafataBlat(a.getDoubleValue());
+	}
+    }
+
+    public void setSuprafataToc(Double newSuprafataToc) {
+        this.suprafataToc = newSuprafataToc;
+    }
+
+    public Double getSuprafataToc() {
+        return suprafataToc;
+    }
+
+    public void readSuprafataToc(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("suprafataToc");
+	if(a != null) {
+	    this.setSuprafataToc(a.getDoubleValue());
+	}
+    }
+
+    public void setSuprafataGrilaj(Double newSuprafataGrilaj) {
+        this.suprafataGrilaj = newSuprafataGrilaj;
+    }
+
+    public Double getSuprafataGrilaj() {
+        return suprafataGrilaj;
+    }
+
+    public void readSuprafataGrilaj(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("suprafataGrilaj");
+	if(a != null) {
+	    this.setSuprafataGrilaj(a.getDoubleValue());
+	}
+    }
+
+    public void setSuprafataFereastra(Double newSuprafataFereastra) {
+        this.suprafataFereastra = newSuprafataFereastra;
+    }
+
+    public Double getSuprafataFereastra() {
+        return suprafataFereastra;
+    }
+
+    public void readSuprafataFereastra(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("suprafataFereastra");
+	if(a != null) {
+	    this.setSuprafataFereastra(a.getDoubleValue());
+	}
+    }
+
+    public void setSuprafataSupralumina(Double newSuprafataSupralumina) {
+        this.suprafataSupralumina = newSuprafataSupralumina;
+    }
+
+    public Double getSuprafataSupralumina() {
+        return suprafataSupralumina;
+    }
+
+    public void readSuprafataSupralumina(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("suprafataSupralumina");
+	if(a != null) {
+	    this.setSuprafataSupralumina(a.getDoubleValue());
+	}
+    }
+
+    public void setSuprafataPanouLateral(Double newSuprafataPanouLateral) {
+        this.suprafataPanouLateral = newSuprafataPanouLateral;
+    }
+
+    public Double getSuprafataPanouLateral() {
+        return suprafataPanouLateral;
+    }
+
+    public void readSuprafataPanouLateral(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("suprafataPanouLateral");
+	if(a != null) {
+	    this.setSuprafataPanouLateral(a.getDoubleValue());
+	}
+    }
+
+    public void setSuprafataGrilaVentilatie(Double newSuprafataGrilaVentilatie) {
+        this.suprafataGrilaVentilatie = newSuprafataGrilaVentilatie;
+    }
+
+    public Double getSuprafataGrilaVentilatie() {
+        return suprafataGrilaVentilatie;
+    }
+
+    public void readSuprafataGrilaVentilatie(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("suprafataGrilaVentilatie");
+	if(a != null) {
+	    this.setSuprafataGrilaVentilatie(a.getDoubleValue());
+	}
+    }
+
+    public void setLexec(Double newLexec) {
+        this.lexec = newLexec;
+    }
+
+    public Double getLexec() {
+        return lexec;
+    }
+
+    public void readLexec(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("lexec");
+	if(a != null) {
+	    this.setLexec(a.getDoubleValue());
+	}
+    }
+
+    public void setHexec(Double newHexec) {
+        this.hexec = newHexec;
+    }
+
+    public Double getHexec() {
+        return hexec;
+    }
+
+    public void readHexec(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("hexec");
+	if(a != null) {
+	    this.setHexec(a.getDoubleValue());
 	}
     }
 

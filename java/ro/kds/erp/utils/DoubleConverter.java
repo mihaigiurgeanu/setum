@@ -5,6 +5,7 @@ import org.apache.commons.beanutils.ConversionException;
 import java.text.NumberFormat;
 import java.math.BigDecimal;
 import java.text.ParseException;
+import java.util.Locale;
 
 /**
  * Describe class DoubleConverter here.
@@ -42,7 +43,7 @@ public class DoubleConverter implements Converter {
 	throws ConversionException {
 
 	try {
-	    NumberFormat nf = NumberFormat.getNumberInstance();
+	    NumberFormat nf = NumberFormat.getInstance(Locale.US);
 	    Number val = nf.parse((String)object);
 	    if( type.isAssignableFrom(BigDecimal.class) ) {
 		return new BigDecimal(val.doubleValue());

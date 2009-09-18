@@ -28,6 +28,7 @@ public interface Sistem extends EJBObject {
 
     public ResponseBean updateName(String newName) throws RemoteException;
     public ResponseBean updateCode(String newCode) throws RemoteException;
+    public ResponseBean updateDiscontinued(Integer newDiscontinued) throws RemoteException;
     public ResponseBean updateCategoryId(Integer newCategoryId) throws RemoteException;
     public ResponseBean updateEntryPrice(java.math.BigDecimal newEntryPrice) throws RemoteException;
     public ResponseBean updateSellPrice(java.math.BigDecimal newSellPrice) throws RemoteException;

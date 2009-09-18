@@ -164,7 +164,50 @@ public abstract class ClientBean implements EntityBean {
     public abstract Collection getContacts();
     public abstract void setContacts(Collection contacts);
 
+    public abstract String getAttribute1();
+    public abstract void setAttribute1(String attr);
 
+    public abstract String getAttribute2();
+    public abstract void setAttribute2(String attr);
+
+    public abstract String getAttribute3();
+    public abstract void setAttribute3(String attr);
+
+    public abstract String getAttribute4();
+    public abstract void setAttribute4(String attr);
+
+    public abstract String getAttribute5();
+    public abstract void setAttribute5(String attr);
+
+    public abstract String getAttribute6();
+    public abstract void setAttribute6(String attr);
+
+    public abstract String getAttribute7();
+    public abstract void setAttribute7(String attr);
+
+    public abstract String getAttribute8();
+    public abstract void setAttribute8(String attr);
+
+    public abstract String getAttribute9();
+    public abstract void setAttribute9(String attr);
+
+    public abstract String getAttribute10();
+    public abstract void setAttribute10(String attr);
+
+    public abstract String getAttribute11();
+    public abstract void setAttribute11(String attr);
+
+    public abstract String getAttribute12();
+    public abstract void setAttribute12(String attr);
+
+    public abstract String getAttribute13();
+    public abstract void setAttribute13(String attr);
+
+    public abstract String getAttribute14();
+    public abstract void setAttribute14(String attr);
+
+    public abstract String getAttribute15();
+    public abstract void setAttribute15(String attr);
 
     /**
      * Convenience method to build the name of the client
@@ -173,7 +216,7 @@ public abstract class ClientBean implements EntityBean {
 	if(getIsCompany()) {
 	    return getCompanyName();
 	} else {
-	    return getFirstName() + " " + getLastName();
+	    return getLastName() + ", " + getFirstName();
 	}
     }
 

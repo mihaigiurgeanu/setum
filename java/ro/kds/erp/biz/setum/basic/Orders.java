@@ -44,6 +44,9 @@ public interface Orders extends EJBObject {
     public ResponseBean updateLocalitateAlta(String newLocalitateAlta) throws RemoteException;
     public ResponseBean updateDistanta(java.math.BigDecimal newDistanta) throws RemoteException;
     public ResponseBean updateObservatii(String newObservatii) throws RemoteException;
+    public ResponseBean updateValoareMontaj(java.math.BigDecimal newValoareMontaj) throws RemoteException;
+    public ResponseBean updateValoareTransport(java.math.BigDecimal newValoareTransport) throws RemoteException;
+    public ResponseBean updateValoareProduse(java.math.BigDecimal newValoareProduse) throws RemoteException;
     public ResponseBean updateTotal(java.math.BigDecimal newTotal) throws RemoteException;
     public ResponseBean updateTvaPercent(Double newTvaPercent) throws RemoteException;
     public ResponseBean updateTotalTva(java.math.BigDecimal newTotalTva) throws RemoteException;
@@ -56,12 +59,24 @@ public interface Orders extends EJBObject {
     public ResponseBean updatePayedAmount(java.math.BigDecimal newPayedAmount) throws RemoteException;
     public ResponseBean updateInvoicedAmount(java.math.BigDecimal newInvoicedAmount) throws RemoteException;
     public ResponseBean updateDiferenta(java.math.BigDecimal newDiferenta) throws RemoteException;
+    public ResponseBean updateCurrencyCode(String newCurrencyCode) throws RemoteException;
+    public ResponseBean updateExchangeRate(java.math.BigDecimal newExchangeRate) throws RemoteException;
     public ResponseBean updateTermenLivrare(java.util.Date newTermenLivrare) throws RemoteException;
     public ResponseBean updateTermenLivrare1(java.util.Date newTermenLivrare1) throws RemoteException;
     public ResponseBean updateAdresaMontaj(String newAdresaMontaj) throws RemoteException;
     public ResponseBean updateAdresaReper(String newAdresaReper) throws RemoteException;
     public ResponseBean updateTelefon(String newTelefon) throws RemoteException;
     public ResponseBean updateContact(String newContact) throws RemoteException;
+    public ResponseBean updateDeliveryHour(String newDeliveryHour) throws RemoteException;
+    public ResponseBean updateTipDemontare(String newTipDemontare) throws RemoteException;
+    public ResponseBean updateAttribute1(String newAttribute1) throws RemoteException;
+    public ResponseBean updateAttribute2(String newAttribute2) throws RemoteException;
+    public ResponseBean updateAttribute3(String newAttribute3) throws RemoteException;
+    public ResponseBean updateAttribute4(String newAttribute4) throws RemoteException;
+    public ResponseBean updateAttribute5(String newAttribute5) throws RemoteException;
+    public ResponseBean updateLivrariRStart(java.util.Date newLivrariRStart) throws RemoteException;
+    public ResponseBean updateLivrariREnd(java.util.Date newLivrariREnd) throws RemoteException;
+    public ResponseBean updateLivrariCuMontaj(String newLivrariCuMontaj) throws RemoteException;
     public ResponseBean updateOfferItemId(Integer newOfferItemId) throws RemoteException;
     public ResponseBean updateProductName(String newProductName) throws RemoteException;
     public ResponseBean updateProductCode(String newProductCode) throws RemoteException;
@@ -88,17 +103,20 @@ public interface Orders extends EJBObject {
 
     public ResponseBean getOrdersCount() throws RemoteException;
     public ResponseBean loadListing(Integer startRow) throws RemoteException;
+    public ResponseBean loadFullListing() throws RemoteException;
     public ResponseBean removeOrder() throws RemoteException;
     public ResponseBean loadLines() throws RemoteException;
     public ResponseBean removeInvoice() throws RemoteException;
     public ResponseBean loadInvoices() throws RemoteException;
     public ResponseBean removePayment() throws RemoteException;
     public ResponseBean loadPayments() throws RemoteException;
+    public ResponseBean orderReport() throws RemoteException;
+    public ResponseBean initLivrariReport(String cuMontaj) throws RemoteException;
+    public ResponseBean livrariReport() throws RemoteException;
 
     public ResponseBean addItem (
         Integer offerIntemId
     ) throws RemoteException;
     public ResponseBean removeItem (
-        Integer itemId
     ) throws RemoteException;
 }

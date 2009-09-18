@@ -2,7 +2,7 @@
 <?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
 <?xml-stylesheet href="setum.css" type="text/css"?>
 
-<!-- $Id: companies.xul,v 1.6 2006/09/26 00:56:03 mihai Exp $ -->
+<!-- $Id: companies.xul,v 1.7 2009/09/18 13:41:37 mihai Exp $ -->
 
 <window
     id="companies-persons-win"
@@ -96,6 +96,10 @@
 	      <row>
 		<label control="companyCode" value="Cod Fiscal:"/>
 		<textbox id="companyCode"/>
+	      </row>
+	      <row>
+		<label control="regCom" value="Reg. Com.:"/>
+		<textbox id="regCom"/>
 	      </row>
 	      <!--
 	      <row>
@@ -375,8 +379,9 @@ function selectTabContactDetails() {
 var theForm = new FormObject();
 theForm.text_fields = new Array(/*"firstName", "lastName", */
                                 "companyName", "companyCode",
+				"regCom",
                                 "address", "postalCode", "city", 
-				"iban", "bank", "comment",
+				"phone", "iban", "bank", "comment",
 				"contactFirstName", "contactLastName",
 				"contactDepartment", "contactPhone",
 				"contactMobile", "contactFax",

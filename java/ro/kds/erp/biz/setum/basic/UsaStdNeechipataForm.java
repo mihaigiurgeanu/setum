@@ -30,6 +30,7 @@ public class UsaStdNeechipataForm implements Serializable {
     String name;
     String code;
     String description;
+    Integer discontinued;
     java.math.BigDecimal entryPrice;
     java.math.BigDecimal sellPrice;
     Double relativeGain;
@@ -47,6 +48,10 @@ public class UsaStdNeechipataForm implements Serializable {
 
 
        this.description = "";
+
+
+
+       this.discontinued = new Integer(0);
 
 
 
@@ -110,6 +115,21 @@ public class UsaStdNeechipataForm implements Serializable {
 	AttributeLocal a = (AttributeLocal)attributes.get("description");
 	if(a != null) {
 	    this.setDescription(a.getStringValue());
+	}
+    }
+
+    public void setDiscontinued(Integer newDiscontinued) {
+        this.discontinued = newDiscontinued;
+    }
+
+    public Integer getDiscontinued() {
+        return discontinued;
+    }
+
+    public void readDiscontinued(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("discontinued");
+	if(a != null) {
+	    this.setDiscontinued(a.getIntValue());
 	}
     }
 

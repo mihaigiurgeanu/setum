@@ -531,7 +531,7 @@ public class StandardOfferBean extends ro.kds.erp.biz.setum.basic.StandardOfferB
      *
      * First, this function looks at the category id in the environment
      * entry <code>rootCategoryId</code>. It takes all of its subcategories
-     * and, for each of them, it adds all thte products to the list.
+     * and, for each of them, it adds all the products to the list.
      *
      * @returns a <code>Map</code> containing the product name as key and
      * the product id as value.

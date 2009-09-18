@@ -38,6 +38,7 @@ Data-entry form for general purpose offers.
     <command id="select-client-command" oncommand="select_client();" />
     <command id="command-pdf-report" oncommand="open_report('pdf')" />
     <command id="command-rtf-report" oncommand="open_report('rtf')" />
+    <command id="command-anexa" oncommand="open_anexa('pdf')" />
   </commandset>
 
   <popupset>
@@ -76,7 +77,7 @@ Data-entry form for general purpose offers.
 	      ondblclick="show_offer_details();"
 	      >
 	  <treecols>
-	    <treecol id="offersListing.name" label="Oferta" flex="1"/>
+	    <treecol id="offersListing.client" label="Oferta" flex="1"/>
 	    <splitter class="tree-splitter"/>
 	    <treecol id="offersListing.no" label="Numarul" flex="1"/>
 	    <splitter class="tree-splitter"/>
@@ -100,6 +101,7 @@ Data-entry form for general purpose offers.
 	  <button label="Sterge produs selectat" command="remove-line"/>
 	  <button label="Salvare" command="command-save"/>
 	  <button label="PDF" command="command-pdf-report"/>
+	  <button label="Anexa" command="command-anexa"/>
 	  <!-- <button label="Word" command="command-rtf-report"/> -->
 	</hbox>
 	<hbox class="title">
@@ -152,18 +154,49 @@ Data-entry form for general purpose offers.
 	      </hbox>
 	    </row>
 	    <row>
-	      <label control="name" value="Nume:"/>
+	      <label control="name" value="Referitor:"/>
 	      <textbox id="name"/>
 	    </row>
+	     <row>
+	      <label control="clientContactId" value="In atentia:"/>
+	      <menulist id="clientContactId">
+		  <menupopup id="clientContactId-popup"/>
+	      </menulist>
+	    </row>
 	    <row>
-	      <label control="description" value="Descriere:"/>
+	      <label control="contract" value="Nr. Contract:"/>
+	      <textbox id="contract"/>
+	    </row>
+	    <row>
+	      <label control="anexa" value="Nr. Anexa:"/>
+	      <textbox id="anexa"/>
+	    </row>
+	    <row>
+	      <label control="description" value="Obiectiv:"/>
 	      <textbox id="description" multiline="true" maxlength="255" 
-		       rows="4"/>
+		       rows="2"/>
 	    </row>
 	    <row>
 	      <label control="comment" value="Observatii:"/>
 	      <textbox id="comment" multiline="true" maxlength="255" 
-		       rows="4"/>
+		       rows="2"/>
+	    </row>
+	    <row>
+	      <label control="terms" value="Termeni:"/>
+	      <textbox id="terms" multiline="true" maxlength="255" 
+		       rows="2"/>
+	    </row>
+	    <row>
+	      <label control="attribute1" value="Semneaza:"/>
+	      <textbox id="attribute1"/>
+	    </row>
+	    <row>
+	      <label control="attribute5" value="Valuta:"/>
+	      <hbox>
+		<textbox id="attribute5"/>
+		<label control="attribute6" value="Cursul:"/>
+		<textbox id="attribute6"/>
+	      </hbox>
 	    </row>
 	  </rows>
 	</grid>
@@ -179,6 +212,8 @@ Data-entry form for general purpose offers.
 	    <treecol id="offerLines.name" label="Produs" flex="1"/>
 	    <splitter class="tree-splitter"/>
 	    <treecol id="offerLines.price" label="Pret" flex="1"/>
+	    <splitter class="tree-splitter"/>
+	    <treecol id="offerLines.quantity" label="Buc" flex="1"/>
 	  </treecols>
 	  <treechildren/>
 	</tree>
@@ -209,40 +244,16 @@ Data-entry form for general purpose offers.
 		<textbox id="price"/>
 	      </row>
 	      <row>
-		<label control="montajId" value="Montaj"/>
-		<menulist id="montajId">
-		  <menupopup id="montajId-popup"/>
-		</menulist>
-	      </row>
-	      <row>
-		<label control="montajProcent" value="+ % din val:"/>
-		<textbox id="montajProcent"/>
-	      </row>
-	      <row>
-		<hbox/>
-		<checkbox id="montajSeparat" label="Pret montaj separat de pret usa."/>
-	      </row>
-	      <row>
-		<label control="locationId" value="Localitate"/>
-		<menulist id="locationId">
-		  <menupopup id="locationId-popup"/>
-		</menulist>
-	      </row>
-	      <row>
-		<label control="distance" value="Distanta"/>
-		<textbox id="distance"/>
-	      </row>
-	      <row>
-		<label control="deliveries" value="Nr. ture"/>
-		<textbox id="deliveries"/>
-	      </row>
-	      <row>
 		<label control="relativeGain" value="Adaos (%):"/>
 		<textbox id="relativeGain"/>
 	      </row>
 	      <row>
 		<label control="absoluteGain" value="Adaos (Lei):"/>
 		<textbox id="absoluteGain"/>
+	      </row>
+	      <row>
+		<label control="quantity" value="Cantitate"/>
+		<textbox id="quantity"/>
 	      </row>
 	      <row>
 		<label control="montajId" value="Montaj"/>
@@ -267,6 +278,10 @@ Data-entry form for general purpose offers.
 		<menulist id="locationId">
 		  <menupopup id="locationId-popup"/>
 		</menulist>
+	      </row>
+	      <row>
+		<label control="otherLocation" value="Alta localitate"/>
+		<textbox id="otherLocation"/>
 	      </row>
 	      <row>
 		<label control="distance" value="Distanta"/>

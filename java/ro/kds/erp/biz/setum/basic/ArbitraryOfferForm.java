@@ -38,6 +38,19 @@ public class ArbitraryOfferForm implements Serializable {
     String name;
     String description;
     String comment;
+    String contract;
+    String anexa;
+    String terms;
+    String attribute1;
+    String attribute2;
+    String attribute3;
+    String attribute4;
+    String attribute5;
+    String attribute6;
+    String attribute7;
+    String attribute8;
+    String attribute9;
+    String attribute10;
     Integer productId;
     java.math.BigDecimal price;
     java.math.BigDecimal quantity;
@@ -56,10 +69,18 @@ public class ArbitraryOfferForm implements Serializable {
     Double montajProcent;
     Boolean montajSeparat;
     Integer locationId;
+    String otherLocation;
     java.math.BigDecimal distance;
     Integer deliveries;
     java.math.BigDecimal valMontaj;
     java.math.BigDecimal valTransport;
+    Integer clientContactId;
+    String contact;
+    String clientContactName;
+    String clientContactPhone;
+    String clientContactFax;
+    String clientContactMobile;
+    String clientContactEmail;
 
     public ArbitraryOfferForm() {
 
@@ -108,6 +129,58 @@ public class ArbitraryOfferForm implements Serializable {
 
 
        this.comment = "";
+
+
+
+       this.contract = "";
+
+
+
+       this.anexa = "";
+
+
+
+       this.terms = "";
+
+
+
+       this.attribute1 = "";
+
+
+
+       this.attribute2 = "";
+
+
+
+       this.attribute3 = "";
+
+
+
+       this.attribute4 = "";
+
+
+
+       this.attribute5 = "";
+
+
+
+       this.attribute6 = "";
+
+
+
+       this.attribute7 = "";
+
+
+
+       this.attribute8 = "";
+
+
+
+       this.attribute9 = "";
+
+
+
+       this.attribute10 = "";
 
 
 
@@ -183,6 +256,10 @@ public class ArbitraryOfferForm implements Serializable {
 
 
 
+       this.otherLocation = "";
+
+
+
        this.distance = new java.math.BigDecimal(0);
 
 
@@ -196,6 +273,34 @@ public class ArbitraryOfferForm implements Serializable {
 
 
        this.valTransport = new java.math.BigDecimal(0);
+
+
+
+       this.clientContactId = new Integer(0);
+
+
+
+       this.contact = "";
+
+
+
+       this.clientContactName = "";
+
+
+
+       this.clientContactPhone = "";
+
+
+
+       this.clientContactFax = "";
+
+
+
+       this.clientContactMobile = "";
+
+
+
+       this.clientContactEmail = "";
 
 
 
@@ -345,6 +450,201 @@ public class ArbitraryOfferForm implements Serializable {
 	AttributeLocal a = (AttributeLocal)attributes.get("comment");
 	if(a != null) {
 	    this.setComment(a.getStringValue());
+	}
+    }
+
+    public void setContract(String newContract) {
+        this.contract = newContract;
+    }
+
+    public String getContract() {
+        return contract;
+    }
+
+    public void readContract(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("contract");
+	if(a != null) {
+	    this.setContract(a.getStringValue());
+	}
+    }
+
+    public void setAnexa(String newAnexa) {
+        this.anexa = newAnexa;
+    }
+
+    public String getAnexa() {
+        return anexa;
+    }
+
+    public void readAnexa(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("anexa");
+	if(a != null) {
+	    this.setAnexa(a.getStringValue());
+	}
+    }
+
+    public void setTerms(String newTerms) {
+        this.terms = newTerms;
+    }
+
+    public String getTerms() {
+        return terms;
+    }
+
+    public void readTerms(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("terms");
+	if(a != null) {
+	    this.setTerms(a.getStringValue());
+	}
+    }
+
+    public void setAttribute1(String newAttribute1) {
+        this.attribute1 = newAttribute1;
+    }
+
+    public String getAttribute1() {
+        return attribute1;
+    }
+
+    public void readAttribute1(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("attribute1");
+	if(a != null) {
+	    this.setAttribute1(a.getStringValue());
+	}
+    }
+
+    public void setAttribute2(String newAttribute2) {
+        this.attribute2 = newAttribute2;
+    }
+
+    public String getAttribute2() {
+        return attribute2;
+    }
+
+    public void readAttribute2(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("attribute2");
+	if(a != null) {
+	    this.setAttribute2(a.getStringValue());
+	}
+    }
+
+    public void setAttribute3(String newAttribute3) {
+        this.attribute3 = newAttribute3;
+    }
+
+    public String getAttribute3() {
+        return attribute3;
+    }
+
+    public void readAttribute3(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("attribute3");
+	if(a != null) {
+	    this.setAttribute3(a.getStringValue());
+	}
+    }
+
+    public void setAttribute4(String newAttribute4) {
+        this.attribute4 = newAttribute4;
+    }
+
+    public String getAttribute4() {
+        return attribute4;
+    }
+
+    public void readAttribute4(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("attribute4");
+	if(a != null) {
+	    this.setAttribute4(a.getStringValue());
+	}
+    }
+
+    public void setAttribute5(String newAttribute5) {
+        this.attribute5 = newAttribute5;
+    }
+
+    public String getAttribute5() {
+        return attribute5;
+    }
+
+    public void readAttribute5(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("attribute5");
+	if(a != null) {
+	    this.setAttribute5(a.getStringValue());
+	}
+    }
+
+    public void setAttribute6(String newAttribute6) {
+        this.attribute6 = newAttribute6;
+    }
+
+    public String getAttribute6() {
+        return attribute6;
+    }
+
+    public void readAttribute6(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("attribute6");
+	if(a != null) {
+	    this.setAttribute6(a.getStringValue());
+	}
+    }
+
+    public void setAttribute7(String newAttribute7) {
+        this.attribute7 = newAttribute7;
+    }
+
+    public String getAttribute7() {
+        return attribute7;
+    }
+
+    public void readAttribute7(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("attribute7");
+	if(a != null) {
+	    this.setAttribute7(a.getStringValue());
+	}
+    }
+
+    public void setAttribute8(String newAttribute8) {
+        this.attribute8 = newAttribute8;
+    }
+
+    public String getAttribute8() {
+        return attribute8;
+    }
+
+    public void readAttribute8(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("attribute8");
+	if(a != null) {
+	    this.setAttribute8(a.getStringValue());
+	}
+    }
+
+    public void setAttribute9(String newAttribute9) {
+        this.attribute9 = newAttribute9;
+    }
+
+    public String getAttribute9() {
+        return attribute9;
+    }
+
+    public void readAttribute9(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("attribute9");
+	if(a != null) {
+	    this.setAttribute9(a.getStringValue());
+	}
+    }
+
+    public void setAttribute10(String newAttribute10) {
+        this.attribute10 = newAttribute10;
+    }
+
+    public String getAttribute10() {
+        return attribute10;
+    }
+
+    public void readAttribute10(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("attribute10");
+	if(a != null) {
+	    this.setAttribute10(a.getStringValue());
 	}
     }
 
@@ -618,6 +918,21 @@ public class ArbitraryOfferForm implements Serializable {
 	}
     }
 
+    public void setOtherLocation(String newOtherLocation) {
+        this.otherLocation = newOtherLocation;
+    }
+
+    public String getOtherLocation() {
+        return otherLocation;
+    }
+
+    public void readOtherLocation(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("otherLocation");
+	if(a != null) {
+	    this.setOtherLocation(a.getStringValue());
+	}
+    }
+
     public void setDistance(java.math.BigDecimal newDistance) {
         this.distance = newDistance;
     }
@@ -675,6 +990,111 @@ public class ArbitraryOfferForm implements Serializable {
 	AttributeLocal a = (AttributeLocal)attributes.get("valTransport");
 	if(a != null) {
 	    this.setValTransport(a.getDecimalValue());
+	}
+    }
+
+    public void setClientContactId(Integer newClientContactId) {
+        this.clientContactId = newClientContactId;
+    }
+
+    public Integer getClientContactId() {
+        return clientContactId;
+    }
+
+    public void readClientContactId(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("clientContactId");
+	if(a != null) {
+	    this.setClientContactId(a.getIntValue());
+	}
+    }
+
+    public void setContact(String newContact) {
+        this.contact = newContact;
+    }
+
+    public String getContact() {
+        return contact;
+    }
+
+    public void readContact(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("contact");
+	if(a != null) {
+	    this.setContact(a.getStringValue());
+	}
+    }
+
+    public void setClientContactName(String newClientContactName) {
+        this.clientContactName = newClientContactName;
+    }
+
+    public String getClientContactName() {
+        return clientContactName;
+    }
+
+    public void readClientContactName(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("clientContactName");
+	if(a != null) {
+	    this.setClientContactName(a.getStringValue());
+	}
+    }
+
+    public void setClientContactPhone(String newClientContactPhone) {
+        this.clientContactPhone = newClientContactPhone;
+    }
+
+    public String getClientContactPhone() {
+        return clientContactPhone;
+    }
+
+    public void readClientContactPhone(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("clientContactPhone");
+	if(a != null) {
+	    this.setClientContactPhone(a.getStringValue());
+	}
+    }
+
+    public void setClientContactFax(String newClientContactFax) {
+        this.clientContactFax = newClientContactFax;
+    }
+
+    public String getClientContactFax() {
+        return clientContactFax;
+    }
+
+    public void readClientContactFax(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("clientContactFax");
+	if(a != null) {
+	    this.setClientContactFax(a.getStringValue());
+	}
+    }
+
+    public void setClientContactMobile(String newClientContactMobile) {
+        this.clientContactMobile = newClientContactMobile;
+    }
+
+    public String getClientContactMobile() {
+        return clientContactMobile;
+    }
+
+    public void readClientContactMobile(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("clientContactMobile");
+	if(a != null) {
+	    this.setClientContactMobile(a.getStringValue());
+	}
+    }
+
+    public void setClientContactEmail(String newClientContactEmail) {
+        this.clientContactEmail = newClientContactEmail;
+    }
+
+    public String getClientContactEmail() {
+        return clientContactEmail;
+    }
+
+    public void readClientContactEmail(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("clientContactEmail");
+	if(a != null) {
+	    this.setClientContactEmail(a.getStringValue());
 	}
     }
 

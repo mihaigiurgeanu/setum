@@ -152,11 +152,15 @@ proc validate_panouLateral {option_id} {
     set bToc $bFrame
     set cToc $cFrame
 
-    set lg_min  [attribute_dbl $grilajStasId Lg_min]
-    set hpl_min [attribute_dbl $grilajStasId Hpl_min]
-    set lg_max  [attribute_dbl $grilajStasId Lg_max]
-    set hg_max  [attribute_dbl $grilajStasId Hg_max]
+    set lg_min [attribute_dbl $grilajStasId Lg_min]
+    set hg_min [attribute_dbl $grilajStasId Hg_min]
+    set lg_max [attribute_dbl $grilajStasId Lg_max]
+    set hg_max [attribute_dbl $grilajStasId Hg_max]
 
+    $logger {log int Object} [java::field BasicLevel DEBUG] "lg_min = $lg_min"
+    $logger {log int Object} [java::field BasicLevel DEBUG] "lg_max = $lg_max"
+    $logger {log int Object} [java::field BasicLevel DEBUG] "hg_min = $hg_min"
+    $logger {log int Object} [java::field BasicLevel DEBUG] "hg_max = $hg_max"
 
     eval_rules {Panou lateral}	;# din commons.tcl
 

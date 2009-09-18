@@ -94,6 +94,10 @@
     <name>quantity</name>
     <type>Integer</type>
   </field>
+  <field>
+    <name>description</name>
+    <type>String</type>
+  </field>
 
   <services>
     <method returnType="standard">

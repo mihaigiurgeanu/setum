@@ -1,1 +1,1 @@
-set price [expr $entryPrice + $absoluteGain]
+set price [expr $sellPrice + $absoluteGain]

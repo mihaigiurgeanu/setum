@@ -10,6 +10,7 @@ import java.math.BigDecimal;
 import org.objectweb.util.monolog.api.Logger;
 import org.objectweb.jonas.common.Log;
 import javax.ejb.CreateException;
+import java.util.Collection;
 
 /**
  * The CMP 2.0 implementation of the OfferItemEJB.
@@ -93,12 +94,16 @@ public abstract class OfferItemBean implements EntityBean {
     public abstract Integer getLocationId();
     public abstract void setLocationId(Integer code);
 
+    public abstract String getOtherLocation();
+    public abstract void setOtherLocation(String location);
+
     public abstract BigDecimal getDistance();
     public abstract void setDistance(BigDecimal value);
 
     public abstract Integer getDeliveries();
     public abstract void setDeliveries(Integer count);
 
+    public abstract Collection getOrderLines(); // cmr field
 
     // Implementation of javax.ejb.EntityBean
 

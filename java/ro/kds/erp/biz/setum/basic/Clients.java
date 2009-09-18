@@ -35,6 +35,7 @@ public interface Clients extends EJBObject {
     public ResponseBean updateCity(String newCity) throws RemoteException;
     public ResponseBean updateCountryCode(String newCountryCode) throws RemoteException;
     public ResponseBean updateCompanyCode(String newCompanyCode) throws RemoteException;
+    public ResponseBean updateRegCom(String newRegCom) throws RemoteException;
     public ResponseBean updatePhone(String newPhone) throws RemoteException;
     public ResponseBean updateIban(String newIban) throws RemoteException;
     public ResponseBean updateBank(String newBank) throws RemoteException;

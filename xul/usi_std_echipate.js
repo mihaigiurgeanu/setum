@@ -5,7 +5,7 @@ var theForm = new FormObject();
 theForm.text_fields = new Array("name", "code");
 theForm.combo_fields = new Array("usaId", "broascaId", "cilindruId",
 				 "sildId", "yallaId", "vizorId");
-theForm.radio_fields = new Array();
+theForm.radio_fields = new Array("discontinued");
 
 theForm.do_link = "/usistd/echipate.do";
 

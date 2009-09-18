@@ -16,6 +16,10 @@
     <type>String</type>
   </field>
   <field>
+    <name>discontinued</name>
+    <type>Integer</type>
+  </field>
+  <field>
     <name>entryPrice</name>
     <type>java.math.BigDecimal</type>
   </field>

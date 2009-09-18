@@ -230,12 +230,68 @@
 	<field-name>comment</field-name>
       </cmp-field>
       <cmp-field>
+	<description>Contact information</description>
+	<field-name>contact</field-name>
+      </cmp-field>
+      <cmp-field>
 	<description>If this is true, the offer is not available, regardless of the valability dates.</description>
 	<field-name>discontinued</field-name>
       </cmp-field>
       <cmp-field>
 	<description>An integer used to group similar offers together</description>
 	<field-name>category</field-name>
+      </cmp-field>
+      <cmp-field>
+	<description>Numarul contractului la care se ataseaza oferta</description>
+	<field-name>contract</field-name>
+      </cmp-field>
+      <cmp-field>
+	<description>Numarul anexei cu care oferta se ataseaza la contract</description>
+	<field-name>anexa</field-name>
+      </cmp-field>
+      <cmp-field>
+	<description>Text pentru termenii contractuali care apar la sfarsitul ofertei.</description>
+	<field-name>terms</field-name>
+      </cmp-field>
+      <cmp-field>
+	<description>Camp liber pentru a fi folosit de BL</description>
+	<field-name>attribute1</field-name>
+      </cmp-field>
+      <cmp-field>
+	<description>Camp liber pentru a fi folosit de BL</description>
+	<field-name>attribute2</field-name>
+      </cmp-field>
+      <cmp-field>
+	<description>Camp liber pentru a fi folosit de BL</description>
+	<field-name>attribute3</field-name>
+      </cmp-field>
+      <cmp-field>
+	<description>Camp liber pentru a fi folosit de BL</description>
+	<field-name>attribute4</field-name>
+      </cmp-field>
+      <cmp-field>
+	<description>Camp liber pentru a fi folosit de BL</description>
+	<field-name>attribute5</field-name>
+      </cmp-field>
+      <cmp-field>
+	<description>Camp liber pentru a fi folosit de BL</description>
+	<field-name>attribute6</field-name>
+      </cmp-field>
+      <cmp-field>
+	<description>Camp liber pentru a fi folosit de BL</description>
+	<field-name>attribute7</field-name>
+      </cmp-field>
+      <cmp-field>
+	<description>Camp liber pentru a fi folosit de BL</description>
+	<field-name>attribute8</field-name>
+      </cmp-field>
+      <cmp-field>
+	<description>Camp liber pentru a fi folosit de BL</description>
+	<field-name>attribute9</field-name>
+      </cmp-field>
+      <cmp-field>
+	<description>Camp liber pentru a fi folosit de BL</description>
+	<field-name>attribute10</field-name>
       </cmp-field>
       <primkey-field>id</primkey-field>
       <ejb-local-ref>
@@ -347,6 +403,9 @@
 	<field-name>locationId</field-name>
       </cmp-field>
       <cmp-field>
+	<field-name>otherLocation</field-name>
+      </cmp-field>
+      <cmp-field>
 	<field-name>distance</field-name>
       </cmp-field>
       <cmp-field>
@@ -449,6 +508,21 @@
       <cmp-field>
 	<field-name>comment</field-name>
       </cmp-field>
+      <cmp-field><field-name>attribute1</field-name></cmp-field>
+      <cmp-field><field-name>attribute2</field-name></cmp-field>
+      <cmp-field><field-name>attribute3</field-name></cmp-field>
+      <cmp-field><field-name>attribute4</field-name></cmp-field>
+      <cmp-field><field-name>attribute5</field-name></cmp-field>
+      <cmp-field><field-name>attribute6</field-name></cmp-field>
+      <cmp-field><field-name>attribute7</field-name></cmp-field>
+      <cmp-field><field-name>attribute8</field-name></cmp-field>
+      <cmp-field><field-name>attribute9</field-name></cmp-field>
+      <cmp-field><field-name>attribute10</field-name></cmp-field>
+      <cmp-field><field-name>attribute11</field-name></cmp-field>
+      <cmp-field><field-name>attribute12</field-name></cmp-field>
+      <cmp-field><field-name>attribute13</field-name></cmp-field>
+      <cmp-field><field-name>attribute14</field-name></cmp-field>
+      <cmp-field><field-name>attribute15</field-name></cmp-field>
       <primkey-field>id</primkey-field>
       <query>
 	<description>Selects companies or persons, depending on parameter</description>
@@ -627,6 +701,27 @@
       <cmp-field>
 	<field-name>deliveryDate</field-name>
       </cmp-field>
+      <cmp-field>
+	<field-name>deliveryHour</field-name>
+      </cmp-field>
+      <cmp-field>
+	<field-name>tipDemontare</field-name>
+      </cmp-field>
+      <cmp-field>
+	<field-name>attribute1</field-name>
+      </cmp-field>
+      <cmp-field>
+	<field-name>attribute2</field-name>
+      </cmp-field>
+      <cmp-field>
+	<field-name>attribute3</field-name>
+      </cmp-field>
+      <cmp-field>
+	<field-name>attribute4</field-name>
+      </cmp-field>
+      <cmp-field>
+	<field-name>attribute5</field-name>
+      </cmp-field>
 
       <primkey-field>id</primkey-field>
 
@@ -665,6 +760,21 @@
 	  <method-params></method-params>
 	</query-method>
 	<ejb-ql>SELECT OBJECT(o) FROM Order AS o</ejb-ql>
+      </query>
+
+      <query>
+	<description>Comenzile cu livrari intre anumite date</description>
+	<query-method>
+	  <method-name>findLivrari</method-name>
+	  <method-params>
+	    <method-param>java.util.Date</method-param>
+	    <method-param>java.util.Date</method-param>
+	  </method-params>
+	</query-method>
+	<ejb-ql><![CDATA[
+	SELECT OBJECT(o) FROM Order AS o WHERE o.deliveryTerm1 BETWEEN ?1 AND ?2
+	ORDER BY o.deliveryTerm1
+	]]></ejb-ql>
       </query>
 
 
@@ -1061,6 +1171,29 @@
     </ejb-relation>
 
     <ejb-relation>
+      <description>The contact person of an offer</description>
+      <ejb-relation-name>Offer-Contact</ejb-relation-name>
+      <ejb-relationship-role>
+	<description>The offer reffering a contact</description>
+	<ejb-relationship-role-name>OffersIssuedToContact</ejb-relationship-role-name>
+	<multiplicity>Many</multiplicity>
+	<relationship-role-source>
+	  <ejb-name>OfferEJB</ejb-name>
+	</relationship-role-source>
+	<cmr-field>
+	  <cmr-field-name>clientContact</cmr-field-name>
+	</cmr-field>
+      </ejb-relationship-role>
+      <ejb-relationship-role>
+	<ejb-relationship-role-name>ContactsHavingOffer</ejb-relationship-role-name>
+	<multiplicity>One</multiplicity>
+	<relationship-role-source>
+	  <ejb-name>ContactEJB</ejb-name>
+	</relationship-role-source>
+      </ejb-relationship-role>
+    </ejb-relation>
+
+    <ejb-relation>
       <description>An attribute's value maybe another product</description>
       <ejb-relation-name>ProductAttribute</ejb-relation-name>
       <ejb-relationship-role>
@@ -1243,6 +1376,10 @@
 	<relationship-role-source>
 	  <ejb-name>OfferItemEJB</ejb-name>
 	</relationship-role-source>
+	<cmr-field>
+	  <cmr-field-name>orderLines</cmr-field-name>
+	  <cmr-field-type>java.util.Collection</cmr-field-type>
+	</cmr-field>
       </ejb-relationship-role>
     </ejb-relation>
 
@@ -1435,7 +1572,7 @@
 
 
 
-      <trans-attribute>Supports</trans-attribute>
+      <trans-attribute>Required</trans-attribute>
 
 
 

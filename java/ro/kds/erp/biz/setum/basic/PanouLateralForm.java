@@ -49,6 +49,7 @@ public class PanouLateralForm implements Serializable {
     String businessCategory;
     Integer quantity;
     String groupingCode;
+    String description;
 
     public PanouLateralForm() {
 
@@ -138,6 +139,10 @@ public class PanouLateralForm implements Serializable {
 
 
        this.groupingCode = "";
+
+
+
+       this.description = "";
 
 
 
@@ -470,6 +475,21 @@ public class PanouLateralForm implements Serializable {
 	AttributeLocal a = (AttributeLocal)attributes.get("groupingCode");
 	if(a != null) {
 	    this.setGroupingCode(a.getStringValue());
+	}
+    }
+
+    public void setDescription(String newDescription) {
+        this.description = newDescription;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void readDescription(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("description");
+	if(a != null) {
+	    this.setDescription(a.getStringValue());
 	}
     }
 

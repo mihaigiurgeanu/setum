@@ -48,7 +48,7 @@ import java.util.Comparator;
  * Created: Fri Nov 18 15:34:24 2005
  *
  * @author <a href="mailto:Mihai Giurgeanu@CRIMIRA"></a>
- * @version $Id: UsaMetalica2KBeanImplementation.java,v 1.27 2008/03/19 21:28:08 mihai Exp $
+ * @version $Id: UsaMetalica2KBeanImplementation.java,v 1.28 2009/09/18 13:41:36 mihai Exp $
  */
 public class UsaMetalica2KBeanImplementation 
     extends ro.kds.erp.biz.setum.basic.UsaMetalica2KBean {
@@ -61,6 +61,10 @@ public class UsaMetalica2KBeanImplementation
     public ResponseBean saveFormData() {
 	ResponseBean r;
 	logger.log(BasicLevel.DEBUG, "Saving product with id = " + id);
+
+	logger.log(BasicLevel.DEBUG, "Calling computePrice. The sellPrice before call is: " + form.getSellPrice());
+	computePrice();
+	logger.log(BasicLevel.DEBUG, "Computed sellPrice is: " + form.getSellPrice());
 
 	try {
 	    InitialContext it = new InitialContext();
@@ -115,7 +119,7 @@ public class UsaMetalica2KBeanImplementation
 	    attribs.add(ah.create("ieFoilSec", form.getIeFoilSec()));
 	    attribs.add(ah.create("extFoilSec", form.getExtFoilSec()));
 	    attribs.add(ah.create("isolation", form.getIsolation()));
-	    attribs.add(ah.create("openeningDir", form.getOpeningDir()));
+	    attribs.add(ah.create("openingDir", form.getOpeningDir()));
 	    attribs.add(ah.create("openingSide", form.getOpeningSide()));
 	    attribs.add(ah.create("frameType", form.getFrameType()));
 	    attribs.add(ah.create("lFrame", form.getLFrame()));
@@ -129,6 +133,12 @@ public class UsaMetalica2KBeanImplementation
 	    attribs.add(ah.create("tresholdSpace", form.getTresholdSpace()));
 	    attribs.add(ah.create("h1Treshold", form.getH1Treshold()));
 	    attribs.add(ah.create("h2Treshold", form.getH2Treshold()));
+
+	    attribs.add(ah.create("masca", form.getMasca()));
+	    attribs.add(ah.create("lacrimar", form.getLacrimar()));
+	    attribs.add(ah.create("bolturi", form.getBolturi()));
+	    attribs.add(ah.create("platbanda", form.getPlatbanda()));
+
 	    attribs.add(ah.create("montareSistem", form.getMontareSistem()));
 	    attribs.add(ah.create("decupareSistemId", form.getDecupareSistemId()));
 	    attribs.add(ah.create("sistemeSetumSauBeneficiar", 
@@ -297,6 +307,11 @@ public class UsaMetalica2KBeanImplementation
 	    form.readTresholdSpace(amap);
 	    form.readH1Treshold(amap);
 	    form.readH2Treshold(amap);
+
+	    form.readMasca(amap);
+	    form.readLacrimar(amap);
+	    form.readBolturi(amap);
+	    form.readPlatbanda(amap);
 
 	    form.readMontareSistem(amap);
 	    form.readDecupareSistemId(amap);
@@ -473,7 +488,7 @@ public class UsaMetalica2KBeanImplementation
 // 	form.setH2Treshold(new Double(0));
 // 	form.setSellPrice(new BigDecimal(0));
 // 	form.setEntryPrice(new BigDecimal(0));
-// 	form.setMontareSistem(new Integer(1));
+ 	form.setMontareSistem(new Integer(1));
 // 	form.setDecupareSistemId(new Integer(0));
  	form.setSistemSetumSauBeneficiar(new Integer(1));
 // 	form.setBroascaId(new Integer(0));
@@ -549,6 +564,10 @@ public class UsaMetalica2KBeanImplementation
 	r.addValueList("foilPosition", ValueLists.makeStdValueList(11008));
 	r.addValueList("tresholdType", ValueLists.makeStdValueList(11009));
 
+	r.addValueList("masca", ValueLists.makeStdValueList(11140));
+	r.addValueList("lacrimar", ValueLists.makeStdValueList(11145));
+	r.addValueList("bolturi", ValueLists.makeStdValueList(11150));
+	r.addValueList("platbanda", ValueLists.makeStdValueList(11155));
 
 	r.addValueList("benefBroascaTip", ValueLists.makeStdValueList(11020));
 	r.addValueList("benefCilindruTip", ValueLists.makeStdValueList(11021));
@@ -754,6 +773,8 @@ public class UsaMetalica2KBeanImplementation
 	    ProductLocal option = ph.findByPrimaryKey(optionId);
 	    option.remove();
 
+	    super.removeOption(optionId);
+	    computeCalculatedFields(null);
 	    r = ResponseBean.SUCCESS;
 
 	} catch (RemoveException e) {
@@ -793,9 +814,31 @@ public class UsaMetalica2KBeanImplementation
 	gcode.add("UM")
 	    .add(form.getSubclass())
 	    .add(form.getVersion())
-	    .add(form.getFrameType()).add(form.getLFrame())
-	    .add(form.getTresholdType()).add(form.getLTreshold())
-	    .add(form.getBroascaId()).add(form.getCilindruId()).add(form.getCopiatCheieId()).add(form.getVizorId()).add(form.getSildId()).add(form.getSildTip()).add(form.getSildCuloare()).add(form.getRozetaId()).add(form.getRozetaTip()).add(form.getRozetaCuloare()).add(form.getManerId()).add(form.getManerCuloare()).add(form.getYalla1Id()).add(form.getYalla2Id()).add(form.getBaraAntipanicaId()).add(form.getManerSemicilindruId()).add(form.getSelectorOrdineId()).add(form.getAmortizorId()).add(form.getAlteSisteme1Id()).add(form.getAlteSisteme2Id());
+	    //.add(form.getFrameType())
+	    //.add(form.getLFrame())
+	    //.add(form.getTresholdType())
+	    //.add(form.getLTreshold())
+	    .add(form.getDecupareSistemId())
+	    .add(form.getBroascaId())
+	    .add(form.getCilindruId())
+	    .add(form.getCopiatCheieId())
+	    .add(form.getVizorId())
+	    .add(form.getSildId())
+	    .add(form.getSildTip())
+	    .add(form.getSildCuloare())
+	    .add(form.getRozetaId())
+	    .add(form.getRozetaTip())
+	    .add(form.getRozetaCuloare())
+	    .add(form.getManerId())
+	    .add(form.getManerCuloare())
+	    .add(form.getYalla1Id())
+	    .add(form.getYalla2Id())
+	    .add(form.getBaraAntipanicaId())
+	    .add(form.getManerSemicilindruId())
+	    .add(form.getSelectorOrdineId())
+	    .add(form.getAmortizorId())
+	    .add(form.getAlteSisteme1Id())
+	    .add(form.getAlteSisteme2Id());
 	//gcode.add("UM").add(form.getSubclass()).add(form.getVersion()).add(form.getMaterial()).add(form.getK()).add(form.getIntFoil()).add(form.getExtFoil()).add(form.getIntFoilSec()).add(form.getIsolation()).add(form.getOpeningDir()).add(form.getOpeningSide()).add(form.getFrameType()).add(form.getTresholdType()).add(form.getMontareSistem()).add(form.getDecupareSistemId()).add(form.getSistemSetumSauBeneficiar()).add(form.getBroascaId()).add(form.getCilindruId()).add(form.getCopiatCheieId()).add(form.getVizorId()).add(form.getSildId()).add(form.getSildTip()).add(form.getSildCuloare()).add(form.getRozetaId()).add(form.getRozetaTip()).add(form.getRozetaCuloare()).add(form.getManerId()).add(form.getManerCuloare()).add(form.getYalla1Id()).add(form.getYalla2Id()).add(form.getBaraAntipanicaId()).add(form.getManerSemicilindruId()).add(form.getSelectorOrdineId()).add(form.getAmortizorId()).add(form.getAlteSisteme1Id()).add(form.getAlteSisteme2Id());
 	gcode.add(finisajGroupingCode(form.getIntFinisajBlatId()));
 	gcode.add(finisajGroupingCode(form.getIntFinisajTocId()));
@@ -837,6 +880,8 @@ public class UsaMetalica2KBeanImplementation
 	    form.setGroupingCode(groupingCode);
 	    r.addField("groupingCode", groupingCode);
 	}
+
+
 	return r;
     }
 
@@ -1019,6 +1064,7 @@ public class UsaMetalica2KBeanImplementation
     protected void addFieldsToScript(Script s) {
 	super.addFieldsToScript(s);
 
+	/*
 	try {
 
 	    CategoryLocalHome ch = Products.getCategoryHome();
@@ -1400,6 +1446,7 @@ public class UsaMetalica2KBeanImplementation
 	} catch (NamingException e) {
 	    logger.log(BasicLevel.ERROR, e);
 	}
+	*/
     }
 
 }

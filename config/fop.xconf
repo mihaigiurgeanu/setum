@@ -15,7 +15,7 @@
   See the License for the specific language governing permissions and
   limitations under the License.
 -->
-<!-- $Id: fop.xconf,v 1.1 2007/02/10 17:45:11 mihai Exp $ -->
+<!-- $Id: fop.xconf,v 1.2 2009/09/18 13:41:35 mihai Exp $ -->
 
 <!--
 
@@ -32,7 +32,7 @@ the location of this file.
 <fop version="1.0">
 
   <!-- Base URL for resolving relative URLs -->
-  <base>file:///C:/Documents%20and%20Settings/Mihai%20Giurgeanu/My%20Documents/src/setum/reports/</base>
+  <base>file:///Users/mihai/Projects/setum/reports/</base>
   
   <!-- Source resolution in dpi (dots/pixels per inch) for determining the size of pixels in SVG and bitmap images, default: 72dpi -->
   <source-resolution>72</source-resolution>
@@ -154,4 +154,3 @@ the location of this file.
   </renderers>
 
 </fop>
-

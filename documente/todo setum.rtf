@@ -1,0 +1,59 @@
+{\rtf1\mac\ansicpg-1\cocoartf824\cocoasubrtf480
+{\fonttbl\f0\fswiss\fcharset77 Helvetica;\f1\fswiss\fcharset77 Helvetica-Bold;}
+{\colortbl;\red255\green255\blue255;\red137\green26\blue150;\red229\green229\blue229;\red228\green43\blue251;
+\red238\green156\blue37;\red51\green126\blue127;}
+\margl1440\margr1440\vieww14540\viewh12400\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\ql\qnatural\pardirnatural
+
+\f0\fs24 \cf0 todo list, setum:\
+0. definire cod beneficiar -- OK, este numele produsului (name).\
+\
+1. definire in setari lista de valori pentru montaj (tip montaj, pret montaj)\
+11200 - comenzi montaj\
+12005 - localitati\
+- la localitati adaug atributul distanta si valoarea double pentru km\
+- se adauga in lista de valori valoarea cu codul 0 si denumirea [alta localitate] cu atributul distanta = 0.\
+12006 - list costuri transport care defineste produsul cu codul 10 - pret pe km\
+\
+\
+2. la linia de oferta se adauga valoare doua campuri:  montajId (tipul de montaj de selectat din lista) si valoare procentuala montaj\
+\pard\pardeftab720\ql\qnatural
+
+\f1\b\fs26 \cf2 \cb3 ALTER
+\f0\b0 \cf0  
+\f1\b \cf2 TABLE
+\f0\b0 \cf0  OFFERITEM_ 
+\f1\b \cf2 ADD
+\f0\b0 \cf0  \cf4 (\cf0 \
+montajId_ \cf5 INT\cf4 (\cf0  \cf6 11\cf0  \cf4 )\cf0  \cf4 ,\cf0 \
+montajProcent_ \cf5 decimal\cf4 (\cf0  \cf6 12,2\cf0  \cf4 )\cf0  \cf4 ,\cf0 \
+montajSeparat_ \cf5 TINYINT\cf4 (\cf0  \cf6 1\cf0  \cf4 )\cf0 \
+\cf4 );\
+
+\fs24 \cf0 \cb1 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\ql\qnatural\pardirnatural
+\cf0 \
+3. la linia de oferta se alege daca valoarea montajului va apare separat de valoare usa sa daca va fi inclusa in valoarea usii (camp montajInclusInPret)\
+\
+4. afisare montaj in oferta\
+\
+5. adaugare campuri transport pe oferta: localitate, nr curse, nr km\
+\pard\pardeftab720\ql\qnatural
+
+\f1\b\fs26 \cf2 \cb3 ALTER
+\f0\b0 \cf0  
+\f1\b \cf2 TABLE
+\f0\b0 \cf0  OFFERITEM_ 
+\f1\b \cf2 ADD
+\f0\b0 \cf0  \cf4 (\cf0 \
+locationId_ \cf5 INT\cf4 (\cf0  \cf6 11\cf0  \cf4 )\cf0  \cf4 ,\cf0 \
+distance_ \cf5 DECIMAL\cf4 (\cf0  \cf6 12\cf4 ,\cf0  \cf6 2\cf0  \cf4 )\cf0  \cf4 ,\cf0 \
+deliveries_ \cf5 INT\cf4 (\cf0  \cf6 11\cf0  \cf4 )\cf0 \
+\cf4 )\
+
+\fs24 \cf0 \cb1 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\ql\qnatural\pardirnatural
+\cf0 6. definire localitati in setari (nume localitate, nr km)\
+7. de afisat transportul in oferta\
+8. raport comanda\
+}

@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<!-- $Id: build.xml,v 1.12 2008/02/29 06:38:23 mihai Exp $ -->
+<!-- $Id: build.xml,v 1.13 2009/09/18 13:41:35 mihai Exp $ -->
 <project name="setumerp" default="application">
   <description>
     Targets for building and deploying the setumerp application.
@@ -78,34 +78,41 @@
       
       <webinf file="${descriptors}/setum/jonas-web.xml" />
       <webinf dir=".">
-	<include name="reports/**/*.jasper" />
+	<include name="reports/*.jasper" />
+	<include name="reports/*.png" />
       </webinf>
+
+      <!-- am mutat imaginea in webinf
       <fileset dir="reports">
 	<include name="images/**/*"/>
       </fileset>
+      -->
       <lib dir="${library}">
 	<include name="ant-1.5.1.jar"/>
 	<include name="commons-beanutils-1.5.jar"/>
 	<include name="commons-collections-2.1.jar"/>
 	<include name="commons-digester-1.3.jar"/>
-	<include name="commons-logging-1.0.2.jar"/>
+	<include name="commons-logging-1.0.4.jar"/>
 	<include name="commons-logging-api-1.0.2.jar"/>
 	<include name="hsqldb-1.61.jar"/>
 	<include name="itext-1.01.jar"/>
 	<include name="jdt-compiler.jar"/>
 	<include name="poi-2.0-final-20040126.jar"/>
-	<include name="xalan.jar"/>
-	<include name="xercesImpl.jar"/>
+	<include name="xalan-2.7.0.jar"/>
+	<include name="xercesImpl-2.7.1.jar"/>
 	<include name="xmlParserAPIs.jar"/>
 	<include name="jasperreports-0.6.8.jar"/>
 	<include name="jasperreports-0.6.8.-applet.jar"/>
 
 	<include name="fop.jar"/>
 	<include name="avalon-framework-4.2.0.jar"/> <!-- for fop -->
-	<include name="batik-all-1.6.jar"/><!-- for fop -->
-	<include name="commons-io-1.1.jar"/><!-- for fop -->
+	<include name="batik-all-1.7.jar"/><!-- for fop -->
+	<include name="commons-io-1.3.1.jar"/><!-- for fop -->
 	<include name="serializer-2.7.0.jar"/><!-- for fop-->
-	<include name="xmlgraphics-commons-1.1.jar"/><!-- for fop -->
+	<include name="xmlgraphics-commons-1.3.1.jar"/><!-- for fop -->
+	<include name="xml-apis-1.3.04.jar"/><!--for fop-->
+	<include name="xml-apis-ext-1.3.04.jar"/><!--for fop-->
+
       </lib>
 
     </war>
@@ -176,7 +183,7 @@
     <jar destfile="${dist}/setumbiz.jar" update="true" basedir="${build}"
 	 includes="ro/kds/erp/scripting/*.class">
       <manifest>
-	<attribute name="Class-Path" value="jacl.jar tcljava.jar"/>	
+	<attribute name="Class-Path" value="jacl.jar tcljava.jar commons-lang-2.4.jar"/>	
       </manifest>
     </jar>
     <jar destfile="${dist}/reporting.jar" update="true" basedir="${build}"
@@ -252,6 +259,7 @@
 	<include name="jacl.jar"/>
 	<include name="tcljava.jar"/>
 	<include name="freemarker.jar"/>
+	<include name="commons-lang-2.4.jar"/>
       </fileset>
     </ear>
 

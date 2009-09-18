@@ -98,6 +98,16 @@ public interface OfferLocal extends EJBLocalObject {
     public void setComment(String comment);
 
     /**
+     * A text field containing contact info.
+     */
+    public String getContact();
+
+    /**
+     * A text field containing contact info.
+     */
+    public void setContact(String contact);
+
+    /**
      * The line items contained in this offer.
      *
      * Returns a <code>Collection</code> of <code>OfferItemLocal</code> ojects
@@ -144,5 +154,48 @@ public interface OfferLocal extends EJBLocalObject {
      * The client associated with this offer.
      */
     public void setClient(ClientLocal client);
+
+    public ContactLocal getClientContact();
+    public void setClientContact(ContactLocal contact);
+
+    public String getContract();
+    public void setContract(String contract);
+
+    public String getAnexa();
+    public void setAnexa(String anexa);
+
+    public String getTerms();
+    public void setTerms(String terms);
+
+    public String getAttribute1();
+    public void setAttribute1(String attr);
+
+    public String getAttribute2();
+    public void setAttribute2(String attr);
+
+    public String getAttribute3();
+    public void setAttribute3(String attr);
+
+    public String getAttribute4();
+    public void setAttribute4(String attr);
+
+    public String getAttribute5();
+    public void setAttribute5(String attr);
+
+    public String getAttribute6();
+    public void setAttribute6(String attr);
+
+    public String getAttribute7();
+    public void setAttribute7(String attr);
+
+    public String getAttribute8();
+    public void setAttribute8(String attr);
+
+    public String getAttribute9();
+    public void setAttribute9(String attr);
+
+    public String getAttribute10();
+    public void setAttribute10(String attr);
+
 
 }

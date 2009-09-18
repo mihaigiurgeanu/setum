@@ -15,6 +15,7 @@ import org.objectweb.util.monolog.api.BasicLevel;
 import org.objectweb.util.monolog.api.Logger;
 import org.objectweb.jonas.common.Log;
 import java.text.SimpleDateFormat;
+import java.util.Locale;
 
 /**
  * The <code>ResponseBean</code> is a data transporter between the
@@ -142,7 +143,7 @@ public class ResponseBean implements Serializable {
 	logger.log(BasicLevel.DEBUG, "add field to response: <<" + 
 		   name + ">> -> <<" + value + ">>"); 
 
-	NumberFormat nf = NumberFormat.getIntegerInstance();
+	NumberFormat nf = NumberFormat.getIntegerInstance(Locale.US);
 	nf.setGroupingUsed(false);
 	fields.put(name, nf.format(value));
     }
@@ -160,7 +161,7 @@ public class ResponseBean implements Serializable {
     public void addField(String name, double value) {
 	logger.log(BasicLevel.DEBUG, "add field to response: <<" + 
 		   name + ">> -> <<" + value + ">>"); 
-	NumberFormat nf = NumberFormat.getInstance();
+	NumberFormat nf = NumberFormat.getInstance(Locale.US);
 	nf.setGroupingUsed(false);
 	fields.put(name, nf.format(value));
     }
@@ -179,7 +180,7 @@ public class ResponseBean implements Serializable {
 	logger.log(BasicLevel.DEBUG, "add field to response: <<" + 
 		   name + ">> -> <<" + value + ">>"); 
 	if(value != null) {
-	    NumberFormat nf = NumberFormat.getInstance();
+	    NumberFormat nf = NumberFormat.getInstance(Locale.US);
 	    nf.setGroupingUsed(false);
 	    fields.put(name, nf.format(value));
 	}
@@ -201,7 +202,7 @@ public class ResponseBean implements Serializable {
 	logger.log(BasicLevel.DEBUG, "add field to response: <<" + 
 		   name + ">> -> <<" + value + ">>"); 
 	if(value != null) {
-	    NumberFormat nf = NumberFormat.getInstance();
+	    NumberFormat nf = NumberFormat.getInstance(Locale.US);
 	    nf.setGroupingUsed(false);
 	    fields.put(name, nf.format(value));
 	}
@@ -223,7 +224,7 @@ public class ResponseBean implements Serializable {
 	logger.log(BasicLevel.DEBUG, "add field to response: <<" + 
 		   name + ">> -> <<" + value + ">>"); 
 	if(value != null) {
-	    NumberFormat nf = NumberFormat.getInstance();
+	    NumberFormat nf = NumberFormat.getInstance(Locale.US);
 	    nf.setGroupingUsed(false);
 	    fields.put(name, nf.format(value));
 	}

@@ -5,7 +5,7 @@ var theForm = new FormObject();
 theForm.text_fields = new Array("code", "name", "description", "entryPrice",
 				"sellPrice", "relativeGain", "absoluteGain");
 theForm.combo_fields = new Array();
-theForm.radio_fields = new Array();
+theForm.radio_fields = new Array("discontinued");
 
 theForm.do_link="/usistd/neechipate.do";
 

@@ -15,7 +15,14 @@ java::import -package ro.kds.erp.data ProductLocal
 set srv [java::cast CommonServicesLocal [$factory local "ejb/CommonServices" [java::field CommonServicesLocalHome class]]]
 
 
-
+;# folosita ca valoare de return pentru un obiect null in cazul 
+;# procedurilor product_by_code_safe si product_by_id_safe.
+proc nullvalobj {{argname {}}} {
+    if {[string equal $argname doubleValue]} {
+	return 0
+    }
+    return {}
+}
 
 ;# Obtine un produs dupa cod si aplica o metoda produsului. Returneaza valoarea
 ;# pe care o intoarce aplicarea metodei.
@@ -35,6 +42,16 @@ proc product_by_code {catid code valmethod} {
     return $val
 }
 
+;# La fel ca pentru product_by_code dar pentru apeluri care se asteapta
+;# la un obiect ca rezultat (de exemplu Double).
+proc product_by_code_safe {catid code valmethod} {
+    set retval [product_by_code $catid $code $valmethod]
+    if {[string length $retval] > 0} {
+	return $retval
+    } {
+	return nullvalobj
+    }    
+}
 
 ;# Obtine un produs dupa id si aplica o metoda produsului. Returneaza valoarea
 ;# pe care o intoarce aplicarea metodei.
@@ -42,11 +59,28 @@ proc product_by_code {catid code valmethod} {
 ;# getPrice1 sau getSellPrice, etc.
 proc product_by_id {pid valmethod} {
     global srv
-    if {[catch {set val [[$srv findProductById $pid] $valmethod]} err]} {
+    
+    java::try {
+	if {[catch {set val [[$srv findProductById $pid] $valmethod]} err]} {
+	    puts "Eroare la obtinere $valmethod pentru produsul $pid: $err"
+	    set val {}
+	}
+    } catch {Exception e} {
 	puts "Eroare la obtinere $valmethod pentru produsul $pid: $err"
 	set val {}
     }
-    return $val
+    return $val 
+}
+
+;# La fel ca pentru product_by_code dar pentru apeluri care se asteapta
+;# la un obiect ca rezultat (de exemplu Double).
+proc product_by_id_safe {pid valmethod} {
+    set retval [product_by_id $pid $valmethod]
+    if {[string length $retval] > 0} {
+	return $retval
+    } {
+	return nullvalobj
+    }
 }
 
 proc attribute_str {pid attr} {
@@ -58,7 +92,7 @@ proc attribute_str {pid attr} {
     return $val
 }
 
-proc attribute_dbl {pid attr} {
+proc attribute_int {pid attr} {
     global srv
     if {[catch {set val [[$srv getAttributeByProductId $pid $attr] getIntValue]} err]} {
 	puts "Nu pot citi atributul $attr pentru produsul $pid: $err"
@@ -67,7 +101,7 @@ proc attribute_dbl {pid attr} {
     return $val
 }
 
-proc attribute_int {pid attr} {
+proc attribute_dbl {pid attr} {
     global srv
     if {[catch {set val [[$srv getAttributeByProductId $pid $attr] getDoubleValue]} err]} {
 	puts "Nu pot citi atributul $attr pentru produsul $pid: $err"

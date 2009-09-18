@@ -386,6 +386,42 @@ windows.arguments[0].select(productId)
 	      </hbox>
 	    </radiogroup>
 	  </groupbox>
+
+	  <groupbox orient="vertical">
+	    <caption label="Alte optiuni"/>
+	    <grid>
+	      <columns>
+		<column/>
+		<column/>
+	      </columns>
+	      <rows>
+		<row>
+		  <label value="Masca:" control="masca"/>
+		  <menulist id="masca" >
+		    <menupopup id="masca-popup"/>
+		  </menulist>
+		</row>
+		<row>
+		  <label value="Lacrimar:" control="lacrimar"/>
+		  <menulist id="lacrimar">
+		    <menupopup id="lacrimar-popup"/>
+		  </menulist>
+		</row>
+		<row>
+		  <label value="Bolturi:" control="bolturi"/>
+		  <menulist id="bolturi">
+		    <menupopup id="bolturi-popup"/>
+		  </menulist>
+		</row>
+		<row>
+		  <label value="Platbanda:" control="platbanda"/>
+		  <menulist id="platbanda">
+		    <menupopup id="platbanda-popup"/>
+		  </menulist>
+		</row>
+	      </rows>
+	    </grid>
+	  </groupbox>
 	</hbox>
       </tabpanel>
 

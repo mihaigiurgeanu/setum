@@ -58,6 +58,7 @@ public class UsaStdNeechipataBean
 	    
 	    form.setName(p.getName());
 	    form.setCode(p.getCode());
+	    form.setDiscontinued(new Integer(p.getDiscontinued()?1:0));
 	    form.setDescription(p.getDescription());
 	    form.setSellPrice(p.getSellPrice());
 	    form.setEntryPrice(p.getEntryPrice());
@@ -115,6 +116,7 @@ public class UsaStdNeechipataBean
 	    p.setName(form.getName());
 	    p.setCode(form.getCode());
 	    p.setDescription(form.getDescription());
+	    p.setDiscontinued(form.getDiscontinued().intValue()==0?false:true);
 	    p.setEntryPrice(form.getEntryPrice());
 	    p.setSellPrice(form.getSellPrice());
 	    p.setPrice1(form.getSellPrice());

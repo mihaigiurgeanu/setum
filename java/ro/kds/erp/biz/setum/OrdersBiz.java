@@ -45,6 +45,25 @@ import ro.kds.erp.data.InvoiceLocal;
 import ro.kds.erp.data.InvoiceLocalHome;
 import ro.kds.erp.data.PaymentLocal;
 import ro.kds.erp.data.PaymentLocalHome;
+import ro.kds.erp.data.AttributeLocal;
+import ro.kds.erp.data.OfferLocal;
+import ro.kds.erp.biz.CommonServicesLocal;
+import ro.kds.erp.biz.CommonServicesLocalHome;
+import ro.kds.erp.biz.ServiceNotAvailable;
+import ro.kds.erp.data.ProductLocalHome;
+import ro.kds.erp.data.CategoryLocal;
+import ro.kds.erp.biz.CategoryManagerLocalHome;
+import ro.kds.erp.biz.CategoryManagerLocal;
+import ro.kds.erp.biz.ProductNotAvailable;
+import ro.kds.erp.biz.setum.basic.OrdersHome;
+import ro.kds.erp.biz.setum.basic.Orders;
+import java.rmi.RemoteException;
+import org.apache.commons.lang.time.DateUtils;
+import java.util.Collections;
+import org.apache.commons.lang.StringUtils;
+import java.util.Comparator;
+import java.text.DateFormat;
+import java.math.RoundingMode;
 
 /**
  * Describe class OrdersBiz here.
@@ -83,6 +102,18 @@ public class OrdersBiz extends OrdersBean {
     static final int LISTING_ROWS_PER_REQUEST = 30;
 
     /**
+     * The category id that holdes the configuration product km (defining price per km).
+     */
+    public final Integer CATEGORY_ID_SHIPPING = new Integer(12006);
+
+    /**
+     * The product for km (configuration product - price per km).
+     */
+    public final String PRODUCT_CODE_KM = "10";
+
+
+
+    /**
      * Initialization of fields. The default initialization is
      * made by the parrent class.
      *
@@ -102,36 +133,23 @@ public class OrdersBiz extends OrdersBean {
 
 	    form.setTvaPercent(prefs.getDouble("invoices.tax.percent",
 					       new Double(19.0)));
+	    form.setCurrencyCode(prefs.get("default.currecy", "RON"));
+
 	} catch (Exception e) {
 	    logger.log(BasicLevel.ERROR, "Exception when geting preferences: ", e);
 	    defaultDelivery = 30;
 	    form.setTvaPercent(new Double(19.0));
+	    form.setCurrencyCode("RON");
 	}
+	
+	form.setExchangeRate(new BigDecimal(1));
 
-	// get a new order no
-	Integer orderNo;
-	try {
-	    InitialContext ic = new InitialContext();
-	    Context env = (Context) ic.lookup("java:comp/env");
-	    
-	    SequenceHome sh = (SequenceHome)PortableRemoteObject.narrow
-		(env.lookup("ejb/SequenceHome"), SequenceHome.class);
-	    Sequence s = sh.create();
-	    orderNo = s.getNext("ro.setumsa.sequnces.orders");
-	} catch (Exception e) {
-	    orderNo = null;
-	    logger.log(BasicLevel.WARN, "Can not get a number for order", e);
-	}
-
-
-	form.setNumber(orderNo.toString());
 	form.setDate(new Date());
 
-	Calendar dateDelivCal = Calendar.getInstance();
-	dateDelivCal.setTime(form.getDate());
-	dateDelivCal.add(Calendar.DATE, defaultDelivery);
-	form.setTermenLivrare(dateDelivCal.getTime());
-	form.setTermenLivrare1(dateDelivCal.getTime());
+	Date delivDate = DateUtils.addDays(DateUtils.truncate(form.getDate(), Calendar.DAY_OF_MONTH), 
+					   defaultDelivery);
+	form.setTermenLivrare(delivDate);
+	form.setTermenLivrare1(delivDate);
 
 
     }
@@ -179,10 +197,27 @@ public class OrdersBiz extends OrdersBean {
 	    form.setAdresaReper(o.getDeliveryAddressHint());
 	    form.setTelefon(o.getDeliveryPhone());
 	    form.setContact(o.getDeliveryContact());	    
+	    form.setDeliveryHour(o.getDeliveryHour());
+	    form.setTipDemontare(o.getTipDemontare());
+	    form.setAttribute1(o.getAttribute1());
+	    form.setAttribute2(o.getAttribute2());
+	    form.setAttribute3(o.getAttribute3());
+	    form.setAttribute4(o.getAttribute4());
+	    form.setAttribute5(o.getAttribute5());
 
-	    form.setTotal(getOrderedAmount());
+	    //form.setTotal(getOrderedAmount());
+	    computeOrderAmounts();
+
 	    form.setPayedAmount(o.getPayedAmount());
 	    form.setInvoicedAmount(o.getInvoicedAmount());
+
+	    try {
+		Preferences prefs = PreferencesBean.getPreferences();
+		form.setCurrencyCode(prefs.get("default.currecy", "RON"));
+	    } catch (Exception e) {
+		logger.log(BasicLevel.ERROR, "Exception when geting preferences: ", e);
+		form.setCurrencyCode("RON");
+	    }
 
 	    r = new ResponseBean();
 	} catch (NamingException e) {
@@ -220,6 +255,24 @@ public class OrdersBiz extends OrdersBean {
 		OrderLocalHome oh = getOrderHome();
 		o = oh.create();
 		id = o.getId(); // currently loaded order
+
+		// get a new order no
+		Integer orderNo;
+		try {
+		    InitialContext ic = new InitialContext();
+		    Context env = (Context) ic.lookup("java:comp/env");
+		    
+		    SequenceHome sh = (SequenceHome)PortableRemoteObject.narrow
+			(env.lookup("ejb/SequenceHome"), SequenceHome.class);
+		    Sequence s = sh.create();
+		    orderNo = s.getNext("ro.setumsa.sequnces.orders");
+		} catch (Exception e) {
+		    orderNo = new Integer(0);
+		    logger.log(BasicLevel.WARN, "Can not get a number for order", e);
+		}
+
+
+		form.setNumber(orderNo.toString());
 	    } else {
 		o = getCurrentOrder();
 	    }
@@ -244,6 +297,14 @@ public class OrdersBiz extends OrdersBean {
 	    o.setDeliveryAddressHint(form.getAdresaReper());
 	    o.setDeliveryPhone(form.getTelefon());
 	    o.setDeliveryContact(form.getContact());
+	    o.setDeliveryHour(form.getDeliveryHour());
+	    o.setTipDemontare(form.getTipDemontare());
+	    o.setAttribute1(form.getAttribute1());
+	    o.setAttribute2(form.getAttribute2());
+	    o.setAttribute3(form.getAttribute3());
+	    o.setAttribute4(form.getAttribute4());
+	    o.setAttribute5(form.getAttribute5());
+
 
 	    r = new ResponseBean();
 	} catch (NamingException e) {
@@ -432,7 +493,8 @@ public class OrdersBiz extends OrdersBean {
 	    ol.setQuantity(form.getQuantity().setScale(2, BigDecimal.ROUND_HALF_UP));
 	    
 	    try {
-		form.setTotal(getOrderedAmount());
+		//form.setTotal(getOrderedAmount());
+		computeOrderAmounts();
 	    } catch (Exception e) {
 		logger.log(BasicLevel.ERROR, "Can not get the ordered amount: " + e.getMessage());
 		logger.log(BasicLevel.DEBUG, e);
@@ -476,6 +538,11 @@ public class OrdersBiz extends OrdersBean {
 	try {
 	    try {
 		OfferItemLocal oi = getOfferItem();
+
+		// avoiding bug when quantity was not set in the offer
+		if(oi.getQuantity() == null) {
+		    oi.setQuantity(new BigDecimal(1));
+		}
 		form.setQuantity(oi.getQuantity());
 		form.setPrice(oi.getPrice());
 		form.setValue(new BigDecimal(form.getPrice().doubleValue() *
@@ -508,6 +575,7 @@ public class OrdersBiz extends OrdersBean {
      * Remove the currently selected order line.
      */
     public ResponseBean removeItem() {
+	logger.log(BasicLevel.DEBUG, "Enter removeItem");
 	if(! isSelectedOrderLine() ) {
 	    return ResponseBean.getErrNotCurrent(ENTITY_ORDER_LINE);
 	}
@@ -515,12 +583,14 @@ public class OrdersBiz extends OrdersBean {
 	ResponseBean r;
 	try {
 	    OrderLineLocal ol = getCurrentLine();
+	    logger.log(BasicLevel.DEBUG, "Call ol.remove");
 	    ol.remove();
-
+	    logger.log(BasicLevel.DEBUG, "Line removed");
 	    r = new ResponseBean();
 	    try {
 		OrderLocal o = getCurrentOrder();
-		form.setTotal(getOrderedAmount());
+		//form.setTotal(getOrderedAmount());
+		computeOrderAmounts();
 		r = computeCalculatedFields(null);
 		r.addField("total", form.getTotal());
 	    } catch (Exception e) {
@@ -529,6 +599,7 @@ public class OrdersBiz extends OrdersBean {
 		form.setTotal(new BigDecimal(0));
 	    }
 	    
+	    logger.log(BasicLevel.DEBUG, "removeItem completed.");
 	} catch (FinderException e) {
 	    r = ResponseBean.getErrNotFound(e.getMessage());
 	    logger.log(BasicLevel.ERROR, "Finder exception when trying to delete an order line");
@@ -544,6 +615,7 @@ public class OrdersBiz extends OrdersBean {
 	    r = ResponseBean.getErrConfigNaming(e.getMessage());
 	}
 
+	logger.log(BasicLevel.DEBUG, "Exit removeItem");
 	return r;
     }
 
@@ -605,6 +677,56 @@ public class OrdersBiz extends OrdersBean {
 	return r;
     }
 
+    public ResponseBean loadFullListing() {
+	ResponseBean r;
+	r = new ResponseBean();
+
+	try {
+	    OrderLocalHome oh = getOrderHome();
+	    Collection rows = oh.findAll();
+
+	    for(Iterator i = rows.iterator(); i.hasNext();) {
+
+		OrderLocal o = (OrderLocal)i.next();
+		r.addRecord();
+
+		r.addField("orders.id",		o.getId());
+		r.addField("orders.no",		o.getDocument().getNumber());
+		r.addField("orders.date",	o.getDocument().getDate());
+		if(o.getClient() != null)
+		    r.addField("orders.client",	o.getClient().getName());
+		else
+		    r.addField("orders.client",	"");
+		try {
+		    r.addField("orders.localitate",	
+			       ValueLists.getValueByCode(12005, o.getDeliveryLocation().toString()).getName());
+		} catch (Exception e) {
+		    r.addField("orders.localitate", "-");
+		    logger.log(BasicLevel.ERROR, "Can not read the value of orders.localitate for code " 
+			       + o.getDeliveryLocation());
+		}
+		r.addField("orders.distanta",		o.getDeliveryDistance());
+		r.addField("orders.avans",		o.getAdvancePayment());
+		r.addField("orders.termenLivrare",	o.getDeliveryTerm());
+	    } 
+	} catch (NamingException e) {
+	    logger.log(BasicLevel.ERROR, "Naming exception when trying to read the orders listing from database: "
+		       + e);
+	    logger.log(BasicLevel.DEBUG, e);
+	    r = ResponseBean.getErrConfigNaming(e.getMessage());
+	} catch (FinderException e) {
+	    logger.log(BasicLevel.ERROR, "Could not get the list of orders from database: " + e);
+	    logger.log(BasicLevel.DEBUG, e);
+	    r = ResponseBean.getErrNotFound(ENTITY_ORDER);
+	} catch (Exception e) {
+	    logger.log(BasicLevel.ERROR, "Unexpected exception occured: " + e);
+	    logger.log(BasicLevel.DEBUG, e);
+	    r = ResponseBean.getErrUnexpected(e);
+	}
+
+	return r;
+    }
+
 
     /**
      * Cache for the orders list
@@ -626,6 +748,16 @@ public class OrdersBiz extends OrdersBean {
 	    OrderLocalHome oh = getOrderHome();
 	    listingCache = new ArrayList(oh.findAll());
 
+	    Collections.sort(listingCache, new Comparator() {
+		    public int compare(Object o1, Object o2) {
+			OrderLocal order1 = (OrderLocal)o1;
+			OrderLocal order2 = (OrderLocal)o2;
+			String s1 = StringUtils.leftPad(order1.getDocument().getNumber(), 6, '0');
+			String s2 = StringUtils.leftPad(order2.getDocument().getNumber(), 6, '0');
+
+			return -(s1.compareTo(s2));
+		    }
+		});
 	    r = new ResponseBean();
 	    r.addRecord();
 	    r.addField("records-count", listingCache.size());
@@ -660,6 +792,7 @@ public class OrdersBiz extends OrdersBean {
      * <li>orderItems.offerDate
      * <li>orderItems.productName
      * <li>orderItems.productCode
+     * <li>orderItems.valoareMontaj
      * <li>orderItems.quantity
      * <li>orderItems.price
      * </ul>
@@ -667,40 +800,69 @@ public class OrdersBiz extends OrdersBean {
     public ResponseBean loadLines() {
 	ResponseBean r;
 
-	try {
+	if(isSelectedOrder()) {
+	    try {
 
-	    OrderLocal o = getCurrentOrder();
-	    Collection lines = o.getLines();
+		OrderLocal o = getCurrentOrder();
+		Collection lines = o.getLines();
 
-	    r = new ResponseBean();
-	    for(Iterator i = lines.iterator(); i.hasNext();) {
-		OrderLineLocal ol = (OrderLineLocal)i.next();
-		
-		r.addRecord();
-		r.addField("orderItems.id", ol.getId());
-		r.addField("orderItems.offerNo", ol.getOfferItem().getOffer().getDocument().getNumber());
-		r.addField("orderItems.offerDate", ol.getOfferItem().getOffer().getDocument().getDate());
-		r.addField("orderItems.productName", ol.getOfferItem().getProduct().getName());
-		r.addField("orderItems.productCode", ol.getOfferItem().getProduct().getCode());
+		double pretKm = getPretKm();
 
-		r.addField("orderItems.quantity", ol.getQuantity());
-		r.addField("orderItems.price", ol.getPrice());
+		r = new ResponseBean();
+		Iterator firstLine = lines.iterator();
+		int lineNo = 0;
+		for(Iterator i = lines.iterator(); i.hasNext();) {
+		    OrderLineLocal ol = (OrderLineLocal)i.next();
+		    lineNo += 1;
+		    try {
+			OfferItemLocal oi = ol.getOfferItem();
+			r.addRecord();
+			r.addField("orderItems.id", ol.getId());
+			r.addField("orderItems.offerNo", oi.getOffer().getDocument().getNumber());
+			r.addField("orderItems.offerDate", ol.getOfferItem().getOffer().getDocument().getDate());
+			r.addField("orderItems.productName", ol.getOfferItem().getProduct().getName() + "/" + lineNo);
+			r.addField("orderItems.productCode", ol.getOfferItem().getProduct().getCode() + "/" + lineNo);
+			r.addField("orderItems.valoareMontaj", 
+				   (computePretMontaj(oi.getMontajId()) +
+				    oi.getMontajProcent().doubleValue() *
+				    ol.getPrice().doubleValue()/100) *
+				   ol.getQuantity().doubleValue());
+			 r.addField("orderItems.valoareTransport",
+				    pretKm *
+				    oi.getDistance().doubleValue() *
+				    oi.getDeliveries().doubleValue());
+
+			// avoiding bug when quantity was not set (offer did not have the quantity field)
+			if(ol.getQuantity() == null) {
+			    ol.setQuantity(new BigDecimal(1));
+			}
+			r.addField("orderItems.quantity", ol.getQuantity());
+			r.addField("orderItems.price", ol.getPrice());
+		    } catch (Exception e) {
+			logger.log(BasicLevel.WARN, "Unexpected exception when loading order line data: " + e);
+			logger.log(BasicLevel.DEBUG, e);
+		    }
+		}
+
+	    } catch (NamingException e) {
+		r = ResponseBean.getErrConfigNaming(e.getMessage());
+		logger.log(BasicLevel.ERROR, 
+			   "The order lines could not be read because configuration error: " + e);
+		logger.log(BasicLevel.DEBUG, e);
+	    } catch (FinderException e) {
+		r = ResponseBean.getErrNotFound(e.getMessage());
+		logger.log(BasicLevel.ERROR, 
+			   "Finder exception when trying to get the list of order lines: " + e);
+		logger.log(BasicLevel.DEBUG, e);
+	    } catch (Exception e) {
+		r = ResponseBean.getErrUnexpected(e);
+		logger.log(BasicLevel.ERROR, "Unexpected exception " + e);
+		logger.log(BasicLevel.DEBUG, e);
 	    }
-
-	} catch (NamingException e) {
-	    r = ResponseBean.getErrConfigNaming(e.getMessage());
-	    logger.log(BasicLevel.ERROR, 
-		       "The order lines could not be read because configuration error: " + e);
-	    logger.log(BasicLevel.DEBUG, e);
-	} catch (FinderException e) {
-	    r = ResponseBean.getErrNotFound(e.getMessage());
-	    logger.log(BasicLevel.ERROR, 
-		       "Finder exception when trying to get the list of order lines: " + e);
-	    logger.log(BasicLevel.DEBUG, e);
-	} catch (Exception e) {
-	    r = ResponseBean.getErrUnexpected(e);
-	    logger.log(BasicLevel.ERROR, "Unexpected exception " + e);
-	    logger.log(BasicLevel.DEBUG, e);
+	}
+	else {
+	    // no order selected (maybe new order)
+	    r = new ResponseBean();
 	}
 
 	return r;
@@ -1260,6 +1422,95 @@ public class OrdersBiz extends OrdersBean {
 	return amount;
     }
 
+    /**
+     * Sum product values, transport amounts and installation amounts for the
+     * order items. Stores the results in form fields.
+     */
+    public void computeOrderAmounts() throws NamingException, 
+					     FinderException {
+	OrderLocal o = getCurrentOrder();
+	Collection lines = o.getLines();
+
+	double amount = 0;
+	double iamount = 0;
+	double tamount = 0;
+
+	double pretKm; //pretul pe km
+	pretKm = getPretKm();
+
+	logger.log(BasicLevel.DEBUG, "Pret km=" + pretKm);
+
+	for(Iterator i = lines.iterator(); i.hasNext();) {
+	    OrderLineLocal ol = (OrderLineLocal)i.next();
+	    double valProduse = ol.getQuantity().doubleValue() * ol.getPrice().doubleValue();
+	    logger.log(BasicLevel.DEBUG, "Valoare produse din linie=" + valProduse);
+	    amount += valProduse;
+	    
+	    logger.log(BasicLevel.DEBUG, "Get offer line.");
+	    OfferItemLocal offerLine = ol.getOfferItem();
+	    if(offerLine == null) {
+		logger.log(BasicLevel.WARN, "OrderLine has a null offer item attached!");
+	    } else {
+		// montaj
+		logger.log(BasicLevel.DEBUG, "Get montajId");
+		Integer montajId = offerLine.getMontajId();
+		if(montajId == null) {
+		    logger.log(BasicLevel.DEBUG, "MontajId is null -> set to 0");
+		    montajId = new Integer(0);
+		}
+
+		logger.log(BasicLevel.DEBUG, "srv is not null");
+		double pretMontaj;
+		if(montajId.intValue() != 0) {
+		    logger.log(BasicLevel.DEBUG, "try to get value of montaj (montajId = " + montajId.intValue() + ")");
+		    pretMontaj = computePretMontaj(montajId);
+		} else {
+		    logger.log(BasicLevel.DEBUG, "montajId is 0. set pretMontaj to 0");
+		    pretMontaj = 0;
+		}
+		logger.log(BasicLevel.DEBUG, "Pret montaj=" + pretMontaj);
+		double valoareMontaj;
+		if(offerLine.getMontajProcent() != null) {
+		    logger.log(BasicLevel.DEBUG, "MontajProcent is not null");
+		    valoareMontaj = pretMontaj * ol.getQuantity().doubleValue() + offerLine.getMontajProcent().doubleValue() * valProduse/100;
+		} else {
+		    logger.log(BasicLevel.DEBUG, "MontajProcent is null");
+		    valoareMontaj = pretMontaj * form.getQuantity().doubleValue();
+		}
+		logger.log(BasicLevel.DEBUG, "Valoare montaj=" + valoareMontaj);
+		iamount += valoareMontaj;
+		
+		logger.log(BasicLevel.DEBUG, "Caluclez transport");
+		// transport
+		double distance = 0;
+		int deliveries = 0;
+		logger.log(BasicLevel.DEBUG, "getDistance");
+		if(offerLine.getDistance() != null) {
+		    logger.log(BasicLevel.DEBUG, "offerLine.getDistance is null");
+		    distance = offerLine.getDistance().doubleValue();
+		}
+		logger.log(BasicLevel.DEBUG, "getDeliveries");
+		if(offerLine.getDeliveries() != null) {
+		    logger.log(BasicLevel.DEBUG, "getDeliveries is null");
+		    deliveries = offerLine.getDeliveries().intValue();
+		}
+		double valoareTransport = distance * deliveries * pretKm;
+		logger.log(BasicLevel.DEBUG, "Valoare transport=" + valoareTransport);
+		tamount += valoareTransport;
+	    }
+	}
+	logger.log(BasicLevel.DEBUG, "Cumulated order amount: " + amount);
+	logger.log(BasicLevel.DEBUG, "Cumulated installation amount: " + iamount);
+	logger.log(BasicLevel.DEBUG, "Cumulated shipping amount: " + tamount);
+
+	form.setValoareProduse(new BigDecimal(amount));
+	form.setValoareTransport(new BigDecimal(tamount));
+	form.setValoareMontaj(new BigDecimal(iamount));
+	form.setTotal(new BigDecimal(amount + tamount + iamount));
+
+    }
+
+
     //////////////////////////////////////////////////////////////////////////
     // Value lists
 
@@ -1273,9 +1524,10 @@ public class OrdersBiz extends OrdersBean {
 	response.addValueList("montaj", ValueLists.makeStdValueList(11200));
 	response.addValueList("localitate", ValueLists.makeStdValueList(12005));
 	response.addValueList("invoiceRole", ValueLists.makeStdValueList(11250));
+	response.addValueList("tipDemontare", ValueLists.makeStdValueList(11205));
     }
 
-
+    
 
 
     //////////////////////////////////////////////////////////////////////////
@@ -1440,7 +1692,8 @@ public class OrdersBiz extends OrdersBean {
     }
 
     /**
-     * Retrieves an offer item from the persistence layer.
+     * Retrieves the offer item corresponding to the current order line
+     * from the persistence layer.
      */
     protected OfferItemLocal getOfferItem() 
 	throws NamingException, FinderException {
@@ -1455,6 +1708,12 @@ public class OrdersBiz extends OrdersBean {
 	}
     }
 
+    /**
+     * Gets the offer entity of the current order line.
+     */
+    protected OfferLocal getOffer() throws NamingException, FinderException {
+	return getOfferItem().getOffer();
+    }
 
     /**
      * Utility method to get a reference to the invoice bean home interface.
@@ -1554,4 +1813,509 @@ public class OrdersBiz extends OrdersBean {
     }
 
 
+
+
+
+    /* Reporting methods */
+
+    /**
+     * Builds a <code>ResponseBean</code> containing the data for the order report. It will contain a 
+     * single record describing the order (roughly the fields of <code>OrderEJB</code>). The record
+     * will have the field <code>lines</code> that will be a <code>ResponseBean</code> with a record for
+     * each item. Each of the records of the <code>order_items</code> fields will contain a <code>product</code>
+     * of type <code>ResponseBean</code> describing the product. Products may contain as well other 
+     * <code>ResponseBean</code> objects and so on.
+     *
+     * An order should be selected before calling this method.
+     *
+     * The xml structure of the response would be something like:
+     * <code>
+     * response
+     * +- record
+     *    +- field(name=...) = value
+     *    +- field(name=...) = value
+     *    ...
+     *    +- field(name=...) = value
+     *    +- field(name=lines)
+     *       +- record
+     *          +- field(name=...) = value // valorile liniei
+     *          ....
+     *          +- field(name=...) = value
+     *          +- field(name=product)
+     *             +- record
+     *                +- field(name=...) = value // valorile atributelor produsului
+     *                ...
+     *                +- field(name=...)
+     *             +- value-list(name=...)
+     *               +- vl-item
+     *                  +- value = value
+     *                  +- label = label
+     *             ...
+     *
+     * </code>
+     *
+     * @return a rather complex <code>ResponseBean</code> describing the offer, the items of the offer and the products.
+     * If an error occurs, the returned <code>ResponseBean</code> will contain the error code and description.
+     */
+    public ResponseBean orderReport() {
+
+	ResponseBean r;
+
+	if (id == null) {
+	    logger.log(BasicLevel.DEBUG, "orderReport: No current order");
+	    r = ResponseBean.getErrNotCurrent("Order");
+	}
+	else {
+	    r = new ResponseBean();
+	    r.addRecord();
+
+	    DateFormat dfmt = DateFormat.getDateInstance();
+
+	    r.addField("number", form.getNumber());
+	    r.addField("date", dfmt.format(form.getDate()));
+	    r.addField("clientId", form.getClientId());
+	    r.addField("clientName", form.getClientName());
+	    r.addField("montaj", form.getMontaj());
+	    if(form.getLocalitate() == 0) {
+		r.addField("localitate", form.getLocalitateAlta());
+		r.addField("distanta", form.getDistanta());
+	    } else 
+		try {
+		    ProductLocal localitateProduct = ValueLists.getValueByCode(12005, form.getLocalitate().toString());
+		    r.addField("localitate", localitateProduct.getName());
+		    Map amap = localitateProduct.getAttributesMap();
+		    AttributeLocal dist = (AttributeLocal)amap.get("distanta");
+		    if(dist != null) 
+			r.addField("distanta", dist.getDecimalValue());
+		    else
+			r.addField("distanta", form.getDistanta());
+		} catch (Exception e) {
+		    r.addField("localitate", "-");
+		    logger.log(BasicLevel.WARN, "Can not read the value of orders.localitate for code " 
+			       + form.getLocalitate());
+		    logger.log(BasicLevel.DEBUG, e);
+		}
+
+	    r.addField("localitateAlta", form.getLocalitateAlta());
+	    r.addField("observatii", form.getObservatii());
+	    r.addField("valoareMontaj", form.getValoareMontaj().setScale(2, RoundingMode.HALF_UP));
+	    r.addField("valoareTransport", form.getValoareTransport());
+	    r.addField("valoareProduse", form.getValoareProduse().setScale(2, RoundingMode.HALF_UP));
+	    r.addField("total", form.getTotal().setScale(2, RoundingMode.HALF_UP)); // valoareMontaj + valoareTransport + valoareProduse
+	    r.addField("tvaPercent", form.getTvaPercent());
+	    r.addField("totalTva", form.getTotalTva().setScale(2, RoundingMode.HALF_UP));
+	    r.addField("discount", form.getDiscount().setScale(2, RoundingMode.HALF_UP));
+	    r.addField("totalFinal", form.getTotalFinal().setScale(2, RoundingMode.HALF_UP));
+	    r.addField("totalFinalTva", form.getTotalFinalTva().setScale(2, RoundingMode.HALF_UP));
+	    r.addField("avans", form.getAvans().setScale(2, RoundingMode.HALF_UP));
+	    r.addField("achitatCu", form.getAchitatCu());
+	    r.addField("valoareAvans", form.getValoareAvans().setScale(2, RoundingMode.HALF_UP));
+	    r.addField("payedAmount", form.getPayedAmount().setScale(2, RoundingMode.HALF_UP));
+	    r.addField("invoicedAmount", form.getInvoicedAmount().setScale(2, RoundingMode.HALF_UP));
+	    r.addField("diferenta", form.getDiferenta().setScale(2, RoundingMode.HALF_UP));
+	    r.addField("termenLivarare", dfmt.format(form.getTermenLivrare()));
+	    r.addField("termenLivrare1", dfmt.format(form.getTermenLivrare1()));
+	    r.addField("adresaMontaj", form.getAdresaMontaj());
+	    r.addField("adresaReper", form.getAdresaReper());
+	    r.addField("telefon", form.getTelefon());
+	    r.addField("contact", form.getContact());
+	    r.addField("deliveryHour", form.getDeliveryHour());
+	    r.addField("tipDemontare", form.getTipDemontare());
+	    r.addField("attribute1", form.getAttribute1());
+	    r.addField("attribute2", form.getAttribute2());
+	    r.addField("attribute3", form.getAttribute3());
+	    r.addField("attribute4", form.getAttribute4());
+	    r.addField("attribute5", form.getAttribute5());
+
+	    ClientUtils clientUtils;
+	    try {
+		clientUtils = new ClientUtils(getFormClient());
+	    } catch (Exception e) {
+		logger.log(BasicLevel.WARN, "Client is not available for report!");
+		clientUtils = new ClientUtils(null);
+	    }
+	    clientUtils.populateResponse(r);
+
+	    r.addField("lines", linesReport());
+	    r.addField("invoices", invoicesReport());
+
+	    r.addField("agrementTehnic", Utils.getAgrementTehnic(factory));
+	    r.addValueList("tipDemontare", ValueLists.makeStdValueList(11205));
+
+	    
+	}
+
+	return r;
+    }
+
+
+    /**
+     * Builds a <code>ResponseBean</code> that has all the
+     * line items of the current order and for each line item
+     * the description of the product as another <code>ResponseBean</code>
+     * field (with attribute name product).
+     */
+    private ResponseBean linesReport() {
+
+	ResponseBean r;
+	try {
+	    OrderLocal order = getCurrentOrder();
+	    double pretKm = getPretKm();
+	    if(order != null) {
+		
+		Collection orderItems = order.getLines();
+		r = new ResponseBean();
+		for(Iterator i = orderItems.iterator(); i.hasNext();) {
+		    OrderLineLocal item = (OrderLineLocal)i.next();
+		    try {
+			loadOrderLineData(item.getId());
+			r.addRecord();
+
+			r.addField("productName", form.getProductName());
+			r.addField("productCode", form.getProductCode());
+			r.addField("price", form.getPrice());
+			r.addField("productPrice", form.getProductPrice());
+			r.addField("priceRatio", form.getPriceRatio());
+			r.addField("quantity", form.getQuantity());
+			r.addField("value", form.getValue().setScale(2, RoundingMode.HALF_UP));
+			r.addField("tax", form.getTax().setScale(2, RoundingMode.HALF_UP));
+			/*
+			r.addField("codMontaj", form.getCodMontaj());
+			r.addField("montajProcent", form.getMontajProcent());
+			r.addField("montajSeparat", form.getMontajSeparat());
+			*/
+			try {
+			    OfferItemLocal offerItem = getOfferItem();
+			    r.addField("obiectiv", offerItem.getOffer().getDescription());
+			    r.addField("montajId", offerItem.getMontajId());
+			    r.addField("montajProcent", offerItem.getMontajProcent());
+			    r.addField("montajSeparat", offerItem.getMontajSeparat());
+			    r.addField("locationId", offerItem.getLocationId());
+			    r.addField("otherLocation", offerItem.getOtherLocation());
+			    r.addField("distance", offerItem.getDistance());
+			    r.addField("deliveries", offerItem.getDeliveries());
+			    double transport = pretKm *
+				offerItem.getDistance().doubleValue() *
+				offerItem.getDeliveries().doubleValue();
+			    double montaj = computePretMontaj(offerItem.getMontajId()) +
+				offerItem.getMontajProcent().doubleValue() *
+				form.getPrice().doubleValue()/100;
+			    r.addField("montajUnitar", new BigDecimal(montaj).setScale(2, RoundingMode.HALF_UP));
+			    r.addField("valoareMontaj", new BigDecimal(montaj * form.getQuantity().doubleValue()).setScale(2, RoundingMode.HALF_UP));
+			    r.addField("valoareTransport", new BigDecimal(transport).setScale(2, RoundingMode.HALF_UP));
+			    double lineValue = form.getValue().doubleValue() + montaj * form.getQuantity().doubleValue() + transport;
+			    r.addField("lineValue", new BigDecimal(lineValue).setScale(2, RoundingMode.HALF_UP));
+			    double lineTax = lineValue * 0.19;
+			    r.addField("lineTax", new BigDecimal(lineTax).setScale(2, RoundingMode.HALF_UP));
+			    r.addField("lineTotal", new BigDecimal(lineValue).setScale(2, RoundingMode.HALF_UP).doubleValue() + new BigDecimal(lineTax).setScale(2, RoundingMode.HALF_UP).doubleValue());
+			    
+			    OfferLocal offer = offerItem.getOffer();
+			    r.addField("contract", offer.getContract());
+			} catch(NamingException e) {
+			    logger.log(BasicLevel.ERROR, "Naming excetpion for offerItem: " + e.getMessage());
+			    logger.log(BasicLevel.DEBUG, e);
+			} catch(FinderException e) {
+			    logger.log(BasicLevel.ERROR, "Finder excetpion for offerItem: " + e.getMessage());
+			    logger.log(BasicLevel.DEBUG, e);
+			}
+			
+			r.addField("product", productReport());
+		    } catch (FinderException e) {
+			logger.log(BasicLevel.WARN, "Order line not found for OrderLineId " + item.getId());
+			logger.log(BasicLevel.DEBUG, e);
+		    }
+		}
+	    } else {
+		r = ResponseBean.getErrNotCurrent("Order");
+		logger.log(BasicLevel.ERROR, "There is no current order (no order selected).");
+	    }
+	} catch (FinderException e){
+	    logger.log(BasicLevel.ERROR, "Call to getCurrentOrder did not find data in the database corresponding to current record!");
+	    logger.log(BasicLevel.DEBUG, e);
+	    r = ResponseBean.getErrNotFound("Order/" + id);
+	} catch (NamingException e) {
+	    logger.log(BasicLevel.ERROR, "Naming exception: " + e.getMessage());
+	    logger.log(BasicLevel.DEBUG, e);
+	    r = ResponseBean.getErrConfigNaming(e.getMessage());
+	}
+
+	r.addValueList("montajId", ValueLists.makeVLForCategoryId(11200));
+	r.addValueList("locationId", ValueLists.makeVLForCategoryId(12005));
+
+	return r;
+
+
+    }
+
+    private ResponseBean invoicesReport() {
+	ResponseBean r;
+	try {
+	    Collection invoices = getCurrentOrder().getInvoices();
+	    
+	    r = new ResponseBean();
+	    for(Iterator i = invoices.iterator(); i.hasNext();) {
+		InvoiceLocal inv = (InvoiceLocal)i.next();
+		
+		r.addRecord();
+		r.addField("id", inv.getId());
+		r.addField("number", inv.getDocument().getNumber());
+		r.addField("date", inv.getDocument().getDate());
+		r.addField("role", inv.getRole());
+		r.addField("amount", inv.getAmount());
+		r.addField("tax", inv.getTax());
+		r.addField("totalAmount", inv.getAmount().doubleValue() + inv.getTax().doubleValue());
+		r.addField("payedAmount", inv.getSumOfPayments());
+
+		r.addField("payments", paymentsReport(inv));
+	    }
+	} catch (NamingException e) {
+	    logger.log(BasicLevel.ERROR, "Naming exception " + e.getMessage());
+	    logger.log(BasicLevel.DEBUG, e);
+	    r = ResponseBean.getErrConfigNaming(e.getMessage());
+	} catch (FinderException e) {
+	    logger.log(BasicLevel.ERROR, "FinderException: " + e.getMessage());
+	    logger.log(BasicLevel.INFO, "Order id searched when FinderException occured is: " + id);
+	    logger.log(BasicLevel.DEBUG, e);
+	    r = ResponseBean.getErrNotFound(e.getMessage());
+	} catch (Exception e) {
+	    logger.log(BasicLevel.ERROR, "Unexpected exception", e);
+	    r = ResponseBean.getErrUnexpected(e);
+	}
+
+	r.addValueList("role", ValueLists.makeStdValueList(11250));
+
+	return r;
+    }
+
+    private ResponseBean paymentsReport(InvoiceLocal invoice) {
+	ResponseBean r;
+	Collection payments = invoice.getPayments();
+	
+	r = new ResponseBean();
+	for(Iterator i = payments.iterator(); i.hasNext();) {
+	    PaymentLocal payment = (PaymentLocal)i.next();
+	    
+	    r.addRecord();
+	    r.addField("id", payment.getId());
+	    r.addField("number", payment.getDocument().getNumber());
+	    r.addField("date", payment.getDocument().getDate());
+	    r.addField("amount", payment.getAmount());
+	    
+	}
+
+	return r;
+    }
+
+    /**
+     * Build a <code>ResponseBean</code> with the fields of the product in the current offer line. 
+     * The response
+     * may contain other <code>ResponseBean</code> objects for other products that are
+     * contained by the main product.
+     *
+     * <code>
+     * ...
+     *   +- field(name=product)
+     *      +- record
+     *         +- field(name=...) = value
+     *         ...
+     *         +- field
+     *      +- value-list
+     *      ....
+     *      +- value-list
+     * </code>
+     */
+    private ResponseBean productReport() {
+	ResponseBean r;
+
+	try {
+	    OfferItemLocal oi = getOfferItem();
+
+
+	    ProductLocal p = oi.getProduct();
+	    CategoryLocal c = p.getCategory();
+	    
+
+	    InitialContext ic = new InitialContext();
+	    Context env = (Context) ic.lookup("java:comp/env");
+	    CategoryManagerLocalHome cmh;
+	    try {
+		cmh = (CategoryManagerLocalHome)PortableRemoteObject.
+		    narrow(env.lookup("ejb/CategoryManagerHome/" + c.getId()), 
+			   CategoryManagerLocalHome.class);
+	    } catch (NamingException e) {
+		// it seems that no category manager is registered for the
+		// given id ... try to get the default category manager
+		cmh = (CategoryManagerLocalHome)PortableRemoteObject.
+		    narrow(env.lookup("ejb/CategoryManagerHome/default"),
+			   CategoryManagerLocalHome.class);
+	    }
+	    CategoryManagerLocal cm = cmh.create();
+
+	    r = cm.getProductReport(p.getId());
+	} catch (NamingException e) {
+	    r = ResponseBean.getErrConfigNaming(e.getMessage());
+	    logger.log(BasicLevel.ERROR, "Name configuration error: " + e.getMessage());
+	    logger.log(BasicLevel.WARN, "Check the category manager for jndi name ejb/CategoryManagerHome/default");
+	    logger.log(BasicLevel.DEBUG, e);
+	} catch (CreateException e) {
+	    r = ResponseBean.getErrCreate(e.getMessage());
+	    logger.log(BasicLevel.ERROR,
+		       "CreateException: CategoryManager could not be instantiated: " + e.getMessage());
+	    logger.log(BasicLevel.DEBUG, e);
+	}
+	catch (FinderException e) {
+	    r = ResponseBean.getErrNotFound(e.getMessage());
+	    logger.log(BasicLevel.ERROR, "FinderException: The offer for current order line could not be found: " + e.getMessage());
+	    logger.log(BasicLevel.DEBUG, e);
+	}
+	return r;
+    }
+
+
+    protected double computePretMontaj (Integer montajId) {
+	double pretMontaj;
+	if (montajId != null) {
+	    try {
+		CommonServicesLocal srv = (CommonServicesLocal)factory
+		    .local("ejb/CommonServices", CommonServicesLocalHome.class);
+		
+		ProductLocal montaj = (ProductLocal)srv.findProductById(montajId);
+		if(montaj.getPrice1() != null) {
+		    logger.log(BasicLevel.DEBUG, "montaj.getPrice1 is not null");
+		    pretMontaj = montaj.getPrice1().doubleValue();
+		} else {
+		    logger.log(BasicLevel.DEBUG, "montaj.getPrice1 is null");
+		    pretMontaj = 0;
+		}
+	    } 
+	    catch (ProductNotAvailable e) {
+		logger.log(BasicLevel.WARN, "Tipul de montaj nu este definit in baza de date: montajId = " + montajId);
+		logger.log(BasicLevel.DEBUG, e);
+		pretMontaj = 0;
+	    }
+	    catch (ServiceNotAvailable e) {
+		logger.log(BasicLevel.ERROR, "CommonServicesLocal not available.");
+		logger.log(BasicLevel.ERROR, e);
+		pretMontaj = 0;
+	    }
+	} 
+	else { // montajId == null
+	    pretMontaj = 0;
+	}
+	return pretMontaj;
+    }
+    
+    protected double getPretKm() {
+	double pretKm;
+	try {
+	    CommonServicesLocal srv = (CommonServicesLocal)factory
+		.local("ejb/CommonServices", CommonServicesLocalHome.class);
+	    
+	    try {
+		ProductLocal km = srv.findProductByCode(CATEGORY_ID_SHIPPING, PRODUCT_CODE_KM);
+		pretKm = km.getPrice1().doubleValue();
+	    } catch(ProductNotAvailable e) {
+		logger.log(BasicLevel.ERROR, "Eroare de configurare: Nu este definit pretul pe km: "
+			   + "Category Id=" + CATEGORY_ID_SHIPPING
+			   + "/Product Code=" + PRODUCT_CODE_KM);
+		logger.log(BasicLevel.DEBUG, e);
+		pretKm = 0;
+	    }
+	} catch (ServiceNotAvailable e) {
+	    logger.log(BasicLevel.ERROR, "Service ejb/CommonServices not available. Application setup error. Please check if the ejb/CommonServices local bean has been configured with ServiceFactory bean");
+	    logger.log(BasicLevel.DEBUG, e);
+	    
+	    
+	    pretKm = 0;
+	}
+	return pretKm;
+    }
+
+
+    /**
+     * Initializarea raportului de livrari.
+     *
+     * @param cuMontaj specifica daca raportul va contine
+     * usile cu montaj sau fara. Poate avea una din trei valori:
+     * <dl>
+     * <dt>yes <dd>Raportul arata usile cu montaj.
+     * <dt>no  <dd>Raportul arata usile fara montaj.
+     * <dt>all <dd>Apar si usi cu montaj si usi fara montaj.
+     * </dl>
+     *
+     * @return valorile initiale ale parametrilor raportului.
+     */
+    public ResponseBean initLivrariReport(String cuMontaj) {
+	super.createNewFormBean();
+
+	Date today = DateUtils.truncate(new Date(), Calendar.DAY_OF_MONTH);
+	form.setLivrariRStart(today);
+
+	form.setLivrariREnd(DateUtils.addDays(today, 7));
+
+	form.setLivrariCuMontaj(cuMontaj);
+	ResponseBean r = new ResponseBean();
+	r.addRecord();
+	r.addField("livrariRStart", form.getLivrariRStart());
+	r.addField("livrariREnd", form.getLivrariREnd());
+	return r;
+    }
+
+    public ResponseBean livrariReport() {
+	ResponseBean r;
+	try {
+	    OrderLocalHome oh = getOrderHome();
+	    Collection orders = oh.findLivrari(form.getLivrariRStart(), form.getLivrariREnd());
+	    logger.log(BasicLevel.DEBUG, "livrariRStart = " + form.getLivrariRStart());
+	    logger.log(BasicLevel.DEBUG, "livrariREnd = " + form.getLivrariREnd());
+	    logger.log(BasicLevel.DEBUG, "Nr comenzi in raportul de livrari: " + orders.size());
+	    
+	    InitialContext ic = new InitialContext();
+	    Context env =  (Context) ic.lookup("java:comp/env");
+
+	    OrdersHome osH = (OrdersHome)PortableRemoteObject.
+		narrow(env.lookup("ejb/OrderSessionHome"), OrdersHome.class);
+	    Orders ordersBean = osH.create();
+
+	    r = new ResponseBean();
+
+	    for(Iterator i = orders.iterator(); i.hasNext();) {
+		try {
+		    OrderLocal o = (OrderLocal)i.next();
+		    ordersBean.loadFormData(o.getId());
+		    ResponseBean orderR = ordersBean.orderReport();	
+		    r.addRecord();
+		    r.addField("order", orderR);
+		} catch (RemoteException e) {
+		    logger.log(BasicLevel.ERROR, "Eroare de sistem la apelul OrderEJB" + e);
+		    logger.log(BasicLevel.DEBUG, "Detalii erorare apel OrderEJB", e);
+		}
+	    }
+	} catch (NamingException e) {
+	    r = ResponseBean.getErrConfigNaming(e.getMessage());
+	    logger.log(BasicLevel.ERROR, "Eroare la rulare raport livrari " + e);
+	    logger.log(BasicLevel.DEBUG, "Detalii exceptie la rulare raport livrari", e);
+	} catch (FinderException e) {
+	    r = ResponseBean.getErrNotFound(e.getMessage());
+	    logger.log(BasicLevel.ERROR, "Eroare la extragerea listei de livrari din baza de date: " + e);
+	    logger.log(BasicLevel.DEBUG, "Detalii exceptie extragere lista de valori", e);
+	} catch (CreateException e) {
+	    r = ResponseBean.getErrCreate(e.getMessage());
+	    logger.log(BasicLevel.ERROR, "Bean-ul de sesiune nu a putut fi creat (OrdersEJB): " + e);
+	    logger.log(BasicLevel.DEBUG, "Detalii eroare creare OrdersEJB bean", e);
+	} catch (RemoteException e) {
+	    r = ResponseBean.getErrRemote(e.getMessage());
+	    logger.log(BasicLevel.ERROR, "Eroare sistem la instantierea unui OrderEJB: " + e);
+	    logger.log(BasicLevel.DEBUG, "Detalii eroare instatiere OrderEJB", e);
+	}
+	
+	DateFormat dfmt = DateFormat.getDateInstance();
+
+	ResponseBean report = new ResponseBean();
+	report.addRecord();
+	report.addField("livrariRStart", dfmt.format(form.getLivrariRStart()));
+	report.addField("livrariREnd", dfmt.format(form.getLivrariREnd()));
+	report.addField("livrari", r);
+	return report;
+    }
 }

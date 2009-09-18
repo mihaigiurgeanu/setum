@@ -523,6 +523,32 @@ public abstract class ClientsBean
 	computeCalculatedFields(r);
 	return r;
     }
+    public ResponseBean updateRegCom(String regCom) {
+        ResponseBean r = new ResponseBean();
+	String oldVal = form.getRegCom();
+	form.setRegCom(regCom);
+	r.addRecord();
+	r.addField("regCom", regCom); // for number format
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".regCom");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
+		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
+		script.setVar(FORM_VARNAME, form, ClientsForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the regCom", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
     public ResponseBean updatePhone(String phone) {
         ResponseBean r = new ResponseBean();
 	String oldVal = form.getPhone();
@@ -876,6 +902,7 @@ public abstract class ClientsBean
 	r.addField("city", form.getCity());
 	r.addField("countryCode", form.getCountryCode());
 	r.addField("companyCode", form.getCompanyCode());
+	r.addField("regCom", form.getRegCom());
 	r.addField("phone", form.getPhone());
 	r.addField("iban", form.getIban());
 	r.addField("bank", form.getBank());
@@ -956,6 +983,12 @@ public abstract class ClientsBean
 	    s.setVar("companyCode", form.getCompanyCode(), String.class);
 	} catch (ScriptErrorException e) {
 	    logger.log(BasicLevel.WARN, "Can not set the value of field: companyCode from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    s.setVar("regCom", form.getRegCom(), String.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: regCom from the script");
             logger.log(BasicLevel.DEBUG, e);
         }
 	try {
@@ -1142,6 +1175,17 @@ public abstract class ClientsBean
 	    }
 	} catch (ScriptErrorException e) {
 	    logger.log(BasicLevel.WARN, "Can not get the value of field: companyCode from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    field = s.getVar("regCom", String.class);
+	    if(!field.equals(form.getRegCom())) {
+	        logger.log(BasicLevel.DEBUG, "Field regCom modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setRegCom((String)field);
+	        r.addField("regCom", (String)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: regCom from the script");
             logger.log(BasicLevel.DEBUG, e);
         }
 	try {

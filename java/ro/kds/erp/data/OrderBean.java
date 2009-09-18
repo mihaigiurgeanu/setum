@@ -157,6 +157,28 @@ public abstract class OrderBean implements EntityBean {
     public abstract Date getDeliveryDate();
     public abstract void setDeliveryDate(Date dd);
 
+    public abstract String getDeliveryHour();
+    public abstract void setDeliveryHour(String hour);
+
+    public abstract String getTipDemontare();
+    public abstract void setTipDemontare(String tipDemontare);
+
+    public abstract String getAttribute1();
+    public abstract void setAttribute1(String attr);
+
+    public abstract String getAttribute2();
+    public abstract void setAttribute2(String attr);
+
+    public abstract String getAttribute3();
+    public abstract void setAttribute3(String attr);
+
+    public abstract String getAttribute4();
+    public abstract void setAttribute4(String attr);
+
+    public abstract String getAttribute5();
+    public abstract void setAttribute5(String attr);
+
+
     public abstract Collection getLines();
     public abstract void setLines(Collection lines);
 
@@ -166,7 +188,7 @@ public abstract class OrderBean implements EntityBean {
 
     public abstract BigDecimal ejbSelectSumOfPayments(Integer id) throws FinderException;
     public abstract BigDecimal ejbSelectInvoicedAmount(Integer id) throws FinderException;
-
+    public abstract Collection ejbFindLivrari(Date start, Date end) throws FinderException;
 
     public BigDecimal getInvoicedAmount() throws FinderException {
 	BigDecimal amount = ejbSelectInvoicedAmount(getId());

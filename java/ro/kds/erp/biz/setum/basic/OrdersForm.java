@@ -36,6 +36,9 @@ public class OrdersForm implements Serializable {
     String localitateAlta;
     java.math.BigDecimal distanta;
     String observatii;
+    java.math.BigDecimal valoareMontaj;
+    java.math.BigDecimal valoareTransport;
+    java.math.BigDecimal valoareProduse;
     java.math.BigDecimal total;
     Double tvaPercent;
     java.math.BigDecimal totalTva;
@@ -48,12 +51,24 @@ public class OrdersForm implements Serializable {
     java.math.BigDecimal payedAmount;
     java.math.BigDecimal invoicedAmount;
     java.math.BigDecimal diferenta;
+    String currencyCode;
+    java.math.BigDecimal exchangeRate;
     java.util.Date termenLivrare;
     java.util.Date termenLivrare1;
     String adresaMontaj;
     String adresaReper;
     String telefon;
     String contact;
+    String deliveryHour;
+    String tipDemontare;
+    String attribute1;
+    String attribute2;
+    String attribute3;
+    String attribute4;
+    String attribute5;
+    java.util.Date livrariRStart;
+    java.util.Date livrariREnd;
+    String livrariCuMontaj;
     Integer offerItemId;
     String productName;
     String productCode;
@@ -118,6 +133,18 @@ public class OrdersForm implements Serializable {
 
 
 
+       this.valoareMontaj = new java.math.BigDecimal(0);
+
+
+
+       this.valoareTransport = new java.math.BigDecimal(0);
+
+
+
+       this.valoareProduse = new java.math.BigDecimal(0);
+
+
+
        this.total = new java.math.BigDecimal(0);
 
 
@@ -166,6 +193,14 @@ public class OrdersForm implements Serializable {
 
 
 
+       this.currencyCode = "";
+
+
+
+       this.exchangeRate = new java.math.BigDecimal(0);
+
+
+
 
        // No rule to initialize this.termenLivrare
 
@@ -189,6 +224,48 @@ public class OrdersForm implements Serializable {
 
 
        this.contact = "";
+
+
+
+       this.deliveryHour = "";
+
+
+
+       this.tipDemontare = "";
+
+
+
+       this.attribute1 = "";
+
+
+
+       this.attribute2 = "";
+
+
+
+       this.attribute3 = "";
+
+
+
+       this.attribute4 = "";
+
+
+
+       this.attribute5 = "";
+
+
+
+
+       // No rule to initialize this.livrariRStart
+
+
+
+
+       // No rule to initialize this.livrariREnd
+
+
+
+       this.livrariCuMontaj = "";
 
 
 
@@ -417,6 +494,51 @@ public class OrdersForm implements Serializable {
 	}
     }
 
+    public void setValoareMontaj(java.math.BigDecimal newValoareMontaj) {
+        this.valoareMontaj = newValoareMontaj;
+    }
+
+    public java.math.BigDecimal getValoareMontaj() {
+        return valoareMontaj;
+    }
+
+    public void readValoareMontaj(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("valoareMontaj");
+	if(a != null) {
+	    this.setValoareMontaj(a.getDecimalValue());
+	}
+    }
+
+    public void setValoareTransport(java.math.BigDecimal newValoareTransport) {
+        this.valoareTransport = newValoareTransport;
+    }
+
+    public java.math.BigDecimal getValoareTransport() {
+        return valoareTransport;
+    }
+
+    public void readValoareTransport(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("valoareTransport");
+	if(a != null) {
+	    this.setValoareTransport(a.getDecimalValue());
+	}
+    }
+
+    public void setValoareProduse(java.math.BigDecimal newValoareProduse) {
+        this.valoareProduse = newValoareProduse;
+    }
+
+    public java.math.BigDecimal getValoareProduse() {
+        return valoareProduse;
+    }
+
+    public void readValoareProduse(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("valoareProduse");
+	if(a != null) {
+	    this.setValoareProduse(a.getDecimalValue());
+	}
+    }
+
     public void setTotal(java.math.BigDecimal newTotal) {
         this.total = newTotal;
     }
@@ -597,6 +719,36 @@ public class OrdersForm implements Serializable {
 	}
     }
 
+    public void setCurrencyCode(String newCurrencyCode) {
+        this.currencyCode = newCurrencyCode;
+    }
+
+    public String getCurrencyCode() {
+        return currencyCode;
+    }
+
+    public void readCurrencyCode(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("currencyCode");
+	if(a != null) {
+	    this.setCurrencyCode(a.getStringValue());
+	}
+    }
+
+    public void setExchangeRate(java.math.BigDecimal newExchangeRate) {
+        this.exchangeRate = newExchangeRate;
+    }
+
+    public java.math.BigDecimal getExchangeRate() {
+        return exchangeRate;
+    }
+
+    public void readExchangeRate(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("exchangeRate");
+	if(a != null) {
+	    this.setExchangeRate(a.getDecimalValue());
+	}
+    }
+
     public void setTermenLivrare(java.util.Date newTermenLivrare) {
         this.termenLivrare = newTermenLivrare;
     }
@@ -672,6 +824,144 @@ public class OrdersForm implements Serializable {
 	AttributeLocal a = (AttributeLocal)attributes.get("contact");
 	if(a != null) {
 	    this.setContact(a.getStringValue());
+	}
+    }
+
+    public void setDeliveryHour(String newDeliveryHour) {
+        this.deliveryHour = newDeliveryHour;
+    }
+
+    public String getDeliveryHour() {
+        return deliveryHour;
+    }
+
+    public void readDeliveryHour(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("deliveryHour");
+	if(a != null) {
+	    this.setDeliveryHour(a.getStringValue());
+	}
+    }
+
+    public void setTipDemontare(String newTipDemontare) {
+        this.tipDemontare = newTipDemontare;
+    }
+
+    public String getTipDemontare() {
+        return tipDemontare;
+    }
+
+    public void readTipDemontare(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("tipDemontare");
+	if(a != null) {
+	    this.setTipDemontare(a.getStringValue());
+	}
+    }
+
+    public void setAttribute1(String newAttribute1) {
+        this.attribute1 = newAttribute1;
+    }
+
+    public String getAttribute1() {
+        return attribute1;
+    }
+
+    public void readAttribute1(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("attribute1");
+	if(a != null) {
+	    this.setAttribute1(a.getStringValue());
+	}
+    }
+
+    public void setAttribute2(String newAttribute2) {
+        this.attribute2 = newAttribute2;
+    }
+
+    public String getAttribute2() {
+        return attribute2;
+    }
+
+    public void readAttribute2(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("attribute2");
+	if(a != null) {
+	    this.setAttribute2(a.getStringValue());
+	}
+    }
+
+    public void setAttribute3(String newAttribute3) {
+        this.attribute3 = newAttribute3;
+    }
+
+    public String getAttribute3() {
+        return attribute3;
+    }
+
+    public void readAttribute3(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("attribute3");
+	if(a != null) {
+	    this.setAttribute3(a.getStringValue());
+	}
+    }
+
+    public void setAttribute4(String newAttribute4) {
+        this.attribute4 = newAttribute4;
+    }
+
+    public String getAttribute4() {
+        return attribute4;
+    }
+
+    public void readAttribute4(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("attribute4");
+	if(a != null) {
+	    this.setAttribute4(a.getStringValue());
+	}
+    }
+
+    public void setAttribute5(String newAttribute5) {
+        this.attribute5 = newAttribute5;
+    }
+
+    public String getAttribute5() {
+        return attribute5;
+    }
+
+    public void readAttribute5(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("attribute5");
+	if(a != null) {
+	    this.setAttribute5(a.getStringValue());
+	}
+    }
+
+    public void setLivrariRStart(java.util.Date newLivrariRStart) {
+        this.livrariRStart = newLivrariRStart;
+    }
+
+    public java.util.Date getLivrariRStart() {
+        return livrariRStart;
+    }
+
+
+    public void setLivrariREnd(java.util.Date newLivrariREnd) {
+        this.livrariREnd = newLivrariREnd;
+    }
+
+    public java.util.Date getLivrariREnd() {
+        return livrariREnd;
+    }
+
+
+    public void setLivrariCuMontaj(String newLivrariCuMontaj) {
+        this.livrariCuMontaj = newLivrariCuMontaj;
+    }
+
+    public String getLivrariCuMontaj() {
+        return livrariCuMontaj;
+    }
+
+    public void readLivrariCuMontaj(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("livrariCuMontaj");
+	if(a != null) {
+	    this.setLivrariCuMontaj(a.getStringValue());
 	}
     }
 

@@ -15,6 +15,8 @@ import ro.kds.erp.data.ClientLocalHome;
 import ro.kds.erp.data.ClientLocal;
 import javax.rmi.PortableRemoteObject;
 import javax.ejb.RemoveException;
+import java.util.Collections;
+import java.util.Comparator;
 
 
 
@@ -27,7 +29,7 @@ import javax.ejb.RemoveException;
  * Created: Tue Jan 17 10:40:18 2006
  *
  * @author <a href="mailto:mihai@cris.kds.ro">Mihai Giurgeanu</a>
- * @version $Id: ClientsBeanImplementation.java,v 1.4 2006/09/26 00:56:03 mihai Exp $
+ * @version $Id: ClientsBeanImplementation.java,v 1.5 2009/09/18 13:41:36 mihai Exp $
  */
 public class ClientsBeanImplementation extends ClientsBean {
 
@@ -77,6 +79,7 @@ public class ClientsBeanImplementation extends ClientsBean {
 	    client.setIban(form.getIban());
 	    client.setBank(form.getBank());
 	    client.setComment(form.getComment());
+	    client.setAttribute1(form.getRegCom());
 	    
 	    r = new ResponseBean();
 	} catch (Exception e) {
@@ -119,6 +122,7 @@ public class ClientsBeanImplementation extends ClientsBean {
 	    form.setIban(client.getIban());
 	    form.setBank(client.getBank());
 	    form.setComment(client.getComment());
+	    form.setRegCom(client.getAttribute1());
 
 	    r = new ResponseBean();
 	} catch (FinderException e) {
@@ -200,8 +204,21 @@ public class ClientsBeanImplementation extends ClientsBean {
 		break;
 	    }
 
+	    
+
+	    ArrayList cllist = new ArrayList(clients);
+	    Collections.sort(cllist, new Comparator() {
+		    public int compare(Object o1, Object o2) {
+			ClientLocal c1 = (ClientLocal)o1;
+			ClientLocal c2 = (ClientLocal)o2;
+
+			return c1.getName().compareTo(c2.getName());
+		    }
+		});
+
+
 	    r = new ResponseBean();
-	    for(Iterator i = clients.iterator(); i.hasNext(); ) {
+	    for(Iterator i = cllist.iterator(); i.hasNext(); ) {
 		ClientLocal c = (ClientLocal)i.next();
 		r.addRecord();
 		r.addField("listing.id", c.getId());
@@ -248,6 +265,7 @@ public class ClientsBeanImplementation extends ClientsBean {
 		r.addField("contacts.id", c.getId());
 		r.addField("contacts.firstName", c.getFirstName());
 		r.addField("contacts.lastName", c.getLastName());
+		r.addField("contacts.department", c.getDepartment());
 		r.addField("contacts.phone", c.getPhone());
 		r.addField("contacts.mobile", c.getMobile());
 		r.addField("contacts.fax", c.getFax());

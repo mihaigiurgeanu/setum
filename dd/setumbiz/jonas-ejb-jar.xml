@@ -175,6 +175,16 @@
   </jonas-session>
 
   <jonas-session>
+    <ejb-name>FereastraCategoryManagerEJB</ejb-name>
+    <jndi-name>FereastraCategoryHome</jndi-name>
+    <session-timeout>28800</session-timeout>
+    <jonas-ejb-ref>
+      <ejb-ref-name>ejb/PreferencesEJB</ejb-ref-name>
+      <jndi-name>PreferencesHome</jndi-name>
+    </jonas-ejb-ref>
+  </jonas-session>
+
+  <jonas-session>
     <ejb-name>GrilaVentilatieEJB</ejb-name>
     <jndi-name>GrilaVentilatieHome</jndi-name>
     <session-timeout>28800</session-timeout>
@@ -205,8 +215,28 @@
   </jonas-session>
 
   <jonas-session>
+    <ejb-name>SupraluminaCategoryManagerEJB</ejb-name>
+    <jndi-name>SupraluminaCategoryHome</jndi-name>
+    <session-timeout>28800</session-timeout>
+    <jonas-ejb-ref>
+      <ejb-ref-name>ejb/PreferencesEJB</ejb-ref-name>
+      <jndi-name>PreferencesHome</jndi-name>
+    </jonas-ejb-ref>
+  </jonas-session>
+
+  <jonas-session>
     <ejb-name>PanouLateralEJB</ejb-name>
     <jndi-name>PanouLateralHome</jndi-name>
+    <session-timeout>28800</session-timeout>
+    <jonas-ejb-ref>
+      <ejb-ref-name>ejb/PreferencesEJB</ejb-ref-name>
+      <jndi-name>PreferencesHome</jndi-name>
+    </jonas-ejb-ref>
+  </jonas-session>
+
+  <jonas-session>
+    <ejb-name>PanouLateralCategoryManagerEJB</ejb-name>
+    <jndi-name>PanouLateralCategoryHome</jndi-name>
     <session-timeout>28800</session-timeout>
     <jonas-ejb-ref>
       <ejb-ref-name>ejb/PreferencesEJB</ejb-ref-name>

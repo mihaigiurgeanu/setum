@@ -49,6 +49,7 @@ public class SupraluminaForm implements Serializable {
     java.math.BigDecimal price1;
     String businessCategory;
     Integer quantity;
+    String description;
 
     public SupraluminaForm() {
 
@@ -138,6 +139,10 @@ public class SupraluminaForm implements Serializable {
 
 
        this.quantity = new Integer(0);
+
+
+
+       this.description = "";
 
 
 
@@ -470,6 +475,21 @@ public class SupraluminaForm implements Serializable {
 	AttributeLocal a = (AttributeLocal)attributes.get("quantity");
 	if(a != null) {
 	    this.setQuantity(a.getIntValue());
+	}
+    }
+
+    public void setDescription(String newDescription) {
+        this.description = newDescription;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void readDescription(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("description");
+	if(a != null) {
+	    this.setDescription(a.getStringValue());
 	}
     }
 

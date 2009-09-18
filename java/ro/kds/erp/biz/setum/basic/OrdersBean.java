@@ -649,6 +649,84 @@ public abstract class OrdersBean
 	computeCalculatedFields(r);
 	return r;
     }
+    public ResponseBean updateValoareMontaj(java.math.BigDecimal valoareMontaj) {
+        ResponseBean r = new ResponseBean();
+	java.math.BigDecimal oldVal = form.getValoareMontaj();
+	form.setValoareMontaj(valoareMontaj);
+	r.addRecord();
+	r.addField("valoareMontaj", valoareMontaj); // for number format
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".valoareMontaj");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
+		script.setVar(OLDVAL_VARNAME, oldVal, java.math.BigDecimal.class);
+		script.setVar(FORM_VARNAME, form, OrdersForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the valoareMontaj", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
+    public ResponseBean updateValoareTransport(java.math.BigDecimal valoareTransport) {
+        ResponseBean r = new ResponseBean();
+	java.math.BigDecimal oldVal = form.getValoareTransport();
+	form.setValoareTransport(valoareTransport);
+	r.addRecord();
+	r.addField("valoareTransport", valoareTransport); // for number format
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".valoareTransport");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
+		script.setVar(OLDVAL_VARNAME, oldVal, java.math.BigDecimal.class);
+		script.setVar(FORM_VARNAME, form, OrdersForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the valoareTransport", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
+    public ResponseBean updateValoareProduse(java.math.BigDecimal valoareProduse) {
+        ResponseBean r = new ResponseBean();
+	java.math.BigDecimal oldVal = form.getValoareProduse();
+	form.setValoareProduse(valoareProduse);
+	r.addRecord();
+	r.addField("valoareProduse", valoareProduse); // for number format
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".valoareProduse");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
+		script.setVar(OLDVAL_VARNAME, oldVal, java.math.BigDecimal.class);
+		script.setVar(FORM_VARNAME, form, OrdersForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the valoareProduse", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
     public ResponseBean updateTotal(java.math.BigDecimal total) {
         ResponseBean r = new ResponseBean();
 	java.math.BigDecimal oldVal = form.getTotal();
@@ -961,6 +1039,58 @@ public abstract class OrdersBean
 	computeCalculatedFields(r);
 	return r;
     }
+    public ResponseBean updateCurrencyCode(String currencyCode) {
+        ResponseBean r = new ResponseBean();
+	String oldVal = form.getCurrencyCode();
+	form.setCurrencyCode(currencyCode);
+	r.addRecord();
+	r.addField("currencyCode", currencyCode); // for number format
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".currencyCode");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
+		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
+		script.setVar(FORM_VARNAME, form, OrdersForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the currencyCode", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
+    public ResponseBean updateExchangeRate(java.math.BigDecimal exchangeRate) {
+        ResponseBean r = new ResponseBean();
+	java.math.BigDecimal oldVal = form.getExchangeRate();
+	form.setExchangeRate(exchangeRate);
+	r.addRecord();
+	r.addField("exchangeRate", exchangeRate); // for number format
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".exchangeRate");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
+		script.setVar(OLDVAL_VARNAME, oldVal, java.math.BigDecimal.class);
+		script.setVar(FORM_VARNAME, form, OrdersForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the exchangeRate", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
     public ResponseBean updateTermenLivrare(java.util.Date termenLivrare) {
         ResponseBean r = new ResponseBean();
 	java.util.Date oldVal = form.getTermenLivrare();
@@ -1112,6 +1242,266 @@ public abstract class OrdersBean
 						// fields to the response also
 	   } catch (ScriptErrorException e) {
 	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the contact", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
+    public ResponseBean updateDeliveryHour(String deliveryHour) {
+        ResponseBean r = new ResponseBean();
+	String oldVal = form.getDeliveryHour();
+	form.setDeliveryHour(deliveryHour);
+	r.addRecord();
+	r.addField("deliveryHour", deliveryHour); // for number format
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".deliveryHour");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
+		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
+		script.setVar(FORM_VARNAME, form, OrdersForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the deliveryHour", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
+    public ResponseBean updateTipDemontare(String tipDemontare) {
+        ResponseBean r = new ResponseBean();
+	String oldVal = form.getTipDemontare();
+	form.setTipDemontare(tipDemontare);
+	r.addRecord();
+	r.addField("tipDemontare", tipDemontare); // for number format
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".tipDemontare");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
+		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
+		script.setVar(FORM_VARNAME, form, OrdersForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the tipDemontare", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
+    public ResponseBean updateAttribute1(String attribute1) {
+        ResponseBean r = new ResponseBean();
+	String oldVal = form.getAttribute1();
+	form.setAttribute1(attribute1);
+	r.addRecord();
+	r.addField("attribute1", attribute1); // for number format
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".attribute1");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
+		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
+		script.setVar(FORM_VARNAME, form, OrdersForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the attribute1", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
+    public ResponseBean updateAttribute2(String attribute2) {
+        ResponseBean r = new ResponseBean();
+	String oldVal = form.getAttribute2();
+	form.setAttribute2(attribute2);
+	r.addRecord();
+	r.addField("attribute2", attribute2); // for number format
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".attribute2");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
+		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
+		script.setVar(FORM_VARNAME, form, OrdersForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the attribute2", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
+    public ResponseBean updateAttribute3(String attribute3) {
+        ResponseBean r = new ResponseBean();
+	String oldVal = form.getAttribute3();
+	form.setAttribute3(attribute3);
+	r.addRecord();
+	r.addField("attribute3", attribute3); // for number format
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".attribute3");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
+		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
+		script.setVar(FORM_VARNAME, form, OrdersForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the attribute3", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
+    public ResponseBean updateAttribute4(String attribute4) {
+        ResponseBean r = new ResponseBean();
+	String oldVal = form.getAttribute4();
+	form.setAttribute4(attribute4);
+	r.addRecord();
+	r.addField("attribute4", attribute4); // for number format
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".attribute4");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
+		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
+		script.setVar(FORM_VARNAME, form, OrdersForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the attribute4", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
+    public ResponseBean updateAttribute5(String attribute5) {
+        ResponseBean r = new ResponseBean();
+	String oldVal = form.getAttribute5();
+	form.setAttribute5(attribute5);
+	r.addRecord();
+	r.addField("attribute5", attribute5); // for number format
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".attribute5");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
+		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
+		script.setVar(FORM_VARNAME, form, OrdersForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the attribute5", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
+    public ResponseBean updateLivrariRStart(java.util.Date livrariRStart) {
+        ResponseBean r = new ResponseBean();
+	java.util.Date oldVal = form.getLivrariRStart();
+	form.setLivrariRStart(livrariRStart);
+	r.addRecord();
+	r.addField("livrariRStart", livrariRStart); // for number format
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".livrariRStart");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
+		script.setVar(OLDVAL_VARNAME, oldVal, java.util.Date.class);
+		script.setVar(FORM_VARNAME, form, OrdersForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the livrariRStart", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
+    public ResponseBean updateLivrariREnd(java.util.Date livrariREnd) {
+        ResponseBean r = new ResponseBean();
+	java.util.Date oldVal = form.getLivrariREnd();
+	form.setLivrariREnd(livrariREnd);
+	r.addRecord();
+	r.addField("livrariREnd", livrariREnd); // for number format
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".livrariREnd");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
+		script.setVar(OLDVAL_VARNAME, oldVal, java.util.Date.class);
+		script.setVar(FORM_VARNAME, form, OrdersForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the livrariREnd", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
+    public ResponseBean updateLivrariCuMontaj(String livrariCuMontaj) {
+        ResponseBean r = new ResponseBean();
+	String oldVal = form.getLivrariCuMontaj();
+	form.setLivrariCuMontaj(livrariCuMontaj);
+	r.addRecord();
+	r.addField("livrariCuMontaj", livrariCuMontaj); // for number format
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".livrariCuMontaj");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
+		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
+		script.setVar(FORM_VARNAME, form, OrdersForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the livrariCuMontaj", e);
            }
         }
 	computeCalculatedFields(r);
@@ -1771,7 +2161,6 @@ public abstract class OrdersBean
      * 
      */
     public ResponseBean removeItem (
-        Integer itemId
     ) {
 
 
@@ -1786,7 +2175,6 @@ public abstract class OrdersBean
 		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
 		script.setVar(LOGGER_VARNAME, logger, Logger.class);
 
-		script.setVar("param_itemId", itemId, Integer.class);
 
 		
 		addFieldsToScript(script);
@@ -1812,6 +2200,9 @@ public abstract class OrdersBean
 	r.addField("localitateAlta", form.getLocalitateAlta());
 	r.addField("distanta", form.getDistanta());
 	r.addField("observatii", form.getObservatii());
+	r.addField("valoareMontaj", form.getValoareMontaj());
+	r.addField("valoareTransport", form.getValoareTransport());
+	r.addField("valoareProduse", form.getValoareProduse());
 	r.addField("total", form.getTotal());
 	r.addField("tvaPercent", form.getTvaPercent());
 	r.addField("totalTva", form.getTotalTva());
@@ -1824,12 +2215,24 @@ public abstract class OrdersBean
 	r.addField("payedAmount", form.getPayedAmount());
 	r.addField("invoicedAmount", form.getInvoicedAmount());
 	r.addField("diferenta", form.getDiferenta());
+	r.addField("currencyCode", form.getCurrencyCode());
+	r.addField("exchangeRate", form.getExchangeRate());
 	r.addField("termenLivrare", form.getTermenLivrare());
 	r.addField("termenLivrare1", form.getTermenLivrare1());
 	r.addField("adresaMontaj", form.getAdresaMontaj());
 	r.addField("adresaReper", form.getAdresaReper());
 	r.addField("telefon", form.getTelefon());
 	r.addField("contact", form.getContact());
+	r.addField("deliveryHour", form.getDeliveryHour());
+	r.addField("tipDemontare", form.getTipDemontare());
+	r.addField("attribute1", form.getAttribute1());
+	r.addField("attribute2", form.getAttribute2());
+	r.addField("attribute3", form.getAttribute3());
+	r.addField("attribute4", form.getAttribute4());
+	r.addField("attribute5", form.getAttribute5());
+	r.addField("livrariRStart", form.getLivrariRStart());
+	r.addField("livrariREnd", form.getLivrariREnd());
+	r.addField("livrariCuMontaj", form.getLivrariCuMontaj());
 	r.addField("offerItemId", form.getOfferItemId());
 	r.addField("productName", form.getProductName());
 	r.addField("productCode", form.getProductCode());
@@ -1923,6 +2326,24 @@ public abstract class OrdersBean
             logger.log(BasicLevel.DEBUG, e);
         }
 	try {
+	    s.setVar("valoareMontaj", form.getValoareMontaj(), java.math.BigDecimal.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: valoareMontaj from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    s.setVar("valoareTransport", form.getValoareTransport(), java.math.BigDecimal.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: valoareTransport from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    s.setVar("valoareProduse", form.getValoareProduse(), java.math.BigDecimal.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: valoareProduse from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
 	    s.setVar("total", form.getTotal(), java.math.BigDecimal.class);
 	} catch (ScriptErrorException e) {
 	    logger.log(BasicLevel.WARN, "Can not set the value of field: total from the script");
@@ -1995,6 +2416,18 @@ public abstract class OrdersBean
             logger.log(BasicLevel.DEBUG, e);
         }
 	try {
+	    s.setVar("currencyCode", form.getCurrencyCode(), String.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: currencyCode from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    s.setVar("exchangeRate", form.getExchangeRate(), java.math.BigDecimal.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: exchangeRate from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
 	    s.setVar("termenLivrare", form.getTermenLivrare(), java.util.Date.class);
 	} catch (ScriptErrorException e) {
 	    logger.log(BasicLevel.WARN, "Can not set the value of field: termenLivrare from the script");
@@ -2028,6 +2461,66 @@ public abstract class OrdersBean
 	    s.setVar("contact", form.getContact(), String.class);
 	} catch (ScriptErrorException e) {
 	    logger.log(BasicLevel.WARN, "Can not set the value of field: contact from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    s.setVar("deliveryHour", form.getDeliveryHour(), String.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: deliveryHour from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    s.setVar("tipDemontare", form.getTipDemontare(), String.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: tipDemontare from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    s.setVar("attribute1", form.getAttribute1(), String.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: attribute1 from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    s.setVar("attribute2", form.getAttribute2(), String.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: attribute2 from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    s.setVar("attribute3", form.getAttribute3(), String.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: attribute3 from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    s.setVar("attribute4", form.getAttribute4(), String.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: attribute4 from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    s.setVar("attribute5", form.getAttribute5(), String.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: attribute5 from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    s.setVar("livrariRStart", form.getLivrariRStart(), java.util.Date.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: livrariRStart from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    s.setVar("livrariREnd", form.getLivrariREnd(), java.util.Date.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: livrariREnd from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    s.setVar("livrariCuMontaj", form.getLivrariCuMontaj(), String.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: livrariCuMontaj from the script");
             logger.log(BasicLevel.DEBUG, e);
         }
 	try {
@@ -2277,6 +2770,39 @@ public abstract class OrdersBean
             logger.log(BasicLevel.DEBUG, e);
         }
 	try {
+	    field = s.getVar("valoareMontaj", java.math.BigDecimal.class);
+	    if(!field.equals(form.getValoareMontaj())) {
+	        logger.log(BasicLevel.DEBUG, "Field valoareMontaj modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setValoareMontaj((java.math.BigDecimal)field);
+	        r.addField("valoareMontaj", (java.math.BigDecimal)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: valoareMontaj from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    field = s.getVar("valoareTransport", java.math.BigDecimal.class);
+	    if(!field.equals(form.getValoareTransport())) {
+	        logger.log(BasicLevel.DEBUG, "Field valoareTransport modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setValoareTransport((java.math.BigDecimal)field);
+	        r.addField("valoareTransport", (java.math.BigDecimal)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: valoareTransport from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    field = s.getVar("valoareProduse", java.math.BigDecimal.class);
+	    if(!field.equals(form.getValoareProduse())) {
+	        logger.log(BasicLevel.DEBUG, "Field valoareProduse modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setValoareProduse((java.math.BigDecimal)field);
+	        r.addField("valoareProduse", (java.math.BigDecimal)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: valoareProduse from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
 	    field = s.getVar("total", java.math.BigDecimal.class);
 	    if(!field.equals(form.getTotal())) {
 	        logger.log(BasicLevel.DEBUG, "Field total modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
@@ -2409,6 +2935,28 @@ public abstract class OrdersBean
             logger.log(BasicLevel.DEBUG, e);
         }
 	try {
+	    field = s.getVar("currencyCode", String.class);
+	    if(!field.equals(form.getCurrencyCode())) {
+	        logger.log(BasicLevel.DEBUG, "Field currencyCode modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setCurrencyCode((String)field);
+	        r.addField("currencyCode", (String)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: currencyCode from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    field = s.getVar("exchangeRate", java.math.BigDecimal.class);
+	    if(!field.equals(form.getExchangeRate())) {
+	        logger.log(BasicLevel.DEBUG, "Field exchangeRate modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setExchangeRate((java.math.BigDecimal)field);
+	        r.addField("exchangeRate", (java.math.BigDecimal)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: exchangeRate from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
 	    field = s.getVar("termenLivrare", java.util.Date.class);
 	    if(!field.equals(form.getTermenLivrare())) {
 	        logger.log(BasicLevel.DEBUG, "Field termenLivrare modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
@@ -2472,6 +3020,116 @@ public abstract class OrdersBean
 	    }
 	} catch (ScriptErrorException e) {
 	    logger.log(BasicLevel.WARN, "Can not get the value of field: contact from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    field = s.getVar("deliveryHour", String.class);
+	    if(!field.equals(form.getDeliveryHour())) {
+	        logger.log(BasicLevel.DEBUG, "Field deliveryHour modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setDeliveryHour((String)field);
+	        r.addField("deliveryHour", (String)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: deliveryHour from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    field = s.getVar("tipDemontare", String.class);
+	    if(!field.equals(form.getTipDemontare())) {
+	        logger.log(BasicLevel.DEBUG, "Field tipDemontare modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setTipDemontare((String)field);
+	        r.addField("tipDemontare", (String)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: tipDemontare from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    field = s.getVar("attribute1", String.class);
+	    if(!field.equals(form.getAttribute1())) {
+	        logger.log(BasicLevel.DEBUG, "Field attribute1 modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setAttribute1((String)field);
+	        r.addField("attribute1", (String)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: attribute1 from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    field = s.getVar("attribute2", String.class);
+	    if(!field.equals(form.getAttribute2())) {
+	        logger.log(BasicLevel.DEBUG, "Field attribute2 modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setAttribute2((String)field);
+	        r.addField("attribute2", (String)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: attribute2 from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    field = s.getVar("attribute3", String.class);
+	    if(!field.equals(form.getAttribute3())) {
+	        logger.log(BasicLevel.DEBUG, "Field attribute3 modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setAttribute3((String)field);
+	        r.addField("attribute3", (String)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: attribute3 from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    field = s.getVar("attribute4", String.class);
+	    if(!field.equals(form.getAttribute4())) {
+	        logger.log(BasicLevel.DEBUG, "Field attribute4 modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setAttribute4((String)field);
+	        r.addField("attribute4", (String)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: attribute4 from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    field = s.getVar("attribute5", String.class);
+	    if(!field.equals(form.getAttribute5())) {
+	        logger.log(BasicLevel.DEBUG, "Field attribute5 modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setAttribute5((String)field);
+	        r.addField("attribute5", (String)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: attribute5 from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    field = s.getVar("livrariRStart", java.util.Date.class);
+	    if(!field.equals(form.getLivrariRStart())) {
+	        logger.log(BasicLevel.DEBUG, "Field livrariRStart modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setLivrariRStart((java.util.Date)field);
+	        r.addField("livrariRStart", (java.util.Date)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: livrariRStart from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    field = s.getVar("livrariREnd", java.util.Date.class);
+	    if(!field.equals(form.getLivrariREnd())) {
+	        logger.log(BasicLevel.DEBUG, "Field livrariREnd modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setLivrariREnd((java.util.Date)field);
+	        r.addField("livrariREnd", (java.util.Date)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: livrariREnd from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    field = s.getVar("livrariCuMontaj", String.class);
+	    if(!field.equals(form.getLivrariCuMontaj())) {
+	        logger.log(BasicLevel.DEBUG, "Field livrariCuMontaj modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setLivrariCuMontaj((String)field);
+	        r.addField("livrariCuMontaj", (String)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: livrariCuMontaj from the script");
             logger.log(BasicLevel.DEBUG, e);
         }
 	try {

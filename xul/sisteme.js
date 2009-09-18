@@ -22,7 +22,7 @@ theForm.text_fields = new Array("code", "name", "entryPrice", "sellPrice",
 				"absoluteGainPP");
 
 theForm.combo_fields = new Array("categoryId");
-theForm.radio_fields = new Array();
+theForm.radio_fields = new Array("discontinued");
 theForm.do_link = "/sisteme.do";
 
 theForm.setupEventListeners();

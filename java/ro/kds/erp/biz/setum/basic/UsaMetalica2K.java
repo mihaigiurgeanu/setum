@@ -67,6 +67,10 @@ public interface UsaMetalica2K extends EJBObject {
     public ResponseBean updateTresholdSpace(Integer newTresholdSpace) throws RemoteException;
     public ResponseBean updateH1Treshold(Double newH1Treshold) throws RemoteException;
     public ResponseBean updateH2Treshold(Double newH2Treshold) throws RemoteException;
+    public ResponseBean updateMasca(Integer newMasca) throws RemoteException;
+    public ResponseBean updateLacrimar(Integer newLacrimar) throws RemoteException;
+    public ResponseBean updateBolturi(Integer newBolturi) throws RemoteException;
+    public ResponseBean updatePlatbanda(Integer newPlatbanda) throws RemoteException;
     public ResponseBean updateEntryPrice(java.math.BigDecimal newEntryPrice) throws RemoteException;
     public ResponseBean updateSellPrice(java.math.BigDecimal newSellPrice) throws RemoteException;
     public ResponseBean updateMontareSistem(Integer newMontareSistem) throws RemoteException;
@@ -169,6 +173,15 @@ public interface UsaMetalica2K extends EJBObject {
     public ResponseBean updateFinisajFereastraExtInt(Boolean newFinisajFereastraExtInt) throws RemoteException;
     public ResponseBean updateFinisajSupraluminaExtInt(Boolean newFinisajSupraluminaExtInt) throws RemoteException;
     public ResponseBean updateFinisajPanouLateralExtInt(Boolean newFinisajPanouLateralExtInt) throws RemoteException;
+    public ResponseBean updateSuprafataBlat(Double newSuprafataBlat) throws RemoteException;
+    public ResponseBean updateSuprafataToc(Double newSuprafataToc) throws RemoteException;
+    public ResponseBean updateSuprafataGrilaj(Double newSuprafataGrilaj) throws RemoteException;
+    public ResponseBean updateSuprafataFereastra(Double newSuprafataFereastra) throws RemoteException;
+    public ResponseBean updateSuprafataSupralumina(Double newSuprafataSupralumina) throws RemoteException;
+    public ResponseBean updateSuprafataPanouLateral(Double newSuprafataPanouLateral) throws RemoteException;
+    public ResponseBean updateSuprafataGrilaVentilatie(Double newSuprafataGrilaVentilatie) throws RemoteException;
+    public ResponseBean updateLexec(Double newLexec) throws RemoteException;
+    public ResponseBean updateHexec(Double newHexec) throws RemoteException;
     public ResponseBean updateGroupingCode(String newGroupingCode) throws RemoteException;
 
 
@@ -180,5 +193,7 @@ public interface UsaMetalica2K extends EJBObject {
     ) throws RemoteException;
     public ResponseBean removeOption (
         Integer optionId
+    ) throws RemoteException;
+    public ResponseBean computePrice (
     ) throws RemoteException;
 }

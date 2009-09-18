@@ -48,6 +48,59 @@
     <type>String</type>
   </field>
 
+  <field>
+    <name>contract</name>
+    <type>String</type>
+  </field>
+  <field>
+    <name>anexa</name>
+    <type>String</type>
+  </field>
+  <field>
+    <name>terms</name>
+    <type>String</type>
+  </field>
+  <field>
+    <name>attribute1</name>
+    <type>String</type>
+  </field>
+  <field>
+    <name>attribute2</name>
+    <type>String</type>
+  </field>
+  <field>
+    <name>attribute3</name>
+    <type>String</type>
+  </field>
+  <field>
+    <name>attribute4</name>
+    <type>String</type>
+  </field>
+  <field>
+    <name>attribute5</name>
+    <type>String</type>
+  </field>
+  <field>
+    <name>attribute6</name>
+    <type>String</type>
+  </field>
+  <field>
+    <name>attribute7</name>
+    <type>String</type>
+  </field>
+  <field>
+    <name>attribute8</name>
+    <type>String</type>
+  </field>
+  <field>
+    <name>attribute9</name>
+    <type>String</type>
+  </field>
+  <field>
+    <name>attribute10</name>
+    <type>String</type>
+  </field>
+
   <!-- Subform fields -->
   <field>
     <name>productId</name>
@@ -124,6 +177,10 @@
     <type>Integer</type>
   </field>
   <field>
+    <name>otherLocation</name>
+    <type>String</type>
+  </field>
+  <field>
     <!-- distanta in km -->
     <name>distance</name>
     <type>java.math.BigDecimal</type>
@@ -142,9 +199,34 @@
     <name>valTransport</name>
     <type>java.math.BigDecimal</type>
   </field>
-
-
-
+  <field>
+    <name>clientContactId</name><!-- id-ul contactului dintre contactele clientului -->
+    <type>Integer</type>
+  </field>
+  <field>
+    <name>contact</name><!-- nu se mai foloseste! se foloseste clientContactId -->
+    <type>String</type>
+  </field>
+  <field>
+    <name>clientContactName</name>
+    <type>String</type>
+  </field>
+  <field>
+    <name>clientContactPhone</name>
+    <type>String</type>
+  </field>
+  <field>
+    <name>clientContactFax</name>
+    <type>String</type>
+  </field>
+  <field>
+    <name>clientContactMobile</name>
+    <type>String</type>
+  </field>
+  <field>
+    <name>clientContactEmail</name>
+    <type>String</type>
+  </field>
   <!-- additional methods for the remote interface -->
   <remote>
     <method>ResponseBean loadListing() throws RemoteException</method>

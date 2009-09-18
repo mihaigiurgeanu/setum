@@ -1,0 +1,12 @@
+ALTER TABLE  `OFFER_` ADD  `contract_` VARCHAR( 100 ) NULL ,
+ADD  `anexa_` VARCHAR( 10 ) NULL ,
+ADD  `attribute1_` VARCHAR( 100 ) NULL ,
+ADD  `attribute2_` VARCHAR( 100 ) NULL ,
+ADD  `attribute3_` VARCHAR( 100 ) NULL ,
+ADD  `attribute4_` VARCHAR( 100 ) NULL ,
+ADD  `attribute5_` VARCHAR( 100 ) NULL ,
+ADD  `attribute6_` VARCHAR( 100 ) NULL ,
+ADD  `attribute7_` VARCHAR( 100 ) NULL ,
+ADD  `attribute8_` VARCHAR( 100 ) NULL ,
+ADD  `attribute9_` VARCHAR( 100 ) NULL ,
+ADD  `attribute10_` VARCHAR( 100 ) NULL ;

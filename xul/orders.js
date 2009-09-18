@@ -14,24 +14,40 @@ const REMOVE_PAYMENT_MSG = "Plata selectata va fi stearsa!";
 // the main tree (orders list)
 var orders;
 var ordersListing = document.getElementById('ordersListing');
+var ordersView;
+
 function load_orders() {
-    orders = new RemoteDataView(theForm.do_link, "loadListing", "getOrdersCount", true);
-    ordersListing.view = make_treeview
-	(orders,
-	 function(row, column) {
-	     var col;
-	     if(column.id) col = column.id; else col = column;
-	     return orders.get_cell_text(row, col);
-	 });
+  orders = new RemoteDataView(theForm.do_link, "loadListing", "getOrdersCount", true);
+  ordersView = make_treeview
+    (orders,
+     function(row, column) {
+      var col;
+      if(column.id) col = column.id; else col = column;
+      if(orders)
+	return orders.get_cell_text(row, col);
+    });
+  ordersListing.view = ordersView;
 }
+
+// function load_orders() {
+//   var req = theForm.get_request();
+//   req.add("command", "loadFullListing");
+//   orders = load_records(req);
+
+//   ordersListing.view = make_treeview
+//     (orders,
+//      function(row, column) {
+//       var col;
+//       if(column.id) col = column.id; else col = column;
+//       return orders[row][col];
+//     });
+// }
 
 var lineItems;
 var lineItemsListing = document.getElementById('lineItemsListing');
-function load_lineItems() {
-    var req = theForm.get_request();
-    req.add("command", "loadLines");
-    lineItems = load_records(req);
-    lineItemsListing.view = make_treeview
+
+function show_lineItems() {
+  lineItemsListing.view = make_treeview
 	(lineItems,
 	 function(row, column) {
 	     var col;
@@ -40,13 +56,21 @@ function load_lineItems() {
 	 });
 }
 
+function load_lineItems() {
+    var req = theForm.get_request();
+    req.add("command", "loadLines");
+    lineItems = load_records(req);
+    show_lineItems();
+}
+
+function clear_lineItems() {
+  lineItems = new Array();
+  show_lineItems();
+}
 
 var invoices;
 var invoicesListing = document.getElementById('invoicesListing');
-function load_invoices() {
-    var req = theForm.get_request();
-    req.add("command", "loadInvoices");
-    invoices = load_records(req);
+function show_invoices() {
     invoicesListing.view = make_treeview
 	(invoices,
 	 function(row, column) {
@@ -56,12 +80,21 @@ function load_invoices() {
 	 });
 }
 
+function load_invoices() {
+    var req = theForm.get_request();
+    req.add("command", "loadInvoices");
+    invoices = load_records(req);
+    show_invoices();
+}
+
+function clear_invoices() {
+  invoices = new Array();
+  show_invoices();
+}
+
 var payments;
 var paymentsListing = document.getElementById("paymentsListing");
-function load_payments() {
-    var req = theForm.get_request();
-    req.add("command", "loadPayments");
-    payments = load_records(req);
+function show_payments() {
     paymentsListing.view = make_treeview
 	(payments,
 	 function(row, column) {
@@ -71,14 +104,26 @@ function load_payments() {
 	 });
 }
 
+function load_payments() {
+    var req = theForm.get_request();
+    req.add("command", "loadPayments");
+    payments = load_records(req);
+    show_payments();
+}
+
+function clear_payments() {
+  payments = new Array();
+  show_payments();
+}
 
 function load_selected_order() {
-    var selid = orders.get_cell_text(ordersListing.currentIndex, "orders.id");
-    var req = theForm.get_request();
-    req.add("operation", "new-context");
-    req.add("command", "loadFormData");
-    req.add("param0", selid);
-    theForm.post_request(req);
+  var selid = orders.get_cell_text(ordersListing.currentIndex, "orders.id");
+  //var selid = orders[ordersListing.currentIndex]["orders.id"];
+  var req = theForm.get_request();
+  req.add("operation", "new-context");
+  req.add("command", "loadFormData");
+  req.add("param0", selid);
+  theForm.post_request(req);
 }
 
 function load_selected_invoice() {
@@ -93,6 +138,7 @@ function on_select_order() {
     load_selected_order();
     load_lineItems();
     load_invoices();
+    clear_payments();
 }
 
 function on_select_lineItem() {
@@ -121,6 +167,11 @@ function on_new_order() {
     req.add("operation", "new-context");
     req.add("command", "newFormData");
     theForm.post_request(req);
+
+    clear_lineItems();
+    clear_invoices();
+    clear_payments();
+
     maintab.selectedIndex = 1;
 }
 
@@ -131,6 +182,9 @@ function on_delete_order() {
     theForm.post_request(req);
     load_orders();
 
+    clear_lineItems();
+    clear_invoices();
+    clear_payments();
 
     return true;
 }
@@ -165,8 +219,8 @@ function on_select_offerItems() {
 function on_delete_orderItem() {
     var req = theForm.get_request();
     req.add("command", "removeItem");
-    req.add("operation", "close-context");
     theForm.post_request(req);
+    load_lineItems();
 
     return true;
 }
@@ -199,6 +253,8 @@ function on_new_invoice() {
     req.add("command", "newInvoiceData");
     theForm.post_request(req);
     maintab.selectedIndex = 4;
+
+    clear_payments();
 }
 
 function on_new_payment() {
@@ -222,7 +278,6 @@ function on_save_payment() {
     var req = theForm.get_request();
     req.add("command", "savePaymentData");
     theForm.post_request(req);
-    load_payments();
     load_selected_order();
     load_selected_invoice();
     load_payments();
@@ -236,6 +291,8 @@ function on_remove_invoice() {
     load_selected_order();
     load_invoices();
     maintab.selectedIndex = 3;
+
+    clear_payments();
 
     return true;
 }
@@ -255,9 +312,20 @@ function on_remove_payment() {
 
 
 function open_report(type) {
-    window.open(SERVER_URL + "/reports/orders." + type);
+    window.open(SERVER_URL + "/reports/order." + type);
 }
 
+function open_pv(type) {
+    window.open(SERVER_URL + "/reports/pv." + type);
+}
+
+function open_livrari_montaje() {
+  window.openDialog("report-livrari.xul", "report-livrari", "chrome, resizable, scrollbars");
+}
+
+function open_livrari_fmontaje() {
+  window.openDialog("report-livrari.xul", "report-livrari", "chrome, resizable, scrollbars");
+}
 
 var theForm = new FormObject();
 theForm.do_link = "/orders.do";
@@ -267,7 +335,8 @@ theForm.text_fields = new Array("number", "date", "clientName", "localitateAlta"
 				"discount", "totalFinal", "totalFinalTva",
 				"avans", "invoicedAmount", "payedAmount",
 				//"achitatCu", 
-				"valoareAvans", "diferenta",
+				//"valoareAvans", 
+				"diferenta",
 				"termenLivrare", "termenLivrare1", "adresaMontaj", 
 				"adresaReper", "telefon", "contact",
 				
@@ -280,10 +349,14 @@ theForm.text_fields = new Array("number", "date", "clientName", "localitateAlta"
 				"invoicePayed", "invoiceUnpayed",
 
 				"paymentNumber", "paymentDate",
-				"paymentAmount"
+				"paymentAmount",
+				"deliveryHour",
+				"attribute1", // cine semneaza
+				"attribute5", //valuta
+				"attribute4"  //cursul
 				);
 
-theForm.combo_fields = new Array("montaj", "localitate", "invoiceRole");
+theForm.combo_fields = new Array("montaj", "localitate", "invoiceRole", "tipDemontare");
 
 theForm.radio_fields = new Array();
 

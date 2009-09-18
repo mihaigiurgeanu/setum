@@ -1,5 +1,8 @@
 package ro.kds.erp.utils;
 
+import java.math.BigDecimal;
+import java.util.Date;
+
 /**
  * Utility class that helps dealing with null values. It checks if
  * the parameter is null and then returns a specific object.
@@ -32,4 +35,27 @@ public class NullHandler {
 	return value==null?defaultValue:value;
     }
 
+    public Integer val(Integer value) {
+	return (Integer)(val((Object)value));
+    }
+
+    public String val(String value) {
+	return (String)(val((Object)value));
+    }
+    
+    public BigDecimal val(BigDecimal value) {
+	return (BigDecimal)(val((Object)value));
+    }
+
+    public Double val(Double value) {
+	return (Double)(val((Object)value));
+    }
+
+    public Date val(Date value) {
+	return (Date)(val((Object)value));
+    }
+
+    public Boolean val(Boolean value) {
+	return (Boolean)(val((Object)value));
+    }
 }

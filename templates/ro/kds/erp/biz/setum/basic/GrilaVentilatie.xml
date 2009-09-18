@@ -47,6 +47,10 @@
     <name>groupingCode</name>
     <type>String</type>
   </field>
+  <field>
+    <name>description</name>
+    <type>String</type>
+  </field>
 
   <services>
     

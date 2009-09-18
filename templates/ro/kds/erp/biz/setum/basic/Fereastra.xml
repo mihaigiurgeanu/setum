@@ -109,6 +109,11 @@
     <name>groupingCode</name>
     <type>String</type>
   </field>
+  <field>
+    <name>description</name>
+    <type>String</type>
+  </field>
+
   <services>
     <method returnType="standard" calculate="true">
       <name>faraGeam</name>

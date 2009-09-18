@@ -41,6 +41,10 @@
     <type>String</type>
   </field>
   <field>
+    <name>regCom</name>
+    <type>String</type>
+  </field>
+  <field>
     <name>phone</name>
     <type>String</type>
   </field>

@@ -28,6 +28,7 @@ public interface UsaStandard extends EJBObject {
 
     public ResponseBean updateName(String newName) throws RemoteException;
     public ResponseBean updateCode(String newCode) throws RemoteException;
+    public ResponseBean updateDiscontinued(Integer newDiscontinued) throws RemoteException;
     public ResponseBean updateUsaId(Integer newUsaId) throws RemoteException;
     public ResponseBean updateBroascaId(Integer newBroascaId) throws RemoteException;
     public ResponseBean updateCilindruId(Integer newCilindruId) throws RemoteException;

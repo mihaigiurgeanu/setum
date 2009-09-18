@@ -4,7 +4,7 @@
 <!-- 
 select_usistd.xul
 
-Dialog for selecting a certain type of products.
+Dialog selectare usi standard.
 -->
 
 <dialog id="select-usistd-dialog" title="Selectare produse"
@@ -50,7 +50,9 @@ Dialog for selecting a certain type of products.
     document.getElementById('listingUsi').view = make_treeview
 	(usi,
 	 function(row, column) {
-	     return usi.get_cell_text(row, column);
+	     var col;
+	     if(column.id) col = column.id; else col = column
+	     return usi.get_cell_text(row, col);
 	 });
     
     function doOk() {

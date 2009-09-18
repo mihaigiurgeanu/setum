@@ -48,6 +48,7 @@ public interface PanouLateral extends EJBObject {
     public ResponseBean updateBusinessCategory(String newBusinessCategory) throws RemoteException;
     public ResponseBean updateQuantity(Integer newQuantity) throws RemoteException;
     public ResponseBean updateGroupingCode(String newGroupingCode) throws RemoteException;
+    public ResponseBean updateDescription(String newDescription) throws RemoteException;
 
 
     public ResponseBean faraGeam (

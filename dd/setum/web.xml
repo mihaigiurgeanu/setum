@@ -1041,7 +1041,7 @@
 
 
   <servlet>
-    <description>Adaugare/editare comenzi</description>
+    <description>Adaugare/editare reguli</description>
     <servlet-name>RulesServer</servlet-name>
     <servlet-class>ro.kds.erp.web.SimpleCallDispatcherServlet</servlet-class>
     <init-param>
@@ -1073,11 +1073,37 @@
 
 
 
+  <filter>
+    <description>Itercepts the XSL FO output of a servlet and transforms it into PDF</description>
+    <display-name>PDF</display-name>
+    <filter-name>PDFFilter</filter-name>
+    <filter-class>ro.kds.erp.reports.FOPFilter</filter-class>
+    <init-param>
+      <description>The mime type for the FOP output</description>
+      <param-name>mime</param-name>
+      <param-value>application/pdf</param-value>
+    </init-param>
+  </filter>
+
+  <filter>
+    <description>Itercepts the XSL FO output of a servlet and transforms it into RTF</description>
+    <display-name>RTF</display-name>
+    <filter-name>RTFFilter</filter-name>
+    <filter-class>ro.kds.erp.reports.FOPFilter</filter-class>
+    <init-param>
+      <description>The mime type for the FOP output</description>
+      <param-name>mime</param-name>
+      <param-value>text/rtf</param-value>
+    </init-param>
+  </filter>
 
 
 
+
+
+  <!-- Arbitrary Offer report -->
   <servlet>
-    <description>Report in the XSLFO for the arbitrary offer</description>
+    <description>Arbitrary Offer XSLFO</description>
     <display-name>XSLOfferReport</display-name>
     <servlet-name>XSLOfferReportServlet</servlet-name>
     <servlet-class>ro.kds.erp.reports.XSLRendererServlet</servlet-class>
@@ -1119,30 +1145,6 @@
     <url-pattern>/reports/offer.rtf</url-pattern>
   </servlet-mapping>
 
-  <filter>
-    <description>Itercepts the XSL FO output of a servlet and transforms it into PDF</description>
-    <display-name>PDF</display-name>
-    <filter-name>PDFFilter</filter-name>
-    <filter-class>ro.kds.erp.reports.FOPFilter</filter-class>
-    <init-param>
-      <description>The mime type for the FOP output</description>
-      <param-name>mime</param-name>
-      <param-value>application/pdf</param-value>
-    </init-param>
-  </filter>
-
-  <filter>
-    <description>Itercepts the XSL FO output of a servlet and transforms it into RTF</description>
-    <display-name>RTF</display-name>
-    <filter-name>RTFFilter</filter-name>
-    <filter-class>ro.kds.erp.reports.FOPFilter</filter-class>
-    <init-param>
-      <description>The mime type for the FOP output</description>
-      <param-name>mime</param-name>
-      <param-value>text/rtf</param-value>
-    </init-param>
-  </filter>
-
   <filter-mapping>
     <filter-name>PDFFilter</filter-name>
     <url-pattern>/reports/offer.pdf</url-pattern>
@@ -1152,11 +1154,237 @@
     <filter-name>RTFFilter</filter-name>
     <url-pattern>/reports/offer.rtf</url-pattern>
   </filter-mapping>
+  <!-- end of offer report -->
 
 
 
 
+  <!-- Anexa contract -->
+  <servlet>
+    <description>Anexa Contract XSLFO</description>
+    <display-name>XSLAnexaReport</display-name>
+    <servlet-name>XSLAnexaReportServlet</servlet-name>
+    <servlet-class>ro.kds.erp.reports.XSLRendererServlet</servlet-class>
+    <init-param>
+      <description>The key in the session holding the object to receive the method invocation</description>
+      <param-name>sessionName</param-name>
+      <param-value>forms.setum.ArbiraryOfferSession</param-value>
+    </init-param>
+    <init-param>
+      <description>The name of the method to be called on the object</description>
+      <param-name>method</param-name>
+      <param-value>offerReport</param-value>
+    </init-param>
+    <init-param>
+      <description>The jndi name of the Transformer ejb to be used</description>
+      <param-name>transformer</param-name>
+      <param-value>ejb/FTLTransformerHome</param-value>
+    </init-param>
+    <init-param>
+      <description>The name of the stylesheet to be used by the Transformer</description>
+      <param-name>stylesheet</param-name>
+      <param-value>anexa-contract.ftl</param-value>
+    </init-param>
+  </servlet>
 
+
+  <servlet-mapping>
+    <servlet-name>XSLAnexaReportServlet</servlet-name>
+    <url-pattern>/reports/anexa.xsl</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>XSLAnexaReportServlet</servlet-name>
+    <url-pattern>/reports/anexa.pdf</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>XSLAnexaReportServlet</servlet-name>
+    <url-pattern>/reports/anexa.rtf</url-pattern>
+  </servlet-mapping>
+
+  <filter-mapping>
+    <filter-name>PDFFilter</filter-name>
+    <url-pattern>/reports/anexa.pdf</url-pattern>
+  </filter-mapping>
+
+  <filter-mapping>
+    <filter-name>RTFFilter</filter-name>
+    <url-pattern>/reports/anexa.rtf</url-pattern>
+  </filter-mapping>
+  <!-- end of offer report -->
+
+
+
+
+  <!-- Order report -->
+  <servlet>
+    <description>Order XSLFO</description>
+    <display-name>XSLOrderReport</display-name>
+    <servlet-name>XSLOrderReportServlet</servlet-name>
+    <servlet-class>ro.kds.erp.reports.XSLRendererServlet</servlet-class>
+    <init-param>
+      <description>The key in the session holding the object to receive the method invocation</description>
+      <param-name>sessionName</param-name>
+      <param-value>forms.Orders</param-value>
+    </init-param>
+    <init-param>
+      <description>The name of the method to be called on the object</description>
+      <param-name>method</param-name>
+      <param-value>orderReport</param-value>
+    </init-param>
+    <init-param>
+      <description>The jndi name of the Transformer ejb to be used</description>
+      <param-name>transformer</param-name>
+      <param-value>ejb/FTLTransformerHome</param-value>
+    </init-param>
+    <init-param>
+      <description>The name of the stylesheet to be used by the Transformer</description>
+      <param-name>stylesheet</param-name>
+      <param-value>order.ftl</param-value>
+    </init-param>
+  </servlet>
+
+
+  <servlet-mapping>
+    <servlet-name>XSLOrderReportServlet</servlet-name>
+    <url-pattern>/reports/order.xsl</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>XSLOrderReportServlet</servlet-name>
+    <url-pattern>/reports/order.pdf</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>XSLOrderReportServlet</servlet-name>
+    <url-pattern>/reports/order.rtf</url-pattern>
+  </servlet-mapping>
+
+  <filter-mapping>
+    <filter-name>PDFFilter</filter-name>
+    <url-pattern>/reports/order.pdf</url-pattern>
+  </filter-mapping>
+
+  <filter-mapping>
+    <filter-name>RTFFilter</filter-name>
+    <url-pattern>/reports/order.rtf</url-pattern>
+  </filter-mapping>
+  <!-- end of order report -->
+
+
+  <!-- Proces Verbal -->
+  <servlet>
+    <description>XSLFO Proces Verbal</description>
+    <display-name>XSLProcesVerbal</display-name>
+    <servlet-name>XSLProcesVerbalServlet</servlet-name>
+    <servlet-class>ro.kds.erp.reports.XSLRendererServlet</servlet-class>
+    <init-param>
+      <description>The key in the session holding the object to receive the method invocation</description>
+      <param-name>sessionName</param-name>
+      <param-value>forms.Orders</param-value><!-- folosesc datele din order -->
+    </init-param>
+    <init-param>
+      <description>The name of the method to be called on the object</description>
+      <param-name>method</param-name>
+      <param-value>orderReport</param-value>
+    </init-param>
+    <init-param>
+      <description>The jndi name of the Transformer ejb to be used</description>
+      <param-name>transformer</param-name>
+      <param-value>ejb/FTLTransformerHome</param-value>
+    </init-param>
+    <init-param>
+      <description>The name of the stylesheet to be used by the Transformer</description>
+      <param-name>stylesheet</param-name>
+      <param-value>pv.ftl</param-value>
+    </init-param>
+  </servlet>
+
+
+  <servlet-mapping>
+    <servlet-name>XSLProcesVerbalServlet</servlet-name>
+    <url-pattern>/reports/pv.xsl</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>XSLProcesVerbalServlet</servlet-name>
+    <url-pattern>/reports/pv.pdf</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>XSLProcesVerbalServlet</servlet-name>
+    <url-pattern>/reports/pv.rtf</url-pattern>
+  </servlet-mapping>
+
+  <filter-mapping>
+    <filter-name>PDFFilter</filter-name>
+    <url-pattern>/reports/pv.pdf</url-pattern>
+  </filter-mapping>
+
+  <filter-mapping>
+    <filter-name>RTFFilter</filter-name>
+    <url-pattern>/reports/pv.rtf</url-pattern>
+  </filter-mapping>
+  <!-- end of proces verbal -->
+
+
+
+  <!-- raport livrari -->
+  <servlet>
+    <description>XSLFO Raport Livrari</description>
+    <display-name>XSLLivrari</display-name>
+    <servlet-name>XSLLivrariServlet</servlet-name>
+    <servlet-class>ro.kds.erp.reports.XSLRendererServlet</servlet-class>
+    <init-param>
+      <description>The key in the session holding the object to receive the method invocation</description>
+      <param-name>sessionName</param-name>
+      <param-value>forms.Orders</param-value><!-- folosesc datele din order -->
+    </init-param>
+    <init-param>
+      <description>The name of the method to be called on the object</description>
+      <param-name>method</param-name>
+      <param-value>livrariReport</param-value>
+    </init-param>
+    <init-param>
+      <description>The jndi name of the Transformer ejb to be used</description>
+      <param-name>transformer</param-name>
+      <param-value>ejb/FTLTransformerHome</param-value>
+    </init-param>
+    <init-param>
+      <description>The name of the stylesheet to be used by the Transformer</description>
+      <param-name>stylesheet</param-name>
+      <param-value>livrari.ftl</param-value>
+    </init-param>
+  </servlet>
+
+
+  <servlet-mapping>
+    <servlet-name>XSLLivrariServlet</servlet-name>
+    <url-pattern>/reports/livrari.xsl</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>XSLLivrariServlet</servlet-name>
+    <url-pattern>/reports/livrari.pdf</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>XSLLivrariServlet</servlet-name>
+    <url-pattern>/reports/livrari.rtf</url-pattern>
+  </servlet-mapping>
+
+  <filter-mapping>
+    <filter-name>PDFFilter</filter-name>
+    <url-pattern>/reports/livrari.pdf</url-pattern>
+  </filter-mapping>
+
+  <filter-mapping>
+    <filter-name>RTFFilter</filter-name>
+    <url-pattern>/reports/livrari.rtf</url-pattern>
+  </filter-mapping>
+
+  <!-- end raport livrari -->
 
 
 
@@ -1428,5 +1656,51 @@
   <session-config>
     <session-timeout>30</session-timeout>
   </session-config>
+
+
+  <security-role>
+    <description>Acces la setarile aplicatiei</description>
+    <role-name>setari</role-name>
+  </security-role>
+  <security-role>
+    <description>Modificarea ofertei standard (sisteme, usi standard)</description>
+    <role-name>administrare_sisteme</role-name>
+  </security-role>
+  <security-role>
+    <description>Creare/modificare comenzi</description>
+    <role-name>comandare</role-name>
+  </security-role>
+  <security-role>
+    <description>Creare/modificare oferte</description>
+    <role-name>ofertare</role-name>
+  </security-role>
+  <security-role>
+    <role-name>vizualizare_oferte</role-name>
+  </security-role>
+  <security-role>
+    <role-name>vizualizare_comenzi</role-name>
+  </security-role>
+
+
+  <security-constraint>
+    <web-resource-collection>
+      <web-resource-name>Contractari Setum</web-resource-name>
+      <url-pattern>/*</url-pattern>
+    </web-resource-collection>
+    <auth-constraint>
+      <description>Roluri pentru accesul in general la aplicatie.</description>
+      <role-name>setari</role-name>
+      <role-name>comandare</role-name>
+      <role-name>ofertare</role-name>
+      <role-name>administrare_sisteme</role-name>
+      <role-name>vizualizare_oferte</role-name>
+      <role-name>vizualizare_comenzi</role-name>
+    </auth-constraint>
+  </security-constraint>
+
+  <login-config>
+    <auth-method>BASIC</auth-method>
+    <realm-name>Setum</realm-name>
+  </login-config>
 
 </web-app>

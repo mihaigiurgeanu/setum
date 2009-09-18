@@ -59,7 +59,7 @@ public class GauriAerisireBizBean extends GauriAerisireBean {
 		p = ph.findByPrimaryKey(id);
 	    }
 
-	    p.setDescription("Gauri aerisire " + form.getDiametru() + "/" + form.getPas() + "/" + form.getNrRanduri());
+	    p.setDescription(String.format("Gauri aerisire %.0f/%.0f/%d", form.getDiametru(), form.getPas(), form.getNrRanduri()));
 	    p.setSellPrice(form.getSellPrice());
 	    p.setEntryPrice(form.getEntryPrice());
 	    p.setPrice1(form.getPrice1());
@@ -77,6 +77,7 @@ public class GauriAerisireBizBean extends GauriAerisireBean {
 	    attributes.add(ah.create("pozitionare2", form.getPozitionare2()));
 	    attributes.add(ah.create("pozitionare3", form.getPozitionare3()));
 	    attributes.add(ah.create("businessCategory", form.getBusinessCategory()));
+	    attributes.add(ah.create("quantity", form.getQuantity()));
 
 	    p.setAttributes(attributes);
 	    r = validate();
@@ -136,6 +137,9 @@ public class GauriAerisireBizBean extends GauriAerisireBean {
 	    if((a = (AttributeLocal)as.get("businessCategory")) != null)
 		form.setBusinessCategory(a.getStringValue());
 
+	    if((a = (AttributeLocal)as.get("quantity")) != null)
+		form.setQuantity(a.getIntValue());
+
 	    r = new ResponseBean();
 	} catch (NamingException e) {
 	    r = ResponseBean.ERR_CONFIG_NAMING;
@@ -183,5 +187,28 @@ public class GauriAerisireBizBean extends GauriAerisireBean {
 	return r;
     }
   
+    public ResponseBean getProductReport(Integer productId) {
+	ResponseBean r;
+	try {
+	    r = loadFormData(productId);
+	    InitialContext ic = new InitialContext();
+	    Context env = (Context)ic.lookup("java:comp/env");
+	    ProductLocalHome ph = (ProductLocalHome)PortableRemoteObject.
+		narrow(env.lookup("ejb/ProductHome"), ProductLocalHome.class);
+	    ProductLocal p = ph.findByPrimaryKey(productId);
 
+	    r.addField("category.name", p.getCategory().getName());
+	    r.addField("category.id", p.getCategory().getId());
+	} catch (FinderException e) {
+	    logger.log(BasicLevel.ERROR, "FinderException in FereastraBizBean.getProductReport for productId " + productId);
+	    logger.log(BasicLevel.DEBUG, e);
+	    r = ResponseBean.getErrNotFound(e.getMessage());
+	}
+	catch (NamingException e) {
+	    logger.log(BasicLevel.ERROR, "NamingException when preparing to get the report for the product id " + productId + ": " + e.getMessage());
+	    logger.log(BasicLevel.DEBUG, e);
+	    r = ResponseBean.getErrConfigNaming(e.getMessage());
+	}
+	return r;
+    }
 }

@@ -51,7 +51,7 @@ public class Usa2KCategoryManager implements SessionBean {
     public void setSessionContext(SessionContext sessionContext) throws EJBException, RemoteException {
 
         if (logger == null) {
-            logger = Monolog.getMonologFactory().getLogger("ro.kds.erp.biz.DefaultCategoryManagerBean");
+            logger = Monolog.getMonologFactory().getLogger("ro.kds.erp.biz.setum.Usa2KCategoryManagerBean");
         }
         logger.log(BasicLevel.DEBUG, "");
     }

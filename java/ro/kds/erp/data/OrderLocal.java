@@ -190,6 +190,38 @@ public interface OrderLocal extends EJBLocalObject {
     public void setDeliveryDate(Date date);
 
     /**
+     * A short text representing the scheduled delivery hour.
+     */
+    public String getDeliveryHour();
+
+    /**
+     * A short text representing the scheduled delivery hour.
+     */
+    public void setDeliveryHour(String hour);
+
+    /**
+     * Cod tip demontare
+     */
+    public String getTipDemontare();
+    public void setTipDemontare(String tipDemontare);
+
+    public String getAttribute1();
+    public void setAttribute1(String attr);
+
+    public String getAttribute2();
+    public void setAttribute2(String attr);
+
+    public String getAttribute3();
+    public void setAttribute3(String attr);
+
+    public String getAttribute4();
+    public void setAttribute4(String attr);
+
+    public String getAttribute5();
+    public void setAttribute5(String attr);
+
+
+    /**
      * The order lines.
      *
      * @return a <code>java.util.Collection</code> of 
@@ -212,6 +244,7 @@ public interface OrderLocal extends EJBLocalObject {
      * The invoices issued for this invoice.
      */
     public void setInvoices(Collection invoices);
+
 
     /**
      * Computes the payed amount, adding up all payments made on

@@ -1,1 +1,1 @@
-set price [expr $entryPrice * (100 + $relativeGain)/100]
+set price [expr $sellPrice + ($sellPrice * $relativeGain)/100]

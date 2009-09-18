@@ -18,6 +18,7 @@ import javax.ejb.CreateException;
 import java.lang.reflect.InvocationTargetException;
 import javax.naming.Context;
 import java.io.PrintWriter;
+import ro.kds.erp.web.SessionBeanMissingException;
 
 /**
  * It renders a call to business logic form into XSLFO representation. This means that
@@ -162,6 +163,9 @@ public class XSLRendererServlet extends HttpServlet {
 	Method m;
 	try {
 	    theBean = request.getSession().getAttribute(sessionName);
+	    if(theBean == null) {
+		throw new SessionBeanMissingException(sessionName);
+	    }
 	    m = theBean.getClass().getMethod(method, null);
 	}
 	catch (NoSuchMethodException e) {
@@ -171,6 +175,11 @@ public class XSLRendererServlet extends HttpServlet {
 	}
 	catch (SecurityException e) {
 	    logger.log(BasicLevel.ERROR, "SecurityException while invoking the method " + method);
+	    logger.log(BasicLevel.DEBUG, e);
+	    throw new ServletException(e);
+	} 
+	catch (SessionBeanMissingException e) {
+	    logger.log(BasicLevel.ERROR, "Session bean missing (is not in the session attributes). The attribute name: " + sessionName);
 	    logger.log(BasicLevel.DEBUG, e);
 	    throw new ServletException(e);
 	}

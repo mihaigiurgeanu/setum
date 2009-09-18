@@ -179,18 +179,26 @@ function open_report(type) {
     window.open(SERVER_URL + "/reports/offer." + type);
 }
 
+function open_anexa(type) {
+    window.open(SERVER_URL + "/reports/anexa." + type);
+}
+
+
 // Global variable theForm that will be used by event handlers
 var theForm = new FormObject();
 theForm.text_fields = new Array("no", "docDate", "dateFrom", "dateTo", 
 				"period", "clientName", "name", 
 				"description", "comment",
-				"price", "relativeGain", "absoluteGain",
+				"price", "quantity",
+				"relativeGain", "absoluteGain",
 				"productCategory", "productCode",
 				"productName", "sellPrice", "entryPrice",
 				"montajProcent", "distance", "deliveries",
-				"valMontaj", "valTransport");
+				"valMontaj", "valTransport", "otherLocation",
+				"contract", "anexa", "terms", "attribute1",
+				"attribute5", "attribute6");
 
-theForm.combo_fields = new Array("montajId", "locationId");
+theForm.combo_fields = new Array("clientContactId", "montajId", "locationId");
 theForm.radio_fields = new Array();
 theForm.cb_fields = new Array("montajSeparat");
 theForm.do_link = "/arbitrary-offer.do";

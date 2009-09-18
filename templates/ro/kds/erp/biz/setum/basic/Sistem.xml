@@ -12,6 +12,10 @@
     <type>String</type>
   </field>
   <field>
+    <name>discontinued</name>
+    <type>Integer</type>
+  </field>
+  <field>
     <name>categoryId</name>
     <type>Integer</type>
   </field>

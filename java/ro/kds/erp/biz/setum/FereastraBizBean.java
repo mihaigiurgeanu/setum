@@ -71,7 +71,7 @@ public class FereastraBizBean extends FereastraBean {
 		p = ph.findByPrimaryKey(id);
 	    }
 
-	    p.setDescription("Fereastra " + form.getLf() + "x" + form.getHf());
+	    p.setDescription(form.getDescription());
 
 	    AttributeLocalHome ah = (AttributeLocalHome)PortableRemoteObject.
 		narrow(env.lookup("ejb/AttributeHome"), 
@@ -98,6 +98,7 @@ public class FereastraBizBean extends FereastraBean {
 	    attributes.add(ah.create("tipComponenta", form.getTipComponenta()));
 	    attributes.add(ah.create("tipGeam", form.getTipGeam()));
 	    attributes.add(ah.create("quantity", form.getQuantity()));
+	    attributes.add(ah.create("standard", form.getStandard()));
 
 
 	    try {
@@ -231,6 +232,8 @@ public class FereastraBizBean extends FereastraBean {
 
 	    if((a = (AttributeLocal)attributes.get("businessCategory")) != null)
 		form.setBusinessCategory(a.getStringValue());
+
+	    form.readStandard(attributes);
 
 	    r = new ResponseBean();
 
@@ -397,5 +400,36 @@ public class FereastraBizBean extends FereastraBean {
 	return r;
     }
   
+
+
+    
+
+    /**
+     * Implementation of <code>CategoryManagerBean</code> method.
+     */
+    public ResponseBean getProductReport(Integer productId) {
+	ResponseBean r;
+	try {
+	    r = loadFormData(productId);
+	    InitialContext ic = new InitialContext();
+	    Context env = (Context)ic.lookup("java:comp/env");
+	    ProductLocalHome ph = (ProductLocalHome)PortableRemoteObject.
+		narrow(env.lookup("ejb/ProductHome"), ProductLocalHome.class);
+	    ProductLocal p = ph.findByPrimaryKey(productId);
+
+	    r.addField("category.name", p.getCategory().getName());
+	    r.addField("category.id", p.getCategory().getId());
+	} catch (FinderException e) {
+	    logger.log(BasicLevel.ERROR, "FinderException in FereastraBizBean.getProductReport for productId " + productId);
+	    logger.log(BasicLevel.DEBUG, e);
+	    r = ResponseBean.getErrNotFound(e.getMessage());
+	}
+	catch (NamingException e) {
+	    logger.log(BasicLevel.ERROR, "NamingException when preparing to get the report for the product id " + productId + ": " + e.getMessage());
+	    logger.log(BasicLevel.DEBUG, e);
+	    r = ResponseBean.getErrConfigNaming(e.getMessage());
+	}
+	return r;
+    }
 
 }

@@ -31,7 +31,7 @@ import java.util.ArrayList;
  * yalla, vizor.
  *
  *
- * $Id: UsaStandardBean.java,v 1.5 2006/04/11 18:24:01 mihai Exp $
+ * $Id: UsaStandardBean.java,v 1.6 2009/09/18 13:41:36 mihai Exp $
  *
  * @author <a href="mailto:Mihai Giurgeanu@CRIMIRA"></a>
  * @version 1.0
@@ -88,6 +88,7 @@ public class UsaStandardBean
 	    ProductLocal usa = ph.findByPrimaryKey(id);
 	    form.setCode(usa.getCode());
 	    form.setName(usa.getName());
+	    form.setDiscontinued(new Integer(usa.getDiscontinued()?1:0));
 	    for(Iterator i = 
 		    usa.getCompositeProduct().getComponents().iterator();
 		i.hasNext(); ) {
@@ -168,6 +169,7 @@ public class UsaStandardBean
 
 	    product.setName(form.getName());
 	    product.setCode(form.getCode());
+	    product.setDiscontinued(form.getDiscontinued().intValue()==0?false:true);
 
 	    Collection parts = p.getComponents();
 	    ProductLocal usa = ph.findByPrimaryKey(form.getUsaId());

@@ -1,7 +1,19 @@
 <#-- arbitraryoffer-macros.ftl -->
 <#-- macro used to generate the report -->
 
+<#assign moneda = doc["child::response/child::record/child::field[attribute::name='attribute5']"]>
+<#assign cursul = doc["child::response/child::record/child::field[attribute::name='attribute6']"]>
 
+<#if moneda?length == 0>
+   <#assign moneda = "RON">
+</#if>
+<#if cursul?length == 0>
+   <#assign cursul = "1">
+<#else>
+   <#if cursul == "0">
+     <#assign cursul = "1">
+   </#if>
+</#if>
 
 <#-- parcurge oferta si grupeaza liniile dupa caracteristici -->
 <#function group_line_offers doc>
@@ -14,8 +26,9 @@
   <#list usilines as usa>
     <#local groupingCode = usa["field[attribute::name='product']/record/field[attribute::name='groupingCode']"] >
     <#local location_id = usa["field[attribute::name='locationId']"] >
+    <#local location = usa["field[attribute::name='location']"] >
     <#local montaj_separat = usa["field[attribute::name='montajSeparat']"] >
-    <#local groupingCode = "${groupingCode}${sep}locid=${location_id}${sep}${montaj_separat}" >
+    <#local groupingCode = "${groupingCode}${sep}${location}${sep}${montaj_separat}" >
     <#local usi = usi + { groupingCode : ((usi[groupingCode]!) + [usa]) } />
   </#list>
 
@@ -47,6 +60,7 @@
 
 <#macro display_usi lineno usi>
 <!-- display_usi START (${lineno}) -->
+<!-- offer_value este ${offer_value} -->
 <#-- Afiseaza o linie de oferta care grupeaza una sau mai multe usi cu caracteristici similare -->
 <#-- lineno este numarul liniei curente (va trebui afisat) -->
 <#-- usi este lista de noduri xml de tip record corespunzatoare liniei de oferta (response/record/field[name=lines]/record) -->
@@ -60,6 +74,7 @@
 <#local tip_montaj = usi[0]["field[attribute::name='tipMontaj']"] >
 <#local val_montaj = 0 >
 <#local val_transport = 0 >
+<#local total_value = 0 >
 <!--
 montaj_separat: ${montaj_separat}
 localitate_id : ${localitate_id}
@@ -69,10 +84,15 @@ tip_montaj: ${tip_montaj}
 -->
 <fo:block space-before="10pt">
 <fo:inline font-weight="bold">${lineno}. </fo:inline>
-Usa metalica &#x00AB;Subcod- ${usa["field[attribute::name='subclass']"]}&#x00BB;,
+Usa metalica &#x00AB;${search(usa?parent, "subclass", usa["field[attribute::name='subclass']"])}<!--${usa["field[attribute::name='subclass']"]}-->&#x00BB;,
     &#x00AB;varianta ${usa["field[attribute::name='version']"]}&#x00BB;,
+    <#if usa["field[attribute::name='decupareSistemId']"]["@@text"]?number != 0>
+      ${search(usa?parent, "decupareSistemId", usa["field[attribute::name='decupareSistemId']"]["@@text"])},
+    </#if>
     echipata cu 
-    	     &#x00AB;<@system name="broasca">broasca</@system>
+    	     <@enum_init /><!-- Initializeaza sistemul de despartire prin virgula -->
+    	     &#x00AB;
+	     <@system name="broasca">broasca</@system>
 	     <@system name="cilindru">cilindru</@system>
 	     <@system name="copiatCheie">copiat chei</@system>
 	     <@system name="vizor">vizor</@system>
@@ -86,10 +106,45 @@ Usa metalica &#x00AB;Subcod- ${usa["field[attribute::name='subclass']"]}&#x00BB;
 	     <@system name="selectorOrdine">selector ordine</@system>
 	     <@system name="amortizor">amortizor</@system>
 	     <@system name="alteSisteme1"></@system>
-	     <@system name="alteSisteme2"></@system>&#x00BB;
+	     <@system name="alteSisteme2"></@system>
 
+	     <@benefs name="broasca">broasca</@benefs>
+	     <@benefs name="cilindru">cilindru</@benefs>
+	     <@benefs name="sild">sild</@benefs>
+	     <@benefs name="yalla">yalla</@benefs>
+	     <@benefs name="baraAntipanica">bara antipanica</@benefs>
+	     <@benefs name="maner">maner</@benefs>
+	     <@benefs name="selectorOrdine">selector ordine</@benefs>
+	     <@benefs name="amortizor">amortizor</@benefs>
+	     <@benefs name="alteSisteme1"></@benefs>
+	     <@benefs name="alteSisteme2"></@benefs>
+	     &#x00BB;
 
 &#x00AB;finisata
+	<#if (usa["field[attribute::name='intFinisajTocId']"] = "0" ||
+	      usa["field[attribute::name='finisajTocBlat']"] = "true") &&
+	     (usa["field[attribute::name='intFinisajGrilajId']"] = "0" ||
+	      usa["field[attribute::name='finisajGrilajBlat']"] = "true") &&
+	     (usa["field[attribute::name='intFinisajFereastraId']"] = "0" ||
+	      usa["field[attribute::name='finisajFereastraBlat']"] = "true") &&
+	     (usa["field[attribute::name='intFinisajSupraluminaId']"] = "0" ||
+	      usa["field[attribute::name='finisajSupraluminaBlat']"] = "true") &&
+	     (usa["field[attribute::name='intFinisajPanouLateralId']"] = "0" ||
+	      usa["field[attribute::name='finisajPanouLateralBlat']"] = "true") &&
+	     (usa["field[attribute::name='extFinisajBlatId']"] = "0" ||
+	      usa["field[attribute::name='finisajBlatExtInt']"] = "true") &&
+	     (usa["field[attribute::name='extFinisajTocId']"] = "0" ||
+	      usa["field[attribute::name='finisajTocExtInt']"] = "true") &&
+	     (usa["field[attribute::name='extFinisajGrilajId']"] = "0" ||
+	      usa["field[attribute::name='finisajGrilajExtInt']"] = "true") &&
+	     (usa["field[attribute::name='extFinisajFereastraId']"] = "0" ||
+	      usa["field[attribute::name='finisajFereastraExtInt']"] = "true") &&
+	     (usa["field[attribute::name='extFinisajSupraluminaId']"] = "0" ||
+	      usa["field[attribute::name='finisajSupraluminaExtInt']"] = "true") &&
+	     (usa["field[attribute::name='extFinisajPanouLateralId']"] = "0" ||
+	      usa["field[attribute::name='finisajPanouLateralExtInt']"] = "true") >
+	<@finisaj name="intFinisajBlat"></@finisaj>
+	<#else>
 	<@finisaj name="intFinisajBlat">blat interior:</@finisaj>
 	<@finisaj name="intFinisajToc">toc interior:</@finisaj>
 	<@finisaj name="intFinisajGrilaj">grilaj interior:</@finisaj>
@@ -102,8 +157,9 @@ Usa metalica &#x00AB;Subcod- ${usa["field[attribute::name='subclass']"]}&#x00BB;
 	<@finisaj name="extFinisajFereastra">fereastra exterior:</@finisaj>
 	<@finisaj name="extFinisajSupralumina">supralumina exterior:</@finisaj>
 	<@finisaj name="extFinisajPanouLateral">panou lateral exterior:</@finisaj>
+	</#if>
 &#x00BB;
-agrement tehnic nr. 
+agrement tehnic nr. ${doc["child::response/child::record/child::field[attribute::name='agrementTehnic']"]}
 </fo:block>
 
 <fo:table border-collapse="collapse">
@@ -119,11 +175,11 @@ agrement tehnic nr.
     <fo:table-row>
 	<fo:table-cell column-number="1" border-style="solid" font-size="10pt" font-weight="bold" number-rows-spanned="2"><fo:block>COD SETUM</fo:block></fo:table-cell>
 	<fo:table-cell column-number="2" border-style="solid" font-size="10pt" font-weight="bold" number-rows-spanned="2"><fo:block>COD BENEF</fo:block></fo:table-cell>
-	<fo:table-cell column-number="3" border-style="solid" font-size="10pt" font-weight="bold" number-columns-spanned="2"><fo:block>DIMENSIUNI [mm]</fo:block></fo:table-cell>
+	<fo:table-cell column-number="3" border-style="solid" font-size="10pt" font-weight="bold" number-columns-spanned="2"><fo:block>DIMENSIUNI EXECUTIE [mm]</fo:block></fo:table-cell>
 	<fo:table-cell column-number="5" border-style="solid" font-size="10pt" font-weight="bold" number-rows-spanned="2"><fo:block>DESCRIERE</fo:block></fo:table-cell>
 	<fo:table-cell column-number="6" border-style="solid" font-size="10pt" font-weight="bold" number-rows-spanned="2" text-align="right"><fo:block>BUC</fo:block></fo:table-cell>
-	<fo:table-cell column-number="7" border-style="solid" font-size="10pt" font-weight="bold" number-rows-spanned="2" text-align="right"><fo:block>Pret/Buc fara TVA [RON]</fo:block></fo:table-cell>
-	<fo:table-cell column-number="8" border-style="solid" font-size="10pt" font-weight="bold" number-rows-spanned="2" text-align="right"><fo:block>Pret/total fara TVA [RON]</fo:block></fo:table-cell>
+	<fo:table-cell column-number="7" border-style="solid" font-size="10pt" font-weight="bold" number-rows-spanned="2" text-align="right"><fo:block>Pret/Buc fara TVA [${moneda}]</fo:block></fo:table-cell>
+	<fo:table-cell column-number="8" border-style="solid" font-size="10pt" font-weight="bold" number-rows-spanned="2" text-align="right"><fo:block>Pret/total fara TVA [${moneda}]</fo:block></fo:table-cell>
     </fo:table-row>
     <fo:table-row>
 	<fo:table-cell column-number="3" border-style="solid" font-size="10pt" font-weight="bold"><fo:block>Le</fo:block></fo:table-cell>
@@ -134,10 +190,11 @@ agrement tehnic nr.
     <#local prod_usa = item_usa["field[attribute::name='product']/record"] >
     <#local val_montaj = val_montaj + cvnumber(item_usa["field[attribute::name='valMontaj']"]) >
     <#local val_transport = val_transport + cvnumber(item_usa["field[attribute::name='valTransport']"]) >
+    <#local total_value = total_value + cvnumber(item_usa["field[attribute::name='lineValue']"]) />
 
     <#local lepl = 0 /> <#-- largime totala panouri laterale -->
     <#local hesl = 0 /> <#-- inaltime totala supralumini -->
-      <#list prod_usa["field[attribute::name='parts']/record/field[name='part']/record"] as part>
+      <#list prod_usa["field[attribute::name='parts']/record/field[attribute::name='part']/record"] as part>
         <#switch part["field[attribute::name='category.id']"]?number>
 	<#case 9980> <#-- panou lateral -->
 	<#local lepl = lepl + part["field[attribute::name='lpl']"]?number />
@@ -155,44 +212,57 @@ agrement tehnic nr.
       <fo:table-cell column-number="3" border-style="solid" font-size="10pt"><fo:block>${lexec}</fo:block></fo:table-cell>
       <fo:table-cell column-number="4" border-style="solid" font-size="10pt"><fo:block>${hexec}</fo:block></fo:table-cell>
       <fo:table-cell column-number="5" border-style="solid" font-size="10pt"><fo:block>
+          <fo:block>
           ${prod_usa["field[attribute::name='k']"]} canat(e),
-	  foaie ${search(prod_usa?parent, "intFoil", prod_usa["field[attribute::name='intFoil']"])} int./${search(prod_usa?parent, "extFoil", prod_usa["field[attribute::name='extFoil']"])} ext., 
+	  foaie ${search(prod_usa?parent, "intFoil", prod_usa["field[attribute::name='intFoil']"])} int./${search(prod_usa?parent, "extFoil", prod_usa["field[attribute::name='extFoil']"])} ext. 
 	  <#if prod_usa["field[attribute::name='k']"]?number &gt; 1>
-	  Lcurent = ${prod_usa["field[attribute::name='lCurrent']"]?number},
+	  , Lcurent = ${prod_usa["field[attribute::name='lCurrent']"]?number}
 	  </#if>
+	  </fo:block>
+	  <#list prod_usa["field[attribute::name='parts']/record/field[attribute::name='part']/record"] as part>
+	  <fo:block space-before="1mm">
+	  ${part["field[attribute::name='description']"]}
+	  </fo:block>
+	  </#list>
       </fo:block></fo:table-cell>
-      <fo:table-cell column-number="6" border-style="solid" font-size="10pt" text-align="right"><fo:block><#--${item_usa["field[attribute::name='quantity']"]}-->1</fo:block></fo:table-cell>
-      <fo:table-cell column-number="7" border-style="solid" font-size="10pt" text-align="right"><fo:block>${item_usa["field[attribute::name='price']"]}</fo:block></fo:table-cell>
-      <fo:table-cell column-number="8" border-style="solid" font-size="10pt" text-align="right"><fo:block>${item_usa["field[attribute::name='price']"]}</fo:block></fo:table-cell>
+      <fo:table-cell column-number="6" border-style="solid" font-size="10pt" text-align="right"><fo:block>${cvnumber(item_usa["field[attribute::name='quantity']"])?string("#,##0.00")}</fo:block></fo:table-cell>
+      <fo:table-cell column-number="7" border-style="solid" font-size="10pt" text-align="right"><fo:block>${(cvnumber(item_usa["field[attribute::name='price']"])/cursul?number)?string("#,##0.00")}</fo:block></fo:table-cell>
+      <fo:table-cell column-number="8" border-style="solid" font-size="10pt" text-align="right"><fo:block>${(cvnumber(item_usa["field[attribute::name='lineValue']"])/cursul?number)?string("#,##0.00")}</fo:block></fo:table-cell>
     </fo:table-row>
-    <#local total_value = total_value!0 + cvnumber(item_usa["field[attribute::name='price']"]) />
     </#list>
+
     <#if montaj_separat == "true">
     <fo:table-row>
       <fo:table-cell column-number="1" border-style="solid" font-size="10pt" font-weight="bold" number-columns-spanned="7"><fo:block text-align="right">TOTAL fara TVA</fo:block></fo:table-cell>
-      <fo:table-cell column-number="8" border-style="solid" font-size="10pt"><fo:block text-align="right">${total_value}</fo:block></fo:table-cell>
+      <fo:table-cell column-number="8" border-style="solid" font-size="10pt"><fo:block text-align="right">${(total_value/cursul?number)?string("#,##0.00")}</fo:block></fo:table-cell>
     </fo:table-row>
     <fo:table-row>
       <fo:table-cell column-number="1" border-style="solid" font-size="10pt" font-weight="bold" number-columns-spanned="7"><fo:block text-align="right">Valoare montaj ${tip_montaj}<#if val_transport &gt; 0 >+ transport ${localitate}</#if></fo:block></fo:table-cell>
-      <fo:table-cell column-number="8" border-style="solid" font-size="10pt"><fo:block text-align="right">${val_transport + val_montaj}</fo:block></fo:table-cell>
+      <fo:table-cell column-number="8" border-style="solid" font-size="10pt"><fo:block text-align="right">${((val_transport + val_montaj)/cursul?number)?string("#,##0.00")}</fo:block></fo:table-cell>
     </fo:table-row>
     <#else>
     <fo:table-row>
       <fo:table-cell column-number="1" border-style="solid" font-size="10pt" font-weight="bold" number-columns-spanned="7"><fo:block text-align="right">Valoare montaj ${tip_montaj}<#if val_transport &gt; 0 >+ transport ${localitate}</#if></fo:block></fo:table-cell>
-      <fo:table-cell column-number="8" border-style="solid" font-size="10pt"><fo:block text-align="right">Inclus in pret</fo:block></fo:table-cell>
+      <fo:table-cell column-number="8" border-style="solid" font-size="10pt">
+          <fo:block text-align="right">
+	  <#if val_montaj + val_transport == 0>0<#else>Inclus in pret</#if>
+	  </fo:block>
+      </fo:table-cell>
     </fo:table-row>
     </#if>
+
     <#local total_value = total_value + val_transport + val_montaj >
-    <#assign offer_value = offer_value!0 + total_value!0 />
+    <#assign offer_value = offer_value + total_value >
+    <!-- offer_value = ${offer_value} -->
     <fo:table-row>
       <fo:table-cell column-number="1" border-style="solid" font-size="10pt" font-weight="bold" number-columns-spanned="7"><fo:block text-align="right">TOTAL fara TVA</fo:block></fo:table-cell>
-      <fo:table-cell column-number="8" border-style="solid" font-size="10pt"><fo:block text-align="right">${total_value}</fo:block></fo:table-cell>
+      <fo:table-cell column-number="8" border-style="solid" font-size="10pt"><fo:block text-align="right">${(total_value/cursul?number)?string("#,##0.00")}</fo:block></fo:table-cell>
     </fo:table-row>
   </fo:table-body>
 </fo:table>
 
 
-
+<!-- offer_value = ${offer_value} -->
 <!-- display_usi END (${lineno}) -->
 </#macro>
 
@@ -224,8 +294,8 @@ agrement tehnic nr.
 	<fo:table-cell column-number="2" border-style="solid" font-size="10pt" font-weight="bold" ><fo:block>COD BENEF</fo:block></fo:table-cell>
 	<fo:table-cell column-number="3" border-style="solid" font-size="10pt" font-weight="bold" ><fo:block>DESCRIERE</fo:block></fo:table-cell>
 	<fo:table-cell column-number="4" border-style="solid" font-size="10pt" font-weight="bold" text-align="right"><fo:block>BUC</fo:block></fo:table-cell>
-	<fo:table-cell column-number="5" border-style="solid" font-size="10pt" font-weight="bold" text-align="right"><fo:block>Pret/Buc fara TVA [RON]</fo:block></fo:table-cell>
-	<fo:table-cell column-number="6" border-style="solid" font-size="10pt" font-weight="bold" text-align="right"><fo:block>Pret/total fara TVA [RON]</fo:block></fo:table-cell>
+	<fo:table-cell column-number="5" border-style="solid" font-size="10pt" font-weight="bold" text-align="right"><fo:block>Pret/Buc fara TVA [${moneda}]</fo:block></fo:table-cell>
+	<fo:table-cell column-number="6" border-style="solid" font-size="10pt" font-weight="bold" text-align="right"><fo:block>Pret/total fara TVA [${moneda}]</fo:block></fo:table-cell>
     </fo:table-row>
 
   </for:table-body>
@@ -243,17 +313,51 @@ agrement tehnic nr.
 
 <#-- afiseaza un sistem dintr-o usa -->
 <#macro system name>
-  <#if usa["child::field[attribute::name='${name}Id']"]?number &gt; 0>
-  <#nested> ${search(usa?parent, "${name}Id", usa["child::field[attribute::name='${name}Id']"])}<#if usa["field[attribute::name='${name}Buc']"]?number &gt; 1 >
-	- ${usa["child::field[attribute::name='${name}Buc']"]} buc.</#if>,
+  <!-- 
+       sistem name: ${name}
+       sistem id: /${usa["field[attribute::name='${name}Id']"]["@@text"]}/
+       sistem buc: /${usa["field[attribute::name='${name}Buc']"]["@@text"]}/
+  -->
+  <#if usa["field[attribute::name='${name}Id']"]?size &gt; 0>
+    <#if (usa["field[attribute::name='${name}Id']"]["@@text"]!0)?number != 0>
+    <@enum_next /><#nested> ${search(usa?parent, "${name}Id", usa["field[attribute::name='${name}Id']"]["@@text"])}<#if (usa["field[attribute::name='${name}Buc']"]["@@text"]!0)?number != 1 >
+	- ${usa["field[attribute::name='${name}Buc']"]["@@text"]} buc.</#if>
+    </#if>
+  <#else>
+    <!-- sistemul ${name} nu exista -->
+  </#if>
+</#macro>
+
+<#-- afiseaza un sistem beneficiar -->
+<#macro benefs name>
+  <#local key_name = "benef${name?cap_first}" >
+  <#local desc = usa["field[attribute::name='${key_name}']"]["@@text"] >
+  <#local buc = usa["field[attribute::name='${key_name}Buc']"]["@@text"] >
+  <#local tip = usa["field[attribute::name='benef${name?cap_first}Tip']"]["@@text"] >
+  <!--
+	sistem xml name: /${key_name}/
+	sistem tip: /${tip}/
+	sistem desc: /${desc}/
+       	sistem buc: /${buc}/
+  -->
+  <#if buc?number &gt; 0 >
+     <@enum_next />
+     <#nested>
+     ${desc}
+     <#if tip?string != '' && tip?number != 0>${search(usa?parent, "${key_name}Tip", tip)}</#if>
+     <#if buc?number != 1>${buc} buc</#if>
   </#if>
 </#macro>
 
 <#-- afiseaza finisajul -->
 <#macro finisaj name>
-  <#if usa["child::field[attribute::name='${name}Id']"]?number != 0>
-  <#nested/> ${usa["child::field[attribute::name='${name}']"]};
-  </#if> 
+  <#if usa["child::field[attribute::name='${name}Id']"]?size &gt; 0>
+    <#if (usa["child::field[attribute::name='${name}Id']"]["@@text"]!"0") != "0">
+    <#nested/> ${usa["child::field[attribute::name='${name}']"]};
+    </#if> 
+  <#else>
+    <!-- finisajul ${name} nu exista -->
+  </#if>
 </#macro>
 
 
@@ -438,6 +542,16 @@ ${record["child::field[attribute::name='code']"]};
 </#macro>
 
 
+<#-- 2 macro-uri cu care pui virgula in fata unui element dintr-o enumerare
+     doar daca nu este primul element din acea enumerare
+-->
+<#macro "enum_init">
+  <#assign first_elem = true>
+</#macro>
+
+<#macro "enum_next">
+  <#if first_elem == true><#assign first_elem = false><#else>,</#if>
+</#macro>
 
 <#-- search a value-list for a value coresponding to a value-id -->
 <#function search node vl_name vl_key>

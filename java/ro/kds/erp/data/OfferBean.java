@@ -124,6 +124,51 @@ public abstract class OfferBean implements EntityBean {
     public abstract ClientLocal getClient();
     public abstract void setClient(ClientLocal client);
 
+    public abstract String getContact();
+    public abstract void setContact(String contact);
+
+    public abstract ContactLocal getClientContact();
+    public abstract void setClientContact(ContactLocal contact);
+
+    public abstract String getContract();
+    public abstract void setContract(String contract);
+
+    public abstract String getAnexa();
+    public abstract void setAnexa(String anexa);
+
+    public abstract String getTerms();
+    public abstract void setTerms(String terms);
+
+    public abstract String getAttribute1();
+    public abstract void setAttribute1(String attr);
+
+    public abstract String getAttribute2();
+    public abstract void setAttribute2(String attr);
+
+    public abstract String getAttribute3();
+    public abstract void setAttribute3(String attr);
+
+    public abstract String getAttribute4();
+    public abstract void setAttribute4(String attr);
+
+    public abstract String getAttribute5();
+    public abstract void setAttribute5(String attr);
+
+    public abstract String getAttribute6();
+    public abstract void setAttribute6(String attr);
+
+    public abstract String getAttribute7();
+    public abstract void setAttribute7(String attr);
+
+    public abstract String getAttribute8();
+    public abstract void setAttribute8(String attr);
+
+    public abstract String getAttribute9();
+    public abstract void setAttribute9(String attr);
+
+    public abstract String getAttribute10();
+    public abstract void setAttribute10(String attr);
+
     // Implementation of javax.ejb.EntityBean
 
     public void setEntityContext(EntityContext entityContext) throws EJBException, RemoteException {

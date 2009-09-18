@@ -139,7 +139,10 @@
 		 selectionsListing.view = make_treeview
 		     (selections,
 		      function (row, column) {
-			  return selections.get_cell_text(row, column);
+		          var col;
+			  if(column.id) col = column.id; else col = column;
+			  if(selections)
+			    return selections.get_cell_text(row, col);
 		      });
 							
 	     }
@@ -153,7 +156,10 @@
 		 productsListing.view = make_treeview
 		     (products,
 		      function (row, column) {
-			  return products.get_cell_text(row, column);
+		          var col;
+			  if(column.id) col = column.id; else col = column;
+			  if(products)
+			    return products.get_cell_text(row, col);
 		      });
 		 */
 
@@ -163,7 +169,10 @@
 		 productsListing.view = make_treeview
 		     (products,
 		      function (row, column) {
-			  return products[row][column];
+		          var col;
+			  if(column.id) col = column.id; else col = column;
+			  if(products)
+			    return products[row][col];
 		      });
 	     }
 
