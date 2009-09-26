@@ -489,8 +489,8 @@ public class OrdersBiz extends OrdersBean {
 	    }
 
 	    ol.setOfferItem(getOfferItem());
-	    ol.setPrice(form.getPrice().setScale(2, BigDecimal.ROUND_HALF_UP));
-	    ol.setQuantity(form.getQuantity().setScale(2, BigDecimal.ROUND_HALF_UP));
+	    ol.setPrice(form.getPrice());
+	    ol.setQuantity(form.getQuantity());
 	    
 	    try {
 		//form.setTotal(getOrderedAmount());
