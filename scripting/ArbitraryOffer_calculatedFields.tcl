@@ -1,18 +1,5 @@
 source "$scripting_root/commons.tcl"
 
-
-
-
-set absoluteGain [expr $price - $sellPrice]
-
-if {$sellPrice != 0} {
-    set relativeGain [expr $absoluteGain * 100/$sellPrice]
-} else {
-    set relativeGain 0
-}
-
-set vatPrice [expr $price * 1.19]
-
 set locationCode 0
 if { $locationId != 0 } {
     set locationCode [product_by_id $locationId getCode]
@@ -47,3 +34,19 @@ if {[info exists attribute6] == 0
     set attribute6 1
 }
 
+
+set valVatMontaj [expr $valMontaj * 1.19]
+set valVatTransport [expr $valTransport * 1.19]
+
+set vatPrice [expr round($price * 1.19 + $valVatMontaj + $valVatTransport) - $valVatMontaj - $valVatTransport]
+
+set price [expr $vatPrice / 1.19]
+
+
+set absoluteGain [expr $price - $sellPrice]
+
+if {$sellPrice != 0} {
+    set relativeGain [expr $absoluteGain * 100/$sellPrice]
+} else {
+    set relativeGain 0
+}

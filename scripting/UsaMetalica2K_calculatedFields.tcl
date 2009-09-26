@@ -68,6 +68,9 @@ log "le: $le"
 set he [expr $hg - $hcorrection - 10 + $h1Treshold]
 log "he: $he"
 
+set se [expr ($le * $he)/1000000]
+log "se: $se"
+
 set luft 5
 set lFoaie [expr $le - (2 * $bFrame + 2 * $luft)]
 

@@ -189,7 +189,7 @@ var theForm = new FormObject();
 theForm.text_fields = new Array("no", "docDate", "dateFrom", "dateTo", 
 				"period", "clientName", "name", 
 				"description", "comment",
-				"price", "quantity",
+				"vatPrice", "price", "quantity",
 				"relativeGain", "absoluteGain",
 				"productCategory", "productCode",
 				"productName", "sellPrice", "entryPrice",

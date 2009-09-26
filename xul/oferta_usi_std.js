@@ -44,12 +44,20 @@ theForm.do_link = "/oferta_usi_std.do";
 theForm.setupEventListeners();
 load_offers();
 
-
-// addProducts() opens a dialog box for selecting the products to
-// be added to the offer; the products are added with the standard
-// reference price
-function addProducts() {
-    window.openDialog("select_usistd.xul", "usistdselction", "chrome,modal");
+// opens a dialog to select new products to add
+function add_products() {
+  var select_handler = {
+  theForm: theForm,
+  select: function add_new_product(productId) {
+      var req = this.theForm.get_request();
+      req.add("command", "addProduct");
+      req.add("param0", productId);
+      this.theForm.post_request(req);
+    },
+  select_end: load_items
+  };
+  
+  window.openDialog("select-usastd.xul", "usistdselction", "chrome,modal", select_handler);
 }
 
 // add the specified product to the offer

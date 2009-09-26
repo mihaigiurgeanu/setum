@@ -116,14 +116,12 @@ windows.arguments[0].select(productId)
 		    <menupopup id="version-popup"/>
 		  </menulist>
 		</row>
-		<!--
 		<row>
-		  <label control="material" value="Material:"/>
+		  <label control="material" value="Dimensiuni atipice:"/>
 		  <menulist id="material" >
 		    <menupopup id="material-popup" />
 		  </menulist>
 		</row>
-		-->
 		<row>
 		  <label value="Dimensiuni gol:"/>
 		  <box>
@@ -135,7 +133,11 @@ windows.arguments[0].select(productId)
 		      <rows>
 			<row>
 			  <label control="lg" value="Lg ="/>
+			  <hbox>
 			  <textbox id="lg" />
+			  <label control="se" value="Se (mp) = "/>
+			  <textbox id="se" disabled="true"/>
+			  </hbox>
 			</row>
 			<row>
 			  <label control="hg" value="Hg ="/>

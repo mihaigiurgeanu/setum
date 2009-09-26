@@ -553,7 +553,7 @@
 		      <fo:table-row border-style="solid">
 			<fo:table-cell column-number="1">
 			  <fo:block>
-			    Copiat chei:
+			    Multiplicat chei:
 			    <#if copiatCheieId != "0">
 			    ${ssearch(usa, 'copiatCheieId')}
 			    </#if>
@@ -656,6 +656,22 @@
 			    <#if amortizorId != "0">
 			    ${usa.record["field[attribute::name='amortizorBuc']"]}
 			    </#if>
+			  </fo:block>
+			</fo:table-cell>
+		      </fo:table-row>
+		      </#if>
+		      <#assign baraAntipanicaId = usa.record["field[attribute::name='baraAntipanicaId']"]>
+		      <#if baraAntipanicaId != "0">
+		      <fo:table-row border-style="solid">
+			<fo:table-cell column-number="1">
+			  <fo:block>
+			    Bara antipanica:
+			    ${ssearch(usa, 'baraAntipanicaId')}
+			  </fo:block>
+			</fo:table-cell>
+			<fo:table-cell column-number="2">
+			  <fo:block>
+			    ${usa.record["field[attribute::name='baraAntipanicaBuc']"]}
 			  </fo:block>
 			</fo:table-cell>
 		      </fo:table-row>

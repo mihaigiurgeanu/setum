@@ -575,6 +575,32 @@ public abstract class UsaMetalica2KBean
 	computeCalculatedFields(r);
 	return r;
     }
+    public ResponseBean updateSe(Double se) {
+        ResponseBean r = new ResponseBean();
+	Double oldVal = form.getSe();
+	form.setSe(se);
+	r.addRecord();
+	r.addField("se", se); // for number format
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".se");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
+		script.setVar(OLDVAL_VARNAME, oldVal, Double.class);
+		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the se", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
     public ResponseBean updateLcorrection(Double lcorrection) {
         ResponseBean r = new ResponseBean();
 	Double oldVal = form.getLcorrection();
@@ -4556,6 +4582,7 @@ public abstract class UsaMetalica2KBean
 	r.addField("hg", form.getHg());
 	r.addField("le", form.getLe());
 	r.addField("he", form.getHe());
+	r.addField("se", form.getSe());
 	r.addField("lcorrection", form.getLcorrection());
 	r.addField("hcorrection", form.getHcorrection());
 	r.addField("lCurrent", form.getLCurrent());
@@ -4781,6 +4808,12 @@ public abstract class UsaMetalica2KBean
 	    s.setVar("he", form.getHe(), Double.class);
 	} catch (ScriptErrorException e) {
 	    logger.log(BasicLevel.WARN, "Can not set the value of field: he from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    s.setVar("se", form.getSe(), Double.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: se from the script");
             logger.log(BasicLevel.DEBUG, e);
         }
 	try {
@@ -5787,6 +5820,17 @@ public abstract class UsaMetalica2KBean
 	    }
 	} catch (ScriptErrorException e) {
 	    logger.log(BasicLevel.WARN, "Can not get the value of field: he from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    field = s.getVar("se", Double.class);
+	    if(!field.equals(form.getSe())) {
+	        logger.log(BasicLevel.DEBUG, "Field se modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setSe((Double)field);
+	        r.addField("se", (Double)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: se from the script");
             logger.log(BasicLevel.DEBUG, e);
         }
 	try {

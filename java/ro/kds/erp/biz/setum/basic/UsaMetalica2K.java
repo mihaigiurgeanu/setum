@@ -37,6 +37,7 @@ public interface UsaMetalica2K extends EJBObject {
     public ResponseBean updateHg(Double newHg) throws RemoteException;
     public ResponseBean updateLe(Double newLe) throws RemoteException;
     public ResponseBean updateHe(Double newHe) throws RemoteException;
+    public ResponseBean updateSe(Double newSe) throws RemoteException;
     public ResponseBean updateLcorrection(Double newLcorrection) throws RemoteException;
     public ResponseBean updateHcorrection(Double newHcorrection) throws RemoteException;
     public ResponseBean updateLCurrent(Double newLCurrent) throws RemoteException;

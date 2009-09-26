@@ -48,6 +48,10 @@
     <type>Double</type>
   </field>
   <field>
+    <name>se</name>
+    <type>Double</type>
+  </field>
+  <field>
     <name>lcorrection</name>
     <type>Double</type>
   </field>

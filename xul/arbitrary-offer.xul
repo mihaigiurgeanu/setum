@@ -240,6 +240,10 @@ Data-entry form for general purpose offers.
 	    </columns>
 	    <rows>
 	      <row>
+		<label control="vatPrice" value="Pret cu TVA"/>
+		<textbox id="vatPrice"/>
+	      </row>
+	      <row>
 		<label control="price" value="Pret"/>
 		<textbox id="price"/>
 	      </row>

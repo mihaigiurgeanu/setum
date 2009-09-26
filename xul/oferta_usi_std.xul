@@ -24,7 +24,7 @@
     <command id="command-save-subform" 
 	     oncommand="theForm.save_sub('saveSubForm');load_items();document.getElementById('maintab').selectedIndex=1" />
     <command id="command-add-products"
-	     oncommand="addProducts();" />
+	     oncommand="add_products();" />
 
 
     <command id="onprint" oncommand="openDialog('print-oferta_usi_std_dlg.xul', 'print-oferta_usi_std_dlg', 'chrome,modal')" />

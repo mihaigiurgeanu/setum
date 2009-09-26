@@ -6,7 +6,7 @@ var theForm = new FormObject();
 
 theForm.text_fields = new Array("name", 
 				"lg", "hg", "lcorrection", "hcorrection",
-				"le", "he", "lCurrent",
+				"le", "he", "se", "lCurrent",
 				"lUtil", "hUtil", "lFoaie", "hFoaie", "lFoaieSec",
 				"lFrame", "bFrame", "cFrame", "lTreshold",
 				"cTreshold", "hTreshold", "h1Treshold",

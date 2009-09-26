@@ -17,9 +17,6 @@ proc log {message} {
     }
 }
 
-set se [expr ($le * $he)/1000000]
-log "se: $se"
-
 log "----start preturi sisteme----"
 set pret_subcod [[product_by_code_safe 11001 $subclass getPrice1] doubleValue]
 set pret_versiune [[product_by_code_safe 11002 $version getPrice1] doubleValue]
@@ -79,7 +76,14 @@ set montare_alteSisteme2 [[product_by_id_safe $alteSisteme2Id getPrice2] doubleV
 
 log "----end preturi sisteme----"
 
-set price_expr "$se * ($pret_subcod + $pret_versiune + $pret_material + $pret_foaieInterioara + $pret_foaieExterioara + $pret_foaieInterioaraSecundara + $pret_foaieExterioaraSecundara + $pret_izolatie) + $pret_deschidere + $pret_parteDeschidere + $pret_pozitionareFoaie"
+# Pentru usile UA STAS folosesc pret fix si nu pret pe suprafata
+if {[string equal -nocase $version "UA STAS"]} {
+    log "UA STAS, pret fix = $pret_versiune"
+    set price_expr "$pret_versiune + $pret_deschidere + $pret_parteDeschidere + $pret_pozitionareFoaie"
+} else {
+    log "Nu e UA STAS, calculez pret pe metrul patrat"
+    set price_expr "$se * ($pret_subcod + $pret_versiune + $pret_material + $pret_foaieInterioara + $pret_foaieExterioara + $pret_foaieInterioaraSecundara + $pret_foaieExterioaraSecundara + $pret_izolatie) + $pret_deschidere + $pret_parteDeschidere + $pret_pozitionareFoaie"
+}
 set sellPrice [expr $price_expr]
 
 log "price1: $price_expr"

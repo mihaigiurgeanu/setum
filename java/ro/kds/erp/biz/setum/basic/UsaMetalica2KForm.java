@@ -38,6 +38,7 @@ public class UsaMetalica2KForm implements Serializable {
     Double hg;
     Double le;
     Double he;
+    Double se;
     Double lcorrection;
     Double hcorrection;
     Double lCurrent;
@@ -229,6 +230,10 @@ public class UsaMetalica2KForm implements Serializable {
 
 
        this.he = new Double(0);
+   
+
+
+       this.se = new Double(0);
    
 
 
@@ -980,6 +985,21 @@ public class UsaMetalica2KForm implements Serializable {
 	AttributeLocal a = (AttributeLocal)attributes.get("he");
 	if(a != null) {
 	    this.setHe(a.getDoubleValue());
+	}
+    }
+
+    public void setSe(Double newSe) {
+        this.se = newSe;
+    }
+
+    public Double getSe() {
+        return se;
+    }
+
+    public void readSe(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("se");
+	if(a != null) {
+	    this.setSe(a.getDoubleValue());
 	}
     }
 
