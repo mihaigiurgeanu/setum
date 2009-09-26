@@ -94,7 +94,7 @@ Usa metalica &#x00AB;${search(usa?parent, "subclass", usa["field[attribute::name
     	     &#x00AB;
 	     <@system name="broasca">broasca</@system>
 	     <@system name="cilindru">cilindru</@system>
-	     <@system name="copiatCheie">copiat chei</@system>
+	     <@system name="copiatCheie">multiplicat chei</@system>
 	     <@system name="vizor">vizor</@system>
 	     <@system name="sild">sild</@system>
 	     <@system name="rozeta">rozeta</@system>
