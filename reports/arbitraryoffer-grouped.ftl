@@ -158,7 +158,7 @@
       <fo:block font-family="Times" font-size="10pt" font-weight="bold" text-align="right">TOTAL fara TVA: ${((offer_value!0)/(cursul?number))?string("#,##0.00")} ${moneda}</fo:block>
       <fo:block font-family="Times" font-size="10pt" font-weight="bold" text-align="right">TOTAL cu TVA: ${(((offer_value!0)/(cursul?number)) * 1.19)?string("#,##0.00")} ${moneda}</fo:block>
 
-      <fo:block font-family="Times" font-size="10pt">
+      <fo:block font-family="Times" font-size="10pt" linefeed-treatment="preserve">
 	<fo:inline font-weight="bold">OBSERVATII:</fo:inline>
 	${doc["response/record/field[attribute::name='comment']"]?html}
       </fo:block>
@@ -171,7 +171,7 @@
 	<fo:block>Termeni contractuali: avans 50% la data semnarii contractului, diferenta de 50% la data livrarii produsului, in lei la cursul BNR din ziua facturarii.</fo:block>
 	-->
 	<fo:block linefeed-treatment="preserve">
-	  ${doc["response/record/field[attribute::name='terms']"]}
+	  ${doc["response/record/field[attribute::name='terms']"]?html}
 	</fo:block>
 
 	<fo:block font-family="Times" font-size="10pt" font-weight="bold" space-before="3mm" text-align="right">

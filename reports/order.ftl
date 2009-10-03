@@ -1120,7 +1120,7 @@
 		  <!-- end optiuni stanga -->
 
 		  <!-- observatii -->
-		  <fo:block border-style="solid" margin-bottom="1mm">
+		  <fo:block border-style="solid" margin-bottom="1mm" linefeed-treatment="preserve">
 		    Observatii: ${usa.record["field[attribute::name='sistemeComment']"]}
 		  </fo:block>
 
@@ -1376,7 +1376,7 @@
       </#list>
 
       <#if (doc.response.record["field[attribute::name='observatii']"])?length &gt; 0>
-      <fo:block border-style="solid" margin-top="2mm">
+      <fo:block border-style="solid" margin-top="2mm" linefeed-treatment="preserve">
 	 ${doc.response.record["field[attribute::name='observatii']"]}
       </fo:block>
       </#if>

@@ -361,7 +361,7 @@
 	   </#list>
 	   <!-- end tip montaj -->
 	 </fo:block>
-	 <fo:block space-after="1cm">
+	 <fo:block space-after="1cm" linefeed-treatment="preserve">
 	   Observatii montaj: ${doc.response.record["field[attribute::name='observatii']"]}
 	 </fo:block>
 
