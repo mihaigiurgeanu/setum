@@ -119,7 +119,7 @@
 	  -
 	  ${ssearch(usa, 'version')},
 	  <!--izolata cu
-	  ${ssearch(usa, 'isolation')}-->,
+	  ${ssearch(usa, 'isolation')}-->
 
 
 	  <!-- start sisteme -->
@@ -135,6 +135,13 @@
 	  <@enum_next/> broasca
 	  ${ssearch(usa, 'broascaId')}
 	  ${usa.record["field[attribute::name='broascaBuc']"]} buc
+	  </#if>
+
+	  <#assign baraAntipanicaId = usa.record["field[attribute::name='baraAntipanicaId']"]>
+	  <#if baraAntipanicaId != "0">
+	  <@enum_next/> bara antipanica
+	  ${ssearch(usa, 'baraAntipanicaId')}
+	  ${usa.record["field[attribute::name='baraAntipanicaBuc']"]} buc
 	  </#if>
 
 	  <#assign sildId = usa.record["field[attribute::name='sildId']"]>
