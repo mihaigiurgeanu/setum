@@ -1383,7 +1383,7 @@
     <init-param>
       <description>The name of the stylesheet to be used by the Transformer</description>
       <param-name>stylesheet</param-name>
-      <param-value>livrari.ftl</param-value>
+      <param-value>livrari-cu-montaj.ftl</param-value>
     </init-param>
   </servlet>
 
@@ -1410,7 +1410,7 @@
     <init-param>
       <description>The name of the stylesheet to be used by the Transformer</description>
       <param-name>stylesheet</param-name>
-      <param-value>livrari.ftl</param-value>
+      <param-value>livrari-fara-montaj.ftl</param-value>
     </init-param>
   </servlet>
 
