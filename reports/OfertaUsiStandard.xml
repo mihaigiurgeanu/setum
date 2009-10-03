@@ -528,7 +528,6 @@
 						isPrintWhenDetailOverflows="false"/>
 					<graphicElement stretchType="NoStretch" pen="2Point" fill="Solid" />
 				</line>
-				<!--
 				<image  scaleImage="RetainShape" vAlign="Top" hAlign="Left" isUsingCache="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
 						mode="Opaque"
@@ -547,7 +546,7 @@
 						isPrintWhenDetailOverflows="false"/>
 					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
 					<graphicElement stretchType="NoStretch" pen="None" fill="Solid" />
-					<imageExpression class="java.lang.String"><![CDATA["http://setumserver:9000/setum/images/sigla.png"]]></imageExpression>				</image>-->
+					<imageExpression class="java.lang.String"><![CDATA["images/sigla.png"]]></imageExpression>				</image>
 				<staticText>
 					<reportElement
 						mode="Opaque"
@@ -569,11 +568,10 @@
 						<font reportFont="header" fontName="sansserif" size="8"/>
 					</textElement>
 				<text><![CDATA[BUCURESTI B-dul PRECIZIEI nr. 32, Sector 6
-Tel.:  021.316.39.57, 021.316.05.78, 021.316.18.56
+Tel.:  021.316.39.57, 021.316.05.78
 Tel/Fax: 021.316.05.90
-Web: http://www.setumsa.ro; e-mail: desfacere@setum.ro
-contractari@setum.ro
-Capital social: 14,10 miliarde lei]]></text>
+e-mail: conducere@setumsa.ro; desfacere@setumsa.ro
+www.setumsa.ro]]></text>
 				</staticText>
 				<textField isStretchWithOverflow="false" pattern="" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
@@ -827,7 +825,7 @@ Capital social: 14,10 miliarde lei]]></text>
 					<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" lineSpacing="Single">
 						<font reportFont="footer" fontName="sansserif" isBold="true"/>
 					</textElement>
-				<text><![CDATA[Nr. RC J40/314/1991 CONT IBAN RO32RNCB5060000000240001 BCR SUC. SECTOR 6 CF:R458556]]></text>
+				<text><![CDATA[Nr. Reg.Com. J40/314/1991   CONT: RO94RNCB0077008452610001 B.C.R. Suc. Sector 6 C.F.:RO 458556; Capital Social: 1.415.115 LEI]]></text>
 				</staticText>
 				<textField isStretchWithOverflow="false" pattern="" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement

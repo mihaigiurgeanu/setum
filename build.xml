@@ -82,11 +82,10 @@
 	<include name="reports/*.png" />
       </webinf>
 
-      <!-- am mutat imaginea in webinf
       <fileset dir="reports">
 	<include name="images/**/*"/>
       </fileset>
-      -->
+
       <lib dir="${library}">
 	<include name="ant-1.5.1.jar"/>
 	<include name="commons-beanutils-1.5.jar"/>
