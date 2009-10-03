@@ -22,4 +22,6 @@ public interface OrderLocalHome extends EJBLocalHome {
     public OrderLocal findByPrimaryKey(Integer id) throws FinderException;
     public Collection findAll() throws FinderException;
     public Collection findLivrari(Date start, Date end) throws FinderException;
+    public Collection findLivrariCuMontaj(Date start, Date end) throws FinderException;
+    public Collection findLivrariFaraMontaj(Date start, Date end) throws FinderException;
 }

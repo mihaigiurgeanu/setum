@@ -776,7 +776,37 @@
 	ORDER BY o.deliveryTerm1
 	]]></ejb-ql>
       </query>
+      
+      <query>
+	<description>Comenzile cu livrari intre anumite date</description>
+	<query-method>
+	  <method-name>findLivrariCuMontaj</method-name>
+	  <method-params>
+	    <method-param>java.util.Date</method-param>
+	    <method-param>java.util.Date</method-param>
+	  </method-params>
+	</query-method>
+	<ejb-ql><![CDATA[
+	SELECT OBJECT(o) FROM Order AS o, IN(o.lines) l, IN(l.offerItem) oi WHERE o.deliveryTerm1 BETWEEN ?1 AND ?2 AND oi.montajId IS NOT NULL AND oi.montajId <> 0
+	ORDER BY o.deliveryTerm1
+	]]></ejb-ql>
+      </query>
 
+
+      <query>
+	<description>Comenzile cu livrari intre anumite date</description>
+	<query-method>
+	  <method-name>findLivrariFaraMontaj</method-name>
+	  <method-params>
+	    <method-param>java.util.Date</method-param>
+	    <method-param>java.util.Date</method-param>
+	  </method-params>
+	</query-method>
+	<ejb-ql><![CDATA[
+	SELECT OBJECT(o) FROM Order AS o, IN(o.lines) l, IN(l.offerItem) oi WHERE o.deliveryTerm1 BETWEEN ?1 AND ?2 AND (oi.montajId IS NULL OR oi.montajId = 0)
+	ORDER BY o.deliveryTerm1
+	]]></ejb-ql>
+      </query>
 
       <query>
 	<description>Computes the amount invoiced on this order</description>

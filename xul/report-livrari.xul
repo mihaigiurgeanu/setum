@@ -9,16 +9,21 @@
     title="Livrari cu montaje"
     xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
     orient="vertical"
-    buttons="accept,cancel"
-    ondialogaccept="return doOk();"
-    ondialogcancel="return true;"
+    buttons="accept"
+    ondialogaccept="return true;"
     debug="false">
 
   <script src="js/logging.js"/>
   <script src="js/treeutils.js"/>
   <script src="js/httpdata.js"/>
   <script src="js/formobject.js"/>
-  
+
+  <commandset>
+    <command id="command-livrari"		oncommand="reportLivrari()"/>
+    <command id="command-cu-montaj"		oncommand="reportLivrariCuMontaj()"/>
+    <command id="command-fara-montaj"		oncommand="reportLivrariFaraMontaj()"/>
+  </commandset>
+  <hbox>
   <grid>
     <rows>
       <row>
@@ -31,7 +36,12 @@
       </row>
     </rows>
   </grid>
-
+  <vbox>
+    <button label="Livrari" command="command-livrari"/>
+    <button label="Doar cu montaj" command="command-cu-montaj"/>
+    <button label="Fara montaj" command="command-fara-montaj"/>
+  </vbox>
+  </hbox>
   <script language="javascript">
     <![CDATA[
 
@@ -45,12 +55,23 @@
 	     req.add("command", "initLivrariReport");
 	     req.add("param0", "yes");
 	     theForm.post_request(req);	     
-
-	     function doOk() {
+	     
+	     function reportLivrari() {
 	       window.open(SERVER_URL + "/reports/livrari.pdf")
 	       return true;
 	     }
-	     
+
+	     function reportLivrariCuMontaj() {
+	       window.open(SERVER_URL + "/reports/livrariCuMontaj.pdf")
+	       return true;
+	     }
+
+	     function reportLivrariFaraMontaj() {
+	       window.open(SERVER_URL + "/reports/livrariFaraMontaj.pdf")
+	       return true;
+	     }
+
+
 	     
 
     ]]></script>

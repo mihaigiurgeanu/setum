@@ -322,6 +322,8 @@
 
     <method>ResponseBean initLivrariReport(String cuMontaj) throws RemoteException</method>
     <method>ResponseBean livrariReport() throws RemoteException</method>
+    <method>ResponseBean livrariCuMontajReport() throws RemoteException</method>
+    <method>ResponseBean livrariFaraMontajReport() throws RemoteException</method>
   </remote>
 
   <!-- Services that may have scripts associated with -->

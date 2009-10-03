@@ -113,6 +113,8 @@ public interface Orders extends EJBObject {
     public ResponseBean orderReport() throws RemoteException;
     public ResponseBean initLivrariReport(String cuMontaj) throws RemoteException;
     public ResponseBean livrariReport() throws RemoteException;
+    public ResponseBean livrariCuMontajReport() throws RemoteException;
+    public ResponseBean livrariFaraMontajReport() throws RemoteException;
 
     public ResponseBean addItem (
         Integer offerIntemId

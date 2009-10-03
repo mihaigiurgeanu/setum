@@ -2261,14 +2261,14 @@ public class OrdersBiz extends OrdersBean {
 	return r;
     }
 
-    public ResponseBean livrariReport() {
-	ResponseBean r;
+    protected ResponseBean doLivrariReport(Collection orders) {
+    	ResponseBean r;
+	
+	logger.log(BasicLevel.DEBUG, "livrariRStart = " + form.getLivrariRStart());
+	logger.log(BasicLevel.DEBUG, "livrariREnd = " + form.getLivrariREnd());
+	logger.log(BasicLevel.DEBUG, "Nr comenzi in raportul de livrari: " + orders.size());
+	
 	try {
-	    OrderLocalHome oh = getOrderHome();
-	    Collection orders = oh.findLivrari(form.getLivrariRStart(), form.getLivrariREnd());
-	    logger.log(BasicLevel.DEBUG, "livrariRStart = " + form.getLivrariRStart());
-	    logger.log(BasicLevel.DEBUG, "livrariREnd = " + form.getLivrariREnd());
-	    logger.log(BasicLevel.DEBUG, "Nr comenzi in raportul de livrari: " + orders.size());
 	    
 	    InitialContext ic = new InitialContext();
 	    Context env =  (Context) ic.lookup("java:comp/env");
@@ -2317,5 +2317,59 @@ public class OrdersBiz extends OrdersBean {
 	report.addField("livrariREnd", dfmt.format(form.getLivrariREnd()));
 	report.addField("livrari", r);
 	return report;
+    }
+
+    public ResponseBean livrariCuMontajReport() {
+	ResponseBean r;
+	try {
+	    OrderLocalHome oh = getOrderHome();
+	    Collection orders = oh.findLivrariCuMontaj(form.getLivrariRStart(), form.getLivrariREnd());
+	    r = doLivrariReport(orders);
+	} catch (NamingException e) {
+	    logger.log(BasicLevel.ERROR, "NamingException in legatura cu OrderHome la rulare raport livrari: " + e);
+	    logger.log(BasicLevel.DEBUG, e);
+	    r = ResponseBean.getErrConfigNaming(e.getMessage());
+	} catch (FinderException e) {
+	    logger.log(BasicLevel.WARN, "Livrarile nu au fost gasite (FinderException): " + e);
+	    logger.log(BasicLevel.DEBUG, e);
+	    r = ResponseBean.getErrNotFound(e.getMessage());
+	}
+	return r;
+    }
+
+    public ResponseBean livrariFaraMontajReport() {
+	ResponseBean r;
+	try {
+	    OrderLocalHome oh = getOrderHome();
+	    Collection orders = oh.findLivrariFaraMontaj(form.getLivrariRStart(), form.getLivrariREnd());
+	    r = doLivrariReport(orders);
+	} catch (NamingException e) {
+	    logger.log(BasicLevel.ERROR, "NamingException in legatura cu OrderHome la rulare raport livrari: " + e);
+	    logger.log(BasicLevel.DEBUG, e);
+	    r = ResponseBean.getErrConfigNaming(e.getMessage());
+	} catch (FinderException e) {
+	    logger.log(BasicLevel.WARN, "Livrarile nu au fost gasite (FinderException): " + e);
+	    logger.log(BasicLevel.DEBUG, e);
+	    r = ResponseBean.getErrNotFound(e.getMessage());
+	}
+	return r;
+    }
+
+    public ResponseBean livrariReport() {
+	ResponseBean r;
+	try {
+	    OrderLocalHome oh = getOrderHome();
+	    Collection orders = oh.findLivrari(form.getLivrariRStart(), form.getLivrariREnd());
+	    r = doLivrariReport(orders);
+	} catch (NamingException e) {
+	    logger.log(BasicLevel.ERROR, "NamingException in legatura cu OrderHome la rulare raport livrari: " + e);
+	    logger.log(BasicLevel.DEBUG, e);
+	    r = ResponseBean.getErrConfigNaming(e.getMessage());
+	} catch (FinderException e) {
+	    logger.log(BasicLevel.WARN, "Livrarile nu au fost gasite (FinderException): " + e);
+	    logger.log(BasicLevel.DEBUG, e);
+	    r = ResponseBean.getErrNotFound(e.getMessage());
+	}
+	return r;
     }
 }

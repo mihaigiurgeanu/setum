@@ -116,12 +116,12 @@
 	
 	<fo:table border-collapse="collapse" table-layout="fixed" width="100%">
 	  <fo:table-column column-number="1" column-width="19mm" border-style="solid"/><!-- Data -->
-	  <fo:table-column column-number="2" column-width="40mm" border-style="solid"/><!-- Beneficiar -->
-	  <fo:table-column column-number="3" column-width="23mm" border-style="solid"/><!-- Tip -->
-	  <fo:table-column column-number="4" column-width="22mm" border-style="solid"/><!-- Dimensiuni -->
+	  <fo:table-column column-number="2" column-width="30mm" border-style="solid"/><!-- Beneficiar -->
+	  <fo:table-column column-number="3" column-width="41mm" border-style="solid"/><!-- Tip -->
+	  <fo:table-column column-number="4" column-width="20mm" border-style="solid"/><!-- Dimensiuni -->
 	  <fo:table-column column-number="5" column-width="10mm" border-style="solid"/><!-- Buc -->
 	  <fo:table-column column-number="6" column-width="22mm" border-style="solid"/><!-- Locatie -->
-	  <fo:table-column column-number="7" column-width="12mm" border-style="solid"/><!-- Ora -->
+	  <fo:table-column column-number="7" column-width="9mm" border-style="solid"/><!-- Ora -->
 	  <fo:table-column column-number="8" column-width="13mm" border-style="solid"/><!-- Montaj -->
 
 	  <fo:table-body>
@@ -162,6 +162,106 @@
 		<fo:block margin="1mm">
 		  <!-- ${usa["field[attribute::name=\"name\"]"]} -->
 		  ${ssearch(usa["parent::*"], "version")}
+		</fo:block>
+		<fo:block margin="1mm">
+		  <!-- finisajele -->
+		  <#if (usa["field[attribute::name='intFinisajTocId']"] = "0" ||
+			        usa["field[attribute::name='finisajTocBlat']"] = "true") &&
+			       (usa["field[attribute::name='intFinisajGrilajId']"] = "0" ||
+			        usa["field[attribute::name='finisajGrilajBlat']"] = "true") &&
+			       (usa["field[attribute::name='intFinisajFereastraId']"] = "0" ||
+			        usa["field[attribute::name='finisajFereastraBlat']"] = "true") &&
+			       (usa["field[attribute::name='intFinisajSupraluminaId']"] = "0" ||
+			        usa["field[attribute::name='finisajSupraluminaBlat']"] = "true") &&
+			       (usa["field[attribute::name='intFinisajPanouLateralId']"] = "0" ||
+			        usa["field[attribute::name='finisajPanouLateralBlat']"] = "true") &&
+			       (usa["field[attribute::name='extFinisajBlatId']"] = "0" ||
+			        usa["field[attribute::name='finisajBlatExtInt']"] = "true") &&
+			       (usa["field[attribute::name='extFinisajTocId']"] = "0" ||
+			        usa["field[attribute::name='finisajTocExtInt']"] = "true") &&
+			       (usa["field[attribute::name='extFinisajGrilajId']"] = "0" ||
+			        usa["field[attribute::name='finisajGrilajExtInt']"] = "true") &&
+			       (usa["field[attribute::name='extFinisajFereastraId']"] = "0" ||
+			        usa["field[attribute::name='finisajFereastraExtInt']"] = "true") &&
+			       (usa["field[attribute::name='extFinisajSupraluminaId']"] = "0" ||
+			        usa["field[attribute::name='finisajSupraluminaExtInt']"] = "true") &&
+			       (usa["field[attribute::name='extFinisajPanouLateralId']"] = "0" ||
+			        usa["field[attribute::name='finisajPanouLateralExtInt']"] = "true")>
+			${usa["field[attribute::name='intFinisajBlat']"]}
+		<#else>
+		            <#if usa["field[attribute::name='intFinisajBlatId']"] != "0">
+			    <fo:block border-bottom-style="solid">
+			      <fo:block>Blat (interior)</fo:block>
+			      <fo:block>${usa["field[attribute::name='intFinisajBlat']"]}</fo:block>
+			    </fo:block>
+			    </#if>
+			    <#if usa["field[attribute::name='extFinisajBlatId']"] != "0">
+			    <fo:block border-bottom-style="solid">
+			      <fo:block>Blat (exterior)</fo:block>
+			      <fo:block>${usa["field[attribute::name='extFinisajBlat']"]}</fo:block>
+			    </fo:block>
+			    </#if>
+			    <#if usa["field[attribute::name='intFinisajTocId']"] != "0">
+			    <fo:block border-bottom-style="solid">
+			      <fo:block>Toc (interior)</fo:block>
+			      <fo:block>${usa["field[attribute::name='intFinisajToc']"]}</fo:block>
+			    </fo:block>
+			    </#if>
+			    <#if usa["field[attribute::name='extFinisajTocId']"] != "0">
+			    <fo:block border-bottom-style="solid">
+			      <fo:block>Toc (exterior)</fo:block>
+			      <fo:block>${usa["field[attribute::name='extFinisajToc']"]}</fo:block>
+			    </fo:block>
+			    </#if>
+			    <#if usa["field[attribute::name='intFinisajGrilajId']"] != "0">
+			    <fo:block border-bottom-style="solid">
+			      <fo:block>Grilaj (interior)</fo:block>
+			      <fo:block>${usa["field[attribute::name='intFinisajGrilaj']"]}</fo:block>
+			    </fo:block>
+			    </#if>
+			     <#if usa["field[attribute::name='extFinisajGrilajId']"] != "0">
+			    <fo:block border-bottom-style="solid">
+			      <fo:block>Grilaj (exterior)</fo:block>
+			      <fo:block>${usa["field[attribute::name='extFinisajGrilaj']"]}</fo:block>
+			    </fo:block>
+			    </#if>
+			    <#if usa["field[attribute::name='intFinisajFereastraId']"] != "0">
+			    <fo:block border-bottom-style="solid">
+			      <fo:block>Fereastra (interior)</fo:block>
+			      <fo:block>${usa["field[attribute::name='intFinisajFereastra']"]}</fo:block>
+			    </fo:block>
+			    </#if>
+			    <#if usa["field[attribute::name='extFinisajFereastraId']"] != "0">
+			    <fo:block border-bottom-style="solid">
+			      <fo:block>Fereastra (exterior)</fo:block>
+			      <fo:block>${usa["field[attribute::name='extFinisajFereastra']"]}</fo:block>
+			    </fo:block>
+			    </#if>
+			    <#if usa["field[attribute::name='intFinisajSupraluminaId']"] != "0">
+			    <fo:block border-bottom-style="solid">
+			      <fo:block>Supralumina (interior)</fo:block>
+			      <fo:block>${usa["field[attribute::name='intFinisajSupralumina']"]}</fo:block>
+			    </fo:block>
+			    </#if>
+			    <#if usa["field[attribute::name='extFinisajSupraluminaId']"] != "0">
+			    <fo:block border-bottom-style="solid">
+			      <fo:block>Supralumina (exterior)</fo:block>
+			      <fo:block>${usa["field[attribute::name='extFinisajSupralumina']"]}</fo:block>
+			    </fo:block>
+			    </#if>
+			    <#if usa["field[attribute::name='intFinisajPanouLateralId']"] != "0">
+			    <fo:block border-bottom-style="solid">
+			      <fo:block>Panou lateral (interior)</fo:block>
+			      <fo:block>${usa["field[attribute::name='intFinisajPanouLateral']"]}</fo:block>
+			    </fo:block>
+			    </#if>
+			    <#if usa["field[attribute::name='extFinisajPanouLateralId']"] != "0">
+			    <fo:block border-bottom-style="solid">
+			      <fo:block>Panou lateral (exterior)</fo:block>
+			      <fo:block>${usa["field[attribute::name='extFinisajPanouLateral']"]}</fo:block>
+			    </fo:block>
+			    </#if>
+		</#if>
 		</fo:block>
 	      </fo:table-cell>
 	      <fo:table-cell column-number="4">

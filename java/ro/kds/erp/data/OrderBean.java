@@ -189,6 +189,8 @@ public abstract class OrderBean implements EntityBean {
     public abstract BigDecimal ejbSelectSumOfPayments(Integer id) throws FinderException;
     public abstract BigDecimal ejbSelectInvoicedAmount(Integer id) throws FinderException;
     public abstract Collection ejbFindLivrari(Date start, Date end) throws FinderException;
+    public abstract Collection ejbFindLivrariCuMontaj(Date start, Date end) throws FinderException;
+    public abstract Collection ejbFindLivrariFaraMontaj(Date start, Date end) throws FinderException;
 
     public BigDecimal getInvoicedAmount() throws FinderException {
 	BigDecimal amount = ejbSelectInvoicedAmount(getId());
