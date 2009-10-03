@@ -136,7 +136,7 @@
 	      <fo:table-cell column-number="8" text-align="center"><fo:block>Montaj</fo:block></fo:table-cell>
 	    </fo:table-row>
 
-	    <#list doc["/response/record/field[@name=\"livrari\"]/record/field[@name=\"order\"]/record/field[@name=\"lines\"]/record/field[@name=\"product\"]/record[field[@name=\"category.id\"]=9990 and ancestor::record[parent::field[@name='lines']]/field[@name=\"montajId\"]=0]"] as usa>
+	    <#list doc["/response/record/field[@name=\"livrari\"]/record/field[@name=\"order\"]/record/field[@name=\"lines\"]/record/field[@name=\"product\"]/record[field[@name=\"category.id\"]=9990 and ancestor::record[parent::field[@name='lines']]/field[@name=\"montajCode\"]=0]"] as usa>
 	    <!-- Begin usa -->
 
 	    <#assign order=usa["ancestor::field[@name='order']/record"]>

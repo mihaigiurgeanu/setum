@@ -64,6 +64,7 @@ import org.apache.commons.lang.StringUtils;
 import java.util.Comparator;
 import java.text.DateFormat;
 import java.math.RoundingMode;
+import ro.kds.erp.biz.Products;
 
 /**
  * Describe class OrdersBiz here.
@@ -1988,6 +1989,10 @@ public class OrdersBiz extends OrdersBean {
 			    OfferItemLocal offerItem = getOfferItem();
 			    r.addField("obiectiv", offerItem.getOffer().getDescription());
 			    r.addField("montajId", offerItem.getMontajId());
+			    if(offerItem.getMontajId() == null || offerItem.getMontajId().intValue() == 0)
+				r.addField("montajCode", 0);
+			    else
+				r.addField("montajCode", Products.getProductHome().findByPrimaryKey(offerItem.getMontajId()).getCode());
 			    r.addField("montajProcent", offerItem.getMontajProcent());
 			    r.addField("montajSeparat", offerItem.getMontajSeparat());
 			    r.addField("locationId", offerItem.getLocationId());

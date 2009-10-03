@@ -772,7 +772,7 @@
 	  </method-params>
 	</query-method>
 	<ejb-ql><![CDATA[
-	SELECT OBJECT(o) FROM Order AS o WHERE o.deliveryTerm1 BETWEEN ?1 AND ?2
+	SELECT DISTINCT OBJECT(o) FROM Order AS o WHERE o.deliveryTerm1 BETWEEN ?1 AND ?2
 	ORDER BY o.deliveryTerm1
 	]]></ejb-ql>
       </query>
@@ -787,7 +787,7 @@
 	  </method-params>
 	</query-method>
 	<ejb-ql><![CDATA[
-	SELECT OBJECT(o) FROM Order AS o, IN(o.lines) l, IN(l.offerItem) oi WHERE o.deliveryTerm1 BETWEEN ?1 AND ?2 AND oi.montajId IS NOT NULL AND oi.montajId <> 0
+	SELECT DISTINCT OBJECT(o) FROM Order AS o, IN(o.lines) l, IN(l.offerItem) oi WHERE o.deliveryTerm1 BETWEEN ?1 AND ?2 AND oi.montajId IS NOT NULL AND oi.montajId <> 0
 	ORDER BY o.deliveryTerm1
 	]]></ejb-ql>
       </query>
@@ -803,7 +803,7 @@
 	  </method-params>
 	</query-method>
 	<ejb-ql><![CDATA[
-	SELECT OBJECT(o) FROM Order AS o, IN(o.lines) l, IN(l.offerItem) oi WHERE o.deliveryTerm1 BETWEEN ?1 AND ?2 AND (oi.montajId IS NULL OR oi.montajId = 0)
+	SELECT DISTINCT OBJECT(o) FROM Order AS o, IN(o.lines) l, IN(l.offerItem) oi WHERE o.deliveryTerm1 BETWEEN ?1 AND ?2 AND (oi.montajId IS NULL OR oi.montajId = 0)
 	ORDER BY o.deliveryTerm1
 	]]></ejb-ql>
       </query>
