@@ -788,15 +788,14 @@
 		  </fo:table><!--/tip foaie-->
 		  <!-- optiuni -->
 		  <fo:table border-collapse="collapse" width="100%" table-layout="fixed" space-after="1mm">
-		    <fo:table-column column-number="1" border-style="solid" column-width="35%"/>
-		    <fo:table-column column-number="2" border-style="solid" column-width="65%"/>
+		    <fo:table-column column-number="1" border-style="solid" column-width="100%"/>
 
 		    <fo:table-body>
 		      <fo:table-row border-style="solid">
-			<fo:table-cell column-number="1" number-columns-spanned="2"><fo:block>OPTIUNI</fo:block></fo:table-cell>
+			<fo:table-cell column-number="1"><fo:block>OPTIUNI</fo:block></fo:table-cell>
 		      </fo:table-row>
 		      <fo:table-row border-style="solid">
-			<fo:table-cell column-number="1" number-columns-spanned="2">
+			<fo:table-cell column-number="1">
 			  <fo:block>
 			    <#if k = 1>
 			    Canat prinicpal K1:
@@ -816,67 +815,36 @@
 			  <#-- <#assign fk = ferestre_k[0]> -->
 		      -->
 		      <#list ferestre_k as fk>
+		      <!-- <#local fk_deschidere = fk.record["field[@name='deschidere']"]> -->
+		      <!-- <#local fk_tipGeam = fk.record["field[@name='tipGeam']"]> -->
+		      <!-- <#local fk_tipGrilaj = fk.record["field[@name='tipGrilaj']"]> -->
+		      <@enum_init/>
 		      <fo:table-row border-style="solid">
-			<fo:table-cell column-number="1" number-rows-spanned="2">
-			  <fo:block>Tip fereastra:</fo:block>
-			  <fo:block>${ssearch(fk, "standard")}</fo:block>
-			</fo:table-cell>
-			<fo:table-cell column-number="2"><fo:block>Sens deschidere: </fo:block></fo:table-cell>
-		      </fo:table-row>
-		      <fo:table-row border-style="solid">
-			<fo:table-cell column-number="2"><fo:block>Balamale: </fo:block></fo:table-cell>
-		      </fo:table-row>
-		      <fo:table-row border-style="solid">
-			<fo:table-cell column-number="1" number-columns-spanned="2">
-			  <fo:block>Pozitionare: ${fk.record["field[attribute::name='pozitionare1']"]}</fo:block>
-			  <fo:block>${fk.record["field[attribute::name='pozitionare2']"]}</fo:block>
-			  <fo:block>${fk.record["field[attribute::name='pozitionare3']"]}</fo:block>
-			</fo:table-cell>
-		      </fo:table-row>
-		      <fo:table-row border-style="solid">
-			<fo:table-cell column-number="1" number-rows-spanned="2">
-			  <!-- <#assign fk_deschidere = fk.record["field[attribute::name='deschidere']"]> -->
+			<fo:table-cell column-number="1">
 			  <fo:block>
+			    Tip fereastra: ${ssearch(fk, "standard")}
 			    <#if fk_deschidere = "1">Fereastra fixa: <#else>Fereastra mobila: </#if>
-			    ${fk.record["field[attribute::name='quantity']"]} buc
+			    ${fk.record["field[@name='quantity']"]} buc
 			  </fo:block>
-			</fo:table-cell>
-			<fo:table-cell column-number="2">
-			  <fo:block><#if fk_deschidere = "2">Sens deschidere: ${ssearch(fk, "sensDeschidere")}<#else>-</#if></fo:block>
-			</fo:table-cell>
-		      </fo:table-row>
-		      <fo:table-row border-style="solid">			
-			<fo:table-cell column-number="2">
-			  <fo:block><#if fk_deschidere = "2">Balamale: ${ssearch(fk, "pozitionareBalamale")}<#else>-</#if></fo:block>
-			</fo:table-cell>
-		      </fo:table-row>
-		      <fo:table-row border-style="solid">
-			<fo:table-cell column-number="1" number-columns-spanned="2"><fo:block>Componenta: ${ssearch(fk, "componenta")}</fo:block></fo:table-cell>
-		      </fo:table-row>
-		      <fo:table-row border-style="solid">
-			<fo:table-cell column-number="1" number-columns-spanned="2">
-			  <fo:block>
-			    Geam: 
-			    <!-- <#assign fk_tipGeam = fk.record["field[attribute::name='tipGeam']"]> -->
-			    <#if fk_tipGeam = "1">
-			    ${ssearch(fk, "geamSimpluId")}
+			  <#if fk_deschidere = "2">
+			  <@enum_next/>
+			  sens deschidere: ${ssearch(fk, "sensDeschidere")}
+			  balamale: ${ssearch(fk, "pozitionareBalamale")}
+			  </#if>
+			  <@enum_next/>pozitionare: ${fk.record["field[attribute::name='pozitionare1']"]}
+			  ${fk.record["field[@name='pozitionare2']"]}
+			  ${fk.record["field[@name='pozitionare3']"]}
+			  <@enum_next/>componenta: ${ssearch(fk, "componenta")}
+			  <#if fk_tipGeam = "1">
+			    <@enum_next/>geam ${ssearch(fk, "geamSimpluId")}
 			    <#elseif fk_tipGeam = "2">
-			    ${ssearch(fk, "geamTermopanId")}
-			    </#if>
-			  </fo:block>
-			</fo:table-cell>
-		      </fo:table-row>
-		      <fo:table-row border-style="solid">
-			<fo:table-cell column-number="1" number-columns-spanned="2">
-			  <fo:block>
-			    Grilaj: 
-			    <!-- <#assign fk_tipGrilaj = fk.record["field[attribute::name='tipGrilaj']"]> -->
-			    <#if fk_tipGrilaj = "1">
-			    ${ssearch(fk, "grilajStasId")}
+			    <@enum_next/>geam ${ssearch(fk, "geamTermopanId")}
+			  </#if>
+			  <#if fk_tipGrilaj = "1">
+			    <@enum_next/>grilaj ${ssearch(fk, "grilajStasId")}
 			    <#elseif fk_tipGrilaj = "2">
-			    Atipic
-			    </#if>
-			  </fo:block>
+			    <@enum_next/> grilaj atipic
+			  </#if>
 			</fo:table-cell>
 		      </fo:table-row>
 		      </#list>
@@ -1551,3 +1519,14 @@ value list searches a child with the give key (value) and returns the associated
 <#-- make the conversion to number -->
      <#return text_number?replace(",", ".")?number />
 </#function> 
+
+<#-- 2 macro-uri cu care pui virgula in fata unui element dintr-o enumerare
+     doar daca nu este primul element din acea enumerare
+-->
+<#macro "enum_init">
+  <#assign first_elem = true>
+</#macro>
+
+<#macro "enum_next">
+  <#if first_elem == true><#assign first_elem = false><#else>,</#if>
+</#macro>
