@@ -179,6 +179,11 @@
   <target name="ejbjarsUpdate"
 	  description="Adds to ejb jars the manifest file information and other needed files"
 	  depends="ejbjars">
+    <!--
+    <jar destfile="${dist}/datalayer.jar" update="true" basedir="${build}">
+      <include name="ro/kds/erp/data//DataLayerException.class"/>
+    </jar>
+    -->
     <jar destfile="${dist}/setumbiz.jar" update="true" basedir="${build}"
 	 includes="ro/kds/erp/scripting/*.class">
       <manifest>

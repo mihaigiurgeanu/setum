@@ -753,7 +753,7 @@
 	<local>ro.kds.erp.data.AttributeLocal</local>
 	<ejb-link>AttributeEJB</ejb-link>
       </ejb-local-ref>
-
+     
       <query>
 	<query-method>
 	  <method-name>findAll</method-name>
@@ -809,6 +809,20 @@
       </query>
 
       <query>
+	<description>Retrieves the amount payed already</description>
+	<query-method>
+	  <method-name>ejbSelectPayments</method-name>
+	  <method-params>
+	    <method-param>java.lang.Integer</method-param>
+	  </method-params>
+	</query-method>
+	<ejb-ql>
+	  SELECT OBJECT(p) FROM Order o, IN(o.invoices) i, IN(i.payments) p
+	  WHERE o.id = ?1
+	</ejb-ql>
+      </query>
+
+      <query>
 	<description>Computes the amount invoiced on this order</description>
 	<query-method>
 	  <method-name>ejbSelectInvoicedAmount</method-name>
@@ -836,6 +850,7 @@
 	  WHERE o.id = ?1
 	</ejb-ql>
       </query>
+
 
 
 
@@ -901,6 +916,9 @@
       <cmp-field>
 	<field-name>tax</field-name>
       </cmp-field>
+      <cmp-field>
+	<field-name>exchangeRate</field-name>
+      </cmp-field>
       
       <primkey-field>id</primkey-field>
 
@@ -956,6 +974,9 @@
 	<field-name>amount</field-name>
       </cmp-field>
 
+      <cmp-field>
+	<field-name>exchangeRate</field-name>
+      </cmp-field>
 
       <primkey-field>id</primkey-field>
 

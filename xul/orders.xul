@@ -275,8 +275,8 @@ Lista comenzilor, creere/vizualizare/stergere
 	      </row>
 	      -->
 	      <row>
-		<label control="diferenta" value="Rest de plata:"/>
-		<textbox id="diferenta" readonly="true"/>
+		<label control="currencyDiferenta" value="Rest de plata:"/>
+		<textbox id="currencyDiferenta" readonly="true"/>
 	      </row>
 	      <row>
 		<label control="attribute5" value="Valuta:"/>
@@ -481,6 +481,10 @@ Lista comenzilor, creere/vizualizare/stergere
 	      <label control="invoiceTotal" value="Total:"/>
 	      <textbox id="invoiceTotal"/>
 	    </row>
+	    <row> 
+	      <label control="invoiceExchangeRate" value="Curs:"/>
+	      <textbox id="invoiceExchangeRate"/>
+	    </row>
 	    <row>
 	      <label control="invoicePayed" value="Suma achitata:"/>
 	      <textbox id="invoicePayed" readonly="true"/>
@@ -551,6 +555,10 @@ Lista comenzilor, creere/vizualizare/stergere
 	    <row>
 	      <label control="paymentAmount" value="Suma:"/>
 	      <textbox id="paymentAmount"/>
+	    </row>
+	    <row> 
+	      <label control="paymentExchangeRate" value="Curs:"/>
+	      <textbox id="paymentExchangeRate"/>
 	    </row>
 	  </rows>
 	</grid>

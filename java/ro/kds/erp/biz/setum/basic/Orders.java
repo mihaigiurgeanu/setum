@@ -58,7 +58,10 @@ public interface Orders extends EJBObject {
     public ResponseBean updateValoareAvans(java.math.BigDecimal newValoareAvans) throws RemoteException;
     public ResponseBean updatePayedAmount(java.math.BigDecimal newPayedAmount) throws RemoteException;
     public ResponseBean updateInvoicedAmount(java.math.BigDecimal newInvoicedAmount) throws RemoteException;
+    public ResponseBean updateCurrencyPayedAmount(java.math.BigDecimal newCurrencyPayedAmount) throws RemoteException;
+    public ResponseBean updateCurrencyInvoicedAmount(java.math.BigDecimal newCurrencyInvoicedAmount) throws RemoteException;
     public ResponseBean updateDiferenta(java.math.BigDecimal newDiferenta) throws RemoteException;
+    public ResponseBean updateCurrencyDiferenta(java.math.BigDecimal newCurrencyDiferenta) throws RemoteException;
     public ResponseBean updateCurrencyCode(String newCurrencyCode) throws RemoteException;
     public ResponseBean updateExchangeRate(java.math.BigDecimal newExchangeRate) throws RemoteException;
     public ResponseBean updateTermenLivrare(java.util.Date newTermenLivrare) throws RemoteException;
@@ -94,12 +97,14 @@ public interface Orders extends EJBObject {
     public ResponseBean updateInvoiceRole(String newInvoiceRole) throws RemoteException;
     public ResponseBean updateInvoiceAmount(java.math.BigDecimal newInvoiceAmount) throws RemoteException;
     public ResponseBean updateInvoiceTax(java.math.BigDecimal newInvoiceTax) throws RemoteException;
+    public ResponseBean updateInvoiceExchangeRate(Double newInvoiceExchangeRate) throws RemoteException;
     public ResponseBean updateInvoiceTotal(java.math.BigDecimal newInvoiceTotal) throws RemoteException;
     public ResponseBean updateInvoicePayed(java.math.BigDecimal newInvoicePayed) throws RemoteException;
     public ResponseBean updateInvoiceUnpayed(java.math.BigDecimal newInvoiceUnpayed) throws RemoteException;
     public ResponseBean updatePaymentNumber(String newPaymentNumber) throws RemoteException;
     public ResponseBean updatePaymentDate(java.util.Date newPaymentDate) throws RemoteException;
     public ResponseBean updatePaymentAmount(java.math.BigDecimal newPaymentAmount) throws RemoteException;
+    public ResponseBean updatePaymentExchangeRate(Double newPaymentExchangeRate) throws RemoteException;
 
     public ResponseBean getOrdersCount() throws RemoteException;
     public ResponseBean loadListing(Integer startRow) throws RemoteException;

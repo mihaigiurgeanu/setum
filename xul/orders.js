@@ -336,7 +336,7 @@ theForm.text_fields = new Array("number", "date", "clientName", "localitateAlta"
 				"avans", "invoicedAmount", "payedAmount",
 				//"achitatCu", 
 				//"valoareAvans", 
-				"diferenta",
+				"diferenta", "currencyDiferenta",
 				"termenLivrare", "termenLivrare1", "adresaMontaj", 
 				"adresaReper", "telefon", "contact",
 				
@@ -347,9 +347,12 @@ theForm.text_fields = new Array("number", "date", "clientName", "localitateAlta"
 				"invoiceNumber", "invoiceDate","invoiceAmount",
 				"invoiceTax", "invoiceTotal", 
 				"invoicePayed", "invoiceUnpayed",
+				"invoiceExchangeRate",
 
 				"paymentNumber", "paymentDate",
 				"paymentAmount",
+				"paymentExchangeRate",
+
 				"deliveryHour",
 				"attribute1", // cine semneaza
 				"attribute5", //valuta

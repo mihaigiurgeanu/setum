@@ -1424,18 +1424,27 @@
 			Plata
 		      </fo:block>
 		    </fo:table-cell>
-		    <fo:table-cell column-number="2">
+		    <fo:table-cell column-number="2" number-columns-spanned="2">
 		      <fo:block>${payment["field[attribute::name='number']"]}</fo:block>
 		    </fo:table-cell>
-		    <fo:table-cell column-number="3">
-		      <fo:block text-align="right">${payment["field[attribute::name='amount']"]}</fo:block>
-		    </fo:table-cell>
 		    <fo:table-cell column-number="4">
-		      <fo:block text-align="right">N/A</fo:block>
+		      <fo:block text-align="right">${payment["field[attribute::name='amount']"]}</fo:block>
 		    </fo:table-cell>
 		  </fo:table-row>
 		  </#list><!-- payment -->
 		  </#list><!-- invoice -->
+		  <fo:table-row border-style="solid">
+		    <fo:table-cell column-number="1" number-columns-spanned="3">
+		      <fo:block text-align="right" font-weight="bold">
+			Rest de plata [${moneda}]: 
+		      </fo:block>
+		    </fo:table-cell>
+		    <fo:table-cell>
+		      <fo:block text-align="right" font-weight="bold">
+			${doc["child::response/child::record/child::field[attribute::name='currencyDiferenta']"]}
+		      </fo:block>
+		    </fo:table-cell>
+		  </fo:table-row>
 		</fo:table-body>
 	      </fo:table>
 	      

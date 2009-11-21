@@ -211,6 +211,8 @@ public class OrdersBiz extends OrdersBean {
 
 	    form.setPayedAmount(o.getPayedAmount());
 	    form.setInvoicedAmount(o.getInvoicedAmount());
+	    form.setCurrencyPayedAmount(o.getCurrencyPayedAmount());
+	    form.setCurrencyInvoicedAmount(o.getCurrencyInvoicedAmount());
 
 	    try {
 		Preferences prefs = PreferencesBean.getPreferences();
@@ -946,7 +948,7 @@ public class OrdersBiz extends OrdersBean {
 	form.setInvoiceTotal(new BigDecimal(0));
 	form.setInvoicePayed(new BigDecimal(0));
 	form.setInvoiceUnpayed(new BigDecimal(0));
-
+	form.setInvoiceExchangeRate(new Double(0)); // las script-ul tcl (calculatedFields) sa calculeze default
 
 	if(isSelectedOrder()) {
 	    form.setInvoiceAmount(new BigDecimal(form.getTotalFinal().doubleValue() - 
@@ -983,6 +985,7 @@ public class OrdersBiz extends OrdersBean {
 	    form.setInvoiceRole(inv.getRole());
 	    form.setInvoiceAmount(inv.getAmount());
 	    form.setInvoiceTax(inv.getTax());
+	    form.setInvoiceExchangeRate(inv.getExchangeRate());
 	    form.setInvoicePayed(inv.getSumOfPayments());
 	    
 	    r = new ResponseBean();
@@ -1038,6 +1041,7 @@ public class OrdersBiz extends OrdersBean {
 	    inv.setRole(form.getInvoiceRole());
 	    inv.setAmount(form.getInvoiceAmount().setScale(2, BigDecimal.ROUND_HALF_UP));
 	    inv.setTax(form.getInvoiceTax().setScale(2, BigDecimal.ROUND_HALF_UP));
+	    inv.setExchangeRate(form.getInvoiceExchangeRate());
 
 	    r = new ResponseBean();
 	} catch (CreateException e) {
@@ -1156,6 +1160,7 @@ public class OrdersBiz extends OrdersBean {
 		r.addField("invoices.date", inv.getDocument().getDate());
 		r.addField("invoices.role", inv.getRole());
 		r.addField("invoices.amount", inv.getAmount());
+		r.addField("invoices.exchangeRate", inv.getExchangeRate());
 	    }
 	} catch (NamingException e) {
 	    logger.log(BasicLevel.ERROR, "Naming exception " + e.getMessage());
@@ -1188,6 +1193,7 @@ public class OrdersBiz extends OrdersBean {
 	form.setPaymentNumber("");
 	form.setPaymentDate(new Date());
 	form.setPaymentAmount(new BigDecimal(0));
+	form.setPaymentExchangeRate(new Double(0)); // scriptul calculatedFields va seta o valoare default
 
 	if(isSelectedInvoice()) {
 	    form.setPaymentAmount(form.getInvoiceTotal().subtract(form.getInvoicePayed()));
@@ -1220,6 +1226,7 @@ public class OrdersBiz extends OrdersBean {
 	    form.setPaymentNumber(payment.getDocument().getNumber());
 	    form.setPaymentDate(payment.getDocument().getDate());
 	    form.setPaymentAmount(payment.getAmount());
+	    form.setPaymentExchangeRate(payment.getExchangeRate());
 
 	    r = new ResponseBean();
 	} catch (NamingException e) {
@@ -1267,6 +1274,7 @@ public class OrdersBiz extends OrdersBean {
 	    payment.getDocument().setNumber(form.getPaymentNumber());
 	    payment.getDocument().setDate(form.getPaymentDate());
 	    payment.setAmount(form.getPaymentAmount().setScale(2, BigDecimal.ROUND_HALF_UP));
+	    payment.setExchangeRate(form.getPaymentExchangeRate());
 
 	    r = new ResponseBean();
 	} catch(NamingException e) {
@@ -1380,6 +1388,7 @@ public class OrdersBiz extends OrdersBean {
 		r.addField("payments.number", payment.getDocument().getNumber());
 		r.addField("payments.date", payment.getDocument().getDate());
 		r.addField("payments.amount", payment.getAmount());
+		r.addField("payments.exchangeRate", payment.getExchangeRate());
 
 	    }
 	} catch (NamingException e) {
@@ -1913,7 +1922,10 @@ public class OrdersBiz extends OrdersBean {
 	    r.addField("valoareAvans", form.getValoareAvans().setScale(2, RoundingMode.HALF_UP));
 	    r.addField("payedAmount", form.getPayedAmount().setScale(2, RoundingMode.HALF_UP));
 	    r.addField("invoicedAmount", form.getInvoicedAmount().setScale(2, RoundingMode.HALF_UP));
+	    r.addField("currencyInvoicedAmount", form.getCurrencyInvoicedAmount());
+	    r.addField("currencyPayedAmount", form.getCurrencyPayedAmount());
 	    r.addField("diferenta", form.getDiferenta().setScale(2, RoundingMode.HALF_UP));
+	    r.addField("currencyDiferenta", form.getCurrencyDiferenta().setScale(2, RoundingMode.HALF_UP));
 	    r.addField("termenLivarare", dfmt.format(form.getTermenLivrare()));
 	    r.addField("termenLivrare1", dfmt.format(form.getTermenLivrare1()));
 	    r.addField("adresaMontaj", form.getAdresaMontaj());

@@ -111,6 +111,9 @@ public abstract class InvoiceBean implements EntityBean {
     
     public abstract BigDecimal getTax();
     public abstract void setTax(BigDecimal tax);
+
+    public abstract Double getExchangeRate();
+    public abstract void setExchangeRate(Double rate);
     
     public abstract Collection getPayments();
     public abstract void setPayments(Collection payments);

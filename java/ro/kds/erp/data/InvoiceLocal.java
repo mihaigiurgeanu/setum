@@ -33,6 +33,9 @@ public interface InvoiceLocal extends EJBLocalObject {
     public BigDecimal getTax();
     public void setTax(BigDecimal tax);
 
+    public Double getExchangeRate();
+    public void setExchangeRate(Double rate);
+
     public Collection getPayments();
     public void setPayments(Collection payments);
 

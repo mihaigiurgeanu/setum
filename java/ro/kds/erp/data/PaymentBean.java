@@ -91,6 +91,9 @@ public abstract class PaymentBean implements EntityBean {
     public abstract BigDecimal getAmount();
     public abstract void setAmount(BigDecimal amount);
 
+    public abstract Double getExchangeRate();
+    public abstract void setExchangeRate(Double rate);
+
     public abstract DocumentLocal getDocument();
     public abstract void setDocument(DocumentLocal d);
 

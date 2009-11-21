@@ -21,6 +21,9 @@ public interface PaymentLocal extends EJBLocalObject {
     public BigDecimal getAmount();
     public void setAmount(BigDecimal amount);
 
+    public Double getExchangeRate();
+    public void setExchangeRate(Double rate);
+
     public DocumentLocal getDocument();
     public void setDocument(DocumentLocal d);
 

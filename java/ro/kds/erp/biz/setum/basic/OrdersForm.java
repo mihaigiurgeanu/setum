@@ -50,7 +50,10 @@ public class OrdersForm implements Serializable {
     java.math.BigDecimal valoareAvans;
     java.math.BigDecimal payedAmount;
     java.math.BigDecimal invoicedAmount;
+    java.math.BigDecimal currencyPayedAmount;
+    java.math.BigDecimal currencyInvoicedAmount;
     java.math.BigDecimal diferenta;
+    java.math.BigDecimal currencyDiferenta;
     String currencyCode;
     java.math.BigDecimal exchangeRate;
     java.util.Date termenLivrare;
@@ -86,12 +89,14 @@ public class OrdersForm implements Serializable {
     String invoiceRole;
     java.math.BigDecimal invoiceAmount;
     java.math.BigDecimal invoiceTax;
+    Double invoiceExchangeRate;
     java.math.BigDecimal invoiceTotal;
     java.math.BigDecimal invoicePayed;
     java.math.BigDecimal invoiceUnpayed;
     String paymentNumber;
     java.util.Date paymentDate;
     java.math.BigDecimal paymentAmount;
+    Double paymentExchangeRate;
 
     public OrdersForm() {
 
@@ -189,7 +194,19 @@ public class OrdersForm implements Serializable {
 
 
 
+       this.currencyPayedAmount = new java.math.BigDecimal(0);
+
+
+
+       this.currencyInvoicedAmount = new java.math.BigDecimal(0);
+
+
+
        this.diferenta = new java.math.BigDecimal(0);
+
+
+
+       this.currencyDiferenta = new java.math.BigDecimal(0);
 
 
 
@@ -338,6 +355,10 @@ public class OrdersForm implements Serializable {
 
 
 
+       this.invoiceExchangeRate = new Double(0);
+   
+
+
        this.invoiceTotal = new java.math.BigDecimal(0);
 
 
@@ -361,6 +382,10 @@ public class OrdersForm implements Serializable {
 
        this.paymentAmount = new java.math.BigDecimal(0);
 
+
+
+       this.paymentExchangeRate = new Double(0);
+   
 
 
     }
@@ -704,6 +729,36 @@ public class OrdersForm implements Serializable {
 	}
     }
 
+    public void setCurrencyPayedAmount(java.math.BigDecimal newCurrencyPayedAmount) {
+        this.currencyPayedAmount = newCurrencyPayedAmount;
+    }
+
+    public java.math.BigDecimal getCurrencyPayedAmount() {
+        return currencyPayedAmount;
+    }
+
+    public void readCurrencyPayedAmount(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("currencyPayedAmount");
+	if(a != null) {
+	    this.setCurrencyPayedAmount(a.getDecimalValue());
+	}
+    }
+
+    public void setCurrencyInvoicedAmount(java.math.BigDecimal newCurrencyInvoicedAmount) {
+        this.currencyInvoicedAmount = newCurrencyInvoicedAmount;
+    }
+
+    public java.math.BigDecimal getCurrencyInvoicedAmount() {
+        return currencyInvoicedAmount;
+    }
+
+    public void readCurrencyInvoicedAmount(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("currencyInvoicedAmount");
+	if(a != null) {
+	    this.setCurrencyInvoicedAmount(a.getDecimalValue());
+	}
+    }
+
     public void setDiferenta(java.math.BigDecimal newDiferenta) {
         this.diferenta = newDiferenta;
     }
@@ -716,6 +771,21 @@ public class OrdersForm implements Serializable {
 	AttributeLocal a = (AttributeLocal)attributes.get("diferenta");
 	if(a != null) {
 	    this.setDiferenta(a.getDecimalValue());
+	}
+    }
+
+    public void setCurrencyDiferenta(java.math.BigDecimal newCurrencyDiferenta) {
+        this.currencyDiferenta = newCurrencyDiferenta;
+    }
+
+    public java.math.BigDecimal getCurrencyDiferenta() {
+        return currencyDiferenta;
+    }
+
+    public void readCurrencyDiferenta(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("currencyDiferenta");
+	if(a != null) {
+	    this.setCurrencyDiferenta(a.getDecimalValue());
 	}
     }
 
@@ -1214,6 +1284,21 @@ public class OrdersForm implements Serializable {
 	}
     }
 
+    public void setInvoiceExchangeRate(Double newInvoiceExchangeRate) {
+        this.invoiceExchangeRate = newInvoiceExchangeRate;
+    }
+
+    public Double getInvoiceExchangeRate() {
+        return invoiceExchangeRate;
+    }
+
+    public void readInvoiceExchangeRate(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("invoiceExchangeRate");
+	if(a != null) {
+	    this.setInvoiceExchangeRate(a.getDoubleValue());
+	}
+    }
+
     public void setInvoiceTotal(java.math.BigDecimal newInvoiceTotal) {
         this.invoiceTotal = newInvoiceTotal;
     }
@@ -1295,6 +1380,21 @@ public class OrdersForm implements Serializable {
 	AttributeLocal a = (AttributeLocal)attributes.get("paymentAmount");
 	if(a != null) {
 	    this.setPaymentAmount(a.getDecimalValue());
+	}
+    }
+
+    public void setPaymentExchangeRate(Double newPaymentExchangeRate) {
+        this.paymentExchangeRate = newPaymentExchangeRate;
+    }
+
+    public Double getPaymentExchangeRate() {
+        return paymentExchangeRate;
+    }
+
+    public void readPaymentExchangeRate(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("paymentExchangeRate");
+	if(a != null) {
+	    this.setPaymentExchangeRate(a.getDoubleValue());
 	}
     }
 

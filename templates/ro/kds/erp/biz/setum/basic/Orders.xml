@@ -98,8 +98,49 @@
     <name>invoicedAmount</name>
     <type>java.math.BigDecimal</type>
   </field>
+
+
+  <field>
+    <name>totalCurrency</name>
+    <type>java.math.BigDecimal</type>
+  </field>
+    <field>
+    <name>totalTvaCurrency</name>
+    <type>java.math.BigDecimal</type>
+  </field>
+  <field>
+    <name>totalFinalCurrency</name>
+    <type>java.math.BigDecimal</type>
+  </field>
+  <field>
+    <name>totalFinalTvaCurrency</name>
+    <type>java.math.BigDecimal</type>
+  </field>
+  <field>
+    <name>avansCurrency</name>
+    <type>java.math.BigDecimal</type>
+  </field>
+  <field>
+    <name>payedAmountCurrency</name>
+    <type>java.math.BigDecimal</type>
+  </field>
+  
+
+
+  <field>
+    <name>currencyPayedAmount</name>
+    <type>java.math.BigDecimal</type>
+  </field>
+  <field>
+    <name>currencyInvoicedAmount</name>
+    <type>java.math.BigDecimal</type>
+  </field>
   <field>
     <name>diferenta</name>
+    <type>java.math.BigDecimal</type>
+  </field>
+  <field>
+    <name>currencyDiferenta</name>
     <type>java.math.BigDecimal</type>
   </field>
   <field>
@@ -252,6 +293,10 @@
     <type>java.math.BigDecimal</type>
   </field>
   <field>
+    <name>invoiceExchangeRate</name>
+    <type>Double</type>
+  </field>
+  <field>
     <name>invoiceTotal</name>
     <type>java.math.BigDecimal</type>
   </field>
@@ -278,7 +323,10 @@
     <name>paymentAmount</name>
     <type>java.math.BigDecimal</type>
   </field>
-
+  <field>
+    <name>paymentExchangeRate</name>
+    <type>Double</type>
+  </field>
 
 
 

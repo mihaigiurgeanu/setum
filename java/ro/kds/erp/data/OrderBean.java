@@ -17,6 +17,7 @@ import org.objectweb.util.monolog.api.Logger;
 import org.objectweb.jonas.common.Log;
 import java.util.Collection;
 import java.util.Date;
+import java.util.Iterator;
 
 /**
  * Describe class OrderBean here.
@@ -188,6 +189,7 @@ public abstract class OrderBean implements EntityBean {
 
     public abstract BigDecimal ejbSelectSumOfPayments(Integer id) throws FinderException;
     public abstract BigDecimal ejbSelectInvoicedAmount(Integer id) throws FinderException;
+    public abstract Collection ejbSelectPayments(Integer id) throws FinderException;
     public abstract Collection ejbFindLivrari(Date start, Date end) throws FinderException;
     public abstract Collection ejbFindLivrariCuMontaj(Date start, Date end) throws FinderException;
     public abstract Collection ejbFindLivrariFaraMontaj(Date start, Date end) throws FinderException;
@@ -208,6 +210,39 @@ public abstract class OrderBean implements EntityBean {
 	} else {
 	    return amount;
 	}
+    }
+
+    public BigDecimal getCurrencyInvoicedAmount() throws FinderException {
+	BigDecimal amount = new BigDecimal(0);
+	Collection invoices = getInvoices();
+	for(Iterator i = invoices.iterator(); i.hasNext();) {
+	    InvoiceLocal inv = (InvoiceLocal)i.next();
+	    amount = amount.add(new BigDecimal(inv.getAmount().doubleValue()/inv.getExchangeRate().doubleValue()));
+	}
+	return amount.setScale(2,  BigDecimal.ROUND_HALF_UP);
+    }
+    
+    public BigDecimal getCurrencyPayedAmount() throws FinderException {
+	BigDecimal amount = new BigDecimal(0);
+	/*
+	OrderLocalHome orderHome;
+	try {
+	    InitialContext ic = new InitialContext();
+	    Context env = (Context) ic.lookup("java:comp/env");
+	    orderHome = (OrderLocalHome) PortableRemoteObject.
+		narrow(env.lookup("ejb/OrderHome"), OrderLocalHome.class);
+	} catch (NamingException e) {
+	    logger.log(BasicLevel.WARN, "Can not get home for the name ejb/OrderHome: " + e.getMessage());
+	    logger.log(BasicLevel.DEBUG, e);
+	    throw new FinderException("NamingException occured: " + e.getMessage());
+	}
+	*/
+	Collection payments = ejbSelectPayments(getId());
+	for(Iterator i = payments.iterator(); i.hasNext();) {
+	    PaymentLocal payment = (PaymentLocal)i.next();
+	    amount = amount.add(new BigDecimal(payment.getAmount().doubleValue()/payment.getExchangeRate().doubleValue()));
+	}
+	return amount.setScale(2,  BigDecimal.ROUND_HALF_UP);
     }
 
     // Implementation of javax.ejb.EntityBean

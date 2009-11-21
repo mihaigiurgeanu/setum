@@ -258,4 +258,13 @@ public interface OrderLocal extends EJBLocalObject {
      */
     public BigDecimal getInvoicedAmount() throws FinderException;
 
+    /**
+     * The sum of payed amounts divided by exchangeRate.
+     */
+    public BigDecimal getCurrencyPayedAmount() throws FinderException;
+
+    /**
+     * The sum of invoiced amounts that were divided by exchangeRate.
+     */
+    public BigDecimal getCurrencyInvoicedAmount() throws FinderException;
 }

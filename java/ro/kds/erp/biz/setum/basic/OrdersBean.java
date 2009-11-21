@@ -1013,6 +1013,58 @@ public abstract class OrdersBean
 	computeCalculatedFields(r);
 	return r;
     }
+    public ResponseBean updateCurrencyPayedAmount(java.math.BigDecimal currencyPayedAmount) {
+        ResponseBean r = new ResponseBean();
+	java.math.BigDecimal oldVal = form.getCurrencyPayedAmount();
+	form.setCurrencyPayedAmount(currencyPayedAmount);
+	r.addRecord();
+	r.addField("currencyPayedAmount", currencyPayedAmount); // for number format
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".currencyPayedAmount");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
+		script.setVar(OLDVAL_VARNAME, oldVal, java.math.BigDecimal.class);
+		script.setVar(FORM_VARNAME, form, OrdersForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the currencyPayedAmount", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
+    public ResponseBean updateCurrencyInvoicedAmount(java.math.BigDecimal currencyInvoicedAmount) {
+        ResponseBean r = new ResponseBean();
+	java.math.BigDecimal oldVal = form.getCurrencyInvoicedAmount();
+	form.setCurrencyInvoicedAmount(currencyInvoicedAmount);
+	r.addRecord();
+	r.addField("currencyInvoicedAmount", currencyInvoicedAmount); // for number format
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".currencyInvoicedAmount");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
+		script.setVar(OLDVAL_VARNAME, oldVal, java.math.BigDecimal.class);
+		script.setVar(FORM_VARNAME, form, OrdersForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the currencyInvoicedAmount", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
     public ResponseBean updateDiferenta(java.math.BigDecimal diferenta) {
         ResponseBean r = new ResponseBean();
 	java.math.BigDecimal oldVal = form.getDiferenta();
@@ -1034,6 +1086,32 @@ public abstract class OrdersBean
 						// fields to the response also
 	   } catch (ScriptErrorException e) {
 	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the diferenta", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
+    public ResponseBean updateCurrencyDiferenta(java.math.BigDecimal currencyDiferenta) {
+        ResponseBean r = new ResponseBean();
+	java.math.BigDecimal oldVal = form.getCurrencyDiferenta();
+	form.setCurrencyDiferenta(currencyDiferenta);
+	r.addRecord();
+	r.addField("currencyDiferenta", currencyDiferenta); // for number format
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".currencyDiferenta");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
+		script.setVar(OLDVAL_VARNAME, oldVal, java.math.BigDecimal.class);
+		script.setVar(FORM_VARNAME, form, OrdersForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the currencyDiferenta", e);
            }
         }
 	computeCalculatedFields(r);
@@ -1949,6 +2027,32 @@ public abstract class OrdersBean
 	computeCalculatedFields(r);
 	return r;
     }
+    public ResponseBean updateInvoiceExchangeRate(Double invoiceExchangeRate) {
+        ResponseBean r = new ResponseBean();
+	Double oldVal = form.getInvoiceExchangeRate();
+	form.setInvoiceExchangeRate(invoiceExchangeRate);
+	r.addRecord();
+	r.addField("invoiceExchangeRate", invoiceExchangeRate); // for number format
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".invoiceExchangeRate");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
+		script.setVar(OLDVAL_VARNAME, oldVal, Double.class);
+		script.setVar(FORM_VARNAME, form, OrdersForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the invoiceExchangeRate", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
     public ResponseBean updateInvoiceTotal(java.math.BigDecimal invoiceTotal) {
         ResponseBean r = new ResponseBean();
 	java.math.BigDecimal oldVal = form.getInvoiceTotal();
@@ -2105,6 +2209,32 @@ public abstract class OrdersBean
 	computeCalculatedFields(r);
 	return r;
     }
+    public ResponseBean updatePaymentExchangeRate(Double paymentExchangeRate) {
+        ResponseBean r = new ResponseBean();
+	Double oldVal = form.getPaymentExchangeRate();
+	form.setPaymentExchangeRate(paymentExchangeRate);
+	r.addRecord();
+	r.addField("paymentExchangeRate", paymentExchangeRate); // for number format
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".paymentExchangeRate");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
+		script.setVar(OLDVAL_VARNAME, oldVal, Double.class);
+		script.setVar(FORM_VARNAME, form, OrdersForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the paymentExchangeRate", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
 
     /**
      * Generated implementation of the addItem service. It will call
@@ -2214,7 +2344,10 @@ public abstract class OrdersBean
 	r.addField("valoareAvans", form.getValoareAvans());
 	r.addField("payedAmount", form.getPayedAmount());
 	r.addField("invoicedAmount", form.getInvoicedAmount());
+	r.addField("currencyPayedAmount", form.getCurrencyPayedAmount());
+	r.addField("currencyInvoicedAmount", form.getCurrencyInvoicedAmount());
 	r.addField("diferenta", form.getDiferenta());
+	r.addField("currencyDiferenta", form.getCurrencyDiferenta());
 	r.addField("currencyCode", form.getCurrencyCode());
 	r.addField("exchangeRate", form.getExchangeRate());
 	r.addField("termenLivrare", form.getTermenLivrare());
@@ -2250,12 +2383,14 @@ public abstract class OrdersBean
 	r.addField("invoiceRole", form.getInvoiceRole());
 	r.addField("invoiceAmount", form.getInvoiceAmount());
 	r.addField("invoiceTax", form.getInvoiceTax());
+	r.addField("invoiceExchangeRate", form.getInvoiceExchangeRate());
 	r.addField("invoiceTotal", form.getInvoiceTotal());
 	r.addField("invoicePayed", form.getInvoicePayed());
 	r.addField("invoiceUnpayed", form.getInvoiceUnpayed());
 	r.addField("paymentNumber", form.getPaymentNumber());
 	r.addField("paymentDate", form.getPaymentDate());
 	r.addField("paymentAmount", form.getPaymentAmount());
+	r.addField("paymentExchangeRate", form.getPaymentExchangeRate());
 	loadValueLists(r);
     }
 
@@ -2410,9 +2545,27 @@ public abstract class OrdersBean
             logger.log(BasicLevel.DEBUG, e);
         }
 	try {
+	    s.setVar("currencyPayedAmount", form.getCurrencyPayedAmount(), java.math.BigDecimal.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: currencyPayedAmount from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    s.setVar("currencyInvoicedAmount", form.getCurrencyInvoicedAmount(), java.math.BigDecimal.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: currencyInvoicedAmount from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
 	    s.setVar("diferenta", form.getDiferenta(), java.math.BigDecimal.class);
 	} catch (ScriptErrorException e) {
 	    logger.log(BasicLevel.WARN, "Can not set the value of field: diferenta from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    s.setVar("currencyDiferenta", form.getCurrencyDiferenta(), java.math.BigDecimal.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: currencyDiferenta from the script");
             logger.log(BasicLevel.DEBUG, e);
         }
 	try {
@@ -2626,6 +2779,12 @@ public abstract class OrdersBean
             logger.log(BasicLevel.DEBUG, e);
         }
 	try {
+	    s.setVar("invoiceExchangeRate", form.getInvoiceExchangeRate(), Double.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: invoiceExchangeRate from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
 	    s.setVar("invoiceTotal", form.getInvoiceTotal(), java.math.BigDecimal.class);
 	} catch (ScriptErrorException e) {
 	    logger.log(BasicLevel.WARN, "Can not set the value of field: invoiceTotal from the script");
@@ -2659,6 +2818,12 @@ public abstract class OrdersBean
 	    s.setVar("paymentAmount", form.getPaymentAmount(), java.math.BigDecimal.class);
 	} catch (ScriptErrorException e) {
 	    logger.log(BasicLevel.WARN, "Can not set the value of field: paymentAmount from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    s.setVar("paymentExchangeRate", form.getPaymentExchangeRate(), Double.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: paymentExchangeRate from the script");
             logger.log(BasicLevel.DEBUG, e);
         }
         logger.log(BasicLevel.DEBUG, "end");
@@ -2924,6 +3089,28 @@ public abstract class OrdersBean
             logger.log(BasicLevel.DEBUG, e);
         }
 	try {
+	    field = s.getVar("currencyPayedAmount", java.math.BigDecimal.class);
+	    if(!field.equals(form.getCurrencyPayedAmount())) {
+	        logger.log(BasicLevel.DEBUG, "Field currencyPayedAmount modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setCurrencyPayedAmount((java.math.BigDecimal)field);
+	        r.addField("currencyPayedAmount", (java.math.BigDecimal)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: currencyPayedAmount from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    field = s.getVar("currencyInvoicedAmount", java.math.BigDecimal.class);
+	    if(!field.equals(form.getCurrencyInvoicedAmount())) {
+	        logger.log(BasicLevel.DEBUG, "Field currencyInvoicedAmount modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setCurrencyInvoicedAmount((java.math.BigDecimal)field);
+	        r.addField("currencyInvoicedAmount", (java.math.BigDecimal)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: currencyInvoicedAmount from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
 	    field = s.getVar("diferenta", java.math.BigDecimal.class);
 	    if(!field.equals(form.getDiferenta())) {
 	        logger.log(BasicLevel.DEBUG, "Field diferenta modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
@@ -2932,6 +3119,17 @@ public abstract class OrdersBean
 	    }
 	} catch (ScriptErrorException e) {
 	    logger.log(BasicLevel.WARN, "Can not get the value of field: diferenta from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    field = s.getVar("currencyDiferenta", java.math.BigDecimal.class);
+	    if(!field.equals(form.getCurrencyDiferenta())) {
+	        logger.log(BasicLevel.DEBUG, "Field currencyDiferenta modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setCurrencyDiferenta((java.math.BigDecimal)field);
+	        r.addField("currencyDiferenta", (java.math.BigDecimal)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: currencyDiferenta from the script");
             logger.log(BasicLevel.DEBUG, e);
         }
 	try {
@@ -3320,6 +3518,17 @@ public abstract class OrdersBean
             logger.log(BasicLevel.DEBUG, e);
         }
 	try {
+	    field = s.getVar("invoiceExchangeRate", Double.class);
+	    if(!field.equals(form.getInvoiceExchangeRate())) {
+	        logger.log(BasicLevel.DEBUG, "Field invoiceExchangeRate modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setInvoiceExchangeRate((Double)field);
+	        r.addField("invoiceExchangeRate", (Double)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: invoiceExchangeRate from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
 	    field = s.getVar("invoiceTotal", java.math.BigDecimal.class);
 	    if(!field.equals(form.getInvoiceTotal())) {
 	        logger.log(BasicLevel.DEBUG, "Field invoiceTotal modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
@@ -3383,6 +3592,17 @@ public abstract class OrdersBean
 	    }
 	} catch (ScriptErrorException e) {
 	    logger.log(BasicLevel.WARN, "Can not get the value of field: paymentAmount from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    field = s.getVar("paymentExchangeRate", Double.class);
+	    if(!field.equals(form.getPaymentExchangeRate())) {
+	        logger.log(BasicLevel.DEBUG, "Field paymentExchangeRate modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setPaymentExchangeRate((Double)field);
+	        r.addField("paymentExchangeRate", (Double)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: paymentExchangeRate from the script");
             logger.log(BasicLevel.DEBUG, e);
         }
     }
