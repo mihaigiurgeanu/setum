@@ -58,6 +58,12 @@ public interface Orders extends EJBObject {
     public ResponseBean updateValoareAvans(java.math.BigDecimal newValoareAvans) throws RemoteException;
     public ResponseBean updatePayedAmount(java.math.BigDecimal newPayedAmount) throws RemoteException;
     public ResponseBean updateInvoicedAmount(java.math.BigDecimal newInvoicedAmount) throws RemoteException;
+    public ResponseBean updateTotalCurrency(java.math.BigDecimal newTotalCurrency) throws RemoteException;
+    public ResponseBean updateTotalTvaCurrency(java.math.BigDecimal newTotalTvaCurrency) throws RemoteException;
+    public ResponseBean updateTotalFinalCurrency(java.math.BigDecimal newTotalFinalCurrency) throws RemoteException;
+    public ResponseBean updateTotalFinalTvaCurrency(java.math.BigDecimal newTotalFinalTvaCurrency) throws RemoteException;
+    public ResponseBean updateAvansCurrency(java.math.BigDecimal newAvansCurrency) throws RemoteException;
+    public ResponseBean updatePayedAmountCurrency(java.math.BigDecimal newPayedAmountCurrency) throws RemoteException;
     public ResponseBean updateCurrencyPayedAmount(java.math.BigDecimal newCurrencyPayedAmount) throws RemoteException;
     public ResponseBean updateCurrencyInvoicedAmount(java.math.BigDecimal newCurrencyInvoicedAmount) throws RemoteException;
     public ResponseBean updateDiferenta(java.math.BigDecimal newDiferenta) throws RemoteException;

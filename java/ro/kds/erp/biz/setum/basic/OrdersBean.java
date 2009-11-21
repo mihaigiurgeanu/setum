@@ -1013,6 +1013,162 @@ public abstract class OrdersBean
 	computeCalculatedFields(r);
 	return r;
     }
+    public ResponseBean updateTotalCurrency(java.math.BigDecimal totalCurrency) {
+        ResponseBean r = new ResponseBean();
+	java.math.BigDecimal oldVal = form.getTotalCurrency();
+	form.setTotalCurrency(totalCurrency);
+	r.addRecord();
+	r.addField("totalCurrency", totalCurrency); // for number format
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".totalCurrency");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
+		script.setVar(OLDVAL_VARNAME, oldVal, java.math.BigDecimal.class);
+		script.setVar(FORM_VARNAME, form, OrdersForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the totalCurrency", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
+    public ResponseBean updateTotalTvaCurrency(java.math.BigDecimal totalTvaCurrency) {
+        ResponseBean r = new ResponseBean();
+	java.math.BigDecimal oldVal = form.getTotalTvaCurrency();
+	form.setTotalTvaCurrency(totalTvaCurrency);
+	r.addRecord();
+	r.addField("totalTvaCurrency", totalTvaCurrency); // for number format
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".totalTvaCurrency");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
+		script.setVar(OLDVAL_VARNAME, oldVal, java.math.BigDecimal.class);
+		script.setVar(FORM_VARNAME, form, OrdersForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the totalTvaCurrency", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
+    public ResponseBean updateTotalFinalCurrency(java.math.BigDecimal totalFinalCurrency) {
+        ResponseBean r = new ResponseBean();
+	java.math.BigDecimal oldVal = form.getTotalFinalCurrency();
+	form.setTotalFinalCurrency(totalFinalCurrency);
+	r.addRecord();
+	r.addField("totalFinalCurrency", totalFinalCurrency); // for number format
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".totalFinalCurrency");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
+		script.setVar(OLDVAL_VARNAME, oldVal, java.math.BigDecimal.class);
+		script.setVar(FORM_VARNAME, form, OrdersForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the totalFinalCurrency", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
+    public ResponseBean updateTotalFinalTvaCurrency(java.math.BigDecimal totalFinalTvaCurrency) {
+        ResponseBean r = new ResponseBean();
+	java.math.BigDecimal oldVal = form.getTotalFinalTvaCurrency();
+	form.setTotalFinalTvaCurrency(totalFinalTvaCurrency);
+	r.addRecord();
+	r.addField("totalFinalTvaCurrency", totalFinalTvaCurrency); // for number format
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".totalFinalTvaCurrency");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
+		script.setVar(OLDVAL_VARNAME, oldVal, java.math.BigDecimal.class);
+		script.setVar(FORM_VARNAME, form, OrdersForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the totalFinalTvaCurrency", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
+    public ResponseBean updateAvansCurrency(java.math.BigDecimal avansCurrency) {
+        ResponseBean r = new ResponseBean();
+	java.math.BigDecimal oldVal = form.getAvansCurrency();
+	form.setAvansCurrency(avansCurrency);
+	r.addRecord();
+	r.addField("avansCurrency", avansCurrency); // for number format
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".avansCurrency");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
+		script.setVar(OLDVAL_VARNAME, oldVal, java.math.BigDecimal.class);
+		script.setVar(FORM_VARNAME, form, OrdersForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the avansCurrency", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
+    public ResponseBean updatePayedAmountCurrency(java.math.BigDecimal payedAmountCurrency) {
+        ResponseBean r = new ResponseBean();
+	java.math.BigDecimal oldVal = form.getPayedAmountCurrency();
+	form.setPayedAmountCurrency(payedAmountCurrency);
+	r.addRecord();
+	r.addField("payedAmountCurrency", payedAmountCurrency); // for number format
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".payedAmountCurrency");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
+		script.setVar(OLDVAL_VARNAME, oldVal, java.math.BigDecimal.class);
+		script.setVar(FORM_VARNAME, form, OrdersForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the payedAmountCurrency", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
     public ResponseBean updateCurrencyPayedAmount(java.math.BigDecimal currencyPayedAmount) {
         ResponseBean r = new ResponseBean();
 	java.math.BigDecimal oldVal = form.getCurrencyPayedAmount();
@@ -2344,6 +2500,12 @@ public abstract class OrdersBean
 	r.addField("valoareAvans", form.getValoareAvans());
 	r.addField("payedAmount", form.getPayedAmount());
 	r.addField("invoicedAmount", form.getInvoicedAmount());
+	r.addField("totalCurrency", form.getTotalCurrency());
+	r.addField("totalTvaCurrency", form.getTotalTvaCurrency());
+	r.addField("totalFinalCurrency", form.getTotalFinalCurrency());
+	r.addField("totalFinalTvaCurrency", form.getTotalFinalTvaCurrency());
+	r.addField("avansCurrency", form.getAvansCurrency());
+	r.addField("payedAmountCurrency", form.getPayedAmountCurrency());
 	r.addField("currencyPayedAmount", form.getCurrencyPayedAmount());
 	r.addField("currencyInvoicedAmount", form.getCurrencyInvoicedAmount());
 	r.addField("diferenta", form.getDiferenta());
@@ -2542,6 +2704,42 @@ public abstract class OrdersBean
 	    s.setVar("invoicedAmount", form.getInvoicedAmount(), java.math.BigDecimal.class);
 	} catch (ScriptErrorException e) {
 	    logger.log(BasicLevel.WARN, "Can not set the value of field: invoicedAmount from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    s.setVar("totalCurrency", form.getTotalCurrency(), java.math.BigDecimal.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: totalCurrency from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    s.setVar("totalTvaCurrency", form.getTotalTvaCurrency(), java.math.BigDecimal.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: totalTvaCurrency from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    s.setVar("totalFinalCurrency", form.getTotalFinalCurrency(), java.math.BigDecimal.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: totalFinalCurrency from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    s.setVar("totalFinalTvaCurrency", form.getTotalFinalTvaCurrency(), java.math.BigDecimal.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: totalFinalTvaCurrency from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    s.setVar("avansCurrency", form.getAvansCurrency(), java.math.BigDecimal.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: avansCurrency from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    s.setVar("payedAmountCurrency", form.getPayedAmountCurrency(), java.math.BigDecimal.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: payedAmountCurrency from the script");
             logger.log(BasicLevel.DEBUG, e);
         }
 	try {
@@ -3086,6 +3284,72 @@ public abstract class OrdersBean
 	    }
 	} catch (ScriptErrorException e) {
 	    logger.log(BasicLevel.WARN, "Can not get the value of field: invoicedAmount from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    field = s.getVar("totalCurrency", java.math.BigDecimal.class);
+	    if(!field.equals(form.getTotalCurrency())) {
+	        logger.log(BasicLevel.DEBUG, "Field totalCurrency modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setTotalCurrency((java.math.BigDecimal)field);
+	        r.addField("totalCurrency", (java.math.BigDecimal)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: totalCurrency from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    field = s.getVar("totalTvaCurrency", java.math.BigDecimal.class);
+	    if(!field.equals(form.getTotalTvaCurrency())) {
+	        logger.log(BasicLevel.DEBUG, "Field totalTvaCurrency modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setTotalTvaCurrency((java.math.BigDecimal)field);
+	        r.addField("totalTvaCurrency", (java.math.BigDecimal)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: totalTvaCurrency from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    field = s.getVar("totalFinalCurrency", java.math.BigDecimal.class);
+	    if(!field.equals(form.getTotalFinalCurrency())) {
+	        logger.log(BasicLevel.DEBUG, "Field totalFinalCurrency modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setTotalFinalCurrency((java.math.BigDecimal)field);
+	        r.addField("totalFinalCurrency", (java.math.BigDecimal)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: totalFinalCurrency from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    field = s.getVar("totalFinalTvaCurrency", java.math.BigDecimal.class);
+	    if(!field.equals(form.getTotalFinalTvaCurrency())) {
+	        logger.log(BasicLevel.DEBUG, "Field totalFinalTvaCurrency modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setTotalFinalTvaCurrency((java.math.BigDecimal)field);
+	        r.addField("totalFinalTvaCurrency", (java.math.BigDecimal)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: totalFinalTvaCurrency from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    field = s.getVar("avansCurrency", java.math.BigDecimal.class);
+	    if(!field.equals(form.getAvansCurrency())) {
+	        logger.log(BasicLevel.DEBUG, "Field avansCurrency modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setAvansCurrency((java.math.BigDecimal)field);
+	        r.addField("avansCurrency", (java.math.BigDecimal)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: avansCurrency from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    field = s.getVar("payedAmountCurrency", java.math.BigDecimal.class);
+	    if(!field.equals(form.getPayedAmountCurrency())) {
+	        logger.log(BasicLevel.DEBUG, "Field payedAmountCurrency modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setPayedAmountCurrency((java.math.BigDecimal)field);
+	        r.addField("payedAmountCurrency", (java.math.BigDecimal)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: payedAmountCurrency from the script");
             logger.log(BasicLevel.DEBUG, e);
         }
 	try {

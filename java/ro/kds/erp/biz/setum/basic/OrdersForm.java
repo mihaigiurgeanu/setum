@@ -50,6 +50,12 @@ public class OrdersForm implements Serializable {
     java.math.BigDecimal valoareAvans;
     java.math.BigDecimal payedAmount;
     java.math.BigDecimal invoicedAmount;
+    java.math.BigDecimal totalCurrency;
+    java.math.BigDecimal totalTvaCurrency;
+    java.math.BigDecimal totalFinalCurrency;
+    java.math.BigDecimal totalFinalTvaCurrency;
+    java.math.BigDecimal avansCurrency;
+    java.math.BigDecimal payedAmountCurrency;
     java.math.BigDecimal currencyPayedAmount;
     java.math.BigDecimal currencyInvoicedAmount;
     java.math.BigDecimal diferenta;
@@ -191,6 +197,30 @@ public class OrdersForm implements Serializable {
 
 
        this.invoicedAmount = new java.math.BigDecimal(0);
+
+
+
+       this.totalCurrency = new java.math.BigDecimal(0);
+
+
+
+       this.totalTvaCurrency = new java.math.BigDecimal(0);
+
+
+
+       this.totalFinalCurrency = new java.math.BigDecimal(0);
+
+
+
+       this.totalFinalTvaCurrency = new java.math.BigDecimal(0);
+
+
+
+       this.avansCurrency = new java.math.BigDecimal(0);
+
+
+
+       this.payedAmountCurrency = new java.math.BigDecimal(0);
 
 
 
@@ -726,6 +756,96 @@ public class OrdersForm implements Serializable {
 	AttributeLocal a = (AttributeLocal)attributes.get("invoicedAmount");
 	if(a != null) {
 	    this.setInvoicedAmount(a.getDecimalValue());
+	}
+    }
+
+    public void setTotalCurrency(java.math.BigDecimal newTotalCurrency) {
+        this.totalCurrency = newTotalCurrency;
+    }
+
+    public java.math.BigDecimal getTotalCurrency() {
+        return totalCurrency;
+    }
+
+    public void readTotalCurrency(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("totalCurrency");
+	if(a != null) {
+	    this.setTotalCurrency(a.getDecimalValue());
+	}
+    }
+
+    public void setTotalTvaCurrency(java.math.BigDecimal newTotalTvaCurrency) {
+        this.totalTvaCurrency = newTotalTvaCurrency;
+    }
+
+    public java.math.BigDecimal getTotalTvaCurrency() {
+        return totalTvaCurrency;
+    }
+
+    public void readTotalTvaCurrency(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("totalTvaCurrency");
+	if(a != null) {
+	    this.setTotalTvaCurrency(a.getDecimalValue());
+	}
+    }
+
+    public void setTotalFinalCurrency(java.math.BigDecimal newTotalFinalCurrency) {
+        this.totalFinalCurrency = newTotalFinalCurrency;
+    }
+
+    public java.math.BigDecimal getTotalFinalCurrency() {
+        return totalFinalCurrency;
+    }
+
+    public void readTotalFinalCurrency(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("totalFinalCurrency");
+	if(a != null) {
+	    this.setTotalFinalCurrency(a.getDecimalValue());
+	}
+    }
+
+    public void setTotalFinalTvaCurrency(java.math.BigDecimal newTotalFinalTvaCurrency) {
+        this.totalFinalTvaCurrency = newTotalFinalTvaCurrency;
+    }
+
+    public java.math.BigDecimal getTotalFinalTvaCurrency() {
+        return totalFinalTvaCurrency;
+    }
+
+    public void readTotalFinalTvaCurrency(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("totalFinalTvaCurrency");
+	if(a != null) {
+	    this.setTotalFinalTvaCurrency(a.getDecimalValue());
+	}
+    }
+
+    public void setAvansCurrency(java.math.BigDecimal newAvansCurrency) {
+        this.avansCurrency = newAvansCurrency;
+    }
+
+    public java.math.BigDecimal getAvansCurrency() {
+        return avansCurrency;
+    }
+
+    public void readAvansCurrency(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("avansCurrency");
+	if(a != null) {
+	    this.setAvansCurrency(a.getDecimalValue());
+	}
+    }
+
+    public void setPayedAmountCurrency(java.math.BigDecimal newPayedAmountCurrency) {
+        this.payedAmountCurrency = newPayedAmountCurrency;
+    }
+
+    public java.math.BigDecimal getPayedAmountCurrency() {
+        return payedAmountCurrency;
+    }
+
+    public void readPayedAmountCurrency(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("payedAmountCurrency");
+	if(a != null) {
+	    this.setPayedAmountCurrency(a.getDecimalValue());
 	}
     }
 
