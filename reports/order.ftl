@@ -786,76 +786,35 @@
 		      </fo:table-row>
 		    </fo:table-body>
 		  </fo:table><!--/tip foaie-->
-		  <!-- optiuni -->
-		  <fo:table border-collapse="collapse" width="100%" table-layout="fixed" space-after="1mm">
-		    <fo:table-column column-number="1" border-style="solid" column-width="100%"/>
-
-		    <fo:table-body>
-		      <fo:table-row border-style="solid">
-			<fo:table-cell column-number="1"><fo:block>OPTIUNI</fo:block></fo:table-cell>
-		      </fo:table-row>
-		      <fo:table-row border-style="solid">
-			<fo:table-cell column-number="1">
-			  <fo:block>
-			    <#if k = 1>
-			    Canat prinicpal K1:
-			    <#else>
-			    Canat secundar K2:
-			    </#if>
-			  </fo:block>
-			</fo:table-cell>
-		      </fo:table-row>
-		      <!--
-			  Selectia optiunilor:
-			  <#assign ferestre_k=usa.record["field[attribute::name='parts']/record/field[attribute::name='part'][record[field[attribute::name='businessCategory']='http://www.kds.ro/erp/businessCategory/setum/optiuni/fereastra'][field[attribute::name='canat']='${k}']]"]>Nr ferestre k${k}: ${ferestre_k?size}
-
-		      -->
-		      <#if ferestre_k?size &gt; 0>
-		      <!-- fereastra 
-			  <#-- <#assign fk = ferestre_k[0]> -->
-		      -->
-		      <#list ferestre_k as fk>
-		      <!-- <#local fk_deschidere = fk.record["field[@name='deschidere']"]> -->
-		      <!-- <#local fk_tipGeam = fk.record["field[@name='tipGeam']"]> -->
-		      <!-- <#local fk_tipGrilaj = fk.record["field[@name='tipGrilaj']"]> -->
-		      <@enum_init/>
-		      <fo:table-row border-style="solid">
-			<fo:table-cell column-number="1">
-			  <fo:block>
-			    Tip fereastra: ${ssearch(fk, "standard")}
-			    <#if fk_deschidere = "1">Fereastra fixa: <#else>Fereastra mobila: </#if>
-			    ${fk.record["field[@name='quantity']"]} buc
-			  </fo:block>
-			  <#if fk_deschidere = "2">
-			  <@enum_next/>
-			  sens deschidere: ${ssearch(fk, "sensDeschidere")}
-			  balamale: ${ssearch(fk, "pozitionareBalamale")}
-			  </#if>
-			  <@enum_next/>pozitionare: ${fk.record["field[attribute::name='pozitionare1']"]}
-			  ${fk.record["field[@name='pozitionare2']"]}
-			  ${fk.record["field[@name='pozitionare3']"]}
-			  <@enum_next/>componenta: ${ssearch(fk, "componenta")}
-			  <#if fk_tipGeam = "1">
-			    <@enum_next/>geam ${ssearch(fk, "geamSimpluId")}
-			    <#elseif fk_tipGeam = "2">
-			    <@enum_next/>geam ${ssearch(fk, "geamTermopanId")}
-			  </#if>
-			  <#if fk_tipGrilaj = "1">
-			    <@enum_next/>grilaj ${ssearch(fk, "grilajStasId")}
-			    <#elseif fk_tipGrilaj = "2">
-			    <@enum_next/> grilaj atipic
-			  </#if>
-			</fo:table-cell>
-		      </fo:table-row>
-		      </#list>
-		      </#if><!-- /fereastra -->
-		    </fo:table-body>
-		  </fo:table><!-- /canat${k} -->
+		  <!-- /canat${k} -->
 		  </#macro>
 		  <@canat k=1/>
 
-		  <!--
+		  
+
+		 
+		  
+
+
+		</fo:table-cell>
+
+		<!-- canat2 -->
+		<fo:table-cell column-number="2" padding-left="1mm" padding-top="1mm">
+		  <#if usa.record["field[attribute::name='k']"] = "2" >
+		  <!-- canat2 -->
+		  <@canat k=2 />
+		  <!-- end canat2 -->
+		  </#if>
+		  <fo:block></fo:block>
+		</fo:table-cell>
+	      </fo:table-row>
+
+
+	      <!--
 		      Selectie optiuni:
+		      <#assign ferestre=usa.record["field[attribute::name='parts']/record/field[attribute::name='part'][record[field[attribute::name='businessCategory']='http://www.kds.ro/erp/businessCategory/setum/optiuni/fereastra']]"]><#t>
+		      Nr ferestre: ${ferestre?size}
+		      <#t>
 		      <#assign panouri=usa.record["field[attribute::name='parts']/record/field[attribute::name='part'][record[field[attribute::name='businessCategory']='http://www.kds.ro/erp/businessCategory/setum/optiuni/panoulateral']]"]><#t>
 		      Nr panouri: ${panouri?size}
 		      <#t>
@@ -873,250 +832,147 @@
 		      </#if>
 		      Nr optiuni stanga:  ${optiuni_st?size}
 		      Nr optiuni dreapta: ${optiuni_dr?size}
-		  -->
+		      <#assign optiuni = ferestre + panouri + supralumini><#t>
+	      -->
 
-		  <!-- optiuni stanga -->
-		  <#macro panou_lateral o>
-		  <!-- panou lateral -->
-		  <fo:table border-collapse="collapse" width="100%" table-layout="fixed" space-after="1mm">
-		    <fo:table-column column-number="1" border-style="solid" column-width="50%"/>
-		    <fo:table-column column-number="2" border-style="solid" column-width="50%"/>
 
-		    <fo:table-body>
-		      <fo:table-row border-style="solid">
-			<fo:table-cell column-number="1" number-columns-spanned="2">
-			  <fo:block>
-			    OPTIUNI
-			  </fo:block>
-			</fo:table-cell>
-		      </fo:table-row>
-		      <fo:table-row border-style="solid">
-			<fo:table-cell column-number="1" number-columns-spanned="2">
-			  <fo:block>
-			    PANOU LATERAL
-			  </fo:block>
-			</fo:table-cell>
-		      </fo:table-row>
-		      <fo:table-row border-style="solid">
-			<fo:table-cell column-number="1" number-rows-spanned="2">
-			  <fo:block>Nr celule:</fo:block>
-			  <fo:block>${o.record["field[attribute::name='cells']"]}</fo:block>
-			</fo:table-cell>
-			<fo:table-cell column-number="2">
-			  <fo:block>Lp = ${o.record["field[attribute::name='lpl']"]}</fo:block>
-			</fo:table-cell>
-		      </fo:table-row>
-		      <fo:table-row border-style="solid">
-			<fo:table-cell column-number="2">
-			  <fo:block>Hp = ${o.record["field[attribute::name='hpl']"]}</fo:block>
-			</fo:table-cell>
-		      </fo:table-row>
-		      <fo:table-row border-style="solid">
-			<fo:table-cell column-number="1">
-			  <#assign o_deschidere = o.record["field[attribute::name='deschidere']"]>
-			  <fo:block>Panou lateral: <#if o_deschidere = "1">Fix<#else>Mobil</#if></fo:block>
-			</fo:table-cell>
-			<fo:table-cell column-number="2">
-			  <fo:block>
-			    Sens deschidere: <#if o_deschidere = "2">${ssearch(o, "sensDeschidere")}<#else>-</#if>
-			  </fo:block>
-			</fo:table-cell>
-		      </fo:table-row>
-		      <fo:table-row border-style="solid">
-			<fo:table-cell column-number="1">
-			  <fo:block>Nr. buc: ${o.record["field[attribute::name='quantity']"]}</fo:block>
-			</fo:table-cell>
-			<fo:table-cell column-number="2">
-			  <fo:block>
-			    <#if o_deschidere = "2">Balamale: ${ssearch(o, "pozitionareBalamale")}<#else>-</#if>
-			  </fo:block>
-			</fo:table-cell>
-		      </fo:table-row>
+	      <!-- 3 bis -->
+	      <fo:table-row>
+		<fo:table-cell number-columns-spanned="2">
+		  <!--Optiuni-->
+		  <fo:block border-style="solid" margin-top="1mm" margin-bottom="1mm">
+		    Optiuni
+		    <#list optiuni as optiune>
+		    <fo:block border-top-style="solid">
+		      <#if optiune.record["field[attribute::name='businessCategory']"] = "http://www.kds.ro/erp/businessCategory/setum/optiuni/fereastra">
+		      <!--fereastra-->
+		      <fo:block>
+		      <#assign fk_deschidere = optiune.record["field[@name='deschidere']"]><#t>
+		      <#assign fk_tipGeam = optiune.record["field[@name='tipGeam']"]><#t>
+		      <#assign fk_tipGrilaj = optiune.record["field[@name='tipGrilaj']"]><#t>
+		      ${ssearch(optiune, "standard")}
+		      ${optiune.record["field[@name='lf']"]} mm X ${optiune.record["field[@name='hf']"]} mm
+		      Canat ${optiune.record["field[@name='canat']"]}
+		      <!--deschidere-->
+		      <#if fk_deschidere = "1">Fixa
+		      <#else>
+		      Mobila
+		      sens deschidere: ${ssearch(optiune, "sensDeschidere")}
+		      balamale: ${ssearch(optiune, "pozitionareBalamale")}
+		      </#if><!--/deschidere-->
 
-		      <fo:table-row border-style="solid">
-			<fo:table-cell column-number="1" number-columns-spanned="2"><fo:block>Componenta: ${ssearch(o, "componenta")}</fo:block></fo:table-cell>
-		      </fo:table-row>
-		      <fo:table-row border-style="solid">
-			<fo:table-cell column-number="1" number-columns-spanned="2">
-			  <fo:block>
-			    Geam/Tabla: 
-			    <!-- 
-				 <#assign o_tipGeam = o.record["field[attribute::name='tipGeam']"]> 
-				 <#assign o_tipTabla = o.record["field[attribute::name='tipTabla']"]> 
-			    -->
-			    <#if o_tipGeam = "1">
-			    ${ssearch(o, "geamSimpluId")}
-			    <#elseif o_tipGeam = "2">
-			    ${ssearch(o, "geamTermopanId")}
-			    </#if>
-			    <#if o_tipTabla != "0">
-			    ${ssearch(o, "tipTabla")} ${ssearch(o, "tablaId")}
-			    </#if>
-			  </fo:block>
-			</fo:table-cell>
-		      </fo:table-row>
-		      <fo:table-row border-style="solid">
-			<fo:table-cell column-number="1" number-columns-spanned="2">
-			  <fo:block>
-			    Grilaj: 
-			    <!-- <#assign o_tipGrilaj = o.record["field[attribute::name='tipGrilaj']"]> -->
-			    <#if o_tipGrilaj = "1">
-			    ${ssearch(o, "grilajStasId")}
-			    <#elseif o_tipGrilaj = "2">
-			    Atipic
-			    </#if>
-			  </fo:block>
-			</fo:table-cell>
-		      </fo:table-row>
-		    </fo:table-body>
-		  </fo:table>
-		  <!-- end panou lateral -->
-		  </#macro>
+		      ${optiune.record["field[attribute::name='pozitionare1']"]}
+		      ${optiune.record["field[@name='pozitionare2']"]}
+		      ${optiune.record["field[@name='pozitionare3']"]}
 
-		  <#macro supralumina o>
-		  <!-- supralumina -->
-		  <fo:table border-collapse="collapse" width="100%" table-layout="fixed" space-after="1mm">
-		    <fo:table-column column-number="1" border-style="solid" column-width="50%"/>
-		    <fo:table-column column-number="2" border-style="solid" column-width="50%"/>
+		      <#if fk_tipGeam = "1">
+		        geam ${ssearch(optiune, "geamSimpluId")}
+		      <#elseif fk_tipGeam = "2">
+			geam ${ssearch(optiune, "geamTermopanId")}
+		      </#if>
 
-		    <fo:table-body>
-		      <fo:table-row border-style="solid">
-			<fo:table-cell column-number="1" number-columns-spanned="2">
-			  <fo:block>
-			    OPTIUNI
-			  </fo:block>
-			</fo:table-cell>
-		      </fo:table-row>
-		      <fo:table-row border-style="solid">
-			<fo:table-cell column-number="1" number-columns-spanned="2">
-			  <fo:block>
-			    SUPRALUMINA
-			  </fo:block>
-			</fo:table-cell>
-		      </fo:table-row>
-		      <fo:table-row>
-			<fo:table-cell column-number="1" number-columns-spanned="2">
-			  <fo:block>
-			    Tip supralumina: ${ssearch(o, "tip")}
-			  </fo:block>
-			</fo:table-cell>
-		      </fo:table-row>
-		      <fo:table-row border-style="solid">
-			<fo:table-cell column-number="1" number-rows-spanned="2">
-			  <fo:block>Nr celule:</fo:block>
-			  <fo:block>${o.record["field[attribute::name='cells']"]}</fo:block>
-			</fo:table-cell>
-			<fo:table-cell column-number="2">
-			  <fo:block>Ls = ${o.record["field[attribute::name='ls']"]}</fo:block>
-			</fo:table-cell>
-		      </fo:table-row>
-		      <fo:table-row border-style="solid">
-			<fo:table-cell column-number="2">
-			  <fo:block>Hs = ${o.record["field[attribute::name='hs']"]}</fo:block>
-			</fo:table-cell>
-		      </fo:table-row>
-		      <fo:table-row border-style="solid">
-			<fo:table-cell column-number="1">
-			  <#assign o_deschidere = o.record["field[attribute::name='deschidere']"]>
-			  <fo:block>Supralumina: <#if o_deschidere = "1">Fixa<#else>Mobila</#if></fo:block>
-			</fo:table-cell>
-			<fo:table-cell column-number="2">
-			  <fo:block>
-			    Sens deschidere: <#if o_deschidere = "2">${ssearch(o, "sensDeschidere")}<#else>-</#if>
-			  </fo:block>
-			</fo:table-cell>
-		      </fo:table-row>
-		      <fo:table-row border-style="solid">
-			<fo:table-cell column-number="1">
-			  <fo:block>Nr. buc: ${o.record["field[attribute::name='quantity']"]}</fo:block>
-			</fo:table-cell>
-			<fo:table-cell column-number="2">
-			  <fo:block>
-			    <#if o_deschidere = "2">Balamale: ${ssearch(o, "pozitionareBalamale")}<#else>-</#if>
-			  </fo:block>
-			</fo:table-cell>
-		      </fo:table-row>
+		      <#if fk_tipGrilaj = "1">
+		        grilaj ${ssearch(optiune, "grilajStasId")}
+		      <#elseif fk_tipGrilaj = "2">
+		         grilaj atipic
+		      </#if>
+		      - ${optiune.record["field[@name='quantity']"]} buc
+		      </fo:block><!--/fereastra-->
+		      </#if>
 
-		      <fo:table-row border-style="solid">
-			<fo:table-cell column-number="1" number-columns-spanned="2"><fo:block>Componenta: ${ssearch(o, "componenta")}</fo:block></fo:table-cell>
-		      </fo:table-row>
-		      <fo:table-row border-style="solid">
-			<fo:table-cell column-number="1" number-columns-spanned="2">
-			  <fo:block>
-			    Geam/Tabla: 
-			    <!-- 
-				 <#assign o_tipGeam = o.record["field[attribute::name='tipGeam']"]> 
-				 <#assign o_tipTabla = o.record["field[attribute::name='tipTabla']"]> 
-			    -->
-			    <#if o_tipGeam = "1">
-			    ${ssearch(o, "geamSimpluId")}
-			    <#elseif o_tipGeam = "2">
-			    ${ssearch(o, "geamTermopanId")}
-			    </#if>
-			    <#if o_tipTabla != "0">
-			    ${ssearch(o, "tipTabla")} ${ssearch(o, "tablaId")}
-			    </#if>
-			  </fo:block>
-			</fo:table-cell>
-		      </fo:table-row>
-		      <fo:table-row border-style="solid">
-			<fo:table-cell column-number="1" number-columns-spanned="2">
-			  <fo:block>
-			    Grilaj: 
-			    <!-- <#assign o_tipGrilaj = o.record["field[attribute::name='tipGrilaj']"]> -->
-			    <#if o_tipGrilaj = "1">
-			    ${ssearch(o, "grilajStasId")}
-			    <#elseif o_tipGrilaj = "2">
-			    Atipic
-			    </#if>
-			  </fo:block>
-			</fo:table-cell>
-		      </fo:table-row>
-		    </fo:table-body>
-		  </fo:table>
-		  <!-- end supralumina -->
-		  </#macro>
 
-		  <#list optiuni_st as optiune>
-		    <#if optiune.record["field[attribute::name='businessCategory']"] = "http://www.kds.ro/erp/businessCategory/setum/optiuni/panoulateral">
-		      <@panou_lateral optiune/>
-		    </#if>
-		    <#if optiune.record["field[attribute::name='businessCategory']"] = "http://www.kds.ro/erp/businessCategory/setum/optiuni/supralumina">
-		      <@supralumina optiune/>
-		    </#if>
-		  </#list>
-		  <!-- end optiuni stanga -->
+		      <#if optiune.record["field[attribute::name='businessCategory']"] = "http://www.kds.ro/erp/businessCategory/setum/optiuni/panoulateral">
+		      <!-- Panou lateral -->
+		      <fo:block>Panou lateral
+		      <#assign nr_celule = optiune.record["field[attribute::name='cells']"]>
+		      cu ${nr_celule} <#if nr_celule != "1">celule<#else>celula</#if>
 
-		  <!-- observatii -->
+		      ${optiune.record["field[attribute::name='lpl']"]} mm X
+		      ${optiune.record["field[attribute::name='hpl']"]} mm
+
+		      <#assign o_deschidere = optiune.record["field[attribute::name='deschidere']"]>
+		      <!--deshidere-->
+		      <#if o_deschidere = "1">Fix
+		      <#else>
+		      Mobil
+		      ${ssearch(optiune, "sensDeschidere")}
+		      balamale ${ssearch(optiune, "pozitionareBalamale")}
+		      </#if><!--deschidere-->
+		      
+		      Componenta: ${ssearch(optiune, "componenta")}
+		      <#assign o_tipGeam = optiune.record["field[attribute::name='tipGeam']"]> 
+		      <#assign o_tipTabla = optiune.record["field[attribute::name='tipTabla']"]>
+
+		      <#if o_tipGeam = "1">
+		      ${ssearch(optiune, "geamSimpluId")}
+		      <#elseif o_tipGeam = "2">
+		      ${ssearch(optiune, "geamTermopanId")}
+		      </#if>
+		      <#if o_tipTabla != "0">
+		      ${ssearch(optiune, "tipTabla")} ${ssearch(optiune, "tablaId")}
+		      </#if>
+
+		      <#assign o_tipGrilaj = optiune.record["field[attribute::name='tipGrilaj']"]>
+		      <#if o_tipGrilaj = "1">
+		      Grilaj ${ssearch(optiune, "grilajStasId")}
+		      <#elseif o_tipGrilaj = "2">
+		      Grilaj atipic
+		      </#if>
+
+		      - ${optiune.record["field[attribute::name='quantity']"]} buc
+		      </fo:block><!--/Panou lateral -->
+		      </#if>
+
+
+		      <#if optiune.record["field[attribute::name='businessCategory']"] = "http://www.kds.ro/erp/businessCategory/setum/optiuni/supralumina">
+		      <!--Supralumina-->
+		      <fo:block>
+		      Supralumina tip ${ssearch(optiune, "tip")}
+		      ${optiune.record["field[attribute::name='ls']"]} mm X 
+		      ${optiune.record["field[attribute::name='hs']"]} mm
+		      cu ${optiune.record["field[attribute::name='cells']"]} celule
+		      <#assign o_deschidere = optiune.record["field[attribute::name='deschidere']"]>
+		      <!--deschidere-->
+		      <#if o_deschidere = "1">Fixa
+		      <#else>
+		      Mobila
+		      cu deschidere ${ssearch(optiune, "sensDeschidere")}
+		      balamale ${ssearch(optiune, "pozitionareBalamale")}
+		      </#if><!--/deschidere-->
+
+		      Componenta ${ssearch(optiune, "componenta")}
+		      <#assign o_tipGeam = optiune.record["field[attribute::name='tipGeam']"]> 
+		      <#assign o_tipTabla = optiune.record["field[attribute::name='tipTabla']"]>
+		      <#if o_tipGeam = "1">
+		      ${ssearch(optiune, "geamSimpluId")}
+		      <#elseif o_tipGeam = "2">
+		      ${ssearch(optiune, "geamTermopanId")}
+		      </#if>
+		      <#if o_tipTabla != "0">
+		      ${ssearch(optiune, "tipTabla")} ${ssearch(optiune, "tablaId")}
+		      </#if>
+
+		      <#assign o_tipGrilaj = optiune.record["field[attribute::name='tipGrilaj']"]>
+		      <#if o_tipGrilaj = "1">
+		      Grilaj ${ssearch(optiune, "grilajStasId")}
+		      <#elseif o_tipGrilaj = "2">
+		      Grilaj atipic
+		      </#if>
+		      - ${optiune.record["field[@name='quantity']"]} buc
+		      </fo:block><!--/Supralumina-->
+		      </#if>
+		    </fo:block>
+		    </#list>
+		  </fo:block><!--/Optiuni-->
+
+		  <!-- Observatii -->
 		  <fo:block border-style="solid" margin-bottom="1mm" linefeed-treatment="preserve">
 		    Observatii: ${usa.record["field[attribute::name='sistemeComment']"]}
 		  </fo:block>
-
-		</fo:table-cell>
-
-		<!-- canat2 -->
-		<fo:table-cell column-number="2" padding-left="1mm" padding-top="1mm">
-		  <#if usa.record["field[attribute::name='k']"] = "2" >
-		  <!-- canat2 -->
-		  <@canat k=2 />
-		  <!-- end canat2 -->
-		  </#if>
-
-		  <!-- optiuni dreapta -->
-		  <#list optiuni_dr as optiune>
-		    <#if optiune.record["field[attribute::name='businessCategory']"] = "http://www.kds.ro/erp/businessCategory/setum/optiuni/panoulateral">
-		      <@panou_lateral optiune/>
-		    </#if>
-		    <#if optiune.record["field[attribute::name='businessCategory']"] = "http://www.kds.ro/erp/businessCategory/setum/optiuni/supralumina">
-		      <@supralumina optiune/>
-		    </#if>
-		  </#list>
-		  <!-- end optiuni dreapta -->
-
-		  
-		  <fo:block></fo:block>
 		</fo:table-cell>
 	      </fo:table-row>
+
+
 
 	      <!-- 4. -->
 	      <!-- montaj/localitate -->
