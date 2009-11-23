@@ -227,16 +227,12 @@
 		<fo:table-cell column-number="2">
 		  <!-- Termen livrare -->
 		  <fo:table border-collapse="collapse" width="100%" border-style="solid" table-layout="fixed" margin-top="1mm" margin-bottom="1mm">
-		    <fo:table-column column-number="1" column-width="35%" border-style="solid"/>
-		    <fo:table-column column-number="2" column-width="35%" border-style="solid"/>
-		    <fo:table-column column-number="3" column-width="15%" border-style="solid"/>
-		    <fo:table-column column-number="4" column-width="15%" border-style="solid"/>
+		    <fo:table-column column-number="1" column-width="50%" border-style="solid"/>
+		    <fo:table-column column-number="2" column-width="50%" border-style="solid"/>
 		    <fo:table-body>
 		      <fo:table-row border-style="solid">
 			<fo:table-cell column-number="1"><fo:block>Termen livrare</fo:block></fo:table-cell>
-			<fo:table-cell column-number="2"><fo:block> ${doc["child::response/child::record/child::field[attribute::name='termenLivarare']"][0]}</fo:block></fo:table-cell>
-			<fo:table-cell column-number="3"><fo:block>BUC</fo:block></fo:table-cell>
-			<fo:table-cell column-number="4"><fo:block>${usa_line["field[attribute::name='quantity']"]}</fo:block></fo:table-cell>			
+			<fo:table-cell column-number="2"><fo:block text-align="right">${doc["child::response/child::record/child::field[attribute::name='termenLivarare']"][0]}</fo:block></fo:table-cell>			
 		      </fo:table-row>
 		    </fo:table-body>
 		  </fo:table>
@@ -263,16 +259,55 @@
 			</fo:block>
 		      </fo:table-cell>
 		      <fo:table-cell>
-			<fo:block border-style="solid">
-			  <fo:block border-bottom-style="solid" text-align="center">Varianta</fo:block>
-			  <fo:block>
-			    <!--${usa.record["field[attribute::name='version']"]}-->
-			    <!--${usa.record["field[attribute::name='k']"]}K-->
-			    <!--${usa.record["field[attribute::name='subclass']"]}-->
-			    <!-- ${ssearch(usa, 'subclass')} - -->
-			    ${ssearch(usa, 'version')}
-			  </fo:block>
-			</fo:block>
+			<fo:table width="100%" table-layout="fixed" border-collapse="collapse" border-style="solid" margin-right="1mm">
+			  <fo:table-column column-number="1" border-style="solid" column-width="20%"/>
+			  <fo:table-column column-number="2" border-style="solid" column-width="80%"/>
+			      
+			  <fo:table-body>
+			    <!-- Varianta -->
+			    <fo:table-row>
+			      <fo:table-cell column-number="1" number-columns-spanned="2">
+				<fo:block text-align="center">Varianta</fo:block>
+			      </fo:table-cell>
+			    </fo:table-row>
+			    <fo:table-row>
+			      <fo:table-cell column-number="1" number-columns-spanned="2">
+				<fo:block>
+				  <!--${usa.record["field[attribute::name='version']"]}-->
+				  <!--${usa.record["field[attribute::name='k']"]}K-->
+				  <!--${usa.record["field[attribute::name='subclass']"]}-->
+				  <!-- ${ssearch(usa, 'subclass')} - -->
+				  ${ssearch(usa, 'version')}
+				</fo:block>
+			      </fo:table-cell>
+			    </fo:table-row>
+			    <!-- /Varianta -->
+
+			    <!-- Buc, Sens deschidere -->
+			    <fo:table-row border-style="solid">
+			      <fo:table-cell column-number="1">
+				<fo:block text-align="center">Buc</fo:block>
+			      </fo:table-cell>
+			      <fo:table-cell column-number="2" padding-left="1mm">
+				<fo:block>Sens deschidere</fo:block>
+			      </fo:table-cell>
+			    </fo:table-row>
+			    <fo:table-row>
+			      <fo:table-cell><fo:block text-align="center">${usa_line["field[attribute::name='quantity']"]}</fo:block></fo:table-cell>
+			      <fo:table-cell  padding-left="1mm">
+				<fo:block>
+				  ${ssearch(usa, "openingSide")}
+				  ${ssearch(usa, "openingDir")}
+				</fo:block>
+			      </fo:table-cell>
+			    </fo:table-row>
+			    <!-- /Buc, Sens deschidere -->
+
+			  </fo:table-body>
+			</fo:table>
+			<!-- /Varianta, Bucati, Sens deschider -->
+
+
 		      </fo:table-cell>
 		    </fo:table-body>
 		  </fo:table>
@@ -837,28 +872,28 @@
 
 
 	      <!-- 3 bis -->
-	      <fo:table-row>
-		<fo:table-cell number-columns-spanned="2">
-		  <!--Optiuni-->
-		  <fo:block border-style="solid" margin-top="1mm" margin-bottom="1mm">
-		    Optiuni
-		    <#list optiuni as optiune>
-		    <fo:block border-top-style="solid">
+	      <#macro list_optiune optiune>
+	            <@enum_init sep="/"/>
+	            <fo:block border-top-style="solid">
 		      <#if optiune.record["field[attribute::name='businessCategory']"] = "http://www.kds.ro/erp/businessCategory/setum/optiuni/fereastra">
 		      <!--fereastra-->
 		      <fo:block>
-		      <#assign fk_deschidere = optiune.record["field[@name='deschidere']"]><#t>
-		      <#assign fk_tipGeam = optiune.record["field[@name='tipGeam']"]><#t>
-		      <#assign fk_tipGrilaj = optiune.record["field[@name='tipGrilaj']"]><#t>
-		      ${ssearch(optiune, "standard")}
-		      ${optiune.record["field[@name='lf']"]} mm X ${optiune.record["field[@name='hf']"]} mm
-		      Canat ${optiune.record["field[@name='canat']"]}
+		      <#local fk_deschidere = optiune.record["field[@name='deschidere']"]><#t>
+		      <#local fk_tipGeam = optiune.record["field[@name='tipGeam']"]><#t>
+		      <#local fk_tipGrilaj = optiune.record["field[@name='tipGrilaj']"]><#t>
+		      
+		      <@enum_next/>
+		      <fo:inline font-weight="bold">Fereastra</fo:inline> <!--${ssearch(optiune, "standard")}-->
+		      Lf x Hf = ${optiune.record["field[@name='lf']"]} x ${optiune.record["field[@name='hf']"]}
 		      <!--deschidere-->
+		      <@enum_next/>
 		      <#if fk_deschidere = "1">Fixa
 		      <#else>
-		      Mobila
-		      sens deschidere: ${ssearch(optiune, "sensDeschidere")}
-		      balamale: ${ssearch(optiune, "pozitionareBalamale")}
+		      Mobila 
+		      <@enum_next/>
+		      Sens deschidere: ${ssearch(optiune, "sensDeschidere")} 
+		      <@enum_next/>
+		      Balamale: ${ssearch(optiune, "pozitionareBalamale")}
 		      </#if><!--/deschidere-->
 
 		      ${optiune.record["field[attribute::name='pozitionare1']"]}
@@ -866,15 +901,19 @@
 		      ${optiune.record["field[@name='pozitionare3']"]}
 
 		      <#if fk_tipGeam = "1">
-		        geam ${ssearch(optiune, "geamSimpluId")}
+		        <@enum_next/>
+		        Geam ${ssearch(optiune, "geamSimpluId")}
 		      <#elseif fk_tipGeam = "2">
-			geam ${ssearch(optiune, "geamTermopanId")}
+		        <@enum_next/>
+			Geam ${ssearch(optiune, "geamTermopanId")}
 		      </#if>
 
 		      <#if fk_tipGrilaj = "1">
-		        grilaj ${ssearch(optiune, "grilajStasId")}
+		        <@enum_next/>
+		        Grilaj ${ssearch(optiune, "grilajStasId")}
 		      <#elseif fk_tipGrilaj = "2">
-		         grilaj atipic
+		        <@enum_next/>
+		        Grilaj atipic
 		      </#if>
 		      - ${optiune.record["field[@name='quantity']"]} buc
 		      </fo:block><!--/fereastra-->
@@ -883,39 +922,56 @@
 
 		      <#if optiune.record["field[attribute::name='businessCategory']"] = "http://www.kds.ro/erp/businessCategory/setum/optiuni/panoulateral">
 		      <!-- Panou lateral -->
-		      <fo:block>Panou lateral
-		      <#assign nr_celule = optiune.record["field[attribute::name='cells']"]>
-		      cu ${nr_celule} <#if nr_celule != "1">celule<#else>celula</#if>
+		      <fo:block>
+		      <@enum_next/>
+		      <fo:inline font-weight="bold">Panou lateral</fo:inline>
+		      
+		      <@enum_next/>
+		      Lp x Hp =
+		      ${optiune.record["field[attribute::name='lpl']"]} x
+		      ${optiune.record["field[attribute::name='hpl']"]}
 
-		      ${optiune.record["field[attribute::name='lpl']"]} mm X
-		      ${optiune.record["field[attribute::name='hpl']"]} mm
+		      <#local nr_celule = optiune.record["field[attribute::name='cells']"]>
+		      <#if nr_celule != "1">
+		      <@enum_next/>
+		      Nr celule: ${nr_celule}
+		      </#if>
 
-		      <#assign o_deschidere = optiune.record["field[attribute::name='deschidere']"]>
+		      <#local o_deschidere = optiune.record["field[attribute::name='deschidere']"]>
 		      <!--deshidere-->
+		      <@enum_next/>
 		      <#if o_deschidere = "1">Fix
 		      <#else>
 		      Mobil
-		      ${ssearch(optiune, "sensDeschidere")}
-		      balamale ${ssearch(optiune, "pozitionareBalamale")}
+		      <@enum_next/>
+		      Deschidere ${ssearch(optiune, "sensDeschidere")}
+		      <@enum_next/>
+		      Balamale ${ssearch(optiune, "pozitionareBalamale")}
 		      </#if><!--deschidere-->
 		      
+		      <@enum_next/>
 		      Componenta: ${ssearch(optiune, "componenta")}
-		      <#assign o_tipGeam = optiune.record["field[attribute::name='tipGeam']"]> 
-		      <#assign o_tipTabla = optiune.record["field[attribute::name='tipTabla']"]>
+		      <#local o_tipGeam = optiune.record["field[attribute::name='tipGeam']"]> 
+		      <#local o_tipTabla = optiune.record["field[attribute::name='tipTabla']"]>
 
 		      <#if o_tipGeam = "1">
-		      ${ssearch(optiune, "geamSimpluId")}
+		        <@enum_next/>
+		        Geam ${ssearch(optiune, "geamSimpluId")}
 		      <#elseif o_tipGeam = "2">
-		      ${ssearch(optiune, "geamTermopanId")}
+		        <@enum_next/>
+		        Geam ${ssearch(optiune, "geamTermopanId")}
 		      </#if>
 		      <#if o_tipTabla != "0">
+		      <@enum_next/>
 		      ${ssearch(optiune, "tipTabla")} ${ssearch(optiune, "tablaId")}
 		      </#if>
 
-		      <#assign o_tipGrilaj = optiune.record["field[attribute::name='tipGrilaj']"]>
+		      <#local o_tipGrilaj = optiune.record["field[attribute::name='tipGrilaj']"]>
 		      <#if o_tipGrilaj = "1">
+		      <@enum_next/>
 		      Grilaj ${ssearch(optiune, "grilajStasId")}
 		      <#elseif o_tipGrilaj = "2">
+		      <@enum_next/>
 		      Grilaj atipic
 		      </#if>
 
@@ -927,48 +983,134 @@
 		      <#if optiune.record["field[attribute::name='businessCategory']"] = "http://www.kds.ro/erp/businessCategory/setum/optiuni/supralumina">
 		      <!--Supralumina-->
 		      <fo:block>
-		      Supralumina tip ${ssearch(optiune, "tip")}
-		      ${optiune.record["field[attribute::name='ls']"]} mm X 
-		      ${optiune.record["field[attribute::name='hs']"]} mm
-		      cu ${optiune.record["field[attribute::name='cells']"]} celule
-		      <#assign o_deschidere = optiune.record["field[attribute::name='deschidere']"]>
+		      <@enum_next/>
+		      <fo:inline font-weight="bold">Supralumina</fo:inline> tip ${ssearch(optiune, "tip")}
+		      <@enum_next/>
+		      Ls x Hs =
+		      ${optiune.record["field[attribute::name='ls']"]} x
+		      ${optiune.record["field[attribute::name='hs']"]}
+
+		      <#if optiune.record["field[attribute::name='cells']"] != "1">
+		      <@enum_next/>
+		      Nr celule: ${optiune.record["field[attribute::name='cells']"]}
+		      </#if>
+
+		      <#local o_deschidere = optiune.record["field[attribute::name='deschidere']"]>
 		      <!--deschidere-->
+		      <@enum_next/>
 		      <#if o_deschidere = "1">Fixa
 		      <#else>
 		      Mobila
-		      cu deschidere ${ssearch(optiune, "sensDeschidere")}
-		      balamale ${ssearch(optiune, "pozitionareBalamale")}
+		      <@enum_next/>
+		      Deschidere ${ssearch(optiune, "sensDeschidere")}
+		      <@enum_next/>
+		      Balamale ${ssearch(optiune, "pozitionareBalamale")}
 		      </#if><!--/deschidere-->
 
+		      <@enum_next/>
 		      Componenta ${ssearch(optiune, "componenta")}
-		      <#assign o_tipGeam = optiune.record["field[attribute::name='tipGeam']"]> 
-		      <#assign o_tipTabla = optiune.record["field[attribute::name='tipTabla']"]>
+		      <#local o_tipGeam = optiune.record["field[attribute::name='tipGeam']"]> 
+		      <#local o_tipTabla = optiune.record["field[attribute::name='tipTabla']"]>
 		      <#if o_tipGeam = "1">
+		      <@enum_next/>
 		      ${ssearch(optiune, "geamSimpluId")}
 		      <#elseif o_tipGeam = "2">
+		      <@enum_next/>
 		      ${ssearch(optiune, "geamTermopanId")}
 		      </#if>
 		      <#if o_tipTabla != "0">
+		      <@enum_next/>
 		      ${ssearch(optiune, "tipTabla")} ${ssearch(optiune, "tablaId")}
 		      </#if>
 
-		      <#assign o_tipGrilaj = optiune.record["field[attribute::name='tipGrilaj']"]>
+		      <#local o_tipGrilaj = optiune.record["field[attribute::name='tipGrilaj']"]>
 		      <#if o_tipGrilaj = "1">
+		      <@enum_next/>
 		      Grilaj ${ssearch(optiune, "grilajStasId")}
 		      <#elseif o_tipGrilaj = "2">
+		      <@enum_next/>
 		      Grilaj atipic
 		      </#if>
 		      - ${optiune.record["field[@name='quantity']"]} buc
 		      </fo:block><!--/Supralumina-->
 		      </#if>
 		    </fo:block>
+	      </#macro><#-- list_optiune -->
+
+	      <fo:table-row>
+		<fo:table-cell number-columns-spanned="2">
+		  <!--Optiuni-->
+		  <#if usa.record["field[attribute::name='k']"] = "1">
+		  <!-- pentru usile cu un canat am doar un bloc de optiuni -->
+		  <fo:block border-style="solid" margin-top="1mm" margin-bottom="1mm">
+		    <fo:inline font-weight="bold">Optiuni</fo:inline>
+		    <#list optiuni as o>
+		    <@list_optiune optiune=o />
 		    </#list>
-		  </fo:block><!--/Optiuni-->
+		  </fo:block>
+		  <#else> <!--  usa.record["field[attribute::name='k']"] = "2" -->
+		  <!-- pentru usile in doua canate, sunt 3 blocuri de optiuni:
+		       optiuni canat principal (fereastra)
+		       optiuni canat secundar  (fereastra)
+		       optiuni in general
+		  -->
+		  <#assign ferestre_k1=usa.record["field[attribute::name='parts']/record/field[attribute::name='part'][record[field[attribute::name='businessCategory']='http://www.kds.ro/erp/businessCategory/setum/optiuni/fereastra'][field[attribute::name='canat']='1']]"]><#t>
+		  Nr ferestre k1: ${ferestre_k1?size}
+		  <#assign ferestre_k2=usa.record["field[attribute::name='parts']/record/field[attribute::name='part'][record[field[attribute::name='businessCategory']='http://www.kds.ro/erp/businessCategory/setum/optiuni/fereastra'][field[attribute::name='canat']='2']]"]><#t>
+		  Nr ferestre k2: ${ferestre_k2?size}
+		  <#if ferestre_k1?size &gt; 0>
+		  <fo:block border-style="solid" margin-top="1mm" margin-bottom="1mm">
+		    <fo:inline font-weight="bold">Optiuni canat principal K1</fo:inline>
+		    <#list ferestre_k1 as o>
+		    <@list_optiune optiune=o />
+		    </#list>
+		  </fo:block>
+		  </#if><!-- /optiuni canat principal-->
+		  <#if ferestre_k2?size &gt; 0>
+		  <fo:block border-style="solid" margin-top="1mm" margin-bottom="1mm">
+		    <fo:inline font-weight="bold">Optiuni canat secundar K2</fo:inline>
+		    <#list ferestre_k2 as o>
+		    <@list_optiune optiune=o />
+		    </#list>
+		  </fo:block>
+		  </#if> <!-- /optiuni canat secundar -->
+		  <#if panouri?size &gt; 0 || supralumini?size &gt; 0>
+		  <fo:block border-style="solid" margin-top="1mm" margin-bottom="1mm">
+		    <fo:inline font-weight="bold">Optiuni</fo:inline>
+		    <#list panouri as o>
+		    <@list_optiune optiune=o />
+		    </#list>
+		    <#list supralumini as o>
+		    <@list_optiune optiune=o />
+		    </#list>
+		  </fo:block>
+		  </#if><!-- /optiuni independente de canat -->
+
+
+
+		  </#if>
+		  <!--/Optiuni-->
+
+		  <!-- masca/lacrimar/bolturi/platbanda -->
+		  <@enum_init/>
+		  <#assign masca =	usa.record["field[@name='masca']"]><#t>
+		  <#assign lacrimar =	usa.record["field[@name='lacrimar']"]><#t>
+		  <#assign bolturi =	usa.record["field[@name='bolturi']"]><#t>
+		  <#assign platbanda =  usa.record["field[@name='platbanda']"]><#t>
+		  <#if masca != "0" || lacrimar != "0" || bolturi != "0" || platbanda != "0">
+		  <fo:block border-style="solid" margin-top="1mm" margin-bottom="1mm">
+		    <#if masca		!= "0"><@enum_next/>Masca = ${ssearch(usa, "masca")}</#if>
+		    <#if lacrimar	!= "0"><@enum_next/>Lacrimar = ${ssearch(usa, "lacrimar")}</#if>
+		    <#if bolturi	!= "0"><@enum_next/>Bolturi = ${ssearch(usa, "bolturi")}</#if>
+		    <#if platbanda	!= "0"><@enum_next/>Platbanda = ${ssearch(usa, "platbanda")}</#if>
+		    
+		  </fo:block>
+		  </#if>
+		  <!-- /masca/lacrimar/bolturi/platbanda -->
+
 
 		  <!-- Observatii -->
-		  <fo:block border-style="solid" margin-bottom="1mm" linefeed-treatment="preserve">
-		    Observatii: ${usa.record["field[attribute::name='sistemeComment']"]}
-		  </fo:block>
+		  <fo:block border-style="solid" margin-bottom="1mm" linefeed-treatment="preserve">Observatii usa: ${usa.record["field[attribute::name='sistemeComment']"]}</fo:block>
 		</fo:table-cell>
 	      </fo:table-row>
 
@@ -995,7 +1137,7 @@
 
 		</fo:table-cell>
 	      </fo:table-row>
-	      
+     
 	      <!-- 5. -->
 	      <!-- explicatie pret -->
 	      <fo:table-row>
@@ -1066,128 +1208,7 @@
 		  </fo:table>
 		</fo:table-cell> <!-- /pret -->
 
-		<fo:table-cell padding-left="1mm">
-
-		  <!-- deschidere/optiuni -->
-		  <fo:table>
-		    <fo:table-column width="50%"/>
-		    <fo:table-column width="50%"/>
-		    <fo:table-body>
-		      <fo:table-row>
-			<fo:table-cell>
-			    <!-- deschidere -->
-			    <fo:table width="100%" table-layout="fixed" border-collapse="collapse" border-style="solid" margin-right="1mm">
-			      <fo:table-column column-number="1" border-style="solid" column-width="67%"/>
-			      <fo:table-column column-number="2" border-style="solid" column-width="33%"/>
-			      
-			      <fo:table-body>
-				<fo:table-row border-style="solid">
-				  <fo:table-cell column-number="1" number-columns-spanned="2">
-				    <fo:block text-align="center">Deschidere</fo:block>
-				  </fo:table-cell>
-				</fo:table-row>
-				<fo:table-row border-style="solid">
-				  <fo:table-cell column-number="1">
-				    <fo:block text-align="center">Sens</fo:block>
-				  </fo:table-cell>
-				  <fo:table-cell column-number="2">
-				    <fo:block text-align="center">Buc</fo:block>
-				  </fo:table-cell>
-				</fo:table-row>
-				<!--
-				<#assign openingDir = usa.record["field[attribute::name='openingDir']"]>OpeningDir: ${openingDir}
-				<#assign openingSide = usa.record["field[attribute::name='openingSide']"]>OpeningSide: ${openingSide}
-				-->
-				<fo:table-row border-style="solid">
-				  <fo:table-cell column-number="1">
-				    <fo:block>Stg int</fo:block>
-				  </fo:table-cell>
-				  <fo:table-cell column-number="2">
-				    <fo:block><#if openingDir="1" && openingSide="1">${usa_line["field[attribute::name='quantity']"]}<#else>0</#if></fo:block>
-				  </fo:table-cell>
-				</fo:table-row>
-				<fo:table-row border-style="solid">
-				  <fo:table-cell column-number="1">
-				    <fo:block>DR int</fo:block>
-				  </fo:table-cell>
-				  <fo:table-cell column-number="2">
-				    <fo:block><#if openingDir="1" && openingSide="2">${usa_line["field[attribute::name='quantity']"]}<#else>-</#if></fo:block>
-				  </fo:table-cell>
-				</fo:table-row>
-				<fo:table-row border-style="solid">
-				  <fo:table-cell column-number="1">
-				    <fo:block>Stg ext</fo:block>
-				  </fo:table-cell>
-				  <fo:table-cell column-number="2">
-				    <fo:block><#if openingDir="2" && openingSide="1">${usa_line["field[attribute::name='quantity']"]}<#else>-</#if></fo:block>
-				  </fo:table-cell>
-				</fo:table-row>
-				<fo:table-row border-style="solid">
-				  <fo:table-cell column-number="1">
-				    <fo:block>Dr ext</fo:block>
-				  </fo:table-cell>
-				  <fo:table-cell column-number="2">
-				    <fo:block><#if openingDir="2" && openingSide="2">${usa_line["field[attribute::name='quantity']"]}<#else>-</#if></fo:block>
-				  </fo:table-cell>
-				</fo:table-row>
-			      </fo:table-body>
-			    </fo:table>
-			    <!-- end deschidere -->
-			  </fo:table-cell>
-
-			  <fo:table-cell>
-			    <!-- optiuni -->
-			    <fo:table width="100%" table-layout="fixed" border-collapse="collapse" border-style="solid" margin-left="1mm">
-			      <fo:table-column column-number="1" border-style="solid" column-width="67%"/>
-			      <fo:table-column column-number="2" border-style="solid" column-width="33%"/>
-
-			      <fo:table-body>
-				<fo:table-row border-style="solid">
-				  <fo:table-cell column-number="1" number-columns-spanned="2">
-				    <fo:block text-align="center">Optiuni</fo:block>
-				  </fo:table-cell>
-				</fo:table-row>
-				<fo:table-row border-style="solid">
-				  <fo:table-cell column-number="1">
-				    <fo:block>Masca</fo:block>
-				  </fo:table-cell>
-				  <fo:table-cell column-number="2">
-				    <fo:block>${ssearch(usa, "masca")}</fo:block>
-				  </fo:table-cell>
-				</fo:table-row>
-				<fo:table-row border-style="solid">
-				  <fo:table-cell column-number="1">
-				    <fo:block>Lacrimar</fo:block>
-				  </fo:table-cell>
-				  <fo:table-cell column-number="2">
-				    <fo:block>${ssearch(usa, "lacrimar")}</fo:block>
-				  </fo:table-cell>
-				</fo:table-row>
-				<fo:table-row border-style="solid">
-				  <fo:table-cell column-number="1">
-				    <fo:block>Bolturi</fo:block>
-				  </fo:table-cell>
-				  <fo:table-cell column-number="2">
-				    <fo:block>${ssearch(usa, "bolturi")}</fo:block>
-				  </fo:table-cell>
-				</fo:table-row>
-				<fo:table-row border-style="solid">
-				  <fo:table-cell column-number="1">
-				    <fo:block>Platbanda</fo:block>
-				  </fo:table-cell>
-				  <fo:table-cell column-number="2">
-				    <fo:block>${ssearch(usa, "platbanda")}</fo:block>
-				  </fo:table-cell>
-				</fo:table-row>
-			      </fo:table-body>
-			    </fo:table>
-			    <!-- end optiuni -->
-			  </fo:table-cell>
-			</fo:table-row>
-		      </fo:table-body>
-		    </fo:table>
-		  
-		</fo:table-cell>
+		
 	      </fo:table-row>
 	    </fo:table-body>
 	  </fo:table>
@@ -1199,11 +1220,11 @@
 
       </#list>
 
+      <!-- Observatii montaj -->
       <#if (doc.response.record["field[attribute::name='observatii']"])?length &gt; 0>
-      <fo:block border-style="solid" margin-top="2mm" linefeed-treatment="preserve">
-	 ${doc.response.record["field[attribute::name='observatii']"]}
-      </fo:block>
-      </#if>
+      <fo:block border-style="solid" margin-bottom="1mm" linefeed-treatment="preserve">Observatii montaj: ${doc.response.record["field[attribute::name='observatii']"]}</fo:block>
+      </#if>	 
+      <!-- /Observatii montaj -->
 
       <fo:table border-collapse="collapse" width="100%" table-layout="fixed" margin-top="2mm">
 	<fo:table-column column-number="1" border-style="solid" column-width="15%"/>
@@ -1388,10 +1409,11 @@ value list searches a child with the give key (value) and returns the associated
 <#-- 2 macro-uri cu care pui virgula in fata unui element dintr-o enumerare
      doar daca nu este primul element din acea enumerare
 -->
-<#macro "enum_init">
+<#macro "enum_init" sep=",">
   <#assign first_elem = true>
+  <#assign enum_separator = sep>
 </#macro>
 
 <#macro "enum_next">
-  <#if first_elem == true><#assign first_elem = false><#else>,</#if>
+  <#if first_elem == true><#assign first_elem = false><#else>${enum_separator}</#if>
 </#macro>

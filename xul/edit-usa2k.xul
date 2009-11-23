@@ -786,7 +786,7 @@ windows.arguments[0].select(productId)
 	  </radiogroup>
 	  
 	  <hbox flex="1">
-	    <label control="sistemeComment" value="Obs:"/>
+	    <label control="sistemeComment" value="Observatii usa:"/>
 	    <textbox id="sistemeComment" multiline="true" rows="4" flex="1" minheight="80px"/>
 	  </hbox>
 	</vbox>

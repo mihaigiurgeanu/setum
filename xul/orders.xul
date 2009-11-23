@@ -291,7 +291,7 @@ Lista comenzilor, creere/vizualizare/stergere
 	</hbox>
 
 	<vbox>
-	  <label control="observatii" value="Observatii:"/>
+	  <label control="observatii" value="Observatii montaj:"/>
 	  <textbox id="observatii" flex="1" multiline="true" rows="4"/>
 	</vbox>
 
