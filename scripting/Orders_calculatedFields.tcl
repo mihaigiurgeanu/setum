@@ -25,8 +25,12 @@ set totalTva [expr $total * ($tvaPercent + 100)/100]
 set totalFinal [expr $total * (100 - $discount)/100]
 set totalFinalTva [expr $totalFinal * (100 + $tvaPercent)/100]
 set diferenta [expr $totalFinalTva - $currencyPayedAmount * $attribute4]
-set currencyDiferenta [expr (round(100 * $diferenta / $attribute4) + 0.0)/ 100]
 
+set currencyDiferenta [expr (round(100 * $diferenta / $attribute4) + 0.0)/ 100]
+set totalCurrency [expr (round(100 * $total / $attribute4) + 0.0)/ 100]
+set totalTvaCurrency [expr (round(100 * $totalTva / $attribute4) + 0.0)/ 100]
+set totalFinalCurrency [expr (round(100 * $totalFinal / $attribute4) + 0.0)/ 100]
+set totalFinalTvaCurrency [expr (round(100 * $totalFinalTva / $attribute4) + 0.0)/ 100]
 
 # daca este ales "alta localintate" nu modific valoarea locatiei
 if {$localitate != 0} {
