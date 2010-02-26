@@ -225,7 +225,24 @@
     </jdbc-mapping>
   </jonas-entity>
 
-
+  <jonas-entity>
+    <ejb-name>ProformaEJB</ejb-name>
+    <jndi-local-name>ProformaHome</jndi-local-name>
+    <cleanup>create</cleanup>
+    <jdbc-mapping>
+      <jndi-name>erpsetumdb</jndi-name>
+      <cmp-field-jdbc-mapping>
+	<field-name>amount</field-name>
+	<jdbc-field-name>amount_</jdbc-field-name>
+	<sql-type>DECIMAL(12,4)</sql-type>
+      </cmp-field-jdbc-mapping>
+      <cmp-field-jdbc-mapping>
+	<field-name>tax</field-name>
+	<jdbc-field-name>tax_</jdbc-field-name>
+	<sql-type>DECIMAL(12,4)</sql-type>
+      </cmp-field-jdbc-mapping>
+    </jdbc-mapping>
+  </jonas-entity>
 
   <jonas-entity>
     <ejb-name>InvoiceEJB</ejb-name>

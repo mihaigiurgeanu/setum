@@ -38,6 +38,7 @@ public abstract class OrdersBean
 
     protected Integer id;
     protected Integer orderLineId;
+    protected Integer proformaId;
     protected Integer invoiceId;
     protected Integer paymentId;
     final static String FORM_VARNAME = "form";
@@ -128,6 +129,7 @@ public abstract class OrdersBean
 	r.addRecord();
 	id = null; // a new product will be added
         orderLineId = null;
+        proformaId = null;
         invoiceId = null;
         paymentId = null;
 	
@@ -216,6 +218,46 @@ public abstract class OrdersBean
      * Save the current subform record into the database.
      */
     public abstract ResponseBean saveOrderLineData();
+
+    public ResponseBean newProformaData() {
+        initProformaFields();
+        ResponseBean r = new ResponseBean();
+        proformaId = null;
+        computeCalculatedFields(null);
+
+        r.addRecord();
+        copyFieldsToResponse(r);
+        return r;
+    }
+
+    protected abstract void initProformaFields();
+
+    /**
+     * Load the data in the subform proforma
+     */
+    public ResponseBean loadProformaData(Integer loadId) throws FinderException {
+
+	logger.log(BasicLevel.DEBUG, "Loading subform Proforma for id = " + loadId);
+	initProformaFields();
+	proformaId = loadId;
+
+	ResponseBean r = loadProformaFields();
+	computeCalculatedFields(null);
+	r.addRecord();
+	copyFieldsToResponse(r);
+	return r;
+    }
+
+    /**
+     * Loads the fields corresponding to the subform proforma
+     * from the database.
+     */
+    protected abstract ResponseBean loadProformaFields() throws FinderException;
+
+    /**
+     * Save the current subform record into the database.
+     */
+    public abstract ResponseBean saveProformaData();
 
     public ResponseBean newInvoiceData() {
         initInvoiceFields();
@@ -1741,6 +1783,58 @@ public abstract class OrdersBean
 	computeCalculatedFields(r);
 	return r;
     }
+    public ResponseBean updateIncasariFromDate(java.util.Date incasariFromDate) {
+        ResponseBean r = new ResponseBean();
+	java.util.Date oldVal = form.getIncasariFromDate();
+	form.setIncasariFromDate(incasariFromDate);
+	r.addRecord();
+	r.addField("incasariFromDate", incasariFromDate); // for number format
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".incasariFromDate");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
+		script.setVar(OLDVAL_VARNAME, oldVal, java.util.Date.class);
+		script.setVar(FORM_VARNAME, form, OrdersForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the incasariFromDate", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
+    public ResponseBean updateIncasariToDate(java.util.Date incasariToDate) {
+        ResponseBean r = new ResponseBean();
+	java.util.Date oldVal = form.getIncasariToDate();
+	form.setIncasariToDate(incasariToDate);
+	r.addRecord();
+	r.addField("incasariToDate", incasariToDate); // for number format
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".incasariToDate");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
+		script.setVar(OLDVAL_VARNAME, oldVal, java.util.Date.class);
+		script.setVar(FORM_VARNAME, form, OrdersForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the incasariToDate", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
     public ResponseBean updateOfferItemId(Integer offerItemId) {
         ResponseBean r = new ResponseBean();
 	Integer oldVal = form.getOfferItemId();
@@ -2048,6 +2142,812 @@ public abstract class OrdersBean
 						// fields to the response also
 	   } catch (ScriptErrorException e) {
 	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the montajSeparat", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
+    public ResponseBean updateProformaNumber(String proformaNumber) {
+        ResponseBean r = new ResponseBean();
+	String oldVal = form.getProformaNumber();
+	form.setProformaNumber(proformaNumber);
+	r.addRecord();
+	r.addField("proformaNumber", proformaNumber); // for number format
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".proformaNumber");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
+		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
+		script.setVar(FORM_VARNAME, form, OrdersForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the proformaNumber", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
+    public ResponseBean updateProformaDate(java.util.Date proformaDate) {
+        ResponseBean r = new ResponseBean();
+	java.util.Date oldVal = form.getProformaDate();
+	form.setProformaDate(proformaDate);
+	r.addRecord();
+	r.addField("proformaDate", proformaDate); // for number format
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".proformaDate");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
+		script.setVar(OLDVAL_VARNAME, oldVal, java.util.Date.class);
+		script.setVar(FORM_VARNAME, form, OrdersForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the proformaDate", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
+    public ResponseBean updateProformaRole(String proformaRole) {
+        ResponseBean r = new ResponseBean();
+	String oldVal = form.getProformaRole();
+	form.setProformaRole(proformaRole);
+	r.addRecord();
+	r.addField("proformaRole", proformaRole); // for number format
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".proformaRole");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
+		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
+		script.setVar(FORM_VARNAME, form, OrdersForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the proformaRole", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
+    public ResponseBean updateProformaAmount(java.math.BigDecimal proformaAmount) {
+        ResponseBean r = new ResponseBean();
+	java.math.BigDecimal oldVal = form.getProformaAmount();
+	form.setProformaAmount(proformaAmount);
+	r.addRecord();
+	r.addField("proformaAmount", proformaAmount); // for number format
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".proformaAmount");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
+		script.setVar(OLDVAL_VARNAME, oldVal, java.math.BigDecimal.class);
+		script.setVar(FORM_VARNAME, form, OrdersForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the proformaAmount", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
+    public ResponseBean updateProformaTax(java.math.BigDecimal proformaTax) {
+        ResponseBean r = new ResponseBean();
+	java.math.BigDecimal oldVal = form.getProformaTax();
+	form.setProformaTax(proformaTax);
+	r.addRecord();
+	r.addField("proformaTax", proformaTax); // for number format
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".proformaTax");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
+		script.setVar(OLDVAL_VARNAME, oldVal, java.math.BigDecimal.class);
+		script.setVar(FORM_VARNAME, form, OrdersForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the proformaTax", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
+    public ResponseBean updateProformaExchangeRate(Double proformaExchangeRate) {
+        ResponseBean r = new ResponseBean();
+	Double oldVal = form.getProformaExchangeRate();
+	form.setProformaExchangeRate(proformaExchangeRate);
+	r.addRecord();
+	r.addField("proformaExchangeRate", proformaExchangeRate); // for number format
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".proformaExchangeRate");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
+		script.setVar(OLDVAL_VARNAME, oldVal, Double.class);
+		script.setVar(FORM_VARNAME, form, OrdersForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the proformaExchangeRate", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
+    public ResponseBean updateProformaTotal(java.math.BigDecimal proformaTotal) {
+        ResponseBean r = new ResponseBean();
+	java.math.BigDecimal oldVal = form.getProformaTotal();
+	form.setProformaTotal(proformaTotal);
+	r.addRecord();
+	r.addField("proformaTotal", proformaTotal); // for number format
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".proformaTotal");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
+		script.setVar(OLDVAL_VARNAME, oldVal, java.math.BigDecimal.class);
+		script.setVar(FORM_VARNAME, form, OrdersForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the proformaTotal", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
+    public ResponseBean updateProformaPercent(Double proformaPercent) {
+        ResponseBean r = new ResponseBean();
+	Double oldVal = form.getProformaPercent();
+	form.setProformaPercent(proformaPercent);
+	r.addRecord();
+	r.addField("proformaPercent", proformaPercent); // for number format
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".proformaPercent");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
+		script.setVar(OLDVAL_VARNAME, oldVal, Double.class);
+		script.setVar(FORM_VARNAME, form, OrdersForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the proformaPercent", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
+    public ResponseBean updateProformaUsePercent(Boolean proformaUsePercent) {
+        ResponseBean r = new ResponseBean();
+	Boolean oldVal = form.getProformaUsePercent();
+	form.setProformaUsePercent(proformaUsePercent);
+	r.addRecord();
+	r.addField("proformaUsePercent", proformaUsePercent); // for number format
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".proformaUsePercent");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
+		script.setVar(OLDVAL_VARNAME, oldVal, Boolean.class);
+		script.setVar(FORM_VARNAME, form, OrdersForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the proformaUsePercent", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
+    public ResponseBean updateProformaComment(String proformaComment) {
+        ResponseBean r = new ResponseBean();
+	String oldVal = form.getProformaComment();
+	form.setProformaComment(proformaComment);
+	r.addRecord();
+	r.addField("proformaComment", proformaComment); // for number format
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".proformaComment");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
+		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
+		script.setVar(FORM_VARNAME, form, OrdersForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the proformaComment", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
+    public ResponseBean updateProformaContract(String proformaContract) {
+        ResponseBean r = new ResponseBean();
+	String oldVal = form.getProformaContract();
+	form.setProformaContract(proformaContract);
+	r.addRecord();
+	r.addField("proformaContract", proformaContract); // for number format
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".proformaContract");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
+		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
+		script.setVar(FORM_VARNAME, form, OrdersForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the proformaContract", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
+    public ResponseBean updateProformaObiectiv(String proformaObiectiv) {
+        ResponseBean r = new ResponseBean();
+	String oldVal = form.getProformaObiectiv();
+	form.setProformaObiectiv(proformaObiectiv);
+	r.addRecord();
+	r.addField("proformaObiectiv", proformaObiectiv); // for number format
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".proformaObiectiv");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
+		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
+		script.setVar(FORM_VARNAME, form, OrdersForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the proformaObiectiv", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
+    public ResponseBean updateProformaCurrency(String proformaCurrency) {
+        ResponseBean r = new ResponseBean();
+	String oldVal = form.getProformaCurrency();
+	form.setProformaCurrency(proformaCurrency);
+	r.addRecord();
+	r.addField("proformaCurrency", proformaCurrency); // for number format
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".proformaCurrency");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
+		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
+		script.setVar(FORM_VARNAME, form, OrdersForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the proformaCurrency", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
+    public ResponseBean updateProformaAmountCurrency(java.math.BigDecimal proformaAmountCurrency) {
+        ResponseBean r = new ResponseBean();
+	java.math.BigDecimal oldVal = form.getProformaAmountCurrency();
+	form.setProformaAmountCurrency(proformaAmountCurrency);
+	r.addRecord();
+	r.addField("proformaAmountCurrency", proformaAmountCurrency); // for number format
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".proformaAmountCurrency");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
+		script.setVar(OLDVAL_VARNAME, oldVal, java.math.BigDecimal.class);
+		script.setVar(FORM_VARNAME, form, OrdersForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the proformaAmountCurrency", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
+    public ResponseBean updateProformaTaxCurrency(java.math.BigDecimal proformaTaxCurrency) {
+        ResponseBean r = new ResponseBean();
+	java.math.BigDecimal oldVal = form.getProformaTaxCurrency();
+	form.setProformaTaxCurrency(proformaTaxCurrency);
+	r.addRecord();
+	r.addField("proformaTaxCurrency", proformaTaxCurrency); // for number format
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".proformaTaxCurrency");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
+		script.setVar(OLDVAL_VARNAME, oldVal, java.math.BigDecimal.class);
+		script.setVar(FORM_VARNAME, form, OrdersForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the proformaTaxCurrency", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
+    public ResponseBean updateProformaTotalCurrency(java.math.BigDecimal proformaTotalCurrency) {
+        ResponseBean r = new ResponseBean();
+	java.math.BigDecimal oldVal = form.getProformaTotalCurrency();
+	form.setProformaTotalCurrency(proformaTotalCurrency);
+	r.addRecord();
+	r.addField("proformaTotalCurrency", proformaTotalCurrency); // for number format
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".proformaTotalCurrency");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
+		script.setVar(OLDVAL_VARNAME, oldVal, java.math.BigDecimal.class);
+		script.setVar(FORM_VARNAME, form, OrdersForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the proformaTotalCurrency", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
+    public ResponseBean updateProformaAttribute1(String proformaAttribute1) {
+        ResponseBean r = new ResponseBean();
+	String oldVal = form.getProformaAttribute1();
+	form.setProformaAttribute1(proformaAttribute1);
+	r.addRecord();
+	r.addField("proformaAttribute1", proformaAttribute1); // for number format
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".proformaAttribute1");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
+		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
+		script.setVar(FORM_VARNAME, form, OrdersForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the proformaAttribute1", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
+    public ResponseBean updateProformaAttribute2(String proformaAttribute2) {
+        ResponseBean r = new ResponseBean();
+	String oldVal = form.getProformaAttribute2();
+	form.setProformaAttribute2(proformaAttribute2);
+	r.addRecord();
+	r.addField("proformaAttribute2", proformaAttribute2); // for number format
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".proformaAttribute2");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
+		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
+		script.setVar(FORM_VARNAME, form, OrdersForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the proformaAttribute2", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
+    public ResponseBean updateProformaAttribute3(String proformaAttribute3) {
+        ResponseBean r = new ResponseBean();
+	String oldVal = form.getProformaAttribute3();
+	form.setProformaAttribute3(proformaAttribute3);
+	r.addRecord();
+	r.addField("proformaAttribute3", proformaAttribute3); // for number format
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".proformaAttribute3");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
+		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
+		script.setVar(FORM_VARNAME, form, OrdersForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the proformaAttribute3", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
+    public ResponseBean updateProformaAttribute4(String proformaAttribute4) {
+        ResponseBean r = new ResponseBean();
+	String oldVal = form.getProformaAttribute4();
+	form.setProformaAttribute4(proformaAttribute4);
+	r.addRecord();
+	r.addField("proformaAttribute4", proformaAttribute4); // for number format
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".proformaAttribute4");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
+		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
+		script.setVar(FORM_VARNAME, form, OrdersForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the proformaAttribute4", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
+    public ResponseBean updateProformaAttribute5(String proformaAttribute5) {
+        ResponseBean r = new ResponseBean();
+	String oldVal = form.getProformaAttribute5();
+	form.setProformaAttribute5(proformaAttribute5);
+	r.addRecord();
+	r.addField("proformaAttribute5", proformaAttribute5); // for number format
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".proformaAttribute5");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
+		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
+		script.setVar(FORM_VARNAME, form, OrdersForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the proformaAttribute5", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
+    public ResponseBean updateProformaAttribute6(String proformaAttribute6) {
+        ResponseBean r = new ResponseBean();
+	String oldVal = form.getProformaAttribute6();
+	form.setProformaAttribute6(proformaAttribute6);
+	r.addRecord();
+	r.addField("proformaAttribute6", proformaAttribute6); // for number format
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".proformaAttribute6");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
+		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
+		script.setVar(FORM_VARNAME, form, OrdersForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the proformaAttribute6", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
+    public ResponseBean updateProformaAttribute7(String proformaAttribute7) {
+        ResponseBean r = new ResponseBean();
+	String oldVal = form.getProformaAttribute7();
+	form.setProformaAttribute7(proformaAttribute7);
+	r.addRecord();
+	r.addField("proformaAttribute7", proformaAttribute7); // for number format
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".proformaAttribute7");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
+		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
+		script.setVar(FORM_VARNAME, form, OrdersForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the proformaAttribute7", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
+    public ResponseBean updateProformaAttribute8(String proformaAttribute8) {
+        ResponseBean r = new ResponseBean();
+	String oldVal = form.getProformaAttribute8();
+	form.setProformaAttribute8(proformaAttribute8);
+	r.addRecord();
+	r.addField("proformaAttribute8", proformaAttribute8); // for number format
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".proformaAttribute8");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
+		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
+		script.setVar(FORM_VARNAME, form, OrdersForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the proformaAttribute8", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
+    public ResponseBean updateProformaAttribute9(String proformaAttribute9) {
+        ResponseBean r = new ResponseBean();
+	String oldVal = form.getProformaAttribute9();
+	form.setProformaAttribute9(proformaAttribute9);
+	r.addRecord();
+	r.addField("proformaAttribute9", proformaAttribute9); // for number format
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".proformaAttribute9");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
+		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
+		script.setVar(FORM_VARNAME, form, OrdersForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the proformaAttribute9", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
+    public ResponseBean updateProformaAttribute10(String proformaAttribute10) {
+        ResponseBean r = new ResponseBean();
+	String oldVal = form.getProformaAttribute10();
+	form.setProformaAttribute10(proformaAttribute10);
+	r.addRecord();
+	r.addField("proformaAttribute10", proformaAttribute10); // for number format
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".proformaAttribute10");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
+		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
+		script.setVar(FORM_VARNAME, form, OrdersForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the proformaAttribute10", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
+    public ResponseBean updateProformaAttribute11(String proformaAttribute11) {
+        ResponseBean r = new ResponseBean();
+	String oldVal = form.getProformaAttribute11();
+	form.setProformaAttribute11(proformaAttribute11);
+	r.addRecord();
+	r.addField("proformaAttribute11", proformaAttribute11); // for number format
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".proformaAttribute11");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
+		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
+		script.setVar(FORM_VARNAME, form, OrdersForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the proformaAttribute11", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
+    public ResponseBean updateProformaAttribute12(String proformaAttribute12) {
+        ResponseBean r = new ResponseBean();
+	String oldVal = form.getProformaAttribute12();
+	form.setProformaAttribute12(proformaAttribute12);
+	r.addRecord();
+	r.addField("proformaAttribute12", proformaAttribute12); // for number format
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".proformaAttribute12");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
+		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
+		script.setVar(FORM_VARNAME, form, OrdersForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the proformaAttribute12", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
+    public ResponseBean updateProformaAttribute13(String proformaAttribute13) {
+        ResponseBean r = new ResponseBean();
+	String oldVal = form.getProformaAttribute13();
+	form.setProformaAttribute13(proformaAttribute13);
+	r.addRecord();
+	r.addField("proformaAttribute13", proformaAttribute13); // for number format
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".proformaAttribute13");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
+		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
+		script.setVar(FORM_VARNAME, form, OrdersForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the proformaAttribute13", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
+    public ResponseBean updateProformaAttribute14(String proformaAttribute14) {
+        ResponseBean r = new ResponseBean();
+	String oldVal = form.getProformaAttribute14();
+	form.setProformaAttribute14(proformaAttribute14);
+	r.addRecord();
+	r.addField("proformaAttribute14", proformaAttribute14); // for number format
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".proformaAttribute14");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
+		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
+		script.setVar(FORM_VARNAME, form, OrdersForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the proformaAttribute14", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
+    public ResponseBean updateProformaAttribute15(String proformaAttribute15) {
+        ResponseBean r = new ResponseBean();
+	String oldVal = form.getProformaAttribute15();
+	form.setProformaAttribute15(proformaAttribute15);
+	r.addRecord();
+	r.addField("proformaAttribute15", proformaAttribute15); // for number format
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".proformaAttribute15");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
+		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
+		script.setVar(FORM_VARNAME, form, OrdersForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the proformaAttribute15", e);
            }
         }
 	computeCalculatedFields(r);
@@ -2528,6 +3428,8 @@ public abstract class OrdersBean
 	r.addField("livrariRStart", form.getLivrariRStart());
 	r.addField("livrariREnd", form.getLivrariREnd());
 	r.addField("livrariCuMontaj", form.getLivrariCuMontaj());
+	r.addField("incasariFromDate", form.getIncasariFromDate());
+	r.addField("incasariToDate", form.getIncasariToDate());
 	r.addField("offerItemId", form.getOfferItemId());
 	r.addField("productName", form.getProductName());
 	r.addField("productCode", form.getProductCode());
@@ -2540,6 +3442,37 @@ public abstract class OrdersBean
 	r.addField("codMontaj", form.getCodMontaj());
 	r.addField("montajProcent", form.getMontajProcent());
 	r.addField("montajSeparat", form.getMontajSeparat());
+	r.addField("proformaNumber", form.getProformaNumber());
+	r.addField("proformaDate", form.getProformaDate());
+	r.addField("proformaRole", form.getProformaRole());
+	r.addField("proformaAmount", form.getProformaAmount());
+	r.addField("proformaTax", form.getProformaTax());
+	r.addField("proformaExchangeRate", form.getProformaExchangeRate());
+	r.addField("proformaTotal", form.getProformaTotal());
+	r.addField("proformaPercent", form.getProformaPercent());
+	r.addField("proformaUsePercent", form.getProformaUsePercent());
+	r.addField("proformaComment", form.getProformaComment());
+	r.addField("proformaContract", form.getProformaContract());
+	r.addField("proformaObiectiv", form.getProformaObiectiv());
+	r.addField("proformaCurrency", form.getProformaCurrency());
+	r.addField("proformaAmountCurrency", form.getProformaAmountCurrency());
+	r.addField("proformaTaxCurrency", form.getProformaTaxCurrency());
+	r.addField("proformaTotalCurrency", form.getProformaTotalCurrency());
+	r.addField("proformaAttribute1", form.getProformaAttribute1());
+	r.addField("proformaAttribute2", form.getProformaAttribute2());
+	r.addField("proformaAttribute3", form.getProformaAttribute3());
+	r.addField("proformaAttribute4", form.getProformaAttribute4());
+	r.addField("proformaAttribute5", form.getProformaAttribute5());
+	r.addField("proformaAttribute6", form.getProformaAttribute6());
+	r.addField("proformaAttribute7", form.getProformaAttribute7());
+	r.addField("proformaAttribute8", form.getProformaAttribute8());
+	r.addField("proformaAttribute9", form.getProformaAttribute9());
+	r.addField("proformaAttribute10", form.getProformaAttribute10());
+	r.addField("proformaAttribute11", form.getProformaAttribute11());
+	r.addField("proformaAttribute12", form.getProformaAttribute12());
+	r.addField("proformaAttribute13", form.getProformaAttribute13());
+	r.addField("proformaAttribute14", form.getProformaAttribute14());
+	r.addField("proformaAttribute15", form.getProformaAttribute15());
 	r.addField("invoiceNumber", form.getInvoiceNumber());
 	r.addField("invoiceDate", form.getInvoiceDate());
 	r.addField("invoiceRole", form.getInvoiceRole());
@@ -2875,6 +3808,18 @@ public abstract class OrdersBean
             logger.log(BasicLevel.DEBUG, e);
         }
 	try {
+	    s.setVar("incasariFromDate", form.getIncasariFromDate(), java.util.Date.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: incasariFromDate from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    s.setVar("incasariToDate", form.getIncasariToDate(), java.util.Date.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: incasariToDate from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
 	    s.setVar("offerItemId", form.getOfferItemId(), Integer.class);
 	} catch (ScriptErrorException e) {
 	    logger.log(BasicLevel.WARN, "Can not set the value of field: offerItemId from the script");
@@ -2944,6 +3889,192 @@ public abstract class OrdersBean
 	    s.setVar("montajSeparat", form.getMontajSeparat(), Boolean.class);
 	} catch (ScriptErrorException e) {
 	    logger.log(BasicLevel.WARN, "Can not set the value of field: montajSeparat from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    s.setVar("proformaNumber", form.getProformaNumber(), String.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: proformaNumber from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    s.setVar("proformaDate", form.getProformaDate(), java.util.Date.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: proformaDate from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    s.setVar("proformaRole", form.getProformaRole(), String.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: proformaRole from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    s.setVar("proformaAmount", form.getProformaAmount(), java.math.BigDecimal.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: proformaAmount from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    s.setVar("proformaTax", form.getProformaTax(), java.math.BigDecimal.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: proformaTax from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    s.setVar("proformaExchangeRate", form.getProformaExchangeRate(), Double.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: proformaExchangeRate from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    s.setVar("proformaTotal", form.getProformaTotal(), java.math.BigDecimal.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: proformaTotal from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    s.setVar("proformaPercent", form.getProformaPercent(), Double.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: proformaPercent from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    s.setVar("proformaUsePercent", form.getProformaUsePercent(), Boolean.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: proformaUsePercent from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    s.setVar("proformaComment", form.getProformaComment(), String.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: proformaComment from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    s.setVar("proformaContract", form.getProformaContract(), String.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: proformaContract from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    s.setVar("proformaObiectiv", form.getProformaObiectiv(), String.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: proformaObiectiv from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    s.setVar("proformaCurrency", form.getProformaCurrency(), String.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: proformaCurrency from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    s.setVar("proformaAmountCurrency", form.getProformaAmountCurrency(), java.math.BigDecimal.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: proformaAmountCurrency from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    s.setVar("proformaTaxCurrency", form.getProformaTaxCurrency(), java.math.BigDecimal.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: proformaTaxCurrency from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    s.setVar("proformaTotalCurrency", form.getProformaTotalCurrency(), java.math.BigDecimal.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: proformaTotalCurrency from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    s.setVar("proformaAttribute1", form.getProformaAttribute1(), String.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: proformaAttribute1 from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    s.setVar("proformaAttribute2", form.getProformaAttribute2(), String.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: proformaAttribute2 from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    s.setVar("proformaAttribute3", form.getProformaAttribute3(), String.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: proformaAttribute3 from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    s.setVar("proformaAttribute4", form.getProformaAttribute4(), String.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: proformaAttribute4 from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    s.setVar("proformaAttribute5", form.getProformaAttribute5(), String.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: proformaAttribute5 from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    s.setVar("proformaAttribute6", form.getProformaAttribute6(), String.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: proformaAttribute6 from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    s.setVar("proformaAttribute7", form.getProformaAttribute7(), String.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: proformaAttribute7 from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    s.setVar("proformaAttribute8", form.getProformaAttribute8(), String.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: proformaAttribute8 from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    s.setVar("proformaAttribute9", form.getProformaAttribute9(), String.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: proformaAttribute9 from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    s.setVar("proformaAttribute10", form.getProformaAttribute10(), String.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: proformaAttribute10 from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    s.setVar("proformaAttribute11", form.getProformaAttribute11(), String.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: proformaAttribute11 from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    s.setVar("proformaAttribute12", form.getProformaAttribute12(), String.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: proformaAttribute12 from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    s.setVar("proformaAttribute13", form.getProformaAttribute13(), String.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: proformaAttribute13 from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    s.setVar("proformaAttribute14", form.getProformaAttribute14(), String.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: proformaAttribute14 from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    s.setVar("proformaAttribute15", form.getProformaAttribute15(), String.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: proformaAttribute15 from the script");
             logger.log(BasicLevel.DEBUG, e);
         }
 	try {
@@ -3595,6 +4726,28 @@ public abstract class OrdersBean
             logger.log(BasicLevel.DEBUG, e);
         }
 	try {
+	    field = s.getVar("incasariFromDate", java.util.Date.class);
+	    if(!field.equals(form.getIncasariFromDate())) {
+	        logger.log(BasicLevel.DEBUG, "Field incasariFromDate modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setIncasariFromDate((java.util.Date)field);
+	        r.addField("incasariFromDate", (java.util.Date)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: incasariFromDate from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    field = s.getVar("incasariToDate", java.util.Date.class);
+	    if(!field.equals(form.getIncasariToDate())) {
+	        logger.log(BasicLevel.DEBUG, "Field incasariToDate modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setIncasariToDate((java.util.Date)field);
+	        r.addField("incasariToDate", (java.util.Date)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: incasariToDate from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
 	    field = s.getVar("offerItemId", Integer.class);
 	    if(!field.equals(form.getOfferItemId())) {
 	        logger.log(BasicLevel.DEBUG, "Field offerItemId modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
@@ -3724,6 +4877,347 @@ public abstract class OrdersBean
 	    }
 	} catch (ScriptErrorException e) {
 	    logger.log(BasicLevel.WARN, "Can not get the value of field: montajSeparat from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    field = s.getVar("proformaNumber", String.class);
+	    if(!field.equals(form.getProformaNumber())) {
+	        logger.log(BasicLevel.DEBUG, "Field proformaNumber modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setProformaNumber((String)field);
+	        r.addField("proformaNumber", (String)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: proformaNumber from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    field = s.getVar("proformaDate", java.util.Date.class);
+	    if(!field.equals(form.getProformaDate())) {
+	        logger.log(BasicLevel.DEBUG, "Field proformaDate modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setProformaDate((java.util.Date)field);
+	        r.addField("proformaDate", (java.util.Date)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: proformaDate from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    field = s.getVar("proformaRole", String.class);
+	    if(!field.equals(form.getProformaRole())) {
+	        logger.log(BasicLevel.DEBUG, "Field proformaRole modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setProformaRole((String)field);
+	        r.addField("proformaRole", (String)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: proformaRole from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    field = s.getVar("proformaAmount", java.math.BigDecimal.class);
+	    if(!field.equals(form.getProformaAmount())) {
+	        logger.log(BasicLevel.DEBUG, "Field proformaAmount modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setProformaAmount((java.math.BigDecimal)field);
+	        r.addField("proformaAmount", (java.math.BigDecimal)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: proformaAmount from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    field = s.getVar("proformaTax", java.math.BigDecimal.class);
+	    if(!field.equals(form.getProformaTax())) {
+	        logger.log(BasicLevel.DEBUG, "Field proformaTax modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setProformaTax((java.math.BigDecimal)field);
+	        r.addField("proformaTax", (java.math.BigDecimal)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: proformaTax from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    field = s.getVar("proformaExchangeRate", Double.class);
+	    if(!field.equals(form.getProformaExchangeRate())) {
+	        logger.log(BasicLevel.DEBUG, "Field proformaExchangeRate modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setProformaExchangeRate((Double)field);
+	        r.addField("proformaExchangeRate", (Double)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: proformaExchangeRate from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    field = s.getVar("proformaTotal", java.math.BigDecimal.class);
+	    if(!field.equals(form.getProformaTotal())) {
+	        logger.log(BasicLevel.DEBUG, "Field proformaTotal modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setProformaTotal((java.math.BigDecimal)field);
+	        r.addField("proformaTotal", (java.math.BigDecimal)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: proformaTotal from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    field = s.getVar("proformaPercent", Double.class);
+	    if(!field.equals(form.getProformaPercent())) {
+	        logger.log(BasicLevel.DEBUG, "Field proformaPercent modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setProformaPercent((Double)field);
+	        r.addField("proformaPercent", (Double)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: proformaPercent from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    field = s.getVar("proformaUsePercent", Boolean.class);
+	    if(!field.equals(form.getProformaUsePercent())) {
+	        logger.log(BasicLevel.DEBUG, "Field proformaUsePercent modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setProformaUsePercent((Boolean)field);
+	        r.addField("proformaUsePercent", (Boolean)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: proformaUsePercent from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    field = s.getVar("proformaComment", String.class);
+	    if(!field.equals(form.getProformaComment())) {
+	        logger.log(BasicLevel.DEBUG, "Field proformaComment modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setProformaComment((String)field);
+	        r.addField("proformaComment", (String)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: proformaComment from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    field = s.getVar("proformaContract", String.class);
+	    if(!field.equals(form.getProformaContract())) {
+	        logger.log(BasicLevel.DEBUG, "Field proformaContract modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setProformaContract((String)field);
+	        r.addField("proformaContract", (String)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: proformaContract from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    field = s.getVar("proformaObiectiv", String.class);
+	    if(!field.equals(form.getProformaObiectiv())) {
+	        logger.log(BasicLevel.DEBUG, "Field proformaObiectiv modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setProformaObiectiv((String)field);
+	        r.addField("proformaObiectiv", (String)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: proformaObiectiv from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    field = s.getVar("proformaCurrency", String.class);
+	    if(!field.equals(form.getProformaCurrency())) {
+	        logger.log(BasicLevel.DEBUG, "Field proformaCurrency modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setProformaCurrency((String)field);
+	        r.addField("proformaCurrency", (String)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: proformaCurrency from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    field = s.getVar("proformaAmountCurrency", java.math.BigDecimal.class);
+	    if(!field.equals(form.getProformaAmountCurrency())) {
+	        logger.log(BasicLevel.DEBUG, "Field proformaAmountCurrency modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setProformaAmountCurrency((java.math.BigDecimal)field);
+	        r.addField("proformaAmountCurrency", (java.math.BigDecimal)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: proformaAmountCurrency from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    field = s.getVar("proformaTaxCurrency", java.math.BigDecimal.class);
+	    if(!field.equals(form.getProformaTaxCurrency())) {
+	        logger.log(BasicLevel.DEBUG, "Field proformaTaxCurrency modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setProformaTaxCurrency((java.math.BigDecimal)field);
+	        r.addField("proformaTaxCurrency", (java.math.BigDecimal)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: proformaTaxCurrency from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    field = s.getVar("proformaTotalCurrency", java.math.BigDecimal.class);
+	    if(!field.equals(form.getProformaTotalCurrency())) {
+	        logger.log(BasicLevel.DEBUG, "Field proformaTotalCurrency modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setProformaTotalCurrency((java.math.BigDecimal)field);
+	        r.addField("proformaTotalCurrency", (java.math.BigDecimal)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: proformaTotalCurrency from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    field = s.getVar("proformaAttribute1", String.class);
+	    if(!field.equals(form.getProformaAttribute1())) {
+	        logger.log(BasicLevel.DEBUG, "Field proformaAttribute1 modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setProformaAttribute1((String)field);
+	        r.addField("proformaAttribute1", (String)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: proformaAttribute1 from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    field = s.getVar("proformaAttribute2", String.class);
+	    if(!field.equals(form.getProformaAttribute2())) {
+	        logger.log(BasicLevel.DEBUG, "Field proformaAttribute2 modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setProformaAttribute2((String)field);
+	        r.addField("proformaAttribute2", (String)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: proformaAttribute2 from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    field = s.getVar("proformaAttribute3", String.class);
+	    if(!field.equals(form.getProformaAttribute3())) {
+	        logger.log(BasicLevel.DEBUG, "Field proformaAttribute3 modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setProformaAttribute3((String)field);
+	        r.addField("proformaAttribute3", (String)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: proformaAttribute3 from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    field = s.getVar("proformaAttribute4", String.class);
+	    if(!field.equals(form.getProformaAttribute4())) {
+	        logger.log(BasicLevel.DEBUG, "Field proformaAttribute4 modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setProformaAttribute4((String)field);
+	        r.addField("proformaAttribute4", (String)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: proformaAttribute4 from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    field = s.getVar("proformaAttribute5", String.class);
+	    if(!field.equals(form.getProformaAttribute5())) {
+	        logger.log(BasicLevel.DEBUG, "Field proformaAttribute5 modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setProformaAttribute5((String)field);
+	        r.addField("proformaAttribute5", (String)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: proformaAttribute5 from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    field = s.getVar("proformaAttribute6", String.class);
+	    if(!field.equals(form.getProformaAttribute6())) {
+	        logger.log(BasicLevel.DEBUG, "Field proformaAttribute6 modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setProformaAttribute6((String)field);
+	        r.addField("proformaAttribute6", (String)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: proformaAttribute6 from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    field = s.getVar("proformaAttribute7", String.class);
+	    if(!field.equals(form.getProformaAttribute7())) {
+	        logger.log(BasicLevel.DEBUG, "Field proformaAttribute7 modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setProformaAttribute7((String)field);
+	        r.addField("proformaAttribute7", (String)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: proformaAttribute7 from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    field = s.getVar("proformaAttribute8", String.class);
+	    if(!field.equals(form.getProformaAttribute8())) {
+	        logger.log(BasicLevel.DEBUG, "Field proformaAttribute8 modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setProformaAttribute8((String)field);
+	        r.addField("proformaAttribute8", (String)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: proformaAttribute8 from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    field = s.getVar("proformaAttribute9", String.class);
+	    if(!field.equals(form.getProformaAttribute9())) {
+	        logger.log(BasicLevel.DEBUG, "Field proformaAttribute9 modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setProformaAttribute9((String)field);
+	        r.addField("proformaAttribute9", (String)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: proformaAttribute9 from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    field = s.getVar("proformaAttribute10", String.class);
+	    if(!field.equals(form.getProformaAttribute10())) {
+	        logger.log(BasicLevel.DEBUG, "Field proformaAttribute10 modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setProformaAttribute10((String)field);
+	        r.addField("proformaAttribute10", (String)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: proformaAttribute10 from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    field = s.getVar("proformaAttribute11", String.class);
+	    if(!field.equals(form.getProformaAttribute11())) {
+	        logger.log(BasicLevel.DEBUG, "Field proformaAttribute11 modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setProformaAttribute11((String)field);
+	        r.addField("proformaAttribute11", (String)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: proformaAttribute11 from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    field = s.getVar("proformaAttribute12", String.class);
+	    if(!field.equals(form.getProformaAttribute12())) {
+	        logger.log(BasicLevel.DEBUG, "Field proformaAttribute12 modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setProformaAttribute12((String)field);
+	        r.addField("proformaAttribute12", (String)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: proformaAttribute12 from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    field = s.getVar("proformaAttribute13", String.class);
+	    if(!field.equals(form.getProformaAttribute13())) {
+	        logger.log(BasicLevel.DEBUG, "Field proformaAttribute13 modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setProformaAttribute13((String)field);
+	        r.addField("proformaAttribute13", (String)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: proformaAttribute13 from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    field = s.getVar("proformaAttribute14", String.class);
+	    if(!field.equals(form.getProformaAttribute14())) {
+	        logger.log(BasicLevel.DEBUG, "Field proformaAttribute14 modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setProformaAttribute14((String)field);
+	        r.addField("proformaAttribute14", (String)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: proformaAttribute14 from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    field = s.getVar("proformaAttribute15", String.class);
+	    if(!field.equals(form.getProformaAttribute15())) {
+	        logger.log(BasicLevel.DEBUG, "Field proformaAttribute15 modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setProformaAttribute15((String)field);
+	        r.addField("proformaAttribute15", (String)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: proformaAttribute15 from the script");
             logger.log(BasicLevel.DEBUG, e);
         }
 	try {

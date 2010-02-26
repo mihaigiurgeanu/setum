@@ -219,6 +219,15 @@
   </field>
   <!-- end raport livrari -->
 
+  <!-- campuri pentru raportul de incasari -->
+  <field>
+    <name>incasariFromDate</name>
+    <type>java.util.Date</type>
+  </field>
+  <field>
+    <name>incasariToDate</name>
+    <type>java.util.Date</type>
+  </field>
   <!-- Subform orderLine -->
 
   <field>
@@ -270,6 +279,136 @@
     <type>Boolean</type>
   </field>
 
+
+  <!-- Subform proforma -->
+  <field>
+    <name>proformaNumber</name>
+    <type>String</type>
+  </field>
+  <field>
+    <name>proformaDate</name>
+    <type>java.util.Date</type>
+  </field>
+  <field>
+    <name>proformaRole</name>
+    <type>String</type>
+  </field>
+  <field>
+    <name>proformaAmount</name>
+    <type>java.math.BigDecimal</type>
+  </field>
+  <field>
+    <name>proformaTax</name>
+    <type>java.math.BigDecimal</type>
+  </field>
+  <field>
+    <name>proformaExchangeRate</name>
+    <type>Double</type>
+  </field>
+  <field>
+    <name>proformaTotal</name>
+    <type>java.math.BigDecimal</type>
+  </field>
+  <field>
+    <!-- camp calculat - reprezinta procentul valorii
+	 proformei din valoarea comenzii -->
+    <name>proformaPercent</name>
+    <type>Double</type>
+  </field>
+  <field>
+    <!-- true   - proforma tiparita afiseaza procentul
+	 false  - proforma tiparita afiseaza doar valoara -->
+    <name>proformaUsePercent</name>
+    <type>Boolean</type>
+  </field>
+  <field>
+    <name>proformaComment</name>
+    <type>String</type>
+  </field>
+  <field>
+    <name>proformaContract</name>
+    <type>String</type>
+  </field>
+  <field>
+    <name>proformaObiectiv</name>
+    <type>String</type>
+  </field>
+  <field>
+    <name>proformaCurrency</name>
+    <type>String</type>
+  </field>
+  <field>
+    <name>proformaAmountCurrency</name>
+    <type>java.math.BigDecimal</type>
+  </field>
+  <field>
+    <name>proformaTaxCurrency</name>
+    <type>java.math.BigDecimal</type>
+  </field>
+  <field>
+    <name>proformaTotalCurrency</name>
+    <type>java.math.BigDecimal</type>
+  </field>
+  <field>
+    <name>proformaAttribute1</name>
+    <type>String</type>
+  </field>
+  <field>
+    <name>proformaAttribute2</name>
+    <type>String</type>
+  </field>
+  <field>
+    <name>proformaAttribute3</name>
+    <type>String</type>
+  </field>
+  <field>
+    <name>proformaAttribute4</name>
+    <type>String</type>
+  </field>
+  <field>
+    <name>proformaAttribute5</name>
+    <type>String</type>
+  </field>
+  <field>
+    <name>proformaAttribute6</name>
+    <type>String</type>
+  </field>
+  <field>
+    <name>proformaAttribute7</name>
+    <type>String</type>
+  </field>
+  <field>
+    <name>proformaAttribute8</name>
+    <type>String</type>
+  </field>
+  <field>
+    <name>proformaAttribute9</name>
+    <type>String</type>
+  </field>
+  <field>
+    <name>proformaAttribute10</name>
+    <type>String</type>
+  </field>
+  <field>
+    <name>proformaAttribute11</name>
+    <type>String</type>
+  </field>
+  <field>
+    <name>proformaAttribute12</name>
+    <type>String</type>
+  </field>
+  <field>
+    <name>proformaAttribute13</name>
+    <type>String</type>
+  </field>
+  <field>
+    <name>proformaAttribute14</name>
+    <type>String</type>
+  </field>
+  <field>
+    <name>proformaAttribute15</name>
+    <type>String</type>
+  </field>
 
   <!-- Subform invoice -->
   <field>
@@ -335,6 +474,7 @@
 
   <subforms>
     <subform name="orderLine"/>
+    <subform name="proforma"/>
     <subform name="invoice"/>
     <subform name="payment"/>
   </subforms>
@@ -357,6 +497,11 @@
     <!-- Remove current invoice -->
     <method>ResponseBean removeInvoice() throws RemoteException</method>
 
+    <!-- Listing of proformas -->
+    <method>ResponseBean loadProformas() throws RemoteException</method>
+
+    <method>ResponseBean removeProforma() throws RemoteException</method>
+
     <!-- Listing of invoices -->
     <method>ResponseBean loadInvoices() throws RemoteException</method>
 
@@ -368,10 +513,13 @@
 
     <method>ResponseBean orderReport() throws RemoteException</method>
 
+    <method>ResponseBean proformaReport() throws RemoteException</method>
+
     <method>ResponseBean initLivrariReport(String cuMontaj) throws RemoteException</method>
     <method>ResponseBean livrariReport() throws RemoteException</method>
     <method>ResponseBean livrariCuMontajReport() throws RemoteException</method>
     <method>ResponseBean livrariFaraMontajReport() throws RemoteException</method>
+    <method>ResponseBean incasariReport() throws RemoteException</method>
   </remote>
 
   <!-- Services that may have scripts associated with -->

@@ -65,6 +65,8 @@ import java.util.Comparator;
 import java.text.DateFormat;
 import java.math.RoundingMode;
 import ro.kds.erp.biz.Products;
+import ro.kds.erp.data.ProformaLocalHome;
+import ro.kds.erp.data.ProformaLocal;
 
 /**
  * Describe class OrdersBiz here.
@@ -95,6 +97,11 @@ public class OrdersBiz extends OrdersBean {
      * The name of the Payment entity.
      */
     public final String ENTITY_PAYMENT = "Payment";
+
+    /**
+     * The name of the Proforma entity.
+     */
+    public final String ENTITY_PROFORMA = "Proforma";
     
     /**
      * The maximum number of records to be returned in one request
@@ -112,7 +119,10 @@ public class OrdersBiz extends OrdersBean {
      */
     public final String PRODUCT_CODE_KM = "10";
 
-
+    /**
+     * The default proforma comment.
+     */
+    public final String defaultProformaComment = "NOTA: Acest document nu este o factura fiscala";
 
     /**
      * Initialization of fields. The default initialization is
@@ -151,6 +161,12 @@ public class OrdersBiz extends OrdersBean {
 					   defaultDelivery);
 	form.setTermenLivrare(delivDate);
 	form.setTermenLivrare1(delivDate);
+
+	Date today = DateUtils.truncate(new Date(), Calendar.DAY_OF_MONTH);
+	form.setIncasariToDate(today);
+
+	Date firstOfMonth = DateUtils.truncate(today, Calendar.MONTH);
+	form.setIncasariFromDate(firstOfMonth);
 
 
     }
@@ -628,7 +644,7 @@ public class OrdersBiz extends OrdersBean {
      * orders starting with <code>startRow</code>, so the list can be loaded
      * bit by bit as the user scrolls into the list control.
      *
-     * The cacned list of orders is initialized by calling <code>getOrdersCount</code>
+     * The cached list of orders is initialized by calling <code>getOrdersCount</code>
      * method that should be called before calling <code>loadListing</code>.
      *
      * @param startRow is the row number for which the ui service is requesting
@@ -745,22 +761,38 @@ public class OrdersBiz extends OrdersBean {
      * <code>records-count</code> set to the number of orders.
      */
     public ResponseBean getOrdersCount() {
+	logger.log(BasicLevel.DEBUG, ">");
+
 	ResponseBean r;
 
 	try {
 	    OrderLocalHome oh = getOrderHome();
+	    logger.log(BasicLevel.DEBUG, "Storing records in cache");
 	    listingCache = new ArrayList(oh.findAll());
-
+	    
+	    logger.log(BasicLevel.DEBUG, "Sorting orders in cache");
 	    Collections.sort(listingCache, new Comparator() {
 		    public int compare(Object o1, Object o2) {
-			OrderLocal order1 = (OrderLocal)o1;
-			OrderLocal order2 = (OrderLocal)o2;
-			String s1 = StringUtils.leftPad(order1.getDocument().getNumber(), 6, '0');
-			String s2 = StringUtils.leftPad(order2.getDocument().getNumber(), 6, '0');
+			logger.log(BasicLevel.DEBUG, "Comparing 2 orders: " + o1 + " and " + o2);
+			try {
+			    OrderLocal order1 = (OrderLocal)o1;
+			    OrderLocal order2 = (OrderLocal)o2;
+			    logger.log(BasicLevel.DEBUG, "Transform order numbers to strings");
+			    String s1 = StringUtils.leftPad(order1.getDocument().getNumber(), 6, '0');
+			    logger.log(BasicLevel.DEBUG, "O1 number: " + s1);
+			    String s2 = StringUtils.leftPad(order2.getDocument().getNumber(), 6, '0');
+			    logger.log(BasicLevel.DEBUG, "O2 number: " + s2);
 
-			return -(s1.compareTo(s2));
+			    return -(s1.compareTo(s2));
+			} catch (Exception e) {
+			    logger.log(BasicLevel.WARN, "Eroare la sortare comenzi: " + e);
+			    logger.log(BasicLevel.DEBUG, "Detalii eroare la soratarea comenzii", e);
+			    return -1;
+			}
 		    }
 		});
+
+	    logger.log(BasicLevel.DEBUG, "Creating the response");
 	    r = new ResponseBean();
 	    r.addRecord();
 	    r.addField("records-count", listingCache.size());
@@ -781,6 +813,7 @@ public class OrdersBiz extends OrdersBean {
 	    r = ResponseBean.getErrUnexpected(e);
 	}
 
+	logger.log(BasicLevel.DEBUG, "<");
 	return r;
     }
 
@@ -1534,6 +1567,7 @@ public class OrdersBiz extends OrdersBean {
 	response.addValueList("montaj", ValueLists.makeStdValueList(11200));
 	response.addValueList("localitate", ValueLists.makeStdValueList(12005));
 	response.addValueList("invoiceRole", ValueLists.makeStdValueList(11250));
+	response.addValueList("proformaRole", ValueLists.makeStdValueList(11250));
 	response.addValueList("tipDemontare", ValueLists.makeStdValueList(11205));
     }
 
@@ -1561,6 +1595,10 @@ public class OrdersBiz extends OrdersBean {
      * Cache for a reference to <code>OfferItemLocalHome</code>.
      */
     OfferItemLocalHome cache_oih;
+    /**
+     * Cache for a reference to <code>ProformaLocalHome</code>
+     */
+    ProformaLocalHome cache_prfh;
     /**
      * Cache for a reference to <code>InvoiceLocalHome</code>
      */
@@ -1726,6 +1764,19 @@ public class OrdersBiz extends OrdersBean {
     }
 
     /**
+     * Utility method to get a reference to the proforma bean home interface.
+     */
+    protected ProformaLocalHome getProformaHome() throws NamingException {
+	if(cache_prfh == null) {
+	    InitialContext ic = new InitialContext();
+	    Context env = (Context)ic.lookup("java:comp/env");
+	    cache_prfh = (ProformaLocalHome)PortableRemoteObject.narrow
+		(env.lookup("ejb/ProformaHome"), ProformaLocalHome.class);
+	}
+	return cache_prfh;
+    }
+
+    /**
      * Utility method to get a reference to the invoice bean home interface.
      */
     protected InvoiceLocalHome getInvoiceHome() throws NamingException {
@@ -1739,10 +1790,34 @@ public class OrdersBiz extends OrdersBean {
     }
 
     /**
+     * Checks if there is a currently selected proforma.
+     */
+    protected boolean isSelectedProforma() {
+	return proformaId != null;
+    }
+
+    /**
      * Checks if there is a currently selected invoice.
      */
     protected boolean isSelectedInvoice() {
 	return invoiceId != null;
+    }
+
+    /**
+     * Load the currently selected proforma.
+     *
+     * @throws FinderException if no proforma is currently selected.
+     */
+    protected ProformaLocal getCurrentProforma() throws NamingException, FinderException {
+	ProformaLocalHome prfh = getProformaHome();
+	try {
+	    ProformaLocal prfl = prfh.findByPrimaryKey(proformaId);
+	    return prfl;
+	} catch (FinderException e) {
+	    logger.log(BasicLevel.DEBUG, "Proforma not found for id = " + 
+		       proformaId + ". ", e);
+	    throw new FinderException(ENTITY_PROFORMA);
+	}
     }
 
     /**
@@ -2389,4 +2464,351 @@ public class OrdersBiz extends OrdersBean {
 	}
 	return r;
     }
+    
+    /**
+     * Initialization of the proforma form fields to the default values.
+     *
+     */
+    public void initProformaFields() {
+	form.setProformaNumber("");
+	form.setProformaDate(new Date());
+	form.setProformaRole("");
+	form.setProformaAmount(new BigDecimal(0));
+	form.setProformaTax(new BigDecimal(0));
+	form.setProformaTotal(new BigDecimal(0));
+	form.setProformaExchangeRate(new Double(0)); // las script-ul tcl (calculatedFields) sa calculeze default
+	form.setProformaPercent(new Double(0)); //se va ocupa script-ul de setarea reala
+	form.setProformaUsePercent(false);
+	form.setProformaComment(defaultProformaComment);
+	form.setProformaContract("");
+	form.setProformaObiectiv("");
+	form.setProformaCurrency(""); //camp calculat (este aceeasi cu moneda comenzii)
+
+	form.setProformaAttribute1("");
+	form.setProformaAttribute2("");
+	form.setProformaAttribute3("");
+	form.setProformaAttribute4("");
+	form.setProformaAttribute5("");
+	form.setProformaAttribute6("");
+	form.setProformaAttribute7("");
+	form.setProformaAttribute8("");
+	form.setProformaAttribute9("");
+	form.setProformaAttribute10("");
+	form.setProformaAttribute11("");
+	form.setProformaAttribute12("");
+	form.setProformaAttribute13("");
+	form.setProformaAttribute14("");
+	form.setProformaAttribute15("");
+
+	if(isSelectedOrder()) {
+	    form.setProformaAmount(new BigDecimal(form.getTotalFinal().doubleValue() - 
+						  form.getInvoicedAmount().doubleValue())
+				   .setScale(2, BigDecimal.ROUND_HALF_UP));
+	    form.setProformaTax(new BigDecimal(form.getInvoiceAmount().doubleValue() *
+					       form.getTvaPercent().doubleValue() / 100)
+				.setScale(2, BigDecimal.ROUND_HALF_UP));
+	}
+    }
+
+    /**
+     * Copy the values of currently selected proforma entity into
+     * the form fields.
+     *
+     * @return a <code>ResponseBean</code> with the result code and,
+     * if an error occurs, the error info.
+     * @exception FinderException if no entity could be found for the
+     * id indicating the currently selected proforma.
+     */
+    public ResponseBean loadProformaFields() throws FinderException {
+	ResponseBean r;
+
+	try {
+	    ProformaLocal prf = getCurrentProforma();
+
+	    form.setProformaNumber(prf.getDocument().getNumber());
+	    form.setProformaDate(prf.getDocument().getDate());
+	    form.setProformaRole(prf.getRole());
+	    form.setProformaAmount(prf.getAmount());
+	    form.setProformaTax(prf.getTax());
+	    form.setProformaExchangeRate(prf.getExchangeRate());
+	    form.setProformaUsePercent(prf.getUsePercent());
+	    form.setProformaComment(prf.getComment());
+	    form.setProformaContract(prf.getContract());
+	    form.setProformaObiectiv(prf.getObiectiv());
+
+	    form.setProformaAttribute1(prf.getAttribute1());
+	    form.setProformaAttribute2(prf.getAttribute2());
+	    form.setProformaAttribute3(prf.getAttribute3());
+	    form.setProformaAttribute4(prf.getAttribute4());
+	    form.setProformaAttribute5(prf.getAttribute5());
+	    form.setProformaAttribute6(prf.getAttribute6());
+	    form.setProformaAttribute7(prf.getAttribute7());
+	    form.setProformaAttribute8(prf.getAttribute8());
+	    form.setProformaAttribute9(prf.getAttribute9());
+	    form.setProformaAttribute10(prf.getAttribute10());
+	    form.setProformaAttribute11(prf.getAttribute11());
+	    form.setProformaAttribute12(prf.getAttribute12());
+	    form.setProformaAttribute13(prf.getAttribute13());
+	    form.setProformaAttribute14(prf.getAttribute14());
+	    form.setProformaAttribute15(prf.getAttribute15());
+	    
+	    r = new ResponseBean();
+	} catch (NamingException e) {
+	    logger.log(BasicLevel.INFO, "The proforma could not be loaded " +
+		       "due to a configuration error of the naming service: " +
+		       e.getMessage());
+	    logger.log(BasicLevel.DEBUG, e);
+	    r = ResponseBean.getErrConfigNaming(e.getMessage());
+	}
+
+
+	return r;
+    }
+
+    public ResponseBean saveProformaData() {
+	ResponseBean r;
+
+	// Current record should be saved, because it might be a new one
+	r = saveFormData();
+	if (r.getCode() != ResponseBean.CODE_SUCCESS)
+	    return r;
+
+	if(! isSelectedOrder()) {
+	    logger.log(BasicLevel.WARN, "saveProformaData called but no order is selected");
+	    return ResponseBean.getErrNotCurrent(ENTITY_ORDER);
+	}
+
+	try {
+	    ProformaLocal prf;
+
+	    if(isSelectedProforma()) {
+		prf = getCurrentProforma();
+	    } else {
+		ProformaLocalHome prfh = getProformaHome();
+		prf = prfh.create();
+		getCurrentOrder().getProformas().add(prf);
+
+		Integer proformaNo;
+		try {
+		    InitialContext ic = new InitialContext();
+		    Context env = (Context) ic.lookup("java:comp/env");
+		    
+		    SequenceHome sh = (SequenceHome)PortableRemoteObject.narrow
+			(env.lookup("ejb/SequenceHome"), SequenceHome.class);
+		    Sequence s = sh.create();
+		    proformaNo = s.getNext("ro.setumsa.sequnces.proformas");
+		} catch (Exception e) {
+		    proformaNo = new Integer(0);
+		    logger.log(BasicLevel.WARN, "Can not get a number for proforma", e);
+		}
+
+		form.setProformaNumber(proformaNo.toString());
+	    }
+
+	    prf.getDocument().setNumber(form.getProformaNumber());
+	    prf.getDocument().setDate(form.getProformaDate());
+	    prf.setRole(form.getProformaRole());
+	    prf.setAmount(form.getProformaAmount().setScale(2, BigDecimal.ROUND_HALF_UP));
+	    prf.setTax(form.getProformaTax().setScale(2, BigDecimal.ROUND_HALF_UP));
+	    prf.setExchangeRate(form.getProformaExchangeRate());
+	    prf.setUsePercent(form.getProformaUsePercent());
+	    prf.setComment(form.getProformaComment());
+	    prf.setContract(form.getProformaContract());
+	    prf.setObiectiv(form.getProformaObiectiv());
+
+	    prf.setAttribute1(form.getProformaAttribute1());
+	    prf.setAttribute2(form.getProformaAttribute2());
+	    prf.setAttribute3(form.getProformaAttribute3());
+	    prf.setAttribute4(form.getProformaAttribute4());
+	    prf.setAttribute5(form.getProformaAttribute5());
+	    prf.setAttribute6(form.getProformaAttribute6());
+	    prf.setAttribute7(form.getProformaAttribute7());
+	    prf.setAttribute8(form.getProformaAttribute8());
+	    prf.setAttribute9(form.getProformaAttribute9());
+	    prf.setAttribute10(form.getProformaAttribute10());
+	    prf.setAttribute11(form.getProformaAttribute11());
+	    prf.setAttribute12(form.getProformaAttribute12());
+	    prf.setAttribute13(form.getProformaAttribute13());
+	    prf.setAttribute14(form.getProformaAttribute14());
+	    prf.setAttribute15(form.getProformaAttribute15());
+
+	    r = new ResponseBean();
+	} catch (CreateException e) {
+	    logger.log(BasicLevel.ERROR, "Proforma entity could not be created: " + e.getMessage());
+	    logger.log(BasicLevel.INFO, "The order id at proforma create exception is: " + id);
+	    logger.log(BasicLevel.DEBUG, e);
+	    
+	    r = ResponseBean.getErrCreate(ENTITY_PROFORMA);
+	} catch (DataLayerException e) {
+	    logger.log(BasicLevel.ERROR, "Proforma entity could not be created: " + e.getMessage());
+	    logger.log(BasicLevel.INFO, "The order id at proforma create exception is: " + id);
+	    logger.log(BasicLevel.DEBUG, e);
+	    
+	    r = ResponseBean.getErrCreate(ENTITY_INVOICE);
+	} catch (FinderException e) {
+	    logger.log(BasicLevel.ERROR, "Finder exception: " + e.getMessage());
+	    logger.log(BasicLevel.INFO, "The order id at finder exception is: " + id);
+	    logger.log(BasicLevel.INFO, "The proforma id at finder exception is: " + proformaId);
+	    
+	    r = ResponseBean.getErrNotFound(e.getMessage());
+	} catch (NamingException e) {
+	    logger.log(BasicLevel.ERROR, "Naming service error: " + e.getMessage());
+	    logger.log(BasicLevel.DEBUG, e);
+	    
+	    r = ResponseBean.getErrConfigNaming(e.getMessage());
+	} catch (Exception e) {
+	    logger.log(BasicLevel.ERROR, "Unexpected exception" , e);
+	    r = ResponseBean.getErrUnexpected(e);
+	}
+
+
+	return r;
+    }
+
+    public ResponseBean loadProformas() throws RemoteException {
+	logger.log(BasicLevel.DEBUG, ">");
+	if(! isSelectedOrder()) {
+	    logger.log(BasicLevel.WARN, "loadInvoices called but no order is selected.");
+	    return ResponseBean.getErrNotCurrent(ENTITY_ORDER);
+	}
+
+	ResponseBean r;
+	
+	try {
+	    Collection proformas = getCurrentOrder().getProformas();
+
+	    r = new ResponseBean();
+	    for(Iterator i = proformas.iterator(); i.hasNext();) {
+		ProformaLocal prf = (ProformaLocal)i.next();
+		
+		r.addRecord();
+		r.addField("proforma.id", prf.getId());
+		r.addField("proforma.number", prf.getDocument().getNumber());
+		r.addField("proforma.date", prf.getDocument().getDate());
+		r.addField("proforma.role", prf.getRole());
+		r.addField("proforma.amount", prf.getAmount());
+		r.addField("proforma.exchangeRate", prf.getExchangeRate());
+	    }
+	} catch (NamingException e) {
+	    logger.log(BasicLevel.ERROR, "Naming exception " + e.getMessage());
+	    logger.log(BasicLevel.DEBUG, e);
+	    r = ResponseBean.getErrConfigNaming(e.getMessage());
+	} catch (FinderException e) {
+	    logger.log(BasicLevel.ERROR, "FinderException: " + e.getMessage());
+	    logger.log(BasicLevel.INFO, "Order id searched when FinderException occured is: " + id);
+	    logger.log(BasicLevel.DEBUG, e);
+	    r = ResponseBean.getErrNotFound(e.getMessage());
+	} catch (Exception e) {
+	    logger.log(BasicLevel.ERROR, "Unexpected exception", e);
+	    r = ResponseBean.getErrUnexpected(e);
+	}	    
+
+	logger.log(BasicLevel.DEBUG, "<");
+
+	return r;
+    }
+
+    /**
+     * Creaza un raspuns cu toate campurile din proforma. Pe langa campurile din
+     * proforma include si toate campurile comenzii. Din cauza ca foloseste 
+     * un apel catre <code>copyFieldsToReport</code> vor fi toate campurile gestionate
+     * de acest bean, dar nu vor fi relevante decat cele ale proformei si cele ale 
+     * ale comenzii.
+     *
+     * In cazul in care proforma nu este selectata, va intoarce un raspuns de eroare.
+     */
+    public ResponseBean proformaReport() throws RemoteException {
+	ResponseBean r;
+
+	if (isSelectedProforma()) {
+	    r = new ResponseBean();
+	    r.addRecord();
+	    copyFieldsToResponse(r); 
+
+	    DateFormat dfmt = DateFormat.getDateInstance();
+
+	    // formatez data proformei
+	    r.addField("proformaDate", dfmt.format(form.getProformaDate()));
+
+
+	    ClientLocal client;
+	    try {
+		client = getFormClient();
+	    } catch (Exception e) {
+		logger.log(BasicLevel.ERROR, "Client's data can not be read: ", e);
+		client = null;
+	    }
+	    (new ClientUtils(client)).populateResponse(r);
+
+	} else {
+	    logger.log(BasicLevel.DEBUG, "Raportul proforma nu poate fi construit pentru ca nu s-a selectat nici o proforma.");
+	    r = ResponseBean.getErrNotCurrent(ENTITY_PROFORMA);
+	}
+
+	return r;
+    }
+
+    public ResponseBean removeProforma() throws RemoteException {
+	ResponseBean r;
+
+	r = new ResponseBean();
+	return r;
+    }
+
+    /**
+     * Raport incasari.
+     */
+    public ResponseBean incasariReport() throws RemoteException {
+	// incasariToDate si incasariFromDate sunt initializate 
+	// de createNewFormBean
+
+	ResponseBean r;
+	DateFormat dfmt = DateFormat.getDateInstance();
+
+	try {
+	    PaymentLocalHome ph = getPaymentHome();
+	    Collection payments = ph.findByDate(form.getIncasariFromDate(), form.getIncasariToDate());
+	    
+	    
+	    ResponseBean paymentsList = new ResponseBean();
+	    double total = 0;
+	    for(Iterator i = payments.iterator(); i.hasNext(); ) {
+		PaymentLocal payment = (PaymentLocal) i.next();
+
+		paymentsList.addRecord();
+		paymentsList.addField("document",	payment.getDocument().getNumber());
+		paymentsList.addField("data",		dfmt.format(payment.getDocument().getDate()));
+		paymentsList.addField("amount",		payment.getAmount());
+		paymentsList.addField("client",		payment.getInvoice().getOrder().getClient().getName());
+		paymentsList.addField("tipFactura",	payment.getInvoice().getRole());
+		paymentsList.addField("exchangeRate",	payment.getExchangeRate());
+		paymentsList.addField("currencyAmount", 
+				      new BigDecimal(payment.getAmount().doubleValue() 
+						     / payment.getExchangeRate().doubleValue())
+				      .setScale(2, BigDecimal.ROUND_HALF_UP));
+		paymentsList.addField("currency",	payment.getInvoice().getOrder().getAttribute5());
+
+		total += payment.getAmount().doubleValue();
+		
+	    }
+
+	    r = new ResponseBean();
+	    r.addRecord();
+	    r.addField("fromDate", dfmt.format(form.getIncasariFromDate()));
+	    r.addField("toDate", dfmt.format(form.getIncasariToDate()));
+	    r.addField("payments", paymentsList);
+	    r.addField("total", total);
+
+	} catch (NamingException e) {
+	    logger.log(BasicLevel.ERROR, "Eroare de configurare/accesare JNDI: " + e);
+	    logger.log(BasicLevel.INFO, "Detalii eroare covfigurare/accesare JNDI: ", e);
+	    r = ResponseBean.getErrConfigNaming(e.getMessage());
+	} catch (FinderException e) {
+	    logger.log(BasicLevel.ERROR, "Eroare la citirea listei de plati din baza de date: " + e);
+	    logger.log(BasicLevel.INFO, "Detalii eroare la citirea liste de plati din baza de date: ", e);
+	    r = ResponseBean.getErrNotFound(e.getMessage());
+	}
+	return r;
+    }
+
 }

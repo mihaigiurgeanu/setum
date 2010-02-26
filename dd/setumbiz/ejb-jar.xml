@@ -1469,6 +1469,13 @@
 	<ejb-link>datalayer.jar#OfferItemEJB</ejb-link>
       </ejb-local-ref>
       <ejb-local-ref>
+	<ejb-ref-name>ejb/ProformaHome</ejb-ref-name>
+	<ejb-ref-type>Entity</ejb-ref-type>
+	<local-home>ro.kds.erp.data.ProformaLocalHome</local-home>
+	<local>ro.kds.data.ProformaHome</local>
+	<ejb-link>datalayer.jar#ProformaEJB</ejb-link>
+      </ejb-local-ref>
+      <ejb-local-ref>
 	<ejb-ref-name>ejb/InvoiceHome</ejb-ref-name>
 	<ejb-ref-type>Entity</ejb-ref-type>
 	<local-home>ro.kds.erp.data.InvoiceLocalHome</local-home>

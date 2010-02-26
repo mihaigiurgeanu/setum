@@ -1495,8 +1495,116 @@
 
 
 
+  <!-- Proforma -->
+  <servlet>
+    <description>XSLFO Proforma</description>
+    <display-name>XSLProforma</display-name>
+    <servlet-name>XSLProformaServlet</servlet-name>
+    <servlet-class>ro.kds.erp.reports.XSLRendererServlet</servlet-class>
+    <init-param>
+      <description>The key in the session holding the object to receive the method invocation</description>
+      <param-name>sessionName</param-name>
+      <param-value>forms.Orders</param-value><!-- folosesc datele din order -->
+    </init-param>
+    <init-param>
+      <description>The name of the method to be called on the object</description>
+      <param-name>method</param-name>
+      <param-value>proformaReport</param-value>
+    </init-param>
+    <init-param>
+      <description>The jndi name of the Transformer ejb to be used</description>
+      <param-name>transformer</param-name>
+      <param-value>ejb/FTLTransformerHome</param-value>
+    </init-param>
+    <init-param>
+      <description>The name of the stylesheet to be used by the Transformer</description>
+      <param-name>stylesheet</param-name>
+      <param-value>proforma.ftl</param-value>
+    </init-param>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>XSLProformaServlet</servlet-name>
+    <url-pattern>/reports/proforma.xsl</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>XSLProformaServlet</servlet-name>
+    <url-pattern>/reports/proforma.pdf</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>XSLProformaServlet</servlet-name>
+    <url-pattern>/reports/proforma.rtf</url-pattern>
+  </servlet-mapping>
+  
+  <filter-mapping>
+    <filter-name>PDFFilter</filter-name>
+    <url-pattern>/reports/proforma.pdf</url-pattern>
+  </filter-mapping>
+
+  <filter-mapping>
+    <filter-name>RTFFilter</filter-name>
+    <url-pattern>/reports/proforma.rtf</url-pattern>
+  </filter-mapping>
+
+  <!-- end Proforma -->
 
 
+   <!-- Raport Incasari -->
+  <servlet>
+    <description>XSLFO Incasari</description>
+    <display-name>XSLIncasari</display-name>
+    <servlet-name>XSLIncasariServlet</servlet-name>
+    <servlet-class>ro.kds.erp.reports.XSLRendererServlet</servlet-class>
+    <init-param>
+      <description>The key in the session holding the object to receive the method invocation</description>
+      <param-name>sessionName</param-name>
+      <param-value>forms.Orders</param-value><!-- folosesc datele din order -->
+    </init-param>
+    <init-param>
+      <description>The name of the method to be called on the object</description>
+      <param-name>method</param-name>
+      <param-value>incasariReport</param-value>
+    </init-param>
+    <init-param>
+      <description>The jndi name of the Transformer ejb to be used</description>
+      <param-name>transformer</param-name>
+      <param-value>ejb/FTLTransformerHome</param-value>
+    </init-param>
+    <init-param>
+      <description>The name of the stylesheet to be used by the Transformer</description>
+      <param-name>stylesheet</param-name>
+      <param-value>incasari.ftl</param-value>
+    </init-param>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>XSLIncasariServlet</servlet-name>
+    <url-pattern>/reports/incasari.xsl</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>XSLIncasariServlet</servlet-name>
+    <url-pattern>/reports/incasari.pdf</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>XSLIncasariServlet</servlet-name>
+    <url-pattern>/reports/incasari.rtf</url-pattern>
+  </servlet-mapping>
+  
+  <filter-mapping>
+    <filter-name>PDFFilter</filter-name>
+    <url-pattern>/reports/incasari.pdf</url-pattern>
+  </filter-mapping>
+
+  <filter-mapping>
+    <filter-name>RTFFilter</filter-name>
+    <url-pattern>/reports/incasari.rtf</url-pattern>
+  </filter-mapping>
+
+  <!-- end Raport Incasari -->
 
   <resource-ref>
     <description>Products datasource reference</description>

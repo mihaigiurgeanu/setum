@@ -35,6 +35,11 @@ Lista comenzilor, creere/vizualizare/stergere
 
     <command id="command-save_item"		oncommand="on_save_orderItem()"/>
 
+    <command id="command-add_proforma"		oncommand="on_add_proforma()"/>
+    <command id="command-save_proforma"		oncommand="on_save_proforma()"/>
+    <command id="command-remove_proforma"	oncommand="on_remove_proforma()"/>
+    <command id="command-print_proforma"	oncommand="open_proforma('pdf')"/>
+
     <command id="command-add_invoice"		oncommand="on_new_invoice()"/>
     <command id="command-remove_invoice"	oncommand="theForm.ask(REMOVE_INVOICE_MSG, on_remove_invoice)"/>
     <command id="command-save_invoice"		oncommand="on_save_invoice()"/>
@@ -46,17 +51,20 @@ Lista comenzilor, creere/vizualizare/stergere
     <command id="command-pv-report"		oncommand="open_pv('pdf')"/>
     <comand id="command-livrari-montaje"         oncommand="open_livrari_montaje()"/>
     <comand id="command-livrari-fmontaje"         oncommand="open_livrari_fmontaje()"/>
+    <command id="command-incasari"		oncommand="open_incasari('pdf')"/>
   </commandset>
 
 
   <tabbox flex="1" id="maintab">
     <tabs>      
-      <tab label="Lista comenzi"/>
-      <tab label="Comanda selectata"/>
-      <tab label="Linia selectata"/>
+      <tab label="Comenzi"/>
+      <tab label="Comanda"/>
+      <tab label="Linie"/>
+      <tab label="Proforme"/>
+      <tab label="Proforma"/>
       <tab label="Facturi"/>
-      <tab label="Factura selectata"/>
-      <tab label="Plata selectata"/>
+      <tab label="Factura"/>
+      <tab label="Plata"/>
     </tabs>
 
     <tabpanels flex="1">
@@ -68,6 +76,7 @@ Lista comenzilor, creere/vizualizare/stergere
 	  <button label="Sterge comanda" command="command-remove_order"/>
 	  <button label="Raport Livrari" command="command-livrari-montaje"/>
 	  <!--<button label="Livrari f/ montaje" command="command-livrari-fmontaje"/>-->
+	  <button label="Raport incasari" command="command-incasari"/>
 	</hbox>
 	<hbox class="title">
 	  <label>Comenzi</label>
@@ -231,28 +240,28 @@ Lista comenzilor, creere/vizualizare/stergere
 	    </columns>
 	    <rows>
 	      <row>
-		<label control="total" value="Val. fara TVA:"/>
-		<textbox id="total" readonly="true"/>
+		<label control="totalCurrency" value="Val. fara TVA:"/>
+		<textbox id="totalCurrency" readonly="true"/>
 	      </row>
 	      <row>
-		<label control="totalTva" value="Val. cu TVA:"/>
-		<textbox id="totalTva" readonly="true"/>
+		<label control="totalTvaCurrency" value="Val. cu TVA:"/>
+		<textbox id="totalTvaCurrency" readonly="true"/>
 	      </row>
 	      <row>
 		<label control="discount" value="Discount (%):"/>
 		<textbox id="discount"/>
 	      </row>
 	      <row>
-		<label control="totalFinal" value="Total fara TVA:"/>
-		<textbox id="totalFinal"/>
+		<label control="totalFinalCurrency" value="Total fara TVA:"/>
+		<textbox id="totalFinalCurrency"/>
 	      </row>
 	      <row>
-		<label control="invoicedAmount" value="Facturat:"/>
-		<textbox id="invoicedAmount" readonly="true"/>
+		<label control="currencyInvoicedAmount" value="Facturat:"/>
+		<textbox id="currencyInvoicedAmount" readonly="true"/>
 	      </row>
 	      <row>
-		<label control="totalFinalTva" value="Total cu TVA"/>
-		<textbox id="totalFinalTva" readonly="true"/>
+		<label control="totalFinalTvaCurrency" value="Total cu TVA"/>
+		<textbox id="totalFinalTvaCurrency" readonly="true"/>
 	      </row>
 	      <row>
 		<label control="avans" value="Avans:"/>
@@ -265,8 +274,8 @@ Lista comenzilor, creere/vizualizare/stergere
 		-->
 	      </row>
 	      <row>
-		<label control="payedAmount" value="Platit:"/>
-		<textbox id="payedAmount" readonly="true"/>
+		<label control="payedAmountCurrency" value="Platit:"/>
+		<textbox id="payedAmountCurrency" readonly="true"/>
 	      </row>
 	      <!--
 	      <row>
@@ -392,6 +401,133 @@ Lista comenzilor, creere/vizualizare/stergere
       </tabpanel>
 
 
+      <tabpanel id="maintab.proforma" orient="vertical"
+		style="border:thin outset white">
+
+	<hbox class="mytoolbar">
+	  <button label="Adauga proforma" command="command-add_proforma"/>
+	  <!--<button label="Sterge proforma" command="command-remove_proforma"/>-->
+	  <button label="Tipareste proforma" command="command-print_proforma"/>
+	</hbox>
+
+
+	<hbox class="title">
+	  <label>Proforme</label>
+	</hbox>
+	<spacer class="header"/>
+
+
+	<tree id="proformasListing"
+	      flex="1"
+	      enableColumnDrag="true"
+	      seltype="single"
+	      onselect="on_select_proforma()"
+	      ondblclick="maintab.selectedIndex=4">
+	  <treecols>
+	    <treecol id="proforma.number" label="Numar" flex="1"
+		     persist="ordinal width hidden"/>
+
+	    <splitter class="tree-splitter"/>
+	    <treecol id="proforma.date" label="Data" flex="1"
+		     persist="ordinal width hidden"/>
+
+	    <splitter class="tree-splitter"/>
+	    <treecol id="proforma.role" label="Tip" flex="1"
+		     persist="ordinal width hidden"/>
+
+	    <splitter class="tree-splitter"/>
+	    <treecol id="proforma.amount" label="Suma" flex="1"
+		     persist="ordinal width hidden"/>
+	  </treecols>
+
+	  <treechildren/>
+
+	</tree>
+      </tabpanel> <!-- maintab.proforma -->
+
+      <tabpanel id="maintab.proformaDetails" orient="vertical"
+		style="border:thin outset white">
+
+	<hbox class="mytoolbar">
+	  <button label="Salveaza" command="command-save_proforma"/>
+	  <button label="Tipareste proforma" command="command-print_proforma"/>
+	</hbox>
+
+	<hbox class="title">
+	  <label>Proforma</label>
+	</hbox>
+	
+	<grid>
+	  <columns>
+	    <column/>
+	    <column/>
+	    <column/>
+	  </columns>
+
+	  <rows>
+	    <row>
+	      <label control="proformaNumber" value="Numar proforma:"/>
+	      <textbox id="proformaNumber"/>
+	    </row>
+	    <row>
+	      <label control="proformaDate" value="Data proforma:"/>
+	      <datebox id="proformaDate" yearstart="2001" yearend="2051"/>
+	    </row>
+	    <row>
+	      <label control="proformaRole" value="Tip proforma:"/>
+	      <menulist id="proformaRole">
+		<menupopup id="proformaRole-popup"/>
+	      </menulist>
+	    </row>
+	    <row>
+	      <label control="proformaContract" value="Contract:"/>
+	      <textbox id="proformaContract"/>
+	    </row>
+	    <row>
+	      <label control="proformaObiectiv" value="Obiectiv:"/>
+	      <textbox id="proformaObiectiv"/>
+	      <textbox id="proformaCurrency" readonly="true"/>
+	    </row>
+	    <row>
+	      <label control="proformaAmount" value="Suma fara TVA:"/>
+	      <textbox id="proformaAmount"/>
+	      <textbox id="proformaAmountCurrency" readonly="true"/>
+	    </row>
+	    <row>
+	      <label control="profromaTax" value="TVA:"/>
+	      <textbox id="proformaTax"/>
+	      <textbox id="proformaTaxCurrency" readonly="true"/>
+	    </row>
+	    <row>
+	      <label control="proformaTotal" value="Total:"/>
+	      <textbox id="proformaTotal"/>
+	      <textbox id="proformaTotalCurrency" readonly="true"/>
+	    </row>
+	    <row>
+	      <label control="proformaPercent" value="Procent:"/>
+	      <hbox>
+		<textbox id="proformaPercent"/>
+		<checkbox id="proformaUsePercent" label="Afiseza procent"/>
+	      </hbox>
+	    </row>
+	    <row>
+	      <label control="proformaComment" value="Observatii"/>
+	      <textbox id="proformaComment" multiline="true" maxlength="2000"
+		       rows="4"/>
+	    </row>
+	    <row> 
+	      <label control="proformaExchangeRate" value="Curs:"/>
+	      <textbox id="proformaExchangeRate"/>
+	    </row>
+	    
+	  </rows>
+	</grid>
+      </tabpanel> <!-- /maintab.proformaDetails -->
+
+
+
+
+
       <tabpanel id="maintab.invoices" orient="vertical"
 		style="border:thin outset white">
 
@@ -412,7 +548,7 @@ Lista comenzilor, creere/vizualizare/stergere
 	      enableColumnDrag="true"
 	      seltype="single"
 	      onselect="on_select_invoice()"
-	      ondblclick="maintab.selectedIndex=4">
+	      ondblclick="maintab.selectedIndex=6">
 	  <treecols>
 	    <treecol id="invoices.number" label="Numar" flex="1"
 		     persist="ordinal width hidden"/>
@@ -503,7 +639,7 @@ Lista comenzilor, creere/vizualizare/stergere
 	      enableColumnDrag="1"
 	      seltype="single"
 	      onselect="on_select_payment()"
-	      ondblclick="maintab.selectedIndex=5">
+	      ondblclick="maintab.selectedIndex=7">
 	  
 	  <treecols>
 	    <treecol id="payments.number" label="Numar" flex="1"

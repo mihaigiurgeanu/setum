@@ -183,6 +183,9 @@ public abstract class OrderBean implements EntityBean {
     public abstract Collection getLines();
     public abstract void setLines(Collection lines);
 
+    public abstract Collection getProformas();
+    public abstract void setProformas(Collection proformas);
+
     public abstract Collection getInvoices();
     public abstract void setInvoices(Collection invoices);
 

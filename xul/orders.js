@@ -68,6 +68,34 @@ function clear_lineItems() {
   show_lineItems();
 }
 
+
+var proformas;
+var proformasListing = document.getElementById("proformasListing");
+function show_proformas() {
+    proformasListing.view = make_treeview
+	(proformas,
+	 function(row, column) {
+	     var col;
+	     if(column.id) col = column.id; else col = column;
+	     return proformas[row][col];
+	 });
+}
+
+function load_proformas() {
+    var req = theForm.get_request();
+    req.add("command", "loadProformas");
+    proformas = load_records(req);
+    show_proformas();
+}
+
+function clear_proformas() {
+  proformas = new Array();
+  show_proformas();
+}
+
+
+
+
 var invoices;
 var invoicesListing = document.getElementById('invoicesListing');
 function show_invoices() {
@@ -126,6 +154,14 @@ function load_selected_order() {
   theForm.post_request(req);
 }
 
+function load_selected_proforma() {
+  var selid = proformas[proformasListing.currentIndex]["proforma.id"];
+  var req = theForm.get_request();
+  req.add("command", "loadProformaData");
+  req.add("param0", selid);
+  theForm.post_request(req);
+}
+
 function load_selected_invoice() {
     var selid = invoices[invoicesListing.currentIndex]["invoices.id"];
     var req = theForm.get_request();
@@ -137,6 +173,7 @@ function load_selected_invoice() {
 function on_select_order() {
     load_selected_order();
     load_lineItems();
+    load_proformas();
     load_invoices();
     clear_payments();
 }
@@ -152,6 +189,10 @@ function on_select_lineItem() {
 function on_select_invoice() {
     load_selected_invoice();
     load_payments();
+}
+
+function on_select_proforma() {
+  load_selected_proforma();
 }
 
 function on_select_payment() {
@@ -248,20 +289,43 @@ function on_select_client() {
     window.openDialog("select-client.xul", "select-client", "chrome,resizable", select_handler);
 }
 
-function on_new_invoice() {
-    var req = theForm.get_request();
-    req.add("command", "newInvoiceData");
-    theForm.post_request(req);
-    maintab.selectedIndex = 4;
+function on_add_proforma() {
+  var req = theForm.get_request();
+  req.add("command", "newProformaData");
+  theForm.post_request(req);
+  maintab.selectedIndex = 4;
+}
 
-    clear_payments();
+function on_save_proforma() {
+  var req = theForm.get_request();
+  req.add("command", "saveProformaData");
+  theForm.post_request(req);
+  load_proformas();
+  maintab.selectedIndex = 3;
+}
+
+function on_remove_proforma() {
+  var req = theForm.get_request();
+  req.add("command", "removeProforma");
+  theForm.post_request(req);
+  load_proformas();
+  maintab.selectedIndex = 3;
+}
+
+function on_new_invoice() {
+  var req = theForm.get_request();
+  req.add("command", "newInvoiceData");
+  theForm.post_request(req);
+  maintab.selectedIndex = 6;
+  
+  clear_payments();
 }
 
 function on_new_payment() {
     var req = theForm.get_request();
     req.add("command", "newPaymentData");
     theForm.post_request(req);
-    maintab.selectedIndex = 5;
+    maintab.selectedIndex = 7;
 }
 
 function on_save_invoice() {
@@ -270,7 +334,7 @@ function on_save_invoice() {
     theForm.post_request(req);
     load_selected_order();
     load_invoices();
-    maintab.selectedIndex = 3;
+    maintab.selectedIndex = 5;
     on_select_order();
 }
 
@@ -281,7 +345,7 @@ function on_save_payment() {
     load_selected_order();
     load_selected_invoice();
     load_payments();
-    maintab.selectedIndex = 4;
+    maintab.selectedIndex = 6;
 }
 
 function on_remove_invoice() {
@@ -290,7 +354,7 @@ function on_remove_invoice() {
     theForm.post_request(req);
     load_selected_order();
     load_invoices();
-    maintab.selectedIndex = 3;
+    maintab.selectedIndex = 5;
 
     clear_payments();
 
@@ -305,7 +369,7 @@ function on_remove_payment() {
     load_selected_order();
     load_selected_invoice();
     load_payments();
-    maintab.selectedIndex = 4;
+    maintab.selectedIndex = 6;
 
     return true;
 }
@@ -327,6 +391,14 @@ function open_livrari_fmontaje() {
   window.openDialog("report-livrari.xul", "report-livrari", "chrome, resizable, scrollbars");
 }
 
+function open_proforma(type) {
+   window.open(SERVER_URL + "/reports/proforma." + type);
+}
+
+function open_incasari(type) {
+   window.open(SERVER_URL + "/reports/incasari." + type);
+}
+
 var theForm = new FormObject();
 theForm.do_link = "/orders.do";
 
@@ -334,8 +406,11 @@ theForm.text_fields = new Array("number", "date", "clientName", "localitateAlta"
 				"distanta", "observatii", "total", "totalTva",
 				"discount", "totalFinal", "totalFinalTva",
 				"avans", "invoicedAmount", "payedAmount",
-				//"achitatCu", 
-				//"valoareAvans", 
+
+				"totalCurrency", "totalTvaCurrency", 
+				"totalFinalCurrency","currencyInvoicedAmount",
+				"totalFinalTvaCurrency",
+
 				"diferenta", "currencyDiferenta",
 				"termenLivrare", "termenLivrare1", "adresaMontaj", 
 				"adresaReper", "telefon", "contact",
@@ -343,6 +418,16 @@ theForm.text_fields = new Array("number", "date", "clientName", "localitateAlta"
 				"productName", "productCode", "price",
 				"productPrice", "priceRatio", "quantity",
 				"value", "tax",
+
+				"proformaNumber", "proformaDate", 
+				"proformaAmount", "proformaTax", 
+				"proformaTotal", "proformaExchangeRate",
+				"proformaAmountCurrency",
+				"proformaTaxCurrency",
+				"proformaTotalCurrency",
+				"proformaPercent", "proformaComment",
+				"proformaContract", "proformaObiectiv",
+				"proformaCurrency",
 
 				"invoiceNumber", "invoiceDate","invoiceAmount",
 				"invoiceTax", "invoiceTotal", 
@@ -359,9 +444,11 @@ theForm.text_fields = new Array("number", "date", "clientName", "localitateAlta"
 				"attribute4"  //cursul
 				);
 
-theForm.combo_fields = new Array("montaj", "localitate", "invoiceRole", "tipDemontare");
+theForm.combo_fields = new Array("montaj", "localitate", "proformaRole", "invoiceRole", "tipDemontare");
 
 theForm.radio_fields = new Array();
+
+theForm.cb_fields = new Array("proformaUsePercent");
 
 theForm.hidden_fields = new Array("clientId", "offerItemId");
 

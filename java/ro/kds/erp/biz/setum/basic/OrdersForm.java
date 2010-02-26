@@ -78,6 +78,8 @@ public class OrdersForm implements Serializable {
     java.util.Date livrariRStart;
     java.util.Date livrariREnd;
     String livrariCuMontaj;
+    java.util.Date incasariFromDate;
+    java.util.Date incasariToDate;
     Integer offerItemId;
     String productName;
     String productCode;
@@ -90,6 +92,37 @@ public class OrdersForm implements Serializable {
     Integer codMontaj;
     Double montajProcent;
     Boolean montajSeparat;
+    String proformaNumber;
+    java.util.Date proformaDate;
+    String proformaRole;
+    java.math.BigDecimal proformaAmount;
+    java.math.BigDecimal proformaTax;
+    Double proformaExchangeRate;
+    java.math.BigDecimal proformaTotal;
+    Double proformaPercent;
+    Boolean proformaUsePercent;
+    String proformaComment;
+    String proformaContract;
+    String proformaObiectiv;
+    String proformaCurrency;
+    java.math.BigDecimal proformaAmountCurrency;
+    java.math.BigDecimal proformaTaxCurrency;
+    java.math.BigDecimal proformaTotalCurrency;
+    String proformaAttribute1;
+    String proformaAttribute2;
+    String proformaAttribute3;
+    String proformaAttribute4;
+    String proformaAttribute5;
+    String proformaAttribute6;
+    String proformaAttribute7;
+    String proformaAttribute8;
+    String proformaAttribute9;
+    String proformaAttribute10;
+    String proformaAttribute11;
+    String proformaAttribute12;
+    String proformaAttribute13;
+    String proformaAttribute14;
+    String proformaAttribute15;
     String invoiceNumber;
     java.util.Date invoiceDate;
     String invoiceRole;
@@ -316,6 +349,16 @@ public class OrdersForm implements Serializable {
 
 
 
+
+       // No rule to initialize this.incasariFromDate
+
+
+
+
+       // No rule to initialize this.incasariToDate
+
+
+
        this.offerItemId = new Integer(0);
 
 
@@ -361,6 +404,131 @@ public class OrdersForm implements Serializable {
 
 
        this.montajSeparat = new Boolean(false);
+
+
+
+       this.proformaNumber = "";
+
+
+
+
+       // No rule to initialize this.proformaDate
+
+
+
+       this.proformaRole = "";
+
+
+
+       this.proformaAmount = new java.math.BigDecimal(0);
+
+
+
+       this.proformaTax = new java.math.BigDecimal(0);
+
+
+
+       this.proformaExchangeRate = new Double(0);
+   
+
+
+       this.proformaTotal = new java.math.BigDecimal(0);
+
+
+
+       this.proformaPercent = new Double(0);
+   
+
+
+       this.proformaUsePercent = new Boolean(false);
+
+
+
+       this.proformaComment = "";
+
+
+
+       this.proformaContract = "";
+
+
+
+       this.proformaObiectiv = "";
+
+
+
+       this.proformaCurrency = "";
+
+
+
+       this.proformaAmountCurrency = new java.math.BigDecimal(0);
+
+
+
+       this.proformaTaxCurrency = new java.math.BigDecimal(0);
+
+
+
+       this.proformaTotalCurrency = new java.math.BigDecimal(0);
+
+
+
+       this.proformaAttribute1 = "";
+
+
+
+       this.proformaAttribute2 = "";
+
+
+
+       this.proformaAttribute3 = "";
+
+
+
+       this.proformaAttribute4 = "";
+
+
+
+       this.proformaAttribute5 = "";
+
+
+
+       this.proformaAttribute6 = "";
+
+
+
+       this.proformaAttribute7 = "";
+
+
+
+       this.proformaAttribute8 = "";
+
+
+
+       this.proformaAttribute9 = "";
+
+
+
+       this.proformaAttribute10 = "";
+
+
+
+       this.proformaAttribute11 = "";
+
+
+
+       this.proformaAttribute12 = "";
+
+
+
+       this.proformaAttribute13 = "";
+
+
+
+       this.proformaAttribute14 = "";
+
+
+
+       this.proformaAttribute15 = "";
 
 
 
@@ -1155,6 +1323,24 @@ public class OrdersForm implements Serializable {
 	}
     }
 
+    public void setIncasariFromDate(java.util.Date newIncasariFromDate) {
+        this.incasariFromDate = newIncasariFromDate;
+    }
+
+    public java.util.Date getIncasariFromDate() {
+        return incasariFromDate;
+    }
+
+
+    public void setIncasariToDate(java.util.Date newIncasariToDate) {
+        this.incasariToDate = newIncasariToDate;
+    }
+
+    public java.util.Date getIncasariToDate() {
+        return incasariToDate;
+    }
+
+
     public void setOfferItemId(Integer newOfferItemId) {
         this.offerItemId = newOfferItemId;
     }
@@ -1332,6 +1518,465 @@ public class OrdersForm implements Serializable {
 	AttributeLocal a = (AttributeLocal)attributes.get("montajSeparat");
 	if(a != null) {
 	    this.setMontajSeparat(a.getBoolValue());
+	}
+    }
+
+    public void setProformaNumber(String newProformaNumber) {
+        this.proformaNumber = newProformaNumber;
+    }
+
+    public String getProformaNumber() {
+        return proformaNumber;
+    }
+
+    public void readProformaNumber(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("proformaNumber");
+	if(a != null) {
+	    this.setProformaNumber(a.getStringValue());
+	}
+    }
+
+    public void setProformaDate(java.util.Date newProformaDate) {
+        this.proformaDate = newProformaDate;
+    }
+
+    public java.util.Date getProformaDate() {
+        return proformaDate;
+    }
+
+
+    public void setProformaRole(String newProformaRole) {
+        this.proformaRole = newProformaRole;
+    }
+
+    public String getProformaRole() {
+        return proformaRole;
+    }
+
+    public void readProformaRole(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("proformaRole");
+	if(a != null) {
+	    this.setProformaRole(a.getStringValue());
+	}
+    }
+
+    public void setProformaAmount(java.math.BigDecimal newProformaAmount) {
+        this.proformaAmount = newProformaAmount;
+    }
+
+    public java.math.BigDecimal getProformaAmount() {
+        return proformaAmount;
+    }
+
+    public void readProformaAmount(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("proformaAmount");
+	if(a != null) {
+	    this.setProformaAmount(a.getDecimalValue());
+	}
+    }
+
+    public void setProformaTax(java.math.BigDecimal newProformaTax) {
+        this.proformaTax = newProformaTax;
+    }
+
+    public java.math.BigDecimal getProformaTax() {
+        return proformaTax;
+    }
+
+    public void readProformaTax(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("proformaTax");
+	if(a != null) {
+	    this.setProformaTax(a.getDecimalValue());
+	}
+    }
+
+    public void setProformaExchangeRate(Double newProformaExchangeRate) {
+        this.proformaExchangeRate = newProformaExchangeRate;
+    }
+
+    public Double getProformaExchangeRate() {
+        return proformaExchangeRate;
+    }
+
+    public void readProformaExchangeRate(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("proformaExchangeRate");
+	if(a != null) {
+	    this.setProformaExchangeRate(a.getDoubleValue());
+	}
+    }
+
+    public void setProformaTotal(java.math.BigDecimal newProformaTotal) {
+        this.proformaTotal = newProformaTotal;
+    }
+
+    public java.math.BigDecimal getProformaTotal() {
+        return proformaTotal;
+    }
+
+    public void readProformaTotal(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("proformaTotal");
+	if(a != null) {
+	    this.setProformaTotal(a.getDecimalValue());
+	}
+    }
+
+    public void setProformaPercent(Double newProformaPercent) {
+        this.proformaPercent = newProformaPercent;
+    }
+
+    public Double getProformaPercent() {
+        return proformaPercent;
+    }
+
+    public void readProformaPercent(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("proformaPercent");
+	if(a != null) {
+	    this.setProformaPercent(a.getDoubleValue());
+	}
+    }
+
+    public void setProformaUsePercent(Boolean newProformaUsePercent) {
+        this.proformaUsePercent = newProformaUsePercent;
+    }
+
+    public Boolean getProformaUsePercent() {
+        return proformaUsePercent;
+    }
+
+    public void readProformaUsePercent(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("proformaUsePercent");
+	if(a != null) {
+	    this.setProformaUsePercent(a.getBoolValue());
+	}
+    }
+
+    public void setProformaComment(String newProformaComment) {
+        this.proformaComment = newProformaComment;
+    }
+
+    public String getProformaComment() {
+        return proformaComment;
+    }
+
+    public void readProformaComment(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("proformaComment");
+	if(a != null) {
+	    this.setProformaComment(a.getStringValue());
+	}
+    }
+
+    public void setProformaContract(String newProformaContract) {
+        this.proformaContract = newProformaContract;
+    }
+
+    public String getProformaContract() {
+        return proformaContract;
+    }
+
+    public void readProformaContract(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("proformaContract");
+	if(a != null) {
+	    this.setProformaContract(a.getStringValue());
+	}
+    }
+
+    public void setProformaObiectiv(String newProformaObiectiv) {
+        this.proformaObiectiv = newProformaObiectiv;
+    }
+
+    public String getProformaObiectiv() {
+        return proformaObiectiv;
+    }
+
+    public void readProformaObiectiv(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("proformaObiectiv");
+	if(a != null) {
+	    this.setProformaObiectiv(a.getStringValue());
+	}
+    }
+
+    public void setProformaCurrency(String newProformaCurrency) {
+        this.proformaCurrency = newProformaCurrency;
+    }
+
+    public String getProformaCurrency() {
+        return proformaCurrency;
+    }
+
+    public void readProformaCurrency(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("proformaCurrency");
+	if(a != null) {
+	    this.setProformaCurrency(a.getStringValue());
+	}
+    }
+
+    public void setProformaAmountCurrency(java.math.BigDecimal newProformaAmountCurrency) {
+        this.proformaAmountCurrency = newProformaAmountCurrency;
+    }
+
+    public java.math.BigDecimal getProformaAmountCurrency() {
+        return proformaAmountCurrency;
+    }
+
+    public void readProformaAmountCurrency(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("proformaAmountCurrency");
+	if(a != null) {
+	    this.setProformaAmountCurrency(a.getDecimalValue());
+	}
+    }
+
+    public void setProformaTaxCurrency(java.math.BigDecimal newProformaTaxCurrency) {
+        this.proformaTaxCurrency = newProformaTaxCurrency;
+    }
+
+    public java.math.BigDecimal getProformaTaxCurrency() {
+        return proformaTaxCurrency;
+    }
+
+    public void readProformaTaxCurrency(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("proformaTaxCurrency");
+	if(a != null) {
+	    this.setProformaTaxCurrency(a.getDecimalValue());
+	}
+    }
+
+    public void setProformaTotalCurrency(java.math.BigDecimal newProformaTotalCurrency) {
+        this.proformaTotalCurrency = newProformaTotalCurrency;
+    }
+
+    public java.math.BigDecimal getProformaTotalCurrency() {
+        return proformaTotalCurrency;
+    }
+
+    public void readProformaTotalCurrency(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("proformaTotalCurrency");
+	if(a != null) {
+	    this.setProformaTotalCurrency(a.getDecimalValue());
+	}
+    }
+
+    public void setProformaAttribute1(String newProformaAttribute1) {
+        this.proformaAttribute1 = newProformaAttribute1;
+    }
+
+    public String getProformaAttribute1() {
+        return proformaAttribute1;
+    }
+
+    public void readProformaAttribute1(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("proformaAttribute1");
+	if(a != null) {
+	    this.setProformaAttribute1(a.getStringValue());
+	}
+    }
+
+    public void setProformaAttribute2(String newProformaAttribute2) {
+        this.proformaAttribute2 = newProformaAttribute2;
+    }
+
+    public String getProformaAttribute2() {
+        return proformaAttribute2;
+    }
+
+    public void readProformaAttribute2(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("proformaAttribute2");
+	if(a != null) {
+	    this.setProformaAttribute2(a.getStringValue());
+	}
+    }
+
+    public void setProformaAttribute3(String newProformaAttribute3) {
+        this.proformaAttribute3 = newProformaAttribute3;
+    }
+
+    public String getProformaAttribute3() {
+        return proformaAttribute3;
+    }
+
+    public void readProformaAttribute3(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("proformaAttribute3");
+	if(a != null) {
+	    this.setProformaAttribute3(a.getStringValue());
+	}
+    }
+
+    public void setProformaAttribute4(String newProformaAttribute4) {
+        this.proformaAttribute4 = newProformaAttribute4;
+    }
+
+    public String getProformaAttribute4() {
+        return proformaAttribute4;
+    }
+
+    public void readProformaAttribute4(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("proformaAttribute4");
+	if(a != null) {
+	    this.setProformaAttribute4(a.getStringValue());
+	}
+    }
+
+    public void setProformaAttribute5(String newProformaAttribute5) {
+        this.proformaAttribute5 = newProformaAttribute5;
+    }
+
+    public String getProformaAttribute5() {
+        return proformaAttribute5;
+    }
+
+    public void readProformaAttribute5(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("proformaAttribute5");
+	if(a != null) {
+	    this.setProformaAttribute5(a.getStringValue());
+	}
+    }
+
+    public void setProformaAttribute6(String newProformaAttribute6) {
+        this.proformaAttribute6 = newProformaAttribute6;
+    }
+
+    public String getProformaAttribute6() {
+        return proformaAttribute6;
+    }
+
+    public void readProformaAttribute6(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("proformaAttribute6");
+	if(a != null) {
+	    this.setProformaAttribute6(a.getStringValue());
+	}
+    }
+
+    public void setProformaAttribute7(String newProformaAttribute7) {
+        this.proformaAttribute7 = newProformaAttribute7;
+    }
+
+    public String getProformaAttribute7() {
+        return proformaAttribute7;
+    }
+
+    public void readProformaAttribute7(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("proformaAttribute7");
+	if(a != null) {
+	    this.setProformaAttribute7(a.getStringValue());
+	}
+    }
+
+    public void setProformaAttribute8(String newProformaAttribute8) {
+        this.proformaAttribute8 = newProformaAttribute8;
+    }
+
+    public String getProformaAttribute8() {
+        return proformaAttribute8;
+    }
+
+    public void readProformaAttribute8(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("proformaAttribute8");
+	if(a != null) {
+	    this.setProformaAttribute8(a.getStringValue());
+	}
+    }
+
+    public void setProformaAttribute9(String newProformaAttribute9) {
+        this.proformaAttribute9 = newProformaAttribute9;
+    }
+
+    public String getProformaAttribute9() {
+        return proformaAttribute9;
+    }
+
+    public void readProformaAttribute9(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("proformaAttribute9");
+	if(a != null) {
+	    this.setProformaAttribute9(a.getStringValue());
+	}
+    }
+
+    public void setProformaAttribute10(String newProformaAttribute10) {
+        this.proformaAttribute10 = newProformaAttribute10;
+    }
+
+    public String getProformaAttribute10() {
+        return proformaAttribute10;
+    }
+
+    public void readProformaAttribute10(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("proformaAttribute10");
+	if(a != null) {
+	    this.setProformaAttribute10(a.getStringValue());
+	}
+    }
+
+    public void setProformaAttribute11(String newProformaAttribute11) {
+        this.proformaAttribute11 = newProformaAttribute11;
+    }
+
+    public String getProformaAttribute11() {
+        return proformaAttribute11;
+    }
+
+    public void readProformaAttribute11(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("proformaAttribute11");
+	if(a != null) {
+	    this.setProformaAttribute11(a.getStringValue());
+	}
+    }
+
+    public void setProformaAttribute12(String newProformaAttribute12) {
+        this.proformaAttribute12 = newProformaAttribute12;
+    }
+
+    public String getProformaAttribute12() {
+        return proformaAttribute12;
+    }
+
+    public void readProformaAttribute12(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("proformaAttribute12");
+	if(a != null) {
+	    this.setProformaAttribute12(a.getStringValue());
+	}
+    }
+
+    public void setProformaAttribute13(String newProformaAttribute13) {
+        this.proformaAttribute13 = newProformaAttribute13;
+    }
+
+    public String getProformaAttribute13() {
+        return proformaAttribute13;
+    }
+
+    public void readProformaAttribute13(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("proformaAttribute13");
+	if(a != null) {
+	    this.setProformaAttribute13(a.getStringValue());
+	}
+    }
+
+    public void setProformaAttribute14(String newProformaAttribute14) {
+        this.proformaAttribute14 = newProformaAttribute14;
+    }
+
+    public String getProformaAttribute14() {
+        return proformaAttribute14;
+    }
+
+    public void readProformaAttribute14(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("proformaAttribute14");
+	if(a != null) {
+	    this.setProformaAttribute14(a.getStringValue());
+	}
+    }
+
+    public void setProformaAttribute15(String newProformaAttribute15) {
+        this.proformaAttribute15 = newProformaAttribute15;
+    }
+
+    public String getProformaAttribute15() {
+        return proformaAttribute15;
+    }
+
+    public void readProformaAttribute15(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("proformaAttribute15");
+	if(a != null) {
+	    this.setProformaAttribute15(a.getStringValue());
 	}
     }
 

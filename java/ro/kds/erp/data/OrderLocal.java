@@ -237,6 +237,16 @@ public interface OrderLocal extends EJBLocalObject {
     public void setLines(Collection lines);
 
     /**
+     * The proformas issued for this order.
+     */
+    public Collection getProformas();
+    
+    /**
+     * Sets the list of proformas issued for this order.
+     */
+    public void setProformas(Collection proformas);
+
+    /**
      * The invoices issued for this invoice.
      */
     public Collection getInvoices();

@@ -15,6 +15,8 @@ import java.math.BigDecimal;
 import javax.naming.Context;
 import org.objectweb.util.monolog.api.Logger;
 import org.objectweb.jonas.common.Log;
+import java.util.Collection;
+import java.util.Date;
 
 /**
  * Describe class PaymentBean here.
@@ -101,6 +103,7 @@ public abstract class PaymentBean implements EntityBean {
     public abstract void setInvoice(InvoiceLocal i);
 
 
+    public abstract Collection ejbFindByDate(Date dateFrom, Date dateTo) throws FinderException;
 
     // Implementation of javax.ejb.EntityBean
 
