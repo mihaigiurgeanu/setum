@@ -279,6 +279,66 @@
     
   </jonas-entity>
 
+  <jonas-entity>
+    <ejb-name>DailySummaryEJB</ejb-name>
+    <jndi-local-name>DailySummaryHome</jndi-local-name>
+    <jdbc-mapping>
+      <jndi-name>erpsetumdb</jndi-name>
+
+      <automatic-pk>true</automatic-pk>
+
+      <cmp-field-jdbc-mapping>
+	<field-name>value1</field-name>
+	<jdbc-field-name>value1_</jdbc-field-name>
+	<sql-type>DECIMAL(12,4)</sql-type>
+      </cmp-field-jdbc-mapping>
+      <cmp-field-jdbc-mapping>
+	<field-name>value2</field-name>
+	<jdbc-field-name>value2_</jdbc-field-name>
+	<sql-type>DECIMAL(12,4)</sql-type>
+      </cmp-field-jdbc-mapping>
+      <cmp-field-jdbc-mapping>
+	<field-name>value3</field-name>
+	<jdbc-field-name>value3_</jdbc-field-name>
+	<sql-type>DECIMAL(12,4)</sql-type>
+      </cmp-field-jdbc-mapping>
+      <cmp-field-jdbc-mapping>
+	<field-name>value4</field-name>
+	<jdbc-field-name>value4_</jdbc-field-name>
+	<sql-type>DECIMAL(12,4)</sql-type>
+      </cmp-field-jdbc-mapping>
+      <cmp-field-jdbc-mapping>
+	<field-name>value5</field-name>
+	<jdbc-field-name>value5_</jdbc-field-name>
+	<sql-type>DECIMAL(12,4)</sql-type>
+      </cmp-field-jdbc-mapping>
+      <cmp-field-jdbc-mapping>
+	<field-name>value6</field-name>
+	<jdbc-field-name>value6_</jdbc-field-name>
+	<sql-type>DECIMAL(12,4)</sql-type>
+      </cmp-field-jdbc-mapping>
+      <cmp-field-jdbc-mapping>
+	<field-name>value7</field-name>
+	<jdbc-field-name>value7_</jdbc-field-name>
+	<sql-type>DECIMAL(12,4)</sql-type>
+      </cmp-field-jdbc-mapping>
+      <cmp-field-jdbc-mapping>
+	<field-name>value8</field-name>
+	<jdbc-field-name>value8_</jdbc-field-name>
+	<sql-type>DECIMAL(12,4)</sql-type>
+      </cmp-field-jdbc-mapping>
+      <cmp-field-jdbc-mapping>
+	<field-name>value9</field-name>
+	<jdbc-field-name>value9_</jdbc-field-name>
+	<sql-type>DECIMAL(12,4)</sql-type>
+      </cmp-field-jdbc-mapping>
+      <cmp-field-jdbc-mapping>
+	<field-name>value10</field-name>
+	<jdbc-field-name>value10_</jdbc-field-name>
+	<sql-type>DECIMAL(12,4)</sql-type>
+      </cmp-field-jdbc-mapping>
+    </jdbc-mapping>
+  </jonas-entity>
 
   <jonas-ejb-relation>
     <ejb-relation-name>ProductAttribute</ejb-relation-name>

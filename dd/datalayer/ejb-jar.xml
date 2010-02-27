@@ -1124,11 +1124,7 @@
     </entity>
 
 
-  </enterprise-beans>
-
-
-
-  <entity>
+    <entity>
     <description>
       Generic daily aggregated summaries.
     </description>
@@ -1164,39 +1160,39 @@
       <field-name>value1</field-name>
     </cmp-field>
     <cmp-field>
-      <description>Generic summay value</description>
+      <description>Generic summary value</description>
       <field-name>value2</field-name>
     </cmp-field>
     <cmp-field>
-      <description>Generic summay value</description>
+      <description>Generic summary value</description>
       <field-name>value3</field-name>
     </cmp-field>
     <cmp-field>
-      <description>Generic summay value</description>
+      <description>Generic summary value</description>
       <field-name>value4</field-name>
     </cmp-field>
     <cmp-field>
-      <description>Generic summay value</description>
+      <description>Generic summary value</description>
       <field-name>value5</field-name>
     </cmp-field>
     <cmp-field>
-      <description>Generic summay value</description>
+      <description>Generic summary value</description>
       <field-name>value6</field-name>
     </cmp-field>
     <cmp-field>
-      <description>Generic summay value</description>
+      <description>Generic summary value</description>
       <field-name>value7</field-name>
     </cmp-field>
     <cmp-field>
-      <description>Generic summay value</description>
+      <description>Generic summary value</description>
       <field-name>value8</field-name>
     </cmp-field>
     <cmp-field>
-      <description>Generic summay value</description>
+      <description>Generic summary value</description>
       <field-name>value9</field-name>
     </cmp-field>
     <cmp-field>
-      <description>Generic summay value</description>
+      <description>Generic summary value</description>
       <field-name>value10</field-name>
     </cmp-field>
 
@@ -1216,6 +1212,12 @@
 	</ejb-ql>
       </query>
   </entity>
+
+  </enterprise-beans>
+
+
+
+  
 
 
   <relationships>
@@ -1898,7 +1900,10 @@
 	<method-name>*</method-name>
       </method>
 
-
+      <method>
+	<ejb-name>DailySummaryEJB</ejb-name>
+	<method-name>*</method-name>
+      </method>
 
       <trans-attribute>Required</trans-attribute>
 
