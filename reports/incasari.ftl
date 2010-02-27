@@ -147,7 +147,7 @@
 	  <fo:table-body>
 	    <fo:table-row border-style="solid">
 	      <fo:table-cell column-number="1" padding="1mm"><fo:block text-align="center"> TOTAL CUMULAT de la ${doc.response.record["field[@name='fromDate']"]}</fo:block></fo:table-cell>
-	      <fo:table-cell column-number="2" padding="1mm"><fo:block text-align="left">${doc.response.record["field[@name='totalZi']"]?number?string("#,##0.00")}</fo:block></fo:table-cell>
+	      <fo:table-cell column-number="2" padding="1mm"><fo:block text-align="left">${doc.response.record["field[@name='totalCumulat']"]?number?string("#,##0.00")}</fo:block></fo:table-cell>
 	    </fo:table-row>
 	  </fo:table-body>
 	</fo:table>

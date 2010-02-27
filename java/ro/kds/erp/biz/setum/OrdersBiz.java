@@ -2922,9 +2922,9 @@ public class OrdersBiz extends OrdersBean {
 
 	try {
 	    PaymentLocalHome ph = getPaymentHome();
+
+	    // Iau platile din data raportului
 	    Collection payments = ph.findByDate(form.getIncasariToDate(), form.getIncasariToDate());
-	    
-	    
 	    ResponseBean paymentsList = new ResponseBean();
 	    double total = 0;
 	    for(Iterator i = payments.iterator(); i.hasNext(); ) {
@@ -2946,6 +2946,15 @@ public class OrdersBiz extends OrdersBean {
 		total += payment.getAmount().doubleValue();
 		
 	    }
+
+	    // Calculez total plati pe toata periada
+	    BigDecimal totalPerioada = new BigDecimal(0); 
+	    payments = ph.findByDate(form.getIncasariFromDate(), form.getIncasariToDate());
+	    for(Iterator i = payments.iterator(); i.hasNext();) {
+		PaymentLocal payment = (PaymentLocal) i.next();
+		totalPerioada = totalPerioada.add(payment.getAmount());
+	    }
+
 	    BigDecimal totalValoare = new BigDecimal(0);
 	    BigDecimal totalBucIncasate = new BigDecimal(0);
 	    BigDecimal totalBucNeincasate = new BigDecimal(0);
@@ -2971,6 +2980,7 @@ public class OrdersBiz extends OrdersBean {
 	    r.addField("bucNeincasate", form.getIncasariBucNeincasate());
 	    r.addField("bucRate", form.getIncasariBucRate());
 	    r.addField("totalZi", form.getIncasariValoare().add(new BigDecimal(total)));
+	    r.addField("totalCumulat", totalValoare.add(totalPerioada));
 	    r.addField("totalBucIncasate", totalBucIncasate.intValue());
 	    r.addField("totalBucNeincasate", totalBucNeincasate.intValue());
 	    r.addField("totalBucRate", totalBucRate.intValue());
