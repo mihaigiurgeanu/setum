@@ -49,9 +49,9 @@ Lista comenzilor, creere/vizualizare/stergere
     <command id="command-save_payment"		oncommand="on_save_payment()"/>
     <command id="command-pdf-report"		oncommand="open_report('pdf')"/>
     <command id="command-pv-report"		oncommand="open_pv('pdf')"/>
-    <comand id="command-livrari-montaje"         oncommand="open_livrari_montaje()"/>
-    <comand id="command-livrari-fmontaje"         oncommand="open_livrari_fmontaje()"/>
-    <command id="command-incasari"		oncommand="open_incasari('pdf')"/>
+    <comand id="command-livrari-montaje"	oncommand="open_livrari_montaje()"/>
+    <comand id="command-livrari-fmontaje"	oncommand="open_livrari_fmontaje()"/>
+    <command id="command-incasari"		oncommand="open_incasari()"/>
   </commandset>
 
 
@@ -76,7 +76,7 @@ Lista comenzilor, creere/vizualizare/stergere
 	  <button label="Sterge comanda" command="command-remove_order"/>
 	  <button label="Raport Livrari" command="command-livrari-montaje"/>
 	  <!--<button label="Livrari f/ montaje" command="command-livrari-fmontaje"/>-->
-	  <button label="Raport incasari" command="command-incasari"/>
+	  <button label="Incasari zilnice" command="command-incasari"/>
 	</hbox>
 	<hbox class="title">
 	  <label>Comenzi</label>

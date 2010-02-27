@@ -1521,6 +1521,14 @@
 	<local>ro.kds.erp.biz.CategoryManagerLocal</local>
 	<ejb-link>UsaMetalicaCategoryManagerEJB</ejb-link>
       </ejb-local-ref>
+      <ejb-local-ref>
+	<description>Daily summaries</description>
+	<ejb-ref-name>ejb/DailySummaryHome</ejb-ref-name>
+	<ejb-ref-type>Entity</ejb-ref-type>
+	<local-home>ro.kds.erp.data.DailySummaryLocalHome</local-home>
+	<local>ro.kds.erp.data.DailySummaryLocal</local>
+	<ejb-link>datalayer.jar#DailySummaryEJB</ejb-link>
+      </ejb-local-ref>
     </session>
 
 

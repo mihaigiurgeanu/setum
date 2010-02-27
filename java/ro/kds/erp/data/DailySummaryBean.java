@@ -157,4 +157,5 @@ public abstract class DailySummaryBean implements EntityBean {
     public abstract void setValue10(BigDecimal value);
  
     public abstract Collection ejbFindByDate(String typeURI, Date day) throws FinderException;
+    public abstract Collection ejbFindByDate(String typeURI, Date from, Date to) throws FinderException;
 }

@@ -67,6 +67,10 @@ import java.math.RoundingMode;
 import ro.kds.erp.biz.Products;
 import ro.kds.erp.data.ProformaLocalHome;
 import ro.kds.erp.data.ProformaLocal;
+import java.util.Date;
+import ro.kds.erp.biz.ResponseBean;
+import ro.kds.erp.data.DailySummaryLocalHome;
+import ro.kds.erp.data.DailySummaryLocal;
 
 /**
  * Describe class OrdersBiz here.
@@ -125,6 +129,11 @@ public class OrdersBiz extends OrdersBean {
     public final String defaultProformaComment = "NOTA: Acest document nu este o factura fiscala";
 
     /**
+     * Numele DailySummary pentru raportul zilnic de incasari.
+     */
+    public final String RAPORT_INCASARI_SUMMARY = "http://www.kds.ro/setum/DailySummary/incasari";
+
+    /**
      * Initialization of fields. The default initialization is
      * made by the parrent class.
      *
@@ -161,14 +170,6 @@ public class OrdersBiz extends OrdersBean {
 					   defaultDelivery);
 	form.setTermenLivrare(delivDate);
 	form.setTermenLivrare1(delivDate);
-
-	Date today = DateUtils.truncate(new Date(), Calendar.DAY_OF_MONTH);
-	form.setIncasariToDate(today);
-
-	Date firstOfMonth = DateUtils.truncate(today, Calendar.MONTH);
-	form.setIncasariFromDate(firstOfMonth);
-
-
     }
 
 
@@ -1607,6 +1608,11 @@ public class OrdersBiz extends OrdersBean {
      * Cache for a reference to <code>PaymentLocalHome</code>
      */
     PaymentLocalHome cache_payh;
+    /**
+     * Cache for a reference to <code>DailySummaryLocalHome</code>
+     */
+    DailySummaryLocalHome cache_dsh;
+
     
     /**
      * Utility method to get a <code>OrderLocalHome</code> reference.
@@ -2755,19 +2761,168 @@ public class OrdersBiz extends OrdersBean {
 	return r;
     }
 
+     /**
+     * Utility method to get a reference to the PaymentLocalHome.
+     */
+    protected DailySummaryLocalHome getDailySummaryHome() throws NamingException {
+	if(cache_dsh == null) {
+	    InitialContext ic = new InitialContext();
+	    Context env = (Context)ic.lookup("java:comp/env");
+	    cache_dsh = (DailySummaryLocalHome)PortableRemoteObject.narrow
+		(env.lookup("ejb/DailySummaryHome"), DailySummaryLocalHome.class);
+	}
+
+	return cache_dsh;
+    }
+
+    /**
+     * Incarca datele din DailySummary pentru data raportului de incasari.
+     */
+    void loadDailySummary() throws NamingException, FinderException {
+	DailySummaryLocalHome dsh = getDailySummaryHome();
+
+	if (form != null) {
+	    form.setIncasariValoare(new BigDecimal(0));
+	    form.setIncasariBucIncasate(0);
+	    form.setIncasariBucNeincasate(0);
+	    form.setIncasariBucRate(0);
+
+	    Date incasariToDate = form.getIncasariToDate();
+
+	    if(incasariToDate != null) {
+		Collection summaries = dsh.findByDate(RAPORT_INCASARI_SUMMARY, incasariToDate);
+		Iterator i = summaries.iterator(); 
+		if(i.hasNext()) {
+		    DailySummaryLocal dailySummary = (DailySummaryLocal)i.next();
+
+		    form.setIncasariValoare(dailySummary.getValue1());
+		    form.setIncasariBucIncasate(dailySummary.getValue2().intValue());
+		    form.setIncasariBucNeincasate(dailySummary.getValue3().intValue());
+		    form.setIncasariBucRate(dailySummary.getValue4().intValue());
+		}
+	    }
+	}
+    }
+
+
+    /**
+     * Initializare date raport incasari.
+     */
+    public void initIncasariFields() {
+	ResponseBean r;
+
+	if (form == null) newFormData();
+
+ 	Date today = DateUtils.truncate(new Date(), Calendar.DAY_OF_MONTH);
+	form.setIncasariToDate(today);
+
+	Date firstOfMonth = DateUtils.truncate(today, Calendar.MONTH);
+	form.setIncasariFromDate(firstOfMonth);
+
+	try {
+	    loadDailySummary();
+	} catch (Exception e) {
+	    logger.log(BasicLevel.ERROR, "Eroare la incarcarea raportului de incasari la data " + today, e);
+	    form.setIncasariValoare(new BigDecimal(0));
+	    form.setIncasariBucIncasate(new Integer(0));
+	    form.setIncasariBucNeincasate(new Integer(0));
+	    form.setIncasariBucRate(new Integer(0));
+	}
+
+    }
+
+    /**
+     * Salveaza datele despre incasari.
+     */
+    public ResponseBean saveIncasariData() {
+	ResponseBean r = new ResponseBean();
+
+	try {
+	    DailySummaryLocalHome dsh = getDailySummaryHome();
+
+	    if (form != null) {
+		Date incasariToDate = form.getIncasariToDate();
+		
+		if(incasariToDate != null) {
+		    Collection summaries = dsh.findByDate(RAPORT_INCASARI_SUMMARY, incasariToDate);
+		    Iterator i = summaries.iterator();
+		    DailySummaryLocal dailySummary; 
+		    if(i.hasNext()) {
+			dailySummary = (DailySummaryLocal)i.next();
+		    } else {
+			dailySummary = dsh.create();
+			dailySummary.setTypeURI(RAPORT_INCASARI_SUMMARY);
+			dailySummary.setDate(form.getIncasariToDate());
+		    }
+		    
+		    dailySummary.setValue1(form.getIncasariValoare());
+		    dailySummary.setValue2(new BigDecimal(form.getIncasariBucIncasate().intValue()));
+		    dailySummary.setValue3(new BigDecimal(form.getIncasariBucNeincasate().intValue()));
+		    dailySummary.setValue4(new BigDecimal(form.getIncasariBucRate().intValue()));
+		}
+	    }
+	} catch (NamingException e) {
+	    r = ResponseBean.getErrConfigNaming(e.getMessage());
+	    logger.log(BasicLevel.ERROR, e);
+	} catch (FinderException e) {
+	    r = ResponseBean.getErrNotFound(e.getMessage());
+	    logger.log(BasicLevel.ERROR, e);
+	} catch (CreateException e) {
+	    r = ResponseBean.getErrCreate(e.getMessage());
+	    logger.log(BasicLevel.ERROR, e);
+	}
+	return r;
+    }
+
+    /**
+     * Incarca datele despre incasari
+     */
+    public ResponseBean loadIncasariFields() throws FinderException {
+	ResponseBean r = new ResponseBean();
+	return r;
+    }
+
+    /**
+     * Este apelata cand se modifica data la care se face raportul de incasari.
+     *
+     * Cand se modifica data raportului, trebuie sa caut daca mai exista date
+     * de raport pentru ziua respectiva si sa le incarc.
+     *
+     * @param toDate data raportului de incasari zilnice
+     * @return un <code>ResponseBean</code> cu valorile parametrilor raportului
+     * din ziua respectiva (daca a mai fost rulat in ziua aceea).
+     */
+    public ResponseBean updateIncasariToDate(Date toDate) {
+	super.updateIncasariToDate(toDate);
+
+
+	ResponseBean r = new ResponseBean();
+	try {
+	    loadDailySummary();
+	    r.addRecord();
+	    r.addField("incasariValoare", form.getIncasariValoare());
+	    r.addField("incasariBucIncasate", form.getIncasariBucIncasate());
+	    r.addField("incasariBucNeincasate", form.getIncasariBucNeincasate());
+	    r.addField("incasariBucRate", form.getIncasariBucRate());
+	} catch (Exception e) {
+	    logger.log(BasicLevel.ERROR, "Eroare la incarcarea raportului de incasari la data " + toDate, e);
+	}
+
+	return r;
+    }
+  
+
     /**
      * Raport incasari.
      */
     public ResponseBean incasariReport() throws RemoteException {
-	// incasariToDate si incasariFromDate sunt initializate 
-	// de createNewFormBean
 
 	ResponseBean r;
 	DateFormat dfmt = DateFormat.getDateInstance();
 
 	try {
 	    PaymentLocalHome ph = getPaymentHome();
-	    Collection payments = ph.findByDate(form.getIncasariFromDate(), form.getIncasariToDate());
+	    Collection payments = ph.findByDate(form.getIncasariToDate(), form.getIncasariToDate());
 	    
 	    
 	    ResponseBean paymentsList = new ResponseBean();
@@ -2791,11 +2946,37 @@ public class OrdersBiz extends OrdersBean {
 		total += payment.getAmount().doubleValue();
 		
 	    }
+	    BigDecimal totalValoare = new BigDecimal(0);
+	    BigDecimal totalBucIncasate = new BigDecimal(0);
+	    BigDecimal totalBucNeincasate = new BigDecimal(0);
+	    BigDecimal totalBucRate = new BigDecimal(0);
 
+	    DailySummaryLocalHome dsh = getDailySummaryHome();
+	    Collection summaries = dsh.findByDate(RAPORT_INCASARI_SUMMARY, 
+						  form.getIncasariFromDate(), form.getIncasariToDate());
+
+	    for(Iterator i = summaries.iterator(); i.hasNext();) {
+		DailySummaryLocal s = (DailySummaryLocal)i.next();
+		totalValoare = totalValoare.add(s.getValue1());
+		totalBucIncasate = totalBucIncasate.add(s.getValue2());
+		totalBucNeincasate = totalBucNeincasate.add(s.getValue3());
+		totalBucRate = totalBucRate.add(s.getValue4());
+	    }
 	    r = new ResponseBean();
 	    r.addRecord();
 	    r.addField("fromDate", dfmt.format(form.getIncasariFromDate()));
 	    r.addField("toDate", dfmt.format(form.getIncasariToDate()));
+	    r.addField("valoare", form.getIncasariValoare());
+	    r.addField("bucIncasate", form.getIncasariBucIncasate());
+	    r.addField("bucNeincasate", form.getIncasariBucNeincasate());
+	    r.addField("bucRate", form.getIncasariBucRate());
+	    r.addField("totalZi", form.getIncasariValoare().add(new BigDecimal(total)));
+	    r.addField("totalBucIncasate", totalBucIncasate.intValue());
+	    r.addField("totalBucNeincasate", totalBucNeincasate.intValue());
+	    r.addField("totalBucRate", totalBucRate.intValue());
+	    r.addField("totalBuc", 
+		       totalBucIncasate.intValue() + totalBucNeincasate.intValue() 
+		       + totalBucRate.intValue());
 	    r.addField("payments", paymentsList);
 	    r.addField("total", total);
 

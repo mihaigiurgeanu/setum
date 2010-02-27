@@ -80,6 +80,10 @@ public class OrdersForm implements Serializable {
     String livrariCuMontaj;
     java.util.Date incasariFromDate;
     java.util.Date incasariToDate;
+    java.math.BigDecimal incasariValoare;
+    Integer incasariBucIncasate;
+    Integer incasariBucNeincasate;
+    Integer incasariBucRate;
     Integer offerItemId;
     String productName;
     String productCode;
@@ -356,6 +360,22 @@ public class OrdersForm implements Serializable {
 
 
        // No rule to initialize this.incasariToDate
+
+
+
+       this.incasariValoare = new java.math.BigDecimal(0);
+
+
+
+       this.incasariBucIncasate = new Integer(0);
+
+
+
+       this.incasariBucNeincasate = new Integer(0);
+
+
+
+       this.incasariBucRate = new Integer(0);
 
 
 
@@ -1340,6 +1360,66 @@ public class OrdersForm implements Serializable {
         return incasariToDate;
     }
 
+
+    public void setIncasariValoare(java.math.BigDecimal newIncasariValoare) {
+        this.incasariValoare = newIncasariValoare;
+    }
+
+    public java.math.BigDecimal getIncasariValoare() {
+        return incasariValoare;
+    }
+
+    public void readIncasariValoare(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("incasariValoare");
+	if(a != null) {
+	    this.setIncasariValoare(a.getDecimalValue());
+	}
+    }
+
+    public void setIncasariBucIncasate(Integer newIncasariBucIncasate) {
+        this.incasariBucIncasate = newIncasariBucIncasate;
+    }
+
+    public Integer getIncasariBucIncasate() {
+        return incasariBucIncasate;
+    }
+
+    public void readIncasariBucIncasate(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("incasariBucIncasate");
+	if(a != null) {
+	    this.setIncasariBucIncasate(a.getIntValue());
+	}
+    }
+
+    public void setIncasariBucNeincasate(Integer newIncasariBucNeincasate) {
+        this.incasariBucNeincasate = newIncasariBucNeincasate;
+    }
+
+    public Integer getIncasariBucNeincasate() {
+        return incasariBucNeincasate;
+    }
+
+    public void readIncasariBucNeincasate(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("incasariBucNeincasate");
+	if(a != null) {
+	    this.setIncasariBucNeincasate(a.getIntValue());
+	}
+    }
+
+    public void setIncasariBucRate(Integer newIncasariBucRate) {
+        this.incasariBucRate = newIncasariBucRate;
+    }
+
+    public Integer getIncasariBucRate() {
+        return incasariBucRate;
+    }
+
+    public void readIncasariBucRate(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("incasariBucRate");
+	if(a != null) {
+	    this.setIncasariBucRate(a.getIntValue());
+	}
+    }
 
     public void setOfferItemId(Integer newOfferItemId) {
         this.offerItemId = newOfferItemId;

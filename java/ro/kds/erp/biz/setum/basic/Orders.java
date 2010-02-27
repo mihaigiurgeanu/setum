@@ -34,6 +34,9 @@ public interface Orders extends EJBObject {
     public ResponseBean newPaymentData() throws RemoteException;
     public ResponseBean savePaymentData() throws RemoteException;
     public ResponseBean loadPaymentData(Integer id) throws RemoteException, FinderException;
+    public ResponseBean newIncasariData() throws RemoteException;
+    public ResponseBean saveIncasariData() throws RemoteException;
+    public ResponseBean loadIncasariData(Integer id) throws RemoteException, FinderException;
 
     public ResponseBean getCurrentFormData() throws RemoteException;
     public ResponseBean getLoadedPrimaryKey() throws RemoteException;
@@ -91,6 +94,10 @@ public interface Orders extends EJBObject {
     public ResponseBean updateLivrariCuMontaj(String newLivrariCuMontaj) throws RemoteException;
     public ResponseBean updateIncasariFromDate(java.util.Date newIncasariFromDate) throws RemoteException;
     public ResponseBean updateIncasariToDate(java.util.Date newIncasariToDate) throws RemoteException;
+    public ResponseBean updateIncasariValoare(java.math.BigDecimal newIncasariValoare) throws RemoteException;
+    public ResponseBean updateIncasariBucIncasate(Integer newIncasariBucIncasate) throws RemoteException;
+    public ResponseBean updateIncasariBucNeincasate(Integer newIncasariBucNeincasate) throws RemoteException;
+    public ResponseBean updateIncasariBucRate(Integer newIncasariBucRate) throws RemoteException;
     public ResponseBean updateOfferItemId(Integer newOfferItemId) throws RemoteException;
     public ResponseBean updateProductName(String newProductName) throws RemoteException;
     public ResponseBean updateProductCode(String newProductCode) throws RemoteException;

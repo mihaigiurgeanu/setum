@@ -60,9 +60,7 @@
       <fo:block font-size="10pt" font-family="Times">
 
 	<fo:block font-size="12pt" font-weight="bold" text-align="center" margin-bottom="2cm" margin-top="1cm">
-	  Raport incasari perioada 
-	  ${doc.response.record["field[@name='fromDate']"]}
-	  -
+	  Raport incasari 
 	  ${doc.response.record["field[@name='toDate']"]}
 	  
 	</fo:block> 
@@ -105,8 +103,80 @@
 	  </fo:table-body>
 	</fo:table>
 
-      </fo:block>
-      <!-- end main block -->
+
+	<fo:table width="100%" space-before="5mm">
+	  <fo:table-column column-number="1" border-left-style="solid" column-width="20%"/>
+	  <fo:table-column column-number="2" border-left-style="solid" column-width="20%"/>
+	  <fo:table-column column-number="3" border-left-style="solid" column-width="20%"/>
+	  <fo:table-column column-number="4" border-left-style="solid" column-width="20%"/>
+	  <fo:table-column column-number="5" border-style="solid" column-width="20%"/>
+
+	  <fo:table-body>
+	    <fo:table-row border-style="solid">
+	      <fo:table-cell column-number="1" padding="1mm" number-rows-spanned="2"><fo:block text-align="center">RAPORT EXPEDITIE /ZI</fo:block></fo:table-cell>
+	      <fo:table-cell column-number="2" padding="1mm"><fo:block text-align="center">Valoare incasata</fo:block></fo:table-cell>
+	      <fo:table-cell column-number="3" padding="1mm"><fo:block text-align="center">BUC Incasate</fo:block></fo:table-cell>
+	      <fo:table-cell column-number="4" padding="1mm"><fo:block text-align="center">BUC Neincasate</fo:block></fo:table-cell>
+	      <fo:table-cell column-number="5" padding="1mm"><fo:block text-align="center">BUC Rate</fo:block></fo:table-cell>
+	    </fo:table-row>
+	    <fo:table-row border-style="solid">
+	      <fo:table-cell column-number="2" padding="1mm"><fo:block text-align="center">${doc.response.record["field[@name='valoare']"]?number?string("#,##0.00")}</fo:block></fo:table-cell>
+	      <fo:table-cell column-number="3" padding="1mm"><fo:block text-align="center">${doc.response.record["field[@name='bucIncasate']"]}</fo:block></fo:table-cell>
+	      <fo:table-cell column-number="4" padding="1mm"><fo:block text-align="center">${doc.response.record["field[@name='bucNeincasate']"]}</fo:block></fo:table-cell>
+	      <fo:table-cell column-number="5" padding="1mm"><fo:block text-align="center">${doc.response.record["field[@name='bucRate']"]}</fo:block></fo:table-cell>
+	    </fo:table-row>
+	  </fo:table-body>
+	</fo:table>
+
+	<fo:table width="100%" space-before="5mm">
+	  <fo:table-column column-number="1" border-left-style="solid" column-width="20%"/>
+	  <fo:table-column column-number="2" border-style="solid" column-width="80%"/>
+
+	  <fo:table-body>
+	    <fo:table-row border-style="solid">
+	      <fo:table-cell column-number="1" padding="1mm"><fo:block text-align="center"> TOTAL INCASAT /ZI</fo:block></fo:table-cell>
+	      <fo:table-cell column-number="2" padding="1mm"><fo:block text-align="left">${doc.response.record["field[@name='totalZi']"]?number?string("#,##0.00")}</fo:block></fo:table-cell>
+	    </fo:table-row>
+	  </fo:table-body>
+	</fo:table>
+
+	<fo:table width="100%" space-before="5mm">
+	  <fo:table-column column-number="1" border-left-style="solid" column-width="20%"/>
+	  <fo:table-column column-number="2" border-style="solid" column-width="80%"/>
+
+	  <fo:table-body>
+	    <fo:table-row border-style="solid">
+	      <fo:table-cell column-number="1" padding="1mm"><fo:block text-align="center"> TOTAL CUMULAT de la ${doc.response.record["field[@name='fromDate']"]}</fo:block></fo:table-cell>
+	      <fo:table-cell column-number="2" padding="1mm"><fo:block text-align="left">${doc.response.record["field[@name='totalZi']"]?number?string("#,##0.00")}</fo:block></fo:table-cell>
+	    </fo:table-row>
+	  </fo:table-body>
+	</fo:table>
+
+      <fo:table width="100%" space-before="5mm">
+	  <fo:table-column column-number="1" border-left-style="solid" column-width="25%"/>
+	  <fo:table-column column-number="2" border-left-style="solid" column-width="25%"/>
+	  <fo:table-column column-number="3" border-left-style="solid" column-width="25%"/>
+	  <fo:table-column column-number="4" border-style="solid" column-width="25%"/>
+
+	  <fo:table-body>
+	    <fo:table-row border-style="solid">
+	      <fo:table-cell column-number="1" padding="1mm"><fo:block text-align="center">USI CUMULATE de la ${doc.response.record["field[@name='fromDate']"]}</fo:block></fo:table-cell>
+	      <fo:table-cell column-number="2" padding="1mm"><fo:block text-align="center">BUC Incasate</fo:block></fo:table-cell>
+	      <fo:table-cell column-number="3" padding="1mm"><fo:block text-align="center">BUC Neincasate</fo:block></fo:table-cell>
+	      <fo:table-cell column-number="4" padding="1mm"><fo:block text-align="center">BUC Rate</fo:block></fo:table-cell>
+	    </fo:table-row>
+
+	    <fo:table-row border-style="solid">
+	      <fo:table-cell column-number="1" padding="1mm"><fo:block text-align="center">${doc.response.record["field[@name='totalBuc']"]}</fo:block></fo:table-cell>
+	      <fo:table-cell column-number="2" padding="1mm"><fo:block text-align="center">${doc.response.record["field[@name='totalBucIncasate']"]}</fo:block></fo:table-cell>
+	      <fo:table-cell column-number="3" padding="1mm"><fo:block text-align="center">${doc.response.record["field[@name='totalBucNeincasate']"]}</fo:block></fo:table-cell>
+	      <fo:table-cell column-number="4" padding="1mm"><fo:block text-align="center">${doc.response.record["field[@name='totalBucRate']"]}</fo:block></fo:table-cell>
+	    </fo:table-row>
+	  </fo:table-body>
+      </fo:table>
+      
+    </fo:block>
+    <!-- end main block -->
 
     </fo:flow>
     <!--/BODY-->

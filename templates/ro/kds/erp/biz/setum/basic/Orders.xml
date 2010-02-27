@@ -228,6 +228,22 @@
     <name>incasariToDate</name>
     <type>java.util.Date</type>
   </field>
+  <field>
+    <name>incasariValoare</name>
+    <type>java.math.BigDecimal</type>
+  </field>
+  <field>
+    <name>incasariBucIncasate</name>
+    <type>Integer</type>
+  </field>
+  <field>
+    <name>incasariBucNeincasate</name>
+    <type>Integer</type>
+  </field>
+  <field>
+    <name>incasariBucRate</name>
+    <type>Integer</type>
+  </field>
   <!-- Subform orderLine -->
 
   <field>
@@ -477,6 +493,7 @@
     <subform name="proforma"/>
     <subform name="invoice"/>
     <subform name="payment"/>
+    <subform name="incasari"/>
   </subforms>
 
 

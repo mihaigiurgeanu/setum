@@ -393,10 +393,12 @@ function open_livrari_fmontaje() {
 
 function open_proforma(type) {
    window.open(SERVER_URL + "/reports/proforma." + type);
+}function open_incasari(type) {
+   window.open(SERVER_URL + "/reports/incasari." + type);
 }
 
-function open_incasari(type) {
-   window.open(SERVER_URL + "/reports/incasari." + type);
+function open_incasari() {
+  window.openDialog("report-incasari.xul", "report-incasari", "chrome, resizable, scrollbars");
 }
 
 var theForm = new FormObject();

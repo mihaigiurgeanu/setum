@@ -36,7 +36,6 @@
 	     function open_jsconsole() {
 		 window.open("javascript:");
 	     }
-	     
     ]]>
   </script>
 

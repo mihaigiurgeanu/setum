@@ -41,6 +41,7 @@ public abstract class OrdersBean
     protected Integer proformaId;
     protected Integer invoiceId;
     protected Integer paymentId;
+    protected Integer incasariId;
     final static String FORM_VARNAME = "form";
     final static String RESPONSE_VARNAME = "response";
     final static String LOGIC_VARNAME = "logic";
@@ -132,6 +133,7 @@ public abstract class OrdersBean
         proformaId = null;
         invoiceId = null;
         paymentId = null;
+        incasariId = null;
 	
 	// set values of the calculated fields
 	computeCalculatedFields(null);
@@ -338,6 +340,46 @@ public abstract class OrdersBean
      * Save the current subform record into the database.
      */
     public abstract ResponseBean savePaymentData();
+
+    public ResponseBean newIncasariData() {
+        initIncasariFields();
+        ResponseBean r = new ResponseBean();
+        incasariId = null;
+        computeCalculatedFields(null);
+
+        r.addRecord();
+        copyFieldsToResponse(r);
+        return r;
+    }
+
+    protected abstract void initIncasariFields();
+
+    /**
+     * Load the data in the subform incasari
+     */
+    public ResponseBean loadIncasariData(Integer loadId) throws FinderException {
+
+	logger.log(BasicLevel.DEBUG, "Loading subform Incasari for id = " + loadId);
+	initIncasariFields();
+	incasariId = loadId;
+
+	ResponseBean r = loadIncasariFields();
+	computeCalculatedFields(null);
+	r.addRecord();
+	copyFieldsToResponse(r);
+	return r;
+    }
+
+    /**
+     * Loads the fields corresponding to the subform incasari
+     * from the database.
+     */
+    protected abstract ResponseBean loadIncasariFields() throws FinderException;
+
+    /**
+     * Save the current subform record into the database.
+     */
+    public abstract ResponseBean saveIncasariData();
 
 
 
@@ -1830,6 +1872,110 @@ public abstract class OrdersBean
 						// fields to the response also
 	   } catch (ScriptErrorException e) {
 	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the incasariToDate", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
+    public ResponseBean updateIncasariValoare(java.math.BigDecimal incasariValoare) {
+        ResponseBean r = new ResponseBean();
+	java.math.BigDecimal oldVal = form.getIncasariValoare();
+	form.setIncasariValoare(incasariValoare);
+	r.addRecord();
+	r.addField("incasariValoare", incasariValoare); // for number format
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".incasariValoare");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
+		script.setVar(OLDVAL_VARNAME, oldVal, java.math.BigDecimal.class);
+		script.setVar(FORM_VARNAME, form, OrdersForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the incasariValoare", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
+    public ResponseBean updateIncasariBucIncasate(Integer incasariBucIncasate) {
+        ResponseBean r = new ResponseBean();
+	Integer oldVal = form.getIncasariBucIncasate();
+	form.setIncasariBucIncasate(incasariBucIncasate);
+	r.addRecord();
+	r.addField("incasariBucIncasate", incasariBucIncasate); // for number format
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".incasariBucIncasate");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
+		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
+		script.setVar(FORM_VARNAME, form, OrdersForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the incasariBucIncasate", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
+    public ResponseBean updateIncasariBucNeincasate(Integer incasariBucNeincasate) {
+        ResponseBean r = new ResponseBean();
+	Integer oldVal = form.getIncasariBucNeincasate();
+	form.setIncasariBucNeincasate(incasariBucNeincasate);
+	r.addRecord();
+	r.addField("incasariBucNeincasate", incasariBucNeincasate); // for number format
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".incasariBucNeincasate");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
+		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
+		script.setVar(FORM_VARNAME, form, OrdersForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the incasariBucNeincasate", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
+    public ResponseBean updateIncasariBucRate(Integer incasariBucRate) {
+        ResponseBean r = new ResponseBean();
+	Integer oldVal = form.getIncasariBucRate();
+	form.setIncasariBucRate(incasariBucRate);
+	r.addRecord();
+	r.addField("incasariBucRate", incasariBucRate); // for number format
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".incasariBucRate");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
+		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
+		script.setVar(FORM_VARNAME, form, OrdersForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the incasariBucRate", e);
            }
         }
 	computeCalculatedFields(r);
@@ -3430,6 +3576,10 @@ public abstract class OrdersBean
 	r.addField("livrariCuMontaj", form.getLivrariCuMontaj());
 	r.addField("incasariFromDate", form.getIncasariFromDate());
 	r.addField("incasariToDate", form.getIncasariToDate());
+	r.addField("incasariValoare", form.getIncasariValoare());
+	r.addField("incasariBucIncasate", form.getIncasariBucIncasate());
+	r.addField("incasariBucNeincasate", form.getIncasariBucNeincasate());
+	r.addField("incasariBucRate", form.getIncasariBucRate());
 	r.addField("offerItemId", form.getOfferItemId());
 	r.addField("productName", form.getProductName());
 	r.addField("productCode", form.getProductCode());
@@ -3817,6 +3967,30 @@ public abstract class OrdersBean
 	    s.setVar("incasariToDate", form.getIncasariToDate(), java.util.Date.class);
 	} catch (ScriptErrorException e) {
 	    logger.log(BasicLevel.WARN, "Can not set the value of field: incasariToDate from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    s.setVar("incasariValoare", form.getIncasariValoare(), java.math.BigDecimal.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: incasariValoare from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    s.setVar("incasariBucIncasate", form.getIncasariBucIncasate(), Integer.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: incasariBucIncasate from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    s.setVar("incasariBucNeincasate", form.getIncasariBucNeincasate(), Integer.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: incasariBucNeincasate from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    s.setVar("incasariBucRate", form.getIncasariBucRate(), Integer.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: incasariBucRate from the script");
             logger.log(BasicLevel.DEBUG, e);
         }
 	try {
@@ -4745,6 +4919,50 @@ public abstract class OrdersBean
 	    }
 	} catch (ScriptErrorException e) {
 	    logger.log(BasicLevel.WARN, "Can not get the value of field: incasariToDate from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    field = s.getVar("incasariValoare", java.math.BigDecimal.class);
+	    if(!field.equals(form.getIncasariValoare())) {
+	        logger.log(BasicLevel.DEBUG, "Field incasariValoare modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setIncasariValoare((java.math.BigDecimal)field);
+	        r.addField("incasariValoare", (java.math.BigDecimal)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: incasariValoare from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    field = s.getVar("incasariBucIncasate", Integer.class);
+	    if(!field.equals(form.getIncasariBucIncasate())) {
+	        logger.log(BasicLevel.DEBUG, "Field incasariBucIncasate modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setIncasariBucIncasate((Integer)field);
+	        r.addField("incasariBucIncasate", (Integer)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: incasariBucIncasate from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    field = s.getVar("incasariBucNeincasate", Integer.class);
+	    if(!field.equals(form.getIncasariBucNeincasate())) {
+	        logger.log(BasicLevel.DEBUG, "Field incasariBucNeincasate modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setIncasariBucNeincasate((Integer)field);
+	        r.addField("incasariBucNeincasate", (Integer)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: incasariBucNeincasate from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    field = s.getVar("incasariBucRate", Integer.class);
+	    if(!field.equals(form.getIncasariBucRate())) {
+	        logger.log(BasicLevel.DEBUG, "Field incasariBucRate modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setIncasariBucRate((Integer)field);
+	        r.addField("incasariBucRate", (Integer)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: incasariBucRate from the script");
             logger.log(BasicLevel.DEBUG, e);
         }
 	try {

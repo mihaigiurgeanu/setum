@@ -19,4 +19,5 @@ public interface DailySummaryLocalHome extends javax.ejb.EJBLocalHome {
     public DailySummaryLocal create() throws CreateException;
     public DailySummaryLocal findByPrimaryKey(Integer id) throws FinderException;
     public Collection findByDate(String typeURI, Date day) throws FinderException;
+    public Collection findByDate(String typeURI, Date from, Date to) throws FinderException;
 }
