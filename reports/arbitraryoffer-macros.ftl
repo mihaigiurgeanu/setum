@@ -108,16 +108,17 @@ Usa metalica &#x00AB;${search(usa?parent, "subclass", usa["field[attribute::name
 	     <@system name="alteSisteme1"></@system>
 	     <@system name="alteSisteme2"></@system>
 
-	     <@benefs name="broasca">broasca</@benefs>
-	     <@benefs name="cilindru">cilindru</@benefs>
-	     <@benefs name="sild">sild</@benefs>
-	     <@benefs name="yalla">yalla</@benefs>
-	     <@benefs name="baraAntipanica">bara antipanica</@benefs>
-	     <@benefs name="maner">maner</@benefs>
-	     <@benefs name="selectorOrdine">selector ordine</@benefs>
-	     <@benefs name="amortizor">amortizor</@benefs>
-	     <@benefs name="alteSisteme1"></@benefs>
-	     <@benefs name="alteSisteme2"></@benefs>
+	     <@benefs name="broasca">broasca beneficiar</@benefs>
+	     <@benefs name="cilindru">cilindru beneficiar</@benefs>
+	     <@benefs name="sild">sild beneficiar</@benefs>
+	     <@benefs name="yalla">yalla beneficiar</@benefs>
+	     <@benefs name="vizor">vizor beneficiar</@benefs>
+	     <@benefs name="baraAntipanica">bara antipanica beneficiar</@benefs>
+	     <@benefs name="maner">maner beneficiar</@benefs>
+	     <@benefs name="selectorOrdine">selector ordine beneficiar</@benefs>
+	     <@benefs name="amortizor">amortizor beneficiar</@benefs>
+	     <@benefs name="alteSisteme1">sistem beneficiar</@benefs>
+	     <@benefs name="alteSisteme2">sisteme beneficiar</@benefs>
 	     &#x00BB;
 
 &#x00AB;finisata

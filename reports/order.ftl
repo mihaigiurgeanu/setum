@@ -762,6 +762,7 @@
 		      <@benefs name="cilindru">cilindru</@benefs>
 		      <@benefs name="sild">sild</@benefs>
 		      <@benefs name="yalla">yalla</@benefs>
+		      <@benefs name="vizor">vizor</@benefs>
 		      <@benefs name="baraAntipanica">bara antipanica</@benefs>
 		      <@benefs name="maner">maner</@benefs>
 		      <@benefs name="selectorOrdine">selector ordine</@benefs>
