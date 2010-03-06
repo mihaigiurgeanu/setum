@@ -1,7 +1,8 @@
-# benefAlteSisteme1.tcl
+# benefAlteSisteme1Tip.tcl
 
-if { [string length $benefAlteSisteme1] == 0 } { 
+if { $benefAlteSisteme1Tip == 0 } { 
     set benefAlteSisteme1Buc 0 
+    set benefAlteSisteme1 "" 
 } else {
    if { $benefAlteSisteme1Buc == 0 } { set benefAlteSisteme1Buc 1 }
 }

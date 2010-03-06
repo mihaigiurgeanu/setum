@@ -2863,6 +2863,84 @@ public abstract class UsaMetalica2KBean
 	computeCalculatedFields(r);
 	return r;
     }
+    public ResponseBean updateBenefVizor(String benefVizor) {
+        ResponseBean r = new ResponseBean();
+	String oldVal = form.getBenefVizor();
+	form.setBenefVizor(benefVizor);
+	r.addRecord();
+	r.addField("benefVizor", benefVizor); // for number format
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".benefVizor");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
+		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
+		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the benefVizor", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
+    public ResponseBean updateBenefVizorBuc(Integer benefVizorBuc) {
+        ResponseBean r = new ResponseBean();
+	Integer oldVal = form.getBenefVizorBuc();
+	form.setBenefVizorBuc(benefVizorBuc);
+	r.addRecord();
+	r.addField("benefVizorBuc", benefVizorBuc); // for number format
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".benefVizorBuc");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
+		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
+		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the benefVizorBuc", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
+    public ResponseBean updateBenefVizorTip(Integer benefVizorTip) {
+        ResponseBean r = new ResponseBean();
+	Integer oldVal = form.getBenefVizorTip();
+	form.setBenefVizorTip(benefVizorTip);
+	r.addRecord();
+	r.addField("benefVizorTip", benefVizorTip); // for number format
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".benefVizorTip");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
+		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
+		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the benefVizorTip", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
     public ResponseBean updateBenefBaraAntipanica(String benefBaraAntipanica) {
         ResponseBean r = new ResponseBean();
 	String oldVal = form.getBenefBaraAntipanica();
@@ -2993,6 +3071,32 @@ public abstract class UsaMetalica2KBean
 	computeCalculatedFields(r);
 	return r;
     }
+    public ResponseBean updateBenefManerTip(Integer benefManerTip) {
+        ResponseBean r = new ResponseBean();
+	Integer oldVal = form.getBenefManerTip();
+	form.setBenefManerTip(benefManerTip);
+	r.addRecord();
+	r.addField("benefManerTip", benefManerTip); // for number format
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".benefManerTip");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
+		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
+		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the benefManerTip", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
     public ResponseBean updateBenefSelectorOrdine(String benefSelectorOrdine) {
         ResponseBean r = new ResponseBean();
 	String oldVal = form.getBenefSelectorOrdine();
@@ -3040,6 +3144,32 @@ public abstract class UsaMetalica2KBean
 						// fields to the response also
 	   } catch (ScriptErrorException e) {
 	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the benefSelectorOrdineBuc", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
+    public ResponseBean updateBenefSelectorOrdineTip(Integer benefSelectorOrdineTip) {
+        ResponseBean r = new ResponseBean();
+	Integer oldVal = form.getBenefSelectorOrdineTip();
+	form.setBenefSelectorOrdineTip(benefSelectorOrdineTip);
+	r.addRecord();
+	r.addField("benefSelectorOrdineTip", benefSelectorOrdineTip); // for number format
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".benefSelectorOrdineTip");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
+		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
+		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the benefSelectorOrdineTip", e);
            }
         }
 	computeCalculatedFields(r);
@@ -3097,6 +3227,32 @@ public abstract class UsaMetalica2KBean
 	computeCalculatedFields(r);
 	return r;
     }
+    public ResponseBean updateBenefAmortizorTip(Integer benefAmortizorTip) {
+        ResponseBean r = new ResponseBean();
+	Integer oldVal = form.getBenefAmortizorTip();
+	form.setBenefAmortizorTip(benefAmortizorTip);
+	r.addRecord();
+	r.addField("benefAmortizorTip", benefAmortizorTip); // for number format
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".benefAmortizorTip");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
+		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
+		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the benefAmortizorTip", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
     public ResponseBean updateBenefAlteSisteme1(String benefAlteSisteme1) {
         ResponseBean r = new ResponseBean();
 	String oldVal = form.getBenefAlteSisteme1();
@@ -3149,6 +3305,32 @@ public abstract class UsaMetalica2KBean
 	computeCalculatedFields(r);
 	return r;
     }
+    public ResponseBean updateBenefAlteSisteme1Tip(Integer benefAlteSisteme1Tip) {
+        ResponseBean r = new ResponseBean();
+	Integer oldVal = form.getBenefAlteSisteme1Tip();
+	form.setBenefAlteSisteme1Tip(benefAlteSisteme1Tip);
+	r.addRecord();
+	r.addField("benefAlteSisteme1Tip", benefAlteSisteme1Tip); // for number format
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".benefAlteSisteme1Tip");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
+		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
+		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the benefAlteSisteme1Tip", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
     public ResponseBean updateBenefAlteSisteme2(String benefAlteSisteme2) {
         ResponseBean r = new ResponseBean();
 	String oldVal = form.getBenefAlteSisteme2();
@@ -3196,6 +3378,32 @@ public abstract class UsaMetalica2KBean
 						// fields to the response also
 	   } catch (ScriptErrorException e) {
 	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the benefAlteSisteme2Buc", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
+    public ResponseBean updateBenefAlteSisteme2Tip(Integer benefAlteSisteme2Tip) {
+        ResponseBean r = new ResponseBean();
+	Integer oldVal = form.getBenefAlteSisteme2Tip();
+	form.setBenefAlteSisteme2Tip(benefAlteSisteme2Tip);
+	r.addRecord();
+	r.addField("benefAlteSisteme2Tip", benefAlteSisteme2Tip); // for number format
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".benefAlteSisteme2Tip");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
+		script.setVar(OLDVAL_VARNAME, oldVal, Integer.class);
+		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the benefAlteSisteme2Tip", e);
            }
         }
 	computeCalculatedFields(r);
@@ -4670,19 +4878,27 @@ public abstract class UsaMetalica2KBean
 	r.addField("benefYalla", form.getBenefYalla());
 	r.addField("benefYallaBuc", form.getBenefYallaBuc());
 	r.addField("benefYallaTip", form.getBenefYallaTip());
+	r.addField("benefVizor", form.getBenefVizor());
+	r.addField("benefVizorBuc", form.getBenefVizorBuc());
+	r.addField("benefVizorTip", form.getBenefVizorTip());
 	r.addField("benefBaraAntipanica", form.getBenefBaraAntipanica());
 	r.addField("benefBaraAntipanicaBuc", form.getBenefBaraAntipanicaBuc());
 	r.addField("benefBaraAntipanicaTip", form.getBenefBaraAntipanicaTip());
 	r.addField("benefManer", form.getBenefManer());
 	r.addField("benefManerBuc", form.getBenefManerBuc());
+	r.addField("benefManerTip", form.getBenefManerTip());
 	r.addField("benefSelectorOrdine", form.getBenefSelectorOrdine());
 	r.addField("benefSelectorOrdineBuc", form.getBenefSelectorOrdineBuc());
+	r.addField("benefSelectorOrdineTip", form.getBenefSelectorOrdineTip());
 	r.addField("benefAmortizor", form.getBenefAmortizor());
 	r.addField("benefAmortizorBuc", form.getBenefAmortizorBuc());
+	r.addField("benefAmortizorTip", form.getBenefAmortizorTip());
 	r.addField("benefAlteSisteme1", form.getBenefAlteSisteme1());
 	r.addField("benefAlteSisteme1Buc", form.getBenefAlteSisteme1Buc());
+	r.addField("benefAlteSisteme1Tip", form.getBenefAlteSisteme1Tip());
 	r.addField("benefAlteSisteme2", form.getBenefAlteSisteme2());
 	r.addField("benefAlteSisteme2Buc", form.getBenefAlteSisteme2Buc());
+	r.addField("benefAlteSisteme2Tip", form.getBenefAlteSisteme2Tip());
 	r.addField("sistemeComment", form.getSistemeComment());
 	r.addField("intFinisajBlat", form.getIntFinisajBlat());
 	r.addField("intFinisajBlatId", form.getIntFinisajBlatId());
@@ -5339,6 +5555,24 @@ public abstract class UsaMetalica2KBean
             logger.log(BasicLevel.DEBUG, e);
         }
 	try {
+	    s.setVar("benefVizor", form.getBenefVizor(), String.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: benefVizor from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    s.setVar("benefVizorBuc", form.getBenefVizorBuc(), Integer.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: benefVizorBuc from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    s.setVar("benefVizorTip", form.getBenefVizorTip(), Integer.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: benefVizorTip from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
 	    s.setVar("benefBaraAntipanica", form.getBenefBaraAntipanica(), String.class);
 	} catch (ScriptErrorException e) {
 	    logger.log(BasicLevel.WARN, "Can not set the value of field: benefBaraAntipanica from the script");
@@ -5369,6 +5603,12 @@ public abstract class UsaMetalica2KBean
             logger.log(BasicLevel.DEBUG, e);
         }
 	try {
+	    s.setVar("benefManerTip", form.getBenefManerTip(), Integer.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: benefManerTip from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
 	    s.setVar("benefSelectorOrdine", form.getBenefSelectorOrdine(), String.class);
 	} catch (ScriptErrorException e) {
 	    logger.log(BasicLevel.WARN, "Can not set the value of field: benefSelectorOrdine from the script");
@@ -5378,6 +5618,12 @@ public abstract class UsaMetalica2KBean
 	    s.setVar("benefSelectorOrdineBuc", form.getBenefSelectorOrdineBuc(), Integer.class);
 	} catch (ScriptErrorException e) {
 	    logger.log(BasicLevel.WARN, "Can not set the value of field: benefSelectorOrdineBuc from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    s.setVar("benefSelectorOrdineTip", form.getBenefSelectorOrdineTip(), Integer.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: benefSelectorOrdineTip from the script");
             logger.log(BasicLevel.DEBUG, e);
         }
 	try {
@@ -5393,6 +5639,12 @@ public abstract class UsaMetalica2KBean
             logger.log(BasicLevel.DEBUG, e);
         }
 	try {
+	    s.setVar("benefAmortizorTip", form.getBenefAmortizorTip(), Integer.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: benefAmortizorTip from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
 	    s.setVar("benefAlteSisteme1", form.getBenefAlteSisteme1(), String.class);
 	} catch (ScriptErrorException e) {
 	    logger.log(BasicLevel.WARN, "Can not set the value of field: benefAlteSisteme1 from the script");
@@ -5405,6 +5657,12 @@ public abstract class UsaMetalica2KBean
             logger.log(BasicLevel.DEBUG, e);
         }
 	try {
+	    s.setVar("benefAlteSisteme1Tip", form.getBenefAlteSisteme1Tip(), Integer.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: benefAlteSisteme1Tip from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
 	    s.setVar("benefAlteSisteme2", form.getBenefAlteSisteme2(), String.class);
 	} catch (ScriptErrorException e) {
 	    logger.log(BasicLevel.WARN, "Can not set the value of field: benefAlteSisteme2 from the script");
@@ -5414,6 +5672,12 @@ public abstract class UsaMetalica2KBean
 	    s.setVar("benefAlteSisteme2Buc", form.getBenefAlteSisteme2Buc(), Integer.class);
 	} catch (ScriptErrorException e) {
 	    logger.log(BasicLevel.WARN, "Can not set the value of field: benefAlteSisteme2Buc from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    s.setVar("benefAlteSisteme2Tip", form.getBenefAlteSisteme2Tip(), Integer.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: benefAlteSisteme2Tip from the script");
             logger.log(BasicLevel.DEBUG, e);
         }
 	try {
@@ -6791,6 +7055,39 @@ public abstract class UsaMetalica2KBean
             logger.log(BasicLevel.DEBUG, e);
         }
 	try {
+	    field = s.getVar("benefVizor", String.class);
+	    if(!field.equals(form.getBenefVizor())) {
+	        logger.log(BasicLevel.DEBUG, "Field benefVizor modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setBenefVizor((String)field);
+	        r.addField("benefVizor", (String)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: benefVizor from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    field = s.getVar("benefVizorBuc", Integer.class);
+	    if(!field.equals(form.getBenefVizorBuc())) {
+	        logger.log(BasicLevel.DEBUG, "Field benefVizorBuc modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setBenefVizorBuc((Integer)field);
+	        r.addField("benefVizorBuc", (Integer)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: benefVizorBuc from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    field = s.getVar("benefVizorTip", Integer.class);
+	    if(!field.equals(form.getBenefVizorTip())) {
+	        logger.log(BasicLevel.DEBUG, "Field benefVizorTip modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setBenefVizorTip((Integer)field);
+	        r.addField("benefVizorTip", (Integer)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: benefVizorTip from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
 	    field = s.getVar("benefBaraAntipanica", String.class);
 	    if(!field.equals(form.getBenefBaraAntipanica())) {
 	        logger.log(BasicLevel.DEBUG, "Field benefBaraAntipanica modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
@@ -6846,6 +7143,17 @@ public abstract class UsaMetalica2KBean
             logger.log(BasicLevel.DEBUG, e);
         }
 	try {
+	    field = s.getVar("benefManerTip", Integer.class);
+	    if(!field.equals(form.getBenefManerTip())) {
+	        logger.log(BasicLevel.DEBUG, "Field benefManerTip modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setBenefManerTip((Integer)field);
+	        r.addField("benefManerTip", (Integer)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: benefManerTip from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
 	    field = s.getVar("benefSelectorOrdine", String.class);
 	    if(!field.equals(form.getBenefSelectorOrdine())) {
 	        logger.log(BasicLevel.DEBUG, "Field benefSelectorOrdine modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
@@ -6865,6 +7173,17 @@ public abstract class UsaMetalica2KBean
 	    }
 	} catch (ScriptErrorException e) {
 	    logger.log(BasicLevel.WARN, "Can not get the value of field: benefSelectorOrdineBuc from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    field = s.getVar("benefSelectorOrdineTip", Integer.class);
+	    if(!field.equals(form.getBenefSelectorOrdineTip())) {
+	        logger.log(BasicLevel.DEBUG, "Field benefSelectorOrdineTip modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setBenefSelectorOrdineTip((Integer)field);
+	        r.addField("benefSelectorOrdineTip", (Integer)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: benefSelectorOrdineTip from the script");
             logger.log(BasicLevel.DEBUG, e);
         }
 	try {
@@ -6890,6 +7209,17 @@ public abstract class UsaMetalica2KBean
             logger.log(BasicLevel.DEBUG, e);
         }
 	try {
+	    field = s.getVar("benefAmortizorTip", Integer.class);
+	    if(!field.equals(form.getBenefAmortizorTip())) {
+	        logger.log(BasicLevel.DEBUG, "Field benefAmortizorTip modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setBenefAmortizorTip((Integer)field);
+	        r.addField("benefAmortizorTip", (Integer)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: benefAmortizorTip from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
 	    field = s.getVar("benefAlteSisteme1", String.class);
 	    if(!field.equals(form.getBenefAlteSisteme1())) {
 	        logger.log(BasicLevel.DEBUG, "Field benefAlteSisteme1 modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
@@ -6912,6 +7242,17 @@ public abstract class UsaMetalica2KBean
             logger.log(BasicLevel.DEBUG, e);
         }
 	try {
+	    field = s.getVar("benefAlteSisteme1Tip", Integer.class);
+	    if(!field.equals(form.getBenefAlteSisteme1Tip())) {
+	        logger.log(BasicLevel.DEBUG, "Field benefAlteSisteme1Tip modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setBenefAlteSisteme1Tip((Integer)field);
+	        r.addField("benefAlteSisteme1Tip", (Integer)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: benefAlteSisteme1Tip from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
 	    field = s.getVar("benefAlteSisteme2", String.class);
 	    if(!field.equals(form.getBenefAlteSisteme2())) {
 	        logger.log(BasicLevel.DEBUG, "Field benefAlteSisteme2 modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
@@ -6931,6 +7272,17 @@ public abstract class UsaMetalica2KBean
 	    }
 	} catch (ScriptErrorException e) {
 	    logger.log(BasicLevel.WARN, "Can not get the value of field: benefAlteSisteme2Buc from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    field = s.getVar("benefAlteSisteme2Tip", Integer.class);
+	    if(!field.equals(form.getBenefAlteSisteme2Tip())) {
+	        logger.log(BasicLevel.DEBUG, "Field benefAlteSisteme2Tip modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setBenefAlteSisteme2Tip((Integer)field);
+	        r.addField("benefAlteSisteme2Tip", (Integer)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: benefAlteSisteme2Tip from the script");
             logger.log(BasicLevel.DEBUG, e);
         }
 	try {

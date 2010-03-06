@@ -126,19 +126,27 @@ public class UsaMetalica2KForm implements Serializable {
     String benefYalla;
     Integer benefYallaBuc;
     Integer benefYallaTip;
+    String benefVizor;
+    Integer benefVizorBuc;
+    Integer benefVizorTip;
     String benefBaraAntipanica;
     Integer benefBaraAntipanicaBuc;
     Integer benefBaraAntipanicaTip;
     String benefManer;
     Integer benefManerBuc;
+    Integer benefManerTip;
     String benefSelectorOrdine;
     Integer benefSelectorOrdineBuc;
+    Integer benefSelectorOrdineTip;
     String benefAmortizor;
     Integer benefAmortizorBuc;
+    Integer benefAmortizorTip;
     String benefAlteSisteme1;
     Integer benefAlteSisteme1Buc;
+    Integer benefAlteSisteme1Tip;
     String benefAlteSisteme2;
     Integer benefAlteSisteme2Buc;
+    Integer benefAlteSisteme2Tip;
     String sistemeComment;
     String intFinisajBlat;
     Integer intFinisajBlatId;
@@ -585,6 +593,18 @@ public class UsaMetalica2KForm implements Serializable {
 
 
 
+       this.benefVizor = "";
+
+
+
+       this.benefVizorBuc = new Integer(0);
+
+
+
+       this.benefVizorTip = new Integer(0);
+
+
+
        this.benefBaraAntipanica = "";
 
 
@@ -605,11 +625,19 @@ public class UsaMetalica2KForm implements Serializable {
 
 
 
+       this.benefManerTip = new Integer(0);
+
+
+
        this.benefSelectorOrdine = "";
 
 
 
        this.benefSelectorOrdineBuc = new Integer(0);
+
+
+
+       this.benefSelectorOrdineTip = new Integer(0);
 
 
 
@@ -621,6 +649,10 @@ public class UsaMetalica2KForm implements Serializable {
 
 
 
+       this.benefAmortizorTip = new Integer(0);
+
+
+
        this.benefAlteSisteme1 = "";
 
 
@@ -629,11 +661,19 @@ public class UsaMetalica2KForm implements Serializable {
 
 
 
+       this.benefAlteSisteme1Tip = new Integer(0);
+
+
+
        this.benefAlteSisteme2 = "";
 
 
 
        this.benefAlteSisteme2Buc = new Integer(0);
+
+
+
+       this.benefAlteSisteme2Tip = new Integer(0);
 
 
 
@@ -2308,6 +2348,51 @@ public class UsaMetalica2KForm implements Serializable {
 	}
     }
 
+    public void setBenefVizor(String newBenefVizor) {
+        this.benefVizor = newBenefVizor;
+    }
+
+    public String getBenefVizor() {
+        return benefVizor;
+    }
+
+    public void readBenefVizor(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("benefVizor");
+	if(a != null) {
+	    this.setBenefVizor(a.getStringValue());
+	}
+    }
+
+    public void setBenefVizorBuc(Integer newBenefVizorBuc) {
+        this.benefVizorBuc = newBenefVizorBuc;
+    }
+
+    public Integer getBenefVizorBuc() {
+        return benefVizorBuc;
+    }
+
+    public void readBenefVizorBuc(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("benefVizorBuc");
+	if(a != null) {
+	    this.setBenefVizorBuc(a.getIntValue());
+	}
+    }
+
+    public void setBenefVizorTip(Integer newBenefVizorTip) {
+        this.benefVizorTip = newBenefVizorTip;
+    }
+
+    public Integer getBenefVizorTip() {
+        return benefVizorTip;
+    }
+
+    public void readBenefVizorTip(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("benefVizorTip");
+	if(a != null) {
+	    this.setBenefVizorTip(a.getIntValue());
+	}
+    }
+
     public void setBenefBaraAntipanica(String newBenefBaraAntipanica) {
         this.benefBaraAntipanica = newBenefBaraAntipanica;
     }
@@ -2383,6 +2468,21 @@ public class UsaMetalica2KForm implements Serializable {
 	}
     }
 
+    public void setBenefManerTip(Integer newBenefManerTip) {
+        this.benefManerTip = newBenefManerTip;
+    }
+
+    public Integer getBenefManerTip() {
+        return benefManerTip;
+    }
+
+    public void readBenefManerTip(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("benefManerTip");
+	if(a != null) {
+	    this.setBenefManerTip(a.getIntValue());
+	}
+    }
+
     public void setBenefSelectorOrdine(String newBenefSelectorOrdine) {
         this.benefSelectorOrdine = newBenefSelectorOrdine;
     }
@@ -2410,6 +2510,21 @@ public class UsaMetalica2KForm implements Serializable {
 	AttributeLocal a = (AttributeLocal)attributes.get("benefSelectorOrdineBuc");
 	if(a != null) {
 	    this.setBenefSelectorOrdineBuc(a.getIntValue());
+	}
+    }
+
+    public void setBenefSelectorOrdineTip(Integer newBenefSelectorOrdineTip) {
+        this.benefSelectorOrdineTip = newBenefSelectorOrdineTip;
+    }
+
+    public Integer getBenefSelectorOrdineTip() {
+        return benefSelectorOrdineTip;
+    }
+
+    public void readBenefSelectorOrdineTip(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("benefSelectorOrdineTip");
+	if(a != null) {
+	    this.setBenefSelectorOrdineTip(a.getIntValue());
 	}
     }
 
@@ -2443,6 +2558,21 @@ public class UsaMetalica2KForm implements Serializable {
 	}
     }
 
+    public void setBenefAmortizorTip(Integer newBenefAmortizorTip) {
+        this.benefAmortizorTip = newBenefAmortizorTip;
+    }
+
+    public Integer getBenefAmortizorTip() {
+        return benefAmortizorTip;
+    }
+
+    public void readBenefAmortizorTip(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("benefAmortizorTip");
+	if(a != null) {
+	    this.setBenefAmortizorTip(a.getIntValue());
+	}
+    }
+
     public void setBenefAlteSisteme1(String newBenefAlteSisteme1) {
         this.benefAlteSisteme1 = newBenefAlteSisteme1;
     }
@@ -2473,6 +2603,21 @@ public class UsaMetalica2KForm implements Serializable {
 	}
     }
 
+    public void setBenefAlteSisteme1Tip(Integer newBenefAlteSisteme1Tip) {
+        this.benefAlteSisteme1Tip = newBenefAlteSisteme1Tip;
+    }
+
+    public Integer getBenefAlteSisteme1Tip() {
+        return benefAlteSisteme1Tip;
+    }
+
+    public void readBenefAlteSisteme1Tip(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("benefAlteSisteme1Tip");
+	if(a != null) {
+	    this.setBenefAlteSisteme1Tip(a.getIntValue());
+	}
+    }
+
     public void setBenefAlteSisteme2(String newBenefAlteSisteme2) {
         this.benefAlteSisteme2 = newBenefAlteSisteme2;
     }
@@ -2500,6 +2645,21 @@ public class UsaMetalica2KForm implements Serializable {
 	AttributeLocal a = (AttributeLocal)attributes.get("benefAlteSisteme2Buc");
 	if(a != null) {
 	    this.setBenefAlteSisteme2Buc(a.getIntValue());
+	}
+    }
+
+    public void setBenefAlteSisteme2Tip(Integer newBenefAlteSisteme2Tip) {
+        this.benefAlteSisteme2Tip = newBenefAlteSisteme2Tip;
+    }
+
+    public Integer getBenefAlteSisteme2Tip() {
+        return benefAlteSisteme2Tip;
+    }
+
+    public void readBenefAlteSisteme2Tip(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("benefAlteSisteme2Tip");
+	if(a != null) {
+	    this.setBenefAlteSisteme2Tip(a.getIntValue());
 	}
     }
 

@@ -33,7 +33,14 @@ set pret_tipBroascaBeneficiar [[product_by_code_safe 11020 $benefBroascaTip getP
 set pret_tipCilindruBeneficiar [[product_by_code_safe 11021 $benefCilindruTip getPrice1] doubleValue]
 set pret_tipSildBeneficiar [[product_by_code_safe 11023 $benefSildTip getPrice1] doubleValue]
 set pret_tipYallaBeneficiar [[product_by_code_safe 11022 $benefYallaTip getPrice1] doubleValue]
+set pret_tipVizorBeneficiar [[product_by_code_safe 11025 $benefVizorTip getPrice1] doubleValue]
 set pret_tipBaraAntipanicaBeneficiar [[product_by_code_safe 11024 $benefBaraAntipanicaTip getPrice1] doubleValue]
+set pret_tipManerBeneficiar [[product_by_code_safe 11026 $benefManerTip getPrice1] getPrice1] doubleValue]
+set pret_tipSelectorOrdineBeneficiar [[product_by_code_safe 11027 $benefSelectorOrdine getPrice1] doubleValue]
+set pret_tipAmortizorBeneficiar [[product_by_code_safe 11028 $benefAmortizorTip getPrice1] doubleValue]
+set pret_tipAlteSisteme1Beneficiar [[product_by_code_safe 11029 $benefAlteSisteme1Tip getPrice1] doubleValue]
+set pret_tipAlteSisteme2Beneficiar [[product_by_code_safe 11029 $benefAlteSisteme2Tip getPrice1] doubleValue]
+
 log "----1----"
 set pret_broasca [[product_by_id_safe $broascaId getPrice1] doubleValue]
 set montare_broasca [[product_by_id_safe $broascaId getPrice2] doubleValue]
@@ -132,9 +139,15 @@ set val_tipBroascaBeneficiar [expr $pret_tipBroascaBeneficiar * $benefBroascaBuc
 set val_tipCilindruBeneficiar [expr $pret_tipCilindruBeneficiar * $benefCilindruBuc]
 set val_tipSildBeneficiar [expr $pret_tipSildBeneficiar * $benefSildBuc]
 set val_tipYallaBeneficiar [expr $pret_tipYallaBeneficiar * $benefYallaBuc]
+set val_tipVizorBeneficiar  [expr $pret_tipVizorBeneficiar * $benefVizorBuc]
 set val_tipBaraAntipanicaBeneficiar [expr $pret_tipBaraAntipanicaBeneficiar * $benefBaraAntipanicaBuc]
+set val_tipManerBeneficiar  [expr $pret_tipManerBeneficiar * $benefManerBuc]
+set val_tipSelectorOrdineBeneficiar  [expr $pret_tipSelectorOrdineBeneficiar * $benefSelectorOrdineBuc]
+set val_tipAmortizorBeneficiar  [expr $pret_tipAmortizorBeneficiar * $benefAmortizorBuc]
+set val_tipAlteSisteme1Beneficiar  [expr $pret_tipAlteSisteme1Beneficiar * $benefAlteSisteme1Buc]
+set val_tipAlteSisteme2Beneficiar  [expr $pret_tipAlteSisteme2Beneficiar * $benefAlteSisteme2Buc]
 
-set price_expr "$sellPrice + $val_tipBroascaBeneficiar + $val_tipCilindruBeneficiar + $val_tipSildBeneficiar + $val_tipYallaBeneficiar + $val_tipBaraAntipanicaBeneficiar + $val_broasca + $val_cilindru + $val_copiatCheie + $val_sild + $val_rozeta + $val_maner + $val_yalla1 + $val_yalla2 + $val_baraAntipanica + $val_selectorOrdine + $val_amortizor + $val_manerSemicilindru + $val_vizor + $val_alteSisteme1 + $val_alteSisteme2"
+set price_expr "$sellPrice + $val_tipBroascaBeneficiar + $val_tipCilindruBeneficiar + $val_tipSildBeneficiar + $val_tipYallaBeneficiar + $val_tipVizorBeneficiar + $val_tipBaraAntipanicaBeneficiar + $val_tipManerBeneficiar + $val_tipSelectorOrdineBeneficiar + $val_tipAmortizorBeneficiar + $val_tipAlteSisteme1Beneficiar + $val_tipAlteSisteme2Beneficiar + $val_broasca + $val_cilindru + $val_copiatCheie + $val_sild + $val_rozeta + $val_maner + $val_yalla1 + $val_yalla2 + $val_baraAntipanica + $val_selectorOrdine + $val_amortizor + $val_manerSemicilindru + $val_vizor + $val_alteSisteme1 + $val_alteSisteme2"
 log "price3 v2: $price_expr"
 
 set sellPrice [expr $price_expr]

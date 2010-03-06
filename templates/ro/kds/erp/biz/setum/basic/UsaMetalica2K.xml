@@ -404,6 +404,18 @@
     <type>Integer</type>
   </field>
   <field>
+    <name>benefVizor</name>
+    <type>String</type>
+  </field>
+  <field>
+    <name>benefVizorBuc</name>
+    <type>Integer</type>
+  </field>
+  <field>
+    <name>benefVizorTip</name>
+    <type>Integer</type>
+  </field>
+  <field>
     <name>benefBaraAntipanica</name>
     <type>String</type>
   </field>
@@ -424,11 +436,19 @@
     <type>Integer</type>
   </field>
   <field>
+    <name>benefManerTip</name>
+    <type>Integer</type>
+  </field>
+  <field>
     <name>benefSelectorOrdine</name>
     <type>String</type>
   </field>
   <field>
     <name>benefSelectorOrdineBuc</name>
+    <type>Integer</type>
+  </field>
+  <field>
+    <name>benefSelectorOrdineTip</name>
     <type>Integer</type>
   </field>
   <field>
@@ -440,6 +460,10 @@
     <type>Integer</type>
   </field>
   <field>
+    <name>benefAmortizorTip</name>
+    <type>Integer</type>
+  </field>
+  <field>
     <name>benefAlteSisteme1</name>
     <type>String</type>
   </field>
@@ -448,11 +472,19 @@
     <type>Integer</type>
   </field>
   <field>
+    <name>benefAlteSisteme1Tip</name>
+    <type>Integer</type>
+  </field>
+  <field>
     <name>benefAlteSisteme2</name>
     <type>String</type>
   </field>
   <field>
     <name>benefAlteSisteme2Buc</name>
+    <type>Integer</type>
+  </field>
+  <field>
+    <name>benefAlteSisteme2Tip</name>
     <type>Integer</type>
   </field>
 

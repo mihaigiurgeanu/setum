@@ -1,7 +1,8 @@
-# benefAmortizor.tcl
+# benefAmortizorTip.tcl
 
-if { [string length $benefAmortizor] == 0 } { 
+if { $benefAmortizorTip == 0 } { 
     set benefAmortizorBuc 0 
+    set benefAmortizor "" 
 } else {
    if { $benefAmortizorBuc == 0 } { set benefAmortizorBuc 1 }
 }

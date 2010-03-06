@@ -193,19 +193,27 @@ public class UsaMetalica2KBeanImplementation
 	    attribs.add(ah.create("benefYalla", form.getBenefYalla()));
 	    attribs.add(ah.create("benefYallaBuc", form.getBenefYallaBuc()));
 	    attribs.add(ah.create("benefYallaTip", form.getBenefYallaTip()));
+	    attribs.add(ah.create("benefVizor", form.getBenefVizor()));
+	    attribs.add(ah.create("benefVizorBuc", form.getBenefVizorBuc()));
+	    attribs.add(ah.create("benefVizorTip", form.getBenefVizorTip()));
 	    attribs.add(ah.create("benefBaraAntipanica", form.getBenefBaraAntipanica()));
 	    attribs.add(ah.create("benefBaraAntipanicaTip", form.getBenefBaraAntipanicaTip()));
 	    attribs.add(ah.create("benefBaraAntipanicaBuc", form.getBenefBaraAntipanicaBuc()));
 	    attribs.add(ah.create("benefManer", form.getBenefManer()));
 	    attribs.add(ah.create("benefManerBuc", form.getBenefManerBuc()));
+	    attribs.add(ah.create("benefManerTip", form.getBenefManerTip()));
 	    attribs.add(ah.create("benefSelectorOrdine", form.getBenefSelectorOrdine()));
 	    attribs.add(ah.create("benefSelectorOrdineBuc", form.getBenefSelectorOrdineBuc()));
+	    attribs.add(ah.create("benefSelectorOrdineTip", form.getBenefSelectorOrdineTip()));
 	    attribs.add(ah.create("benefAmortizor", form.getBenefAmortizor()));
 	    attribs.add(ah.create("benefAmortizorBuc", form.getBenefAmortizorBuc()));
+	    attribs.add(ah.create("benefAmortizorTip", form.getBenefAmortizorTip()));
 	    attribs.add(ah.create("benefAlteSisteme1", form.getBenefAlteSisteme1()));
 	    attribs.add(ah.create("benefAlteSisteme1Buc", form.getBenefAlteSisteme1Buc()));
+	    attribs.add(ah.create("benefAlteSisteme1Tip", form.getBenefAlteSisteme1Tip()));
 	    attribs.add(ah.create("benefAlteSisteme2", form.getBenefAlteSisteme2()));
 	    attribs.add(ah.create("benefAlteSisteme2Buc", form.getBenefAlteSisteme2Buc()));
+	    attribs.add(ah.create("benefAlteSisteme2Tip", form.getBenefAlteSisteme2Tip()));
 
 	    attribs.add(ah.create("intFinisajBlatId", form.getIntFinisajBlatId()));
 	    attribs.add(ah.create("intFinisajTocId", form.getIntFinisajTocId()));
@@ -366,19 +374,27 @@ public class UsaMetalica2KBeanImplementation
 	    form.readBenefYalla(amap);
 	    form.readBenefYallaBuc(amap);
 	    form.readBenefYallaTip(amap);
+	    form.readBenefVizor(amap);
+	    form.readVizorBuc(amap);
+	    form.readBenefVizorTip(amap);
 	    form.readBenefBaraAntipanica(amap);
 	    form.readBenefBaraAntipanicaTip(amap);
 	    form.readBenefBaraAntipanicaBuc(amap);
 	    form.readBenefManer(amap);
 	    form.readBenefManerBuc(amap);
+	    form.readBenefManerTip(amap);
 	    form.readBenefSelectorOrdine(amap);
 	    form.readBenefSelectorOrdineBuc(amap);
+	    form.readBenefSelectorOrdineTip(amap);
 	    form.readBenefAmortizor(amap);
 	    form.readBenefAmortizorBuc(amap);
+	    form.readBenefAmortizorTip(amap);
 	    form.readBenefAlteSisteme1(amap);
 	    form.readBenefAlteSisteme1Buc(amap);
+	    form.readBenefAlteSisteme1Tip(amap);
 	    form.readBenefAlteSisteme2(amap);
 	    form.readBenefAlteSisteme2Buc(amap);
+	    form.readBenefAlteSisteme2Tip(amap);
 
 	    //form.readIntFinisajBlat(amap);
 	    form.readIntFinisajBlatId(amap);
@@ -573,7 +589,13 @@ public class UsaMetalica2KBeanImplementation
 	r.addValueList("benefCilindruTip", ValueLists.makeStdValueList(11021));
 	r.addValueList("benefSildTip", ValueLists.makeStdValueList(11023));
 	r.addValueList("benefYallaTip", ValueLists.makeStdValueList(11022));
+	r.addValueList("benefVizorTip", ValueLists.makeStdValueList(11025));
 	r.addValueList("benefBaraAntipanicaTip", ValueLists.makeStdValueList(11024));
+	r.addValueList("benefManerTip", ValueLists.makeStdValueList(11026));
+	r.addValueList("benefSelectorOrdine", ValueLists.makeStdValueList(11027));
+	r.addValueList("benefAmortizoTip", ValueLists.makeStdValueList(11028));
+	r.addValueList("benefAlteSisteme1Tip", ValueLists.makeStdValueList(11029));
+	r.addValueList("benefAlteSisteme2Tip", ValueLists.makeStdValueList(11029));
 
 	r.addValueList("broascaId", 
 		       ValueLists.makeVLForCategoryRef("broascaId"));
