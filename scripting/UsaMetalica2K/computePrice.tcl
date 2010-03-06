@@ -87,6 +87,9 @@ log "----end preturi sisteme----"
 if {[string equal -nocase $version "UA STAS"]} {
     log "UA STAS, pret fix = $pret_versiune"
     set price_expr "$pret_versiune + $pret_deschidere + $pret_parteDeschidere + $pret_pozitionareFoaie"
+} else if {[string equal -nocase -length 15 $version "UA DISTRIBUITOR"]} {
+    log "UA DISTRIBUITOR, pret fix = $pret_versiune"
+    set price_expr "$pret_versiune + $pret_deschidere + $pret_parteDeschidere + $pret_pozitionareFoaie"
 } else {
     log "Nu e UA STAS, calculez pret pe metrul patrat"
     set price_expr "$se * ($pret_subcod + $pret_versiune + $pret_material + $pret_foaieInterioara + $pret_foaieExterioara + $pret_foaieInterioaraSecundara + $pret_foaieExterioaraSecundara + $pret_izolatie) + $pret_deschidere + $pret_parteDeschidere + $pret_pozitionareFoaie"
