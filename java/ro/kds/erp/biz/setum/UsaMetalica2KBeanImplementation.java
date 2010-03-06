@@ -592,8 +592,8 @@ public class UsaMetalica2KBeanImplementation
 	r.addValueList("benefVizorTip", ValueLists.makeStdValueList(11025));
 	r.addValueList("benefBaraAntipanicaTip", ValueLists.makeStdValueList(11024));
 	r.addValueList("benefManerTip", ValueLists.makeStdValueList(11026));
-	r.addValueList("benefSelectorOrdine", ValueLists.makeStdValueList(11027));
-	r.addValueList("benefAmortizoTip", ValueLists.makeStdValueList(11028));
+	r.addValueList("benefSelectorOrdineTip", ValueLists.makeStdValueList(11027));
+	r.addValueList("benefAmortizorTip", ValueLists.makeStdValueList(11028));
 	r.addValueList("benefAlteSisteme1Tip", ValueLists.makeStdValueList(11029));
 	r.addValueList("benefAlteSisteme2Tip", ValueLists.makeStdValueList(11029));
 
