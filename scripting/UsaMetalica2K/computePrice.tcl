@@ -87,7 +87,7 @@ log "----end preturi sisteme----"
 if {[string equal -nocase $version "UA STAS"]} {
     log "UA STAS, pret fix = $pret_versiune"
     set price_expr "$pret_versiune + $pret_deschidere + $pret_parteDeschidere + $pret_pozitionareFoaie"
-} else if {[string equal -nocase -length 15 $version "UA DISTRIBUITOR"]} {
+} elseif {[string equal -nocase -length 15 $version "UA DISTRIBUITOR"]} {
     log "UA DISTRIBUITOR, pret fix = $pret_versiune"
     set price_expr "$pret_versiune + $pret_deschidere + $pret_parteDeschidere + $pret_pozitionareFoaie"
 } else {
