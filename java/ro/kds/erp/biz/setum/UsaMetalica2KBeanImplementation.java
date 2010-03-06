@@ -375,7 +375,7 @@ public class UsaMetalica2KBeanImplementation
 	    form.readBenefYallaBuc(amap);
 	    form.readBenefYallaTip(amap);
 	    form.readBenefVizor(amap);
-	    form.readVizorBuc(amap);
+	    form.readBenefVizorBuc(amap);
 	    form.readBenefVizorTip(amap);
 	    form.readBenefBaraAntipanica(amap);
 	    form.readBenefBaraAntipanicaTip(amap);
