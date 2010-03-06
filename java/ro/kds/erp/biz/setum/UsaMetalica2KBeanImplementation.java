@@ -471,7 +471,7 @@ public class UsaMetalica2KBeanImplementation
 // 	form.setDescription("");
  	form.setSubclass("A");
  	form.setVersion("UF");
- 	form.setMaterial(new Integer(1));
+ 	form.setMaterial(new Integer(0));
  	form.setK(new Integer(1));
 // 	form.setLg(new Double(0));
 // 	form.setHg(new Double(0));
