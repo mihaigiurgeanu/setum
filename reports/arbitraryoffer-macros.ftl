@@ -227,8 +227,13 @@ agrement tehnic nr. ${doc["child::response/child::record/child::field[attribute:
 	  </#list>
       </fo:block></fo:table-cell>
       <fo:table-cell column-number="6" border-style="solid" font-size="10pt" text-align="right"><fo:block>${cvnumber(item_usa["field[attribute::name='quantity']"])?string("#,##0.00")}</fo:block></fo:table-cell>
+      <#if montaj_separat == "true">
       <fo:table-cell column-number="7" border-style="solid" font-size="10pt" text-align="right"><fo:block>${(cvnumber(item_usa["field[attribute::name='price']"])/cursul?number)?string("#,##0.00")}</fo:block></fo:table-cell>
       <fo:table-cell column-number="8" border-style="solid" font-size="10pt" text-align="right"><fo:block>${(cvnumber(item_usa["field[attribute::name='lineValue']"])/cursul?number)?string("#,##0.00")}</fo:block></fo:table-cell>
+      <#else><#--montaj separat este false-->
+      <fo:table-cell column-number="7" border-style="solid" font-size="10pt" text-align="right"><fo:block>${(cvnumber(item_usa["field[attribute::name='priceCuMontaj']"])/cursul?number)?string("#,##0.00")}</fo:block></fo:table-cell>
+      <fo:table-cell column-number="8" border-style="solid" font-size="10pt" text-align="right"><fo:block>${(cvnumber(item_usa["field[attribute::name='lineValueCuMontaj']"])/cursul?number)?string("#,##0.00")}</fo:block></fo:table-cell>
+      </#if><#--sume linie/montaj separat sau nu-->
     </fo:table-row>
     </#list>
 

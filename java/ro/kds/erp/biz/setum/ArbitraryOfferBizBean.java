@@ -694,6 +694,7 @@ public class ArbitraryOfferBizBean extends ArbitraryOfferBean {
 	    oi.setProduct(p);
 	    oi.setPrice(p.getSellPrice()); // change it with the reference price
 	    oi.setQuantity(new BigDecimal(1));
+	    form.setMontajSeparat(new Boolean(true));
 
 	    oi.setBusinessCategory(businessCategory);
 
@@ -904,6 +905,11 @@ public class ArbitraryOfferBizBean extends ArbitraryOfferBean {
 		r.addRecord();
 		r.addField("productId", form.getProductId());
 		r.addField("price", form.getPrice().setScale(2, RoundingMode.HALF_UP));
+		r.addField("priceCuMontaj", 
+			   form.getPrice()
+			   .add((form.getValMontaj().add(form.getValTransport()))
+				.divide(form.getQuantity()))
+			   .setScale(2, RoundingMode.HALF_UP));
 		r.addField("vatPrice", form.getVatPrice().setScale(2, RoundingMode.HALF_UP));
 		r.addField("relativeGain", form.getRelativeGain());
 		r.addField("absoluteGain", form.getAbsoluteGain());
@@ -925,6 +931,10 @@ public class ArbitraryOfferBizBean extends ArbitraryOfferBean {
 		r.addField("quantity", form.getQuantity());
 		r.addField("lineSellValue", form.getQuantity().doubleValue() * form.getSellPrice().doubleValue());
 		r.addField("lineValue", form.getQuantity().doubleValue() * form.getPrice().doubleValue());
+		r.addField("lineValueCuMontaj", 
+			   form.getQuantity().doubleValue() * form.getPrice().doubleValue() + 
+			   form.getValMontaj().setScale(2, RoundingMode.HALF_UP).doubleValue() + 
+			   form.getValTransport().setScale(2, RoundingMode.HALF_UP).doubleValue());
 		r.addField("lineEntryValue", form.getQuantity().doubleValue() * form.getEntryPrice().doubleValue());
 		r.addField("lineVatValue", form.getQuantity().doubleValue() * form.getVatPrice().doubleValue());
 
