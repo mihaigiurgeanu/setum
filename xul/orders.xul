@@ -57,12 +57,12 @@ Lista comenzilor, creere/vizualizare/stergere
 
   <tabbox flex="1" id="maintab">
     <tabs>      
-      <tab label="Comenzi"/>
+      <tab label="Lista comenzi"/>
       <tab label="Comanda"/>
       <tab label="Linie"/>
-      <tab label="Proforme"/>
+      <tab label="Lista proforme"/>
       <tab label="Proforma"/>
-      <tab label="Facturi"/>
+      <tab label="Lista facturi"/>
       <tab label="Factura"/>
       <tab label="Plata"/>
     </tabs>
