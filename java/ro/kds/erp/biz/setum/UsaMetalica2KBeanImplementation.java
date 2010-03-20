@@ -490,7 +490,7 @@ public class UsaMetalica2KBeanImplementation
 //  	form.setIsolation(new Integer(1));
 //  	form.setOpeningDir(new Integer(1));
 //  	form.setOpeningSide(new Integer(1));
-//  	form.setFrameType(new Integer(1));
+  	form.setFrameType(new Integer(1));
 // 	form.setLFrame(new Double(0));
 // 	form.setBFrame(new Double(0));
 // 	form.setCFrame(new Double(0));
