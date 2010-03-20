@@ -1,0 +1,311 @@
+<?xml version="1.0"?>
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+<?xml-stylesheet href="setum.css" type="text/css"?>
+
+<dialog id="products-selection-dlg" title="Selectii de produse"
+	xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+	buttons="accept,cancel"
+	persist="screenX screenY width height"
+	ondialogaccept="return doOk()"
+	ondialogcancel="return doCancel();">
+
+  <script src="js/logging.js"/>
+  <script src="js/treeutils.js"/>
+  <script src="js/httpdata.js"/>
+  <script src="js/formobject.js"/>
+
+  <commandset>
+
+    <command id="newSelectionCmd" oncommand="add_selection()"/>
+    <command id="removeSelectionCmd" oncommand="remove_selection()"/>
+
+    <command id="addProductsCmd" oncommand="add_products()"/>
+    <command id="removeProductCmd" oncommand="remove_product()"/>
+    <command id="saveCmd" oncommand="save_selection()"/>
+
+
+  </commandset>
+
+  <tabbox flex="1" id="maintab">
+    <tabs>
+      <tab label="Selectii"/>
+      <tab label="Detalii selectie"/>
+    </tabs>
+
+    <tabpanels flex="1">
+
+
+      <!--
+	  LISTING
+      -->
+      <tabpanel id="maintab.listing" orient="vertical">
+	<hbox class="mytoolbar">
+	  <button id="add-selection-button" command="newSelectionCmd" label="Adauga"/>
+	  <button id="remove-selection-button" command="removeSelectionCmd" label="Sterge"/>
+	</hbox>
+
+	<hbox class="title">
+	  <label>Liste de valori</label>
+	</hbox>
+	<spacer height="header"/>
+
+
+	<tree id="selectionsListing"
+	      flex="1"
+	      enableColumnDrag="true"
+	      seltype="single"
+	      onclick="on_select_selection()"
+	      ondblclick="maintab.selectedIndex = 1"
+	      >
+	  
+	  <treecols>
+	    <treecol id="selection.code" label="Cod" flex="1"
+		     persist="ordinal width hidden"/>
+	    <splitter class="tree-splitter"/>
+	    <treecol id="selection.name" label="Nume" flex="1"
+		     persist="ordinal width hidden"/>
+	  </treecols>
+	  
+	  <treechildren/>
+	</tree>
+      </tabpanel>
+
+
+
+      <!--
+	  DETAILS
+	  contains form controls and a listing (tree) of products in the crt selection
+      -->
+      <tabpanel id="maintab.details" orient="vertical">
+	
+
+	<hbox class="mytoolbar">
+	  <button label="Salvare" command="saveCmd"/>
+	  <button label="Adauga ..." command="addProductsCmd"/>
+	  <button label="Sterge" command="removeProductCmd"/>
+	</hbox>
+	<hbox class="title">
+	  <label>Detalii selectie produse</label>
+	</hbox>
+	<spacer class="header"/>
+
+	<grid>
+	  <rows>
+	    <row>
+	      <label control="code" value="Cod:"/>
+	      <textbox id="code"/>
+	    </row>
+	    <row>
+	      <label control="name" value="Name:"/>
+	      <textbox id="name"/>
+	    </row>
+	    <row>
+	      <label control="description" value="Descriere:"/>
+	      <textbox id="description" multiline="true" rows="4" cols="60"/>
+	    </row>
+	  </rows>
+	</grid>
+
+	<tree id="productsListing"
+	      flex="1"
+	      enableColumnDrag="true"
+	      seltype="single"
+	      onclick="on_select_product()"
+	      ondblclick="">
+	  <treecols>
+	    <treecol id="product.code" label="Cod" flex="1"
+		     persist="ordinal width hidden"/>
+	    <splitter class="tree-splitter"/>
+	    <treecol id="product.name" label="Nume" flex="1"
+		     persist="ordinal width hidden"/>
+	  </treecols>
+
+	  <treechildren/>
+	</tree>
+      </tabpanel>
+
+    </tabpanels>
+  </tabbox>
+
+  <script language="JavaScript">
+    <![CDATA[
+	     // cache a reference to the maintab
+	     var maintab = document.getElementById("maintab");
+
+	     var selections;
+	     var selectionsListing = document.getElementById("selectionsListing");
+	     function load_selections() {
+		 selections = new RemoteDataView(theForm.do_link, "loadListing", "getListingLength");
+		 selectionsListing.view = make_treeview
+		     (selections,
+		      function (row, column) {
+		          var col;
+			  if(column.id) col = column.id; else col = column;
+			  if(selections)
+			    return selections.get_cell_text(row, col);
+		      });
+							
+	     }
+
+	     var products;
+	     var productsListing = document.getElementById("productsListing");
+	     function load_products() {
+		 /*
+		 products = new RemoteDataView(theForm.do_link, "loadProductsListing",
+					       "getProductsListingLength");
+		 productsListing.view = make_treeview
+		     (products,
+		      function (row, column) {
+		          var col;
+			  if(column.id) col = column.id; else col = column;
+			  if(products)
+			    return products.get_cell_text(row, col);
+		      });
+		 */
+
+		 var req = theForm.get_request();
+		 req.add("command", "productsListing");
+		 products = load_records(req);
+		 productsListing.view = make_treeview
+		     (products,
+		      function (row, column) {
+		          var col;
+			  if(column.id) col = column.id; else col = column;
+			  if(products)
+			    return products[row][col];
+		      });
+	     }
+
+	     // Process OK button
+	     function doOk() {
+		 for(var i = 0; i<selections.length; i++) {
+		     if(selectionsListing.view.selection.isSelected(i)) {
+			 window.arguments[0]
+			 .select(selections.get_cell_text(i, "selection.id"));
+		     }
+		 }
+		 window.arguments[0].select_end();
+		 return true;
+	     }
+
+	     // Process Cancel button
+	     function doCancel() {
+		 // just close the dialog
+		 return true;
+	     }
+
+
+
+
+	     // add a new selection
+	     function add_selection() {
+		 var req = theForm.get_request();
+		 req.add("command", "newFormData");
+		 theForm.post_request(req);
+		 load_products();
+		 maintab.selectedIndex = 1;
+	     }
+
+	     // remove a selection
+	     function remove_selection() {
+		 var req = theForm.get_request();
+		 req.add("command", "removeSelection");
+		 theForm.post_request(req);
+		 load_selections();
+	     }
+
+	     // opens a dialog to select new products to add
+	     function add_products() {
+		 var select_handler = {
+		     theForm: theForm,
+		     select: function update_product(productId) {
+			 var req = this.theForm.get_request();
+			 req.add("command", "addProduct");
+			 req.add("param0", productId);
+			 this.theForm.post_request(req);
+		     },
+		     select_end: products_added
+		 };
+
+		 window.openDialog("select-usastd.xul", "usistdselction", "chrome,modal", select_handler);
+	     }
+
+	     // removes the selected product
+	     function remove_product() {
+		 var req = theForm.get_request();
+		 req.add("command", "removeProduct");
+		 theForm.post_request(req);
+		 load_products();		 
+	     }
+
+	     // callback function used to add one product to the current selection
+	     function add_one_product(productId) {
+		 var req = theForm.get_request();
+		 req.add("command", "addProduct");
+		 req.add("param0", productId);
+		 theForm.post_request(req);
+	     }
+
+	     // callback function called after a series of products have been added.
+	     // add_products opens a dialog; the user selects more products; the dialog
+	     // calls add_one_product(productId) for each product selected; at the end,
+	     // the dialog calls products_added() to signal that all products selected
+	     // by the user were added.
+	     function products_added() {
+		 load_products();
+	     }
+
+	     // method called at click event on the tree that displays the listing
+	     // of the selections
+	     function on_select_selection() {
+		 var selid = selections.get_cell_text(selectionsListing.currentIndex,
+						      "selection.id");
+		 var req = theForm.get_request();
+		 req.add("command", "loadFormData");
+		 req.add("param0", selid);
+		 theForm.post_request(req);
+		 load_products();
+	     }
+
+	     // method called at click event on the tree that displays the listing
+	     // of the products in the current selection
+	     function on_select_product() {
+		 /*
+		 var selid = products.
+		 get_cell_text(productsListing.currentIndex,
+			       "product.id");
+		 */
+		 var selid = products[productsListing.currentIndex]["product.id"];
+		 var req = theForm.get_request();
+		 req.add("command", "selectProduct");
+		 req.add("param0", selid);
+		 theForm.post_request(req);
+	     }
+
+	     // save the changes on the edited selection
+	     function save_selection() {
+		 var req = theForm.get_request();
+		 req.add("command", "saveFormData");
+		 theForm.post_save_request(req);
+		 load_selections();
+		 maintab.selectedIndex = 0;
+		 
+	     }
+
+	     var theForm = new FormObject();
+	     theForm.do_link="/usi-std-selections.do";
+	     theForm.text_fields = new Array(
+					     "code",
+					     "name",
+					     "description"
+					     );
+
+	     theForm.combo_fields = new Array();
+	     theForm.radio_fields = new Array();
+	     
+	     theForm.setupEventListeners();
+
+	     load_selections();
+    ]]>
+  </script>
+</dialog>

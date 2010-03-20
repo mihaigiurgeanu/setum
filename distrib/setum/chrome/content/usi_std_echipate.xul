@@ -1,0 +1,148 @@
+<?xml version="1.0"?>
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+<?xml-stylesheet href="setum.css" type="text/css"?>
+
+<window
+    id="lista-preturi-usi-standard-win"
+    title="Lista Preturi Usi Standard"
+    persist="screenX screenY width height"
+    orient="horizontal"
+    xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+
+  <script src="js/logging.js"/>
+  <script src="js/treeutils.js"/>
+  <script src="js/httpdata.js"/>
+  <script src="js/formobject.js"/>
+
+
+  <commandset>
+    <command id="command-save" oncommand="save()"/>
+    <command id="command-add" oncommand="addnew()"/>
+    <command id="command-remove" oncommand="remove_selected_product()"/>
+  </commandset>
+
+
+  <tabbox flex="1" id="maintab">
+    <tabs>
+      <tab label="Lista usi"/>
+      <tab label="Echipare usa"/>
+    </tabs>
+    
+    <tabpanels flex="1">
+      
+      <tabpanel id="lista-usi" orient="vertical">
+	<hbox class="mytoolbar">
+	  <button id="addnew-button" command="command-add" label="Adaugare usa"/>
+	  <button id="remove-button" command="command-remove" label="Stergere usa"/>
+	</hbox>
+	<hbox class="title">
+	  <label>Usi standard echipate</label>
+	</hbox>
+	<spacer class="header"/>
+
+	<tree id="listingUsi" flex="1" enableColumnDrag="true" perisist="ordinal width height hidden" seltype="single" 
+	      ondblclick="document.getElementById('maintab').selectedIndex=1;" 
+	      onselect="theForm.load_form(usi.get_cell_text(this.currentIndex, 'id'))">
+	  <treecols>
+	    <treecol id="col-usa" label="Usa" flex="1"/>
+	    <splitter class="tree-splitter"/>
+	    <treecol id="col-broasca" label="Broasca" flex="1"/>
+	    <splitter class="tree-splitter"/>
+	    <treecol id="col-cilindru" label="Cilindru" flex="1"/>
+	    <splitter class="tree-splitter"/>
+	    <treecol id="col-sild" label="Sild" flex="1"/>
+	    <splitter class="tree-splitter"/>
+	    <treecol id="col-yalla" label="Yalla" flex="1"/>
+	    <splitter class="tree-splitter"/>
+	    <treecol id="col-vizor" label="Vizor" flex="1"/>
+	    <splitter class="tree-splitter"/>
+	  </treecols>
+	  <treechildren/>
+	</tree>
+
+	
+      </tabpanel>
+      
+      <tabpanel id="echipare-usa" orient="vertical" style="overflow:auto">
+
+	<hbox class="mytoolbar">
+	  <button label="Salveaza modificari" id="button-save" command="command-save"/>
+	</hbox>
+	<hbox class="title">
+	  <label>Echipare usa standard</label>
+	</hbox>
+	<spacer class="header"/>
+	<description>
+	  Definirea combinatiilor de usi si sisteme disponibile in oferta.
+	</description>
+	<spacer class="header"/>
+	<grid flex="1">
+	  <columns>
+	    <column flex="0"/>
+	    <column flex="1"/>
+	  </columns>
+
+	  <rows>
+	    <row>
+	      <label control="usaId" value="Usa:" />
+	      <menulist id="usaId">
+		<menupopup id="usaId-popup"/>
+	      </menulist>
+	    </row>
+	    <row>
+	      <label control="broascaId" value="Broasca:" />
+	      <menulist id="broascaId">
+		<menupopup id="broascaId-popup">
+		</menupopup>
+	      </menulist>
+	    </row>
+	    <row>
+	      <label control="cilindruId" value="Cilindru:" />
+	      <menulist id="cilindruId">
+		<menupopup id="cilindruId-popup">
+		</menupopup>
+	      </menulist>
+	    </row>
+	    <row>
+	      <label control="sildId" value="Sild:" />
+	      <menulist id="sildId">
+		<menupopup id="sildId-popup">
+		</menupopup>
+	      </menulist>
+	    </row>
+	    <row>
+	      <label control="yallaId" value="Yalla:" />
+	      <menulist id="yallaId">
+		<menupopup id="yallaId-popup">
+		</menupopup>
+	      </menulist>
+	    </row>
+	    <row>
+	      <label control="vizorId" value="Vizor:" />
+	      <menulist id="vizorId">
+		<menupopup id="vizorId-popup">
+		</menupopup>
+	      </menulist>
+	    </row>
+	    <row>
+	      <label control="code" value="Cod:"/>
+	      <textbox id="code"/>
+	    </row>
+	    <row>
+	      <label control="name" value="Cod magazin:"/>
+	      <textbox id="name"/>
+	    </row>
+	  </rows>
+	</grid>
+	<radiogroup id="discontinued" orient="horizontal">
+	  <radio id="discontinued.0" value="0" label="Produsul disponibil"/>
+	  <radio id="discontinued.1" value="1" label="NU este disponibil"/>
+	</radiogroup>
+
+      </tabpanel>
+
+    </tabpanels>
+  </tabbox>	
+
+  <script src="usi_std_echipate.js"/>
+</window>

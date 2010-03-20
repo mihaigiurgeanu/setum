@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="iso-8859-2"?>
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+<?xml-stylesheet href="setum.css" type="text/css"?>
+<?xml-stylesheet href="bindings/dateselector.css" type="text/css"?>
+
+
+<dialog
+    id="report-livrari-dlg"
+    title="Livrari cu montaje"
+    xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+    orient="vertical"
+    buttons="accept"
+    ondialogaccept="return true;"
+    debug="false">
+
+  <script src="js/logging.js"/>
+  <script src="js/treeutils.js"/>
+  <script src="js/httpdata.js"/>
+  <script src="js/formobject.js"/>
+
+  <commandset>
+    <command id="command-livrari"		oncommand="reportLivrari()"/>
+    <command id="command-cu-montaj"		oncommand="reportLivrariCuMontaj()"/>
+    <command id="command-fara-montaj"		oncommand="reportLivrariFaraMontaj()"/>
+  </commandset>
+  <hbox>
+  <grid>
+    <rows>
+      <row>
+	<label controls="dataStart" value="De la data:"/>
+	<datebox id="livrariRStart" yearstart="2001" yearend="2051"/>
+      </row>
+      <row>
+	<label controls="livrariREnd" value="Pana la data:"/>
+	<datebox id="livrariREnd" yearstart="2001" yearend="2051"/>
+      </row>
+    </rows>
+  </grid>
+  <vbox>
+    <button label="Livrari" command="command-livrari"/>
+    <button label="Doar cu montaj" command="command-cu-montaj"/>
+    <button label="Fara montaj" command="command-fara-montaj"/>
+  </vbox>
+  </hbox>
+  <script language="javascript">
+    <![CDATA[
+
+
+	     var theForm = new FormObject();
+	     theForm.do_link = "/orders.do";
+	     theForm.text_fields = new Array("livrariRStart", "livrariREnd");
+	     theForm.setupEventListeners();
+
+             var req = theForm.get_request();
+	     req.add("command", "initLivrariReport");
+	     req.add("param0", "yes");
+	     theForm.post_request(req);	     
+	     
+	     function reportLivrari() {
+	       window.open(SERVER_URL + "/reports/livrari.pdf")
+	       return true;
+	     }
+
+	     function reportLivrariCuMontaj() {
+	       window.open(SERVER_URL + "/reports/livrariCuMontaj.pdf")
+	       return true;
+	     }
+
+	     function reportLivrariFaraMontaj() {
+	       window.open(SERVER_URL + "/reports/livrariFaraMontaj.pdf")
+	       return true;
+	     }
+
+
+	     
+
+    ]]></script>
+    
+</dialog>
+

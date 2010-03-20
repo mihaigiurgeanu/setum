@@ -1,0 +1,331 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<xbl:bindings 
+    xmlns:xbl="http://www.mozilla.org/xbl"
+    xmlns:xul="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+    xmlns:html="http://www.w3.org/1999/xhtml">
+
+
+<!-- oncommand="document.getAnonymousElementByAttribute(this.parentNode.parentNode.parentNode,'class','popupbox').show()" -->
+
+  <xbl:binding id="datebox">
+    <xbl:content>
+      <xul:hbox>
+	<xul:box anonid="year"	class="_dateselector_year" xbl:inherits="yearstart,yearend"/>
+	<xul:box anonid="month" class="_dateselector_month"/>
+	<xul:box anonid="day"	class="_dateselector_day"/>
+      </xul:hbox>
+
+    </xbl:content>
+
+
+    <xbl:handlers>
+      <xbl:handler event="command">
+	event.preventBubble();
+
+	var selDay = this.day;
+	var selMonth = this.month;
+	var selYear = this.year;
+
+	this.day = selDay;
+	this.month = selMonth;
+	this.year = selYear;
+	this.setAttribute("value", this.year + "-" + this.month + "-" + this.day);
+
+	var changeEvent = document.createEvent("Events");
+	changeEvent.initEvent("change", true, true);
+	this.dispatchEvent(changeEvent);
+      </xbl:handler>
+    </xbl:handlers>
+
+    <xbl:implementation>
+      <xbl:constructor>
+	//alert(this.getAttribute("value"));
+	this.value = this.getAttribute("value");
+      </xbl:constructor>
+
+      <xbl:field name="yearbox">
+	document.getAnonymousElementByAttribute(this, "anonid", "year");
+      </xbl:field>
+
+      <xbl:field name="daybox">
+	document.getAnonymousElementByAttribute(this, "anonid", "day");
+      </xbl:field>
+
+      <xbl:field name="monthbox">
+	document.getAnonymousElementByAttribute(this, "anonid", "month");
+      </xbl:field>
+
+      <xbl:property name="day">
+	<xbl:getter>
+	  return this.daybox.value;
+	</xbl:getter>
+	<xbl:setter>
+	  this.daybox.value = val;
+	  this.setAttribute("value", new Date(this.year, this.month - 1, this.day));
+	</xbl:setter>
+      </xbl:property>
+
+      <xbl:property name="month">
+	<xbl:getter>
+	  return this.monthbox.value;
+	</xbl:getter>
+	<xbl:setter>
+	  this.daybox.month = val;
+	  this.monthbox.value = val;
+	  this.setAttribute("value", new Date(this.year, this.month - 1, this.day));
+	</xbl:setter>
+      </xbl:property>
+
+      <xbl:property name="year">
+	<xbl:getter>
+	  return this.yearbox.value;
+	</xbl:getter>
+	<xbl:setter>
+	  this.daybox.year = val;
+	  this.yearbox.value = val;
+	  this.setAttribute("value", new Date(this.year, this.month - 1, this.day));
+	</xbl:setter>
+      </xbl:property>
+
+
+      <xbl:property name="value">
+	<xbl:getter>
+	  return this.getAttribute("value");
+	</xbl:getter>
+	<xbl:setter>
+	  var valueDate = this.parseDate(val);
+	  this.daybox.year = valueDate.getFullYear();
+	  this.daybox.month = valueDate.getMonth() + 1;
+	  this.daybox.value = valueDate.getDate();
+	  this.monthbox.value = valueDate.getMonth() + 1;
+	  this.yearbox.value = valueDate.getFullYear();
+	</xbl:setter>
+      </xbl:property>
+
+
+      <!-- Parses a date having format YYYY-MM-DD -->
+      <xbl:method name="parseDate">
+	<xbl:parameter name="strDate"/>
+	  
+	<xbl:body>
+	  <![CDATA[
+		var year = strDate.substr(0, 4);
+		var month = strDate.substr(5, 2);
+		var day = strDate.substr(8, 2);
+
+		return new Date(year, month - 1, day);
+	  ]]>
+	</xbl:body>
+      </xbl:method>
+    </xbl:implementation>
+
+  </xbl:binding>
+
+  <xbl:binding id="popupbox" display="xul:popup">
+    <xbl:content>
+      <!--
+      <xul:box hidden="true">
+	<xbl:children/>
+      </xul:box>
+      -->
+
+      <xul:popup anonid="popup">
+	<xbl:children/>
+      </xul:popup>
+
+    </xbl:content>
+
+
+    <xbl:implementation>
+
+      <xbl:method name="show">
+	<xbl:body><![CDATA[
+
+	var box = document.getAnonymousElementByAttribute(this, "anonid", "popup");
+	alert(box.localName);
+	box.showPopup(box.parentNode, -1, -1, "popup");
+	  
+	]]>
+	</xbl:body>
+      </xbl:method>
+
+
+      <xbl:method name="hide">	  
+	<xbl:body><![CDATA[
+
+	var box = document.getAnonymousNodes(this)[0];
+	box.hidePopup();
+	  
+	]]>
+	</xbl:body>
+      </xbl:method>
+
+      <!--
+      <xbl:method name="show">
+	<xbl:body><![CDATA[
+	var box = document.getAnonymousNodes(this)[0];
+	box.hidden=false;
+	]]></xbl:body>
+      </xbl:method>
+      <xbl:method name="hide">
+	<xbl:body><![CDATA[
+	var box = document.getAnonymousNodes(this)[0];
+	box.hidden="true";
+	]]></xbl:body>
+      </xbl:method>
+
+      -->
+
+    </xbl:implementation>
+
+  </xbl:binding>
+
+  <xbl:binding id="dateselector-monthyear">
+    <xbl:content>
+      <xul:vbox>
+	<xul:hbox>
+	  <xul:box class="_dateselector_year" xbl:inherits="yearstart,yearend"/>
+	  <xul:box class="_dateselector_month"/>
+	</xul:hbox>
+      </xul:vbox>
+    </xbl:content>
+  </xbl:binding>
+
+
+
+  <xbl:binding id="dateselector-year">
+    <xbl:content>
+      <xul:menulist xbl:inherits="value">
+	<xul:menupopup/>
+      </xul:menulist>
+    </xbl:content>
+
+    <xbl:implementation>
+      <xbl:constructor>
+	<![CDATA[
+	var yearstart = this.getAttribute("yearstart");
+	var yearend = this.getAttribute("yearend");
+
+	for(var year = yearstart; year < yearend; year++) {
+		this.yearbox.appendItem(year, year);
+	}
+	]]>
+      </xbl:constructor>
+
+      <xbl:field name="yearbox">
+	document.getAnonymousNodes(this)[0];
+      </xbl:field>
+
+      <xbl:property name="value" 
+		    onset="return this.yearbox.value = val;" 
+		    onget="return this.yearbox.value;"/>
+    </xbl:implementation>
+  </xbl:binding>
+
+
+  <xbl:binding id="dateselector-month">
+    <xbl:content>
+      <xul:menulist xbl:inherits="value">
+	<xul:menupopup>
+	  <xul:menuitem value="1" label="Ian"/>
+	  <xul:menuitem value="2" label="Feb"/>
+	  <xul:menuitem value="3" label="Mar"/>
+	  <xul:menuitem value="4" label="Apr"/>
+	  <xul:menuitem value="5" label="Mai"/>
+	  <xul:menuitem value="6" label="Iun" class="nonempty"/>
+	  <xul:menuitem value="7" label="Iul"/>
+	  <xul:menuitem value="8" label="Aug"/>
+	  <xul:menuitem value="9" label="Sep"/>
+	  <xul:menuitem value="10" label="Oct"/>
+	  <xul:menuitem value="11" label="Nov"/>
+	  <xul:menuitem value="12" label="Dec"/>	
+	</xul:menupopup>
+      </xul:menulist>
+    </xbl:content>
+
+    <xbl:implementation>
+      <xbl:field name="monthbox">
+	document.getAnonymousNodes(this)[0];
+      </xbl:field>
+
+
+      <xbl:property name="value" 
+		    onset="return this.monthbox.value = val;" 
+		    onget="return this.monthbox.value;"/>
+    </xbl:implementation>
+  </xbl:binding>
+
+
+
+
+  <xbl:binding id="dateselector-day">
+
+    <xbl:content>
+      <xul:menulist xbl:inherits="value">
+	<xul:menupopup/>
+      </xul:menulist>
+    </xbl:content>
+
+
+
+    <xbl:implementation>
+
+      <xbl:field name="daybox" readonly="true">
+	getAnonymousNodes(this)[0];
+      </xbl:field>
+
+      <xbl:field name="week_days" readonly="true">
+	new Array("Du", "Lu", "Ma", "Mi", "Jo", "Vi", "Sa");
+      </xbl:field>
+
+      <xbl:method name="listDays">
+	<xbl:parameter name="year"/>
+	<xbl:parameter name="month"/>
+
+	<xbl:body>
+	  <![CDATA[
+		var crtValue = this.value;
+		var pastLastDate = new Date( year, month-1, 32 );
+		var lastDayOfMonth = 32 - pastLastDate.getDate();
+
+		this.daybox.removeAllItems();
+		for(var i = 1; i<= lastDayOfMonth; i++) {
+			var idate = new Date(year, month-1, i);
+			this.daybox.appendItem(i, i, this.week_days[idate.getDay()]);
+		}
+
+		if(crtValue < lastDayOfMonth) {
+			this.value = crtValue;
+		} else {
+			this.value = lastDayOfMonth;
+		}
+		return lastDayOfMonth;
+	  ]]>
+	</xbl:body>
+      </xbl:method>
+
+      <xbl:property name="year" onget="return this.getAttribute('year')">
+	<xbl:setter>
+	  this.setAttribute("year", val);
+	  return this.listDays(this.getAttribute('year'), this.getAttribute('month'));
+	</xbl:setter>
+      </xbl:property>
+
+      <xbl:property name="month" onget="return this.getAttribute('month')">
+	<xbl:setter>
+	  this.setAttribute("month", val);
+	  return this.listDays(this.getAttribute('year'), this.getAttribute('month'));
+	</xbl:setter>
+      </xbl:property>
+
+
+      <xbl:property name="value" 
+		    onset="return this.daybox.value = val;" 
+		    onget="return this.daybox.value;"/>
+
+    </xbl:implementation>
+
+  </xbl:binding>
+</xbl:bindings>

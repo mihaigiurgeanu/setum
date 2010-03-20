@@ -1,0 +1,709 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+<?xml-stylesheet href="setum.css" type="text/css"?>
+<?xml-stylesheet href="bindings/dateselector.css" type="text/css"?>
+
+<!-- orders.xul
+
+Lista comenzilor, creere/vizualizare/stergere
+
+-->
+
+
+<window
+    id="orders-win"
+    title="Comandare"
+    persist="screenX screenY width height"
+    orient="vertical"
+    xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+    style="overflow:auto">
+
+  <script src="js/logging.js"/>
+  <script src="js/treeutils.js"/>
+  <script src="js/httpdata.js"/>
+  <script src="js/formobject.js"/>
+  
+
+  <commandset>
+    <command id="command-add_order"		oncommand="on_new_order()"/>
+    <command id="command-remove_order"		oncommand="theForm.ask(REMOVE_ORDER_MSG, on_delete_order)"/>
+
+    <command id="command-save_order"		oncommand="on_save()"/>
+    <command id="command-add_orderItem"		oncommand="on_select_offerItems()"/>
+    <command id="command-remove_orderItem"	oncommand="on_delete_orderItem()"/>
+    <command id="command-select_client"		oncommand="on_select_client();" />
+
+    <command id="command-save_item"		oncommand="on_save_orderItem()"/>
+
+    <command id="command-add_proforma"		oncommand="on_add_proforma()"/>
+    <command id="command-save_proforma"		oncommand="on_save_proforma()"/>
+    <command id="command-remove_proforma"	oncommand="on_remove_proforma()"/>
+    <command id="command-print_proforma"	oncommand="open_proforma('pdf')"/>
+
+    <command id="command-add_invoice"		oncommand="on_new_invoice()"/>
+    <command id="command-remove_invoice"	oncommand="theForm.ask(REMOVE_INVOICE_MSG, on_remove_invoice)"/>
+    <command id="command-save_invoice"		oncommand="on_save_invoice()"/>
+    
+    <command id="command-add_payment"		oncommand="on_new_payment();"/>
+    <command id="command-remove_payment"	oncommand="theForm.ask(REMOVE_PAYMENT_MSG, on_remove_payment)"/>
+    <command id="command-save_payment"		oncommand="on_save_payment()"/>
+    <command id="command-pdf-report"		oncommand="open_report('pdf')"/>
+    <command id="command-pv-report"		oncommand="open_pv('pdf')"/>
+    <comand id="command-livrari-montaje"	oncommand="open_livrari_montaje()"/>
+    <comand id="command-livrari-fmontaje"	oncommand="open_livrari_fmontaje()"/>
+    <command id="command-incasari"		oncommand="open_incasari()"/>
+  </commandset>
+
+
+  <tabbox flex="1" id="maintab">
+    <tabs>      
+      <tab label="Lista comenzi"/>
+      <tab label="Comanda"/>
+      <tab label="Linie"/>
+      <tab label="Lista proforme"/>
+      <tab label="Proforma"/>
+      <tab label="Lista facturi"/>
+      <tab label="Factura"/>
+      <tab label="Plata"/>
+    </tabs>
+
+    <tabpanels flex="1">
+      
+      <tabpanel id="maintab.listing" orient="vertical"
+		style="border:thin outset white">
+	<hbox class="mytoolbar">
+	  <button label="Adauga comanda" command="command-add_order"/>
+	  <button label="Sterge comanda" command="command-remove_order"/>
+	  <button label="Raport Livrari" command="command-livrari-montaje"/>
+	  <!--<button label="Livrari f/ montaje" command="command-livrari-fmontaje"/>-->
+	  <button label="Incasari zilnice" command="command-incasari"/>
+	</hbox>
+	<hbox class="title">
+	  <label>Comenzi</label>
+	</hbox>
+	<spacer class="header"/>
+
+	<tree id="ordersListing"
+	      flex="1"
+	      enableColumnDrag="true"
+	      persist="ordinal width height hidden" 
+	      seltype="single"
+	      onselect="on_select_order()"
+	      ondblclick="maintab.selectedIndex=1">
+	  <treecols>
+	    <treecol id="orders.no" label="Nr." flex="1"/>
+	    <splitter class="tree-splitter"/>
+	    <treecol id="orders.date" label="Data" flex="1"/>
+	    <splitter class="tree-splitter"/>
+	    <treecol id="orders.client" label="Clientul" flex="1"/>
+	    <splitter class="tree-splitter"/>
+	    <treecol id="orders.localitate" label="Localitate" flex="1"/>
+	    <splitter class="tree-splitter"/>
+	    <treecol id="orders.distanta" label="Distanta" flex="1"/>
+	    <splitter class="tree-splitter"/>
+	    <treecol id="orders.avans" label="Avans" flex="1"/>
+	    <splitter class="tree-splitter"/>
+	    <treecol id="orders.termenLivrare" label="Livrare" flex="1"/>
+	  </treecols>
+	  <treechildren/>
+	</tree>
+      </tabpanel> <!-- maintab.listing -->
+
+
+
+
+
+
+
+      <tabpanel id="maintab.order" orient="vertical"
+		style="border:thin outset white">
+	<hbox class="mytoolbar">
+	  <button label="Adauga produs" command="command-add_orderItem"/>
+	  <button label="Sterge produs" command="command-remove_orderItem"/>
+	  <button label="Adauga factura" command="command-add_invoice"/>
+	  <button label="Salveaza" command="command-save_order"/>
+	  <button label="PDF" command="command-pdf-report"/>
+	  <button label="PV" command="command-pv-report"/>
+	</hbox>
+	<hbox class="title">
+	  <label>Detalii comanda</label>
+	</hbox>
+	<spacer class="header"/>
+
+	<hbox>
+
+	  <grid>
+	    <columns>
+	      <column/>
+	      <column/>
+	    </columns>
+	    <rows>
+	      <row>
+		<button label="Client:" command="command-select_client"/>
+		<vbox>
+		  <textbox id="clientName" readonly="true"/>
+		</vbox>
+	      </row>
+
+	      <row>
+		<label control="number" value="Numar:"/>
+		<textbox id="number"/>
+	      </row>
+
+	      <row>
+		<label control="date" value="din Data:"/>
+		<datebox yearstart="2001" yearend="2051" id="date"/>
+	      </row>
+
+	      <row>
+		<label control="montaj" value="Montaj:"/>
+		<menulist id="montaj">
+		  <menupopup id="montaj-popup"/>
+		</menulist>
+	      </row>
+
+	      <row>
+		<label control="localitate" value="Localitate:"/>
+		<menulist id="localitate">
+		  <menupopup id="localitate-popup"/>
+		</menulist>
+	      </row>
+	      <row>
+		<label control="localitateAlta" value="Alta:"/>
+		<textbox id="localitateAlta"/>
+	      </row>
+
+	      <row>
+		<label control="tipDemontare" value="La adresa se demonteaza"/>
+		<menulist id="tipDemontare">
+		  <menupopup id="tipDemontare-popup"/>
+		</menulist>
+	      </row>
+	      <!--
+	      <row>
+		<label control="distanta" value="Distanta:"/>
+		<textbox id="distanta"/>
+	      </row>
+	      -->
+	      <row>
+		<label control="deliveryHour" value="Programare ora:"/>
+		<textbox id="deliveryHour"/>
+	      </row>
+	      <row>
+		<label control="attribute1" value="Semneaza:"/>
+		<textbox id="attribute1"/>
+	      </row>
+	    </rows>
+	  </grid>
+
+
+
+	  <grid>
+	    <columns>
+	      <column/>
+	      <column/>
+	    </columns>
+	    <rows>
+	      <row>
+		<label control="termenLivrare" value="Termen livrare:"/>
+		<datebox id="termenLivrare" yearstart="2001" yearend="2051"/>
+	      </row>
+	      <row>
+		<label control="termenLivrare1" value="Data montaj:"/>
+		<datebox id="termenLivrare1" readonly="true" yearstart="2001" yearend="2051"/>
+	      </row>
+	      <row>
+		<label control="adresaMontaj" value="Adresa montaj:"/>
+		<textbox id="adresaMontaj" multiline="true" rows="2"/>
+	      </row>
+	      <row>
+		<label control="adresaReper" value="Reper:"/>
+		<textbox id="adresaReper"/>
+	      </row>
+	      <row>
+		<label control="telefon" value="Mobil:"/>
+		<textbox id="telefon"/>
+	      </row>
+	      <row>
+		<label control="contact" value="Pers. contact:"/>
+		<textbox id="contact"/>
+	      </row>
+	    </rows>
+	  </grid>
+
+
+
+	  <grid>
+	    <columns>
+	      <column/>
+	      <column/>
+	    </columns>
+	    <rows>
+	      <row>
+		<label control="totalCurrency" value="Val. fara TVA:"/>
+		<textbox id="totalCurrency" readonly="true"/>
+	      </row>
+	      <row>
+		<label control="totalTvaCurrency" value="Val. cu TVA:"/>
+		<textbox id="totalTvaCurrency" readonly="true"/>
+	      </row>
+	      <row>
+		<label control="discount" value="Discount (%):"/>
+		<textbox id="discount"/>
+	      </row>
+	      <row>
+		<label control="totalFinalCurrency" value="Total fara TVA:"/>
+		<textbox id="totalFinalCurrency"/>
+	      </row>
+	      <row>
+		<label control="currencyInvoicedAmount" value="Facturat:"/>
+		<textbox id="currencyInvoicedAmount" readonly="true"/>
+	      </row>
+	      <row>
+		<label control="totalFinalTvaCurrency" value="Total cu TVA"/>
+		<textbox id="totalFinalTvaCurrency" readonly="true"/>
+	      </row>
+	      <row>
+		<label control="avans" value="Avans:"/>
+		<textbox id="avans"/>
+	      </row>
+	      <row>
+		<!--
+		<label control="achitatCu" value="Achitat cu:"/>
+		<textbox id="achitatCu"/>
+		-->
+	      </row>
+	      <row>
+		<label control="payedAmountCurrency" value="Platit:"/>
+		<textbox id="payedAmountCurrency" readonly="true"/>
+	      </row>
+	      <!--
+	      <row>
+		<label control="valoareAvans" value="Valoare avans:"/>
+		<textbox id="valoareAvans" readonly="true"/>
+	      </row>
+	      -->
+	      <row>
+		<label control="currencyDiferenta" value="Rest de plata:"/>
+		<textbox id="currencyDiferenta" readonly="true"/>
+	      </row>
+	      <row>
+		<label control="attribute5" value="Valuta:"/>
+		<textbox id="attribute5"/>
+	      </row>
+	      <row>
+		<label control="attribute4" value="Cursul:"/>
+		<textbox id="attribute4"/>
+	      </row>
+	    </rows>
+	  </grid>
+	</hbox>
+
+	<vbox>
+	  <label control="observatii" value="Observatii montaj:"/>
+	  <textbox id="observatii" flex="1" multiline="true" rows="4"/>
+	</vbox>
+
+
+	<tree id="lineItemsListing"
+	      flex="1"
+	      enableColumnDrag="true"
+	      seltype="single"
+	      onselect="on_select_lineItem()"
+	      ondblclick="maintab.selectedIndex=2">
+	  <treecols>
+	    <treecol id="orderItems.offerNo" label="Oferta" flex="1"
+		     persist="ordinal width hidden"/>
+	    <splitter class="tree-splitter"/>
+	    <treecol id="orderItems.offerDate" label="din data" flex="1"
+		     persist="ordinal width hidden"/>
+	    <splitter class="tree-splitter"/>
+	    <treecol id="orderItems.productName" label="Produsul" flex="1"
+		     persist="ordinal width hidden"/>
+	    <splitter class="tree-splitter"/>
+	    <treecol id="orderItems.productCode" label="Cod produs" flex="1"
+		     persist="ordinal width hidden"/>
+	    <splitter class="tree-splitter"/>
+	    <treecol id="orderItems.quantity" label="Cantitatea" flex="1"
+		     persist="ordinal width hidden"/>
+	    <splitter class="tree-splitter"/>
+	    <treecol id="orderItems.price" label="Pret" flex="1"
+		     persist="ordinal width hidden"/>
+	    <splitter class="tree-splitter"/>
+	    <treecol id="orderItems.valoareMontaj" label="Montaj" flex="1"
+		     persist="ordinal width hidden"/>
+	    <splitter class="tree-splitter"/>
+	    <treecol id="orderItems.valoareTransport" label="Transport" flex="1"
+		     persist="ordinal width hidden"/>
+	  </treecols>
+	  <treechildren/>
+	</tree>
+
+      </tabpanel>
+
+
+
+
+
+      <tabpanel id="maintab.orderLine" orient="vertical"
+		style="border:thin outset white" flex="1">
+	<hbox class="mytoolbar">
+	  <button label="Salveaza" command="command-save_item"/>
+	</hbox>
+	<hbox class="title">
+	  <label>Linie de comanda</label>
+	</hbox>
+	<spacer class="header"/>
+	
+	<grid>
+	  <columns>
+	    <column/>
+	    <column/>
+	  </columns>
+	  <rows>
+	    <row>
+	      <label control="productCode" value="Cod produs:"/>
+	      <textbox id="productCode" readonly="true"/>
+	    </row>
+	    <row>
+	      <label control="productName" value="Nume produs:"/>
+	      <textbox id="productName" readonly="true"/>
+	    </row>
+	    <row>
+	      <label control="price" value="Pret vazare:"/>
+	      <textbox id="price"/>
+	    </row>
+	    <row>
+	      <label control="productPrice" value="Pret ofertat:"/>
+	      <textbox id="productPrice" readonly="true"/>
+	    </row>
+	    <row>
+	      <label control="priceRatio" value="Corectie pret(%):"/>
+	      <textbox id="priceRatio" />
+	    </row>
+	    <row>
+	      <label control="quantity" value="Cantiate:"/>
+	      <textbox id="quantity"/>
+	    </row>
+	    <row>
+	      <label control="value" value="Valoarea:"/>
+	      <textbox id="value" readonly="true"/>	      
+	    </row>
+	    <row>
+	      <label control="tax" value="TVA:"/>
+	      <textbox id="tax" readonly="true"/>
+	    </row>
+	  </rows>
+	</grid>
+	
+	
+
+      </tabpanel>
+
+
+      <tabpanel id="maintab.proforma" orient="vertical"
+		style="border:thin outset white">
+
+	<hbox class="mytoolbar">
+	  <button label="Adauga proforma" command="command-add_proforma"/>
+	  <!--<button label="Sterge proforma" command="command-remove_proforma"/>-->
+	  <button label="Tipareste proforma" command="command-print_proforma"/>
+	</hbox>
+
+
+	<hbox class="title">
+	  <label>Lista proforme</label>
+	</hbox>
+	<spacer class="header"/>
+
+
+	<tree id="proformasListing"
+	      flex="1"
+	      enableColumnDrag="true"
+	      seltype="single"
+	      onselect="on_select_proforma()"
+	      ondblclick="maintab.selectedIndex=4">
+	  <treecols>
+	    <treecol id="proforma.number" label="Numar" flex="1"
+		     persist="ordinal width hidden"/>
+
+	    <splitter class="tree-splitter"/>
+	    <treecol id="proforma.date" label="Data" flex="1"
+		     persist="ordinal width hidden"/>
+
+	    <splitter class="tree-splitter"/>
+	    <treecol id="proforma.role" label="Tip" flex="1"
+		     persist="ordinal width hidden"/>
+
+	    <splitter class="tree-splitter"/>
+	    <treecol id="proforma.amount" label="Suma" flex="1"
+		     persist="ordinal width hidden"/>
+	  </treecols>
+
+	  <treechildren/>
+
+	</tree>
+      </tabpanel> <!-- maintab.proforma -->
+
+      <tabpanel id="maintab.proformaDetails" orient="vertical"
+		style="border:thin outset white">
+
+	<hbox class="mytoolbar">
+	  <button label="Salveaza" command="command-save_proforma"/>
+	  <button label="Tipareste proforma" command="command-print_proforma"/>
+	</hbox>
+
+	<hbox class="title">
+	  <label>Proforma</label>
+	</hbox>
+	
+	<grid>
+	  <columns>
+	    <column/>
+	    <column/>
+	    <column/>
+	  </columns>
+
+	  <rows>
+	    <row>
+	      <label control="proformaNumber" value="Numar proforma:"/>
+	      <textbox id="proformaNumber"/>
+	    </row>
+	    <row>
+	      <label control="proformaDate" value="Data proforma:"/>
+	      <datebox id="proformaDate" yearstart="2001" yearend="2051"/>
+	    </row>
+	    <row>
+	      <label control="proformaRole" value="Tip proforma:"/>
+	      <menulist id="proformaRole">
+		<menupopup id="proformaRole-popup"/>
+	      </menulist>
+	    </row>
+	    <row>
+	      <label control="proformaContract" value="Contract:"/>
+	      <textbox id="proformaContract"/>
+	    </row>
+	    <row>
+	      <label control="proformaObiectiv" value="Obiectiv:"/>
+	      <textbox id="proformaObiectiv"/>
+	      <textbox id="proformaCurrency" readonly="true"/>
+	    </row>
+	    <row>
+	      <label control="proformaAmount" value="Suma fara TVA:"/>
+	      <textbox id="proformaAmount"/>
+	      <textbox id="proformaAmountCurrency" readonly="true"/>
+	    </row>
+	    <row>
+	      <label control="profromaTax" value="TVA:"/>
+	      <textbox id="proformaTax"/>
+	      <textbox id="proformaTaxCurrency" readonly="true"/>
+	    </row>
+	    <row>
+	      <label control="proformaTotal" value="Total:"/>
+	      <textbox id="proformaTotal"/>
+	      <textbox id="proformaTotalCurrency" readonly="true"/>
+	    </row>
+	    <row>
+	      <label control="proformaPercent" value="Procent:"/>
+	      <hbox>
+		<textbox id="proformaPercent"/>
+		<checkbox id="proformaUsePercent" label="Afiseza procent"/>
+	      </hbox>
+	    </row>
+	    <row>
+	      <label control="proformaComment" value="Observatii"/>
+	      <textbox id="proformaComment" multiline="true" maxlength="2000"
+		       rows="4"/>
+	    </row>
+	    <row> 
+	      <label control="proformaExchangeRate" value="Curs:"/>
+	      <textbox id="proformaExchangeRate"/>
+	    </row>
+	    
+	  </rows>
+	</grid>
+      </tabpanel> <!-- /maintab.proformaDetails -->
+
+
+
+
+
+      <tabpanel id="maintab.invoices" orient="vertical"
+		style="border:thin outset white">
+
+	<hbox class="mytoolbar">
+	  <button label="Adauga factura" command="command-add_invoice"/>
+	  <button label="Sterge factura" command="command-remove_invoice"/>
+	</hbox>
+
+
+	<hbox class="title">
+	  <label>Facturi</label>
+	</hbox>
+	<spacer class="header"/>
+
+
+	<tree id="invoicesListing"
+	      flex="1"
+	      enableColumnDrag="true"
+	      seltype="single"
+	      onselect="on_select_invoice()"
+	      ondblclick="maintab.selectedIndex=6">
+	  <treecols>
+	    <treecol id="invoices.number" label="Numar" flex="1"
+		     persist="ordinal width hidden"/>
+
+	    <splitter class="tree-splitter"/>
+	    <treecol id="invoices.date" label="Data" flex="1"
+		     persist="ordinal width hidden"/>
+
+	    <splitter class="tree-splitter"/>
+	    <treecol id="invoices.role" label="Tip" flex="1"
+		     persist="ordinal width hidden"/>
+
+	    <splitter class="tree-splitter"/>
+	    <treecol id="invoices.amount" label="Suma" flex="1"
+		     persist="ordinal width hidden"/>
+	  </treecols>
+
+	  <treechildren/>
+
+	</tree>
+      </tabpanel> <!-- maintab.invoices -->
+
+      <tabpanel id="maintab.invoiceDetails" orient="vertical"
+		style="border:thin outset white">
+
+	<hbox class="mytoolbar">
+	  <button label="Adauga plata" command="command-add_payment"/>
+	  <button label="Sterge plata" command="command-remove_payment"/>
+	  <button label="Salveaza" command="command-save_invoice"/>
+	</hbox>
+
+	<hbox class="title">
+	  <label>Factura</label>
+	</hbox>
+	
+	<grid>
+	  <columns>
+	    <column/>
+	    <column/>
+	  </columns>
+
+	  <rows>
+	    <row>
+	      <label control="invoiceNumber" value="Numar factura:"/>
+	      <textbox id="invoiceNumber"/>
+	    </row>
+	    <row>
+	      <label control="invoiceDate" value="Data facutra:"/>
+	      <datebox id="invoiceDate" yearstart="2001" yearend="2051"/>
+	    </row>
+	    <row>
+	      <label control="invoiceRole" value="Tip factura:"/>
+	      <menulist id="invoiceRole">
+		<menupopup id="invoiceRole-popup"/>
+	      </menulist>
+	    </row>
+	    <row>
+	      <label control="invoiceAmount" value="Suma fara TVA:"/>
+	      <textbox id="invoiceAmount"/>
+	    </row>
+	    <row>
+	      <label control="invoiceTax" value="TVA:"/>
+	      <textbox id="invoiceTax"/>
+	    </row>
+	    <row>
+	      <label control="invoiceTotal" value="Total:"/>
+	      <textbox id="invoiceTotal"/>
+	    </row>
+	    <row> 
+	      <label control="invoiceExchangeRate" value="Curs:"/>
+	      <textbox id="invoiceExchangeRate"/>
+	    </row>
+	    <row>
+	      <label control="invoicePayed" value="Suma achitata:"/>
+	      <textbox id="invoicePayed" readonly="true"/>
+	    </row>
+	    <row>
+	      <label control="invoiceUnpayed" value="Suma restanta:"/>
+	      <textbox id="invoiceUnpayed" readonly="true"/>
+	    </row>
+	    
+	  </rows>
+	</grid>
+
+
+	<tree id="paymentsListing"
+	      flex="1"
+	      enableColumnDrag="1"
+	      seltype="single"
+	      onselect="on_select_payment()"
+	      ondblclick="maintab.selectedIndex=7">
+	  
+	  <treecols>
+	    <treecol id="payments.number" label="Numar" flex="1"
+		     persist="ordinal width hidden"/>
+
+	    <splitter class="tree-splitter"/>
+	    <treecol id="payments.date" label="Data" flex="1"
+		     persist="ordinal width hidden"/>
+
+	    <splitter class="tree-splitter"/>
+	    <treecol id="payments.amount" label="Suma" flex="1"
+		     persist="ordinal width hidden"/>
+
+	  </treecols>
+
+	  <treechildren/>
+
+
+	</tree>
+      </tabpanel> <!-- maintab.invoiceDetails -->
+
+      <tabpanel id="maintab.paymentDetails" orient="vertical"
+		style="border:thin outset white">
+	
+
+	<hbox class="mytoolbar">
+	  <button label="Salveaza" command="command-save_payment"/>
+	</hbox>
+
+	<hbox class="title">
+	  <label>Detalii plata</label>
+	</hbox>
+
+	<grid>
+	  <columns>
+	    <column/>
+	    <column/>
+	  </columns>
+
+	  <rows>
+	    <row>
+	      <label control="paymentNumber" value="Numar document:"/>
+	      <textbox id="paymentNumber"/>
+	    </row>
+	    <row>
+	      <label control="paymentDate" value="Data document:"/>
+	      <datebox id="paymentDate" yearstart="2001" yearend="2051"/>
+	    </row>
+	    <row>
+	      <label control="paymentAmount" value="Suma:"/>
+	      <textbox id="paymentAmount"/>
+	    </row>
+	    <row> 
+	      <label control="paymentExchangeRate" value="Curs:"/>
+	      <textbox id="paymentExchangeRate"/>
+	    </row>
+	  </rows>
+	</grid>
+      </tabpanel>
+    </tabpanels>
+  </tabbox>
+
+
+  <script src="orders.js"/>
+
+
+</window>

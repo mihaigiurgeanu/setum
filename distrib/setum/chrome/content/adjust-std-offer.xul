@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="iso-8859-2"?>
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+
+
+<!--
+adjust-std-offer.xul
+
+Dialog for updating the prices of a standard offer.
+
+-->
+
+
+<dialog id="adjust-std-offer" title="Ajustare preturi"
+	xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+	buttons="accept,cancel"
+	ondialogaccept="return doOk()"
+	ondialogcancel="return true;">
+
+  
+
+
+  <script src="js/logging.js"/>
+  <script src="js/treeutils.js"/>
+  <script src="js/httpdata.js"/>
+  <script src="js/formobject.js"/>
+
+
+
+  <grid>
+    <rows>
+      <row>
+	<label control="percent" value="Procent de adunat la pret:"/>
+	<textbox id="percent"/>
+      </row>
+    </rows>
+  </grid>
+
+
+  <script language="javascript"><![CDATA[
+
+
+
+
+function doOk() {
+
+    window.arguments[0].adjust_prices(document.getElementById('percent').value);
+
+}
+
+
+
+  ]]></script>
+</dialog>

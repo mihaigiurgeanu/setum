@@ -1,0 +1,353 @@
+<?xml version="1.0"?>
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+
+<window
+    id="detalii-sistem-win"
+    title="Detalii Sistem"
+    persist="screenX screenY width height"
+    orient="vertical"
+    onload="initform();"
+    xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+    style="overflow:auto">
+
+  <script src="js/httpdata.js"/>
+  <script src="usimetalice2k.js"/>
+
+  <commandset>
+    <command id="command-save" oncommand="save();" />
+    <command id="command-add" oncommand="addnew();" />
+  </commandset>
+
+
+  <tabbox flex="1" id="maintab">
+    <tabs>
+      <tab label="Lista usi"/>
+      <tab label="Definire usa"/>
+    </tabs>
+
+    <tabpanels flex="1">
+      <tabpanel id="listausi-tab" orient="vertical">
+	
+	<hbox>
+	  <split flex="1"/>
+	  <button flex="0" id="addnew" command="command-add" label="Creeaza noua usa"/>
+	</hbox>
+
+	<tree id="listausi" flex="1" enableColumnDrag="true" perisist="ordinal width height hidden" seltype="single" ondblclick="editUsa()" onclick="loadUsaSel();">
+	  <treecols>
+	    <treecol id="col-id" label="Cod intern" flex="1"/>
+	    <splitter class="tree-splitter"/>
+	    <treecol id="col-usa" label="Usa" flex="1"/>
+	    <splitter class="tree-splitter"/>
+	    <treecol id="col-material" label="material" flex="1"/>
+	    <splitter class="tree-splitter"/>
+	  </treecols>
+	  <treechildren/>
+	</tree>
+
+	
+      </tabpanel>
+
+      <tabpanel id="definireusa-tab" style="overflow:auto;" orient="vertical">
+
+	<grid >
+	  <columns>
+	    <column/>
+	  </columns>
+	  <rows>
+	    <row>
+	      <groupbox orient="vertical">
+		<caption label="Definire usa" />
+		<grid>
+		  <columns>
+		    <column/>
+		    <column/>
+		  </columns>
+		  <rows>
+		    <row>
+		      <label control="subclass" value="Subcod:"/>
+		      <menulist id="subclass" onblur="combo_changed(this)">
+			<menupopup id="subclass-popup">
+			  <menuitem id="subclass-A" label="A - apartament" value="A" />
+			  <menuitem id="subclass-S" label="S - siguranta" value="S" />
+			  <menuitem id="subclass-M" label="M - metalica" value="M" />
+			  <menuitem id="subclass-B" label="B - batanta" value="B" />
+			</menupopup>
+		      </menulist>
+		    </row>
+		    <row>
+		      <label control="version" value="Varianta:"/>
+		      <menulist id="version" onblur="combo_changed(this)">
+			<menupopup id="version-popup">
+			  <menuitem id="version-UF" value="UF" label="UF - cu falt"/>
+			  <menuitem id="version-UFF" value="UFF" label="UFF - fara falt"/>
+			</menupopup>
+		      </menulist>
+		    </row>
+		    <row>
+		      <label control="material" value="Material:"/>
+		      <menulist id="material" onblur="combo_changed(this)">
+			<menupopup id="material-popup">
+			  <menuitem id="material-1" value="1" label="otel"/>
+			  <menuitem id="material-2" value="2" label="otel zincat termic"/>
+			  <menuitem id="material-3" value="3" label="inox"/>
+			  <menuitem id="material-4" value="4" label="aluminiu"/>
+			  <menuitem id="material-5" value="5" label="alama"/>
+			  <menuitem id="material-6" value="6" label="cupru"/>
+			</menupopup>
+		      </menulist>
+		    </row>
+		    <row>
+		      <label value="Dimensiuni gol:"/>
+		      <box>
+			<grid>
+			  <columns>
+			    <column/>
+			    <column/>
+			  </columns>
+			  <rows>
+			    <row>
+			      <label control="lg" value="Lg ="/>
+			      <textbox id="lg" />
+			    </row>
+			    <row>
+			      <label control="hg" value="Hg ="/>
+			      <textbox id="hg" />
+			    </row>
+			    <row>
+			      <label control="lcorrection" value="L corectie ="/>
+			      <textbox id="lcorrection" />
+			    </row>
+			    <row>
+			      <label control="hcorrection" value="H correction ="/>
+			      <textbox id="hcorrection" />
+			    </row>
+			    <row>
+			      <label control="lCurrent" value="L curenta ="/>
+			      <textbox id="lCurrent" />
+			    </row>
+			    <row>
+			      <radiogroup id="kType" onblur="radio_changed(this)">
+				<radio id="kType-1" value="1" 
+				       label="cu canate egale"/>
+				<radio id="kType-2" value="2" 
+				       label="cu canate inegale"/>
+			      </radiogroup>
+			    </row>
+			  </rows>
+			</grid>
+		      </box>
+		    </row>
+		    <row>
+		      <label value="Dimensiuni executie:"/>
+		      <box>
+			<grid>
+			  <columns>
+			    <column/>
+			    <column/>
+			  </columns>
+			  <rows>
+			    <row>
+			      <label control="le" value="Le ="/>
+			      <textbox id="le"  disabled="true" />
+			    </row>
+			    <row>
+			      <label control="he" value="He ="/>
+			      <textbox id="he" disabled="true"/>
+			    </row>
+			  </rows>
+			</grid>
+		      </box>
+		    </row>
+		  </rows>
+		</grid>
+	      </groupbox>
+	    </row>
+	    <row>
+	      <groupbox orient="vertical">
+		<caption label="Tip foaie"/>
+		<label>Canat principal:</label>
+		<hbox>
+		  <label>La interior placata cu tabla 2 randuri</label>
+		  <menulist id="intFoil" onblur="combo_changed(this)">
+		    <menupopup id="intFoil-popup">
+		      <menuitem id="intFoil-1" value="1" label="Lisa"/>
+		      <menuitem id="intFoil-2" value="2" label="Amprentata"/>
+		    </menupopup>
+		  </menulist>
+		</hbox>
+		<hbox>
+		  <label value="La exterior"/>
+		  <radiogroup id="ieFoil" onblur="radio_changed(this)">
+		    <radio id="ieFoil-1" value="1" label="la fel ca la interior"/>
+		    <hbox>
+		      <radio id="ieFoil-2" value="2" label="placata cu tabla 2 randuri"/>
+		      <menulist id="extFoil" onblur="combo_changed(this)">
+			<menupopup id="extFoil-popup">
+			  <menuitem id="extFoil-1" value="1" label="Lisa"/>
+			  <menuitem id="extFoil-2" value="2" label="Amprentata"/>
+			</menupopup>
+		      </menulist>
+		    </hbox>
+		  </radiogroup>
+		</hbox>
+
+
+		<label>Canat secundar:</label>
+		<hbox>
+		  <label>La interior placata cu tabla 2 randuri</label>
+		  <menulist id="intFoilSec" onblur="combo_changed(this)">
+		    <menupopup id="intFoilSec-popup">
+		      <menuitem id="intFoilSec-1" value="1" label="Lisa"/>
+		      <menuitem id="intFoilSec-2" value="2" label="Amprentata"/>
+		    </menupopup>
+		  </menulist>
+		</hbox>
+		<hbox>
+		  <label value="La exterior"/>
+		  <radiogroup id="ieFoilSec" onblur="radio_changed(this)">
+		    <radio id="ieFoilSec-1" value="1" label="la fel ca la interior"/>
+		    <hbox>
+		      <radio id="ieFoilSec-2" value="2" label="placata cu tabla 2 randuri"/>
+		      <menulist id="extFoilSec" onblur="combo_changed(this)">
+			<menupopup id="extFoilSec-popup">
+			  <menuitem id="extFoilSec-1" value="1" label="Lisa"/>
+			  <menuitem id="extFoilSec-2" value="2" label="Amprentata"/>
+			</menupopup>
+		      </menulist>
+		    </hbox>
+		  </radiogroup>
+		</hbox>
+
+		<hbox>
+		  <label control="isolation" value="Izolatie:"/>
+		  <menulist id="isolation" onblur="combo_changed(this)">
+		    <menupopup id="isolation-popup">
+		      <menuitem id="isolation-1" value="1" label="vata minerala"/>
+		      <menuitem id="isolation-2" value="2" label="spuma poliuretanica"/>
+		    </menupopup>
+		  </menulist>
+		</hbox>
+		<hbox>
+		  <label control="openingDir" value="Sens deschidere:"/>
+		  <vbox>
+		    <menulist id="openingDir" onblur="combo_changed(this)">
+		      <menupopup id="openingDir-popup">
+			<menuitem id="openingDir-1" value="1" label="interior"/>
+			<menuitem id="openingDir-2" value="2" label="exterior"/>
+		      </menupopup>
+		    </menulist>
+		    <menulist id="openingSide" onblur="combo_changed(this)">
+		      <menupopup id="openingSide-popup">
+			<menuitem id="openingSide-1" value="1" label="stanga"/>
+			<menuitem id="openingSide-2" value="2" label="dreapta"/>
+		      </menupopup>
+		    </menulist>
+		  </vbox>
+		</hbox>
+	      </groupbox>
+	    </row>
+	    <row>
+	      <groupbox orient="vertical">
+		<caption label="Toc"/>
+		<radiogroup id="frameType" onblur="radio_changed(this)">
+		  <radio id="frameType-1" value="1" label="Toc STAS"/>
+		  <hbox align="start">
+		    <radio id="frameType-2" value="2" label="Toc modificat"/>
+		    <vbox>
+		      <grid>
+			<columns>
+			  <column/>
+			  <column/>
+			</columns>
+			<rows>
+			  <row>
+			    <label control="lFrame" value="l toc = "/>
+			    <textbox id="lFrame" />
+			  </row>
+			  <row>
+			    <label control="bFrame" value="b toc = "/>
+			    <textbox id="bFrame" />
+			  </row>
+			  <row>
+			    <label control="cFrame" value="C toc = "/>
+			    <textbox id="cFrame" />
+			  </row>
+			</rows>
+		      </grid>
+		    </vbox>
+		  </hbox>
+		</radiogroup>
+		<hbox>
+		  <label value="Pozitionare foaie"/>
+		  <menulist id="foilPosition" onblur="combo_changed(this)">
+		    <menupopup id="foilPosition-popup">
+		      <menuitem id="foilPosition-1" value="1" label="interior"/>
+		      <menuitem id="foilPosition-2" value="2" label="exterior"/>
+		      <menuitem id="foilPosition-3" value="3" label="mijloc"/>
+		    </menupopup>
+		  </menulist>
+		</hbox>
+	      </groupbox>
+	    </row>
+	    <row>
+	      <groupbox orient="vertical">
+		<caption label="Prag"/>
+		<radiogroup id="tresholdType" onblur="radio_changed(this)">
+		  <radio id="tresholdType-1" value="1" label="Prag STAS"/>
+		  <hbox align="start">
+		    <radio id="tresholdType-2" value="2" label="Prag modificat"/>
+		    <vbox>
+		      <grid>
+			<columns>
+			  <column/>
+			  <column/>
+			</columns>
+			<rows>
+			  <row>
+			    <label control="lTreshold" value="l prag = "/>
+			    <textbox id="lTreshold" />
+			  </row>
+			  <row>
+			    <label control="hTreshold" value="h prag = "/>
+			    <textbox id="hTreshold" />
+			  </row>
+			  <row>
+			    <label control="cTreshold" value="C prag = "/>
+			    <textbox id="cTreshold" />
+			  </row>
+			</rows>
+		      </grid>
+		    </vbox>
+		  </hbox>
+		  <hbox align="start">
+		    <radio id="tresholdType-3" value="3" label="Fara prag"/>
+		    <vbox>
+		      <radiogroup id="tresholdSpace" onblur="radio_changed(this)">
+			<hbox>
+			  <radio id="tresholdSpace-1" value="1" label="Cu incastrare - h incastrare = "/>
+			  <textbox id="h1Treshold" />
+			</hbox>
+			<hbox>
+			  <radio id="tresholdSpace-2" value="2" label="Fara incastrare - h = "/>
+			  <textbox id="h2Treshold" />
+			</hbox>
+		      </radiogroup>
+		    </vbox>
+		  </hbox>
+		</radiogroup>
+	      </groupbox>
+	    </row>
+	  </rows>
+	</grid>
+	
+	<hbox>
+	  <button flex="0" id="save" command="command-save" label="Salveaza"/>
+	  <split flex="1"/>
+	</hbox>
+
+
+      </tabpanel>
+    </tabpanels>
+  </tabbox>
+</window>

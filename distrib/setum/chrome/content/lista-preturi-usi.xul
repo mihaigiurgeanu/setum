@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+
+<window
+    id="lista-preturi-usi-standard-win"
+    title="Lista Preturi Usi Standard"
+    persist="screenX screenY width height"
+    orient="horizontal"
+    onload="init();"
+    xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+  
+
+  <script src="lista-preturi-usi.js"/>
+
+  <tabbox>
+    <tabs>
+      <tab label="Lista Usi"/>
+      <tab label="Editare Usa"/>
+    </tabs>
+    
+    <tabpanels>
+      
+      <tabpanel id="lista-usi">
+      </tabpanel>
+      
+      <tabpanel id="editare-usa">
+	<grid flex="1">
+	  <columns>
+	    <column flex="1"/>
+	    <column flex="2"/>
+	  </columns>
+	  
+	  <rows>
+	    <row>
+	      <label control="denumire-produs" value="Denumire Produs:"/>
+	      <textbox id="denumire-produs" maxlength="100"/>
+	    </row>
+	    <row>
+	      <label control="cod-produs" value="Cod Produs:"/>
+	      <textbox id="cod-produs" maxlength="20"/>
+	    </row>
+	    <row>
+	      <label control="varianta-constructiva" value="Varianta Constructiva:"/>
+	      <textbox id="varianta-constructiva" maxlength="100"/>
+	    </row>
+	    <row>
+	      <label control="pret-std-fara-tva" value="Pret Standard fara TVA:"/>
+	      <textbox id="pret-std-fara-tva" maxlength="20"/>
+	    </row>
+	  </rows>
+	</grid>
+      </tabpanel>
+    </tabpanels>
+  </tabbox>	
+
+</window>
+
+
+
+

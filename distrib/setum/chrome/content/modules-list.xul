@@ -53,7 +53,6 @@
   <hbox flex="1">
     <tree id="appmodules" width="180px"
 	  datasources="modules.rdf" ref="http://www.kds.ro/erp/modules" 
-	  querytype="rdf"
 	  onselect="show_module();">
       <treecols>
 	<treecol id="modulename" label="Module" primary="true" flex="1"/>

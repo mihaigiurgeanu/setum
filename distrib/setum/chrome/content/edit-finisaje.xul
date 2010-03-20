@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="iso-8859-2"?>
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+<?xml-stylesheet href="setum.css" type="text/css"?>
+
+
+<!--
+edit-finisaje.xul
+
+Editarea datelor unei ferestre.
+
+Argumentele primite la deschiderea dialogului:
+0 - obiect select_handler care trebuie sa contina metoda select(objectId)
+-->
+<dialog
+    id="edit-finisaje-dlg"
+    title="Finisaje"
+    xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+    persist="screenX screenY width height"
+    orient="vertical"
+    buttons="accept,cancel"
+    ondialogaccept="return doOk();"
+    ondialogcancel="return true;"
+    debug="false">
+
+  <script src="js/logging.js"/>
+  <script src="js/treeutils.js"/>
+  <script src="js/httpdata.js"/>
+  <script src="js/formobject.js"/>
+
+  <hbox style="overflow:auto">
+    <grid>
+      <rows>
+	<row>
+	  <label controls="zincare" value="Zincare:"/>
+	  <menulist id="zincare">
+	    <menupopup id="zincare-popup"/>
+	  </menulist>
+	</row>
+	<row>
+	  <label controls="furnir" value="Furnir:"/>
+	  <menulist id="furnir">
+	    <menupopup id="furnir-popup"/>
+	  </menulist>
+	</row>
+	<row>
+	  <label controls="placare" value="Placare:"/>
+	  <menulist id="placare">
+	    <menupopup id="placare-popup"/>
+	  </menulist>
+	</row>
+	<row>
+	  <label controls="grundId" value="Grund:"/>
+	  <menulist id="grundId" >
+	    <menupopup id="grundId-popup"/>
+	  </menulist>
+	</row>
+	<row>
+	  <label controls="vopsireTip" value="Tip vopsire:"/>
+	  <menulist id="vopsireTip">
+	    <menupopup id="vopsireTip-popup"/>
+	  </menulist>
+	</row>
+	<row>
+	  <label controls="ralStasId" value="RAL STAS:"/>
+	  <menulist id="ralStasId">
+	    <menupopup id="ralStasId-popup"/>
+	  </menulist>
+	</row>
+	<row>
+	  <label controls="ralOrder" value="Comanda RAL:"/>
+	  <textbox id="ralOrder"/>
+	</row>
+	<row>
+	  <label controls="ralOrderValue" value="Valoare RAL pe comnada:"/>
+	  <textbox id="ralOrderValue"/>
+	</row>
+      </rows>
+    </grid>
+
+  </hbox>
+
+
+
+  <script language="javascript">
+    <![CDATA[
+
+
+	     // Global variable theForm that will be used by event handlers
+	     var theForm = new FormObject();
+	     
+	     theForm.do_link = "/edit-finisaje.do";
+	     theForm.text_fields = new Array("ralOrder", "ralOrderValue");
+	     theForm.combo_fields = new Array("zincare", "furnir", "placare",
+					      "grundId", "vopsireTip", "ralStasId");
+	     theForm.radio_fields = new Array();
+	     
+	     theForm.setupEventListeners();
+
+
+	     theForm.load_current();
+
+
+	     function doOk() {
+		 var req = theForm.get_request();
+		 req.add("command", "saveFormData");
+		 if(theForm.post_save_request(req)) {
+		     window.arguments[0].select(theForm.get_loaded_id());
+		     return true;
+		 }
+		 return false;
+	     }
+	     
+    ]]></script>
+
+</dialog>
