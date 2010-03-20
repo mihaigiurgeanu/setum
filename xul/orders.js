@@ -210,6 +210,7 @@ function on_new_order() {
     theForm.post_request(req);
 
     clear_lineItems();
+    clear_proformas();
     clear_invoices();
     clear_payments();
 
@@ -224,6 +225,7 @@ function on_delete_order() {
     load_orders();
 
     clear_lineItems();
+    clear_proformas();
     clear_invoices();
     clear_payments();
 

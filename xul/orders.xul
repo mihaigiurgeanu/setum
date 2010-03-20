@@ -412,7 +412,7 @@ Lista comenzilor, creere/vizualizare/stergere
 
 
 	<hbox class="title">
-	  <label>Proforme</label>
+	  <label>Lista proforme</label>
 	</hbox>
 	<spacer class="header"/>
 

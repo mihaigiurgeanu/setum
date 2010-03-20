@@ -2510,7 +2510,7 @@ public class OrdersBiz extends OrdersBean {
 	    form.setProformaAmount(new BigDecimal(form.getTotalFinal().doubleValue() - 
 						  form.getInvoicedAmount().doubleValue())
 				   .setScale(2, BigDecimal.ROUND_HALF_UP));
-	    form.setProformaTax(new BigDecimal(form.getInvoiceAmount().doubleValue() *
+	    form.setProformaTax(new BigDecimal(form.getTotalFinal().doubleValue() *
 					       form.getTvaPercent().doubleValue() / 100)
 				.setScale(2, BigDecimal.ROUND_HALF_UP));
 	}
