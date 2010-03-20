@@ -2922,9 +2922,12 @@ public class OrdersBiz extends OrdersBean {
 
 	try {
 	    PaymentLocalHome ph = getPaymentHome();
+	    Date startOfFromDate = DateUtils.truncate(form.getIncasariFromDate(),  Calendar.DAY_OF_MONTH);
+	    Date startOfToDate = DateUtils.truncate(form.getIncasariToDate(),  Calendar.DAY_OF_MONTH);
+	    Date endOfToDate = DateUtils.addDays(startOfToDate, 1);
 
 	    // Iau platile din data raportului
-	    Collection payments = ph.findByDate(form.getIncasariToDate(), form.getIncasariToDate());
+	    Collection payments = ph.findByDate(startOfToDate, endOfToDate);
 	    ResponseBean paymentsList = new ResponseBean();
 	    double total = 0;
 	    for(Iterator i = payments.iterator(); i.hasNext(); ) {
@@ -2949,7 +2952,7 @@ public class OrdersBiz extends OrdersBean {
 
 	    // Calculez total plati pe toata periada
 	    BigDecimal totalPerioada = new BigDecimal(0); 
-	    payments = ph.findByDate(form.getIncasariFromDate(), form.getIncasariToDate());
+	    payments = ph.findByDate(startOfFromDate, endOfToDate);
 	    for(Iterator i = payments.iterator(); i.hasNext();) {
 		PaymentLocal payment = (PaymentLocal) i.next();
 		totalPerioada = totalPerioada.add(payment.getAmount());
@@ -2962,7 +2965,7 @@ public class OrdersBiz extends OrdersBean {
 
 	    DailySummaryLocalHome dsh = getDailySummaryHome();
 	    Collection summaries = dsh.findByDate(RAPORT_INCASARI_SUMMARY, 
-						  form.getIncasariFromDate(), form.getIncasariToDate());
+						  startOfFromDate, endOfToDate);
 
 	    for(Iterator i = summaries.iterator(); i.hasNext();) {
 		DailySummaryLocal s = (DailySummaryLocal)i.next();

@@ -1114,11 +1114,11 @@
 	    <method-param>java.util.Date</method-param>
 	  </method-params>
 	</query-method>
-	<ejb-ql>
+	<ejb-ql><![CDATA[
 	  SELECT OBJECT(p) FROM Payment AS p, IN(p.document) d
 	  WHERE d.date BETWEEN ?1 AND ?2
 	  ORDER BY d.date
-	</ejb-ql>
+	]]></ejb-ql>
       </query>
 
     </entity>
