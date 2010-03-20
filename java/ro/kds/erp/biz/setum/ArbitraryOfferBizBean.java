@@ -929,14 +929,26 @@ public class ArbitraryOfferBizBean extends ArbitraryOfferBean {
 		r.addField("valMontaj", form.getValMontaj().setScale(2, RoundingMode.HALF_UP));
 		r.addField("valTransport", form.getValTransport().setScale(2, RoundingMode.HALF_UP));
 		r.addField("quantity", form.getQuantity());
-		r.addField("lineSellValue", form.getQuantity().doubleValue() * form.getSellPrice().doubleValue());
-		r.addField("lineValue", form.getQuantity().doubleValue() * form.getPrice().doubleValue());
+		r.addField("lineSellValue", 
+			   form.getQuantity()
+			   .multiply(form.getSellPrice())
+			   .setScale(2, RoundingMode.HALF_UP));
+		r.addField("lineValue", 
+			   form.getQuantity()
+			   .multiply(form.getPrice())
+			   .setScale(2, RoundingMode.HALF_UP));
 		r.addField("lineValueCuMontaj", 
-			   form.getQuantity().doubleValue() * form.getPrice().doubleValue() + 
-			   form.getValMontaj().setScale(2, RoundingMode.HALF_UP).doubleValue() + 
-			   form.getValTransport().setScale(2, RoundingMode.HALF_UP).doubleValue());
-		r.addField("lineEntryValue", form.getQuantity().doubleValue() * form.getEntryPrice().doubleValue());
-		r.addField("lineVatValue", form.getQuantity().doubleValue() * form.getVatPrice().doubleValue());
+			   form.getQuantity()
+			   .multiply(form.getPrice()) 
+			   .add(form.getValMontaj())
+			   .add(form.getValTransport())
+			   .setScale(2, RoundingMode.HALF_UP));
+		r.addField("lineEntryValue", 
+			   form.getQuantity()
+			   .multiply(form.getEntryPrice()));
+		r.addField("lineVatValue", 
+			   form.getQuantity()
+			   .multiply(form.getVatPrice()));
 
 		try {
 		    CommonServicesLocal srv = (CommonServicesLocal)factory.local("ejb/CommonServices", CommonServicesLocalHome.class);
