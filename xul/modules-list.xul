@@ -58,6 +58,8 @@
       <treecols>
 	<treecol id="modulename" label="Module" primary="true" flex="1"/>
 	<splitter class="tree-splitter"/>
+	<treecol id="description" label="Descriere" hidden="true"/>
+	<splitter class="tree-splitter"/>
 	<treecol id="xulfile" label="File" hidden="true"/>
       </treecols>
       
@@ -69,12 +71,14 @@
 	</query>
 	<rule>
 	  <binging subject="?definition" predicate="http://www.kds.ro/erp/modules/definition#type" object="?type"/>
+	  <binging subject="?definition" predicate="http://www.kds.ro/erp/modules/definition#description" object="?description"/>
 	  <where subject="?type" rel="equals" value="container"/>
 	  <action>
 	    <treechildren>
 	      <treeitem uri="?definition" container="true">
 		<treerow>
 		  <treecell label="?displayName"/>
+		  <treecell label="?description"/>
 		</treerow>
 	      </treeitem>
 	    </treechildren>
@@ -82,11 +86,13 @@
 	</rule>
 	<rule>
 	  <binding subject="?definition" predicate="http://www.kds.ro/erp/modules/definition#xulfile" object="?xulfile"/>
+	  <binging subject="?definition" predicate="http://www.kds.ro/erp/modules/definition#description" object="?description"/>
 	  <action>
 	    <treechildren>
 	      <treeitem uri="?definition">
 		<treerow>
 		  <treecell label="?displayName"/>
+		  <treecell label="?description"/>
 		  <treecell label="?xulfile"/>
 		</treerow>
 	      </treeitem>
