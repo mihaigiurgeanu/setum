@@ -53,6 +53,7 @@
   <hbox flex="1">
     <tree id="appmodules" width="180px"
 	  datasources="modules.rdf" ref="http://www.kds.ro/erp/modules" 
+	  querytype="rdf"
 	  onselect="show_module();">
       <treecols>
 	<treecol id="modulename" label="Module" primary="true" flex="1"/>
@@ -61,15 +62,23 @@
       </treecols>
       
       <template>
+	<query>
+	  <content uri="?uri"/>
+	  <member container="?uri" child="?definition"/>
+	</query>
 	<rule>
-	  <treechildren>
-	    <treeitem uri="rdf:*">
-	      <treerow>
-		<treecell label="rdf:http://www.kds.ro/erp/modules/definition#displayName"/>
-		<treecell label="rdf:http://www.kds.ro/erp/modules/definition#xulfile"/>
-	      </treerow>
-	    </treeitem>
-	  </treechildren>
+	  <binding subject="?definition" predicate="http://www.kds.ro/erp/modules/definition#displayName" object="?displayName"/>
+	  <binding subject="?definition" predicate="http://www.kds.ro/erp/modules/definition#xulfile" object="?xulfile"/>
+	  <action>
+	    <treechildren>
+	      <treeitem uri="?definition" container="true">
+		<treerow>
+		  <treecell label="?displayName"/>
+		  <treecell label="?xulfile"/>
+		</treerow>
+	      </treeitem>
+	    </treechildren>
+	  </action>
 	</rule>
       </template>
     </tree>
