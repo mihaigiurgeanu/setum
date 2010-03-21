@@ -65,13 +65,26 @@
 	<query>
 	  <content uri="?uri"/>
 	  <member container="?uri" child="?definition"/>
+	  <triple subject="?definition" predicate="http://www.kds.ro/erp/modules/definition#displayName" object="?displayName"/>
 	</query>
 	<rule>
-	  <binding subject="?definition" predicate="http://www.kds.ro/erp/modules/definition#displayName" object="?displayName"/>
-	  <binding subject="?definition" predicate="http://www.kds.ro/erp/modules/definition#xulfile" object="?xulfile"/>
+	  <binging subject="?definition" predicate="http://www.kds.ro/erp/modules/definition#type" object="?type"/>
+	  <where subject="?type" rel="equals" value="container"/>
 	  <action>
 	    <treechildren>
 	      <treeitem uri="?definition" container="true">
+		<treerow>
+		  <treecell label="?displayName"/>
+		</treerow>
+	      </treeitem>
+	    </treechildren>
+	  </action>
+	</rule>
+	<rule>
+	  <binding subject="?definition" predicate="http://www.kds.ro/erp/modules/definition#xulfile" object="?xulfile"/>
+	  <action>
+	    <treechildren>
+	      <treeitem uri="?definition">
 		<treerow>
 		  <treecell label="?displayName"/>
 		  <treecell label="?xulfile"/>

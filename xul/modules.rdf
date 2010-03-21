@@ -47,11 +47,13 @@
   <rdf:Description rdf:about="http://www.kds.ro/erp/modules/setum/products">
     <modules:displayName>Produse</modules:displayName>
     <modules:description>Nomenclator produse</modules:description>
+    <modules:type>container</modules:type>
   </rdf:Description>
 
   <rdf:Description rdf:about="http://www.kds.ro/erp/modules/setum/offer">
-    <modules:displayName>Ofertare</modules:displayName>
+    <modules:displayName>Oferte</modules:displayName>
     <modules:description>Gestiune oferte</modules:description>
+    <modules:type>container</modules:type>
   </rdf:Description>
 
   <rdf:Description rdf:about="http://www.kds.ro/erp/modules/setum/sisteme">
@@ -159,6 +161,7 @@
   <rdf:Description rdf:about="http://www.kds.ro/erp/modules/setum/clienti">
     <modules:displayName>Clienti</modules:displayName>
     <modules:description>Adaugare/modificare/vizualizare clienti</modules:description>
+    <modules:type>container</modules:type>
   </rdf:Description>
 
   <rdf:Description rdf:about="http://www.kds.ro/erp/modules/setum/clienti/companii">
@@ -178,6 +181,7 @@
   <rdf:Description rdf:about="http://www.kds.ro/erp/modules/settings">
     <modules:displayName>Administrare sistem</modules:displayName>
     <modules:description>Root menu for admin modules</modules:description>
+    <modules:type>container</modules:type>
   </rdf:Description>
 
   <rdf:Description rdf:about="http://www.kds.ro/erp/modules/settings/valuelists">
