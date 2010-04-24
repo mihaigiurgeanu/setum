@@ -321,7 +321,8 @@
 	  </method-params>
 	</query-method>
 	<ejb-ql>
-	  SELECT OBJECT(o) FROM Offer o WHERE o.client.id = ?1
+	  SELECT OBJECT(o) FROM Offer o, IN(o.document) d WHERE o.client.id = ?1
+          ORDER BY d.number DESC
 	</ejb-ql>
       </query>
     </entity>
