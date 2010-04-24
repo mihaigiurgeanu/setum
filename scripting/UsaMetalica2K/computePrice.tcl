@@ -91,14 +91,14 @@ log "sellPrice = $sellPrice"
 
 set pret_toc  [[product_by_code_safe 11007 $frameType getPrice1] doubleValue]
 if {$frameType == 2} {
-    set kgtm [1.25 * ($ldesfToc - 0.240) * (2*$hexe + $lexe) * 7.85 *1.1]
-    set pret_toc [$kgtm * $pret_toc]
+    set kgtm [expr 1.25 * ($ldesfToc - 0.240) * (2*$he + $le) * 7.85 *1.1 / 1000]
+    set pret_toc [expr $kgtm * $pret_toc]
 }
 
 set pret_prag [[product_by_code_safe 11009 $tresholdType getPrice1] doubleValue]
 if {$tresholdType == 2} {
-    set kgpm [expr 1.25 *  ($ldesfPrag - 0.240) * $lexe * 7.85 *1.1]
-    set pret_prag [$kgpm * $pret_prag]
+    set kgpm [expr 1.25 *  ($ldesfPrag - 0.240) * $le * 7.85 *1.1 / 1000]
+    set pret_prag [expr $kgpm * $pret_prag]
 }
 
 set price_expr "$sellPrice + $pret_toc + $pret_prag"

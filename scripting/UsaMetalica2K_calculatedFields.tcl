@@ -23,10 +23,10 @@ if { $frameType == 1 } {
     set lFrame 90
     
     ;#if {$k == 1 } {set bFrame 35} else {set bFrame 45}
-
-     if {[string match -nocase "*cu falt*" $version]} {
+    
+    if {[string match -nocase "*cu falt*" $version]} {
  	set bFrame 45
-     } else {
+    } else {
  	set bFrame 35
     }
     log "versiune <<$version>> => bToc: $bFrame "
@@ -79,7 +79,7 @@ if {$ieFoil == 1} {
     set extFoil $intFoil
 }
 
-if {$ieFoileSec == 1 {
+if {$ieFoilSec == 1} {
     set extFoilSec $intFoilSec
 }
 
@@ -242,4 +242,5 @@ if { $finisajPanouLateralExtInt } {
     set extFinisajPanouLateralId $intFinisajPanouLateralId
     set extFinisajPanouLateral $intFinisajPanouLateral
 }
+
 
