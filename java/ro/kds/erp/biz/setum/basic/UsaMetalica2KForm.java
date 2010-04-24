@@ -61,6 +61,7 @@ public class UsaMetalica2KForm implements Serializable {
     Double lFrame;
     Double bFrame;
     Double cFrame;
+    Double ldesfToc;
     Integer foilPosition;
     Integer tresholdType;
     Double lTreshold;
@@ -69,6 +70,7 @@ public class UsaMetalica2KForm implements Serializable {
     Integer tresholdSpace;
     Double h1Treshold;
     Double h2Treshold;
+    Double ldesfPrag;
     Integer masca;
     Integer lacrimar;
     Integer bolturi;
@@ -325,6 +327,10 @@ public class UsaMetalica2KForm implements Serializable {
    
 
 
+       this.ldesfToc = new Double(0);
+   
+
+
        this.foilPosition = new Integer(0);
 
 
@@ -354,6 +360,10 @@ public class UsaMetalica2KForm implements Serializable {
 
 
        this.h2Treshold = new Double(0);
+   
+
+
+       this.ldesfPrag = new Double(0);
    
 
 
@@ -1333,6 +1343,21 @@ public class UsaMetalica2KForm implements Serializable {
 	}
     }
 
+    public void setLdesfToc(Double newLdesfToc) {
+        this.ldesfToc = newLdesfToc;
+    }
+
+    public Double getLdesfToc() {
+        return ldesfToc;
+    }
+
+    public void readLdesfToc(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("ldesfToc");
+	if(a != null) {
+	    this.setLdesfToc(a.getDoubleValue());
+	}
+    }
+
     public void setFoilPosition(Integer newFoilPosition) {
         this.foilPosition = newFoilPosition;
     }
@@ -1450,6 +1475,21 @@ public class UsaMetalica2KForm implements Serializable {
 	AttributeLocal a = (AttributeLocal)attributes.get("h2Treshold");
 	if(a != null) {
 	    this.setH2Treshold(a.getDoubleValue());
+	}
+    }
+
+    public void setLdesfPrag(Double newLdesfPrag) {
+        this.ldesfPrag = newLdesfPrag;
+    }
+
+    public Double getLdesfPrag() {
+        return ldesfPrag;
+    }
+
+    public void readLdesfPrag(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("ldesfPrag");
+	if(a != null) {
+	    this.setLdesfPrag(a.getDoubleValue());
 	}
     }
 

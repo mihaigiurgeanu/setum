@@ -1173,6 +1173,32 @@ public abstract class UsaMetalica2KBean
 	computeCalculatedFields(r);
 	return r;
     }
+    public ResponseBean updateLdesfToc(Double ldesfToc) {
+        ResponseBean r = new ResponseBean();
+	Double oldVal = form.getLdesfToc();
+	form.setLdesfToc(ldesfToc);
+	r.addRecord();
+	r.addField("ldesfToc", ldesfToc); // for number format
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".ldesfToc");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
+		script.setVar(OLDVAL_VARNAME, oldVal, Double.class);
+		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the ldesfToc", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
     public ResponseBean updateFoilPosition(Integer foilPosition) {
         ResponseBean r = new ResponseBean();
 	Integer oldVal = form.getFoilPosition();
@@ -1376,6 +1402,32 @@ public abstract class UsaMetalica2KBean
 						// fields to the response also
 	   } catch (ScriptErrorException e) {
 	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the h2Treshold", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
+    public ResponseBean updateLdesfPrag(Double ldesfPrag) {
+        ResponseBean r = new ResponseBean();
+	Double oldVal = form.getLdesfPrag();
+	form.setLdesfPrag(ldesfPrag);
+	r.addRecord();
+	r.addField("ldesfPrag", ldesfPrag); // for number format
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".ldesfPrag");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
+		script.setVar(OLDVAL_VARNAME, oldVal, Double.class);
+		script.setVar(FORM_VARNAME, form, UsaMetalica2KForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the ldesfPrag", e);
            }
         }
 	computeCalculatedFields(r);
@@ -4605,6 +4657,7 @@ public abstract class UsaMetalica2KBean
 	r.addField("lFrame", form.getLFrame());
 	r.addField("bFrame", form.getBFrame());
 	r.addField("cFrame", form.getCFrame());
+	r.addField("ldesfToc", form.getLdesfToc());
 	r.addField("foilPosition", form.getFoilPosition());
 	r.addField("tresholdType", form.getTresholdType());
 	r.addField("lTreshold", form.getLTreshold());
@@ -4613,6 +4666,7 @@ public abstract class UsaMetalica2KBean
 	r.addField("tresholdSpace", form.getTresholdSpace());
 	r.addField("h1Treshold", form.getH1Treshold());
 	r.addField("h2Treshold", form.getH2Treshold());
+	r.addField("ldesfPrag", form.getLdesfPrag());
 	r.addField("masca", form.getMasca());
 	r.addField("lacrimar", form.getLacrimar());
 	r.addField("bolturi", form.getBolturi());
@@ -4949,6 +5003,12 @@ public abstract class UsaMetalica2KBean
             logger.log(BasicLevel.DEBUG, e);
         }
 	try {
+	    s.setVar("ldesfToc", form.getLdesfToc(), Double.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: ldesfToc from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
 	    s.setVar("foilPosition", form.getFoilPosition(), Integer.class);
 	} catch (ScriptErrorException e) {
 	    logger.log(BasicLevel.WARN, "Can not set the value of field: foilPosition from the script");
@@ -4994,6 +5054,12 @@ public abstract class UsaMetalica2KBean
 	    s.setVar("h2Treshold", form.getH2Treshold(), Double.class);
 	} catch (ScriptErrorException e) {
 	    logger.log(BasicLevel.WARN, "Can not set the value of field: h2Treshold from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    s.setVar("ldesfPrag", form.getLdesfPrag(), Double.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: ldesfPrag from the script");
             logger.log(BasicLevel.DEBUG, e);
         }
 	try {
@@ -6076,6 +6142,17 @@ public abstract class UsaMetalica2KBean
             logger.log(BasicLevel.DEBUG, e);
         }
 	try {
+	    field = s.getVar("ldesfToc", Double.class);
+	    if(!field.equals(form.getLdesfToc())) {
+	        logger.log(BasicLevel.DEBUG, "Field ldesfToc modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setLdesfToc((Double)field);
+	        r.addField("ldesfToc", (Double)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: ldesfToc from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
 	    field = s.getVar("foilPosition", Integer.class);
 	    if(!field.equals(form.getFoilPosition())) {
 	        logger.log(BasicLevel.DEBUG, "Field foilPosition modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
@@ -6161,6 +6238,17 @@ public abstract class UsaMetalica2KBean
 	    }
 	} catch (ScriptErrorException e) {
 	    logger.log(BasicLevel.WARN, "Can not get the value of field: h2Treshold from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    field = s.getVar("ldesfPrag", Double.class);
+	    if(!field.equals(form.getLdesfPrag())) {
+	        logger.log(BasicLevel.DEBUG, "Field ldesfPrag modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setLdesfPrag((Double)field);
+	        r.addField("ldesfPrag", (Double)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: ldesfPrag from the script");
             logger.log(BasicLevel.DEBUG, e);
         }
 	try {

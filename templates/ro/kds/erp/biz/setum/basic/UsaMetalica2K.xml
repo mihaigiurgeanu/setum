@@ -140,6 +140,10 @@
     <type>Double</type>
   </field>
   <field>
+    <name>ldesfToc</name>
+    <type>Double</type>
+  </field>
+  <field>
     <name>foilPosition</name>
     <type>Integer</type>
   </field>
@@ -169,6 +173,10 @@
   </field>
   <field>
     <name>h2Treshold</name>
+    <type>Double</type>
+  </field>
+  <field>
+    <name>ldesfPrag</name>
     <type>Double</type>
   </field>
   <field>
