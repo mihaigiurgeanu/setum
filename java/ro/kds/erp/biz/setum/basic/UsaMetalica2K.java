@@ -60,6 +60,7 @@ public interface UsaMetalica2K extends EJBObject {
     public ResponseBean updateLFrame(Double newLFrame) throws RemoteException;
     public ResponseBean updateBFrame(Double newBFrame) throws RemoteException;
     public ResponseBean updateCFrame(Double newCFrame) throws RemoteException;
+    public ResponseBean updateLdesfToc(Double newLdesfToc) throws RemoteException;
     public ResponseBean updateFoilPosition(Integer newFoilPosition) throws RemoteException;
     public ResponseBean updateTresholdType(Integer newTresholdType) throws RemoteException;
     public ResponseBean updateLTreshold(Double newLTreshold) throws RemoteException;
@@ -68,6 +69,7 @@ public interface UsaMetalica2K extends EJBObject {
     public ResponseBean updateTresholdSpace(Integer newTresholdSpace) throws RemoteException;
     public ResponseBean updateH1Treshold(Double newH1Treshold) throws RemoteException;
     public ResponseBean updateH2Treshold(Double newH2Treshold) throws RemoteException;
+    public ResponseBean updateLdesfPrag(Double newLdesfPrag) throws RemoteException;
     public ResponseBean updateMasca(Integer newMasca) throws RemoteException;
     public ResponseBean updateLacrimar(Integer newLacrimar) throws RemoteException;
     public ResponseBean updateBolturi(Integer newBolturi) throws RemoteException;

@@ -23,11 +23,11 @@ if { $frameType == 1 } {
     set lFrame 90
     
     ;#if {$k == 1 } {set bFrame 35} else {set bFrame 45}
-
-    if {[string match -nocase "*cf" $version]} {
-	set bFrame 45
+    
+    if {[string match -nocase "*cu falt*" $version]} {
+ 	set bFrame 45
     } else {
-	set bFrame 35
+ 	set bFrame 35
     }
     log "versiune <<$version>> => bToc: $bFrame "
     set cFrame 25
@@ -79,6 +79,10 @@ if {$ieFoil == 1} {
     set extFoil $intFoil
 }
 
+if {$ieFoilSec == 1} {
+    set extFoilSec $intFoilSec
+}
+
 if { $k == 2 } {
     if {$kType == 1} {
 	set lCurrent [expr ($le - (2*$bFrame + 3*$luft))/2]
@@ -101,7 +105,7 @@ set suprafataBlat [expr 2 * $lFoaie * $hFoaie / 1000 / 1000]
 
 set ldesfToc [expr ($lFrame + 2 * ($bFrame + $cFrame) + 30)/1000]
 set ldesfPrag [expr ($lTreshold + 2 * ($hTreshold + $cTreshold) + 30)/1000]
-set suprafatToc [expr ($ldesfToc * 2 * ($he + $le) + $ldesfPrag * $le)/1000]
+set suprafataToc [expr ($ldesfToc * 2 * ($he + $le) + $ldesfPrag * $le)/1000]
 
 set suprafataGrilaj 0
 set suprafataFereastra 0
@@ -189,5 +193,6 @@ set lexec [expr $le + $lplTotal]
 
 
 # finisaje
+
 
 
