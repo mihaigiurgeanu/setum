@@ -216,7 +216,7 @@ public abstract class ClientBean implements EntityBean {
 	if(getIsCompany()) {
 	    return getCompanyName();
 	} else {
-	    return getLastName() + ", " + getFirstName();
+	    return getLastName() + " " + getFirstName();
 	}
     }
 
