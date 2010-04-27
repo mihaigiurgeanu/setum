@@ -37,7 +37,7 @@
     <!-- BODY -->
     <fo:flow flow-name="xsl-region-body">
 
-      <fo:block font-size="10pt" font-family="Times">
+      <fo:block font-size="12pt" font-family="Times">
 
       <!--
       <#assign lines=doc["response/record/field[attribute::name='lines']"] />
@@ -387,7 +387,8 @@
 	 <!-- start fisa RLV -->
 
 	 <!-- start header rlv -->
-	 <fo:table width="100%"  border-collapse="collapse" table-layout="fixed" space-after="1cm">
+	 <fo:table width="100%"  border-collapse="collapse" table-layout="fixed" 
+		   space-after="1cm" break-before="page">
 	   <fo:table-column column-number="1" column-width="50%" border-style="none"/>
 	   <fo:table-column column-number="2" column-width="50%" border-style="none"/>
 
