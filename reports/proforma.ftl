@@ -59,8 +59,8 @@
 
       <fo:block font-size="10pt" font-family="Times">
 	<fo:table width="100%">
-	  <fo:table-column column-number="1" column-width="30%"/>
-	  <fo:table-column column-number="1" column-width="40%"/>
+	  <fo:table-column column-number="1" column-width="45%"/>
+	  <fo:table-column column-number="1" column-width="25%"/>
 	  <fo:table-column column-number="1" column-width="30%"/>
 	  
 	  <fo:table-body>
@@ -74,6 +74,8 @@
 		<fo:block>Banca: B.C.R. Sucrusala Sector 6</fo:block>
 		<fo:block>Tel: 021.316.18.56</fo:block>
 		<fo:block>Fax: 021.316.05.90</fo:block>
+		<fo:block>contractari@setumsa.ro</fo:block>
+		<fo:block>desfacere@setumsa.ro</fo:block>
 	      </fo:table-cell>
 
 	      <fo:table-cell column-number="2" padding-top="20mm">
