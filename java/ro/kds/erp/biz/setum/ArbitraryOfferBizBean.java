@@ -599,7 +599,7 @@ public class ArbitraryOfferBizBean extends ArbitraryOfferBean {
 	    form.setProductName(p.getName());
 	    form.setSellPrice(p.getSellPrice());
 	    form.setEntryPrice(p.getEntryPrice());
-	    form.setPrice(p.getSellPrice().add(form.getAbsoluteGain()));
+	    //form.setPrice(p.getSellPrice().add(form.getAbsoluteGain()));
 
 	    r = super.updateProductId(productId);
 	    if(r.getCode() == 0) {
