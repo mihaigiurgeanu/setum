@@ -24,7 +24,7 @@
   <property name="src.sessionbean" value="${source}"/>
   <property name="xul.src" value="xul"/>
   <property name="xul.dist" value="distrib/setum"/>
-  <property name="xul.dist.content" value="${xul.dist}/chrome/content"/>
+  <property name="xul.dist.content" value="${xul.dist}/chrome/xul"/>
   
   <taskdef name="ejbjar"
 	   classname="org.objectweb.jonas.ant.EjbJar"
@@ -317,13 +317,13 @@
 	     destdir="${docs}" />
   </target>
 
-  <target name="distribxul" description="Copiaza fisierele XUL pentru a fi rulate cu XULRunner">
+  <target name="deployxul" description="Copiaza fisierele XUL pentru a fi rulate cu XULRunner">
     <copy todir="${xul.dist.content}">
       <fileset dir="${xul.src}"/>
     </copy>
   </target>
 
-  <target name="install-xul" description="Instaleaza aplicatia xul (doar pentru Mac OS X)" depends="distribxul">
+  <target name="install-xul" description="Instaleaza aplicatia xul (doar pentru Mac OS X)" depends="deployxul">
     <exec os="Mac OS X" executable="/Library/Frameworks/XUL.framework/xulrunner-bin">
       <arg line="--install-app distrib/setum/"/>
     </exec>

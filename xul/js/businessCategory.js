@@ -8,8 +8,8 @@
 
 
 // the file that holds the definitions for categoryBusiness resources
-var categories_uri = "chrome://setum/xul/categories.xml";
-var modules_uri = "chrome://setum/xul/modules.rdf";
+var categories_uri = "chrome://setum/content/categories.xml";
+var modules_uri = "chrome://setum/content/modules.rdf";
 
 var rdfService = Components.classes["@mozilla.org/rdf/rdf-service;1"].getService(Components.interfaces.nsIRDFService);
 

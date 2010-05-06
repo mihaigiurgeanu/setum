@@ -6,7 +6,7 @@ var rdf_service = Components.classes["@mozilla.org/rdf/rdf-service;1"].getServic
 
 
 // Data sources
-var messages_ds = rdf_service.GetDataSource("chrome://setum/xul/messages.xml");
+var messages_ds = rdf_service.GetDataSource("chrome://setum/content/messages.xml");
 
 
 // Vocabulary
