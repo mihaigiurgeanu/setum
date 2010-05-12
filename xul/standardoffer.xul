@@ -164,9 +164,9 @@
 	    <splitter class="tree-splitter"/>
 	    <treecol id="offerLines.price2" label="Manopera" flex="1"/>
 	    <splitter class="tree-splitter"/>
-	    <treecol id="offersLines.sellPrice" label="Pret curent" flex="1"/>
+	    <treecol id="offerLines.sellPrice" label="Pret curent" flex="1"/>
 	    <splitter class="tree-splitter"/>
-	    <treecol id="offersLines.entryPrice" label="Cost" flex="1"/>
+	    <treecol id="offerLines.entryPrice" label="Pret intrare" flex="1"/>
 	  </treecols>
 	  <treechildren/>
 	</tree>
