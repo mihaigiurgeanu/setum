@@ -118,6 +118,10 @@ public class StandardOfferBean extends ro.kds.erp.biz.setum.basic.StandardOfferB
 	// subform fields
 	form.setProductId(new Integer(0));
 	form.setPrice(new BigDecimal(0));
+	form.setEntryPrice(new BigDecimal(0));
+	form.setSellPrice(new BigDecimal(0));
+	form.setPrice1(new BigDecimal(0));
+	form.setPrice2(new BigDecimal(0));
 	form.setRelativeGain(new Double(0));
 	form.setAbsoluteGain(new BigDecimal(0));
 
@@ -125,8 +129,6 @@ public class StandardOfferBean extends ro.kds.erp.biz.setum.basic.StandardOfferB
 	form.setProductCategory("");
 	form.setProductCode("");
 	form.setProductName("");
-	form.setEntryPrice(new BigDecimal(0));
-	form.setSellPrice(new BigDecimal(0));
     }
 
     /**
@@ -455,12 +457,36 @@ public class StandardOfferBean extends ro.kds.erp.biz.setum.basic.StandardOfferB
     }
 
     public ResponseBean addProduct(Integer productId) {
-	form.setProductId(productId);
-	computeCalculatedFields(null);
-	form.setPrice(form.getSellPrice());
-	form.setPrice1(form.getSellPrice());
-	offerItem = null;
-	return saveSubForm();
+	ResponseBean r;
+
+
+	try {
+	    InitialContext ic = new InitialContext();
+	    Context env = (Context)ic.lookup("java:comp/env");
+	    ProductLocalHome ph = (ProductLocalHome)PortableRemoteObject.narrow
+		(env.lookup("ejb/ProductHome"), ProductLocalHome.class);
+	    ProductLocal p = ph.findByPrimaryKey(form.getProductId());
+
+	    form.setProductId(productId);
+	    
+	    form.setPrice(p.getSellPrice());
+	    form.setPrice1(p.getPrice1());
+	    form.setPrice2(p.getPrice2());
+	    
+	    computeCalculatedFields(null);
+	
+	    offerItem = null;
+	    r = saveSubForm();
+	} catch (FinderException e) {
+	    logger.log(BasicLevel.ERROR, "Product not found for id " + 
+		       form.getProductId());
+	    r = ResponseBean.getErrNotFound("Product");
+	} catch (NamingException e) {
+	    logger.log(BasicLevel.ERROR, "Could not retrieve the product's details", e);
+	    r = ResponseBean.getErrConfigNaming("ejb/ProductHome");
+	}
+	return r;
+
     }
 
     public ResponseBean removeItem() {
