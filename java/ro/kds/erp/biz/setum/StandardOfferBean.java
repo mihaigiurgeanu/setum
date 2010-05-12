@@ -465,7 +465,7 @@ public class StandardOfferBean extends ro.kds.erp.biz.setum.basic.StandardOfferB
 	    Context env = (Context)ic.lookup("java:comp/env");
 	    ProductLocalHome ph = (ProductLocalHome)PortableRemoteObject.narrow
 		(env.lookup("ejb/ProductHome"), ProductLocalHome.class);
-	    ProductLocal p = ph.findByPrimaryKey(form.getProductId());
+	    ProductLocal p = ph.findByPrimaryKey(productId);
 
 	    form.setProductId(productId);
 	    
