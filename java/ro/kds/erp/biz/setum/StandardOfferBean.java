@@ -291,9 +291,14 @@ public class StandardOfferBean extends ro.kds.erp.biz.setum.basic.StandardOfferB
 			r.addField("offerLines.category", 
 				   p.getCategory().getName());
 			r.addField("offerLines.name", p.getName());
+
+			r.addField("offerLines.sellPrice", p.getSellPrice());
+			r.addField("offerLines.entryPrice", p.getEntryPrice());
 		    }
 
 		    r.addField("offerLines.price", item.getPrice());
+		    r.addField("offerLines.price1", item.getPrice1());
+		    r.addField("offerLines.price2", item.getPrice2());
 		
 		}
 
@@ -465,7 +470,7 @@ public class StandardOfferBean extends ro.kds.erp.biz.setum.basic.StandardOfferB
 	    Context env = (Context)ic.lookup("java:comp/env");
 	    ProductLocalHome ph = (ProductLocalHome)PortableRemoteObject.narrow
 		(env.lookup("ejb/ProductHome"), ProductLocalHome.class);
-	    ProductLocal p = ph.findByPrimaryKey(form.getProductId());
+	    ProductLocal p = ph.findByPrimaryKey(productId);
 
 	    form.setProductId(productId);
 	    
