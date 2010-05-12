@@ -163,7 +163,7 @@
 	    <treecol id="offerLines.price1" label="Pret cu usa" flex="1"/>
 	    <splitter class="tree-splitter"/>
 	    <treecol id="offerLines.price2" label="Manopera" flex="1"/>
-	    <splitter class="tree-splitter/>
+	    <splitter class="tree-splitter"/>
 	    <treecol id="offersLines.sellPrice" label="Pret curent" flex="1"/>
 	    <splitter class="tree-splitter"/>
 	    <treecol id="offersLines.entryPrice" label="Cost" flex="1"/>
