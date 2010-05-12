@@ -291,9 +291,14 @@ public class StandardOfferBean extends ro.kds.erp.biz.setum.basic.StandardOfferB
 			r.addField("offerLines.category", 
 				   p.getCategory().getName());
 			r.addField("offerLines.name", p.getName());
+
+			r.addField("offerLines.sellPrice", p.getSellPrice());
+			r.addField("offerLines.entryPrice", p.getEntryPrice());
 		    }
 
 		    r.addField("offerLines.price", item.getPrice());
+		    r.addField("offerLines.price1", item.getPrice1());
+		    r.addField("offerLines.price2", item.getPrice2());
 		
 		}
 
