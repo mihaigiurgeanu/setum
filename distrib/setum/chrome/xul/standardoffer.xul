@@ -238,7 +238,7 @@
 		<textbox id="entryPrice" readonly="true"/>
 	      </row>
 	      <row>
-		<label control="sellPrice" value="Pret magazin:"/>
+		<label control="sellPrice" value="Pret curent:"/>
 		<textbox id="sellPrice" readonly="true"/>
 	      </row>
 	      <row>
