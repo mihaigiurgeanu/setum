@@ -35,6 +35,12 @@ public interface UsaStandard extends EJBObject {
     public ResponseBean updateSildId(Integer newSildId) throws RemoteException;
     public ResponseBean updateYallaId(Integer newYallaId) throws RemoteException;
     public ResponseBean updateVizorId(Integer newVizorId) throws RemoteException;
+    public ResponseBean updateFilterUsa(String newFilterUsa) throws RemoteException;
+    public ResponseBean updateFilterBroasca(String newFilterBroasca) throws RemoteException;
+    public ResponseBean updateFilterCilindru(String newFilterCilindru) throws RemoteException;
+    public ResponseBean updateFilterSild(String newFilterSild) throws RemoteException;
+    public ResponseBean updateFilterYalla(String newFilterYalla) throws RemoteException;
+    public ResponseBean updateFilterVizor(String newFilterVizor) throws RemoteException;
 
     public ResponseBean loadListing(Integer startRow) throws RemoteException;
     public ResponseBean getListingLength() throws RemoteException;

@@ -36,6 +36,12 @@ public class UsaStandardForm implements Serializable {
     Integer sildId;
     Integer yallaId;
     Integer vizorId;
+    String filterUsa;
+    String filterBroasca;
+    String filterCilindru;
+    String filterSild;
+    String filterYalla;
+    String filterVizor;
 
     public UsaStandardForm() {
 
@@ -73,6 +79,30 @@ public class UsaStandardForm implements Serializable {
 
 
        this.vizorId = new Integer(0);
+
+
+
+       this.filterUsa = "";
+
+
+
+       this.filterBroasca = "";
+
+
+
+       this.filterCilindru = "";
+
+
+
+       this.filterSild = "";
+
+
+
+       this.filterYalla = "";
+
+
+
+       this.filterVizor = "";
 
 
 
@@ -210,6 +240,96 @@ public class UsaStandardForm implements Serializable {
 	AttributeLocal a = (AttributeLocal)attributes.get("vizorId");
 	if(a != null) {
 	    this.setVizorId(a.getIntValue());
+	}
+    }
+
+    public void setFilterUsa(String newFilterUsa) {
+        this.filterUsa = newFilterUsa;
+    }
+
+    public String getFilterUsa() {
+        return filterUsa;
+    }
+
+    public void readFilterUsa(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("filterUsa");
+	if(a != null) {
+	    this.setFilterUsa(a.getStringValue());
+	}
+    }
+
+    public void setFilterBroasca(String newFilterBroasca) {
+        this.filterBroasca = newFilterBroasca;
+    }
+
+    public String getFilterBroasca() {
+        return filterBroasca;
+    }
+
+    public void readFilterBroasca(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("filterBroasca");
+	if(a != null) {
+	    this.setFilterBroasca(a.getStringValue());
+	}
+    }
+
+    public void setFilterCilindru(String newFilterCilindru) {
+        this.filterCilindru = newFilterCilindru;
+    }
+
+    public String getFilterCilindru() {
+        return filterCilindru;
+    }
+
+    public void readFilterCilindru(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("filterCilindru");
+	if(a != null) {
+	    this.setFilterCilindru(a.getStringValue());
+	}
+    }
+
+    public void setFilterSild(String newFilterSild) {
+        this.filterSild = newFilterSild;
+    }
+
+    public String getFilterSild() {
+        return filterSild;
+    }
+
+    public void readFilterSild(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("filterSild");
+	if(a != null) {
+	    this.setFilterSild(a.getStringValue());
+	}
+    }
+
+    public void setFilterYalla(String newFilterYalla) {
+        this.filterYalla = newFilterYalla;
+    }
+
+    public String getFilterYalla() {
+        return filterYalla;
+    }
+
+    public void readFilterYalla(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("filterYalla");
+	if(a != null) {
+	    this.setFilterYalla(a.getStringValue());
+	}
+    }
+
+    public void setFilterVizor(String newFilterVizor) {
+        this.filterVizor = newFilterVizor;
+    }
+
+    public String getFilterVizor() {
+        return filterVizor;
+    }
+
+    public void readFilterVizor(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("filterVizor");
+	if(a != null) {
+	    this.setFilterVizor(a.getStringValue());
 	}
     }
 

@@ -40,6 +40,32 @@
     <type>Integer</type>
   </field>
 
+  <!-- Filter -->
+  <field>
+    <name>filterUsa</name>
+    <type>String</type>
+  </field>
+  <field>
+    <name>filterBroasca</name>
+    <type>String</type>
+  </field>
+  <field>
+    <name>filterCilindru</name>
+    <type>String</type>
+  </field>
+  <field>
+    <name>filterSild</name>
+    <type>String</type>
+  </field>
+  <field>
+    <name>filterYalla</name>
+    <type>String</type>
+  </field>
+  <field>
+    <name>filterVizor</name>
+    <type>String</type>
+  </field>
+
   <remote>
     <method>ResponseBean loadListing(Integer startRow) throws RemoteException</method>
     <method>ResponseBean getListingLength() throws RemoteException</method>
