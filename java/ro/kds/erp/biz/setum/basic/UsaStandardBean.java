@@ -523,6 +523,162 @@ public abstract class UsaStandardBean
 	computeCalculatedFields(r);
 	return r;
     }
+    public ResponseBean updateFilterUsa(String filterUsa) {
+        ResponseBean r = new ResponseBean();
+	String oldVal = form.getFilterUsa();
+	form.setFilterUsa(filterUsa);
+	r.addRecord();
+	r.addField("filterUsa", filterUsa); // for number format
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".filterUsa");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
+		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
+		script.setVar(FORM_VARNAME, form, UsaStandardForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the filterUsa", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
+    public ResponseBean updateFilterBroasca(String filterBroasca) {
+        ResponseBean r = new ResponseBean();
+	String oldVal = form.getFilterBroasca();
+	form.setFilterBroasca(filterBroasca);
+	r.addRecord();
+	r.addField("filterBroasca", filterBroasca); // for number format
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".filterBroasca");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
+		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
+		script.setVar(FORM_VARNAME, form, UsaStandardForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the filterBroasca", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
+    public ResponseBean updateFilterCilindru(String filterCilindru) {
+        ResponseBean r = new ResponseBean();
+	String oldVal = form.getFilterCilindru();
+	form.setFilterCilindru(filterCilindru);
+	r.addRecord();
+	r.addField("filterCilindru", filterCilindru); // for number format
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".filterCilindru");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
+		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
+		script.setVar(FORM_VARNAME, form, UsaStandardForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the filterCilindru", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
+    public ResponseBean updateFilterSild(String filterSild) {
+        ResponseBean r = new ResponseBean();
+	String oldVal = form.getFilterSild();
+	form.setFilterSild(filterSild);
+	r.addRecord();
+	r.addField("filterSild", filterSild); // for number format
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".filterSild");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
+		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
+		script.setVar(FORM_VARNAME, form, UsaStandardForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the filterSild", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
+    public ResponseBean updateFilterYalla(String filterYalla) {
+        ResponseBean r = new ResponseBean();
+	String oldVal = form.getFilterYalla();
+	form.setFilterYalla(filterYalla);
+	r.addRecord();
+	r.addField("filterYalla", filterYalla); // for number format
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".filterYalla");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
+		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
+		script.setVar(FORM_VARNAME, form, UsaStandardForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the filterYalla", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
+    public ResponseBean updateFilterVizor(String filterVizor) {
+        ResponseBean r = new ResponseBean();
+	String oldVal = form.getFilterVizor();
+	form.setFilterVizor(filterVizor);
+	r.addRecord();
+	r.addField("filterVizor", filterVizor); // for number format
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".filterVizor");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
+		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
+		script.setVar(FORM_VARNAME, form, UsaStandardForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the filterVizor", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
 
 
     /**
@@ -538,6 +694,12 @@ public abstract class UsaStandardBean
 	r.addField("sildId", form.getSildId());
 	r.addField("yallaId", form.getYallaId());
 	r.addField("vizorId", form.getVizorId());
+	r.addField("filterUsa", form.getFilterUsa());
+	r.addField("filterBroasca", form.getFilterBroasca());
+	r.addField("filterCilindru", form.getFilterCilindru());
+	r.addField("filterSild", form.getFilterSild());
+	r.addField("filterYalla", form.getFilterYalla());
+	r.addField("filterVizor", form.getFilterVizor());
 	loadValueLists(r);
     }
 
@@ -605,6 +767,42 @@ public abstract class UsaStandardBean
 	    s.setVar("vizorId", form.getVizorId(), Integer.class);
 	} catch (ScriptErrorException e) {
 	    logger.log(BasicLevel.WARN, "Can not set the value of field: vizorId from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    s.setVar("filterUsa", form.getFilterUsa(), String.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: filterUsa from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    s.setVar("filterBroasca", form.getFilterBroasca(), String.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: filterBroasca from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    s.setVar("filterCilindru", form.getFilterCilindru(), String.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: filterCilindru from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    s.setVar("filterSild", form.getFilterSild(), String.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: filterSild from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    s.setVar("filterYalla", form.getFilterYalla(), String.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: filterYalla from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    s.setVar("filterVizor", form.getFilterVizor(), String.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: filterVizor from the script");
             logger.log(BasicLevel.DEBUG, e);
         }
         logger.log(BasicLevel.DEBUG, "end");
@@ -713,6 +911,72 @@ public abstract class UsaStandardBean
 	    }
 	} catch (ScriptErrorException e) {
 	    logger.log(BasicLevel.WARN, "Can not get the value of field: vizorId from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    field = s.getVar("filterUsa", String.class);
+	    if(!field.equals(form.getFilterUsa())) {
+	        logger.log(BasicLevel.DEBUG, "Field filterUsa modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setFilterUsa((String)field);
+	        r.addField("filterUsa", (String)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: filterUsa from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    field = s.getVar("filterBroasca", String.class);
+	    if(!field.equals(form.getFilterBroasca())) {
+	        logger.log(BasicLevel.DEBUG, "Field filterBroasca modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setFilterBroasca((String)field);
+	        r.addField("filterBroasca", (String)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: filterBroasca from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    field = s.getVar("filterCilindru", String.class);
+	    if(!field.equals(form.getFilterCilindru())) {
+	        logger.log(BasicLevel.DEBUG, "Field filterCilindru modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setFilterCilindru((String)field);
+	        r.addField("filterCilindru", (String)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: filterCilindru from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    field = s.getVar("filterSild", String.class);
+	    if(!field.equals(form.getFilterSild())) {
+	        logger.log(BasicLevel.DEBUG, "Field filterSild modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setFilterSild((String)field);
+	        r.addField("filterSild", (String)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: filterSild from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    field = s.getVar("filterYalla", String.class);
+	    if(!field.equals(form.getFilterYalla())) {
+	        logger.log(BasicLevel.DEBUG, "Field filterYalla modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setFilterYalla((String)field);
+	        r.addField("filterYalla", (String)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: filterYalla from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    field = s.getVar("filterVizor", String.class);
+	    if(!field.equals(form.getFilterVizor())) {
+	        logger.log(BasicLevel.DEBUG, "Field filterVizor modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setFilterVizor((String)field);
+	        r.addField("filterVizor", (String)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: filterVizor from the script");
             logger.log(BasicLevel.DEBUG, e);
         }
     }

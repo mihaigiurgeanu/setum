@@ -50,6 +50,8 @@ public class UsaStandardBean
      * Form data initialization
      */
     public void createNewFormBean() {
+	logger.log(BasicLevel.DEBUG, "Creating a new form bean");
+
 	super.createNewFormBean();
 
 	form.setName("");
@@ -61,6 +63,7 @@ public class UsaStandardBean
 	form.setSildId(new Integer(0));
 	form.setYallaId(new Integer(0));
 	form.setVizorId(new Integer(0));
+
     }
 
     /**
@@ -250,6 +253,92 @@ public class UsaStandardBean
     }
 
     /**
+     * Returneaza lista usilor standard filtrata dupa anumite conditii.
+     */
+    private ArrayList getFilteredItems() throws NamingException, FinderException {
+	ArrayList items = new ArrayList();
+
+	InitialContext ic = new InitialContext();
+	Context env = (Context)ic.lookup("java:comp/env");
+	CategoryLocalHome ch =
+	    (CategoryLocalHome)PortableRemoteObject.narrow
+	    (env.lookup("ejb/CategoryHome"), CategoryLocalHome.class);
+	CategoryLocal c = ch.findByPrimaryKey(USA_STD_ID);
+	
+	Collection products = c.getProducts();
+
+	for(Iterator i = products.iterator(); i.hasNext(); ) {
+	    
+	    ProductLocal p = (ProductLocal)i.next();
+	    
+	    CompositeProductLocal cp = p.getCompositeProduct();
+	    Collection parts = cp.getComponents();
+	    String usa = "";
+	    String broasca = "";
+	    String cilindru = "";
+	    String sild = "";
+	    String yalla = "";
+	    String vizor = "";
+	    for(Iterator j = parts.iterator(); j.hasNext(); ) {
+		ProductLocal part = (ProductLocal)j.next();
+		Integer catid = part.getCategory().getId();
+		if(catid.equals(USA_SIMPLA_ID)) {
+		    usa = part.getName();
+		} else if(catid.equals(BROASCA_ID)) {
+		    broasca = part.getName();
+		} else if(catid.equals(CILINDRU_ID)) {
+		    cilindru = part.getName();
+		} else if(catid.equals(SILD_ID)) {
+		    sild = part.getName();
+		} else if(catid.equals(YALLA_ID)) {
+		    yalla = part.getName();
+		} else if(catid.equals(VIZOR_ID)) {
+		    vizor = part.getName();
+		} else {
+		    logger.log(BasicLevel.WARN, "Productd " + p.getId() + 
+			       " has an unknown component type " 
+			       + part.getCategory().getName());
+		}
+		
+	    }
+	    if(stringFilter(usa, form.getFilterUsa()) &&
+	       stringFilter(broasca, form.getFilterBroasca()) &&
+	       stringFilter(sild, form.getFilterSild()) &&
+	       stringFilter(cilindru, form.getFilterCilindru()) &&
+	       stringFilter(yalla, form.getFilterYalla()) &&
+	       stringFilter(vizor, form.getFilterVizor())) {
+		
+		items.add(p);
+	    } else {
+		logger.log(BasicLevel.DEBUG, "Product " + p.getId() + " was filtered out.");
+	    }
+	}
+
+	return items;
+    }
+
+    /**
+     * Helper method that matches a value against a filter. The filter
+     * will match if the value contains the filter. The comparison is
+     * made in case insensitive mode.
+     */
+    private boolean stringFilter(String value, String filter) {
+	if(filter == null || filter.length() == 0)
+	    return true;
+	
+	if(value == null) {
+	    logger.log(BasicLevel.WARN, "stringFilter: valoarea este null");
+	    return true;
+	}
+
+	if(value.toUpperCase().indexOf(filter.toUpperCase()) > -1) {
+	    return true;
+	}
+
+	return false;
+    }
+
+    /**
      * Returns the number of products in the listing managed by this bean.
      * It also initializes a listing cache from which the loadListing method
      * will read data to return partial listings.
@@ -263,15 +352,7 @@ public class UsaStandardBean
     public ResponseBean getListingLength() {
 	ResponseBean r;
 	try {
-	    InitialContext ic = new InitialContext();
-	    Context env = (Context)ic.lookup("java:comp/env");
-	    CategoryLocalHome ch =
-		(CategoryLocalHome)PortableRemoteObject.narrow
-		(env.lookup("ejb/CategoryHome"), CategoryLocalHome.class);
-	    CategoryLocal c = ch.findByPrimaryKey(USA_STD_ID);
-	    
-	    Collection products = c.getProducts();
-	    productsListing = new ArrayList(products);
+	    productsListing = getFilteredItems();
  
 	    r = new ResponseBean();
 	    r.addRecord();
