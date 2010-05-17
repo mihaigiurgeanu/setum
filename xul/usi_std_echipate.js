@@ -48,4 +48,8 @@ function remove_selected_product() {
 }
 
 theForm.setupEventListeners();
+
+// addnew pentru select filtru de selectie
+theForm.addnew();
+document.getElementById('maintab').selectedIndex=0;
 load_usi();
