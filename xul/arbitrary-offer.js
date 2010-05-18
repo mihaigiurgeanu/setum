@@ -119,6 +119,11 @@ function edit_product() {
 	    req.add("field", "productId");
 	    req.add("value", productId);
 	    this.theForm.post_request(req);
+	    // trimit si comanda de save ca sa evit eroarea
+	    // in care utilizatorul uita sa salveze (specific cerut de Garofita)
+	    req = this.theForm.get_request();
+	    req.add("command", "saveSubForm");
+	    this.theForm.post_save_request(req);
 	}
     };
 
