@@ -81,7 +81,7 @@ Dialog selectare usi standard.
       <![CDATA[
     var usi;
     function load_usi() {
-        usi = new RemoteDataView(do_link, "loadListing", "getListingLength");
+        usi = new RemoteDataView(theForm.do_link, "loadListing", "getListingLength");
         document.getElementById('listingUsi').view = make_treeview
 	    (usi,
 	     function(row, column) {
@@ -114,9 +114,9 @@ Dialog selectare usi standard.
 
     theForm.setupEventListeners();
     theForm.addnew();
-    //load_usi();
+    load_usi();
 
       ]]>
-      </script>
+  </script>
   
 </dialog>

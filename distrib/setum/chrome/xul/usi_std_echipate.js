@@ -32,12 +32,15 @@ function save() {
     document.getElementById('maintab').selectedIndex=0;
 }
 
-function addnew() {
+function send_new_command() {
+  var req = theForm.get_request();
+  req.add("command", "newFormData");
+  theForm.post_request(req);
+}
 
-    var req = theForm.get_request();
-    req.add("command", "newFormData");
-    theForm.post_request(req);
-    document.getElementById('maintab').selectedIndex=1;
+function addnew() {
+  send_new_command();
+  document.getElementById('maintab').selectedIndex=1;
 }
 
 function remove_selected_product() {
@@ -48,4 +51,7 @@ function remove_selected_product() {
 }
 
 theForm.setupEventListeners();
+
+// addnew pentru select filtru de selectie
+send_new_command();
 load_usi();
