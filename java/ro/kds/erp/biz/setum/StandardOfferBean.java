@@ -770,9 +770,16 @@ public class StandardOfferBean extends ro.kds.erp.biz.setum.basic.StandardOfferB
 	
 	ResponseBean r;
 
-	// To add 10% you would multply with 1.1 (10 + 100)/100
-	BigDecimal multiplier = percent.add(new BigDecimal(100)).
-	    divide(new BigDecimal(100), 8, BigDecimal.ROUND_HALF_UP);
+	BigDecimal multiplier;
+	if(percent.doubleValue() >= 0) {
+	    // To add 10% you would multply with 1.1 (10 + 100)/100
+	    multiplier = percent.add(new BigDecimal(100)).
+		divide(new BigDecimal(100), 8, BigDecimal.ROUND_HALF_UP);
+	} else {
+	    // modificare specific SETUM ceruta de Garofita
+	    multiplier = new BigDecimal(100).divide(new BigDecimal(100 - percent.doubleValue()), 
+						    8, BigDecimal.ROUND_HALF_UP);
+	}
 
 	if (id == null) {
 	    r = ResponseBean.ERR_NOTCURRENT;
