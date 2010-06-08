@@ -681,14 +681,8 @@ public class OrdersBiz extends OrdersBean {
 		r.addField("orders.client",	o.getClient().getName());
 	    else
 		r.addField("orders.client",	"");
-	    try {
-		r.addField("orders.localitate",	
-			   ValueLists.getValueByCode(12005, o.getDeliveryLocation().toString()).getName());
-	    } catch (Exception e) {
-		r.addField("orders.localitate", "-");
-		logger.log(BasicLevel.ERROR, "Can not read the value of orders.localitate for code " 
-			   + o.getDeliveryLocation());
-	    }
+	    r.addField("orders.localitate",	o.getDeliveryLocationOther());
+
 	    r.addField("orders.distanta",	o.getDeliveryDistance());
 	    r.addField("orders.avans",		o.getAdvancePayment());
 	    r.addField("orders.termenLivrare",	o.getDeliveryTerm());
