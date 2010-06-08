@@ -224,7 +224,7 @@
 			 req.add("param0", productId);
 			 this.theForm.post_request(req);
 		     },
-		     select_end: products_added
+		     select_end: load_items
 		 };
 
 		 window.openDialog("select-usastd.xul", "usistdselction", "chrome,modal", select_handler);
@@ -239,7 +239,7 @@
 	     }
 
 	     // callback function used to add one product to the current selection
-	     function add_one_product(productId) {
+	     function addProduct(productId) {
 		 var req = theForm.get_request();
 		 req.add("command", "addProduct");
 		 req.add("param0", productId);
@@ -251,7 +251,7 @@
 	     // calls add_one_product(productId) for each product selected; at the end,
 	     // the dialog calls products_added() to signal that all products selected
 	     // by the user were added.
-	     function products_added() {
+	     function load_items() {
 		 load_products();
 	     }
 
