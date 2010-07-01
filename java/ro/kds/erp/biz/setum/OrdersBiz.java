@@ -152,13 +152,13 @@ public class OrdersBiz extends OrdersBean {
 					    new Integer(30)).intValue();
 
 	    form.setTvaPercent(prefs.getDouble("invoices.tax.percent",
-					       new Double(19.0)));
+					       new Double(24.0)));
 	    form.setCurrencyCode(prefs.get("default.currecy", "RON"));
 
 	} catch (Exception e) {
 	    logger.log(BasicLevel.ERROR, "Exception when geting preferences: ", e);
 	    defaultDelivery = 30;
-	    form.setTvaPercent(new Double(19.0));
+	    form.setTvaPercent(new Double(24.0));
 	    form.setCurrencyCode("RON");
 	}
 	
@@ -2097,7 +2097,7 @@ public class OrdersBiz extends OrdersBean {
 			    r.addField("valoareTransport", new BigDecimal(transport).setScale(2, RoundingMode.HALF_UP));
 			    double lineValue = form.getValue().doubleValue() + montaj * form.getQuantity().doubleValue() + transport;
 			    r.addField("lineValue", new BigDecimal(lineValue).setScale(2, RoundingMode.HALF_UP));
-			    double lineTax = lineValue * 0.19;
+			    double lineTax = lineValue * 0.24;
 			    r.addField("lineTax", new BigDecimal(lineTax).setScale(2, RoundingMode.HALF_UP));
 			    r.addField("lineTotal", new BigDecimal(lineValue).setScale(2, RoundingMode.HALF_UP).doubleValue() + new BigDecimal(lineTax).setScale(2, RoundingMode.HALF_UP).doubleValue());
 			    

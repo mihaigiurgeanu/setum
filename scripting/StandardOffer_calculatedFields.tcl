@@ -4,7 +4,7 @@ if {$price == 0} {
     set price [expr $sellPrice]
 }
 
-set vatPrice [expr round($price * 1.19)]
+set vatPrice [expr round($price * 1.24)]
 
 set period [expr ($dateTo - $dateFrom)/(3600 * 24)]
 

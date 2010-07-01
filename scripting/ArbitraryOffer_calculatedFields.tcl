@@ -35,12 +35,12 @@ if {[info exists attribute6] == 0
 }
 
 
-set valVatMontaj [expr $valMontaj * 1.19]
-set valVatTransport [expr $valTransport * 1.19]
+set valVatMontaj [expr $valMontaj * 1.24]
+set valVatTransport [expr $valTransport * 1.24]
 
-set vatPrice [expr round($price * 1.19 + $valVatMontaj + $valVatTransport) - $valVatMontaj - $valVatTransport]
+set vatPrice [expr round($price * 1.24 + $valVatMontaj + $valVatTransport) - $valVatMontaj - $valVatTransport]
 
-set price [expr $vatPrice / 1.19]
+set price [expr $vatPrice / 1.24]
 
 
 set absoluteGain [expr $price - $sellPrice]

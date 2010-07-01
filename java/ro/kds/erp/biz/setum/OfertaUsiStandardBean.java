@@ -55,7 +55,7 @@ public class OfertaUsiStandardBean
     /**
      * Constant VAT value
      */
-    private static final BigDecimal VAT = new BigDecimal(0.19);
+    private static final BigDecimal VAT = new BigDecimal(0.24);
 
     /**
      * Cache the line items listing. The cache is initialized
