@@ -904,7 +904,11 @@ public class OfertaUsiStandardBean
 	theMap.put("offerDateFrom", form.getDateFrom());
 	theMap.put("offerDateTo", form.getDateTo());
 	theMap.put("offerPeriod", form.getPeriod());
-	theMap.put("offerName", form.getName());
+	if(currentSelection != null) {
+	    theMap.put("offerName", currentSelection.getName());
+	} else {
+	    theMap.put("offerName", form.getName());
+	}
 	theMap.put("offerDescription", form.getDescription());
 	theMap.put("offerComment", form.getComment());
 
