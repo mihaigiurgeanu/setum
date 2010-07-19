@@ -80,6 +80,7 @@ public class ClientsBeanImplementation extends ClientsBean {
 	    client.setBank(form.getBank());
 	    client.setComment(form.getComment());
 	    client.setAttribute1(form.getRegCom());
+	    client.setAttribute2(form.getCnp());
 	    
 	    r = new ResponseBean();
 	} catch (Exception e) {
@@ -123,6 +124,7 @@ public class ClientsBeanImplementation extends ClientsBean {
 	    form.setBank(client.getBank());
 	    form.setComment(client.getComment());
 	    form.setRegCom(client.getAttribute1());
+	    form.setCnp(client.getAttribute2());
 
 	    r = new ResponseBean();
 	} catch (FinderException e) {

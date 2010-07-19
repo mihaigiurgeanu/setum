@@ -554,10 +554,13 @@ public class OrdersBiz extends OrdersBean {
         orderLineId = null;
 	form.setOfferItemId(offerItemId);
 
+	logger.log(BasicLevel.DEBUG, "entering addItem");
+
 	ResponseBean r;
 	try {
+	    OfferItemLocal oi = null;
 	    try {
-		OfferItemLocal oi = getOfferItem();
+		oi = getOfferItem();
 
 		// avoiding bug when quantity was not set in the offer
 		if(oi.getQuantity() == null) {
@@ -579,14 +582,47 @@ public class OrdersBiz extends OrdersBean {
 	    } catch (NamingException e) {
 		logger.log(BasicLevel.WARN, "Naming exception when getting the offer item. Continue execution of business logic.");
 		logger.log(BasicLevel.DEBUG, e);
-	    }	    
+	    }
+
 	    computeCalculatedFields(null);
 	    r = saveOrderLineData();
+	    logger.log(BasicLevel.DEBUG, "cod raspuns saveOrderLineData: " + r.getCode());
+	    logger.log(BasicLevel.DEBUG, "obiectul offer item" + oi);
+	    if (r.getCode() == ResponseBean.CODE_SUCCESS) {
+		if (oi != null) {
+		    OrderLocal o = getCurrentOrder();
+		    logger.log(BasicLevel.DEBUG, "numar order items: " + o.getLines().size());
+
+		    if (o.getLines().size() == 1) {
+			form.setLocalitate(oi.getLocationId());
+			form.setLocalitateAlta(oi.getOtherLocation());
+			form.setDistanta(oi.getDistance());
+			
+			o.setDeliveryLocation(form.getLocalitate());
+			o.setDeliveryLocationOther(form.getLocalitateAlta());
+			o.setDeliveryDistance(form.getDistanta());
+
+			r.addField("localitate", form.getLocalitate());
+			r.addField("localitateAlta", form.getLocalitateAlta());
+			r.addField("distanta", form.getDistanta());
+
+			logger.log(BasicLevel.DEBUG, "localitate id: " + form.getLocalitate());
+			logger.log(BasicLevel.DEBUG, "localitateAlta: " + form.getLocalitateAlta());
+			logger.log(BasicLevel.DEBUG, "distanta: " + form.getDistanta());
+		    }
+		}
+	    }
+
 	} catch (FinderException e) {
 	    logger.log(BasicLevel.ERROR, "Finder exception " + e);
 	    logger.log(BasicLevel.DEBUG, e);
 	    r = ResponseBean.getErrNotFound(e.getMessage());
+	} catch (NamingException e) {
+	    logger.log(BasicLevel.WARN, "Naming exception when getting the order.");
+	    logger.log(BasicLevel.DEBUG, e);
+	    r = ResponseBean.getErrConfigNaming(e.getMessage());
 	}
+	logger.log(BasicLevel.DEBUG, "exit addItem");
         return r;
     }
 

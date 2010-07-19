@@ -50,6 +50,7 @@ public class ClientUtils {
 	    r.addField("clientBank", "");
 	    r.addField("clientComment", "");
 	    r.addField("clientRegCom", "");
+	    r.addField("clientCnp", "");
 	} else {
 	    r.addField("clientIsCompany", client.getIsCompany());
 	    r.addField("clientAddress", client.getAddress());
@@ -63,6 +64,7 @@ public class ClientUtils {
 	    r.addField("clientBank", client.getBank());
 	    r.addField("clientComment", client.getComment());
 	    r.addField("clientRegCom", client.getAttribute1());
+	    r.addField("clientCnp", client.getAttribute2());
 	}
     }
 

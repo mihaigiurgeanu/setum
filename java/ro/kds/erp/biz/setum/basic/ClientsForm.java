@@ -37,6 +37,7 @@ public class ClientsForm implements Serializable {
     String countryCode;
     String companyCode;
     String regCom;
+    String cnp;
     String phone;
     String iban;
     String bank;
@@ -91,6 +92,10 @@ public class ClientsForm implements Serializable {
 
 
        this.regCom = "";
+
+
+
+       this.cnp = "";
 
 
 
@@ -295,6 +300,21 @@ public class ClientsForm implements Serializable {
 	AttributeLocal a = (AttributeLocal)attributes.get("regCom");
 	if(a != null) {
 	    this.setRegCom(a.getStringValue());
+	}
+    }
+
+    public void setCnp(String newCnp) {
+        this.cnp = newCnp;
+    }
+
+    public String getCnp() {
+        return cnp;
+    }
+
+    public void readCnp(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("cnp");
+	if(a != null) {
+	    this.setCnp(a.getStringValue());
 	}
     }
 
