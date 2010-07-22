@@ -156,7 +156,7 @@
 
       <fo:block font-family="Times" font-size="10pt" font-weight="bold" text-decoration="underline" text-align="right" space-before="1cm">TOTAL OFERTA NR  ${doc["response/record/field[attribute::name='no']"]}/Data ${doc["response/record/field[attribute::name='dateFrom']"]}</fo:block>
       <fo:block font-family="Times" font-size="10pt" font-weight="bold" text-align="right">TOTAL fara TVA: ${((offer_value!0)/(cursul?number))?string("#,##0.00")} ${moneda}</fo:block>
-      <fo:block font-family="Times" font-size="10pt" font-weight="bold" text-align="right">TOTAL cu TVA: ${(((offer_value!0)/(cursul?number)) * 1.19)?string("#,##0.00")} ${moneda}</fo:block>
+      <fo:block font-family="Times" font-size="10pt" font-weight="bold" text-align="right">TOTAL cu TVA: ${(((offer_value!0)/(cursul?number)) * 1.24)?string("#,##0.00")} ${moneda}</fo:block>
 
       <fo:block font-family="Times" font-size="10pt" linefeed-treatment="preserve">
 	<fo:inline font-weight="bold">OBSERVATII:</fo:inline>
