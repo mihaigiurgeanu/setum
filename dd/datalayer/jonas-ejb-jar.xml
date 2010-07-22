@@ -11,6 +11,8 @@
   <jonas-entity>
     <ejb-name>ProductEJB</ejb-name>
     <jndi-local-name>ProductLocalHome</jndi-local-name>
+    <shared>false</shared>
+    <lock-policy>container-read-write</lock-policy>
     <jdbc-mapping>
       <jndi-name>erpsetumdb</jndi-name>
       <automatic-pk>true</automatic-pk>
@@ -52,9 +54,12 @@
     </jdbc-mapping>
     <cleanup>create</cleanup>
   </jonas-entity>
+
   <jonas-entity>
     <ejb-name>AttributeEJB</ejb-name>
     <jndi-local-name>AttributeLocalHome</jndi-local-name>
+    <shared>false</shared>
+    <lock-policy>container-read-write</lock-policy>
     <jdbc-mapping>
       <jndi-name>erpsetumdb</jndi-name>
       <automatic-pk>true</automatic-pk>
@@ -66,33 +71,45 @@
     </jdbc-mapping>
     <cleanup>create</cleanup>
   </jonas-entity>
+
   <jonas-entity>
     <ejb-name>CategoryEJB</ejb-name>
     <jndi-local-name>CategoryLocalHome</jndi-local-name>
+    <shared>false</shared>
+    <lock-policy>container-read-write</lock-policy>
     <jdbc-mapping>
       <jndi-name>erpsetumdb</jndi-name>
     </jdbc-mapping>
     <cleanup>create</cleanup>
   </jonas-entity>
+
   <jonas-entity>
     <ejb-name>CompositeProductEJB</ejb-name>
     <jndi-local-name>CompositeProductLocal</jndi-local-name>
+    <shared>false</shared>
+    <lock-policy>container-read-write</lock-policy>
     <jdbc-mapping>
       <jndi-name>erpsetumdb</jndi-name>
     </jdbc-mapping>
     <cleanup>create</cleanup>
   </jonas-entity>
+
   <jonas-entity>
     <ejb-name>OfferEJB</ejb-name>
     <jndi-local-name>OfferLocalHome</jndi-local-name>
+    <shared>false</shared>
+    <lock-policy>container-read-write</lock-policy>
     <jdbc-mapping>
       <jndi-name>erpsetumdb</jndi-name>
     </jdbc-mapping>
     <cleanup>create</cleanup>
   </jonas-entity>
+
   <jonas-entity>
     <ejb-name>OfferItemEJB</ejb-name>
     <jndi-local-name>OfferItemLocalHome</jndi-local-name>
+    <shared>false</shared>
+    <lock-policy>container-read-write</lock-policy>
     <jdbc-mapping>
       <jndi-name>erpsetumdb</jndi-name>
       <automatic-pk>true</automatic-pk>
@@ -144,15 +161,20 @@
   <jonas-entity>
     <ejb-name>DocumentEJB</ejb-name>
     <jndi-local-name>DocumentLocalHome</jndi-local-name>
+    <shared>false</shared>
+    <lock-policy>container-read-write</lock-policy>
     <jdbc-mapping>
       <jndi-name>erpsetumdb</jndi-name>
       <automatic-pk>true</automatic-pk>
     </jdbc-mapping>
     <cleanup>create</cleanup>
   </jonas-entity>
+
   <jonas-entity>
     <ejb-name>ClientEJB</ejb-name>
     <jndi-local-name>ClientLocalHome</jndi-local-name>
+    <shared>false</shared>
+    <lock-policy>container-read-write</lock-policy>
     <jdbc-mapping>
       <jndi-name>erpsetumdb</jndi-name>
       <automatic-pk>true</automatic-pk>
@@ -163,6 +185,8 @@
   <jonas-entity>
     <ejb-name>ContactEJB</ejb-name>
     <jndi-local-name>ContactLocalHome</jndi-local-name>
+    <shared>false</shared>
+    <lock-policy>container-read-write</lock-policy>
     <jdbc-mapping>
       <jndi-name>erpsetumdb</jndi-name>
       <automatic-pk>true</automatic-pk>
@@ -173,6 +197,8 @@
   <jonas-entity>
     <ejb-name>ProductsSelectionEJB</ejb-name>
     <jndi-local-name>ProductsSelectionHome</jndi-local-name>
+    <shared>false</shared>
+    <lock-policy>container-read-write</lock-policy>
     <jdbc-mapping>
       <jndi-name>erpsetumdb</jndi-name>
       <automatic-pk>true</automatic-pk>
@@ -184,6 +210,8 @@
   <jonas-entity>
     <ejb-name>OrderEJB</ejb-name>
     <jndi-local-name>OrderHome</jndi-local-name>
+    <shared>false</shared>
+    <lock-policy>container-read-write</lock-policy>
     <jdbc-mapping>
       <jndi-name>erpsetumdb</jndi-name>
       <cmp-field-jdbc-mapping>
@@ -209,6 +237,8 @@
   <jonas-entity>
     <ejb-name>OrderLineEJB</ejb-name>
     <jndi-local-name>OrderLineHome</jndi-local-name>
+    <shared>false</shared>
+    <lock-policy>container-read-write</lock-policy>
     <jdbc-mapping>
       <jndi-name>erpsetumdb</jndi-name>
       <automatic-pk>true</automatic-pk>
@@ -228,6 +258,8 @@
   <jonas-entity>
     <ejb-name>ProformaEJB</ejb-name>
     <jndi-local-name>ProformaHome</jndi-local-name>
+    <shared>false</shared>
+    <lock-policy>container-read-write</lock-policy>
     <cleanup>create</cleanup>
     <jdbc-mapping>
       <jndi-name>erpsetumdb</jndi-name>
@@ -247,6 +279,8 @@
   <jonas-entity>
     <ejb-name>InvoiceEJB</ejb-name>
     <jndi-local-name>InvoiceHome</jndi-local-name>
+    <shared>false</shared>
+    <lock-policy>container-read-write</lock-policy>
     <jdbc-mapping>
       <jndi-name>erpsetumdb</jndi-name>
       <cmp-field-jdbc-mapping>
@@ -266,6 +300,8 @@
   <jonas-entity>
     <ejb-name>PaymentEJB</ejb-name>
     <jndi-local-name>PaymentHome</jndi-local-name>
+    <shared>false</shared>
+    <lock-policy>container-read-write</lock-policy>
     <jdbc-mapping>
       <jndi-name>erpsetumdb</jndi-name>
 
@@ -282,11 +318,13 @@
   <jonas-entity>
     <ejb-name>DailySummaryEJB</ejb-name>
     <jndi-local-name>DailySummaryHome</jndi-local-name>
+    <shared>false</shared>
+    <lock-policy>container-read-write</lock-policy>
     <jdbc-mapping>
       <jndi-name>erpsetumdb</jndi-name>
 
       <automatic-pk>true</automatic-pk>
-
+      
       <cmp-field-jdbc-mapping>
 	<field-name>value1</field-name>
 	<jdbc-field-name>value1_</jdbc-field-name>

@@ -270,6 +270,8 @@ public class OrdersBiz extends OrdersBean {
 	ResponseBean r;
 
 	try {
+	    ClientLocal client = getFormClient();
+
 	    OrderLocal o;
 	    if(id == null) {
 		OrderLocalHome oh = getOrderHome();
@@ -299,7 +301,7 @@ public class OrdersBiz extends OrdersBean {
 
 	    o.getDocument().setNumber(form.getNumber());
 	    o.getDocument().setDate(form.getDate());
-	    o.setClient(getFormClient());
+	    o.setClient(client);
 
 	    o.setInstallation(form.getMontaj());
 	    o.setDeliveryLocation(form.getLocalitate());
@@ -946,7 +948,10 @@ public class OrdersBiz extends OrdersBean {
 	
 	try {
 	    ClientLocal client = getFormClient();
+	    form.setClientName(client.getName());
 	    r.addField("clientName", client.getName());
+	    form.setAdresaMontaj(client.getAddress() + ", " + client.getCity());
+	    r.addField("adresaMontaj", form.getAdresaMontaj());
 	} catch (NamingException e) {
 	    logger.log(BasicLevel.ERROR, "Can not get the client's name due to a naming configuration problem: " + e.getMessage());
 	    logger.log(BasicLevel.DEBUG, e);
@@ -1650,21 +1655,35 @@ public class OrdersBiz extends OrdersBean {
      * @throws NamingException if the naming server performed an error.
      */
     protected OrderLocalHome getOrderHome() throws NamingException {
-	if (cache_oh == null) {
-	    try {
-		InitialContext ic = new InitialContext();
-		Context env = (Context) ic.lookup("java:comp/env");
-		cache_oh = (OrderLocalHome) PortableRemoteObject.
-		    narrow(env.lookup("ejb/OrderHome"), OrderLocalHome.class);
-	    } catch (NamingException e) {
-		logger.log(BasicLevel.WARN, "Can not get home for the name ejb/OrderHome: " + e.getMessage());
-		logger.log(BasicLevel.DEBUG, e);
-		cache_oh = null;
-		throw e;
-	    }
+// 	if (cache_oh == null) {
+// 	    try {
+// 		InitialContext ic = new InitialContext();
+// 		Context env = (Context) ic.lookup("java:comp/env");
+// 		cache_oh = (OrderLocalHome) PortableRemoteObject.
+// 		    narrow(env.lookup("ejb/OrderHome"), OrderLocalHome.class);
+// 	    } catch (NamingException e) {
+// 		logger.log(BasicLevel.WARN, "Can not get home for the name ejb/OrderHome: " + e.getMessage());
+// 		logger.log(BasicLevel.DEBUG, e);
+// 		cache_oh = null;
+// 		throw e;
+// 	    }
+// 	}
+
+// 	return cache_oh;
+
+	try {
+	    InitialContext ic = new InitialContext();
+	    Context env = (Context) ic.lookup("java:comp/env");
+	    OrderLocalHome orderHome = (OrderLocalHome) PortableRemoteObject.
+		narrow(env.lookup("ejb/OrderHome"), OrderLocalHome.class);
+	    return orderHome;
+	} catch (NamingException e) {
+	    logger.log(BasicLevel.WARN, "Can not get home for the name ejb/OrderHome: " + e.getMessage());
+	    logger.log(BasicLevel.DEBUG, e);
+	    cache_oh = null;
+	    throw e;
 	}
 
-	return cache_oh;
     }
 
     /**
@@ -1696,7 +1715,7 @@ public class OrdersBiz extends OrdersBean {
 	try {
 	    return ch.findByPrimaryKey(form.getClientId());
 	} catch (FinderException e) {
-	    logger.log(BasicLevel.DEBUG, "Can not find client with id " + form.getClientId());
+	    logger.log(BasicLevel.WARN, "Can not find client with id " + form.getClientId());
 	    FinderException finderE = new FinderException(ClientsBeanImplementation.ENTITY_CLIENT);
 	    finderE.initCause(e);
 	    throw finderE;
@@ -1708,14 +1727,20 @@ public class OrdersBiz extends OrdersBean {
      * Utility method to get a reference to the client local home.
      */
     protected ClientLocalHome getClientHome() throws NamingException {
-	if(cache_ch == null) {
-	    InitialContext ic = new InitialContext();
-	    Context env = (Context)ic.lookup("java:comp/env");
-	    cache_ch = (ClientLocalHome) PortableRemoteObject.
-		narrow(env.lookup("ejb/ClientHome"), ClientLocalHome.class);
-	}
+// 	if(cache_ch == null) {
+// 	    InitialContext ic = new InitialContext();
+// 	    Context env = (Context)ic.lookup("java:comp/env");
+// 	    cache_ch = (ClientLocalHome) PortableRemoteObject.
+// 		narrow(env.lookup("ejb/ClientHome"), ClientLocalHome.class);
+// 	}
 
-	return cache_ch;
+// 	return cache_ch;
+
+	InitialContext ic = new InitialContext();
+	Context env = (Context)ic.lookup("java:comp/env");
+	ClientLocalHome clientHome = (ClientLocalHome) PortableRemoteObject.
+	    narrow(env.lookup("ejb/ClientHome"), ClientLocalHome.class);
+	return clientHome;
     }
 
 
@@ -1751,28 +1776,40 @@ public class OrdersBiz extends OrdersBean {
      * Utility method to get the order line local home from the database.
      */
     protected OrderLineLocalHome getOrderLineHome() throws NamingException {
-	if(cache_ollh == null) {
-	    InitialContext ic = new InitialContext();
-	    Context env = (Context)ic.lookup("java:comp/env");
-	    cache_ollh = (OrderLineLocalHome) PortableRemoteObject.
-		narrow(env.lookup("ejb/OrderLineHome"), OrderLineLocalHome.class);
-	}
+// 	if(cache_ollh == null) {
+// 	    InitialContext ic = new InitialContext();
+// 	    Context env = (Context)ic.lookup("java:comp/env");
+// 	    cache_ollh = (OrderLineLocalHome) PortableRemoteObject.
+// 		narrow(env.lookup("ejb/OrderLineHome"), OrderLineLocalHome.class);
+// 	}
 
-	return cache_ollh;
+// 	return cache_ollh;
+
+	InitialContext ic = new InitialContext();
+	Context env = (Context)ic.lookup("java:comp/env");
+	OrderLineLocalHome olHome = (OrderLineLocalHome) PortableRemoteObject.
+	    narrow(env.lookup("ejb/OrderLineHome"), OrderLineLocalHome.class);
+	return olHome;
     }
 
     /**
      * Utility function to retrieve a reference to <code>OfferItemLocalHome</code>.
      */
     public OfferItemLocalHome getOfferItemHome() throws NamingException {
-	if(cache_oih == null) {
-	    InitialContext ic = new InitialContext();
-	    Context env = (Context)ic.lookup("java:comp/env");
-	    cache_oih = (OfferItemLocalHome)PortableRemoteObject.narrow
-		(env.lookup("ejb/OfferItemHome"), OfferItemLocalHome.class);
-	}
+// 	if(cache_oih == null) {
+// 	    InitialContext ic = new InitialContext();
+// 	    Context env = (Context)ic.lookup("java:comp/env");
+// 	    cache_oih = (OfferItemLocalHome)PortableRemoteObject.narrow
+// 		(env.lookup("ejb/OfferItemHome"), OfferItemLocalHome.class);
+// 	}
 
-	return cache_oih;
+// 	return cache_oih;
+
+	InitialContext ic = new InitialContext();
+	Context env = (Context)ic.lookup("java:comp/env");
+	OfferItemLocalHome offerItemHome = (OfferItemLocalHome)PortableRemoteObject.narrow
+	    (env.lookup("ejb/OfferItemHome"), OfferItemLocalHome.class);
+	return offerItemHome;
     }
 
     /**
@@ -1803,26 +1840,37 @@ public class OrdersBiz extends OrdersBean {
      * Utility method to get a reference to the proforma bean home interface.
      */
     protected ProformaLocalHome getProformaHome() throws NamingException {
-	if(cache_prfh == null) {
-	    InitialContext ic = new InitialContext();
-	    Context env = (Context)ic.lookup("java:comp/env");
-	    cache_prfh = (ProformaLocalHome)PortableRemoteObject.narrow
-		(env.lookup("ejb/ProformaHome"), ProformaLocalHome.class);
-	}
-	return cache_prfh;
+// 	if(cache_prfh == null) {
+// 	    InitialContext ic = new InitialContext();
+// 	    Context env = (Context)ic.lookup("java:comp/env");
+// 	    cache_prfh = (ProformaLocalHome)PortableRemoteObject.narrow
+// 		(env.lookup("ejb/ProformaHome"), ProformaLocalHome.class);
+// 	}
+//	return cache_prfh;
+	InitialContext ic = new InitialContext();
+	Context env = (Context)ic.lookup("java:comp/env");
+	ProformaLocalHome proformaHome = (ProformaLocalHome)PortableRemoteObject.narrow
+	    (env.lookup("ejb/ProfomraHome"), ProformaLocalHome.class);
+	return proformaHome;
     }
 
     /**
      * Utility method to get a reference to the invoice bean home interface.
      */
     protected InvoiceLocalHome getInvoiceHome() throws NamingException {
-	if(cache_invh == null) {
-	    InitialContext ic = new InitialContext();
-	    Context env = (Context)ic.lookup("java:comp/env");
-	    cache_invh = (InvoiceLocalHome)PortableRemoteObject.narrow
-		(env.lookup("ejb/InvoiceHome"), InvoiceLocalHome.class);
-	}
-	return cache_invh;
+// 	if(cache_invh == null) {
+// 	    InitialContext ic = new InitialContext();
+// 	    Context env = (Context)ic.lookup("java:comp/env");
+// 	    cache_invh = (InvoiceLocalHome)PortableRemoteObject.narrow
+// 		(env.lookup("ejb/InvoiceHome"), InvoiceLocalHome.class);
+// 	}
+// 	return cache_invh;
+
+	InitialContext ic = new InitialContext();
+	Context env = (Context)ic.lookup("java:comp/env");
+	InvoiceLocalHome invoiceHome = (InvoiceLocalHome)PortableRemoteObject.narrow
+	    (env.lookup("ejb/InvoiceHome"), InvoiceLocalHome.class);
+	return invoiceHome;
     }
 
     /**
@@ -1878,14 +1926,19 @@ public class OrdersBiz extends OrdersBean {
      * Utility method to get a reference to the PaymentLocalHome.
      */
     protected PaymentLocalHome getPaymentHome() throws NamingException {
-	if(cache_payh == null) {
-	    InitialContext ic = new InitialContext();
-	    Context env = (Context)ic.lookup("java:comp/env");
-	    cache_payh = (PaymentLocalHome)PortableRemoteObject.narrow
-		(env.lookup("ejb/PaymentHome"), PaymentLocalHome.class);
-	}
+// 	if(cache_payh == null) {
+// 	    InitialContext ic = new InitialContext();
+// 	    Context env = (Context)ic.lookup("java:comp/env");
+// 	    cache_payh = (PaymentLocalHome)PortableRemoteObject.narrow
+// 		(env.lookup("ejb/PaymentHome"), PaymentLocalHome.class);
+// 	}
 
-	return cache_payh;
+// 	return cache_payh;
+	InitialContext ic = new InitialContext();
+	Context env = (Context)ic.lookup("java:comp/env");
+	PaymentLocalHome paymentHome = (PaymentLocalHome)PortableRemoteObject.narrow
+	    (env.lookup("ejb/PaymentHome"), PaymentLocalHome.class);
+	return paymentHome;
     }
 
     /**
