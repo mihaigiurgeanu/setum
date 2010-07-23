@@ -1850,7 +1850,7 @@ public class OrdersBiz extends OrdersBean {
 	InitialContext ic = new InitialContext();
 	Context env = (Context)ic.lookup("java:comp/env");
 	ProformaLocalHome proformaHome = (ProformaLocalHome)PortableRemoteObject.narrow
-	    (env.lookup("ejb/ProfomraHome"), ProformaLocalHome.class);
+	    (env.lookup("ejb/ProformaHome"), ProformaLocalHome.class);
 	return proformaHome;
     }
 
