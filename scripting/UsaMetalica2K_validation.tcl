@@ -38,18 +38,29 @@ rule_minmax cTreshold 25 25
 
 # conditii tip foaie pentru 1k
 
+if {[string first "cu falt" $version] > -1} {
+    set esteCuFalt 1
+} else {
+    set esteCuFalt 0
+}
+
 if { $k == 1 } {
 
     # Foaie Lisa
     if { $intFoil == 1 } {
 	rule_minmax lFoaie 420 1100
-	rule_minmax hFoaie 420 2400
+	rule_minmax hFoaie 420 2280
+
     }
 
     # Foaie amprentata
     if { $intFoil == 2 } {
 	rule_minmax lFoaie 690 1000
-	rule_minmax hFoaie 1660 2090
+	if { $esteCuFalt } {
+	    rule_minmax hFoaie 1660 2030
+	} else {
+	    rule_minmax hFoaie 1660 2080
+	}
     }
 
 
@@ -62,19 +73,19 @@ if { $k == 2 } {
     # Foaie Lisa, k principal
     if { $intFoil == 1 } {
 	rule_minmax lFoaie 420 1100
-	rule_minmax hFoaie 420 2400
+	rule_minmax hFoaie 420 2280
     }
 
     # Foaie amprentata, k principal
     if { $intFoil == 2 } {
 	rule_minmax lFoaie 690 1000
-	rule_minmax hFoaie 1660 2020
+	rule_minmax hFoaie 1660 2030
     }
 
     # Foaie Lisa, k secundar
     if { $intFoil == 1 } {
 	rule_minmax lFoaieSec 165 1100
-	rule_minmax hFoaie 1660 2020
+	rule_minmax hFoaie 1660 2280
     }
 
     # Foaie amprentata, k secundar
@@ -85,7 +96,7 @@ if { $k == 2 } {
 	} else {
 	    $response addValidationInfo "http://www.kds.ro/readybeans/rdf/validation/message/Usa2K#amprenta_necentrata"
 	}
-	rule_minmax hFoaie 1660 2020
+	rule_minmax hFoaie 1660 2030
     }
     
 

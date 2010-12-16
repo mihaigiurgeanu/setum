@@ -230,6 +230,8 @@
   <!-- additional methods for the remote interface -->
   <remote>
     <method>ResponseBean loadListing() throws RemoteException</method>
+    <method>ResponseBean getOffersCount() throws RemoteException</method>
+    <method>ResponseBean loadPartialListing(Integer startRow) throws RemoteException</method>
     <method>ResponseBean lineItemsListing() throws RemoteException</method>
     <method>ResponseBean loadSubForm(Integer loadId) throws RemoteException</method>
     <method>ResponseBean addItem(Integer productId, String businessCategory) throws RemoteException</method>

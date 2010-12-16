@@ -788,7 +788,17 @@
 	  </method-params>
 	</query-method>
 	<ejb-ql><![CDATA[
-	SELECT DISTINCT OBJECT(o) FROM Order AS o, IN(o.lines) l, IN(l.offerItem) oi WHERE o.deliveryTerm1 BETWEEN ?1 AND ?2 AND oi.montajId IS NOT NULL AND oi.montajId <> 0
+	SELECT DISTINCT OBJECT(o) 
+	FROM Order AS o, 
+	     IN(o.lines) l, 
+	     IN(l.offerItem) oi, 
+	     Category c, 
+	     IN(c.products) p 
+	WHERE o.deliveryTerm1 BETWEEN ?1 AND ?2 
+	AND oi.montajId IS NOT NULL AND oi.montajId <> 0
+	AND p.id = oi.montajId
+	AND p.code <> 0
+	AND c.id = 11200
 	ORDER BY o.deliveryTerm1
 	]]></ejb-ql>
       </query>
@@ -804,7 +814,18 @@
 	  </method-params>
 	</query-method>
 	<ejb-ql><![CDATA[
-	SELECT DISTINCT OBJECT(o) FROM Order AS o, IN(o.lines) l, IN(l.offerItem) oi WHERE o.deliveryTerm1 BETWEEN ?1 AND ?2 AND (oi.montajId IS NULL OR oi.montajId = 0)
+	SELECT DISTINCT OBJECT(o) 
+	FROM Order AS o, 
+	     IN(o.lines) l, 
+	     IN(l.offerItem) oi, 
+	     Category c, 
+	     IN(c.products) p 
+	WHERE o.deliveryTerm1 BETWEEN ?1 AND ?2 
+	AND (oi.montajId IS NULL OR oi.montajId = 0 OR
+	     (p.id = oi.montajId
+	      AND p.code = 0
+	      AND c.id = 11200)
+	    )
 	ORDER BY o.deliveryTerm1
 	]]></ejb-ql>
       </query>
@@ -1117,7 +1138,7 @@
 	</query-method>
 	<ejb-ql><![CDATA[
 	  SELECT OBJECT(p) FROM Payment AS p, IN(p.document) d
-	  WHERE d.date BETWEEN ?1 AND ?2
+	  WHERE d.date >= ?1 AND d.date < ?2
 	  ORDER BY d.date
 	]]></ejb-ql>
       </query>

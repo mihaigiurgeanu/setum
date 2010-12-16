@@ -288,7 +288,8 @@
 			      </fo:table-cell>
 			    </fo:table-row>
 			    <fo:table-row>
-			      <fo:table-cell><fo:block text-align="center">${usa_line["field[attribute::name='quantity']"]}</fo:block></fo:table-cell>
+			      <fo:table-cell><fo:block text-align="center" font-weight="bold">
+				${usa_line["field[attribute::name='quantity']"]}</fo:block></fo:table-cell>
 			      <fo:table-cell  padding-left="1mm">
 				<fo:block font-weight="bold">
 				  ${ssearch(usa, "openingSide")}
@@ -372,18 +373,29 @@
 			  <fo:block>Prag</fo:block>
 			</fo:table-cell>
 			<fo:table-cell column-number="2" number-columns-spanned="3">
-			  <fo:block font-weight="bold">${ssearch(usa, 'tresholdType')}</fo:block>
+			  <fo:block font-weight="bold">
+			  ${ssearch(usa, 'tresholdType')}
+			  <#if usa.record["field[attribute::name='tresholdType']"] == "3">
+			  <#if usa.record["field[attribute::name='tresholdSpace']"] == "1">
+			  cu incastrare
+			  h incastrare = ${usa.record["field[@name='h1Treshold']"]}
+			  <#else>
+			  fara incastrare
+			  h = ${usa.record["field[@name='h2Treshold']"]}
+			  </#if>
+			  </#if>
+			  </fo:block>
 			</fo:table-cell>
 		      </fo:table-row>
 		      <fo:table-row border-style="solid">
 			<fo:table-cell column-number="2">
-			  <fo:block text-align="center" font-weight="bold"><#if usa.record["field[attribute::name='tresholdType']"] != "1">lprag= ${usa.record["field[attribute::name='lTreshold']"]}<#else>-</#if></fo:block>
+			  <fo:block text-align="center" font-weight="bold"><#if usa.record["field[attribute::name='tresholdType']"] == "2">lprag= ${usa.record["field[attribute::name='lTreshold']"]}<#else>-</#if></fo:block>
 			</fo:table-cell>
 			<fo:table-cell column-number="3">
-			  <fo:block text-align="center" font-weight="bold"><#if usa.record["field[attribute::name='tresholdType']"] != "1">cprag= ${usa.record["field[attribute::name='cTreshold']"]}<#else>-</#if></fo:block>
+			  <fo:block text-align="center" font-weight="bold"><#if usa.record["field[attribute::name='tresholdType']"] == "2">cprag= ${usa.record["field[attribute::name='cTreshold']"]}<#else>-</#if></fo:block>
 			</fo:table-cell>
 			<fo:table-cell column-number="4">
-			  <fo:block text-align="center" font-weight="bold"><#if usa.record["field[attribute::name='tresholdType']"] != "1">hprag= ${usa.record["field[attribute::name='hTreshold']"]}<#else>-</#if></fo:block>
+			  <fo:block text-align="center" font-weight="bold"><#if usa.record["field[attribute::name='tresholdType']"] == "2">hprag= ${usa.record["field[attribute::name='hTreshold']"]}<#else>-</#if></fo:block>
 			</fo:table-cell>
 		      </fo:table-row>
 		    </fo:table-body>
@@ -420,6 +432,67 @@
 			    <fo:block border-bottom-style="solid">
 			      <fo:block font-weight="bold">${usa.record["field[attribute::name='intFinisajBlat']"]}</fo:block>
 			    </fo:block>
+			  </fo:block>
+			  <#elseif (usa.record["field[attribute::name='intFinisajTocId']"] = "0" ||
+			            usa.record["field[attribute::name='finisajTocBlat']"] = "true") &&
+				   (usa.record["field[attribute::name='extFinisajBlatId']"] = "0" ||
+			            usa.record["field[attribute::name='finisajBlatExtInt']"] = "true") &&
+				   (usa.record["field[attribute::name='extFinisajTocId']"] = "0" ||
+			            usa.record["field[attribute::name='finisajTocExtInt']"] = "true")
+			  >
+			  <fo:block border-top-style="solid" border-left-style="solid" border-right-style="solid">
+			    <fo:block border-bottom-style="solid" text-align="center">Finisaj</fo:block>
+			    <fo:block border-bottom-style="solid">
+			      <fo:block font-weight="bold">${usa.record["field[attribute::name='intFinisajBlat']"]}</fo:block>
+			    </fo:block>
+			    <#if usa.record["field[attribute::name='intFinisajGrilajId']"] != "0">
+			    <fo:block border-bottom-style="solid">
+			      <fo:block>Grilaj (interior)</fo:block>
+			      <fo:block font-weight="bold">${usa.record["field[attribute::name='intFinisajGrilaj']"]}</fo:block>
+			    </fo:block>
+			    </#if>
+			     <#if usa.record["field[attribute::name='extFinisajGrilajId']"] != "0">
+			    <fo:block border-bottom-style="solid">
+			      <fo:block>Grilaj (exterior)</fo:block>
+			      <fo:block font-weight="bold">${usa.record["field[attribute::name='extFinisajGrilaj']"]}</fo:block>
+			    </fo:block>
+			    </#if>
+			    <#if usa.record["field[attribute::name='intFinisajFereastraId']"] != "0">
+			    <fo:block border-bottom-style="solid">
+			      <fo:block>Fereastra (interior)</fo:block>
+			      <fo:block font-weight="bold">${usa.record["field[attribute::name='intFinisajFereastra']"]}</fo:block>
+			    </fo:block>
+			    </#if>
+			    <#if usa.record["field[attribute::name='extFinisajFereastraId']"] != "0">
+			    <fo:block border-bottom-style="solid">
+			      <fo:block>Fereastra (exterior)</fo:block>
+			      <fo:block font-weight="bold">${usa.record["field[attribute::name='extFinisajFereastra']"]}</fo:block>
+			    </fo:block>
+			    </#if>
+			    <#if usa.record["field[attribute::name='intFinisajSupraluminaId']"] != "0">
+			    <fo:block border-bottom-style="solid">
+			      <fo:block>Supralumina (interior)</fo:block>
+			      <fo:block font-weight="bold">${usa.record["field[attribute::name='intFinisajSupralumina']"]}</fo:block>
+			    </fo:block>
+			    </#if>
+			    <#if usa.record["field[attribute::name='extFinisajSupraluminaId']"] != "0">
+			    <fo:block border-bottom-style="solid">
+			      <fo:block>Supralumina (exterior)</fo:block>
+			      <fo:block font-weight="bold">${usa.record["field[attribute::name='extFinisajSupralumina']"]}</fo:block>
+			    </fo:block>
+			    </#if>
+			    <#if usa.record["field[attribute::name='intFinisajPanouLateralId']"] != "0">
+			    <fo:block border-bottom-style="solid">
+			      <fo:block>Panou lateral (interior)</fo:block>
+			      <fo:block font-weight="bold">${usa.record["field[attribute::name='intFinisajPanouLateral']"]}</fo:block>
+			    </fo:block>
+			    </#if>
+			    <#if usa.record["field[attribute::name='extFinisajPanouLateralId']"] != "0">
+			    <fo:block border-bottom-style="solid">
+			      <fo:block>Panou lateral (exterior)</fo:block>
+			      <fo:block font-weight="bold">${usa.record["field[attribute::name='extFinisajPanouLateral']"]}</fo:block>
+			    </fo:block>
+			    </#if>
 			  </fo:block>
 			  <#else>
 			  <fo:block border-top-style="solid" border-left-style="solid" border-right-style="solid">
@@ -690,6 +763,30 @@
 			  <fo:block>
 			    <#if yallaId != "0">
 			    ${usa.record["field[attribute::name='yalla1Buc']"]}
+			    </#if>
+			  </fo:block>
+			</fo:table-cell>
+		      </fo:table-row>
+		      </#if>
+		      <#assign yalla2Id = usa.record["field[attribute::name='yalla2Id']"]>
+		      <#if yalla2Id != "0">
+		      <fo:table-row border-style="solid">
+			<fo:table-cell column-number="1">
+			  <fo:block>
+			    Yalla:
+			  </fo:block>
+			</fo:table-cell>
+			<fo:table-cell column-number="2" font-weight="bold">
+			  <fo:block>
+			    <#if yalla2Id != "0">
+			    ${ssearch(usa, 'yalla2Id')}
+			    </#if>
+			  </fo:block>
+			</fo:table-cell>
+			<fo:table-cell column-number="3" font-weight="bold">
+			  <fo:block>
+			    <#if yalla2Id != "0">
+			    ${usa.record["field[attribute::name='yalla2Buc']"]}
 			    </#if>
 			  </fo:block>
 			</fo:table-cell>

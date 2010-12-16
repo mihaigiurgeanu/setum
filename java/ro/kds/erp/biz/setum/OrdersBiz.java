@@ -705,6 +705,15 @@ public class OrdersBiz extends OrdersBean {
 	ResponseBean r;
 
 	r = new ResponseBean();
+	if(listingCache == null) {
+	    logger.log(BasicLevel.WARN, "Cache-ul listing-ului este null. Nu a fost apelat getOrdersCount? Apelez acum getOrdersCount.");
+	    r = getOrdersCount();
+	    if(listingCache == null) {
+		logger.log(BasicLevel.ERROR, "Can not create the cache listing.");
+		return r;
+	    }
+	}
+
 	int endRow = startRow.intValue() + LISTING_ROWS_PER_REQUEST;
 	for(int i = startRow.intValue(); 
 	    (i < endRow) && (i < listingCache.size()); i++) {
@@ -952,6 +961,8 @@ public class OrdersBiz extends OrdersBean {
 	    r.addField("clientName", client.getName());
 	    form.setAdresaMontaj(client.getAddress() + ", " + client.getCity());
 	    r.addField("adresaMontaj", form.getAdresaMontaj());
+	    form.setTelefon(client.getPhone());
+	    r.addField("telefon", form.getTelefon());
 	} catch (NamingException e) {
 	    logger.log(BasicLevel.ERROR, "Can not get the client's name due to a naming configuration problem: " + e.getMessage());
 	    logger.log(BasicLevel.DEBUG, e);
@@ -2845,7 +2856,7 @@ public class OrdersBiz extends OrdersBean {
     }
 
      /**
-     * Utility method to get a reference to the PaymentLocalHome.
+     * Utility method to get a reference to the DailySummaryLocalHome.
      */
     protected DailySummaryLocalHome getDailySummaryHome() throws NamingException {
 	if(cache_dsh == null) {

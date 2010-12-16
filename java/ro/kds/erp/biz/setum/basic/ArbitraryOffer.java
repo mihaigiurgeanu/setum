@@ -82,6 +82,8 @@ public interface ArbitraryOffer extends EJBObject {
     public ResponseBean updateClientContactEmail(String newClientContactEmail) throws RemoteException;
 
     public ResponseBean loadListing() throws RemoteException;
+    public ResponseBean getOffersCount() throws RemoteException;
+    public ResponseBean loadPartialListing(Integer startRow) throws RemoteException;
     public ResponseBean lineItemsListing() throws RemoteException;
     public ResponseBean loadSubForm(Integer loadId) throws RemoteException;
     public ResponseBean addItem(Integer productId, String businessCategory) throws RemoteException;

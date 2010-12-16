@@ -6,19 +6,35 @@ var maintab = document.getElementById("maintab");
 // The main tree
 var offers;
 var offersListing = document.getElementById('offersListing');
-function load_offers() {
-    var req = theForm.get_request();
-    req.add("command", "loadListing");
-    offers = load_records(req);
+var offersView;
 
-    offersListing.view = make_treeview
-	(offers,
-	 function(row,column) {
-	     var col;
-	     if(column.id) col = column.id; else col = column;
-	     return offers[row][col];
-	 });
+// function load_offers() {
+//     var req = theForm.get_request();
+//     req.add("command", "loadListing");
+//     offers = load_records(req);
+
+//     offersListing.view = make_treeview
+// 	(offers,
+// 	 function(row,column) {
+// 	     var col;
+// 	     if(column.id) col = column.id; else col = column;
+// 	     return offers[row][col];
+// 	 });
+// }
+
+function load_offers() {
+  offers = new RemoteDataView(theForm.do_link, "loadPartialListing", "getOffersCount", true);
+  offersView = make_treeview
+    (offers,
+     function(row, column) {
+      var col;
+      if(column.id) col = column.id; else col = column;
+      if(offers)
+	return offers.get_cell_text(row, col);
+    });
+  offersListing.view = offersView;
 }
+
 
 // The list of offer items
 var line_items;
@@ -48,13 +64,14 @@ function crtItem() {
 }
 
 function on_select_offer() {
-    var selid = offers[offersListing.currentIndex]["id"];
-    var req = theForm.get_request();
-    req.add("command", "loadFormData");
-    req.add("param0", selid);
-    theForm.post_request(req);
-    load_items();
-    document.getElementById("maintab.offerDetails").setAttribute("hidden", "false");
+
+  var selid = offers.get_cell_text(offersListing.currentIndex, "id"); //offers[offersListing.currentIndex]["id"];
+  var req = theForm.get_request();
+  req.add("command", "loadFormData");
+  req.add("param0", selid);
+  theForm.post_request(req);
+  load_items();
+  document.getElementById("maintab.offerDetails").setAttribute("hidden", "false");
 }
 
 function on_select_item() {

@@ -2043,6 +2043,14 @@
         <method-name>saveFormData</method-name>
       </method>
       <method>
+        <ejb-name>UsaMetalica2KEJB</ejb-name>
+        <method-name>addOption</method-name>
+      </method>
+      <method>
+        <ejb-name>UsaMetalica2KEJB</ejb-name>
+        <method-name>removeOption</method-name>
+      </method>
+      <method>
         <ejb-name>StandardOfferEJB</ejb-name>
         <method-name>saveFormData</method-name>
       </method>
@@ -2055,28 +2063,44 @@
         <method-name>saveFormData</method-name>
       </method>
       <method>
-        <description>All methods of OtherProducsEJB</description>
         <ejb-name>OtherProductsEJB</ejb-name>
         <method-name>saveFormData</method-name>
       </method>
       <method>
-        <description>All methods of UsaStdNeechipataBean</description>
         <ejb-name>UsaStdNeechipataEJB</ejb-name>
         <method-name>saveFormData</method-name>
       </method>
       <method>
-        <description>All methods of UsaStdNeechipataBean</description>
         <ejb-name>UsaStandardEJB</ejb-name>
         <method-name>saveFormData</method-name>
       </method>
       <method>
-        <description>All methods of OfrtaUsiStandard</description>
         <ejb-name>OfertaUsiStandardEJB</ejb-name>
         <method-name>saveFormData</method-name>
       </method>
       <method>
+	<ejb-name>OfertaUsiStandardEJB</ejb-name>
+	<method-name>addProduct</method-name>
+      </method>
+      <method>
+	<ejb-name>OfertaUsiStandardEJB</ejb-name>
+	<method-name>saveSubForm</method-name>
+      </method>
+      <method>
+	<ejb-name>OfertaUsiStandardEJB</ejb-name>
+	<method-name>removeItem</method-name>
+      </method>
+      <method>
         <ejb-name>ArbitraryOfferEJB</ejb-name>
         <method-name>saveFormData</method-name>
+      </method>
+      <method>
+	<ejb-name>ArbitraryOfferEJB</ejb-name>
+	<method-name>addItem</method-name>
+      </method>
+      <method>
+	<ejb-name>ArbitraryOfferEJB</ejb-name>
+	<method-name>removeItem</method-name>
       </method>
       <method>
         <ejb-name>FereastraEJB</ejb-name>

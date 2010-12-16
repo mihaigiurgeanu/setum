@@ -59,7 +59,7 @@
 	  <fo:table-row>
 	    <fo:table-cell column-number="1">
 	      <fo:block font-weight="bold">
-		Rest de plata = DE INCASAT: ${doc["/response/record/field[attribute::name='diferenta']"]} 
+		Rest de plata = DE INCASAT: ${doc["/response/record/field[attribute::name='diferenta']"]} RON
 	      </fo:block>
 	      <!--
 		<fo:block>

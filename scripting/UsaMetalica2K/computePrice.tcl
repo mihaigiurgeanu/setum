@@ -84,7 +84,7 @@ set montare_alteSisteme2 [[product_by_id_safe $alteSisteme2Id getPrice2] doubleV
 log "----end preturi sisteme----"
 
 # Pentru usile UA STAS folosesc pret fix si nu pret pe suprafata
-if {[string equal -nocase $version "UA STAS"]} {
+if {[string equal -nocase -length 7 $version "UA STAS"]} {
     log "UA STAS, pret fix = $pret_versiune"
     set price_expr "$pret_versiune + $pret_deschidere + $pret_parteDeschidere + $pret_pozitionareFoaie"
 } elseif {[string equal -nocase -length 15 $version "UA DISTRIBUITOR"]} {

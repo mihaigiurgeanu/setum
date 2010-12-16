@@ -401,8 +401,114 @@ public class ArbitraryOfferBizBean extends ArbitraryOfferBean {
 	}
     }
 
+    /**
+     * Cache the offers list.
+     */
+    ArrayList listingCache;
 
+    /**
+     * The count of lines each request to loadPartialListing will return;
+     */
+    static final int LISTING_ROWS_PER_REQUEST = 30;
+    
+    /**
+     * Initialization of the listing cache.
+     *
+     * @return the number of offers in the listing.
+     */
+    public ResponseBean getOffersCount() {
+	logger.log(BasicLevel.DEBUG, ">");
 
+	ResponseBean r;
+
+	try {
+	    InitialContext ic = new InitialContext();
+	    Context env = (Context)ic.lookup("java:comp/env");
+	    OfferLocalHome oh = (OfferLocalHome)
+		PortableRemoteObject.narrow
+		(env.lookup("ejb/OfferHome"), OfferLocalHome.class);
+
+	    listingCache = new ArrayList(oh.findByCategory(OFFERS_CATEGORY));
+	    Collections.sort(listingCache, new Comparator() {
+		    public int compare(Object o1, Object o2) {
+			OfferLocal offer1 = (OfferLocal)o1;
+			OfferLocal offer2 = (OfferLocal)o2;
+			String n1 = StringUtils.leftPad(offer1.getDocument().getNumber(), 6, '0');
+			String n2 = StringUtils.leftPad(offer2.getDocument().getNumber(), 6, '0');
+
+			return -(n1.compareTo(n2));
+		    }
+		});
+
+	  
+	    r = new ResponseBean();
+	    r.addRecord();
+	    r.addField("records-count", listingCache.size());
+	} catch (NamingException e) {
+	    logger.log(BasicLevel.ERROR, "Naming exception when trying to read the offers listing from database: "
+		       + e);
+	    logger.log(BasicLevel.DEBUG, e);
+	    r = ResponseBean.getErrConfigNaming(e.getMessage());
+	} catch (FinderException e) {
+	    logger.log(BasicLevel.ERROR, "Could not get the list of offers from database: " + e);
+	    logger.log(BasicLevel.DEBUG, e);
+	    r = ResponseBean.getErrNotFound(ENTITY_OFFER);
+	} catch (Exception e) {
+	    logger.log(BasicLevel.ERROR, "Unexpected exception occured: " + e);
+	    logger.log(BasicLevel.DEBUG, e);
+	    r = ResponseBean.getErrUnexpected(e);
+	}
+	logger.log(BasicLevel.DEBUG, "<");
+	return r;
+    }
+
+    /**
+     * Loads a part of the offer listing, starting with <code>startRow</code>.
+     *
+     * @param startRow is the first row from the <code>listingCache</code> that will
+     * be returned in the listing.
+     */
+    public ResponseBean loadPartialListing(Integer startRow) {
+	ResponseBean r;
+
+	r = new ResponseBean();
+	if(listingCache == null) {
+	    r = getOffersCount();
+	    if(listingCache == null) {
+		logger.log(BasicLevel.ERROR, "Could not load the offers in memory");
+		return r;
+	    }
+	}
+
+	int endRow = startRow.intValue() + LISTING_ROWS_PER_REQUEST;
+	for(int i = startRow.intValue(); 
+	    (i < endRow) && (i < listingCache.size()); i++) {
+	    
+	    OfferLocal offer = (OfferLocal) listingCache.get(i);
+	    r.addRecord();
+	    r.addField("id", offer.getId());
+	    r.addField("offersListing.no", offer.getDocument().getNumber());
+	    r.addField("offersListing.name", offer.getName());
+	    r.addField("offersListing.docDate", offer.getDocument().getDate());
+	    r.addField("offersListing.dateFrom", offer.getDateFrom());
+	    r.addField("offersListing.dateTo", offer.getDateTo());
+	    
+	    ClientLocal client = offer.getClient();
+	    if (client != null) {
+		String clientName;
+		if(client.getIsCompany()) {
+		    clientName = client.getCompanyName();
+		} else {
+		    clientName = client.getLastName() + ", " + client.getFirstName();
+		}
+		r.addField("offersListing.client", clientName);
+	    } else {
+		r.addField("offersListing.client", "-");
+	    }
+	    
+	}
+	return r;
+    }
 
     /**
      * Makes the list of the lineItems of the current selected offer.
