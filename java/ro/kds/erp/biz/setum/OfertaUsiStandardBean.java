@@ -37,6 +37,7 @@ import java.util.Comparator;
 import ro.kds.erp.data.ProductsSelectionLocalHome;
 import ro.kds.erp.data.ProductsSelectionLocal;
 import java.util.TreeSet;
+import java.math.MathContext;
 
 /**
  * Business logic pentru form-ul de vizualizare/modificare oferte
@@ -930,7 +931,7 @@ public class OfertaUsiStandardBean
     }
 
     private BigDecimal computeVATPrice(BigDecimal price) {
-	return price.multiply(form.getVat().add(new BigDecimal(1)));
+	return price.multiply(form.getVat().add(new BigDecimal(1))).round(MathContext.UNLIMITED);
     }
 }
 

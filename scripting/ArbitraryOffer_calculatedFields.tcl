@@ -40,7 +40,7 @@ set valVatTransport [expr $valTransport * 1.24]
 
 set vatPrice [expr round($price * 1.24 + $valVatMontaj + $valVatTransport) - $valVatMontaj - $valVatTransport]
 
-set price [expr $vatPrice / 1.24]
+set price [expr round($vatPrice / 1.24)]
 
 
 set absoluteGain [expr $price - $sellPrice]
