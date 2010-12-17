@@ -1012,9 +1012,11 @@ public class ArbitraryOfferBizBean extends ArbitraryOfferBean {
 		r.addField("productId", form.getProductId());
 		r.addField("price", form.getPrice().setScale(2, RoundingMode.HALF_UP));
 		r.addField("priceCuMontaj", 
-			   form.getPrice()
-			   .add((form.getValMontaj().add(form.getValTransport()))
-				.divide(form.getQuantity()))
+			   new BigDecimal(
+					  form.getPrice().doubleValue() +
+					  (form.getValMontaj().doubleValue() +
+					   form.getValTransport().doubleValue()) /
+					  form.getQuantity().doubleValue())
 			   .setScale(2, RoundingMode.HALF_UP));
 		r.addField("vatPrice", form.getVatPrice().setScale(2, RoundingMode.HALF_UP));
 		r.addField("relativeGain", form.getRelativeGain());
