@@ -930,6 +930,15 @@ public class OfertaUsiStandardBean
 	return new BigDecimal(lPrice * 10);
     }
 
+    static public double round(double price) {
+	long lPrice = new Double(price).longValue();
+	long digit = lPrice % 10;
+	lPrice /= 10;
+	if (digit > 0)
+	    lPrice +=1;
+	return lPrice*10;
+    }
+
     private BigDecimal computeVATPrice(BigDecimal price) {
 	return price.multiply(form.getVat().add(new BigDecimal(1))).round(MathContext.UNLIMITED);
     }

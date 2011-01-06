@@ -1,5 +1,7 @@
 source "$scripting_root/commons.tcl"
 
+java::import -package ro.kds.erp.biz.setum OfertaUsiStandardBean
+
 set locationCode 0
 if { $locationId != 0 } {
     set locationCode [product_by_id $locationId getCode]
@@ -38,7 +40,7 @@ if {[info exists attribute6] == 0
 set valVatMontaj [expr $valMontaj * 1.24]
 set valVatTransport [expr $valTransport * 1.24]
 
-set vatPrice [expr round($price * 1.24 + $valVatMontaj + $valVatTransport) - $valVatMontaj - $valVatTransport]
+set vatPrice [java::call OfertaUsiStandardBean {round double} [expr $price * 1.24 + $valVatMontaj + $valVatTransport - $valVatMontaj - $valVatTransport]]
 
 set price [expr round($vatPrice / 1.24)]
 
