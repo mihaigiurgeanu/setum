@@ -40,15 +40,20 @@ if {[info exists attribute6] == 0
 set valVatMontaj [expr $valMontaj * 1.24]
 set valVatTransport [expr $valTransport * 1.24]
 
-set vatPrice [java::call OfertaUsiStandardBean {round double} [expr $price * 1.24 + $valVatMontaj + $valVatTransport - $valVatMontaj - $valVatTransport]]
+set vatPrice [java::call OfertaUsiStandardBean {round double} [expr $price * 1.24]]
 
-set price [expr round($vatPrice / 1.24)]
+set price [expr $vatPrice / 1.24]
 
+# calculez adaosul fata de pretul de vanzare;
+# ca sa calculez un adaos real, calculez un sellPrice rotunjit exact dupa
+# formula cu care rotunjesc si pretul din oferta.
+set sellVatPrice [java::call OfertaUsiStandardBean {round double} [expr $sellPrice * 1.24]]
+set sellPriceRotunjit [expr $sellVatPrice / 1.24]
 
-set absoluteGain [expr $price - $sellPrice]
+set absoluteGain [expr $price - $sellPriceRotunjit]
 
-if {$sellPrice != 0} {
-    set relativeGain [expr $absoluteGain * 100/$sellPrice]
+if {$sellPriceRotunjit != 0} {
+    set relativeGain [expr $absoluteGain * 100/$sellPriceRotunjit]
 } else {
     set relativeGain 0
 }
