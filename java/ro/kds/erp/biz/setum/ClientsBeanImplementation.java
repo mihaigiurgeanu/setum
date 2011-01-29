@@ -381,6 +381,11 @@ public class ClientsBeanImplementation extends ClientsBean {
      */
     public ResponseBean saveSubForm() {
 	ResponseBean r;
+	r = saveFormData();
+
+	if(r.isError())
+	    return r;
+
 	ContactLocal contact = selectedContact;
 	try {
 	    if(contact == null) {
