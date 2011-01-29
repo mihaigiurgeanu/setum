@@ -196,6 +196,7 @@ public class ClientsBeanImplementation extends ClientsBean {
 	    case 1:
 		// selct only companies
 		clients = clh.findByCompanyFlag(true);
+		break;
 	    case -1:
 		// select all
 		clients = clh.findAll();
