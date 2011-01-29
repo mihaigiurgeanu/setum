@@ -442,6 +442,9 @@ public class ResponseBean implements Serializable {
 	addValidationInfo(EMPTY_VALIDATION_SUBJECT, message, "");
     }
 
+    public boolean isError() {
+	return code != CODE_SUCCESS;
+    }
 
     // Response codes and messages
 
