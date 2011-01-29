@@ -304,7 +304,11 @@
 // The main tree
 var clients;
 function load_clients() {
-  clients = theForm.load_param_listing(1); // only companies
+  var req = theForm.get_request();
+  req.add("command", "loadListing");
+  req.add("param0", "1");
+  clients = load_records(req);
+
   document.getElementById('clients-listing-tree').view = make_treeview
     (clients,
      function(row,column) {
@@ -317,7 +321,10 @@ function load_clients() {
 // contacts
 var contacts;
 function load_contacts() {
-  contacts = theForm.load_sub_listing("contactsListing");
+  var req = theForm.get_request();
+  req.add("command", "contactsListing");
+  contacts = load_records(req);
+
   document.getElementById('contacts-listing-tree').view = make_treeview
     (contacts,
      function(row,column) {
