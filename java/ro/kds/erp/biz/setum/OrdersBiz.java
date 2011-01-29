@@ -1051,6 +1051,8 @@ public class OrdersBiz extends OrdersBean {
 	form.setInvoiceExchangeRate(form.getProformaExchangeRate());
 	form.setInvoiceTotal(form.getProformaTotal());
 
+	copyFieldsToResponse(r);
+
 	return r;
     }
 
