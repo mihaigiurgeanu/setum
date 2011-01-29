@@ -537,6 +537,8 @@
     <method>ResponseBean livrariCuMontajReport() throws RemoteException</method>
     <method>ResponseBean livrariFaraMontajReport() throws RemoteException</method>
     <method>ResponseBean incasariReport() throws RemoteException</method>
+
+    <method>ResponseBean newInvoiceFromProforma() throws RemoteException</method>
   </remote>
 
   <!-- Services that may have scripts associated with -->

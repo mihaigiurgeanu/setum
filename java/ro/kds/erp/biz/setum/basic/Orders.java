@@ -173,6 +173,7 @@ public interface Orders extends EJBObject {
     public ResponseBean livrariCuMontajReport() throws RemoteException;
     public ResponseBean livrariFaraMontajReport() throws RemoteException;
     public ResponseBean incasariReport() throws RemoteException;
+    public ResponseBean newInvoiceFromProforma() throws RemoteException;
 
     public ResponseBean addItem (
         Integer offerIntemId

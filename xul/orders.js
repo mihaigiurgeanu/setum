@@ -323,6 +323,13 @@ function on_new_invoice() {
   clear_payments();
 }
 
+function on_new_invoice_from_proforma() {
+  var req = theForm.get_request();
+  req.add("command", "newInvoiceFromProforma");
+  theForm.post_request(req);
+  maintab.selectedIndex = 6;
+}
+
 function on_new_payment() {
     var req = theForm.get_request();
     req.add("command", "newPaymentData");

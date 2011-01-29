@@ -1043,6 +1043,17 @@ public class OrdersBiz extends OrdersBean {
 	logger.log(BasicLevel.DEBUG, "<");
     }
 
+    public ResponseBean newInvoiceFromProforma() {
+	ResponseBean r = newInvoiceData();
+	form.setInvoiceAmount(form.getProformaAmount());
+	form.setInvoiceRole(form.getProformaRole());
+	form.setInvoiceTax(form.getProformaTax());
+	form.setInvoiceExchangeRate(form.getProformaExchangeRate());
+	form.setInvoiceTotal(form.getProformaTotal());
+
+	return r;
+    }
+
     /**
      * Copy the values of currently selected invoice entity into
      * the form fields.
