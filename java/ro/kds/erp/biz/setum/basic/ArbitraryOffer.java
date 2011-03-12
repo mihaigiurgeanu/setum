@@ -26,6 +26,7 @@ public interface ArbitraryOffer extends EJBObject {
     public ResponseBean getCurrentFormData() throws RemoteException;
     public ResponseBean getLoadedPrimaryKey() throws RemoteException;
 
+    public ResponseBean updateSearchText(String newSearchText) throws RemoteException;
     public ResponseBean updateNo(String newNo) throws RemoteException;
     public ResponseBean updateDocDate(java.util.Date newDocDate) throws RemoteException;
     public ResponseBean updateDateFrom(java.util.Date newDateFrom) throws RemoteException;

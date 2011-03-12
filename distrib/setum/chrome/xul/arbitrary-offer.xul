@@ -39,6 +39,8 @@ Data-entry form for general purpose offers.
     <command id="command-pdf-report" oncommand="open_report('pdf')" />
     <command id="command-rtf-report" oncommand="open_report('rtf')" />
     <command id="command-anexa" oncommand="open_anexa('pdf')" />
+
+    <command id="command-search" oncommand="on_search()"/>
   </commandset>
 
   <popupset>
@@ -70,6 +72,11 @@ Data-entry form for general purpose offers.
 	  <label value="Lista de oferte" />
 	</hbox>
 	<spacer class="header"/>
+
+	<hbox>
+	  <textbox id="searchText"/>
+	  <button label="Cauta" command="command-search"/>
+	</hbox>
 
 	<tree id="offersListing" flex="1" enableColumnDrag="true"
 	      persist="ordinal width height hidden" seltype="single"

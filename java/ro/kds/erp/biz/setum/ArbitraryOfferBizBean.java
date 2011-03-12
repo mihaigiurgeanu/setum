@@ -421,14 +421,12 @@ public class ArbitraryOfferBizBean extends ArbitraryOfferBean {
 
 	ResponseBean r;
 
-	try {
-	    InitialContext ic = new InitialContext();
-	    Context env = (Context)ic.lookup("java:comp/env");
-	    OfferLocalHome oh = (OfferLocalHome)
-		PortableRemoteObject.narrow
-		(env.lookup("ejb/OfferHome"), OfferLocalHome.class);
+	if (form == null) {
+	    newFormData();
+	}
 
-	    listingCache = new ArrayList(oh.findByCategory(OFFERS_CATEGORY));
+	try {
+	    listingCache = getFilteredList();
 	    Collections.sort(listingCache, new Comparator() {
 		    public int compare(Object o1, Object o2) {
 			OfferLocal offer1 = (OfferLocal)o1;
@@ -460,6 +458,27 @@ public class ArbitraryOfferBizBean extends ArbitraryOfferBean {
 	}
 	logger.log(BasicLevel.DEBUG, "<");
 	return r;
+    }
+
+    /**
+     * Incarca lista filtrata.
+     */
+    private ArrayList getFilteredList() throws NamingException, FinderException {
+	ArrayList list = new ArrayList();
+	InitialContext ic = new InitialContext();
+	Context env = (Context)ic.lookup("java:comp/env");
+	OfferLocalHome oh = (OfferLocalHome)
+	    PortableRemoteObject.narrow
+	    (env.lookup("ejb/OfferHome"), OfferLocalHome.class);
+
+	for (Iterator i = oh.findByCategory(OFFERS_CATEGORY).iterator(); i.hasNext(); ) {
+	    OfferLocal o = (OfferLocal) i.next();
+	    if(Utils.stringFilter(o.getDocument().getNumber(), form.getSearchText()) ||
+	      Utils.stringFilter(o.getClient().getName(), form.getSearchText())) {
+		list.add(o);
+	    }
+	}
+	return list;
     }
 
     /**

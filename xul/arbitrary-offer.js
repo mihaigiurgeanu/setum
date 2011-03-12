@@ -22,8 +22,9 @@ var offersView;
 // 	 });
 // }
 
-function load_offers() {
-  offers = new RemoteDataView(theForm.do_link, "loadPartialListing", "getOffersCount", true);
+
+function do_load_offers(set_new_context) {
+  offers = new RemoteDataView(theForm.do_link, "loadPartialListing", "getOffersCount", set_new_context);
   offersView = make_treeview
     (offers,
      function(row, column) {
@@ -35,6 +36,13 @@ function load_offers() {
   offersListing.view = offersView;
 }
 
+function load_offers() {
+  do_load_offers(true);
+}
+
+function on_search() {
+  do_load_offers(false);
+}
 
 // The list of offer items
 var line_items;
@@ -208,7 +216,7 @@ function open_anexa(type) {
 
 // Global variable theForm that will be used by event handlers
 var theForm = new FormObject();
-theForm.text_fields = new Array("no", "docDate", "dateFrom", "dateTo", 
+theForm.text_fields = new Array("searchText", "no", "docDate", "dateFrom", "dateTo", 
 				"period", "clientName", "name", 
 				"description", "comment",
 				"vatPrice", "price", "quantity",

@@ -27,6 +27,7 @@ Lista comenzilor, creere/vizualizare/stergere
   <commandset>
     <command id="command-add_order"		oncommand="on_new_order()"/>
     <command id="command-remove_order"		oncommand="theForm.ask(REMOVE_ORDER_MSG, on_delete_order)"/>
+    <command id="command-search"		oncommand="on_search()"/>
 
     <command id="command-save_order"		oncommand="on_save()"/>
     <command id="command-add_orderItem"		oncommand="on_select_offerItems()"/>
@@ -83,6 +84,11 @@ Lista comenzilor, creere/vizualizare/stergere
 	  <label>Comenzi</label>
 	</hbox>
 	<spacer class="header"/>
+
+	<hbox>
+	  <textbox id="searchText"/>
+	  <button label="Cauta" command="command-search"/>
+	</hbox>
 
 	<tree id="ordersListing"
 	      flex="1"

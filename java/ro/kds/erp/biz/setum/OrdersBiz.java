@@ -807,10 +807,13 @@ public class OrdersBiz extends OrdersBean {
 
 	ResponseBean r;
 
+	if (form == null) {
+	    logger.log(BasicLevel.DEBUG, "creez nu nou form (newFormData)");
+	    newFormData();
+	}
+
 	try {
-	    OrderLocalHome oh = getOrderHome();
-	    logger.log(BasicLevel.DEBUG, "Storing records in cache");
-	    listingCache = new ArrayList(oh.findAll());
+	    listingCache = getFilteredList();
 	    
 	    logger.log(BasicLevel.DEBUG, "Sorting orders in cache");
 	    Collections.sort(listingCache, new Comparator() {
@@ -858,6 +861,27 @@ public class OrdersBiz extends OrdersBean {
 	logger.log(BasicLevel.DEBUG, "<");
 	return r;
     }
+    
+    /**
+     * Incarca lista filtrata.
+     */
+    private ArrayList getFilteredList() throws NamingException, FinderException {
+	ArrayList list = new ArrayList();
+	OrderLocalHome oh = getOrderHome();
+	logger.log(BasicLevel.DEBUG, "Storing records in cache");
+	logger.log(BasicLevel.DEBUG, "searchText = " + form.getSearchText());
+
+	for (Iterator i = oh.findAll().iterator(); i.hasNext(); ) {
+	    OrderLocal o = (OrderLocal) i.next();
+	    if(Utils.stringFilter(o.getDocument().getNumber(), form.getSearchText()) ||
+	       Utils.stringFilter(o.getClient().getName(), form.getSearchText())) {
+		list.add(o);
+	    }
+	}
+	return list;
+    }
+
+
 
     /**
      * Retrieves the list of order lines for the currently selected order.

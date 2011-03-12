@@ -289,6 +289,32 @@ public abstract class ArbitraryOfferBean
 	return r;
     }
 
+    public ResponseBean updateSearchText(String searchText) {
+        ResponseBean r = new ResponseBean();
+	String oldVal = form.getSearchText();
+	form.setSearchText(searchText);
+	r.addRecord();
+	r.addField("searchText", searchText); // for number format
+	Script script = TclFileScript.loadScript(getScriptPrefix() + ".searchText");
+	if(script.loaded()) {
+	   try {
+		script.setVar(LOGIC_VARNAME, this, this.getClass());
+		script.setVar(OLDVAL_VARNAME, oldVal, String.class);
+		script.setVar(FORM_VARNAME, form, ArbitraryOfferForm.class);
+		script.setVar(RESPONSE_VARNAME, r, ResponseBean.class);
+		script.setVar(SERVICE_FACTORY_VARNAME, factory, ServiceFactoryLocal.class);
+		script.setVar(LOGGER_VARNAME, logger, Logger.class);
+		addFieldsToScript(script);
+		script.run();
+		getFieldsFromScript(script, r); // add all the changed
+						// fields to the response also
+	   } catch (ScriptErrorException e) {
+	       logger.log(BasicLevel.ERROR, "Can not run the script for updating the searchText", e);
+           }
+        }
+	computeCalculatedFields(r);
+	return r;
+    }
     public ResponseBean updateNo(String no) {
         ResponseBean r = new ResponseBean();
 	String oldVal = form.getNo();
@@ -1699,6 +1725,7 @@ public abstract class ArbitraryOfferBean
      * Get the fields stored internaly and adds them to the response.
      */
     protected void copyFieldsToResponse(ResponseBean r) {
+	r.addField("searchText", form.getSearchText());
 	r.addField("no", form.getNo());
 	r.addField("docDate", form.getDocDate());
 	r.addField("dateFrom", form.getDateFrom());
@@ -1766,6 +1793,12 @@ public abstract class ArbitraryOfferBean
         } catch (ScriptErrorException e) {
             logger.log(BasicLevel.ERROR, "Can not set the logger variable in the script" +
                        e.getMessage());
+            logger.log(BasicLevel.DEBUG, e);
+        }
+	try {
+	    s.setVar("searchText", form.getSearchText(), String.class);
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not set the value of field: searchText from the script");
             logger.log(BasicLevel.DEBUG, e);
         }
 	try {
@@ -2101,6 +2134,17 @@ public abstract class ArbitraryOfferBean
      */
     protected void getFieldsFromScript(Script s, ResponseBean r) {
 	Object field;
+	try {
+	    field = s.getVar("searchText", String.class);
+	    if(!field.equals(form.getSearchText())) {
+	        logger.log(BasicLevel.DEBUG, "Field searchText modified by script. Its new value is <<" + (field==null?"null":field.toString()) + ">>");
+	        form.setSearchText((String)field);
+	        r.addField("searchText", (String)field);
+	    }
+	} catch (ScriptErrorException e) {
+	    logger.log(BasicLevel.WARN, "Can not get the value of field: searchText from the script");
+            logger.log(BasicLevel.DEBUG, e);
+        }
 	try {
 	    field = s.getVar("no", String.class);
 	    if(!field.equals(form.getNo())) {

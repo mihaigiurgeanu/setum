@@ -104,7 +104,7 @@ RemoteDataView.prototype.clear = function () {
     var req = new HTTPDataRequest(this.do_link);
     req.add("command", this.get_length_request);
 
-    if(this.initOnClear) {
+    if(this.initOnClear == true) {
 	req.add("operation", "new-context");
     }
 

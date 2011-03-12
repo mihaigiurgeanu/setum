@@ -27,6 +27,7 @@ public class ArbitraryOfferForm implements Serializable {
 	return "http://www.kds.ro/readybeans/rdf/forms/ArbitraryOffer#" + fieldName;
      }
 
+    String searchText;
     String no;
     java.util.Date docDate;
     java.util.Date dateFrom;
@@ -83,6 +84,10 @@ public class ArbitraryOfferForm implements Serializable {
     String clientContactEmail;
 
     public ArbitraryOfferForm() {
+
+
+       this.searchText = "";
+
 
 
        this.no = "";
@@ -304,6 +309,21 @@ public class ArbitraryOfferForm implements Serializable {
 
 
 
+    }
+
+    public void setSearchText(String newSearchText) {
+        this.searchText = newSearchText;
+    }
+
+    public String getSearchText() {
+        return searchText;
+    }
+
+    public void readSearchText(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("searchText");
+	if(a != null) {
+	    this.setSearchText(a.getStringValue());
+	}
     }
 
     public void setNo(String newNo) {

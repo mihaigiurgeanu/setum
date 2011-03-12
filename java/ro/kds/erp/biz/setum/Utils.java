@@ -58,4 +58,20 @@ public class Utils {
 	}
 	return "N/A";
     }
+
+    /**
+     * Helper method that matches a value against a filter. The filter
+     * will match if the value contains the filter. The comparison is
+     * made in case insensitive mode.
+     */
+    public static boolean stringFilter(String value, String filter) {
+	if(filter == null || filter.length() == 0)
+	    return true;
+
+	if(value.toUpperCase().indexOf(filter.toUpperCase()) > -1) {
+	    return true;
+	}
+
+	return false;
+    }
 } // Utils

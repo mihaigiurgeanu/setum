@@ -7,6 +7,10 @@
   <package>ro.kds.erp.biz.setum.basic</package>
   <name>Orders</name>
   <field>
+    <name>searchText</name>
+    <type>String</type>
+  </field>
+  <field>
     <name>number</name>
     <type>String</type>
   </field>

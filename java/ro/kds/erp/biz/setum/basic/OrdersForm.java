@@ -27,6 +27,7 @@ public class OrdersForm implements Serializable {
 	return "http://www.kds.ro/readybeans/rdf/forms/Orders#" + fieldName;
      }
 
+    String searchText;
     String number;
     java.util.Date date;
     Integer clientId;
@@ -142,6 +143,10 @@ public class OrdersForm implements Serializable {
     Double paymentExchangeRate;
 
     public OrdersForm() {
+
+
+       this.searchText = "";
+
 
 
        this.number = "";
@@ -606,6 +611,21 @@ public class OrdersForm implements Serializable {
    
 
 
+    }
+
+    public void setSearchText(String newSearchText) {
+        this.searchText = newSearchText;
+    }
+
+    public String getSearchText() {
+        return searchText;
+    }
+
+    public void readSearchText(Map attributes) {
+	AttributeLocal a = (AttributeLocal)attributes.get("searchText");
+	if(a != null) {
+	    this.setSearchText(a.getStringValue());
+	}
     }
 
     public void setNumber(String newNumber) {

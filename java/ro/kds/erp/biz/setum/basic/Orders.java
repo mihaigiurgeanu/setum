@@ -41,6 +41,7 @@ public interface Orders extends EJBObject {
     public ResponseBean getCurrentFormData() throws RemoteException;
     public ResponseBean getLoadedPrimaryKey() throws RemoteException;
 
+    public ResponseBean updateSearchText(String newSearchText) throws RemoteException;
     public ResponseBean updateNumber(String newNumber) throws RemoteException;
     public ResponseBean updateDate(java.util.Date newDate) throws RemoteException;
     public ResponseBean updateClientId(Integer newClientId) throws RemoteException;

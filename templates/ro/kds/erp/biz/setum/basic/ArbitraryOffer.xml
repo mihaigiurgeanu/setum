@@ -4,6 +4,10 @@
   <package>ro.kds.erp.biz.setum.basic</package>
   <name>ArbitraryOffer</name>
   <field>
+    <name>searchText</name>
+    <type>String</type>
+  </field>
+  <field>
     <name>no</name>
     <type>String</type>
   </field>

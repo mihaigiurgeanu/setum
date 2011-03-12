@@ -16,8 +16,8 @@ var orders;
 var ordersListing = document.getElementById('ordersListing');
 var ordersView;
 
-function load_orders() {
-  orders = new RemoteDataView(theForm.do_link, "loadListing", "getOrdersCount", true);
+function do_load_orders(set_new_context) {
+  orders = new RemoteDataView(theForm.do_link, "loadListing", "getOrdersCount", set_new_context);
   ordersView = make_treeview
     (orders,
      function(row, column) {
@@ -42,6 +42,14 @@ function load_orders() {
 //       return orders[row][col];
 //     });
 // }
+
+function load_orders() {
+  do_load_orders(true);
+}
+
+function on_search() {
+  do_load_orders(false);
+}
 
 var lineItems;
 var lineItemsListing = document.getElementById('lineItemsListing');
@@ -420,7 +428,7 @@ function open_incasari() {
 var theForm = new FormObject();
 theForm.do_link = "/orders.do";
 
-theForm.text_fields = new Array("number", "date", "clientName", "localitateAlta",
+theForm.text_fields = new Array("searchText", "number", "date", "clientName", "localitateAlta",
 				"distanta", "observatii", "total", "totalTva",
 				"discount", "totalFinal", "totalFinalTva",
 				"avans", "invoicedAmount", "payedAmount",
