@@ -331,10 +331,16 @@ function on_new_invoice_from_proforma() {
 }
 
 function on_new_payment() {
-    var req = theForm.get_request();
-    req.add("command", "newPaymentData");
-    theForm.post_request(req);
-    maintab.selectedIndex = 7;
+  // salvez factura
+  var req = theForm.get_request();
+  req.add("command", "saveInvoiceData");
+  theForm.post_request(req);
+
+  // adaug noua plata
+  req = theForm.get_request();
+  req.add("command", "newPaymentData");
+  theForm.post_request(req);
+  maintab.selectedIndex = 7;
 }
 
 function on_save_invoice() {
@@ -348,13 +354,14 @@ function on_save_invoice() {
 }
 
 function on_save_payment() {
-    var req = theForm.get_request();
-    req.add("command", "savePaymentData");
-    theForm.post_request(req);
-    load_selected_order();
-    load_selected_invoice();
-    load_payments();
-    maintab.selectedIndex = 6;
+  // salvez plata
+  req = theForm.get_request();
+  req.add("command", "savePaymentData");
+  theForm.post_request(req);
+  load_selected_order();
+  load_selected_invoice();
+  load_payments();
+  maintab.selectedIndex = 6;
 }
 
 function on_remove_invoice() {
