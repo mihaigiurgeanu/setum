@@ -41,6 +41,7 @@ Lista comenzilor, creere/vizualizare/stergere
     <command id="command-print_proforma"	oncommand="open_proforma('pdf')"/>
 
     <command id="command-add_invoice"		oncommand="on_new_invoice()"/>
+    <command id="command-add_invoice_from_prof" oncommand="on_new_invoice_from_proforma()"/>
     <command id="command-remove_invoice"	oncommand="theForm.ask(REMOVE_INVOICE_MSG, on_remove_invoice)"/>
     <command id="command-save_invoice"		oncommand="on_save_invoice()"/>
     
@@ -451,6 +452,7 @@ Lista comenzilor, creere/vizualizare/stergere
 	<hbox class="mytoolbar">
 	  <button label="Salveaza" command="command-save_proforma"/>
 	  <button label="Tipareste proforma" command="command-print_proforma"/>
+	  <button label="Creaza factura" command="command-add_invoice_from_prof"/>
 	</hbox>
 
 	<hbox class="title">
