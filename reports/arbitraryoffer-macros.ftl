@@ -146,14 +146,29 @@ Usa metalica &#x00AB;${search(usa?parent, "subclass", usa["field[attribute::name
 	      usa["field[attribute::name='finisajPanouLateralExtInt']"] = "true") >
 	<@finisaj name="intFinisajBlat"></@finisaj>
 	<#else>
-	<@finisaj name="intFinisajBlat">blat interior:</@finisaj>
-	<@finisaj name="intFinisajToc">toc interior:</@finisaj>
+	  <#if (usa["field[attribute::name='finisajBlatExtInt']"] = "true") &&
+	       (usa["field[attribute::name='finisajTocExtInt']"] = "true") >
+	     <@finisaj name="intFinisajBlat">blat interior/blat exterior:</@finisaj>
+	     <@finisaj name="intFinisajToc">toc interior/toc exterior:</@finisaj>
+	  <#elseif usa["field[attribute::name='finisajTocExtInt']"] = "true">
+	     <@finisaj name="intFinisajBlat">blat interior:</@finisaj>
+	     <@finisaj name="extFinisajBlat">blat exterior:</@finisaj>
+	     <@finisaj name="intFinisajToc">toc interior/toc exterior:</@finisaj>
+          <#elseif usa["field[attribute::name='finisajBlatExtInt']"] = "true">
+	     <@finisaj name="intFinisajBlat">blat interior/blat exterior:</@finisaj>
+	     <@finisaj name="intFinisajToc">toc interior:</@finisaj>
+	     <@finisaj name="extFinisajToc">toc exterior:</@finisaj>
+          <#else>
+	    <@finisaj name="intFinisajBlat">blat interior:</@finisaj>
+	    <@finisaj name="extFinisajBlat">blat exterior:</@finisaj>
+	    <@finisaj name="intFinisajToc">toc interior:</@finisaj>
+	    <@finisaj name="extFinisajToc">toc exterior:</@finisaj>
+	 </#if>
+
 	<@finisaj name="intFinisajGrilaj">grilaj interior:</@finisaj>
 	<@finisaj name="intFinisajFereastra">fereastra interior:</@finisaj>
 	<@finisaj name="intFinisajSupralumina">supralumina interior:</@finisaj>
 	<@finisaj name="intFinisajPanouLateral">panou lateral interior:</@finisaj>
-	<@finisaj name="extFinisajBlat">blat exterior:</@finisaj>
-	<@finisaj name="extFinisajToc">toc exterior:</@finisaj>
 	<@finisaj name="extFinisajGrilaj">grilaj exterior:</@finisaj>
 	<@finisaj name="extFinisajFereastra">fereastra exterior:</@finisaj>
 	<@finisaj name="extFinisajSupralumina">supralumina exterior:</@finisaj>
