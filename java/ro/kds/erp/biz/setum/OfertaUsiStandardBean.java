@@ -38,6 +38,7 @@ import ro.kds.erp.data.ProductsSelectionLocalHome;
 import ro.kds.erp.data.ProductsSelectionLocal;
 import java.util.TreeSet;
 import java.math.MathContext;
+import org.apache.commons.lang.StringUtils;
 
 /**
  * Business logic pentru form-ul de vizualizare/modificare oferte
@@ -101,21 +102,6 @@ public class OfertaUsiStandardBean
 	    availability = 30;
 	}
 
-	Integer offerNo;
-	try {
-	    InitialContext ic = new InitialContext();
-	    Context env = (Context) ic.lookup("java:comp/env");
-	    
-	    SequenceHome sh = (SequenceHome)PortableRemoteObject.narrow
-		(env.lookup("ejb/SequenceHome"), SequenceHome.class);
-	    Sequence s = sh.create();
-	    offerNo = s.getNext("ro.setumsa.sequnces.offers");
-	} catch (Exception e) {
-	    offerNo = null;
-	    logger.log(BasicLevel.WARN, "Can not get a number for offer", e);
-	}
-
-	form.setNo(String.valueOf(offerNo));
 	form.setDocDate(new Date());
 
 	form.setDateFrom(new Date());
@@ -177,6 +163,20 @@ public class OfertaUsiStandardBean
 	    } else {
 		offer = oh.findByPrimaryKey(id);
 	    }
+
+	    Integer offerNo;
+	    try {
+		SequenceHome sh = (SequenceHome)PortableRemoteObject.narrow
+		    (env.lookup("ejb/SequenceHome"), SequenceHome.class);
+		Sequence s = sh.create();
+		offerNo = s.getNext("ro.setumsa.sequnces.offers");
+	    } catch (Exception e) {
+		offerNo = null;
+		logger.log(BasicLevel.WARN, "Can not get a number for offer", e);
+	    }
+
+	    form.setNo(String.valueOf(offerNo));
+
 	    DocumentLocal docData = offer.getDocument();
 	    docData.setNumber(form.getNo());
 	    docData.setDate(form.getDocDate());
@@ -257,7 +257,17 @@ public class OfertaUsiStandardBean
 		PortableRemoteObject.narrow
 		(env.lookup("ejb/OfferHome"), OfferLocalHome.class);
 
-	    Collection offers = oh.findByCategory(OFFERS_CATEGORY);
+	    ArrayList offers = new ArrayList(oh.findByCategory(OFFERS_CATEGORY));
+	    Collections.sort(offers, new Comparator() {
+		    public int compare(Object o1, Object o2) {
+			OfferLocal offer1 = (OfferLocal)o1;
+			OfferLocal offer2 = (OfferLocal)o2;
+			String n1 = StringUtils.leftPad(offer1.getDocument().getNumber(), 6, '0');
+			String n2 = StringUtils.leftPad(offer2.getDocument().getNumber(), 6, '0');
+
+			return -(n1.compareTo(n2));
+		    }
+		});
 	    ResponseBean r = new ResponseBean();
 	    for(Iterator i = offers.iterator(); i.hasNext(); ) {
 		OfferLocal offer = (OfferLocal) i.next();
