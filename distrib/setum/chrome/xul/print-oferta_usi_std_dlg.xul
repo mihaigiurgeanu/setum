@@ -38,10 +38,8 @@
 		 theForm.post_request(req);
 		 
 		 // vechea oferta cu jasper
-		 //open('http://setumserver:9000/setum/oferta-usi-standard.pdf', 'Usi standard', '');
+		 open('http://setumserver:9000/setum/oferta-usi-standard.pdf', 'Usi standard', '');
 		 
-		 // oferta cu xslfo
-		 open('http://setumserver:9000/setum/reports/oferta-usi_std.pdf', 'Usi standard', '');
 		 return true;
 	     }
 	     function doCancel() {
