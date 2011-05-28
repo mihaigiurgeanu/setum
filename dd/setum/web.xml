@@ -1606,6 +1606,61 @@
 
   <!-- end Raport Incasari -->
 
+  <!-- Oferta usi standard (XSL-FO + ftl) -->
+    <servlet>
+    <description>XSLFO Usi standard</description>
+    <display-name>XSLOfertaUsiStd</display-name>
+    <servlet-name>XSLOfertaUsiStdServlet</servlet-name>
+    <servlet-class>ro.kds.erp.reports.XSLRendererServlet</servlet-class>
+    <init-param>
+      <description>The key in the session holding the object to receive the method invocation</description>
+      <param-name>sessionName</param-name>
+      <param-value>forms.setum.OfetaUsiStandard</param-value>
+    </init-param>
+    <init-param>
+      <description>The name of the method to be called on the object</description>
+      <param-name>method</param-name>
+      <param-value>offerReportData</param-value>
+    </init-param>
+    <init-param>
+      <description>The jndi name of the Transformer ejb to be used</description>
+      <param-name>transformer</param-name>
+      <param-value>ejb/FTLTransformerHome</param-value>
+    </init-param>
+    <init-param>
+      <description>The name of the stylesheet to be used by the Transformer</description>
+      <param-name>stylesheet</param-name>
+      <param-value>oferta-usi_std.ftl</param-value>
+    </init-param>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>XSLOfertaUsiStdServlet</servlet-name>
+    <url-pattern>/reports/oferta-usi_std.xsl</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>XSLOfertaUsiStdServlet</servlet-name>
+    <url-pattern>/reports/oferta-usi_std.pdf</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>XSLOfertaUsiStdServlet</servlet-name>
+    <url-pattern>/reports/oferta-usi_std.rtf</url-pattern>
+  </servlet-mapping>
+  
+  <filter-mapping>
+    <filter-name>PDFFilter</filter-name>
+    <url-pattern>/reports/oferta-usi_std.pdf</url-pattern>
+  </filter-mapping>
+
+  <filter-mapping>
+    <filter-name>RTFFilter</filter-name>
+    <url-pattern>/reports/oferta-usi_std.rtf</url-pattern>
+  </filter-mapping>
+
+  <!-- end Oferta usi standard (XSL-FO + ftl) -->
+
   <resource-ref>
     <description>Products datasource reference</description>
     <res-ref-name>jdbc/Products</res-ref-name>

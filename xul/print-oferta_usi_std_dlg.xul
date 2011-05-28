@@ -36,8 +36,12 @@
 		 req.add("field", "selectionCode");
 		 req.add("value", document.getElementById("selectionCode").value);
 		 theForm.post_request(req);
-
-		 open('http://setumserver:9000/setum/oferta-usi-standard.pdf', 'Usi standard', '');
+		 
+		 // vechea oferta cu jasper
+		 //open('http://setumserver:9000/setum/oferta-usi-standard.pdf', 'Usi standard', '');
+		 
+		 // oferta cu xslfo
+		 open('http://setumserver:9000/setum/reports/oferta-usi_std.pdf', 'Usi standard', '');
 		 return true;
 	     }
 	     function doCancel() {

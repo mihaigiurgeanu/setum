@@ -168,6 +168,7 @@
     <method>java.util.Collection lineItemsCollectionMap() throws RemoteException</method>
     <method>java.util.Map getOfferFieldsMap() throws RemoteException</method>
     <method>ResponseBean clearFilter() throws RemoteException</method>
+    <method>ResponseBean offerReportData() throws RemoteException</method>
   </remote>
 
   <services>

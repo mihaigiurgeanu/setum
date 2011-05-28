@@ -313,6 +313,16 @@ public class ResponseBean implements Serializable {
 	valueLists.put(name, vl);
     }
 
+    public void addField(String name, Object value) {
+	logger.log(BasicLevel.DEBUG, "add field to response: <<" + 
+		   name + ">> -> <<" + value + ">>"); 
+	if(value != null) {
+	    fields.put(name, value.toString());
+	}
+	else 
+	    fields.put(name, "");
+    }
+
     /**
      * Create the XML response. This is the representation of the response
      * object in an XML format.

@@ -39,6 +39,7 @@ import ro.kds.erp.data.ProductsSelectionLocal;
 import java.util.TreeSet;
 import java.math.MathContext;
 import org.apache.commons.lang.StringUtils;
+import java.util.Set;
 
 /**
  * Business logic pentru form-ul de vizualizare/modificare oferte
@@ -813,6 +814,43 @@ public class OfertaUsiStandardBean
 	return r;
     }
 
+    /**
+     * Returneaza datele ofertei pentru raport.
+     */
+    public ResponseBean offerReportData() {
+	ResponseBean r = new ResponseBean();
+
+	r.addRecord();
+	r.addField("offerNo", form.getNo());
+	r.addField("docDate", form.getDocDate());
+	r.addField("offerDateFrom", form.getDateFrom());
+	r.addField("offerDateTo", form.getDateTo());
+	r.addField("offerPeriod", form.getPeriod());
+	if(currentSelection != null) {
+	    r.addField("offerName", currentSelection.getName());
+	} else {
+	    r.addField("offerName", form.getName());
+	}
+	r.addField("offerDescription", form.getDescription());
+	r.addField("offerComment", form.getComment());
+
+
+
+	Collection lineItemsCollection = lineItemsCollectionMap();
+	ResponseBean lineItemsResponse = new ResponseBean();
+	for (Iterator i=lineItemsCollection.iterator(); i.hasNext(); ) {
+	    lineItemsResponse.addRecord();
+	    Map l = (Map)i.next();
+	    Set fields = l.keySet();
+	    for (Iterator f = fields.iterator(); f.hasNext(); ) {
+		String field = (String)f.next();
+		lineItemsResponse.addField(field, l.get(field));
+	    } 
+	}
+	r.addField("lineItems", lineItemsResponse);
+
+	return r;
+    }
 
     /**
      * Builds a <code>Collection</code> of <code>Map</code> objects to be
