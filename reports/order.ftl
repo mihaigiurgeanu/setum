@@ -465,9 +465,9 @@
 			     <@finisaj name="extFinisajSupralumina">Supralumina (exterior></@finisaj>
 			     <@finisaj name="intFinisajPanouLateral">Panou lateral (interior)</@finisaj>
 			     <@finisaj name="extFinisajPanouLateral">Panou lateral (exterior)</@finisaj>
-			  </fo:block>
 			  </#if>
-			  <!-- end finisaje -->
+		    </fo:block>
+		    <!-- end finisaje -->
 
 		  <!-- sisteme inchidere -->
 		  <!-- Sisteme -->
