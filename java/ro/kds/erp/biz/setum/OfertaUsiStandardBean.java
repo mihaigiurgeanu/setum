@@ -891,21 +891,45 @@ public class OfertaUsiStandardBean
 		OfferItemLocal item = (OfferItemLocal)i.next();
 
 		if(selectionSet == null || selectionSet.contains(item.getProduct().getId())) {
+		    logger.log(BasicLevel.DEBUG, "Adaug o noua linie la raportul de oferta usi standard.");
 		    HashMap dataRow = new HashMap();
 		    loadSubForm(item.getId());
 		    dataRow.put("name", form.getProductName());
+		    logger.log(BasicLevel.DEBUG, "    name: " + form.getProductName());
+
 		    dataRow.put("code", form.getProductCode());
+		    logger.log(BasicLevel.DEBUG, "    code: " + form.getProductCode());
+
 		    dataRow.put("sellPrice", form.getVatPrice());
+		    logger.log(BasicLevel.DEBUG, "    sellPrice: " + form.getVatPrice());
 		    
 		    dataRow.put("usa_code", form.getUsaCode());
+		    logger.log(BasicLevel.DEBUG, "    usa_code: " + form.getUsaCode());
+
 		    dataRow.put("usa_name", form.getUsa());
+		    logger.log(BasicLevel.DEBUG, "    usa_name: " + form.getUsa());
+
 		    dataRow.put("usa_id", form.getUsaId());
+		    logger.log(BasicLevel.DEBUG, "    usa_id: " + form.getUsaId());
+
 		    dataRow.put("usa_description", form.getUsaDescription());
+		    logger.log(BasicLevel.DEBUG, "    usa_description: " + form.getUsaDescription());
+
 		    dataRow.put("broasca_name", form.getBroasca());
+		    logger.log(BasicLevel.DEBUG, "    broasca_name: " + form.getBroasca());
+
 		    dataRow.put("cilindru_name", form.getCilindru());
+		    logger.log(BasicLevel.DEBUG, "    cilindru_name" + form.getCilindru());
+
 		    dataRow.put("sild_name", form.getSild());
+		    logger.log(BasicLevel.DEBUG, "    sild_name: " + form.getSild());
+
 		    dataRow.put("yalla_name", form.getYalla());
+		    logger.log(BasicLevel.DEBUG, "    yalla_name: " + form.getYalla());
+
 		    dataRow.put("vizor_name", form.getVizor());
+		    logger.log(BasicLevel.DEBUG, "    vizor_name: " + form.getVizor());
+
 		    reportData.add(dataRow);
 		}
 
