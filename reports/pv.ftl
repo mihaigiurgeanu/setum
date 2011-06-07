@@ -254,7 +254,7 @@
 	   <!-- end optiuni -->
 
 	   <!-- start finisaje -->
-	   <#if (usa.record["field[attribute::name='intFinisajTocId']"] = "0" ||
+	                  <#if (usa.record["field[attribute::name='intFinisajTocId']"] = "0" ||
 			        usa.record["field[attribute::name='finisajTocBlat']"] = "true") &&
 			       (usa.record["field[attribute::name='intFinisajGrilajId']"] = "0" ||
 			        usa.record["field[attribute::name='finisajGrilajBlat']"] = "true") &&
@@ -276,61 +276,43 @@
 			        usa.record["field[attribute::name='finisajSupraluminaExtInt']"] = "true") &&
 			       (usa.record["field[attribute::name='extFinisajPanouLateralId']"] = "0" ||
 			        usa.record["field[attribute::name='finisajPanouLateralExtInt']"] = "true")>
-	   <!-- finisaje egale, listez doar unul -->
-	   Finisaj ${usa.record["field[attribute::name='intFinisajBlat']"]}
-	   <#else>
-	   <!-- finisaje neegale ... le listez pe fiecare -->
-	   Finisaj
-	   <#if usa.record["field[attribute::name='intFinisajBlatId']"] != "0">
-	   Blat (interior)
-	   ${usa.record["field[attribute::name='intFinisajBlat']"]}/
-	   </#if>
-	   <#if usa.record["field[attribute::name='extFinisajBlatId']"] != "0">
-	   Blat (exterior)
-	   ${usa.record["field[attribute::name='extFinisajBlat']"]}/
-	   </#if>
-	   <#if usa.record["field[attribute::name='intFinisajTocId']"] != "0">
-	   Toc (interior)
-	   ${usa.record["field[attribute::name='intFinisajToc']"]}/
-	   </#if>
-	   <#if usa.record["field[attribute::name='extFinisajTocId']"] != "0">
-	   Toc (exterior)
-	   ${usa.record["field[attribute::name='extFinisajToc']"]}/
-	   </#if>
-	   <#if usa.record["field[attribute::name='intFinisajGrilajId']"] != "0">
-	   Grilaj (interior)
-	   ${usa.record["field[attribute::name='intFinisajGrilaj']"]}
-	   </#if>
-	   <#if usa.record["field[attribute::name='extFinisajGrilajId']"] != "0">
-	   Grilaj (exterior)
-	   ${usa.record["field[attribute::name='extFinisajGrilaj']"]}/
-	   </#if>
-	   <#if usa.record["field[attribute::name='intFinisajFereastraId']"] != "0">
-	   Fereastra (interior)
-	   ${usa.record["field[attribute::name='intFinisajFereastra']"]}/
-	   </#if>
-	   <#if usa.record["field[attribute::name='extFinisajFereastraId']"] != "0">
-	   Fereastra (exterior)
-	   ${usa.record["field[attribute::name='extFinisajFereastra']"]}/
-	   </#if>
-	   <#if usa.record["field[attribute::name='intFinisajSupraluminaId']"] != "0">
-	   Supralumina (interior)
-	   ${usa.record["field[attribute::name='intFinisajSupralumina']"]}/
-	   </#if>
-	   <#if usa.record["field[attribute::name='extFinisajSupraluminaId']"] != "0">
-	   Supralumina (exterior)
-	   ${usa.record["field[attribute::name='extFinisajSupralumina']"]}/
-	   </#if>
-	   <#if usa.record["field[attribute::name='intFinisajPanouLateralId']"] != "0">
-	   Panou lateral (interior)
-	   ${usa.record["field[attribute::name='intFinisajPanouLateral']"]}/
-	   </#if>
-	   <#if usa.record["field[attribute::name='extFinisajPanouLateralId']"] != "0">
-	   Panou lateral (exterior)
-	   ${usa.record["field[attribute::name='extFinisajPanouLateral']"]}
-	   </#if>
 
-	   </#if>
+				<@finisaj name="intFinisajBlat"></@finisaj>
+			  <#else>
+			  <#if usa.record["field[attribute::name='finisajTocBlat']"] = "true" &&
+			       usa.record["field[attribute::name='finisajBlatExtInt']"] = "true" &&
+			       usa.record["field[attribute::name='finisajTocExtInt']"] = "true"
+			  >
+			     <@finisaj name="intFinisajBlat">Toc/Blat (interior/exterior)</@finisaj>
+			  
+			  <#elseif (usa.record["field[attribute::name='finisajBlatExtInt']"] = "true") &&
+			           (usa.record["field[attribute::name='finisajTocExtInt']"] = "true") >
+			     <@finisaj name="intFinisajBlat">Blat (interior/exterior)</@finisaj>
+			     <@finisaj name="intFinisajToc">Toc (interior/exterior)</@finisaj>
+			  
+			  <#elseif usa.record["field[attribute::name='finisajBlatExtInt']"] = "true">
+			     <@finisaj name="intFinisajBlat">Blat (interior/exterior)</@finisaj>
+			     <@finisaj name="intFinisajToc">Toc (interior)</@finisaj>
+			     <@finisaj name="extFinisajToc">Toc (exterior)</@finisaj>
+			  <#elseif usa.record["field[attribute::name='finisajTocExtInt']"] = "true">
+			     <@finisaj name="intFinisajBlat">Blat (interior)</@finisaj>
+			     <@finisaj name="extFinisajBlat">Blat (exterior)</@finisaj>
+			     <@finisaj name="intFinisajToc">Toc (interior/exterior)</@finisaj>
+			  <#else>
+			     <@finisaj name="intFinisajBlat">Blat (interior)</@finisaj>
+			     <@finisaj name="extFinisajBlat">Blat (exterior)</@finisaj>
+			     <@finisaj name="intFinisajToc">Toc (interior)</@finisaj>
+			     <@finisaj name="extFinisajToc">Toc (exterior)</@finisaj>
+			  </#if>
+			     <@finisaj name="intFinisajGrilaj">Grilaj (interior)</@finisaj>
+			     <@finisaj name="extFinisajGrilaj">Grilaj (exterior)</@finisaj>
+			     <@finisaj name="intFinisajFereastra">Fereastra (interior)</@finisaj>
+			     <@finisaj name="extFinisajFereastra">Fereastra (exterior)</@finisaj>
+			     <@finisaj name="intFinisajSupralumina">Supralumina (interior)</@finisaj>
+			     <@finisaj name="extFinisajSupralumina">Supralumina (exterior></@finisaj>
+			     <@finisaj name="intFinisajPanouLateral">Panou lateral (interior)</@finisaj>
+			     <@finisaj name="extFinisajPanouLateral">Panou lateral (exterior)</@finisaj>
+			  </#if>
 	   <!-- end finisaje -->
 	   
 
@@ -555,6 +537,15 @@
      <#if tip?string != '' && tip?number != 0>${search(usa, "${key_name}Tip", tip)}</#if>
      <#if buc?number != 1>${buc} buc</#if>
   </#if>
+</#macro>
+
+<#macro finisaj name>
+<#if usa.record["field[attribute::name='${name}Id']"] != "0">
+<fo:block border-bottom-style="solid">
+  <fo:block><#nested/></fo:block>
+  <fo:block font-weight="bold">${usa.record["field[attribute::name='${name}']"]}</fo:block>
+</fo:block>
+</#if>
 </#macro>
 
 </fo:root>
