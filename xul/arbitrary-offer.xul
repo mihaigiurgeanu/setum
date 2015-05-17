@@ -24,6 +24,8 @@ Data-entry form for general purpose offers.
 
 
   <script src="js/logging.js"/>
+  <script src="js/rdf.js"/>
+  <script src="js/messages.js"/>
   <script src="js/treeutils.js"/>
   <script src="js/httpdata.js"/>
   <script src="js/formobject.js"/>

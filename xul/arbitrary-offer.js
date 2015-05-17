@@ -115,20 +115,22 @@ function remove_item() {
 function save_offer() {
     var req = theForm.get_request();
     req.add("command", "saveFormData");
-    theForm.post_save_request(req);
-    load_offers();
-    maintab.selectedIndex = 0;
-    document.getElementById("maintab.lineItemsDetails").setAttribute("hidden", "true");
-    document.getElementById("maintab.offerDetails").setAttribute("hidden", "true");
+    if(theForm.post_request(req)) {
+      load_offers();
+      maintab.selectedIndex = 0;
+      document.getElementById("maintab.lineItemsDetails").setAttribute("hidden", "true");
+      document.getElementById("maintab.offerDetails").setAttribute("hidden", "true");
+    }
 }
 
 function save_item() {
     var req = theForm.get_request();
     req.add("command", "saveSubForm");
-    theForm.post_save_request(req);
-    load_items();
-    maintab.selectedIndex = 1;
-    document.getElementById("maintab.lineItemsDetails").setAttribute("hidden", "true");
+    if(theForm.post_request(req)) {
+      load_items();
+      maintab.selectedIndex = 1;
+      document.getElementById("maintab.lineItemsDetails").setAttribute("hidden", "true");
+    }
 }
 
 

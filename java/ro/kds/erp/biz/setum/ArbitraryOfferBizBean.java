@@ -902,7 +902,7 @@ public class ArbitraryOfferBizBean extends ArbitraryOfferBean {
 
 		updateOrderPriceOfAttachedOrderLines();
 
-		r = new ResponseBean();
+		r = validate();
 	    } catch (Exception e) {
 		r = new ResponseBean();
 		r.setCode(1);
