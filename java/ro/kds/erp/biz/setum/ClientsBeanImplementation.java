@@ -175,6 +175,74 @@ public class ClientsBeanImplementation extends ClientsBean {
 	selectedContact = null;
     }
 
+    private ArrayList clientsCache;
+    static final int LISTING_ROWS_PER_REQUEST = 50;
+
+    /**
+     * Prepares partial listing loading.
+     */
+    public ResponseBean getClientsCount() {
+	ResponseBean r;
+	try {
+	    InitialContext ic = new InitialContext();
+	    Context env = (Context)ic.lookup("java:comp/env");
+	    ClientLocalHome clh = (ClientLocalHome)PortableRemoteObject.narrow
+		(env.lookup("ejb/ClientHome"), ClientLocalHome.class);
+
+	    // select all
+	    Collection clients = clh.findAll();
+
+	    clientsCache = new ArrayList(clients);
+	    Collections.sort(clientsCache, new Comparator() {
+		    public int compare(Object o1, Object o2) {
+			ClientLocal c1 = (ClientLocal)o1;
+			ClientLocal c2 = (ClientLocal)o2;
+			
+			return c1.getName().compareTo(c2.getName());
+		    }
+		});
+	    r = new ResponseBean();
+	    r.addRecord();
+	    r.addField("records-count", clientsCache.size());
+	} catch (Exception e) {
+	    r = new ResponseBean();
+	    r.setCode(1);
+	    r.setMessage("Eroare la incarcarea listei de clienti!");
+	    logger.log(BasicLevel.ERROR,
+		       "Error loading the list of clients", e);
+	}
+	return r;
+    }
+
+    public ResponseBean loadPartialListing(Integer startRow) {
+	ResponseBean r = new ResponseBean();
+	if(clientsCache == null) {
+	    r = getClientsCount();
+	    if(clientsCache == null) {
+		logger.log(BasicLevel.ERROR, "Could not load the clients in memory");
+		return r;
+	    }
+	}
+
+	int endRow = startRow.intValue() + LISTING_ROWS_PER_REQUEST;
+	for(int i = startRow.intValue(); 
+	    (i < endRow) && (i < clientsCache.size()); i++) {
+	    
+	    ClientLocal c = (ClientLocal)clientsCache.get(i);
+	    r.addRecord();
+	    r.addField("listing.id", c.getId());
+	    r.addField("listing.name", c.getName());
+	    r.addField("listing.companyName", c.getCompanyName());
+	    r.addField("listing.firstName", c.getFirstName());
+	    r.addField("listing.lastName", c.getLastName());
+	    r.addField("listing.city", c.getCity());
+	    r.addField("listing.countryCode", c.getCountryCode());
+	    r.addField("listing.phone", c.getPhone());
+	}
+
+	return r;
+    }
+
     /**
      * Loads the list of clients
      */

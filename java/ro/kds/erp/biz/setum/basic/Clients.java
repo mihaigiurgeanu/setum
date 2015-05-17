@@ -52,6 +52,8 @@ public interface Clients extends EJBObject {
     public ResponseBean updateContactComment(String newContactComment) throws RemoteException;
 
     public ResponseBean loadListing(Integer isCompany) throws RemoteException;
+    public ResponseBean getClientsCount() throws RemoteException;
+    public ResponseBean loadPartialListing(Integer startRow) throws RemoteException;
     public ResponseBean contactsListing() throws RemoteException;
     public ResponseBean loadSubForm(Integer loadId) throws RemoteException;
     public ResponseBean addNewContact() throws RemoteException;

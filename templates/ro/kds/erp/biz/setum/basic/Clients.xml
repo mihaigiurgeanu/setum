@@ -108,6 +108,8 @@
   <!-- additional methods for the remote interface -->
   <remote>
     <method>ResponseBean loadListing(Integer isCompany) throws RemoteException</method>
+    <method>ResponseBean getClientsCount() throws RemoteException</method>
+    <method>ResponseBean loadPartialListing(Integer startRow) throws RemoteException</method>
     <method>ResponseBean contactsListing() throws RemoteException</method>
     <method>ResponseBean loadSubForm(Integer loadId) throws RemoteException</method>
     <method>ResponseBean addNewContact() throws RemoteException</method>

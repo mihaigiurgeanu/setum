@@ -64,8 +64,9 @@ Arguments:
   theForm.do_link = "/clients.do";
   
   var clients;
+  var clients_view;
   var clients_listing = document.getElementById("clients-listing-tree");
-  var req = theForm.get_request();
+/*  var req = theForm.get_request();
   req.add("command", "loadListing");
   req.add("param0", "-1");
   clients = load_records(req);
@@ -76,11 +77,22 @@ Arguments:
        if(column.id) col = column.id; else col = column;
        return clients[row][col];
    });
-  
+*/
+  clients = new RemoteDataView(theForm.do_link, "loadPartialListing", "getClientsCount");
+  clients_view = make_treeview
+    (clients,
+     function(row, column) {
+       var col;
+       if(column.id) col = column.id; else col = column;
+       if(clients)
+         return clients.get_cell_text(row, col);
+     });
+   clients_listing.view = clients_view;
+
   function doOk() {
       for(var i=0; i<clients.length; i++) {
 	  if(clients_listing.view.selection.isSelected(i)) {
-	      window.arguments[0].select(clients[i]['listing.id']);
+	      window.arguments[0].select(clients.get_cell_text(i, 'listing.id'));
 	  }
       }
   
