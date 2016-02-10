@@ -160,7 +160,7 @@ public class OfertaUsiStandardPDF extends HttpServlet {
 		    compositePrice = compositePrice.add(vizor.getSellPrice());
 
 
-		fields.put("sellPrice", compositePrice.multiply(new BigDecimal(1.24)));
+		fields.put("sellPrice", compositePrice.multiply(new BigDecimal(1.20)));
 		records.add(fields);		
 	    }
 
