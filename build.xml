@@ -17,24 +17,14 @@
   <property name="reports" value="reports"/>
   <property name="library" value="lib"/>
   <property name="genic.destination" value="skels"/>
-  <property name="templates" value="templates"/>
-  <property name="src.formbean" value="${source}"/>
   <property name="src.home" value="${source}"/>
   <property name="src.remote" value="${source}"/>
   <property name="src.sessionbean" value="${source}"/>
-  <property name="xul.src" value="xul"/>
-  <property name="xul.dist" value="distrib/setum"/>
-  <property name="xul.dist.content" value="${xul.dist}/chrome/xul"/>
   
-  <taskdef name="ejbjar"
-	   classname="org.objectweb.jonas.ant.EjbJar"
-	   classpath="${jonas.root}/lib/common/ow_jonas_ant.jar" />
-  <taskdef name="freemarker" classname="freemarker.ext.ant.FreemarkerXmlTask"
-	   classpath="${library}/freemarker.jar"/>
   <taskdef name="jrc" 
 	   classname="net.sf.jasperreports.ant.JRAntCompileTask"> 
     <classpath>
-      <fileset dir="./lib">
+      <fileset dir="${library}">
 	<include name="**/*.jar"/>
       </fileset>
     </classpath>
@@ -44,7 +34,7 @@
     <pathelement location="${build}" />
     <pathelement location="${jonas.root}/lib/commons/j2ee/ejb-2_1-api.jar" />
     <pathelement location="${jonas.root}/lib/commons/j2ee/servlet-2_4.jar" />
-    <fileset dir="./lib">
+    <fileset dir="${library}">
       <include name="**/*.jar"/>
     </fileset>
     <fileset dir="${jonas.root}/lib">
@@ -120,29 +110,7 @@
     </war>
   </target>
 
-  <!--
-  <target name="reports.war" depends="init,compile,reports"
-	  description="The main web module">
-    <war destfile="${dist}/reports.war"
-	 webxml="${descriptors}/reports/web.xml"
-	 >
-      <classes dir="${build}">
-	<include name="ro/kds/erp/reports/**/*.class" />
-      </classes>
-      <webinf dir=".">
-	<include name="reports/**/*.jasper" />
-      </webinf>
-      <fileset dir="reports">
-	<include name="images/**/*"/>
-      </fileset>
-      <lib dir="${library}" />
-
-      <webinf file="${descriptors}/reports/jonas-web.xml" />
-    </war>
-  </target>
-  -->
-
-  <target name="compile" depends="init,generateFormClasses"
+  <target name="compile" depends="init"
 	  description="Compile the java classes">
     <mkdir dir="${build}" />
     <javac srcdir="${source}" destdir="${build}" 
@@ -182,11 +150,6 @@
   <target name="ejbjarsUpdate"
 	  description="Adds to ejb jars the manifest file information and other needed files"
 	  depends="ejbjars">
-    <!--
-    <jar destfile="${dist}/datalayer.jar" update="true" basedir="${build}">
-      <include name="ro/kds/erp/data//DataLayerException.class"/>
-    </jar>
-    -->
     <jar destfile="${dist}/setumbiz.jar" update="true" basedir="${build}"
 	 includes="ro/kds/erp/scripting/*.class">
       <manifest>
@@ -203,19 +166,10 @@
 
   <target name="upload" depends="application"
 	  description="deploys the application on the app server">
-    <!--
-    <copy file="${dist}/setum.war" toDir="${jonas.root}/webapps" 
-	  overwrite="true" />
-    <copy file="${dist}/reports.war" toDir="${jonas.root}/webapps" 
-	  overwrite="true" />
-    <copy file="${dist}/datalayer.jar" todir="${jonas.root}/ejbjars"
-	  overwrite="true" />
-    -->
     <copy file="${dist}/setum.ear" toDir="${jonas.root}/apps"
 	  overwrite="true" />
   </target>
 
-  <!-- deploying the ear on a linux machine -->
   <target name="deploy">
     <echo message="OS name: ${os.name}"/>
     <exec os="Windows XP" executable="${jonas.root}/bin/nt/jonas.bat"
@@ -248,7 +202,6 @@
     </exec>
   </target>
 
-  <!-- Building the ear -->
   <target name="application" depends="init,ejbjarsUpdate,setum.war,prefsadm"
 	  description="builds the ear">
     <ear earfile="${dist}/setum.ear" appxml="${descriptors}/setumapp/application.xml">
@@ -292,42 +245,9 @@
     <jrc srcdir="${reports}" includes="OfertaSisteme.xml OfertaUsiStandard.xml" />
   </target>
 
-  <target name="generateFormClasses" depends="init"
-	  description="Generation of java classes from xml templates">
-    <freemarker basedir="${templates}" destdir="${src.formbean}"
-		templatedir="${templates}"
-		includes="**/*.xml" excludes="**/schemas.xml" template="FormBean.ftl"
-		extension="Form.java" />
-    <freemarker basedir="${templates}" destdir="${src.remote}"
-		templatedir="${templates}"
-		includes="**/*.xml" excludes="**/schemas.xml" template="RemoteInterface.ftl"
-		extension=".java" />
-    <freemarker basedir="${templates}" destdir="${src.home}"
-		templatedir="${templates}"
-		includes="**/*.xml" excludes="**/schemas.xml" template="HomeInterface.ftl"
-		extension="Home.java" />
-    <freemarker basedir="${templates}" destdir="${src.sessionbean}"
-		templatedir="${templates}"
-		includes="**/*.xml" excludes="**/schemas.xml" template="SessionBean.ftl"
-		extension="Bean.java" />
-  </target>
-
   <target name="docs" description="Runs javadoc and generate source code documentation">
     <javadoc sourcepath="${source}" packagenames="ro.kds.erp.*" 
 	     destdir="${docs}" />
   </target>
-
-  <target name="deployxul" description="Copiaza fisierele XUL pentru a fi rulate cu XULRunner">
-    <copy todir="${xul.dist.content}">
-      <fileset dir="${xul.src}"/>
-    </copy>
-  </target>
-
-  <target name="install-xul" description="Instaleaza aplicatia xul (doar pentru Mac OS X)" depends="deployxul">
-    <exec os="Mac OS X" executable="/Library/Frameworks/XUL.framework/xulrunner-bin">
-      <arg line="--install-app distrib/setum/"/>
-    </exec>
-  </target>
-   
 
 </project>

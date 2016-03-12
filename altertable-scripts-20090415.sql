@@ -1,2 +1,0 @@
-ALTER TABLE  `OFFER_` ADD  `contact_` VARCHAR( 500 ) NULL ;
-ALTER TABLE  `ORDER_` ADD  `deliveryHour_` VARCHAR( 50 ) NULL ;

@@ -1,5 +1,0 @@
-<?xml version="1.0"?>
-<locatingRules xmlns="http://thaiopensource.com/ns/locating-rules/1.0">
-  <uri resource="RulesServer.xml" uri="../../../../../../schema/class.rnc"/>
-  <uri resource="GenericProducts.xml" uri="../../../../../../schema/class.rnc"/>
-</locatingRules>

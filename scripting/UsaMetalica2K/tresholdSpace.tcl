@@ -1,2 +1,0 @@
-
-set tresholdType 3
